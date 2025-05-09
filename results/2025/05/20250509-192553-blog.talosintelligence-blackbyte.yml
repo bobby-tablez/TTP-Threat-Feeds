@@ -1,0 +1,31 @@
+summary: Phishing attacks surged as the primary method for initial access. BlackByte
+  ransomware group using techniques that depart from their established tradecraft.
+date: '2024-03-15'
+authors: Talos Incident Response
+attribution: BlackByte
+malware_families:
+- BlackByte
+TTPs:
+  processs:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - cmd.exe /c reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "BlackByte"
+    /t REG_SZ /d "C:\Windows\Temp\blackbyte.exe"
+  - powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\\Windows\\Temp\\blackbyte.ps1
+  powershell:
+  - $filePath = "C:\Windows\Temp\blackbyte.exe"; Invoke-Expression $filePath
+  registry_keys:
+  - HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\BlackByte
+  network_connections:
+  - destination: 192.168.1.100
+    port: 443
+  file_modifications:
+  - C:\Windows\Temp\blackbyte.exe
+  - C:\Windows\Temp\blackbyte.ps1
+IOCs:
+- C:\\Windows\\Temp\\blackbyte.exe
+- C:\\Windows\\Temp\\blackbyte.ps1
+- 192.168.1.100:443
+reference: https://blog.talosintelligence.com/category/cisco-talos-incident-response/
+file_creation_date: May 09, 2025

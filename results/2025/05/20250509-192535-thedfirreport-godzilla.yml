@@ -1,0 +1,23 @@
+summary: A WordPress plugin exploit leads to the deployment of the Godzilla web shell.
+date: '2024-01-01'
+authors: []
+attribution: Unknown
+malware_families:
+- Godzilla
+TTPs:
+  processs:
+  - powershell.exe
+  commandline:
+  - '"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -ExecutionPolicy
+    Bypass -WindowStyle Hidden -File "C:\\inetpub\\wwwroot\\wp-content\\uploads\\plugins\\godzilla\\cmd.php"'
+  registry_keys: []
+  network_connections: []
+  file_modifications:
+  - '"C:\\inetpub\\wwwroot\\wp-content\\uploads\\plugins\\godzilla\\cmd.php"'
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- '"C:\\inetpub\\wwwroot\\wp-content\\uploads\\plugins\\godzilla\\cmd.php"'
+reference: https://thedfirreport.com/2024/03/04/threat-brief-wordpress-exploit-leads-to-godzilla-web-shell-discovery-new-cve/
+file_creation_date: May 09, 2025

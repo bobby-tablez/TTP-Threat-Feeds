@@ -1,0 +1,52 @@
+summary: This document provides instructions and guidance on generating HAR files
+  and browser console logs for troubleshooting website issues. It details steps for
+  various browsers (Chrome, Firefox, Edge, Safari) and includes information on sanitizing
+  HAR files to remove sensitive data.
+date: '2024-01-26'
+authors:
+- ''
+attribution:
+- ''
+malware_families:
+- ''
+TTPs:
+  processs:
+  - chrome
+  - firefox
+  - edge
+  - safari
+  commandline:
+  - chrome --inspect
+  - firefox -I
+  - edge --inspect
+  - safari --inspect
+  powershell:
+  - ''
+  scripting_engine:
+  - ''
+  registry_keys:
+  - ''
+  network_connections:
+  - process: chrome
+    port: 9222
+  - process: firefox
+    port: 6000
+  - process: edge
+    port: 9222
+  - process: safari
+    port: 9222
+  file_modifications:
+  - ''
+  persistence:
+  - ''
+  pipes:
+  - ''
+  process_relations:
+  - ''
+IOCs:
+- https://example.com/favicon.ico
+- https://sucuri.net/
+- https://static.olark.com/olark-chimes.ogg
+- https://log.olark.com/
+reference: https://blog.sucuri.net/2025/04/easy-guide-to-saving-har-files-and-console-logs-for-troubleshooting.html
+file_creation_date: May 09, 2025

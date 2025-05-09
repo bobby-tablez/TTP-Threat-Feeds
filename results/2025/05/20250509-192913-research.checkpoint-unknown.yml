@@ -1,0 +1,26 @@
+summary: AI models are capable of generating entire attack chains, including phishing
+  emails, macros, reverse shells, and more. This poses a significant challenge for
+  cybersecurity defenses.
+date: '2023-01-16'
+authors:
+- Checkpoint Research
+attribution: null
+malware_families: []
+TTPs:
+  processs:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - cmd.exe /c echo This is a test > C:\\temp\\test.txt
+  - powershell.exe -ExecutionPolicy Bypass -EncodedCommand JAB...
+  scripting_engine: []
+  registry_keys: []
+  network_connections: []
+  file_modifications:
+  - C:\\temp\\test.txt
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs: []
+reference: https://research.checkpoint.com/2023/ai-can-write-malware-now-are-we-doomed/
+file_creation_date: May 09, 2025

