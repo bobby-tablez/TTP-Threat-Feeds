@@ -1,0 +1,55 @@
+summary: "In late January 2025, Qilin ransomware actors gained access to a Managed Service Provider (MSP) administrator’s credentials through a phishing email and subsequently launched ransomware attacks on the MSP's customers. The attack leveraged evilginx for credential harvesting and MFA bypass."
+date: "January 2025"
+authors: []
+attribution: "STAC4365 (Sophos tracked affiliate), potentially linked to a North Korean state actor ('Moonstone Sleet')"
+malware_families:
+  - Qilin
+  - Agenda
+TTPs:
+  processs:
+    - msiexec.exe
+    - WinRAR.exe
+    - chrome.exe
+  commandline:
+    - "C:\\Program Files\\WinRAR\\WinRAR.exe\" a -epl -scul -r0 -iext -imonl--."
+    - "C:\\Program Files\\WinRAR\\WinRAR.exe\" a -epl -scul -r0 -iext -imonl --"
+    - "C:\\Windows\\System32\\msiexec.exe\" /i \"C:\\Windows\\SystemTemp\\ScreenConnect\\24.3.7.9067\\ru.msi\""
+    - "C:\\WINDOWS\\System32\\msiexec.exe\" /i \"C:\\WINDOWS\\SystemTemp\\ScreenConnect\\24.3.7.9067\\ru.msi\""
+    - "C:\\WINDOWS\\System32\\msiexec.exe\" /i \"C:\\WINDOWS\\SystemTemp\\ScreenConnect\\24.3.7.9067\\ru.msi\""
+    - "C:\\WINDOWS\\System32\\msiexec.exe\" /i \"C:\\WINDOWS\\SystemTemp\\ScreenConnect\\24.3.7.9067\\ru.msi\""
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  network_connections:
+    - process: "Unknown"
+      source_port: "62976"
+      destination: "104.26.3.69"
+      destination_port: "443"
+      data_sent: "95917084180"
+      data_recv: "389159284"
+    - process: "Unknown"
+      source_port: "59924"
+      destination: "104.26.3.69"
+      destination_port: "443"
+      data_sent: "22447399894"
+      data_recv: "60437900"
+    - process: "Unknown"
+      source_port: "61579"
+      destination: "104.26.2.69"
+      destination_port: "443"
+      data_sent: "21254948655"
+      data_recv: "57806328"
+  file_modifications: []
+  persistence:
+    - Description: "New ScreenConnect instance pushed out using 'ru.msi' across multiple customer environments."
+    - Description: "Modified various boot options to ensure targeted devices would boot into Safe Mode with networking."
+  pipes: []
+  process_relations: []
+IOCs:
+  - URL: "hxxps://b8dymnk3.r.us-east-1.awstrack[.]me/L0/https://cloud.screenconnect[.]com.ms/suKcHZYV/1/010001948f5ca748-c4d2fc4f-aa9e-40d4-afe9-bbe0036bc608-000000/mWU0NBS5qVoIVdXUd4HdKWrsBSI=410"
+  - URL: "hxxps://cloud.screenconnect[.]com.ms/suKcHZYV/1/010001948f5ca748-c4d2fc4f-aa9e-40d4-afe9-bbe0036bc608-000000/mWU0NBS5qVoIVdXUd4HdKWrsBSI=410"
+  - IP: "186.2.163[.]10"
+  - URL: "https://31.41.244.100"
+  - Domain: "cloud.screenconnect[.]com.ms"
+  - Domain: "awstrack[.]me"
+reference: https://news.sophos.com/en-us/2025/04/01/sophos-mdr-tracks-ongoing-campaign-by-qilin-affiliates-targeting-screenconnect/

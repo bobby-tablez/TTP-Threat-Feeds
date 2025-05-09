@@ -1,0 +1,52 @@
+summary: "FortiGuard Labs analysis of malicious software packages (November 2024 - present) reveals various techniques used to exploit system vulnerabilities, including low-file-count packages, command overwrites, obfuscation, and suspicious API usage. Attackers are leveraging these methods to evade detection and compromise systems."
+date: "N/A" # Date not explicitly provided in the text
+authors: "FortiGuard Labs Threat Research"
+attribution: "N/A" # Attribution not explicitly mentioned
+malware_families:
+  - AffineQuant-99.6
+  - amzn-aws-glue-ml-libs-python-6.1.5
+  - amzn-awsglue-6.1.4
+  - seller-admin-common_6.5.8
+  - seller-rn-mng-lib_6.5.8
+  - xeno.dll_1.0.2
+TTPs:
+  processs:
+    - python
+    - node
+    - powershell
+  commandline:
+    - "python main.py" #AffineQuant-99.6
+    - "python setup.py" #amzn-aws-glue-ml-libs-python-6.1.5
+    - "python setup.py" #amzn-awsglue-6.1.4
+    - "node index.js" #seller-admin-common_6.5.8
+    - "node index.js" #seller-rn-mng-lib_6.5.8
+    - "node index.js" #xeno.dll_1.0.2
+  powershell: N/A
+  scripting_engine:
+    - javascript
+    - python
+  registry_keys: N/A
+  network_connections:
+    - process: python
+      port: N/A
+      destination: [ "remote servers controlled by the attacker" ] #AffineQuant-99.6
+    - process: python
+      port: N/A
+      destination: [ "hidden URLs" ] #AffineQuant-99.6
+    - process: node
+      port: N/A
+      destination: [ "attacker’s server" ] #seller-admin-common_6.5.8, seller-rn-mng-lib_6.5.8
+    - process: node
+      port: 443
+      destination: [ "online API" ] #seller-admin-common_6.5.8, seller-rn-mng-lib_6.5.8
+  file_modifications: N/A
+  persistence: N/A
+  pipes: N/A
+  process_relations: N/A
+IOCs:
+  hashes: N/A
+  ips: N/A
+  domains: N/A
+  urls:
+    - "Discord webhooks" #seller-admin-common_6.5.8, seller-rn-mng-lib_6.5.8
+reference: https://www.fortinet.com/blog/threat-research/fortinet-identifies-malicious-packages-in-the-wild-insights-and-trends

@@ -1,0 +1,36 @@
+summary: Consumer VPN solutions are being exploited to distribute spyware components
+  of the SecondEye suite. These components are delivered through Trojanized installers
+  of VPN software developed in Iran.
+date: '2023-06-08'
+authors:
+- Bitdefender Senior Software Engineer
+attribution: Iran
+malware_families:
+- SecondEye
+TTPs:
+  processs:
+  - sysbus32.exe
+  - syscrt32.exe
+  - systemp32.exe
+  - syscache32.exe
+  - sysinit32.exe
+  - syseend32.exe
+  commandline:
+  - '"C:\Windows\Temp\sysbus32.exe"'
+  - '"C:\Windows\Temp\syscrt32.exe"'
+  - '"C:\Windows\Temp\systemp32.exe"'
+  - '"C:\Windows\Temp\syscache32.exe"'
+  - '"C:\Windows\Temp\sysinit32.exe"'
+  - '"C:\Windows\Temp\syseend32.exe"'
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  network_connections: []
+  file_modifications: []
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- https://www.bitdefender.com/business/threat-intelligence/reports/vpn-spyware-iran/
+reference: https://www.bitdefender.com/en-us/blog/labs/eyespy-iranian-spyware-delivered-in-vpn-installers
+file_creation_date: May 09, 2025

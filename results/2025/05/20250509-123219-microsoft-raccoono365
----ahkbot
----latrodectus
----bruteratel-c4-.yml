@@ -1,0 +1,65 @@
+summary: "Since October 2024, Microsoft Defender Experts (DEX) has observed campaigns leveraging Node.js to deliver malware and other payloads that ultimately lead to information theft and data exfiltration. This report details an attack chain involving a malvertising campaign related to cryptocurrency trading."
+date: "April 2025"
+authors: []
+attribution: []
+malware_families:
+  - RaccoonO365
+  - AHKBot
+  - Latrodectus
+  - BruteRatel C4 (BRc4)
+  - Remcos
+TTPs:
+  processs:
+    - node.exe
+    - powershell.exe
+    - msedge_proxy
+  commandline:
+    - "powershell.EXE" -NoProfile -Command Add-MpPreference -ExclusionProcess powershell.exe -Force
+    - "powershell.EXE" -NoProfile -Command Add-MpPreference -ExclusionPath (Get-Location) -Force
+    - "node.exe" -r .\{FileName}.js .\app.jsc
+  powershell:
+    - |
+      $infe = @{machiseld = $6u3 & B}
+      FE
+      T mere-onject ' snutt e o_.oume 1);
+      Tty = i1 eyt totery:
+      G RS,
+      et~ s corcesars | eresa-avec
+      e i, St - 3 PmBCTTs core - . MmorCares
+      totcaprcemars - 3 RmbedresR oot )
+    - |
+      $Files = Get-ChildItem -Path . -Exclude $RuntimeName, $buildiase, $persistentDirectory -Force
+      If (5Files.Length -gt 9) { Remove-Item §Files -Force -Recurse }
+    - |
+      Sheta = Tnvoke-Request Manifest
+      Add-File Sunt tnelame SHeta.node.hash SHeta.node.url
+      Add-File $6u1ldiase SHetabutld.hash sHeta.butld.url
+  registry_keys:
+    - "HKU:\$_\Sof tware\Microsof t\Windows\CurrentVersion\Internet Settings* ProxyEnable -Value 0"
+  network_connections:
+    - port: PORT_HTTP
+    - port: PORT_IP
+  file_modifications:
+    - "manifest.json"
+    - ".jsc"
+    - ".js"
+    - "node.exe"
+    - "app.jsc"
+  persistence:
+    - Scheduled Task
+  pipes: []
+  process_relations:
+    - node.exe launches .jsc file
+IOCs:
+  - hosts:
+    - subline-forecasts-pale-scored.trycloudflare.com
+    - washing-cartridges-watts-flags.trycloudflare.com
+    - investigators-boxing-trademark-threatened.trycloudflare.com
+    - fotos-phillips-princess-baker.trycloudflare.com
+    - casting-advisors-older-invitations.trycloudflare.com
+    - complement-parliamentary-chairs-hc.trycloudflare.com
+  - IPs:
+    - 216.245.184.181
+    - 212.237.217.182
+    - 168.119.96.41
+reference: https://www.microsoft.com/en-us/security/blog/2025/04/15/threat-actors-misuse-node-js-to-deliver-malware-and-other-malicious-payloads/

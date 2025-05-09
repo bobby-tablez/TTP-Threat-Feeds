@@ -1,0 +1,28 @@
+summary: "Bitdefender researchers discovered severe security vulnerabilities in the Solarman and Deye platforms, which manage over 195 gigawatts of solar power output. These flaws allow attackers to generate authorization tokens for any account, potentially disrupting or taking down the grid by modifying inverter parameters."
+date: "June 08, 2023"
+authors:
+  - George Petridis
+  - Radu Bejan
+attribution: N/A
+malware_families: N/A
+TTPs:
+  processs:
+    - Unknown (related to API calls and platform interactions)
+  commandline:
+    - "/oauth2-s/oauth/token" #API endpoint for generating authorization tokens.
+    - "/user-s/acc/orgs" #Endpoint returning excessive private information about users.
+    - "/oauth-s/oauth/token" #API endpoint with a JWT token vulnerability.
+  powershell: N/A
+  scripting_engine: N/A
+  registry_keys: N/A
+  network_connections: N/A
+  file_modifications: N/A
+  persistence: N/A
+  pipes: N/A
+  process_relations: N/A
+IOCs:
+  - URL: "https://eu1.deyecloud.com"
+  - Endpoint: "/oauth2-s/oauth/token"
+  - Endpoint: "/user-s/acc/orgs"
+  - Endpoint: "/oauth-s/oauth/token"
+reference: https://www.bitdefender.com/en-us/blog/labs/60-hurts-per-second-how-we-got-access-to-enough-solar-power-to-run-the-united-states

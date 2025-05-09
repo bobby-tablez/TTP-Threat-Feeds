@@ -1,0 +1,87 @@
+summary: 'Fodcha is a rapidly spreading DDoS botnet discovered by CNCERT and 360netlab.
+  It infects over 62,000 devices globally, with more than 10,000 daily active bots
+  in China alone, targeting over 100 DDoS victims daily. The botnet uses folded.in
+  as an initial C2 domain and the chacha algorithm for network traffic encryption.
+
+  '
+date: '2022-04-13'
+authors:
+- CNCERT
+- 360netlab
+attribution:
+  threat_actor: Fodcha operators
+malware_families:
+- Fodcha
+TTPs:
+  processs:
+  - arm
+  - mips
+  - mpsl
+  - x86
+  commandline:
+  - arm
+  - mips
+  - mpsl
+  - x86
+  powershell: null
+  scripting_engine: null
+  registry_keys: null
+  network_connections:
+  - port: 10
+    destination:
+    - fridgexperts.cc
+  file_modifications: null
+  persistence: null
+  pipes: null
+  process_relations: null
+IOCs:
+  sample_hash:
+  - md5: 0e3ff1a19fcd087138ec85d5dba597151b637faa5e424966393928cd6df31849
+  - md5: 208e72261e10672caa60070c770644ba2251cf2ed00229c8804fc91868b3c1cb2a
+  - md5: 02e6502db381fa4d4aeb356633af732ed0c36ebbeddb65015d01e6244a28462fe2de
+  - md5: eb66e1a08ea18dab520988d9e437adb95cbe4875a9f072ff7f2ee4d4ae3fc8ae41752
+  - md5: c705c5a6b44897757cacbdb65e4765fbd7bcae93b393698724cd9c240dbed6dfc584
+  - md5: a20246e8a79bdaee372e5ca89dbb7b5c1f9f58fe68a8fc7ebf81131188e3454fe066
+  - md5: 380fa469d22fe58b08ea78f3e6b1f59e5fe40447b11d8e45f7888ce85a67f98ed7f2
+  - md5: cd89b1776a09d5490702c12d85ab6c6186cdb774ad07f0384c61f96a7897e87f96
+  - md5: c0c99db0e8c3ecab4dd7f13f3946374720c9cbf28561272c705c5a6b44897757ca
+  - md5: cbdb65e4765fbd7bcae93b393698724cd9c240dbed6dfc584a20246e8a79bdaee37
+  domains:
+  - folded.in
+  - fridgexperts.cc
+  ips:
+  - 139.177.195.192
+  - 162.33.179.171
+  - 206.188.197.104
+  - 31.214.245.253
+  urls:
+  - http://139.177.195.192/bins/arm
+  - http://139.177.195.192/bins/arm5
+  - http://139.177.195.192/bins/arm7
+  - http://139.177.195.192/bins/mips
+  - http://139.177.195.192/bins/realtek.mips
+  - http://139.177.195.192/blah
+  - http://139.177.195.192/linnn
+  - http://139.177.195.192/skidrthttp
+  - http://139.177.195.192/z.sh
+  - http://162.33.179.171/bins/arm
+  - http://162.33.179.171/bins/arm7
+  - http://162.33.179.171/bins/mpsl
+  - http://162.33.179.171/bins/realtek.mips
+  - http://162.33.179.171/bins/realtek.mpsl
+  - http://162.33.179.171/blah
+  - http://162.33.179.171/k.sh
+  - http://162.33.179.171/linnn
+  - http://162.33.179.171/z.sh
+  - http://206.188.197.104/bins/arm7
+  - http://206.188.197.104/bins/realtek.mips
+  - http://206.188.197.104/skidrthttp
+  - http://31.214.245.253/bins/arm
+  - http://31.214.245.253/bins/arm7
+  - http://31.214.245.253/bins/mips
+  - http://31.214.245.253/bins/mpsl
+  - http://31.214.245.253/bins/x86
+  - http://31.214.245.253/k.sh
+  - http://31.214.245.253/kk.sh
+reference: https://blog.netlab.360.com/fodcha-a-new-ddos-botnet/
+file_creation_date: May 09, 2025

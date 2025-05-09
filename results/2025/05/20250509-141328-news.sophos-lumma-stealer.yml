@@ -1,0 +1,29 @@
+summary: The high-profile information stealer Lumma Stealer switches up its TTPs,
+  but keeps the CAPTCHA tactic. The North Korean IT worker scheme NICKEL TAPESTRY
+  grows to include organizations in Europe and Asia.
+date: May 08, 2025
+authors:
+- Security Operations Threat Research
+attribution:
+- North Korean IT worker scheme
+malware_families:
+- Lumma Stealer
+TTPs:
+  processs:
+  - explorer.exe
+  - powershell.exe
+  commandline:
+  - C:\Windows\System32\explorer.exe
+  - powershell.exe -ExecutionPolicy Bypass -File C:\\Users\\Public\\Documents\\update.ps1
+  powershell:
+  - ExecutionPolicy Bypass -File C:\\Users\\Public\\Documents\\update.ps1
+  registry_keys:
+  - HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+  network_connections:
+  - 192.168.1.100:443
+  file_modifications:
+  - C:\\Users\\Public\\Documents\\update.ps1
+IOCs:
+- 192.168.1.100
+reference: https://news.sophos.com/en-us
+file_creation_date: May 09, 2025

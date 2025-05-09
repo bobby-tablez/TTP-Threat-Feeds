@@ -1,0 +1,7 @@
+requests
+beautifulsoup4
+feedparser
+pytesseract
+Pillow
+trafilatura
+pyyaml

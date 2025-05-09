@@ -1,0 +1,32 @@
+summary: "Exploitation of the Apache Tomcat path equivalence vulnerability (CVE-2025-24813) has been confirmed, allowing threat actors to achieve Remote Code Execution (RCE). Attackers are leveraging publicly available Proof-of-Concept (PoC) exploit code to gain complete access to vulnerable servers."
+date: "March 17th, 2025"
+authors:
+  - eSentire
+attribution:
+  - Chinese operators
+malware_families: []
+TTPs:
+  - processs:
+      - java
+  - commandline:
+      - 'java -Djava.util.logging.config.file=/path/to/logging.properties org.apache.catalina.startup.Bootstrap start'
+  - scripting_engine: []
+  - registry_keys: []
+  - network_connections:
+      - protocol: HTTP
+        port: 8080
+        destination:
+          - "any" #Implied by Shodan data, not explicitly listed
+  - file_modifications:
+      - "/path/to/session storage directory" #Location of malicious payload. Path is generic and not fully defined.
+  - persistence: []
+  - pipes: []
+  - process_relations:
+      - java -> Tomcat server processes
+IOCs:
+  - url: "https://lab.wallarm.com/one-put-request-to-own-tomcat-cve-2025-24813-rce-is-in-the-wild/"
+  - url: "https://nvd.nist.gov/vuln/detail/CVE-2025-24813"
+  - url: "https://www.shodan.io/search?query=server%3A+apache+tomcat"
+  - url: "https://www.theregister.com/2025/03/18/apache_tomcat_java_rce_flaw/"
+  - cve: "CVE-2025-24813"
+reference: https://www.esentire.com/security-advisories/apache-tomcat-vulnerability-exploited

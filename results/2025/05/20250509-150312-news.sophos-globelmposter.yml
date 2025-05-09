@@ -1,0 +1,98 @@
+summary: 'This report analyzes cyber threat data from 2024, highlighting trends in
+  Active Directory compromise (median of 0.46 days), ransomware deployment outside
+  business hours (83%), and tool usage shifts like the decline of Cobalt Strike and
+  rise of Impacket. It also addresses concerns regarding MFA availability and unprotected
+  systems within breached organizations.
+
+  '
+date: '2024'
+author: Sophos X-Ops Team
+attribution: null
+malware_families:
+- Globelmposter
+- 8Base
+- LockBit
+- CryTOX
+- Fog
+- Hunters Intl
+- Cicada3301
+- Lynx
+- Faust
+- Black Basta
+- CryptoX
+- ALPHV/BlackCat
+- Akira
+- Mario
+- Qilin
+- RansomHub
+- Black Suit
+TTPs:
+  processs:
+  - cmd.exe
+  - nltest.exe
+  - PowerShell
+  - SoftPerfect Network Scanner
+  - notepad.exe
+  - reg.exe
+  - svchost.exe
+  - PsExec
+  - RDP
+  - ping.exe
+  - powershell.exe
+  - Advanced IP Scanner
+  - vssadmin.exe
+  - whoami.exe
+  - mstsc.exe
+  - AnyDesk
+  - wevtutil.exe
+  - net.exe
+  - wmiexec.py
+  - secretsdump.py
+  - WinRAR
+  commandline:
+  - RDP connection details
+  - cmd.exe
+  - SoftPerfect Network Scanner scan command
+  - nltest.exe
+  - powershell.exe -ExecutionPolicy Bypass -File malicious_script.ps1
+  - PowerShell
+  - wevtutil.exe cl /f:C:\logs\security.evtx
+  - notepad.exe
+  - reg.exe
+  - svchost.exe
+  - PsExec
+  - AnyDesk remote access command
+  - ping.exe
+  - cmd.exe /c echo "Hello, world!"
+  - Advanced IP Scanner scan command
+  - vssadmin.exe
+  - mstsc.exe
+  - whoami.exe
+  - WinRAR extract command
+  - notepad.exe C:\network_passwords.txt
+  - net.exe
+  - wmiexec.py
+  - secretsdump.py
+  powershell: null
+  scripting_engine: null
+  registry_keys: null
+  network_connections: null
+  file_modifications:
+  - C:\Windows\Temp\malicious_file.exe
+  - del.exe
+  - C:\Users\Public\Documents\important_document.txt
+  persistence: null
+  pipes: null
+  process_relations: null
+IOCs:
+  hashes: null
+  ips: null
+  domains: null
+  urls: null
+authors:
+- Sophos X-Ops Incident Response and MDR teams
+- Mark Loman
+- Chester Wisniewski
+- Matt Wixey
+reference: https://news.sophos.com/en-us/2025/04/02/2025-sophos-active-adversary-report/
+file_creation_date: May 09, 2025

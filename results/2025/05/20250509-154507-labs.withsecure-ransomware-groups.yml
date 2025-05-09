@@ -1,0 +1,30 @@
+summary: A comprehensive analysis of the evolving cyber threat environment tailored
+  for European mid-market organizations, focusing on financially motivated actors
+  and state-sponsored threats.
+date: '2025'
+authors: Tim West
+attribution:
+- Russia
+- China
+- North Korea
+- Iran
+malware_families:
+- Ransomware groups
+- Business Email Compromise (BEC)
+TTPs:
+  processs:
+  - powershell.exe
+  commandline:
+  - '"C:\\Windows\\System32\\powershell.exe" -ExecutionPolicy Bypass -WindowStyle
+    Hidden -File C:\\Users\\Public\\Documents\\script.ps1'
+  persistence:
+  - Scheduled Tasks
+  pipes: []
+  process_relations: []
+IOCs:
+  domains: []
+  urls: []
+  hashes: []
+  ips: []
+reference: https://labs.withsecure.com/publications/cyber-threat-landscape-european-mid-market-2025.html
+file_creation_date: May 09, 2025

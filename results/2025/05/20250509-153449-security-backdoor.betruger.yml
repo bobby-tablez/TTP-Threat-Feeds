@@ -1,0 +1,33 @@
+summary: RansomHub ransomware affiliates are using a new custom backdoor called Backdoor.Betruger
+  in attacks. This multi-function backdoor includes features like screenshotting,
+  keylogging, file uploading, network scanning, privilege escalation, and credential
+  dumping.
+date: '2024-10-27'
+authors:
+- Symantec
+attribution: Greenbottle (RansomHub)
+malware_families:
+- Backdoor.Betruger
+TTPs:
+  processs:
+  - mailer.exe
+  - turbomailer.exe
+  - netscan.exe
+  commandline:
+  - netscan.exe
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  network_connections:
+  - port: ''
+    destination: ''
+  file_modifications: ''
+  persistence: ''
+  pipes: ''
+  process_relations: ''
+IOCs:
+- mailer.exe
+- turbomailer.exe
+- netscan.exe
+reference: https://www.security.com/threat-intelligence/ransomhub-betruger-backdoor
+file_creation_date: May 09, 2025

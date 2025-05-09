@@ -1,0 +1,40 @@
+summary: Several Minecraft mods and plugins hosted on CurseForge and Bukkit have been
+  tainted with a multi-stage, multi-platform infostealer malware called Fractureiser.
+  Compromised accounts are used to publish malware-rigged updates.
+date: '2023-06-09'
+authors:
+- Bitdefender
+attribution: Unknown
+malware_families:
+- Trojan.Java.Fractureiser.*
+TTPs:
+- processs:
+  - URLClassLoader
+- commandline:
+  - URLClassLoader - http://85.217.144.130:8080/dl
+- powershell: ''
+- scripting_engine: ''
+- registry_keys: ''
+- network_connections:
+  - protocol: HTTP
+    port: 8080
+    destination: 85.217.144.130
+  - protocol: HTTPS
+    port: 8083
+    destination: files-8ie.pages.dev
+- file_modifications:
+  - C:\\Program Files\\nekoservice\\ServiceHost.exe
+  - C:\\Program Files\\nekoservice\\service.jar
+- persistence: Adds NekoService as a service to run.
+- pipes: ''
+- process_relations: ''
+IOCs:
+- hash: dc43c4685c3f47808ac207d1667cc1eb915b2d82
+- ip: 85.217.144.130
+- port: '8080'
+- url: http://85.217.144.130:8080/dl
+- url: https://files-8ie.pages.dev:8083/ip
+- url: connect.skyrage.de
+- hash: 0e583c572ad823330b9e34d871fcc2df
+reference: https://www.bitdefender.com/en-us/blog/labs/infected-minecraft-mods-lead-to-multi-stage-multi-platform-infostealer-malware
+file_creation_date: May 09, 2025

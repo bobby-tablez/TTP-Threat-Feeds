@@ -1,0 +1,63 @@
+summary: "A long-term cyber intrusion targeting critical national infrastructure (CNI) in the Middle East attributed to an Iranian state-sponsored threat group involved extensive espionage operations and suspected network prepositioning."
+date: "May 2021 - February 2025"
+authors: "FortiGuard Labs Threat Research, FGIR team"
+attribution: "Iranian state-sponsored threat group"
+malware_families:
+  - Havoc
+  - HanifNet
+  - HXLibrary
+  - NeoExpressRAT
+  - SystemBC
+  - MeshCentral
+
+TTPs:
+  processs:
+    - plink
+    - Ngrok
+    - glider proxy
+    - ReverseSocks5
+    - RDP
+    - PsExec
+
+  commandline:
+    - "plink"
+    - "Ngrok"
+    - "glider proxy"
+    - "ReverseSocks5"
+    - "RDP"
+    - "PsExec"
+
+  powershell: 
+    # No PowerShell scripts provided in the text.
+
+  scripting_engine:
+    # No other scripting engines (VBS, JScript, Python) mentioned.
+
+  registry_keys:
+    # No registry keys were explicitly listed.
+
+  network_connections:
+    - port: "Unknown"
+      destination: "VPS-hosted infrastructure (avoiding U.S.-based providers)"
+
+  file_modifications:
+    # No file modifications were explicitly listed.
+
+  persistence:
+    - "stolen VPN credentials"
+    - "multiple web shells"
+    - "backdoors (Havoc, HanifNet, HXLibrary, NeoExpressRAT)"
+    - "SystemBC"
+    - "MeshCentral"
+
+  pipes:
+    # No named pipes were explicitly listed.
+
+  process_relations:
+    - "Chaining proxies (plink, Ngrok) to bypass segmentation."
+    - "Lateral movement using RDP and PsExec."
+
+IOCs:
+  - "Stolen VPN credentials"
+  - "VPS-hosted infrastructure (avoiding U.S.-based providers)"
+reference: https://www.fortinet.com/blog/threat-research/fortiguard-incident-response-team-detects-intrusion-into-middle-east-critical-national-infrastructure

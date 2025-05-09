@@ -1,0 +1,37 @@
+summary: "This report details potential vulnerabilities within Okta's FastPass implementation, specifically focusing on how attackers can exploit weaknesses in the authentication flow to achieve account takeover. It highlights risks related to AiTM phishing attacks, exposed proxy servers, and malicious browser extensions capable of spoofing Origin headers."
+date: "May 2024-May 2025"
+authors:
+  - Fenix Qiao
+  - Shuyang Wang
+attribution: null
+malware_families: []
+TTPs:
+  processs:
+    - curl
+  commandline:
+    - 'curl -i http://127.0.1:8769'
+    - 'curl -i http://127.0.1:8769 -H \'Origin: test\''
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  network_connections:
+    - port: 8769
+      destination: "127.0.0.1"
+  file_modifications: []
+  persistence: null
+  pipes: []
+  process_relations: null
+IOCs:
+  urls:
+    - 'http://localhost:65112/?code=*'
+    - 'http://dev-49281249.okta.com/idp/authenticators/autnj6gd5vBoV3v285d7/transactions/ftMcFJCy_g2cVtk87oHePeNYHKNnUhrwBm/verify'
+    - 'http://localhost:65112/'
+    - 'com-okta-authenticator://deviceChallenge?challengeRequest=eyJraWQiOiJid1...'
+    - 'http://lo.pocs.cc:8769/challenge'
+  ips:
+    - "127.0.0.1"
+  domains:
+    - 'dev-49281249.okta.com'
+    - 'pocs.cc'
+  hashes: []
+reference: https://www.obsidiansecurity.com/blog/behind-the-shield-cracking-the-limits-of-okta-fastpass

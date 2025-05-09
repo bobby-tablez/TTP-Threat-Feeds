@@ -1,0 +1,38 @@
+summary: "The TeaBot banking trojan is being distributed through the Google Play Store via a dropper application named 'PDF Reader: File Manager'. This application dynamically downloads and installs TeaBot, employing evasion techniques and targeting various European countries, including Russia."
+date: "2024-02-16"
+authors: 
+  - "Cleafy LABS"
+attribution: "Unknown (likely threat actor group)"
+malware_families:
+  - "TeaBot"
+TTPs:
+  processs:
+    - "TelephonyManager"
+    - "MainLibrary"
+    - "ServiceHandler"
+  commandline:
+    - "context.startActivity(i);"
+    - "MainLibrary.url.set(\"https://befukiv.com/1.apk\")"
+    - "i.addFlags(0x10000000)"
+  powershell: null
+  scripting_engine: null
+  registry_keys: null
+  network_connections:
+    - port: null
+      destination: "https://befukiv.com/1.apk"
+  file_modifications:
+    - path: "/data/app/com.tragisoap.fileandpdfmanager-xxxxxxxxxx/base.apk" #Example, actual path would vary
+    - path: "rvkcc1.on"
+  persistence: null
+  pipes: null
+  process_relations:
+    - "PDF Reader: File Manager (dropper) -> MainLibrary -> TeaBot"
+IOCs:
+  domains:
+    - "befukiv.com"
+  urls:
+    - "https://befukiv.com/1.apk"
+  file_paths:
+    - "/data/app/com.tragisoap.fileandpdfmanager-xxxxxxxxxx/base.apk" #Example, actual path would vary
+    - "/rvkcc1.on"
+reference: https://www.cleafy.com/cleafy-labs/a-stealthy-threat-uncovered-teabot-on-google-play-store

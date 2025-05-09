@@ -1,0 +1,52 @@
+summary: "The Securonix Threat Research team has been tracking a stealthy malware campaign leveraging social engineering and deceptive file downloads to trick users into executing heavily obfuscated code. This infection ultimately deploys a user-mode rootkit that manipulates system processes and registry entries to evade detection and maintain persistence."
+date: "Mar 13, 2025"
+authors:
+  - Den Iuzvyk
+  - Tim Peck
+attribution: "Unknown (likely US based)"
+malware_families:
+  - r77 rootkit
+  - QuasarRAT
+TTPs:
+  processs:
+    - powershell.exe
+    - cmd.exe
+  commandline:
+    - 'powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\Windows\Temp\$nya-qX6Pb164.ps1'
+    - 'cmd.exe /c echo %onimaiuc%'
+    - 'sc start ACPIx86'
+  powershell:
+    - '$rFUJ=[nKSnKynKsnKtnKemnK.nKSenKcnKunKrinKtnKynK.nKCnKrnKynKpnKtnKonKgnKrnKanKpnKhynK.nKAnKesnK]nK::nKCrnKenKanKtnKe(nK)nK;'.Replace('nK', '')'
+    - 'If ($env:F:\ -ne "") { Exit 900 }'
+  registry_keys:
+    - "HKLM\SOFTWARE\OOhhhm"
+    - "HKU\S-1-5-21-...<SID>...-1001\Environment\onimaiuc"
+    - "HKLM\SYSTEM\CurrentControlSet\Services\ACPIx86"
+    - "HKLM\SOFTWARE\$nya-config\service_names\ACPIx86"
+    - "HKLM\SOFTWARE\$nya-config\paths\C:\Windows\system32\drivers\ACPIx86.sys"
+    - "HKLM\SOFTWARE\$nya-config\pid\3499344"
+    - "HKLM\SOFTWARE\$nya-dll64"
+    - "HKLM\SOFTWARE\$nya-dll32"
+    - "HKLM\SOFTWARE\$nya-config\paths\C:\Windows\system32\drivers\ACPIx86.sys"
+  network_connections:
+    - destination: '86.54.42[.]120'
+      port: 4782
+  file_modifications:
+    - "C:\\Windows\\System32\\Drivers\\ACPIx86.sys"
+    - "%APPDATA%\\Roaming\\$nya-" #Dynamic file name, likely containing encrypted user data
+  persistence:
+    - Scheduled Tasks (XML configuration file "$nya-qX6Pb164" in C:\Windows\System32\Tasks)
+    - Registry injected PowerShell scripts (HKU\S-1-5-21-...<SID>...-1001\Environment\onimaiuc)
+  pipes: []
+  process_relations:
+    - Batch script execution initiates PowerShell commands.
+    - PowerShell executes obfuscated commands, writes scripts to disk, modifies the registry, and schedules tasks.
+    - PowerShell injects payloads into the Windows Registry.
+    - The r77 rootkit is injected into a PowerShell process.
+
+IOCs:
+  domains:
+    - "hxxps://cooinbase[.]net"
+  ips:
+    - "86.54.42[.]120"
+reference: https://www.securonix.com/blog/analyzing-obscurebat-threat-actors-lure-victims-into-executing-malicious-batch-scripts-to-deploy-stealthy-rootkits/

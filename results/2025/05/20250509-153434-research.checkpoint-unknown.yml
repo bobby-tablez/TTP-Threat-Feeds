@@ -1,0 +1,51 @@
+summary: 'In 2022, government APTs wiped out entire computer systems, hackers turned
+  good software evil, and ransomware evolved into something entirely new. This report
+  reviews the biggest stories, most important trends, and cutting insights from the
+  last year in cybersecurity.
+
+  '
+date: '2023-02-10'
+authors:
+- checkpont
+malware_families: []
+TTPs:
+  processs:
+  - SysSonoviewimageY2616M81D18E6080027
+  commandline:
+  - C:\\Users\\Eyal\\D18\\E@60@27.Sys\\Sonoview\\image\\Y2016M01\\D18\\E00G0027\\
+  - C:\\\\Users\\\\Eyal\\\\D18\\\\onoview\\\\image\\\\Y2016401\\\\D18\\ \\0000027
+  - C:\\Users\\Eyal\\D18\\E@@0e@27.\\Sonoview\\image\\Y2016401\\D18\\ E6000027\\
+  - C:\\Users\\Eyal\\D18\\E@@00027.\\Sonoview\\image\\Y2016401\\D18\\ 6000027\\
+  - C:\\Users\\Eyal\\D18\\E@00@027.[nSys\\Sonoview\\image\\Y2016M01\\D18\\E0000027\\
+  - C:\\Users\\Eyal\\D18\\E@006027.[nSys\\Sonoview\\image\\Y2016M01\\D18\\6000027\\
+  - C:\\Users\\Eyal\\D18\\E@900027,lys\\Sonoview\\image\\Y2016401\\D18\\E0000027 \\
+  - C:\\Users\\Eyal\\D18\\E@000@27.s\\Sonoview\\image\\Y2016101\\018\\E6000027\\
+  - C:\\Users\\Eyal\\D18\\E@0@27.lainSys\\Sonoview\\image\\Y2016M01\\018\\E6000027'
+  - C:\\Users\\Eyal\\D18\\E@60@@27.lainSys\\Sonoview\\image\\Y2016101\\D18\\E0000027
+  - C:\\Users\\Eyal\\D18\\E@000027.Sonoview\\image\\Y2016401\\D18\\EG060027\\
+  - C:\\Users\\Eyal\\D18\\E@@00@27.\\Sonoview\\image\\Y2016M01\\D18\\E6060027\\
+  - C:\\Users\\Eval\\D18\\EG0G0827,_ . -._
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  network_connections: []
+  file_modifications:
+  - C:\\Users\\Eyal\\D18\\E@60@27.Sys\\Sonoview\\image\\Y2016M01\\D18\\E00G0027\\
+  - C:\\\\Users\\\\Eyal\\\\D18\\\\onoview\\\\image\\\\Y2016401\\\\D18\\ \\0000027
+  - C:\\Users\\Eyal\\D18\\E@@0e@27.\\Sonoview\\image\\Y2016401\\D18\\ E6000027\\
+  - C:\\Users\\Eyal\\D18\\E@@00027.\\Sonoview\\image\\Y2016401\\D18\\ 6000027\\
+  - C:\\Users\\Eyal\\D18\\E@00@027.[nSys\\Sonoview\\image\\Y2016M01\\D18\\E0000027\\
+  - C:\\Users\\Eyal\\D18\\E@006027.[nSys\\Sonoview\\image\\Y2016M01\\D18\\6000027\\
+  - C:\\Users\\Eyal\\D18\\E@900027,lys\\Sonoview\\image\\Y2016401\\D18\\E0000027 \\
+  - C:\\Users\\Eyal\\D18\\E@000@27.s\\Sonoview\\image\\Y2016101\\018\\E6000027\\
+  - C:\\Users\\Eyal\\D18\\E@0@27.lainSys\\Sonoview\\image\\Y2016M01\\018\\E6000027'
+  - C:\\Users\\Eyal\\D18\\E@60@@27.lainSys\\Sonoview\\image\\Y2016101\\D18\\E0000027
+  - C:\\Users\\Eyal\\D18\\E@000027.Sonoview\\image\\Y2016401\\D18\\EG060027\\
+  - C:\\Users\\Eyal\\D18\\E@@00@27.\\Sonoview\\image\\Y2016M01\\D18\\E6060027\\
+  - C:\\Users\\Eval\\D18\\EG0G0827,_ . -._
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs: []
+reference: https://research.checkpoint.com/2023/2022-in-cybersecurity/
+file_creation_date: May 09, 2025

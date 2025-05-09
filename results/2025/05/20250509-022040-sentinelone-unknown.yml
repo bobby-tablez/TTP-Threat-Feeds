@@ -1,0 +1,99 @@
+summary: "AkiraBot is a Python framework used to spam website chats and contact forms en masse to promote a low-quality SEO service. SentinelLABS assesses that AkiraBot has targeted more than 400,000 websites and successfully spammed at least 80,000 websites since September 2024."
+date: "March 2025"
+authors: []
+attribution: "Unknown"
+malware_families: []
+TTPs:
+  processs:
+    - python
+    - chrome
+  commandline:
+    - C:/Users/Administrator/Desktop/AkiraBot/monitor.py
+    - C:/Users/Administrator/Downloads/AkiraBot/monitor.py
+    - C:/Users/Usuario/Desktop/AkiraBot/monitor.py
+    - "python monitor.py"
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  network_connections: []
+  file_modifications:
+    - C:/Users/Administrator/Desktop/URLS/02.01.25 SERVICEWRAP-Godaddy/02.01.25 SERVIstartCEWRAP-Godaddy_Thursday 215.txt
+    - C:/Users/Administrator/Desktop/URLS ~ Copy/02.01.25 USEAKIRA-Godaddy/02.01.25 USEAKTRA-Godaddy_Tuesday 221 - continuation. txt
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+  domains:
+    - akirateam[.]com
+    - beservicewrap[.]pro
+    - firstpageprofs[.]com
+    - getkira[.]info
+    - goservicewrap[.]com
+    - gogoservicewrap[.]com
+    - joinnowkira[.]org
+    - joinnowservicewraps[.]pro
+    - joinservicewrap[.]com
+    - joinuseakira[.]com
+    - kiraone[.]info
+    - letsgetcustomers[.]com
+    - loveservice-wrap[.]com
+    - mybkira[.]info
+    - onlyforyoursite[.]com
+    - searchengineboosters[.]com
+    - service-wrap[.]com
+    - servicewrap-go[.]com
+    - servicewrap[.]pro
+    - servicewrapgo[.]com
+    - servicewrapone[.]com
+    - theakirateam[.]com
+    - toakira[.]pro
+    - topservice-wrap[.]pro
+    - topservicewrap[.]com
+    - usekiara[.]com
+    - useproakira[.]com
+    - usethatakira[.]com
+    - wantkiara[.]info
+    - wearetherealpros[.]com
+    - wethekira[.]shop
+    - wetheservicewrap[.]pro
+  hashes:
+    - 09ec44b6d3555a0397142b4308825483b479bf5a
+    - 0de065d58b367ffb28ce53bc1dc023f95a6d0b89
+    - 13de9fcd4e7c36d32594924975b7ef2b91614556
+    - 2322964ea57312747ae9d1e918811201a0c86e9c
+    - 253684ea43cb0456a6fec5728e1091ff8fcb27cf
+    - 36b4e424ce8082d7606bb9f677f97c0f594f254d
+    - 3a443c72995254400da30fe203f3fbf287629969
+    - 3a7cc815b921166006f31c1065dadfeb8d5190e6
+    - 4d24dd5c166fa471554ed781180e353e6b9642b7
+    - 51ec20e5356bbebd43c03faae56fca4c3bbe318e
+    - 55affc664472c4657c8534e0508636394eac8828
+    - 5620b527dfc71e2ee7efb2e22a0441b60fd67b84
+    - 5fde3180373c420cfa5cfdea7f227a1e1fe6936c
+    - 62e66bae4b892593009d5261d898356b6d0be3ef
+    - 6b65c296d9e1cda5af2f7dab94ce8e163b2a4ca8
+    - 6c56b986893dd1de83151510f4b6260613c5fbb9
+    - 6f342ff77cd43921210d144a403b8abb1e541a8b
+    - 7129194c63ae262c814da8045879aed7a037f196
+    - 71464c4f145c9a43ade999d385a9260aabcbf66d
+    - 730192b0f62e37d4d57bae9ff14ec8671fbf051e
+    - 769aa6ab69154ca87ccba0535e0180a985c21a0c
+    - 76aab3ab0f3f16cf30d7913ff767f67a116ff1e7
+    - 853fde052316be7887474996538b31f6ac0c3963
+    - 9d43494c6f87414c67533cce5ec86754311631fc
+    - 9f6ed2427e959e92eb1699024f457d87fa7b5279
+    - aa72065673dc543e6bf627c7479bfe8a5e42a9c4
+    - aac26242f4209bc59c82c8f223fcf2f152ce44bc
+    - b643a1f2c4eb436db26763d5e2527f6bebe8bcbf
+    - bbd754e36aee4702b9f20b90d509248945add4ea
+    - cb194612ed003eaf8d8cf6ed3731f21f3edeb161
+    - cc63ee921c29f47612096c34d6ee3ef244b33db2
+    - e12c6911997d7c2af5550b7e989f1dc57b6733b8
+    - eae675812c4274502051d6f2d36348f77a8464a0
+    - f1c7c5d0870fd0abb7e419f2c2ba8df42fa74667
+    - f2e71c9cbc4a18482a11ca3f54f2c958973360b4
+    - fb7fdcc2fe11e95065a0ce9041348984427ca0f4
+  urls:
+    - https://contact.apps-api.instantpage.secureserver.net/messaging
+    - https://i. fxdx. in/api-rt/changeip/c3v680ZnMa/>
+reference: https://www.sentinelone.com/labs/akirabot-ai-powered-bot-bypasses-captchas-spams-websites-at-scale/

@@ -1,0 +1,34 @@
+summary: "This research uncovered vulnerabilities and security flaws within the Prometheus ecosystem, including information disclosure, denial-of-service (DoS), and code execution risks due to RepoJacking. Over 336,000 servers expose their Prometheus servers and exporters to the internet."
+date: "2024-11-30"  # Inferred from the Shodan data timestamp
+authors: [] # Not specified in the provided text
+attribution: [] # Not specified in the provided text
+malware_families: [] # Not specified in the provided text
+
+TTPs:
+  processs:
+    - "Shodan"
+  commandline:
+    - "/usr/bin/shodan" #Inferred from Shodan usage. No specific arguments are listed.
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  network_connections:
+    - port: 9090
+      destination: ["<<IP_ADDRESS:9090-9100>>"] # Prometheus server and node exporter
+    - port: 9100
+      destination: ["<<IP_ADDRESS:9090-9100>>"] # Prometheus server and node exporter
+  file_modifications: []
+  persistence: []
+  pipes: []
+  process_relations: []
+
+IOCs:
+  urls:
+    - "https://github.com/opensourceelectrolux/aws-cost-exporter"
+    - "https://github.com/electrolux-oss/aws-cost-exporter"
+    - "https://github.com/hnlq715/" # 404 error, potential risk
+  domains:
+    - "skoda-auto.com"
+  ips: []
+  hashes: []
+reference: https://www.aquasec.com/blog/300000-prometheus-servers-and-exporters-exposed-to-dos-attacks/

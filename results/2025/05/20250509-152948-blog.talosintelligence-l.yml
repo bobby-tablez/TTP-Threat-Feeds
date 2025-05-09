@@ -1,0 +1,26 @@
+summary: Threat actors are bypassing MFA with adversary-in-the-middle attacks via
+  reverse proxies. A new spam campaign is targeting Brazilian users with a clever
+  twist abusing the free trial period of trusted remote monitoring tools and the countrys
+  electronic invoice system to spread malicious agents.
+date: '2025'
+authors: Cisco Talos
+attribution: ToyMaker, Cactus
+malware_families: LAGTOY
+TTPs:
+  processs:
+  - powershell.exe
+  commandline:
+  - '"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -ExecutionPolicy
+    Bypass -WindowStyle Hidden -File "C:\\Users\\Public\\Documents\\invoice.ps1"'
+  registry_keys:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  network_connections:
+  - 192.168.1.10:443
+  persistence:
+  - Registry Run Key
+  pipes: []
+  process_relations: []
+IOCs:
+- C:\\Users\\Public\\Documents\\invoice.ps1
+reference: https://blog.talosintelligence.com
+file_creation_date: May 09, 2025

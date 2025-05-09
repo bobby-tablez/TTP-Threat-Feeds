@@ -1,0 +1,55 @@
+summary: B1txor20 is a Linux backdoor utilizing DNS Tunnel technology for C2 communication.
+  It supports features like Socket5 proxy, remote rootkit installation, and arbitrary
+  command execution.
+date: February 9, 2022
+authors:
+- 360Netlab
+attribution: Unknown
+malware_families:
+- B1txor20
+TTPs:
+  processs:
+  - /etc/machine-id
+  - /tmp/.138171241
+  - /dev/urandom
+  - res
+  commandline:
+  - fopen("/etc/machine-id", "r")
+  - fopen("/tmp/.138171241", "r")
+  - fopen("/dev/urandom", "r")
+  - read(v7->_fileno, &v12, 16uLL)
+  - struct.unpack("<16H", id)
+  - res_mkquery(@, \"google.com\", 1, query_type, OLL, @, OLL, v2, 512)
+  - __res_send(v2, vi4, v3, 512)
+  powershell: ''
+  scripting_engine: ''
+  registry_keys:
+  - /etc/machine-id
+  - /tmp/.138171241
+  network_connections:
+  - port: '53'
+    destination:
+    - 8.8.8.8
+  - port: '53'
+    destination:
+    - 8.8.8.4
+  - port: '443'
+    destination:
+    - 194.165.16.24
+  file_modifications:
+  - /var/run/.netns.pid
+  persistence: ''
+  pipes: ''
+  process_relations:
+  - process: B1txor20
+    child: netns
+IOCs:
+- C2: webserv.systems
+- IP: 194.165.16.24
+- URL: hxxp://179.60.150.23:8000/xExportObject.class
+- URL: ldap://179.60.150.23:1389/o=tomcathxxp://194.165.16.24:8229/b1t_1t.sh
+- URL: hxxp://194.165.16.24:8228/b1thxxp://194.165.16.24:8228/b1thxxp://194.165.16.24:8228/_run.sh
+- URL: hxxp://194.165.16.24:8228/run.shhxxp://194.165.16.24:8228/share.shhxxp://194.165.16.24:8228/b1thxxp://194.165.16.24:8228/run.shhxxp://194.165.16.24:8228/run.sh
+- MD5: 0a0c43726fd256ad827f4108bdf5e772
+reference: https://blog.netlab.360.com/b1txor20-use-of-dns-tunneling_en/
+file_creation_date: May 09, 2025

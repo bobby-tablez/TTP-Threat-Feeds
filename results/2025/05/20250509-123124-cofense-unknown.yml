@@ -1,0 +1,22 @@
+summary: "A new credential phishing campaign uses emails disguised as Amazon e-gift cards from the recipient’s employer to harvest Microsoft credentials. The email lures recipients with a large monetary value and an appearance of being from their employer, leading them to a fake Amazon gift card redemption site and ultimately a Microsoft login page."
+date: "Unknown"
+author: "Lorenzo Sampang, Cofense Phishing Defense Center"
+attribution: "Unknown"
+malware_families: []
+TTPs:
+  - processs: []
+  - commandline: []
+  - powershell: []
+  - scripting_engine: []
+  - registry_keys: []
+  - network_connections:
+      - destination: ["activationshub[.]com"]
+      - destination: ["officefilecenter[.]com"]
+  - file_modifications: []
+  - persistence: []
+  - pipes: []
+  - process_relations: []
+IOCs:
+  - url: "activationshub[.]com"
+  - url: "officefilecenter[.]com"
+reference: https://cofense.com/blog/amazon-gift-card-email-hooks-microsoft-credentials

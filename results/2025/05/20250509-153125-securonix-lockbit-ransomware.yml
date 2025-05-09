@@ -1,0 +1,51 @@
+summary: "The report details several significant cybersecurity events in 2024, including\
+  \ the resurgence of the LockBit ransomware group, a disruptive failure within CrowdStrike's\
+  \ EDR software (dubbed WannaStrike), increased activity from APT groups like Actor240524\
+  \ and Lazarus Group, and a cyberattack on MITRE\u2019s NERVE network. The report\
+  \ also highlights key trends such as exploitation of zero-day vulnerabilities, sophisticated\
+  \ attack techniques, and the importance of timely patching and vulnerability management.\n"
+date: '2024'
+authors:
+- Nitish Singh
+- Nikhil Kumar Chadha
+attribution:
+- LockBit Ransomware Group
+- Actor240524 (New Adversary Group)
+- Lazarus Group (North Korean APT)
+malware_families:
+- LockBit Ransomware
+- BeaverTail Malware
+- Remcos RAT
+- HijackLoader
+- Connecio
+IOCs:
+- SHA256 hashes for the campaign (specific hashes not provided in report)
+TTPs:
+  processs:
+  - powershell.exe
+  - cmd.exe
+  commandline:
+  - C:\\Windows\\System32\\powershell.exe -ExecutionPolicy Bypass -File C:\\Users\\Public\\Documents\\LockBit4_0.ps1
+  - C:\\Windows\\System32\\cmd.exe /c powershell.exe -WindowStyle Hidden -ExecutionPolicy
+    Bypass -File "C:\\temp\\payload.ps1"
+  powershell:
+  - -ExecutionPolicy Bypass -File C:\\Users\\Public\\Documents\\LockBit4_0.ps1
+  - -WindowStyle Hidden -ExecutionPolicy Bypass -File "C:\\temp\\payload.ps1"
+  registry_keys:
+  - HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  network_connections:
+  - process: powershell.exe
+    port: 443
+    destination:
+    - Tor URLs
+  file_modifications:
+  - C:\\Users\\Public\\Documents\\LockBit4_0.ps1
+  - C:\\temp\\payload.ps1
+  - CrowdStrike Falcon.zip
+  persistence:
+  - Registry key modification under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  pipes: []
+  process_relations:
+  - powershell.exe -> cmd.exe (via command line execution)
+reference: https://www.securonix.com/blog/securonix-threat-labs-2024-annual-autonomous-threat-sweeper-intelligence-insights/
+file_creation_date: May 09, 2025

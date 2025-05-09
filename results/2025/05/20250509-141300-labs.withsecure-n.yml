@@ -1,0 +1,37 @@
+summary: Sharing CloudWatch dashboards provides viewers with some permissions over
+  the source account. A now-fixed bug allowed unauthenticated viewers to enumerate
+  EC2 tags within the source account, and intended viewers are still granted respective
+  permissions.
+date: Late July 2024 (disclosure), August 28, 2024 (fix)
+authors: Leonidas Tsaousis
+attribution: Not specified in report
+malware_families: Not specified in report
+TTPs:
+  processs:
+  - browser
+  - awscli
+  commandline:
+  - aws ec2 describe-tags
+  - aws cognito-identity get-id --identity-pool-id "us-east-1:5207...0d" --region
+    us-east-1
+  - aws cognito-identity get-credentials-for-identity --identity-id "us-east-1:3b5e1.....db8"
+    --region us-east-1
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  network_connections:
+  - process: browser
+    port: null
+    destination:
+    - cloudwatch.amazonaws.com
+  file_modifications: []
+  persistence: Dashboard sharing via URL
+  pipes: []
+  process_relations:
+  - browser -> awscli
+  - browser -> cognito-identity
+IOCs:
+- https://cloudwatch.amazonaws.com/dashboard.html?dashboard=<NAME>&context=eyJSIjoidXMt....<REDACTED>....JsaWMifQ==
+author: Not specified in report
+reference: https://labs.withsecure.com/publications/cloudwatch-dashboard.html
+file_creation_date: May 09, 2025

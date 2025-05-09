@@ -1,0 +1,70 @@
+summary: A 1-2 sentence summary of the Wannacry ransomware attack and its evolution.
+date: May 11, 2022
+attribution: ''
+malware_families:
+- Wannacry
+TTPs:
+  processs:
+  - cp<radio>iep.ob
+  - ge-Sys\\Sonoview\\image\\Y2616M81\\D18\\E6080027
+  - Sys\\Sonoview\\image\\Y2016M01\\D18\\E00G0027
+  - 1peterpreter
+  - Sonoview\\image\\Y2016401\\D18\\E0000027
+  - Sonoview\\image\\Y2016401\\D18\\ 6000027
+  - Sonoview\\image\\Y2016M01\\D18\\E0000027
+  - Sonoview\\image\\Y2016M01\\D18\\6000027
+  - Sonoview\\image\\Y2016401\\D18\\E0000027
+  - Sonoview\\image\\Y2016101\\018\\E6000027
+  - Sonoview\\image\\Y2016M01\\018\\E6000027
+  - Sonoview\\image\\Y2016401\\D18\\EG060027
+  - Sonoview\\image\\Y2016M01\\D18\\E6060027
+  commandline:
+  - cp<radio>iep.ob.
+  - ge-Sys\\Sonoview\\image\\Y2616M81\\D18\\E6080027
+  - Sys\\Sonoview\\image\\Y2016M01\\D18\\E00G0027
+  - 1peterpreter > upload C:\\\\Users\\\\Eyal\\\\D18\\\\onoview\\\\image\\\\Y2016401\\\\D18\\
+    \\0000027
+  - 'uploading : C:\\Users\\Eyal\\D18\\E@@0e@27.\\Sonoview\\image\\Y2016401\\D18\\
+    E6000027'
+  - 'uploaded : C:\\Users\\Eyal\\D18\\E@@00027.\\Sonoview\\image\\Y2016401\\D18\\
+    6000027'
+  - 'uploading : C:\\Users\\Eyal\\D18\\E@00@027.[nSys\\Sonoview\\image\\Y2016M01\\D18\\E0000027'
+  - 'uploaded : C:\\Users\\Eyal\\D18\\E@006027.[nSys\\Sonoview\\image\\Y2016M01\\D18\\6000027'
+  - 'uploading : C:\\Users\\Eyal\\D18\\E@900027,lys\\Sonoview\\image\\Y2016401\\D18\\E0000027'
+  - 'uploaded : C:\\Users\\Eyal\\D18\\E@000@27.s\\Sonoview\\image\\Y2016101\\018\\E6000027'
+  - 'uploading : C:\\Users\\Eyal\\D18\\E@0@27.lainSys\\Sonoview\\image\\Y2016M01\\018\\E6000027'
+  - 'uploaded : C:\\Users\\Eyal\\D18\\E@60@@27.lainSys\\Sonoview\\image\\Y2016101\\D18\\E0000027'
+  - 'uploading : C:\\Users\\Eyal\\D18\\E@000027.Sonoview\\image\\Y2016401\\D18\\EG060027'
+  - 'uploaded : C:\\Users\\Eyal\\D18\\E@@00@27.\\Sonoview\\image\\Y2016M01\\D18\\E6060027'
+  - 'uploading : C:\\Users\\Eval\\D18\\EG0G0827,_ . -._'
+  powershell: ''
+  scripting_engine: ''
+  registry_keys:
+  - HKLM\\Sys\\Sonoview\\image\\Y2616M81\\D18\\E6080027
+  - HKLM\\Sys\\Sonoview\\image\\Y2016M01\\D18\\E00G0027
+  network_connections: ''
+  file_modifications:
+  - C:\\Users\\Eyal\\D18\\E@60@27.Sys\\Sonoview\\image\\Y2616M81\\D18\\E6080027
+  - C:\\Users\\Eyal\\D18\\E@60@27.Sys\\Sonoview\\image\\Y2016M01\\D18\\E00G0027
+  - C:\\\\Users\\\\Eyal\\\\D18\\\\onoview\\\\image\\\\Y2016401\\\\D18\\ \\0000027
+  - C:\\Users\\Eyal\\D18\\E@@0e@27.\\Sonoview\\image\\Y2016401\\D18\\ E6000027
+  - C:\\Users\\Eyal\\D18\\E@@00027.\\Sonoview\\image\\Y2016401\\D18\\ 6000027
+  - C:\\Users\\Eyal\\D18\\E@00@027.[nSys\\Sonoview\\image\\Y2016M01\\D18\\E0000027
+  - C:\\Users\\Eyal\\D18\\E@006027.[nSys\\Sonoview\\image\\Y2016M01\\D18\\6000027
+  - C:\\Users\\Eyal\\D18\\E@900027,lys\\Sonoview\\image\\Y2016401\\D18\\E0000027
+  - C:\\Users\\Eyal\\D18\\E@000@27.s\\Sonoview\\image\\Y2016101\\018\\E6000027
+  - C:\\Users\\Eyal\\D18\\E@0@27.lainSys\\Sonoview\\image\\Y2016M01\\018\\E6000027
+  - C:\\Users\\Eyal\\D18\\E@60@@27.lainSys\\Sonoview\\image\\Y2016101\\D18\\E0000027
+  - C:\\Users\\Eyal\\D18\\E@000027.Sonoview\\image\\Y2016401\\D18\\EG060027
+  - C:\\Users\\Eyal\\D18\\E@@00@27.\\Sonoview\\image\\Y2016M01\\D18\\E6060027
+  - C:\\Users\\Eval\\D18\\EG0G0827,_ . -._
+  persistence: ''
+  pipes: ''
+  process_relations: ''
+IOCs:
+- cp<radio>iep.ob
+- ge-Sys\\Sonoview\\image\\Y2616M81\\D18\\E6080027
+- Sys\\Sonoview\\image\\Y2016M01\\D18\\E00G0027
+- 1peterpreter
+reference: https://research.checkpoint.com/2022/ransomversary-wannacrys-5th-anniversary-special-and-the-evolution-of-ransomware/
+file_creation_date: May 09, 2025

