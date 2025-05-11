@@ -1,0 +1,88 @@
+summary: 'This report details the wszero DDoS botnet, which utilizes various communication
+  methods including TCP, UDP, ICMP, and WebSocket with TLS encryption. The botnet
+  leverages JSON-based C2 communication and exhibits capabilities for HTTP request
+  bypassing.'
+date: '2022-12-07'
+authors:
+- twitter netlab[at]360.cn
+- Netlab360DNS
+- wangkun-bd@360.cn
+attribution:
+  threat_actor: Gobotnet
+malware_families:
+- wszero
+- BotMonGoDDoS
+- DDoS
+- SSH/Telnet
+TTPs:
+  processs: ''
+  commandline: ''
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  network_connections: ''
+  file_modifications: ''
+  persistence: ''
+  pipes: ''
+  process_relations: ''
+IOCs:
+  hashes:
+  - aabca688b31eb962a7a2849c57000bea
+  - 86827dc70c5001633b801b7b7fa8a9b9
+  - 0642bc041c2e4a74fbf58537a2305543
+  - 13e1966f13274c71d39e4aea7f62127e
+  - 271aebe152b793765a75e5e89d24cdbd
+  - 27f66ef808e5497528c653ba862822b7
+  - 2eca5324301a55dfa5b5d2c2b67ab9d0
+  - 342a5c7e1eb3ead0b6ddeeed4f1a811f
+  - 3627e6848eb9f6a28c7c83b347753f26
+  - 367b9095e93d27fc1a684a90a77e82f9
+  - 40b3bb4e7d00377cbd9d100b39d26ac0
+  - 45bc7cd7c7acdf679d1f3ceceb7d6602
+  - 4a5e9ffd3ce77d5269033b8032426e45
+  - 513a8036ca358b0acfce30903f95f12b
+  - 52d21fbad081d699ec6e041fcdd6133c
+  - 59d635cca6de9c417995ab5fa5501829
+  - 5eea56fc1f7a373973dc9ff0cc8fe86f
+  - 62c11ea75e82611b6ba7d7bf08ed009f
+  - 62eeda48db5d0f5c6ee31112fe0c18ee
+  - 6b6cac5bd765178545b0fa3caa0fd99b
+  - 72ad17b874a956fdb4c969a03924aea2
+  - 777a4bdda609735b1dd784b98fe27693
+  - 79a7fc0ae8222f29e9c6e133f7a33b4b
+  - 823c7b89db6a35345f205bb64769d5ef
+  - 83d647c9749e9a5a5f9c6ae01747a713
+  - 857dfb390d02f5ca93a37ffa2f0cbde2
+  - 871624995190fe3310f553f0fbc61b0e
+  - 88b98664c3c901242c73e1d8f18a47eb
+  - 8d85e3e0328cdd51c83fb68e31a28e62
+  - 8e2efc8f7edd7dfff4bad7126d30e254
+  - 8f55245e24c4e84df7e8dddd19523d93
+  - 9039df359128850de1b3ee1240b150d6
+  - 9606e8903df98f59a827be8876ace389
+  - 9d396b48773ccbc5fdb3ffc2fb7c20f6
+  - 9daae12c05a9a21c405c9319fc49c358
+  - ae504e3f08e2fef8e95100811fe8e2be
+  - b36b340ba9947dae7b5bab3e1330d53a
+  - b7c841eb41d6233ff67006177a507c66
+  - bbfefb41c71896f7433b58376218553d
+  - bef01d6529c5250de0662547d75959b2
+  - c5e6aae51d97acb44339ae4d5f296b4f
+  - c8cfc2ddb08f812f6440b8918a916c75
+  - d418109e5d81d48da12fe271cd08c61a
+  - da86780f3a94c1aa6ea76fdfcb5db412
+  - de28becdcbc5400261a809420c5953e3
+  - ec0d832b564606660645e15f3b28fceb
+  - f635dfefc35ad532d2ad9a08cb4864bd
+  - f7cde1a55211f815bc3a6aecd04f731b
+  - fcbb9872ea0fe1af63254b65c4475ee8
+  - fe8e1f4680355b1093536165e445fa8
+  ips:
+  - 176.65.137.5
+  - 176.65.137.6
+  domains:
+  - zero.sudolite.ml
+  urls:
+  - https://qeruya.cyou/
+reference: https://blog.netlab.360.com/new-ddos-botnet-wszeor/
+file_creation_date: May 11, 2025

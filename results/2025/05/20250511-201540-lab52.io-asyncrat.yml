@@ -1,0 +1,49 @@
+summary: Early in May 2024, S2 Grupos intelligence unit, Lab52, detected a new phishing
+  campaign impersonating the Colombian Attorney Generals Office to infect systems
+  with AsyncRAT using DLL side-loading and HijackLoader.
+date: '2024-05-06'
+authors:
+- Lab52
+attribution: APT-C-36
+malware_families:
+- AsyncRAT
+- HijackLoader
+TTPs:
+  processs:
+  - IObit RttHlp.exe
+  - cmd.exe
+  - MSBuild.exe
+  - powershell.exe
+  - conhost.exe
+  commandline:
+  - C:\\Users\\XXXX\\AppData\\Roaming\\WUKApp\\08 CITACION DEMANDA.exe
+  - cmd.exe /c start MSBuild.exe
+  - powershell.exe -ExecutionPolicy Bypass -File C:\\Users\\XXXX\\AppData\\Roaming\\WUKApp\\dreamland.m4a
+  - powershell.exe -ExecutionPolicy Bypass -File C:\\Users\\XXXX\\AppData\\Roaming\\WUKApp\\cutcherry.vcf
+  scripting_engine:
+  - PowerShell
+  registry_keys:
+  - AsyncMutex_6SI8OkPnk
+  network_connections:
+  - C2 Server
+  file_modifications:
+  - C:\\Users\\XXXX\\AppData\\Roaming\\WUKApp\\08 CITACION DEMANDA.exe
+  - C:\\Users\\XXXX\\AppData\\Roaming\\WUKApp\\Register.dll
+  - C:\\Users\\XXXX\\AppData\\Roaming\\WUKApp\\vcl120.bpl
+  - C:\\Users\\XXXX\\AppData\\Roaming\\WUKApp\\dreamland.m4a
+  - C:\\Users\\XXXX\\AppData\\Roaming\\WUKApp\\cutcherry.vcf
+  persistence:
+  - chromeHttp_zx_test link file on the users home folder
+  - mlt_Archive scheduled task
+  process_relations:
+  - IObit RttHlp.exe -> cmd.exe -> MSBuild.exe
+IOCs:
+- AsyncMutex_6SI8OkPnk
+- C:\\Users\\XXXX\\AppData\\Roaming\\WUKApp\\08 CITACION DEMANDA.exe
+- C:\\Users\\XXXX\\AppData\\Roaming\\WUKApp\\Register.dll
+- C:\\Users\\XXXX\\AppData\\Roaming\\WUKApp\\vcl120.bpl
+- C:\\Users\\XXXX\\AppData\\Roaming\\WUKApp\\dreamland.m4a
+- C:\\Users\\XXXX\\AppData\\Roaming\\WUKApp\\cutcherry.vcf
+- mlt_Archive
+reference: https://lab52.io/blog/dll-side-loading-through-iobit-against-colombia/
+file_creation_date: May 11, 2025

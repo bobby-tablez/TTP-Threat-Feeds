@@ -28,7 +28,7 @@ PROMPT_TEMPLATE = """
 I need you to create a technical YAML Report. The purpose of the YAML report is to present raw data from public security advisories. We need raw commands executed by attackers, registry keys, executed code as part of the TTPs section.
 Extract the following information from this cyber threat report:
 - description: A 1-2 sentence summary
-- date: Extract and provide the date of publication (YYYY-MM-DD format)
+- date: Extract and provide the date of publication, typically found in the publication header (format: YYYY-MM-DD)
 - authors: Author(s)
 - attribution: Attribution (threat actor, APT group, country)
 - malware_families: Malware family names
@@ -43,12 +43,13 @@ Extract the following information from this cyber threat report:
   - persistence: description or sub keys persistence methods used
   - pipes: list of any named pipes
   - process_relations: process trees based on your analysis
-
 - Indicators of compromise (hashes, IPs, domains, URLs)
 
-Return all results in YAML format with the following keys: summary, date, author, attribution, malware_families, TTPs, IOCs
+RESULTS: Return all results in YAML format with the following keys: description, date, authors, attribution, malware_families, TTPs, IOCs
 
-Do not make up information. Do not summarize TTPs. Only return relevant data that is explicitly present in the report. if no TTPs, ignore.
+Additional requirements:
+Do not make up information. Do not summarize TTPs. Only return relevant data that is explicitly present in the report. if no TTPs, ignore and provide empty tags
+If the publication contains little useful data, lots of empty fields are acceptable
 Be very detailed (e.g: include ALL and FULL command line arguements)
 Never truncate outputs (e.g: ...), include full command line and URLs
 Provide only technical data, for example, don't describe TTPs, IOCs and URLs. Only provide raw commands, URLs, etc where appropriate

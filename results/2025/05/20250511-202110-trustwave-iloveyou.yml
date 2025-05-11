@@ -1,0 +1,57 @@
+summary: A technical analysis of the ILOVEYOU worm and how modern worms have evolved,
+  including examples like Tangerine Turkey, LitterDrifter, PlugX, RapperBot, P2PInfect,
+  Morris II, and Raspberry Robin.
+date: '2025-05-02'
+authors:
+- Pauline Bolanos
+attribution:
+- Gamaredon (APT group)
+- Mustang Panda (China-based threat actor)
+malware_families:
+- ILOVEYOU
+- Tangerine Turkey
+- XMRig
+- Zephyr Miner
+- LitterDrifter
+- PlugX
+- RapperBot
+- P2PInfect
+- Morris II
+- Raspberry Robin
+- SSH-Snake
+TTPs:
+  processs:
+  - wscript.exe
+  - iexplore.exe
+  - cmd.exe
+  - x64dbg.exe
+  - x32bridge.dll
+  commandline:
+  - wscript.exe //nologo LOVE-LETTER-FOR-YOU.TXT.VBS
+  - '"C:\WINDOWS\system32\iexplore.exe" http://skyinternet.com.ph/welcome.htm'
+  - C:\\Windows\\System32\\cmd.exe /c echo %USERNAME% >> c:\passwords.txt
+  - x64dbg.exe -p plugx.dll
+  - x32bridge.dll
+  powershell: null
+  scripting_engine:
+  - VBScript
+  registry_keys:
+  - HKEY_CURRENT_USER\AppStart\Run
+  - HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Explorer\Main
+  file_modifications:
+  - C:\LOVE-LETTER-FOR-YOU.TXT.VBS
+  - C:\passwords.txt
+  - C:\\WINDOWS\\system32\\iexplore.exe
+  persistence:
+  - Registry key modification for autorun on startup
+  pipes: null
+  process_relations:
+  - wscript.exe -> iexplore.exe
+  - wscript.exe -> cmd.exe
+IOCs:
+  domains:
+  - skyinternet.com.ph
+  urls:
+  - http://skyinternet.com.ph/welcome.htm
+reference: https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/a-deep-rooted-infestation-how-the-iloveyou-bug-continues-its-legacy-in-modern-worms/
+file_creation_date: May 11, 2025

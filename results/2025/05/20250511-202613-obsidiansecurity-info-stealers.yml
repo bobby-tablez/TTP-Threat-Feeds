@@ -1,0 +1,56 @@
+summary: Cyber attackers are using fake CAPTCHA attacks delivered through SEO-optimized
+  malicious websites to bypass traditional phishing defenses and steal user credentials.
+  These attacks present a seemingly legitimate verification challenge before activating
+  harmful code.
+date: '2024-05-16'
+authors:
+- Shuyang Wang
+- Damien Miller-McAndrews
+attribution: APT groups (Ukraine CERT warning about Office 365 account compromise)
+malware_families:
+- info stealers
+TTPs:
+  commandline:
+  - Windows Key + R
+  - Ctrl + V
+  - Enter
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: []
+  network_connections: []
+  file_modifications: []
+  persistence: ''
+  pipes: []
+  process_relations: []
+IOCs:
+  domains:
+  - x10[.]mxcoinspaceteam[.]com
+  - payhub-secure[.]com
+  - soubtcevent[.]com
+  - cambodiatouristservice[.]com
+  - fu-xu-ry[.]com
+  - omniflex-secure[.]com
+  - securedmicrosoft365[.]com
+  - sso-accountservices[.]com
+  - complaintguest2[.]com
+  - komi[.]cam
+  - roomnum-998388[.]world
+  - claim-pamp[.]func
+  - captcha[.]com
+  - talentstack[.]icurooms
+  - visitor999837[.]world
+  - april-boking-recapt09993748[.]com
+  - captcha-cf[.]com
+  ips:
+  - 94.181.229.250
+  - 94.156.177.61
+  - 98.91.81.111
+  - 98.91.81.131
+  - 185.101.6420
+  - 217.17.201207
+  - 174.214.13
+  urls:
+  - https://www.cisecurity.org/insights/blog/active-lumma-stealer-campaign-impacting-us
+  - https://cert.gov.ua/article/6281123
+reference: https://www.obsidiansecurity.com/blog/defeat-fake-captcha-attacks-from-the-source
+file_creation_date: May 11, 2025

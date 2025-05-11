@@ -1,0 +1,69 @@
+summary: New Noodlophile Stealer distributes via fake AI video generation platforms,
+  leveraging public enthusiasm for AI to deliver malware disguised as AI output.
+date: '2024-05-16'
+authors: null
+attribution: Unknown (Likely Vietnamese origin)
+malware_families:
+- Noodlophile Stealer
+- XWorm
+TTPs:
+  processs:
+  - CapCut.exe
+  - AICore.dll
+  - certutil.exe
+  - images.exe
+  - srchost.exe
+  - powershell.exe
+  - regasm.exe
+  powershell:
+  - powershell -cp b\"yp\"ass w hid\"de\"n -c \"exit\"
+  scripting_engine:
+  - Python
+  registry_keys:
+  - HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  network_connections:
+  - process: CapCut.exe
+    port: 80
+    destination: google.com
+  - process: srchost.exe
+    destination:
+    - https://85.209.87[.]207/sysdi/randomuser2025.txt
+  file_modifications:
+  - '%LOCALAPPDATA%\\SoftwareHost\\srchost.exe'
+  - C:\\Users\\Public\\Explorer.bat
+  persistence:
+  - Registry key modification under HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  pipes: []
+  process_relations:
+  - CapCut.exe -> CapCutLoader.dll -> install.bat -> certutil.exe -> images.exe ->
+    srchost.exe (Python) -> Noodlophile Stealer/XWorm
+IOCs:
+  C2:
+  - http://lumalabs-dream[.]com/VideoLumaAI.zip
+  - https://luma-dreammachine[.]com/LumaAI.zip
+  - https://luma-dreammachine[.]com/File_Successful.zip
+  - https://luma-aidreammachine[.]com/Creation_Luma.zip
+  - https://85.209.87[.]207/sysdi/LDXC10.txt
+  - https://85.209.87[.]207/sysdi/randomuser2025.txt
+  - http://160.25.232[.]62/bee/bee02_ads.txt
+  - 149.154.167.220:25902
+  Tokens:
+  - 7882816556:AAEEosBLhRZ8Op2ZRmBF1RD7DkJIyfk47Ds
+  - 103.232.54[.]13:25902
+  Hashes:
+  - 5c98553c45c9e86bf161c7b5060bd40ba5f4f11d5672ce36cd2f30e8c7016424
+  - 67779bf7a2fa8838793b31a886125e157f4659cda9f2a491d9a7acb4defbfdf5
+  - 11C873CEE11FD1D183351C9CDF233CF9B29E28F5E71267C2CB1F373A564C6A73
+  - 82C0D5C4C405739AEE74B792DCCD7C821A9F06A0F6E389AD57A321ADCC6757A7
+  - 353f17553a3457c6b77c4ca30505d9307dda9613e2a98ad3e392d2084284b739
+  - Fa0c8f439db570b4206f7c8be497cf91aaf28e41eaffdc70baef904b190387ef
+  - C006c6dddb9bfcdbf2790eee4bc77dd09cd63ab5b8e64190a55b9e5b66325d55
+  - Dc3e9daf25c44eb5d3ad12aa668c6219e8e7031152e1d7d51ee0b889c37ba443
+  - F9a8b13c56d1074beed40de97920beef2e39086591e961c2c45e25fdd16b4786
+  - 8b0ee435928189c98969825e729a014e94b90e1da3af3cfeee1d02374c2bd906
+  - C006c6dddb9bfcdbf2790eee4bc77dd09cd63ab5b8e64190a55b9e5b66325d55
+  - 934a68ac125cf995662bdd2d76a1d8dd3f107010ce77e21f003ebc581dc025d3
+  - 1a70a211df697c522c6821e526d31bd47697dbe3fa9ddac5d95f921df4313f59
+  - e2c8eaf77dca9ed188f12261b9e9052ba0e58d1b9c45d922cbf0f3d00611ea56
+reference: https://www.morphisec.com/blog/new-noodlophile-stealer-fake-ai-video-generation-platforms/
+file_creation_date: May 11, 2025

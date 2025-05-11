@@ -1,0 +1,16 @@
+summary: A Qantas-spoofing email campaign targeted Australian employees with credential
+  phishing pages designed to steal credit card details. The campaign bypassed multiple
+  SEGs and used convincing emails mimicking legitimate Qantas marketing materials.
+date: '2025-02-01'
+authors:
+- Max Gannon
+attribution:
+- Unknown
+malware_families: []
+TTPs: {}
+IOCs:
+- subscriptions[.]pstmrk[.]it
+- qantas[.]com
+- auth/auhs1
+reference: https://cofense.com/blog/custom-crafted,-qantas-spoofing-emails-target-australian-victims
+file_creation_date: May 11, 2025
