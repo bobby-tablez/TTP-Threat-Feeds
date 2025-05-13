@@ -1,0 +1,99 @@
+description: FERELOR is a malware campaign utilizing various techniques including
+  process injection, registry modifications, and network communication to download
+  and execute malicious payloads.
+date: '2024-08-29'
+attribution: wanghao
+malware_families:
+- PureCrypter
+- Meteorite
+- Discord
+- Telegram
+TTPs:
+  processs:
+  - wscript.exe
+  - powershell.exe
+  - cmd.exe
+  commandline:
+  - 'C:\\Windows\\System32\\wscript.exe "C:\\Users\\Public\\Sizxarup[10.File]": :WriteAllBytes($nsguzai,
+    [Convert]:return SnsguzqiFromBase64string(Scscvozh))=2 &"SETTINGS=~ RTICONG) 103
+    o Address 00004148 RT_GROUP_ICON(14) Offset 00003148 RT_VERSION(16) Size 0000013oo
+    FHE SI ot [ nicode [ C Strings 5 3 [0<00004148 ~ 000004283 ( 0x00000135 )it  RT
+    E= FHE1 s owoorsc A IolIlolloesote celetorelorelselrelollhes/gooslcomlolam i mamomelsiugsdfy
+    s Tempetes'
+  - powershell.exe -EncodedCommand SnsguzqiFromBase64string(Scscvozh)
+  - C:\\Windows\\Temp\\check.exe
+  powershell:
+  - -EncodedCommand SnsguzqiFromBase64string(Scscvozh)
+  registry_keys:
+  - '%APPDATA%\\discord\\Local Storage\\'
+  - '%APPDATAR\\TelegranDesktop\\tdata\\ '
+  network_connections:
+  - protocol: HTTP
+    destination: 185.215.113.89
+    port: 80
+  - protocol: HTTP
+    destination: 89.34.27.167
+    port: 80
+  file_modifications:
+  - C:\\Windows\\Temp\\check.exe
+  - C:\\Users\\Public\\Sizxarup[10.File]
+  persistence: ''
+  pipes: []
+  process_relations:
+  - wscript.exe -> powershell.exe
+  - powershell.exe -> cmd.exe
+  - cmd.exe -> msxml2.xmlhttp
+  - msxml2.xmlhttp -> adodb.stream
+  - adodb.stream -> check.exe
+IOCs:
+  hashes: []
+  ips:
+  - 212.192.246.195
+  - 37.0.11.164:8080
+  - 80.66.75.123
+  - 89.34.27.167
+  - 91.243.44.142
+  - 185.215.113.89
+  - 62.204.41.69
+  - 45.143.201.4
+  domains:
+  - agenttt.ac.ug
+  - andres.ug
+  - asdasgs.ug
+  - asdsadasrdc.ug
+  - beachwood.ug
+  - boundertime.ru
+  - check-time.ru
+  - courtneyjones.ac.ug
+  - danwisha.ac.ug
+  - hopeforhealth.com.ph
+  - hubvera.ac.ug
+  - jonescourtney.ac.ug
+  - leatherlites.ug
+  - marksidfgs.ug
+  - marnersstyler.ug
+  - mistitis.ug
+  - mofdold.ug
+  - momomolastik.ug
+  - nicoslag.ru
+  - partaususd.ru
+  - pdshcjvnv.ug
+  - qd34g34ewdfsf23.ru
+  - qwertasd.ru
+  - qwertzx.ru
+  - raphaellasia.com
+  - rockphil.ac.ug
+  - rockrock.ug
+  - timebound.ug
+  - timebounder.ru
+  - timecheck.ug
+  - timekeeper.ug
+  - triathlethe.ug
+  - underdohg.ac.ug
+  - underdohg.ug
+  - www.rockrock.ug
+  urls:
+  - http://89.34.27.167/check.exe
+  - http://cdn.discordapp.com/attachments/994652587494232125/1004377760762704896/ps1-6_Hiuveier.png
+reference: https://blog.netlab.360.com/purecrypter-is-busy-pumping-out-various-malicious-malware-families/
+file_creation_date: May 13, 2025

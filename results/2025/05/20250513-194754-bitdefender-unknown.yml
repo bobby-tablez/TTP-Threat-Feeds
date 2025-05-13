@@ -1,0 +1,28 @@
+description: This report details vulnerabilities discovered in LG WebOS TV operating
+  systems (versions 4 through 7) that allow for root access after bypassing the authorization
+  mechanism.  Over 91,000 devices exposing vulnerable services to the internet were
+  identified.
+date: '2024-04-09'
+TTPs:
+  processs:
+  - system
+  - iconv
+  commandline:
+  - /usr/bin/iconv -f %s -t UTF-8 s >> /tmp/asn_filslyric.1re
+  - system(achtackaie)
+  - ip addr add %s/%s brd %s dev %s
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  network_connections: []
+  file_modifications:
+  - /tmp/asn_filslyric.1re
+  - /media/internal/downloads/
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- Port: '3000'
+- Port: '3001'
+reference: https://www.bitdefender.com/en-us/blog/labs/vulnerabilities-identified-in-lg-webos
+file_creation_date: May 13, 2025

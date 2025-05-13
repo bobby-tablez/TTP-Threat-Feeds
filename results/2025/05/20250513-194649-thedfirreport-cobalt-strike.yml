@@ -1,0 +1,100 @@
+description: This report details a cyber intrusion attributed to TA4557, outlining
+  their tactics, techniques, and procedures (TTPs) including the use of resume lures,
+  Cobalt Strike, SharpShares, Seatbelt, and other tools for reconnaissance, lateral
+  movement, and persistence. The attackers targeted a victim organization, exploiting
+  vulnerabilities and leveraging stolen credentials to gain access to sensitive data.
+date: '2024-12-02'
+authors:
+- DFIR Threat Intelligence Group
+attribution: TA4557
+malware_families:
+- Cobalt Strike
+- more_eggs
+- SharpShares
+- Seatbelt
+- VeeamHax
+TTPs:
+  processs:
+  - cmd.exe
+  - powershell.exe
+  - rundll32.exe
+  - adfind.exe
+  - net.exe
+  - tar.exe
+  - 7za.exe
+  - python.exe
+  - msxsl.exe
+  - regsvr32.exe
+  - cloudflared
+  - regsvrz32.exe
+  - cnd.exe
+  - pythonw.exe
+  - cloudflared.exe
+  commandline:
+  - cmd.exe /C net user REDACTED /dom %WINDIR%\\system32\\cmd.exe /C net user REDACTED
+    /dom
+  - rundll32.exe "ModuleILPath":"Seatbelt" "ManagedPdbBuildPath":"Z:\\Agressor\\\\github.com-GhostPack\\\\Seatbelt-master\\\\Seatbelt\\\\obj\\\\Debug\\\\Seatbelt.pdb"
+  - rundll32.exe "ModuleILPath":"SharpShares" "ManagedPdbBuildPath":"C:\\\\Users\\\\mmoser\\\\source\\\\repos\\\\SharpShares\\\\SharpShares\\\\obj\\\\Release\\\\SharpShares.pdb"
+  - adfind.exe -f "(objectcategory=person)"
+  - adfind.exe -f "objectcategory=computer"
+  - adfind.exe -subnets -f (objectCategory=subnet)
+  - C:\\ProgramData\\scaner\\scaner\\netscan.exe
+  - c:\\programdata\\ssh\\7za.exe x "c:\\programdata\\ssh\\python-3.10.4-embed-amd64.zip"
+    -y
+  - cmd.exe /C "python.exe cradle.py"
+  - 'cmd /v /c set "cykbcnp3=updates Ganpianp: call set "cykbcnp86B=x%cykbcnp3:~6,
+    1%%" && loykbcnp868let "cykbonp! & cleykbeno2! kbenp2! "C:\\Users\\\\AppData\\Roaming\\Hicrosoft\\"'
+  - 'cmd /v /c set \"amagezngss26=updates Ganpianp: call set \"amageang34=%amagezngssa6:~6,
+    1% tan;tanp: lamagezng3hlet \"amagezng9l8=t\" cnp;ian; lamageznal4let\"amaggzng825=1\"
+    fanp;cann; call !amaggzng3!tar!amagezng9ls amaggzng34! cr!amagezngs2s! planaggzng9ls!
+    e:j!amagezng34! crlanaggzngs2s! planageznag18! 178F2E426. txt"'
+  - net user backup Password!12 /add
+  - net localgroup Administrators backup /add
+  - net user sqlbackup Password!12211 /add
+  - net localgroup administrators sqlbackup /add
+  - net user adn_1 Password!12211 /add
+  - net localgroup Administrators adn_1 /dom
+  - net localgroup Administrators adn_1 /add
+  - 'vssadmin create shadow /for=C: 2>&1'
+  - powershell.exe Expand-Archive -LiteralPath "c:\\programdata\\ssh\\python-3.10.
+    4-embed-amd64." -DestinationPath "C:\\programdata\\ssh\\"
+  - powershell.exe Expand-Archive "c:\\prograndata\\ssh\\python-3.10.4-enbed-and64.zip"
+    "C:\\prograndata\\ssh\\"
+  - tar xf c:\\prograndata\\ssh\\python-3.10. 4-embed-amd64. zip
+  powershell:
+  - Invoke-Obfuscation Via Stdin
+  - Expand-Archive -LiteralPath "c:\\programdata\\ssh\\python-3.10. 4-embed-amd64."
+    -DestinationPath "C:\\programdata\\ssh\\"
+  - Expand-Archive "c:\\prograndata\\ssh\\python-3.10.4-enbed-and64.zip" "C:\\prograndata\\ssh\\"
+  registry_keys:
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  network_connections:
+  - port: 443
+    destination:
+    - shehasgone.com
+    - pin.howasit.com
+  file_modifications:
+  - C:\\programdata\\shares.txt
+  - c:\\programdata\\seatinfo.txt
+  - C:\\Users\\<REDACTED>\\AppData\\Local\\Microsoft\\CLR_v4.0\\UsageLogs\\rundll32.exe.log
+  - C:\\ProgramData\\scaner.zip
+  - C:\\Windows\\System32\\rundll32.exe.log
+  - C:\\Users\\\\AppData\\Roaming\\Hicrosoft\\26358.d11
+  - C:\\ProgramData\\ssh\\Veeam. Backup.Common . d11
+  - C:\\ProgramData\\ssh\\Veeam.Backup.Model.d11
+  - C:\\ProgramData\\ssh\\Veeam. Backup. Interaction. MountService.d11
+  - C:\\ProgramData\\ssh\\Veeantax. exe
+  - C:\\ProgramData\\ssh\\7za.exe
+  - C:\\ProgramData\\ssh\\msxsl.exe
+  persistence:
+  - Scheduled Tasks
+  pipes: []
+  process_relations: []
+IOCs:
+- 72.167.151.219
+- johnshinkus.con
+- '8333626657486659737'
+- C:\\ProgramData\\ssh\\VeeamHax.exe
+- C:\\Windows\\System32\\KERNELBASE.dll
+reference: https://thedfirreport.com/2024/12/02/the-curious-case-of-an-egg-cellent-resume/
+file_creation_date: May 13, 2025

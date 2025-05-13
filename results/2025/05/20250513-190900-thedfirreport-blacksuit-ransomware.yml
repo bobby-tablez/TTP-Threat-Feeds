@@ -63,8 +63,6 @@ TTPs:
   pipes: []
   process_relations: []
 IOCs:
-- <IP redacted>
-- <hostname redacted>
 - DESKTOP-0MEMSEA
 - DESKTOP-BIFFSC7
 reference: https://thedfirreport.com/2024/08/26/blacksuit-ransomware/
