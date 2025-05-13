@@ -1,0 +1,71 @@
+description: In December 2023, we observed an intrusion that started with the execution
+  of a Cobalt Strike beacon and ended in the deployment of BlackSuit ransomware.
+date: '2024-08-26'
+authors:
+- MetallicHack
+- yatinwad
+- malforsec
+attribution: Unknown
+malware_families:
+- BlackSuit Ransomware
+- Cobalt Strike
+- SystemBC
+TTPs:
+  processs:
+  - RtWin64.exe
+  - systeminfo
+  - nltest
+  - Rubeus
+  - Sharphound
+  - psexec
+  - rundll32.exe
+  - socks32.exe
+  - mstsc.exe
+  - adfind.exe
+  - Get-DataInfo.ps1
+  - start.bat
+  - 7z.exe
+  - Notepad.exe
+  - Wordpad.exe
+  commandline:
+  - C:\\Windows\\system32\\\\cmd.exe /C systeminfo
+  - C:\\Windows\\system32\\cmd.exe /C net group "domain admins" /domain
+  - C:\\Windows\\system32\\cmd.exe /C nltest /dclist <domainname redacted>
+  - C:\\Windows\\system32\\cmd.exe /C nltest /domain_trusts /all_trusts
+  - C:\\Windows\\system32\\cmd.exe /C net group "enterprise admins" /domain
+  - C:\\Windows\\system32\\cmd.exe /C ping <hostname redacted>
+  - C:\\Windows\\system32\\taskmgr.exe /4
+  - C:\\Windows\\system32\\cmd.exe /C All windows Import-Module ActiveDirectory Get-ADComputer
+    -Filter {enabled -eq $true} -properties *|select Name, DNSHostName, OperatingSystem,
+    LastLogonDate, IPv4Address | Export-CSV C:\\Users\\AllWindows.csv -NoTypeInformation
+    -Encoding UTF8
+  - C:\\Windows\\system32\\cmd.exe /C route print
+  - C:\\Windows\\system32\\cmd.exe /C ping http://<IP redacted>/Administrator
+  - C:\\Windows\\system32\\mmc.exe
+  - C:\\Windows\\system32\\dsa.msc
+  - C:\\Windows\\system32\\mmc.exe C:\\Windows\\System32\\gpedit.msc
+  - Cobalt Strike PsExec
+  - Cobalt Strike psexec_psh
+  - powershell -nop -w hidden -encodedcommand ...
+  powershell:
+  - Get-DataInfo.ps1
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server DenyTSConnections
+  - HKEY_CURRENT_USER\\Run
+  network_connections: []
+  file_modifications:
+  - C:\\Windows\\Temp\\Dogi\\
+  - C:\\Windows\\System32\\qwe.exe
+  - C:\\Windows\\System32\\adf.bat
+  - C:\\Perflogs\\adf\\ADFind.exe
+  persistence:
+  - 'Registry Run Key: socks5 within the Current User registry hive'
+  pipes: []
+  process_relations: []
+IOCs:
+- <IP redacted>
+- <hostname redacted>
+- DESKTOP-0MEMSEA
+- DESKTOP-BIFFSC7
+reference: https://thedfirreport.com/2024/08/26/blacksuit-ransomware/
+file_creation_date: May 13, 2025
