@@ -1,0 +1,52 @@
+description: A new email campaign distributing a Remote Access Trojan (RAT) using
+  multiple evasion techniques targets organizations in Spain, Italy, and Portugal.
+  The campaign leverages serviciodecorreo as an authorized sender and employs geolocation
+  filtering and Ngrok to create secure tunnels.
+date: '2024-05-16'
+authors:
+- FortiGuard Labs Threat Research
+attribution:
+- Unknown (likely APT group)
+malware_families:
+- Ratty RAT
+TTPs:
+  processs:
+  - java.exe
+  commandline:
+  - java -jar FA-43-03-2025.jar
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  network_connections:
+  - port: 443
+    destination: download1528.mediafire.com
+  - port: 443
+    destination: jw8ndw9ev.localto.net
+  - port: 443
+    destination: l5ugb6qxh.localto.net
+  file_modifications:
+  - C:\Users\Public\Documents\FA-43-03-2025.jar
+  persistence: ''
+  pipes: ''
+  process_relations: ''
+IOCs:
+  hashes:
+  - sha256: a1c2861a68b2a4d62b6fbfc7534f498cefe5f92f720466d24ae1b66ebc9f5731
+  - sha256: d20d14792c91107f53318ff7df83b9cd98acd3c394959a74e72278682822b600
+  - sha256: 9184ff2cdd05fcaf111db23123479c845b2ece2fedccc2524b2de592f9980876
+  - sha256: 5f897fec78e2fd812eb3bc451222e64480a9d5bc97b746cc0468698a63470880
+  - sha256: 6153c80b17cb990caad1d80cac72c867d4ecfa1a84b7ab286b7373cd4168794e
+  - sha256: 469b8911fd1ae2ded8532a50e9e66b8d54820c18ccdba49d7a38850d6af54475
+  - sha256: af8b6ac45918bc87d2a164fae888dab6e623327cba7c2409e4d0ef1dde8d1793
+  IPs:
+  - 143.47.53.106
+  - 130.51.20.126
+  - 199.232.214.172
+  - 199.232.210.172
+  Domains:
+  - jw8ndw9ev[.]localto[.]net
+  - l5ugb6qxh[.]localto[.]net
+  URLs:
+  - hxxps://download1528[.]mediafire[.]com/35ougpab4uhgHgb3Pmqh8niQ0hzS9b-TtTro5oPV5iUIULfNckqgXvjXQ6aTp-NF-k8EflSnFWC--Ffh4aX1NlYrzaPzgFlyxHVe0fKkLE1p3u5cntfU25orm92QdoQmXE9-gyI4hRgSYpaNcd3o12kJnPRbJhD3aqbl1Qx3vqbUtk8/ayp0ikmndrdseht/FA-43-03-2025.jar
+reference: https://www.fortinet.com/blog/threat-research/multilayered-email-attack-how-a-pdf-invoice-and-geofencing-led-to-rat-malware
+file_creation_date: May 12, 2025

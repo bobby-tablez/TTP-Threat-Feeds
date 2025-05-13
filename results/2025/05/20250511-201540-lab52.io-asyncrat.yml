@@ -1,7 +1,7 @@
 summary: Early in May 2024, S2 Grupos intelligence unit, Lab52, detected a new phishing
   campaign impersonating the Colombian Attorney Generals Office to infect systems
   with AsyncRAT using DLL side-loading and HijackLoader.
-date: '2024-05-06'
+date: '2024-05-28'
 authors:
 - Lab52
 attribution: APT-C-36

@@ -1,0 +1,123 @@
+description: A threat actor utilized SystemBC and Cobalt Strike for initial access,
+  lateral movement, and persistence within a network. The adversary leveraged various
+  techniques including PowerShell, WMI, scheduled tasks, and remote service connections
+  to achieve their objectives.
+date: '2024-01-01'
+malware_families:
+- GootLoader
+- SystemBC
+- Cobalt Strike
+- Gootloader
+TTPs:
+  processs:
+  - powershell.exe
+  - wscript.exe
+  - rundll32.exe
+  - dllhost.exe
+  - svchost.exe
+  - alhost.exe
+  - cnd.exe
+  - cad.exe
+  - GootLoaderAutoJsDecode.py
+  - Advanced_IP_Scanner_2.5.3850.exe
+  - wscript.EXE
+  - Adobe\\Frontline Management.js
+  - Rundll32.exe
+  - Dllhost.exe
+  - notepad.exe
+  - wordpad.exe
+  commandline:
+  - C:\\Windows\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe /enco
+  - C:\\Windows\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exeAGH\"AZOB\"LAHA\"ATA\"
+    At AHHATAAG\"AD\" TA\"AADADSA\" NGAWA\" DTAHOAZADQAMA\" OADSA\" JA\"BZ \"AHGAZARIA
+    \" CTABAR IAC\" SATGAL \"A\" CSA\" TGBTAGHA TgATACT \"ATGATAC TA\" dQAG\" A\"
+    Fw* ACWB \"VA\"C \" IAK \"WAIACTAKWALAGYAd\"AB3ACTAKWAIACTIAKWALAGE...
+  - wscript C:\\Users \\AppData\\Roaming\\Adobe
+  - C:\\Windows\\SysWOW64\\rshell\\vl.e\\powershell.exe
+  - C:\\Windows\\System32\\dllhost. exe C:\\Windows\\systen32\\cnd.exe C:\\Windows\\systen32\\cad.exe
+    /c echo F7952a3a6e > \\.\\pipe\\2craTSC:\\WWindons\\Systen32\\dl1host. exe C:\\WWindos\\ysten32\\cnd.exe.
+    C:\\Windows\\systea32\\cad.exe /c echo Sede3d2edca > \\.\\pipe\\dfcc3
+  - netsh firewall set service remotedesktop enable
+  - netsh firewall set service remoteadmin enable
+  - reg add "hklm\\system\\currentcontrolset\\control\\lsa" /f /v DisableRestrictedAdmin
+    /t REG_DWORD /d 0
+  - schtasks /delete /tn "\\Microsoft\\Windows\\Windows Defender\\Windows/tn \"\\Microsoft\\Windows\\Windows
+    Defender\\windows/tn \"\\Microsoft\\Windows\\Windows Defender\\windows/tn \"\\Microsoft\\Windows\\Windows
+    Defender\\Windows
+  - Set-MpPreference -DisableRealtimeMonitoring $true
+  - Set-MpPreference
+  - powershell.exe -windowstyle hidden -ExecutionPolicy Bypass -File "C:\\Users \\AppData\\Roaming[s5-psi]Parentimage
+    7 images 4 CommandLineC:\\WWindons\\Systen32\\alhost. exe C:\\Windows\\systen32\\cnd.exe
+    C:\\Windows\\systen32\\cad.exe /c echo F7952a3a6e > \\.\\pipe\\2craTSC:\\WWindons\\Systen32\\dl1host.
+    exe C:\\WWindos\\ysten32\\cnd.exe. C:\\Windows\\systea32\\cad.exe /c echo Sede3d2edca
+    > \\.\\pipe\\dfcc3
+  - reg add "hklm\\system\\currentcontrolset\\control\\terminal server" /f /v fDenyTSConnections
+    /t REG_DWORD /d @
+  - netsh firewall set service remotedesktop enable
+  - netsh firewall set service remoteadmin enable
+  - Advanced_IP_Scanner_2.5.3850.exe
+  - powershell.exe -nop -w hidden -c Set-MpPreference -DisableRealtimeMonitoring $true
+  - reg add"hklm\\system\\currentcontrolset\\control\\terminal server" /f /v fDenyTSConnections
+    /tREG_DWORD /d 0
+  - netsh firewall set service remoteadminenable, netsh firewall set serviceremotedesktop
+    enable
+  - reg add"hklm\\system\\currentcontrolset\\control\\lsa"/f /v DisableRestrictedAdmin
+    /t REG_DWORD/d 0
+  - powershell.exe\" /enco NgAWA.....
+  - 'Cobalt Strike beacon remote service execution: e544944'
+  - PipeName:\\moj0.5688.8052.1838949397870888770b
+  - Spawn to Rundll32.exe migrate to Dllhost.exe
+  - LSASS Credential access via Dllhost.exe
+  - Ping <REDACTED>
+  powershell:
+  - Set-MpPreference -DisableRealtimeMonitoring $true
+  scripting_engine: ''
+  registry_keys:
+  - HKU\\.DEFAULT\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\socks_powershell
+  - HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Personalization\\cbKStbjQBNFy
+  - HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Personalization\\geRBAdXTDCKN
+  - hklm\\system\\currentcontrolset\\control\\terminal server
+  - hklm\\system\\currentcontrolset\\control\\lsa
+  network_connections:
+  - port: 4001
+    destination: 91.92.136.20
+  - port: 50
+    destination: UTC
+  - destination: 91.215.85.143:443
+  - destination: 91.92.136.20:4001
+  - destination: aboveandbeyondmovers.com/downloads.php
+  - destination: hrclubphilippines[.Jcom/xmlrpc.php
+  - destination: 108.160.158[.]102hxxps|//mediacratia[.]Jru/xmlrpc.php
+  - destination: 172.67.200[.]238/104.21.21[.]226
+  - destination: daraltanweer[.]Jcom/xmlrpc.php
+  - destination: ukrainians[.]today/xmlrpc.php
+  - destination: my-little-kitchen[.]Jcom/xmlrpc.php
+  - destination: montages[.Jno/xmlrpc.php
+  - destination: pocketofpreschool[.Jcom/xmlrpc.php
+  - destination: blog[.]lilianpraskoval[.]Jcz/xmlrpc.php
+  - destination: sitmeanssit[.]Jcom/xmlrpc.php
+  - destination: artmodel[.]Jcom[.]Jua/xmlrpc.php
+  - destination: blog[.]lilianpraskoval[.]Jcz/xmlrpc.php
+  file_modifications: ''
+  persistence: ''
+  pipes:
+  - \\moj0.5688.8052.1838949397870888770b
+  process_relations: ''
+attribution: Unknown
+IOCs:
+- 91.215.85.143
+- 91.92.136.20
+- aboveandbeyondmovers.com/downloads.php
+- hrclubphilippines[.Jcom/xmlrpc.php
+- 108.160.158[.]102hxxps|//mediacratia[.]Jru/xmlrpc.php
+- 172.67.200[.]238/104.21.21[.]226
+- daraltanweer[.]Jcom/xmlrpc.php
+- ukrainians[.]today/xmlrpc.php
+- my-little-kitchen[.]Jcom/xmlrpc.php
+- montages[.Jno/xmlrpc.php
+- pocketofpreschool[.Jcom/xmlrpc.php
+- blog[.]lilianpraskoval[.]Jcz/xmlrpc.php
+- sitmeanssit[.]Jcom/xmlrpc.php
+- artmodel[.]Jcom[.]Jua/xmlrpc.php
+reference: https://thedfirreport.com/2024/02/26/seo-poisoning-to-domain-control-the-gootloader-saga-continues/
+file_creation_date: May 12, 2025

@@ -1,0 +1,89 @@
+description: Evasive Infostealer leveraging Phishing and Spam Campaigns for its Delivery.
+  Threat Actors are increasingly using spam emails and phishing websites to trick
+  users into downloading malware such as Stealer and Remote Access Trojan (RAT) to
+  infect users machines and steal sensitive information.
+date: '2023-01-12'
+authors:
+- Cyble Research & Intelligence Labs (CRIL)
+attribution:
+- Threat Actor
+- APT Group
+malware_families:
+- Rhadamanthys Stealer
+TTPs:
+  processs:
+  - Adobe Acrobat DC Updater.exe
+  - Jan-statement.exe
+  - Runtime Broker.exe
+  - rundll32.exe
+  - wscript.exe
+  - pythonw.exe
+  commandline:
+  - C:\\Users\\it amer\\Downloads\\Jan-statement.exe
+  - '"C:\\Windows\\system32\\rundll32.exe" C:\\Users\\Fill Wi 1\\AppData\\Local\\Temp\\nsis_unsibcfb0.dll,DllEntryPoint'
+  powershell: ''
+  scripting_engine: ''
+  registry_keys:
+  - SYSTEM\\ControlSet001\\Control\\systenInformatio
+  - SYSTEM\\COntrolSet001\\Services\\\\BALLOON
+  - SYSTEM\\ControlSet001\\Services\\\\Balloonservice
+  - SYSTEM\\CORtrolSet001\\Services\\\\VBoxGuest
+  - SYSTEM\\COntrolSet001\\Services\\\\vBoxHouse
+  - SYSTEM\\COntrolSet001\\Services\\\\VBoxseTM
+  - SYSTEM\\ControlSet001\\Services\\\\VBoxservice
+  - SYSTEM\\COntrolSet001\\Services\\\\vaoxvideo
+  - SYSTEM\\CONtrolSet001\\Services\\\\virtIo-Fs service
+  - SYSTEM\\Controlsetoo1\\Services\\\\virtioserial
+  - SYSTEM\\Control5et001\\Services\\\\netkvn
+  - SYSTEM\\COntrolSet001\\Services\\\\vioscsi
+  - SYSTEM\\Control5et001\\Services\\\\vioser
+  - SYSTEM\\ControlSet001\\Services\\\\VBoxvideo.sys
+  - System32\\\\drivers\\\\balloon. sys
+  - System3z\\\\drivers\\\\netkvm. 5ys
+  - System32\\\\drivers\\\\pvpanic. sys
+  - System32\\\\drivers\\\\viofs.sys
+  - System32\\\\drivers\\\\viogpudo. sys
+  - System32\\\\drivers\\\\vioinput.sys
+  - System32\\\\drivers\\\\viorng.sys
+  - System32\\\\drivers\\\\vioscsi.sys
+  - System32\\\\vboxoglarrayspu. d11
+  - System32\\\\vboxoglcrutil.dil
+  - System32\\\\vboxoglerrorspu. d11
+  - System32\\\\vboxog]feedbackspu.d11
+  - System32\\\\vboxogIpackspu.d11
+  - System32\\\\vboxoglpassthroughspu. d11
+  - System32\\\\vboxservice. exe
+  - System32\\\\vboxcray. exe
+  network_connections: ''
+  file_modifications:
+  - '%temp%\\ST\\'
+  - '%temp%\\Runtime Broker.exe'
+  - '%temp%\\Initialize 4.exe'
+  - '%temp%\\nsis_unsibcfb0.dll'
+  - C:\\Users\\it amer\\Downloads\\Jan-statement.exe
+  persistence: ''
+  pipes: ''
+  process_relations:
+  - Jan-statement.exe -> Runtime Broker.exe
+  - Runtime Broker.exe -> Binary_Stub Replacer.pyc
+IOCs:
+  hashes:
+  - db66fc58c07ba0ccbe1b9c2db770179d0d931e5bf73838da9c915581661d4c1a
+  domains:
+  - zolotayavitrina[.]com
+  - bluestacks-install[.]com
+  - zoomus-install[.]com
+  - install-zoom[.]com
+  - install-anydesk[.]com
+  - install-anydeslk[.]com
+  - zoom-meetings-install[.]com
+  - zoom-meetings-download[.]com
+  - anydleslk-download[.]com
+  - zoomvideo-install[.]com
+  - zoom-video-install[.]com
+  - istaller-zoom[.]com
+  - notepad.hasankahrimanoglu[.]com
+  urls:
+  - https://zolotayavitrina[.]com/Jan-statement[.]exe
+reference: https://cyble.com/blog/rhadamanthys-new-stealer-spreading-through-google-ads/
+file_creation_date: May 12, 2025

@@ -1,0 +1,60 @@
+description: FortiGuard Labs observed a threat actor using phishing emails with malicious
+  HTML files to spread Horabot, malware that primarily targets Spanish-speaking users.
+  It is known for using crafted emails impersonating invoices or financial documents
+  to trick victims into opening malicious attachments and can steal email credentials,
+  harvest contact lists, and install banking trojans.
+date: 2024-04
+authors:
+- FortiGuard Labs
+attribution:
+- Threat Actor
+malware_families:
+- Horabot
+TTPs:
+  processs:
+  - Outlook.exe
+  - mshta.exe
+  commandline:
+  - C:\\Windows\\System32\\cmd.exe /c start powershell.exe -ExecutionPolicy Bypass
+    -File "C:\\Users\\Public\\LAPTOP-0QF0NEUP\\a.bat"
+  - powershell.exe -ExecutionPolicy Bypass -File C:\\Users\\Public\\LAPTOP-0QF0NEUP\\a.ps1
+  powershell:
+  - -ExecutionPolicy Bypass -File "C:\\Users\\Public\\LAPTOP-0QF0NEUP\\a.bat"
+  registry_keys: []
+  network_connections:
+  - protocol: HTTP
+    port: 80
+    destination:
+    - 209.74.71.168
+  - protocol: HTTP
+    port: 80
+    destination:
+    - 93.127.200.211
+  file_modifications: []
+  persistence:
+  - description: Creates a new shortcut .lnk file pointing to the hidden dropped files
+      related to the AutoIt payload (winupdate_version_686.exe with .ai arguments).
+      It also sets the .lnk file to execute the Batch script during system startup
+      for the PowerShell script.
+  pipes: []
+  process_relations: []
+IOCs:
+- hash: 523d7e9005b2e431068130989caf4a96062a029b50a5455d37a2b88e6d04f83d
+- hash: 84d77737196ea5a8cb0efd8fc3ea61a878d1e1851cc63bcb1e0868019c71996f13
+- hash: a5c60a799c104a7bb1ff1489b82031c2ea1ed10712ca019e996fc0e37e9dfa2ba4
+- hash: 71519bed0a5503408fee0593bc13547c88cfb10872a9739c2b1eaa5a287ca885b
+- domain: t4.contactswebaccion.store
+- domain: f5.contactswebaccion.space
+- domain: labodeguitaup.space
+- ip: 209.74.71.168
+- ip: 93.127.200.211
+- domain: d1.webcorreio.pics
+- domain: updatec.lat
+- url: hxxps://t4[.]contactswebaccion[.]store/0704/
+- url: hxxps://d1[.]webcorreio[.]pics/LNIJGPNIPPK/WWGDI
+- url: hxxps://dl[.]webcorreio[.]pics/g1/
+- url: hxxps://labodeguitaup[.]space/a/08/150822/au/au.tws
+- url: hxxp://209.74.71.168/on7all/index15.php
+- url: hxxp://93.127.200.211/a/08/150822/au/logs/index.php?CHLG
+reference: https://www.fortinet.com/blog/threat-research/horabot-unleashed-a-stealthy-phishing-threat
+file_creation_date: May 12, 2025

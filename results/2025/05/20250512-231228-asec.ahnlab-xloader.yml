@@ -1,0 +1,31 @@
+description: XLoader info-stealer is distributed using phishing emails containing
+  MS Office documents that exploit the Equation Editor vulnerability (CVE-2017-11882).
+  The malware utilizes HorusProtector for in-memory execution and persistence.
+date: '2024-04-25'
+authors: AhnLab Security Intelligence Center (ASEC)
+attribution: HorusProtector
+malware_families:
+- XLoader
+TTPs:
+  processs:
+  - cmd.exe
+  - cscript.exe
+  - RegAsm.exe
+  commandline:
+  - cmd.exe /C cscript %tmp%\\Client.vbe
+  powershell:
+  - PowerShell script to run the loader
+  registry_keys:
+  - Computer\\HKEY_CURRENT_USER\\SOFTWARE\\gSngToQWoKopCel
+  file_modifications:
+  - '%tmp%\\Client.vbe'
+  persistence:
+  - Creates a key with a 15-character random name under Computer\\HKEY_CURRENT_USER\\SOFTWARE\\donn
+  pipes: []
+  process_relations:
+  - DOCX file -> RTF document -> Client.vbe (executed via cscript) -> RegAsm.exe ->
+    DLL loader -> XLoader
+IOCs:
+- gSngToQWoKopCel
+reference: https://asec.ahnlab.com/en/87724/
+file_creation_date: May 12, 2025

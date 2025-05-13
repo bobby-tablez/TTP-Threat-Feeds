@@ -1,0 +1,43 @@
+description: Cleafy identified a new Android malware sample, ToxicPanda, sharing similarities
+  with TgToxic but exhibiting reduced capabilities and code refactoring. The malware
+  focuses on Account Takeover (ATO) via On Device Fraud (ODF), targeting European
+  and potentially Latin American banking customers.
+date: '2024-01-26'
+authors: Cleafy Threat Intelligence team
+attribution: Chinese speakers
+malware_families:
+- ToxicPanda
+- TgToxic
+TTPs:
+  processs:
+  - ApplicationC1002
+  commandline:
+  - serverAddr =serverPort = 7000dnsServer = "114.114.114"
+  - 'case "restartSc":'
+  - 'case "restartMe":'
+  - 'case "rightClick":'
+  - 'case "screen_relay":'
+  - 'case "screenshot":'
+  - 'case "sendAlert":'
+  - 'case "setAppStyle":'
+  - 'case "setCam":'
+  - 'case "setDebugMode":'
+  - 'case "setDebugOff":'
+  - 'case "setDebugOn":'
+  - RequestPretty Raw Hex N =1 GET /adv php?apk-losoa&cmode test&device=HTTP/1.1
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  network_connections:
+  - port: 1771
+    destination: ctrl.dksu.top
+  file_modifications:
+  - path: langs.json
+  - path: XX.json
+  - path: config.toml
+  persistence: ''
+  pipes: ''
+  process_relations: ''
+IOCs:
+reference: https://www.cleafy.com/cleafy-labs/toxicpanda-a-new-banking-trojan-from-asia-hit-europe-and-latam
+file_creation_date: May 12, 2025

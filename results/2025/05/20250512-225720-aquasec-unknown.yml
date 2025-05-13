@@ -1,0 +1,39 @@
+description: A set of critical vulnerabilities (CVE-2025-1097, CVE-2025-1098, CVE-2025-24514,
+  and CVE-2025-1974) were disclosed in the ingress-nginx Controller for Kubernetes.
+  These vulnerabilities could lead to a complete cluster takeover by granting attackers
+  unauthorized access to all secrets stored across all namespaces.
+date: '2025-03-26'
+TTPs:
+  processs:
+  - kubectl
+  commandline:
+  - kubectl get pods --all-namespaces --selector app.kubernetes.io/name=ingress-nginx
+  - kubectl describe deployment ingress-nginx-controller -n <namespace> | grep "Image:"
+  - helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx --set controller.admissionWebhooks.enabled=false
+  - kubectl delete ValidatingWebhookConfiguration ingress-nginx-admission
+  - kubectl edit the ingress-nginx deployment or daemonset to remove the--validating-webhookflag
+    from the controllers command args.
+  - trivy k8s format cyclonedx output ./kbom.cdx.json
+  - trivy sbom ./kbom.cdx.json
+  - trivy k8s scanners vuln report summary
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  network_connections: []
+  file_modifications: []
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- CVE-2025-1974
+- CVE-2025-24514
+- CVE-2025-1097
+- CVE-2025-1098
+- v1.11.5
+- v1.12.1
+- 'kubernetes.io/metadata.name: kube-system'
+- 'port: 8443'
+- 'protocol: TCP'
+- http://example.com/#;\\ninjection point
+reference: https://www.aquasec.com/blog/ingress-nginx-vulnerabilities-what-you-need-to-know/
+file_creation_date: May 12, 2025

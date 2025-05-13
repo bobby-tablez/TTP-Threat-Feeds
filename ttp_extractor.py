@@ -60,29 +60,40 @@ Context:
 {text}
 """
 
-def merge_yamls(yaml_texts):
+def merge_yamls(chunks):
     merged = {}
-    for yml in yaml_texts:
+    for chunk in chunks:
         try:
-            parsed = yaml.safe_load(yml)
-            for key, value in parsed.items():
-                if key not in merged:
+            data = yaml.safe_load(chunk)
+        except yaml.YAMLError:
+            continue
+        if not isinstance(data, dict):
+            continue
+        for key, value in data.items():
+            if not value:
+                continue
+            if key not in merged:
+                merged[key] = value
+            elif isinstance(value, list):
+                if isinstance(merged[key], list):
+                    merged[key].extend(v for v in value if v not in merged[key])
+                else:
                     merged[key] = value
-                elif isinstance(value, list):
-                    merged[key] = list({*merged.get(key, []), *value})
-                elif isinstance(value, dict):
-                    merged[key] = merged.get(key, {})
+            elif isinstance(value, dict):
+                if isinstance(merged[key], dict):
                     for subkey, subval in value.items():
                         if subkey not in merged[key]:
                             merged[key][subkey] = subval
                         elif isinstance(subval, list):
-                            merged[key][subkey] = list({*merged[key][subkey], *subval})
+                            merged[key][subkey].extend(v for v in subval if v not in merged[key][subkey])
                         else:
                             merged[key][subkey] = subval
                 else:
-                    merged[key] = value  # Last one wins
-        except Exception:
-            continue
+                    merged[key] = value
+            else:
+                # Prefer longer or non-empty values
+                if len(str(value)) > len(str(merged[key])):
+                    merged[key] = value
     return merged
 
 def clean_text(text):

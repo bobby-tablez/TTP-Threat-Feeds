@@ -45,3 +45,4 @@ https://intezer.com/blog/
 https://blogs.jpcert.or.jp
 https://www.sonatype.com/blog/
 https://asec.ahnlab.com/en/
+https://www.seqrite.com/blog/

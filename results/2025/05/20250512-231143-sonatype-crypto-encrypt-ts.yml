@@ -1,0 +1,36 @@
+description: An illicit npm package called "crypto-encrypt-ts" mimics the popular
+  CryptoJS library but steals crypto wallet secrets and exfiltrates them to threat
+  actors using Better Stack (Logtail).
+date: '2025-04-30'
+authors:
+- Ax Sharma
+attribution: Unknown
+malware_families:
+- crypto-encrypt-ts
+TTPs:
+  processs:
+  - node
+  - pm2
+  commandline:
+  - node start.js
+  - npm install -g pm2 & pm2 start cronJob.js name hourly-hello
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  network_connections:
+  - port: 443
+    destination: s1287874.eu-nbg-2.betterstackdata[.]com
+  file_modifications: ''
+  persistence:
+  - description: Uses pm2 to schedule a cron job for continuous data collection.
+  pipes: ''
+  process_relations:
+  - parent: node
+    child: pm2
+IOCs:
+- hash: ''
+- ip: ''
+- domain: s1287874.eu-nbg-2.betterstackdata[.]com
+- url: ''
+reference: https://www.sonatype.com/blog/revived-cryptojs-library-is-a-crypto-stealer-in-disguise
+file_creation_date: May 12, 2025

