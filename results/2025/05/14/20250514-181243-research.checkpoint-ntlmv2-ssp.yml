@@ -1,0 +1,60 @@
+description: A vulnerability in Windows Explorer allows attackers to leak NTLMv2 hashes
+  with minimal user interaction by extracting a malicious .library-msfile from a ZIP
+  archive. Active exploitation has been observed since March 19, 2025, targeting Polish
+  and Romanian governments and private institutions.
+authors:
+- Check Point Research
+attribution: UAC-0194 (suspected Russian affiliation), APT28 (Fancy Bear/Forest Blizzard)
+malware_families:
+- NTLMv2 SSP
+TTPs:
+  processes:
+  - zip.exe
+  - explorer.exe
+  - smss.exe
+  commandline:
+  - C:\\Windows\\System32\\zip.exe: ''
+  - C:\\Windows\\Explorer.EXE: ''
+  - C:\\Windows\\System32\\smss.exe: ''
+  powershell: null
+  scripting_engine: null
+  registry_keys: null
+  image_load: null
+  network_connections:
+  - executable: explorer.exe
+    destination_address: 194.127.179[.]157
+    port: null
+    url: null
+  - executable: smss.exe
+    destination_address: 159.196.128[.]120
+    port: null
+    url: null
+  file_modifications:
+  - C:\\Users\\<user>\\.TEMP\\xd.library-ms
+  - \\\\ATTACKER_IP\\\\SHARE_NAME
+  - \\\\159.196.128[.]120\\\\shared
+  persistence: null
+  pipes: null
+  process_relations:
+  - zip.exe -> explorer.exe -> smss.exe
+IOCs:
+- hash: null
+- ip: 194.127.179[.]157
+- ip: 159.196.128[.]120
+- domain: stu.iku.edu.tr
+- domain: alunos.estgv.ipv.pt
+- domain: com.dmu.edu.eg
+- domain: edu.ipchile.cl
+- domain: istlam.edu.ec
+- domain: nu.ac.th
+- domain: edu.uni.lodz.pl
+- domain: buc.edu.eg
+- file_path: xd.zip
+- file_path: xd.library-ms
+- file_path: xd.url
+- file_path: xd.website
+- file_path: xd.lnk
+- url: file://159.196.128[.]120/
+reference: https://research.checkpoint.com/2025/cve-2025-24054-ntlm-exploit-in-the-wild/
+date_of_publication: April 16, 2025
+file_creation_date: May 14, 2025

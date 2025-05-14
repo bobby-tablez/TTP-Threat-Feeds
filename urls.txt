@@ -1,5 +1,7 @@
 https://cert.gov.ua/articles
 https://thedfirreport.com/
+https://www.gdatasoftware.com/blog/
+https://www.jamf.com/blog/
 https://securelist.com/category/apt-reports/
 https://blog.talosintelligence.com/
 https://www.securonix.com/blog/

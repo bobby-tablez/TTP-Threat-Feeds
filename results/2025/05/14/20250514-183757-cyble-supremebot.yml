@@ -1,0 +1,65 @@
+description: SupremeBot pushes Umbral Stealer through trojanized Super Mario game
+  installers to mine cryptocurrency and steal sensitive information.
+attribution: Unknown (likely linked to Shadow Legion)
+malware_families:
+- SupremeBot
+- Umbral Stealer
+- XMR Miner
+TTPs:
+  processes:
+  - Super-Mario-Bros.exe
+  - super-mario-forever-v702e.exe
+  - java.exe
+  - atom.exe
+  - cmd.exe
+  - schtasks.exe
+  - wime.exe
+  commandline:
+  - Super-Mario-Bros.exe
+  - super-mario-forever-v702e.exe
+  - java.exe
+  - atom.exe
+  - C:\\Windows\\System32\\cmd.exe /c taskkill /im atom.exe /f & erase C:\\Users\\<Admin>\\AppData\\Roaming\\atom.exe & exit
+  - C:\\Windows\\System32\\schtasks.exe /Create /SC MINUTE /MO 15 /TN U757WD6WG4EDHUD873
+    /TR C:\\ProgramData\\{FY3PFGWN-J6QF-EIEE-KMFXFHFLWH1Q}\\Super-Mario-Bros.exe /F
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load: ''
+  network_connections:
+  - executable: java.exe
+    destination: gulf[.]moneroocean[.]stream
+    port: ''
+  - executable: atom.exe
+    destination: silentlegion[.]duckdns[.]org
+  - executable: atom.exe
+    url: hxxp://shadowlegion[.]duckdns[.]org/wime[.]exe
+  file_modifications:
+  - '%appdata%\\super-mario-forever-v702e.exe'
+  - '%appdata%\\java.exe'
+  - '%appdata%\\atom.exe'
+  - C:\\ProgramData\\{FY3PFGWN-J6QF-EIEE-KMFXFHFLWH1Q}\\Super-Mario-Bros.exe
+  - C:\\Windows\\System32\\schtasks.exe
+  persistence:
+  - Scheduled task created named "U757WD6WG4EDHUD873" running every 15 minutes.
+  pipes: ''
+  process_relations:
+  - Super-Mario-Bros.exe -> super-mario-forever-v702e.exe
+  - Super-Mario-Bros.exe -> java.exe
+  - Super-Mario-Bros.exe -> atom.exe
+  - atom.exe -> schtasks.exe (creates scheduled task)
+  - atom.exe -> cmd.exe (kills itself and deletes file)
+  - atom.exe -> wime.exe (downloads Umbral Stealer)
+IOCs:
+- hash: e9cc8222d121a68b6802ff24a84754e117c55ae09d61d54b2bc96ef6fb267a54
+- ip: gulf[.]moneroocean[.]stream
+- url: hxxp://shadowlegion[.]duckdns[.]org/nam/api/endpoint[.]php
+- url: hxxp://silentlegion[.]duckdns[.]org/gate/update[.]php
+- url: hxxp://silentlegion[.]duckdns[.]org/gate/connection[.]php
+- url: hxxp://silentlegion[.]duckdns[.]org/gate/config[.]php
+- url: hxxp[:]//shadowlegion[.]duckdns[.]org/wime[.]exe
+authors:
+- Cyble Research and Intelligence Labs (CRIL)
+reference: https://cyble.com/blog/trojanized-super-mario-game-installer-spreads-supremebot-malware/
+date_of_publication: June 23, 2023
+file_creation_date: May 14, 2025

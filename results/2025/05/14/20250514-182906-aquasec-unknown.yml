@@ -1,0 +1,44 @@
+description: Aqua Nautilus researchers discovered critical vulnerabilities (CVE-2023-27898,
+  CVE-2023-27905) in Jenkins Server and Update Center. Exploitation allows unauthenticated
+  attackers to execute arbitrary code, potentially leading to complete server compromise.
+attribution: Aqua Team Nautilus
+TTPs:
+  processes:
+  - java
+  - jenkins
+  - nc
+  commandline:
+  - /usr/bin/java -jar ascii-magician.hpi
+  - jenkins -version
+  - nc -1lv 443
+  powershell: []
+  scripting_engine:
+  - javascript
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: jenkins
+    destination_address: attackers_machine
+    port: '443'
+  - executable: nc
+    destination_address: attackers_machine
+    port: '443'
+  file_modifications:
+  - ascii-magician.hpi
+  - https://attackers machine/evil.js
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- https://updates.jenkins.io/update-center.json
+- https://updates.jenkins.io/download/plugins/pam-auth/1.10/pam-auth.hpi
+- https://github.com/jenkinsci/ascii-magician-plugin
+- https://updates.jenkins.io/dynamic-stable-2.319.2/update-center.json
+- attackers_machine
+- '443'
+authors:
+- Ilay Goldman
+- Yakir Kadkoda
+reference: https://www.aquasec.com/blog/jenkins-server-vulnerabilities/
+date_of_publication: March 08, 2023
+file_creation_date: May 14, 2025

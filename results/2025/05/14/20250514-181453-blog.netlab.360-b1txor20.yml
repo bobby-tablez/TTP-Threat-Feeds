@@ -1,0 +1,107 @@
+description: This report details the B1txor20 malware family, a DNS tunnel botnet
+  utilizing XOR encryption and RC4 for obfuscation. It leverages various techniques
+  including process injection, registry modifications, and persistence mechanisms
+  to maintain its presence on compromised systems.
+authors:
+- 360Netlab
+attribution: Unknown (likely APT group)
+malware_families:
+- B1txor20
+- Mirai
+- Gafgyt
+- Elknot
+- Log4J
+TTPs:
+  processes:
+  - python
+  - bind
+  - remove
+  - connect
+  commandline:
+  - /usr/bin/python /tmp/.138171241/dev/urandom
+  - bind -t udp -a 0.0.0.0 -p 53
+  - remove "/dev/pamd"
+  - connect
+  powershell: ''
+  scripting_engine:
+  - python
+  registry_keys:
+  - /var/run/.netns.pidPID
+  - /etc/machine-id
+  - /tmp/.138171241
+  image_load: ''
+  network_connections:
+  - 'executable: python, destination: 8.8.8.8:53'
+  - 'executable: python, destination: 8.8.8.4:53'
+  - 'executable: python, destination: 194.165.16.24:443'
+  file_modifications:
+  - /tmp/.138171241/dev/urandom
+  - /etc/machine-id
+  - /tmp/.138171241
+  persistence:
+  - Utilizes /etc/machine-id and /tmp directories for persistence.
+  pipes: ''
+  process_relations: ''
+IOCs:
+- 'MD5: 0a0c43726fd256ad827f4108bdf5e772'
+- .dns.webserv.systems
+- 194.165.16.24
+- 104.244.73.126
+- 109.201.133.100
+- 162.247.74.27
+- 166.78.48.7
+- 171.25.193.78
+- 185.100.87.202
+- 185.129.62.62
+- 185.220.100.240
+- 185.220.100.241
+- 185.220.100.242
+- 185.220.100.243
+- 185.220.100.246
+- 185.220.100.249
+- 185.220.100.250
+- 185.220.100.252
+- 185.220.100.254
+- 185.220.100.255
+- 185.220.101.134
+- 185.220.101.136
+- 185.220.101.140
+- 185.220.101.143
+- 185.220.101.144
+- 185.220.101.151
+- 185.220.101.155
+- 185.220.101.161
+- 185.220.101.162
+- 185.220.101.164
+- 185.220.101.166
+- 185.220.101.168
+- 185.220.101.172
+- 185.220.101.174
+- 185.220.101.176
+- 185.220.101.181
+- 185.220.101.191
+- 185.220.101.34
+- 185.220.101.37
+- 185.220.101.39
+- 185.220.101.40
+- 185.220.101.42
+- 185.220.101.43
+- 185.220.101.46
+- 185.220.101.5
+- 185.220.101.50
+- 185.220.101.51
+- 185.220.101.53
+- 185.220.101.54
+- 185.220.101.56
+- 185.220.101.57
+- 185.220.101.61
+- 185.56.80.65
+- 193.218.118.158
+- 194.32.107.159
+- 194.32.107.187
+- 194.88.143.66
+- hxxp://179.60.150.23:8000/xExportObject.class
+- ldap://179.60.150.23:1389/o=tomcathxxp://194.165.16.24:8229/b1t_1t.shhxxp://194.165.16.24:8228/b1thxxp://194.165.16.24:8228/_run.shhxxp://194.165.16.24:8228/run.shhxxp://194.165.16.24:8228/share.sh
+reference: https://blog.netlab.360.com/b1txor20-use-of-dns-tunneling_cn/
+date_of_publication: March 15, 2022
+file_creation_date: May 14, 2025

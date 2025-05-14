@@ -1,0 +1,60 @@
+description: The report details the GrimResource campaign, utilizing Microsoft Management
+  Console (MMC) for initial access and evasion. SideWinder malware, employing server-side
+  polymorphism, targets government officials in Pakistan and Turkey.
+attribution: Unknown APT group targeting Pakistan
+malware_families:
+- DismCore.dll
+- SideWinder
+TTPs:
+  processes:
+  - mmc.exe
+  - DISM.exe
+  - powershell.exe
+  - Dism.exe
+  commandline:
+  - C:\\Windows\\System32\\mmc.exe "ARRVL-PAX-MNFSTPK284-23NOV.pdf.msc"
+  - C:\\ProgramData\\Dism.exe /Online /Cleanup-Image /RestoreHealth /Source:wim:C:\\\\REARS\\\\Install.wim:1
+    /audit:audit
+  - powershell -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\\Users\\Public\\IEEE-Template-.ps1
+  - '"C:\\ProgramData\\Dism.exe"'
+  powershell:
+  - -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\\Users\\Public\\IEEE-Template-.ps1
+  registry_keys:
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load: []
+  network_connections:
+  - executable: mmc.exe
+    destination_address: ewh.ieee[.]org
+    port: '443'
+  - executable: DISM.exe
+    destination_address: siasat[.]top
+    port: '443'
+  file_modifications:
+  - C:\\Users\\Public\\IEEE-Template-.pdf
+  - C:\\ProgramData\\DismCore.dll
+  - C:\\ProgramData\\Dism.exe
+  - C:\\Users\\Public\\IEEE-Template-.ps1
+  persistence:
+  - 'Scheduled Task: CoreEdgeUpdateServicesTelemetryFallBack'
+  - Utilizes Dism.exe in ProgramData directory.
+  pipes: []
+  process_relations:
+  - mmc.exe -> DISM.exe
+  - DISM.exe -> DismCore.dll
+  scripting_engine:
+  - Python
+IOCs:
+- hash: b33d76c413ef0f4c48a8a61cfeb5e24ff465bbc6b70bf0cada2bb44299a2768f
+- domain: siasat[.]top
+- url: hxxps://ewh.ieee[.]org/reg/ccece15/files/ccece-word-sample.pdf
+- file: ARRVL-PAX-MNFSTPK284-23NOV.pdf.msc
+- ewh.ieee[.]org/reg/ccece15/files/ccece-word-sample.pdf
+- siasat[.]top
+- grimresource.mschttps://gist.github.com/joe-desimone/2b0bbee382c9bdfcac53f2349a379fa4
+authors:
+- Den Iuzvyk
+- Tim Peck
+- Securonix Threat Labs
+reference: https://www.securonix.com/blog/analyzing-fluxconsole-using-tax-themed-lures-threat-actors-exploit-windows-management-console-to-deliver-backdoor-payloads/
+date_of_publication: May 14, 2025
+file_creation_date: May 14, 2025

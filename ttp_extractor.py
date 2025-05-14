@@ -15,6 +15,7 @@ import trafilatura
 import collections
 import unicodedata
 import string
+from dateutil.parser import parse as date_parse
 
 
 # CONFIG
@@ -26,12 +27,10 @@ CACHE_FILE = "processed_urls.txt"
 
 PROMPT_TEMPLATE = """
 I need you to create a technical YAML Report. The purpose of the YAML report is to present raw data from public security advisories. All information bust be actual. 
-We need raw commands executed by attackers, registry keys, executed code as part of the TTPs section. Return all results in YAML format with the following keys: description, date, authors, attribution, malware_families, TTPs, IOCs
+We need raw commands executed by attackers, registry keys, executed code as part of the TTPs section. Return all results in YAML format with the following keys: description, attribution, malware_families, TTPs, IOCs, authors
 Extract the following information from this cyber threat report:
 
 - description: A 1-2 sentence summary
-- date: Extract and provide the date of publication, typically found in the publication header (format: YYYY-MM-DD), double check for accuracy.
-- authors: List each author who contributed to the report.
 - attribution: Attribution (threat actor, APT group, country).
 - malware_families: Malware family names.
 - TTPs: Extract ALL actual observable indicators. Each TTP subkey containing list items as outlined (no deviation or truncation, only the data provided). TTPs include the following sub keys: (exclude the following sub keys if not present)
@@ -47,7 +46,7 @@ Extract the following information from this cyber threat report:
   - pipes: list of any named pipes
   - process_relations: process trees based on your analysis
 - IOCs: list all indicators of compromise. These can include hashes, IPs, domains and URLs)
-
+- authors: List each author who contributed to the report.
 
 Additional critical requirements:
 Do not make up information. Do not provide summaries to TTPs. Only return relevant technical data that is explicitly present in the report. if no TTPs, ignore.
@@ -61,6 +60,13 @@ Prefer the use of single quotes for YAML syntax over double quotes.
 Context:
 {text}
 """
+
+bad_patterns = [
+    r"/faq", r"/platform", r"/news", r"/industry", r"/category", r"/tag",
+    r"/features", r"/services", r"/page", r"/newsletter", r"\?paged=\d+",
+    r"\?_paged=\d+", r"/about", r"guide", r"howto", r"how-to", r"/feed"
+]
+
 
 def merge_yamls(chunks):
     merged = {}
@@ -84,19 +90,25 @@ def merge_yamls(chunks):
             elif isinstance(value, dict):
                 if isinstance(merged[key], dict):
                     for subkey, subval in value.items():
+                        if not subval:
+                            continue
                         if subkey not in merged[key]:
                             merged[key][subkey] = subval
                         elif isinstance(subval, list):
-                            merged[key][subkey].extend(v for v in subval if v not in merged[key][subkey])
+                            if isinstance(merged[key][subkey], list):
+                                merged[key][subkey].extend(v for v in subval if v not in merged[key][subkey])
+                            else:
+                                merged[key][subkey] = subval
                         else:
-                            merged[key][subkey] = subval
+                            if len(str(subval)) > len(str(merged[key][subkey])):
+                                merged[key][subkey] = subval
                 else:
                     merged[key] = value
             else:
-                # Prefer longer or non-empty values
                 if len(str(value)) > len(str(merged[key])):
                     merged[key] = value
     return merged
+
 
 def clean_text(text):
     # Normalize and strip bad Unicode
@@ -106,6 +118,51 @@ def clean_text(text):
     text = re.sub(r"[\x00-\x1F\x7F-\x9F\u2000-\u206F\u2190-\u21FF]", "", text)
     return text
 
+def extract_date(url, html):
+    # 1. Try common <time> or <meta> HTML tags
+    soup = BeautifulSoup(html, "html.parser")
+
+    # <time datetime="...">
+    time_tag = soup.find("time")
+    if time_tag and time_tag.get("datetime"):
+        try:
+            return date_parse(time_tag["datetime"]).strftime("%B %d, %Y")
+        except:
+            pass
+
+    # <meta name="date" content="...">
+    meta_date = soup.find("meta", {"name": "date"}) or soup.find("meta", {"property": "article:published_time"})
+    if meta_date and meta_date.get("content"):
+        try:
+            return date_parse(meta_date["content"]).strftime("%B %d, %Y")
+        except:
+            pass
+
+    # 2. Try extracting a date from the URL
+    match = re.search(r"/(20\d{2})[/-](\d{1,2})[/-](\d{1,2})", url)
+    if match:
+        try:
+            return datetime(int(match[1]), int(match[2]), int(match[3])).strftime("%B %d, %Y")
+        except:
+            pass
+
+    # 3. Try scanning page text for known patterns
+    text = soup.get_text()
+    date_patterns = [
+        r'\b\d{4}-\d{2}-\d{2}\b',         # 2024-05-14
+        r'\b\d{2}/\d{2}/\d{4}\b',         # 14/05/2024
+        r'\b\d{1,2} [A-Za-z]+ \d{4}\b'    # 14 May 2024
+    ]
+    for pattern in date_patterns:
+        match = re.search(pattern, text)
+        if match:
+            try:
+                return date_parse(match.group(0)).strftime("%B %d, %Y")
+            except:
+                continue
+
+    # 4. Fallback: use current date
+    return datetime.utcnow().strftime("%B %d, %Y")
 
 def read_cached_urls():
     if not os.path.exists(CACHE_FILE):
@@ -115,11 +172,7 @@ def read_cached_urls():
 
 def append_to_cache(url):
     from urllib.parse import urlparse
-    bad_patterns = [
-        r"/faq", r"/platform", r"/news", r"/industry", r"/category", r"/tag",
-        r"/features", r"/services", r"/page", r"/newsletter", r"\\?paged=\\d+",
-        r"\\?_paged=\\d+", r"/about", r"guide", r"howto", r"how-to", r"/feed"
-    ]
+
     if any(re.search(p, url.lower()) for p in bad_patterns):
         return
 
@@ -248,9 +301,10 @@ def write_yaml(content, source, malware):
     now = datetime.utcnow()
     year = now.strftime("%Y")
     month = now.strftime("%m")
+    day = now.strftime("%d")
     timestamp = now.strftime("%Y%m%d-%H%M%S")
 
-    output_dir = os.path.join("results", year, month)
+    output_dir = os.path.join("results", year, month, day)
     os.makedirs(output_dir, exist_ok=True)
 
     filename = os.path.join(output_dir, f"{timestamp}-{source}-{malware}.yml")
@@ -296,6 +350,8 @@ def handle_article(url, cached):
         # Merge all parsed YAMLs into one dict
         merged_data = merge_yamls(all_sections)
         merged_data["reference"] = url
+        extracted_date = extract_date(url, raw_html)
+        merged_data["date_of_publication"] = extracted_date if extracted_date else "Unknown"
         merged_data["file_creation_date"] = datetime.utcnow().strftime("%B %d, %Y")
         yaml_output = yaml.dump(merged_data, sort_keys=False)
 
@@ -357,9 +413,14 @@ def main():
                 links = valid_links
 
             for article_url in links:
+                if any(re.search(p, article_url.lower()) for p in bad_patterns):
+                    print(f"  ⏩ Skipped bad path: {article_url}")
+                    continue
                 handle_article(article_url, cached)
+
         except Exception as e:
             print(f"  Failed to scan {base}: {e}")
+
 
 if __name__ == "__main__":
     main()

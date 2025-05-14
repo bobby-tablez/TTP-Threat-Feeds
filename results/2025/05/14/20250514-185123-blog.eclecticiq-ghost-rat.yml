@@ -1,0 +1,67 @@
+description: 'Threat actors are exploiting recently announced vulnerabilities in Ivanti
+  systems to establish advanced footholds, potentially leading to ransomware attacks
+  and targeted reconnaissance. The vulnerabilities include authentication bypass (CVE-2023-46805),
+  command injection (CVE-2024-21887), and privilege escalation (CVE-2024-21888).  Exploitation
+  is observed using a CGI file backdoor (compcheckresult.cgi) for persistent access,
+  alongside malicious infrastructure linked to the GH0STRAT campaign and Cobalt Strike
+  signatures.
+
+  '
+attribution: Unknown (likely a mix of moderate to advanced cybercriminals and Advanced
+  Persistent Threats)
+malware_families:
+- Ghost RAT
+- Cobalt Strike
+TTPs:
+  processes:
+  - CGI
+  commandline:
+  - compcheckresult.cgi
+  powershell: ''
+  scripting_engine:
+  - JQuery
+  registry_keys: ''
+  image_load: ''
+  network_connections: ''
+  file_modifications:
+  - b901cba30e2dd5bbf759fd8b72b8d2dd2e50e58bcf1a96b3983effcf881fec27
+  - f266fec702b13c771f0e5d6424f449696499809896d9cf8bd1288b0f6ea7e836
+  persistence:
+  - Backdooring a legitimate CGI file (compcheckresult.cgi) to produce a webshell
+    for persistent access.
+  pipes: ''
+  process_relations: ''
+IOCs:
+- hash: b901cba30e2dd5bbf759fd8b72b8d2dd2e50e58bcf1a96b3983effcf881fec27
+- hash: f266fec702b13c771f0e5d6424f449696499809896d9cf8bd1288b0f6ea7e836
+- ip: 47[.]103[.]219[.]77
+- ip: 91[.]243[.]44[.]63
+- ip: 198[.]12[.]81[.]50
+- ip: 51[.]161[.]42[.]94
+- ip: 172[.]245[.]191[.]17
+- ip: 107[.]172[.]73[.]152
+- ip: 87[.]236[.]146[.]34
+- ip: 185[.]140[.]248[.]17
+- ip: 92[.]38[.]135[.]99
+- ip: 195[.]123[.]210[.]174
+- ip: 185[.]141[.]26[.]236
+- ip: 45[.]140[.]146[.]34
+- ip: 185[.]117[.]75[.]123
+- ip: 195[.]123[.]220[.]220
+- ip: 40[.]125[.]65[.]33
+- ip: 54[.]39[.]144[.]250
+- ip: 194[.]36[.]190[.]41
+- ip: 185[.]14[.]28[.]10
+- ip: 45[.]133[.]1[.]53
+- ip: 93[.]189[.]43[.]3
+- ip: 45[.]138[.]157[.]211
+- ip: 45[.]10[.]88[.]124
+- ip: 131[.]153[.]38[.]125
+- ip: 66[.]220[.]17[.]157
+- ip: 66[.]117[.]37[.]7
+- domain: symantke[.]com
+authors:
+- Aleksander W. Jarosz
+reference: https://blog.eclecticiq.com/advanced-cybercriminals-rapidly-diversify-cyberattack-channels-following-public-vulnerability-disclosure
+date_of_publication: February 15, 2024
+file_creation_date: May 14, 2025

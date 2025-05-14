@@ -1,0 +1,49 @@
+description: The Trustwave SpiderLabs Email Security team has identified a major spike
+  in SVG image-based attacks where harmless-looking graphics are used to hide dangerous
+  links.
+attribution: Trustwave SpiderLabs
+malware_families:
+- Ursnif
+authors:
+- Trustwave SpiderLabs Email Security team
+TTPs:
+  processes:
+  - browser
+  commandline:
+  - C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe "hxxps://docs.google.com/drawings/d/1e6oBFLaz3YRncI8qZ--Mg7yh8Uzw8XK0uW5l-z-khKc/preview?pli=1"
+  powershell: ''
+  scripting_engine:
+  - JavaScript
+  registry_keys: ''
+  image_load: ''
+  network_connections:
+  - executable: chrome.exe
+    destination_address: docs.google.com
+    port: '443'
+    url: hxxps://docs.google.com/drawings/d/1e6oBFLaz3YRncI8qZ--Mg7yh8Uzw8XK0uW5l-z-khKc/preview?pli=1
+  - executable: chrome.exe
+    destination_address: grado33closet.com
+    port: '443'
+    url: hxxps://grado33closet[.]com/n/?c3Y9bzM2NV8xX25vbSZyYW5kPVl6WlpSVGs9JnVpZD1VU0VSMDQwMzIwMjVVNDEwMzA0MDM=
+  file_modifications:
+  - C:\\Users\\<user_email>\\Downloads\\voicemail.svg
+  persistence: ''
+  pipes: ''
+  process_relations: ''
+IOCs:
+  - hash: ''
+  - ip: ''
+  - domain:
+    - ut.sxbmjefh[.]ru
+    - docs.google.com
+    - grado33closet[.]com
+  - url:
+    - hxxps://ut[.]sxbmjefh[.]ru/I6wx84s/
+    - hxxps://docs.google.com/drawings/d/1e6oBFLaz3YRncI8qZ--Mg7yh8Uzw8XK0uW5l-z-khKc/preview?pli=1
+    - hxxps://grado33closet[.]com/n/?c3Y9bzM2NV8xX25vbSZyYW5kPVl6WlpSVGs9JnVpZD1VU0VSMDQwMzIwMjVVNDEwMzA0MDM=
+authors: 
+  - Bernard Bautista
+  - Kevin Adriano
+reference: https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/pixel-perfect-trap-the-surge-of-svg-borne-phishing-attacks/
+date_of_publication: April 10, 2025
+file_creation_date: May 14, 2025

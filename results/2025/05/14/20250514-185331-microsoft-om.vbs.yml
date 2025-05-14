@@ -1,0 +1,58 @@
+description: Marbled Dust, a Turkiye-affiliated espionage threat actor, is exploiting
+  a zero-day vulnerability (CVE-2025-27920) in the Output Messenger messaging app
+  to collect user data from targets in Iraq. The attack chain involves gaining access
+  as an authenticated user, exploiting the vulnerability to drop malicious files,
+  and using those files to establish backdoors and exfiltrate data.
+attribution: Turkiye-affiliated espionage threat actor (Marbled Dust / Sea Turtle
+  / UNC1326)
+malware_families:
+- OM.vbs
+- OMServerService.exe
+- OMClientService.exe
+TTPs:
+  processes:
+  - OutputMessenger.exe
+  - OMClientService.exe
+  - OMServerService.exe
+  - plink.exe
+  - cmd.exe
+  commandline:
+  - cmd /c <script_content>
+  powershell: []
+  scripting_engine:
+  - VBScript
+  - GoLang
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: OMServerService.exe
+    destination_address: api.wordinfos[.]com
+    port: ''
+  - executable: OMClientService.exe
+    destination_address: api.wordinfos[.]com
+    port: ''
+  - executable: plink.exe
+    destination_address: <Marbled Dust-attributed IP address>
+    url: ''
+    port: ''
+  file_modifications:
+  - C:\\Program Files\\Output Messenger Server\\OfflineMessages\\Temp\\1\\File
+  - C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\StartUp\\OMServerService.vbs
+  - C:\\Users\\public\\videos\\OMServerService.exe
+  persistence:
+  - Startup folder (C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\StartUp)
+  pipes: []
+  process_relations:
+  - Marbled Dust gains access -> drops OM.vbs and OMServerService.vbs to startup folder
+    -> OMServerService.vbs calls OM.vbs, which is passed to OMServerService.exe as
+    an argument.
+IOCs:
+- hash: 1df959e4d2f48c4066fddcb5b3fd00b0b25ae44f350f5f35a86571abb2852e39
+- hash: 2b7b65d6f8815dbe18cabaa20c01be655d8475fc429388a4541eff193596ae63
+- domain: api.wordinfos[.]com
+- ip_address: <Marbled Dust-attributed IP address>
+authors:
+- Microsoft Threat Intelligence
+reference: https://www.microsoft.com/en-us/security/blog/2025/05/12/marbled-dust-leverages-zero-day-in-output-messenger-for-regional-espionage/
+date_of_publication: May 12, 2025
+file_creation_date: May 14, 2025

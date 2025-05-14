@@ -1,0 +1,88 @@
+description: Exchange and SharePoint Servers are attractive targets for attackers,
+  who exploit vulnerabilities like ProxyShell, ProxyNotShell, NTLM relay, and AutoDiscover
+  SSRF to gain persistent access. Attackers utilize web shells, modify existing files
+  (like signout.aspx), and employ stealthy persistence tactics, often evading detection
+  until post-compromise activities are observed.
+attribution: Unknown
+malware_families:
+- MailSniper
+- Chopper
+TTPs:
+  processes:
+  - w3wp.exe
+  - cmd.exe
+  - powershell.exe
+  - net.exe
+  - csc.exe
+  - cvtres.exe
+  - conhost.exe
+  - OleConverter.exe
+  - wermgr.exe
+  - WerFault.exe
+  - TranscodingService.exe
+  commandline:
+  - w3wp.exe
+  - '&cd&echo'
+  - Invoke-GlobalMailSearch -ImpersonationAccount Administrator
+  - Get-Credential
+  - powershell.exe
+  - C:\\Users\\Administrator\\Downloads\\MailSniper-master\\MailSniper-master\\MailSniper.ps1
+  - python-requests/2.27.1
+  - 'X-PROOF_TOKEN: <REDACTED>'
+  - 'Host: sp2019'
+  - 'Authorization: Bearer <REDACTED>'
+  - autodiscover/autodiscover . xml@test/PowerShell/Autodiscover. json?serializationlevel-Full;ExchClientVer=15.2.922.7;
+    clientApplication-ManagementShell; TargetServer=;
+  - GET/_api/web/currentuser HTTP/1.1
+  - powershell.exe -File C:\Users\Administrator\Downloads\MailSniper-master\MailSniper-master\MailSniper.ps1
+  - cmd.exe /c powershell.exe -Command whoami
+  - C:\m\D /c Get-Mailbox
+  powershell:
+  - Invoke-GlobalMailSearch -ImpersonationAccount Administrator
+  - $item.Load($PropertySet)
+  - Get-Mailbox
+  - FindItem Traversal="Shallow"
+  - GetItem
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: w3wp.exe
+    destination_address: EXHR-04184
+    port: ''
+    url: http://EXHR-04184/PowerShell
+  - executable: python-requests/2.27.1
+    destination_address: sp2019
+  - executable: powershell.exe
+    destination_address: EXHR-04184
+    port: ''
+    url: https://EXHR-04184/EWS/Exchange.asmx
+  - executable: powershell.exe
+    destination_address: sp2019
+    port: '80'
+    url: /powershell?PSVersion=5.1.20348.1850
+  file_modifications:
+  - C:\\Program Files\\Microsoft\\Exchange Server\\V15\\FrontEnd\\HttpProxy\\owa\\auth\\Current\\scripts\\premium\\.aspx
+  - signout.aspx
+  - C:\\Users\\Administrator\\Downloads\\MailSniper-master\\MailSniper-master\\MailSniper.ps1
+  - C:\Users\Administrator\Downloads\MailSniper-master\MailSniper-master\MailSniper.ps1
+  - /BusinessDataMetadataCatalog/BDCMetadata.bdcm
+  persistence:
+  - Replacing or appending web shell code into existing files like signout.aspx
+  - Installing remote monitoring and management (RMM) tools for broader access
+  pipes: []
+  process_relations: []
+IOCs:
+- EXHR-04184
+- Administrator@exhr-
+- C:\\Program Files\\Microsoft\\Exchange Server\\V15\\FrontEnd\\HttpProxy\\owa\\auth\\Current\\scripts\\premium\\.aspx
+- C:\\Users\\Administrator\\Downloads\\MailSniper-master\\MailSniper-master\\MailSniper.ps1
+- https://EXHR-04184/EWS/Exchange.asmx
+- sp2019
+- /powershell?PSVersion=5.1.20348.1850
+- <REDACTED>
+authors:
+- Microsoft
+- Unknown
+reference: https://www.microsoft.com/en-us/security/blog/2025/04/09/stopping-attacks-against-on-premises-exchange-server-and-sharepoint-server-with-amsi/
+date_of_publication: April 09, 2025
+file_creation_date: May 14, 2025

@@ -1,0 +1,70 @@
+description: Starting in January 2025, Check Point Research (CPR) has been tracking
+  a wave of targeted phishing attacks aimed at European governments and diplomats.
+  The Techniques, Tactics and Procedures (TTPs) observed in this campaign align with
+  the WINELOADER campaigns, which were attributed to APT29.
+attribution: APT29 (Midnight Blizzard / Cozy Bear), Russia
+malware_families:
+- GRAPELOADER
+- WINELOADER
+authors:
+- Check Point Research
+- Unknown
+IOCs:
+- bakenhof[.]com
+- silry[.]com
+- ophibre[.]com/blog.php
+- bravecup[.]com/view.php
+- e55c854d77279ed516579b91315783edd776ac0ff81ea4cc5b2b0811cf40aa63
+- castechtools.com
+- 9FFZberyptprimitives.dll
+- IT5P/api.php
+- nkGZwininet.dll
+TTPs:
+  processes:
+  - wine.exe
+  - AppvIsvSubsystems64.dll
+  - ppcore.dll
+  - rundll32.exe
+  - vmtools.dll
+  - floss.exe
+  - rank_strings.exe
+  commandline:
+  - wine.exe
+  - C:\\Users\\User\\AppData\\Local\\POWERPNT\\.SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"
+    with the entry POWERPNT, pointing to C:\\Users\\User\\AppData\\Local\\POWERPNT\\wine.exe
+  - .\\floss.exe -only decoded -q .\\OLD | rank_strings.exe
+  - .\\floss.exe --only decoded -q .\\NEWcastechtools.com 9FFZberyptprimitives.dll
+    IT5P/api.php nkGZwininet.dll *pgPs$uvwxym{."iphlpapi.dll &C=jWFntdll.dll MfMyvcruntimelde.dllHttpOpenRequestW
+  powershell: ''
+  scripting_engine: ''
+  registry_keys:
+  - HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load: ''
+  network_connections:
+  - executable: wine.exe
+    destination: ophibre[.]com/blog.php
+    port: 443
+    protocol: HTTPS
+  - executable: unknown
+    destination: bravecup[.]com/view.php
+    port: 443
+    protocol: HTTPS
+  - executable: wininet.dll
+    destination_address: castechtools.com
+    port: '443'
+    url: IT5P/api.php
+  - executable: iphlpapi.dll
+  file_modifications:
+  - C:\\Users\\User\\AppData\\Local\\POWERPNT\\.SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  - C:\\Users\\User\\AppData\\Local\\POWERPNT\\wine.zip
+  - C:\\Users\\User\\AppData\\Local\\POWERPNT\\wine.exe
+  persistence:
+  - Modifying the Windows registrys Run key to execute wine.exe automatically on system
+    reboot.
+  pipes: ''
+  process_relations:
+  - wine.exe -> GRAPELOADER (DLL side-loading)
+  - WINELOADER (trojanized DLL) loaded by vulnerable executable (VMWare Tools installer).
+reference: https://research.checkpoint.com/2025/apt29-phishing-campaign/
+date_of_publication: April 15, 2025
+file_creation_date: May 14, 2025
