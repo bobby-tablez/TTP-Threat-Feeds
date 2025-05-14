@@ -25,36 +25,38 @@ URLS_FILE = "urls.txt"
 CACHE_FILE = "processed_urls.txt"
 
 PROMPT_TEMPLATE = """
-I need you to create a technical YAML Report. The purpose of the YAML report is to present raw data from public security advisories. We need raw commands executed by attackers, registry keys, executed code as part of the TTPs section.
+I need you to create a technical YAML Report. The purpose of the YAML report is to present raw data from public security advisories. All information bust be actual. 
+We need raw commands executed by attackers, registry keys, executed code as part of the TTPs section. Return all results in YAML format with the following keys: description, date, authors, attribution, malware_families, TTPs, IOCs
 Extract the following information from this cyber threat report:
+
 - description: A 1-2 sentence summary
-- date: Extract and provide the date of publication, typically found in the publication header (format: YYYY-MM-DD)
-- authors: Author(s)
-- attribution: Attribution (threat actor, APT group, country)
-- malware_families: Malware family names
-- TTPs: Extract ALL actual observable indicators. Each TTP subkey containing list items as outlined (no deviation, only the data listed). TTPs include the following sub keys: (exclude the following sub keys if not present)
-  - processs: a list of all process names executed
-  - commandline: Full list of process with commandline
-  - powershell: powershell scripts
-  - scripting_engine: other scripts such as VBS, JScript, Python
+- date: Extract and provide the date of publication, typically found in the publication header (format: YYYY-MM-DD), double check for accuracy.
+- authors: List each author who contributed to the report.
+- attribution: Attribution (threat actor, APT group, country).
+- malware_families: Malware family names.
+- TTPs: Extract ALL actual observable indicators. Each TTP subkey containing list items as outlined (no deviation or truncation, only the data provided). TTPs include the following sub keys: (exclude the following sub keys if not present)
+  - processes: a list of all process names executed
+  - commandline: Full list of process with commandline arguments
+  - powershell: any and all powershell scripts
+  - scripting_engine: other scripts such as VBS, JScript, Python, bash, etc.
   - registry_keys: Windows registry keys impacted
-  - network_connections: processes making network connections and their ports, destinations in a list
-  - file_modifications: List of files created, files deleted (full paths)
-  - persistence: description or sub keys persistence methods used
+  - image_load: Provide details as to processes involved with loaded DLL, or SO libraries
+  - network_connections: Processes related, list executables that made network connections, their destination address, URL, or hostname along with ports. 
+  - file_modifications: List of files created, dropped or deleted (full paths)
+  - persistence: description in a list sub keys persistence methods used
   - pipes: list of any named pipes
   - process_relations: process trees based on your analysis
-- Indicators of compromise (hashes, IPs, domains, URLs)
+- IOCs: list all indicators of compromise. These can include hashes, IPs, domains and URLs)
 
-RESULTS: Return all results in YAML format with the following keys: description, date, authors, attribution, malware_families, TTPs, IOCs
 
-Additional requirements:
-Do not make up information. Do not summarize TTPs. Only return relevant data that is explicitly present in the report. if no TTPs, ignore and provide empty tags
+Additional critical requirements:
+Do not make up information. Do not provide summaries to TTPs. Only return relevant technical data that is explicitly present in the report. if no TTPs, ignore.
 If the publication contains little useful data, lots of empty fields are acceptable
-Be very detailed (e.g: include ALL and FULL command line arguements)
-Never truncate outputs (e.g: ...), include full command line and URLs
-Provide only technical data, for example, don't describe TTPs, IOCs and URLs. Only provide raw commands, URLs, etc where appropriate
+Be very detailed (e.g: include ALL and FULL command line arguements).
+Never truncate outputs (e.g: ...), include full command line and URLs.
+Provide only technical data, for example, don't describe TTPs, IOCs and URLs. Only provide raw data where appropriate.
 For any key or subkey that contains no data, do not include the key or subkey in the YAML.
-Use single quotes for YAML syntax.
+Prefer the use of single quotes for YAML syntax over double quotes.
 
 Context:
 {text}
@@ -130,7 +132,7 @@ def append_to_cache(url):
             f.write(url + "\n")
 
 def is_security_report(text, url):
-    keywords = ["cve", "malware", "exploit", "ransomware", "backdoor", "apt", "payload", "command", "persistence", "ttps", "threat", "advisory", "campaign", "malicious", "attack"]
+    keywords = ["cve", "malware", "exploit", "ransomware", "backdoor", "apt", "payload", "command", "persistence", "ttps", "threat", "advisory", "campaign", "malicious", "attack", "analysis", "cybercrime", "operation", "phish", "stealer", "loader", "dropper"]
     score = sum(1 for kw in keywords if kw in text.lower())
     if re.search(r"CVE-\\d{4}-\\d{4,7}", text):
         score += 2

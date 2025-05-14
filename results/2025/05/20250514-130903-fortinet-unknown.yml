@@ -1,0 +1,85 @@
+description: Phishing remains a prevalent cybersecurity threat, with attackers increasingly
+  targeting platforms like Facebook, Roblox, Telegram, Ionos, Coinbase, PayPal, Lazada,
+  iTrust, and Vkontakte. The report highlights the use of AI to refine phishing attempts
+  and emphasizes the importance of real-time anti-phishing solutions and employee
+  awareness training.
+date: '2025-03-20'
+authors:
+- Chris Tse
+- Bryan Lu
+- Baksheesh Singh Ghuman
+attribution: Unknown
+TTPs:
+  processes:
+  - chrome.exe
+  commandline:
+  - '"C:\Program Files\Google\Chrome\Application\chrome.exe" --new-window https://facebook[.]case-id-10012125556[.]vercel[.]app'
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: chrome.exe
+    destination_address: facebook[.]case-id-10012125556[.]vercel[.]app
+    port: 443
+  - executable: chrome.exe
+    destination_address: policy-violation-10002321704[.]github[.]io
+    port: 443
+  - executable: chrome.exe
+    destination_address: robux-generator---cpa[.]firebaseapp[.]com
+    port: 443
+  - executable: chrome.exe
+    destination_address: rbxodi[.]blogspot[.]com
+    port: 80
+  - executable: chrome.exe
+    destination_address: www[.]telegramtgtg[.]com
+    port: 443
+  - executable: chrome.exe
+    destination_address: www[.]91gsh[.]com
+    port: 443
+  - executable: chrome.exe
+    destination_address: 67a34b6bfc0d210a820d0cf5--brilliant-mermaid-bad0bd[.]netlify[.]app
+    port: 443
+  - executable: chrome.exe
+    destination_address: gworldhomes[.]com
+    port: 443
+  - executable: chrome.exe
+    destination_address: ionos-es/login/login[.]php
+    port: 80
+  - executable: chrome.exe
+    destination_address: 000414-coinbase[.]com
+    port: 443
+  - executable: chrome.exe
+    destination_address: coinbsphnnumbe[.]gitbook[.]io/us
+    port: 443
+  - executable: chrome.exe
+    destination_address: paypalloginonline[.]blogspot[.]com
+    port: 80
+  - executable: chrome.exe
+    destination_address: niemalssoeder[.]de
+    port: 80
+  - executable: chrome.exe
+    destination_address: uncloabatles[.]ru
+    port: 443
+  - executable: chrome.exe
+    destination_address: vim[.]vimeo18[.]ru
+    port: 443
+  file_modifications: []
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- facebook[.]case-id-10012125556[.]vercel[.]app
+- policy-violation-10002321704[.]github[.]io
+- robux-generator---cpa[.]firebaseapp[.]com
+- rbxodi[.]blogspot[.]com
+- www[.]telegramtgtg[.]com
+- www[.]91gsh[.]com
+- 67a34b6bfc0d210a820d0cf5--brilliant-mermaid-bad0bd[.]netlify[.]app
+- gworldhomes[.]com/ionos-ag/ionos-es/login/login[.]php
+- 000414-coinbase[.]com
+- coinbsphnnumbe[.]gitbook[.]io/us
+- paypalloginonline[.]blogspot[.]com
+- niemalssoeder[.]de/c/index/myaccount
+- uncloabatles[.]ru/votes/7838610
+- vim[.]vimeo18[.]ru/votes/3818905
+reference: https://www.fortinet.com/blog/threat-research/real-time-anti-phishing-essential-defense-against-evolving-cyber-threats
+file_creation_date: May 14, 2025

@@ -1,0 +1,44 @@
+description: Microsoft uncovered a vulnerability in macOS that could allow specially
+  crafted codes to escape the App Sandbox and run unrestricted on the system. An attacker
+  could create an exploit to escape the App Sandbox without user interaction required
+  for any sandboxed app using security-scoped bookmarks.
+date: '2025-05-01'
+authors:
+- Microsoft Threat Intelligence
+attribution:
+- Unknown
+TTPs:
+- processes:
+  - Microsoft Word
+  - ScopedBookmarkAgent
+  - plutil
+  - security
+- commandline:
+  - plutil -p ~/Library/Containers/com.microsoft.Word/Data/Library/Preferences/com.microsoft.Word.securebookmarks.plist
+  - security delete-generic-password -a com.apple.scopedbookmarksagent.xpc -s com.apple.scopedbookmarksagent.xpc/Users/jbo/Library/Keychains/Login.keychain-db
+  - security add-generic-password -A -a com.apple.scopedbookmarksagent.xpc -5 com.apple.scopedbookmarksagent.xpc
+    -w AAAABBBBCCCCDODDEEEEFFFFGGGGITIT
+- powershell: []
+- scripting_engine: []
+- registry_keys:
+  - com.apple.scopedbookmarksagent.xpc
+- image_load: []
+- network_connections: []
+- file_modifications:
+  - /Users/jbo/.zshenv
+  - ~/Library/Containers/com.microsoft.Word/Data/Library/Preferences/com.microsoft.Word.securebookmarks.plist
+- persistence:
+  - Persistent user choices are saved in a PLIST file under the Containers folder.
+  - The ACL only controls the ability to read the secret, an attacker could completely
+    avoid reading the existing secret and instead can delete the existing entry and
+    add a new entry, with a well-known secret.
+- pipes: []
+- process_relations:
+  - Microsoft Word -> ScopedBookmarkAgent
+IOCs:
+- CVE-2025-31191
+- /Users/jbo/.zshenv
+- ~/Library/Containers/com.microsoft.Word/Data/Library/Preferences/com.microsoft.Word.securebookmarks.plist
+- com.apple.scopedbookmarksagent.xpc
+reference: https://www.microsoft.com/en-us/security/blog/2025/05/01/analyzing-cve-2025-31191-a-macos-security-scoped-bookmarks-based-sandbox-escape/
+file_creation_date: May 14, 2025

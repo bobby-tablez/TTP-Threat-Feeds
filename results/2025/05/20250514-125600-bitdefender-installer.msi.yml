@@ -1,0 +1,55 @@
+description: A persistent malvertising campaign is plaguing Facebook, leveraging the
+  reputations of well-known cryptocurrency exchanges to lure victims into a maze of
+  malware.
+date: '2025-05-08'
+authors:
+- Alina BÎZGĂ
+attribution: Unknown
+TTPs:
+  processes:
+  - msedge_proxy.exe
+  - TaskScheduler
+  commandline:
+  - msedge_proxy.exe
+  - powershell
+  powershell:
+  - "$APIs = @(\"http://127.0.0.1:30308/set\", \"http://127.0.0.1:30303/set\")\nFor\
+    \ ($i = 0; $i -lt 1000000; $i++) {\n  $api = $APIs | Get-Random\n  Invoke-WebRequest\
+    \ -Uri $api -UseBasicParsing\n  Start-Sleep -Milliseconds (Get-Random -Minimum\
+    \ 100 -Maximum 500)\n}\n"
+  - 'function c(){const b=[''WQ7dTGLdSbq'' , ''Cq52bhK\"1,{ type: ''application/javascript''
+    }))bconst i = http://127. 362et''SELECT Manufacturer, Name, Version FROM Win32_BI0S'',\"SELECT
+    Nase, Manufacturer, Domain, Model, Nusber0fLogicalProcessors FROM Win32_ComputerSysten,''SELECT
+    Nase, Version, RegisteredUser FRON Win32_OperatingSystea'',bE = B(this, function
+    O {const i = function () {let zry {z = Function(return (function() {}.constructor(\"return
+    this\")(\\\\x20));\"10} cateh 0O {2 = windowreturn zI1.console = l.console ||
+    {}),[''log'', ''warn'', ''info'', ''error'', ''exception'', ''table'', ''trace''lfor
+    (let z = 6; z < j.length; z+) {const X = B.constructor.prototype.bind(B),o= 3z,p
+    =Vl Il XX[''__proto__''] = B.bind(B)X.toString = p.toString.bind(p)Vlol = X}15127'
+  registry_keys:
+  - HKLM:\\SOFTWARE\\Microsoft\\Cryptography
+  - HKCU\\Control Panel\\International\\Geo
+  network_connections:
+  - executable: msedge_proxy.exe
+    destination: 127.0.0.1
+    port: '30308'
+  - executable: msedge_proxy.exe
+    destination: 127.0.0.1
+    port: '30303'
+  file_modifications:
+  - installer.msi
+  persistence:
+  - Task Scheduler
+  pipes: []
+  process_relations:
+  - Front-End script -> localhost server (msedge_proxy.exe)
+IOCs:
+- hashes: []
+- ips:
+  - 127.0.0.1
+- domains: []
+- urls:
+  - http://127.0.0.1:30308/set
+  - http://127.0.0.1:30303/set
+reference: https://www.bitdefender.com/en-us/blog/labs/weaponizing-facebook-ads-inside-the-multi-stage-malware-campaign-exploiting-cryptocurrency-brands
+file_creation_date: May 14, 2025

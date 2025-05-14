@@ -1,0 +1,72 @@
+description: Threat actors are exploiting the popularity of ChatGPT to distribute
+  malware and phishing attacks through fraudulent social media pages, typosquatted
+  domains, and malicious apps.
+date: '2023-02-22'
+authors:
+- Cyble Research and Intelligence Labs (CRIL)
+attribution: Unknown Threat Actors
+malware_families:
+- Lumma Stealer
+- Aurora Stealer
+- Clipper Malware
+- SMS Fraud Android malware
+- Spynote Malware
+- Potentially Unwanted Programs (PUPs)
+- Adware
+- Spyware
+- Billing Fraud
+TTPs:
+  processes:
+  - gzip.exe
+  - ChatGPT-OpenAI-Pro-Full-134676745403.exe
+  - Installer_3.64_win64_86.exe
+  commandline:
+  - gzip ChatGPT-OpenAI-Pro-Full-134676745403.gz
+  - '"C:\\Users\\<user>\\AppData\\Local\\Temp\\ChatGPT-OpenAI-Pro-Full-134676745403.exe"'
+  - '"C:\\Users\\<user>\\AppData\\Local\\Temp\\Installer_3.64_win64_86.exe"'
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load: ''
+  network_connections:
+  - executable: ChatGPT-OpenAI-Pro-Full-134676745403.exe
+    destination: rebrand.ly/qaltfnuOpenAI
+    port: ''
+  - executable: Installer_3.64_win64_86.exe
+    destination: chatgpt-go.online
+    port: ''
+  - executable: clip[.]exe
+    destination: chatgpt-go.online
+    port: ''
+  - executable: java[.]exe
+    destination: chatgpt-go.online
+    port: ''
+  file_modifications:
+  - C:\\Users\\<user>\\AppData\\Local\\Temp\\ChatGPT-OpenAI-Pro-Full-134676745403.gz
+  - C:\\Users\\<user>\\AppData\\Local\\Temp\\ChatGPT-OpenAI-Pro-Full-134676745403.exe
+  - C:\\Users\\<user>\\AppData\\Local\\Temp\\Installer_3.64_win64_86.zip
+  - C:\\Users\\<user>\\AppData\\Local\\Temp\\Installer_3.64_win64_86.exe
+  persistence: ''
+  pipes: ''
+  process_relations: ''
+IOCs:
+- hash: 53ab0aecf4f91a7ce0c391cc6507f79f669bac033c7b3be2517406426f7f37f0
+  description: SHA256 hash of ChatGPT-OpenAI-Pro-Full-134676745403.exe
+- url: https://rebrand.ly/qaltfnuOpenAI
+  description: URL hosting the compressed executable file
+- domain: chatgpt-go.online
+  description: Typosquatted domain hosting malicious files
+- hash: 60e0279b7cff89ec8bc1c892244989d73f45c6fcc3e432eaca5ae113f71f38c5
+  description: SHA256 hash of stealer malware on chat-gpt-online-pc[.]com
+- domain: chat-gpt-online-pc[.]com
+  description: Typosquatted domain hosting malicious files
+- package_name: com.chatgpt.ogothai
+  sha256: d1b1813f7975b7117931477571a2476decff41f124b84cc7a2074dd00b5eba7c
+  description: Android SMS Fraud malware package name and SHA256 hash
+- package_name: cmf0.c3b5bm90zq.patch
+  sha256: 3ec772d082aa20f4ff5cf01e0d1cac38b4f647ceb79fdd3ffd1aca455ae8f60b
+  description: Android Spynote malware package name and SHA256 hash
+- phone_number: '+4761597'
+  description: Premium SMS number targeted by the SMS fraud malware
+reference: https://cyble.com/blog/the-growing-threat-of-chatgpt-based-phishing-attacks/
+file_creation_date: May 14, 2025

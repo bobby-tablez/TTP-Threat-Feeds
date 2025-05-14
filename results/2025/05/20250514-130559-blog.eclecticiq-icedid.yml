@@ -1,0 +1,46 @@
+description: IcedID, also known as Bokbot, is a banking stealer and malware loader
+  operated by cybercrime group Lunar Spider. This report details the IcedID installation
+  process.
+date: '2021-08-21'
+authors:
+- EclecticIQ Threat Research Team
+attribution: Lunar Spider
+malware_families:
+- IcedID
+- Bokbot
+TTPs:
+  processes:
+  - mshta.exe
+  - rundll32.exe
+  - wscript.shell
+  - explorer.exe
+  - adodb.stream
+  commandline:
+  - mshta.exe "C:\\Users\\Public\\docBorderWin.hta"
+  - rundll32 c:\\\\users\\\\public\\\\docBorderiiin. jpg,PluginInit
+  - wscript.shell
+  powershell: ''
+  scripting_engine:
+  - JavaScript
+  - VBScript
+  registry_keys: ''
+  image_load: ''
+  network_connections:
+  - executable: mshta.exe
+    destination: ribswansonz.com
+    port: '443'
+  - executable: rundll32.exe
+    destination: ribswansonz.com
+    port: '443'
+  file_modifications:
+  - C:\\Users\\Public\\docBorderWin.hta
+  - C:\\Users\\Public\\docBorderiiin. jpg
+  persistence:
+  - "The malware ensures the victim\u2019s system is a 64-bit operating system and\
+    \ is not a virtual machine."
+  pipes: ''
+  process_relations: ''
+IOCs:
+- ribswansonz.com
+reference: https://blog.eclecticiq.com/8-september-2021-a-look-into-banking-trojan-icedids-installation-process
+file_creation_date: May 14, 2025

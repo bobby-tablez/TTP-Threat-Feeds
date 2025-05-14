@@ -1,0 +1,29 @@
+description: A phishing campaign leverages Google Ads to redirect users to a credential-stealing
+  page hosted on a dynamic DNS service. The ad URL has remained active for over a
+  week despite being flagged as malicious.
+date: 2025-01-30
+authors:
+- Jan Kopriva
+attribution: Unknown (Likely financially motivated)
+IOCs:
+- hxxps://googleads.g.doubleclick.net/pcs/click?xai=AKAOjssIdZGtK2LGw4coQMwtQcONuf8cVZUVHUrlFgT33_wiLCuxpoweUvHdBH9neY4iW-CZh2SzgITptx6j64F0B2pEU0uoeRfmKTeyn7LSG5Irubqjv6IFl9MeqTp84ZT99WRJlZDMgrwUaUI7QjgNwL22AVveJm980wuVNryiILT2WhxCPmcY8M7PVIOygAXT_382p7PUn7bIByn2OjlTfCiaqta3tAhZWCuROeXZPznm5cGhgUYspVywPb8Y8GbuT5pyEUyF89icmqe5zg&sig=Cg0ArKJSzFtr0kI2Y6Ll&adurl=hxxps://eec086f678a65400d3fa7ba9c787d976.ip-ddns[.]com#[target@domain.tld]
+- hxxps://eec086f678a65400d3fa7ba9c787d976.ip-ddns[.]com
+- ip-ddns.com
+- target@domain.tld
+- https://www.virustotal.com/gui/domain/eec086f678a65400d3fa7ba9c787d976.ip-ddns.com
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: googleads[.]g[.]doubleclick[.]net
+  - destination_address: eec086f678a65400d3fa7ba9c787d976.ip-ddns[.]com
+  file_modifications: []
+  persistence: []
+  pipes: []
+  process_relations: []
+reference: https://isc.sans.edu/diary/31880
+file_creation_date: May 14, 2025

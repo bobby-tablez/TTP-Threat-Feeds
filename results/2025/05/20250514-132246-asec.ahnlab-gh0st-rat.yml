@@ -1,0 +1,42 @@
+description: A Chinese-speaking threat actor distributed a web server native module
+  targeting a South Korean web server, utilizing a .NET loader malware (WebShell)
+  and Gh0st RAT backdoor.
+date: 2025-04-30
+authors:
+- AhnLab SEcurity intelligence Center (ASEC)
+attribution: Chinese-speaking threat group
+malware_families:
+- Gh0st RAT
+- WebShell (.NET Loader Malware)
+- HijackDriverManager (Rootkit Driver)
+- IIS Native Module Malware
+TTPs:
+  processes:
+  - appcmd.exe
+  - w3wp.exe
+  commandline:
+  - '%SystemRoot%\\System32\\inetsrv\\appcmd.exe install module /name:IsapiCachesModule
+    /image:C:\\Windows\\System32\\inetsrv\\caches.dll /preCondition:bitness64'
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load:
+  - w3wp.exe loads caches.dll (IIS native module malware)
+  network_connections:
+  - 'Executable: Unknown, Destination Address: 47.236.9[.]229, Port: 10086'
+  file_modifications:
+  - C:\\Windows\\System32\\inetsrv\\caches.dll (Malicious IIS native module)
+  - C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\Temporary ASP.NET Files\\root\\44365c70\\3eb5ad5a\\App_Web_zcd2fld5.dll
+    (.NET Loader Malware)
+  persistence:
+  - Rootkit driver (Winkbj.sys) used to conceal the malicious IIS module from security
+    products.
+  pipes: ''
+  process_relations:
+  - appcmd.exe -> w3wp.exe (loads caches.dll)
+IOCs:
+- 'IP: 47.236.9[.]229'
+- 'File Path: C:\\Windows\\System32\\inetsrv\\caches.dll'
+- 'File Path: C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\Temporary ASP.NET Files\\root\\44365c70\\3eb5ad5a\\App_Web_zcd2fld5.dll'
+reference: https://asec.ahnlab.com/en/87804/
+file_creation_date: May 14, 2025

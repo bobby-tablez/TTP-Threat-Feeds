@@ -1,0 +1,32 @@
+description: The Atomic macOS Stealer (AMOS) is a Golang-based information-stealing
+  malware targeting macOS platforms, capable of stealing keychain passwords, crypto
+  wallet data, browser details, user files, and system information.
+date: '2023-04-26'
+authors:
+- Cyble Research and Intelligence Labs (CRIL)
+attribution: Unknown Threat Actor
+malware_families:
+- Atomic macOS Stealer (AMOS)
+TTPs:
+  processes:
+  - /Setup.app/Contents/macOS/My Go Application.app
+  commandline:
+  - /Setup.app/Contents/macOS/My Go Application.app
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: /Setup.app/Contents/macOS/My Go Application.app
+    url: hxxp[:]//amos-malware[.]ru/sendlog
+  file_modifications:
+  - /Desktop/
+  - /Documents/
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- hash: 15f39e53a2b4fa01f2c39ad29c7fe4c2fef6f24eff6fa46b8e77add58e7ac709
+- url: hxxp[:]//amos-malware[.]ru/sendlog
+reference: https://cyble.com/blog/threat-actor-selling-new-atomic-macos-amos-stealer-on-telegram/
+file_creation_date: May 14, 2025

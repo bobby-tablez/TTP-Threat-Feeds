@@ -1,0 +1,49 @@
+description: ValleyRAT is a Remote Access Trojan that operates entirely in memory,
+  blending stealth, persistence, and evasive delivery techniques. It targets high-value
+  sectors such as finance, healthcare, manufacturing, and critical infrastructure.
+date: 2025-04-17
+authors:
+- Alon Shekalim
+attribution:
+  threat_actor: Silver Fox APT
+  country: China
+malware_families:
+- ValleyRAT
+- Gh0stRAT
+TTPs:
+  processes:
+  - nslookup.exe
+  - svchost.exe
+  - Douyin.exe
+  commandline:
+  - nslookup.exe
+  powershell: ''
+  scripting_engine: ''
+  registry_keys:
+  - Modification of registry keys (specific keys not listed)
+  image_load: ''
+  network_connections:
+  - executable: nslookup.exe
+  file_modifications:
+  - mpclient.dat
+  - sscronet.dll
+  - tier0.dll
+  persistence:
+  - Registry modification
+  pipes: ''
+  process_relations: ''
+IOCs:
+  domains:
+  - https://anizom[.]com/
+  - https://karlost[.]club/
+  files:
+  - sscronet.dll
+  - douyin.exe
+  - tier0.dll
+  - mpclient.dat
+  - Setup.zip
+  hashes:
+  - 53A6735CE1ECA68908C0367152A1F8F3CA62B801788CD104F53D037811284D71
+  - bb89e401560ba763d1c5860dd51667ba17768c04d00270bf34abebac47fd040e
+reference: https://www.morphisec.com/blog/valleyrat-malware-and-the-evolving-landscape-of-ransomware-threats/
+file_creation_date: May 14, 2025

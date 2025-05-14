@@ -1,0 +1,46 @@
+description: Ransomware actors are observed to take an average of 17 hours and 18
+  actions before deploying ransomware. The report analyzes time-to-ransom metrics
+  across various ransomware groups, highlighting differences in attack approaches
+  and the importance of proactive security measures.
+date: '2025-05-13'
+authors:
+- Lindsey O'Donnell-Welch
+attribution: Unknown (Huntress analysis)
+malware_families:
+- INC Ransomware
+- Akira Ransomware
+- Phobos Ransomware
+- Maze Ransomware
+- Conti Ransomware
+- Play Ransomware
+- Black Basta Ransomware
+- Sodinokibi Ransomware
+- Rapid Ransomware
+- RansomHub
+TTPs:
+  processes:
+  - Procdump
+  - LSASS
+  - powershell
+  commandline:
+  - C:\\ Windows\\Temp\\Procdump\\procdump.exe
+  - procdump -ma Isass.exe Isass.dmp
+  - powershell -NoProfile Windowstyle Hidden 10 pubic drsctory.
+  - Invoke-RestMethod -UriRtps77qq525T SoTCAy/T\"-OGtFIe $patStart-Process Spath
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_modifications:
+  - C:\\ Windows\\Temp\\Procdump\\procdump.exe
+  - Isass.dmp
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- CmdLine:_Isass.dmp
+- C:\\Windows\\Temp\\Procdump\\procdump.exe
+- procdump -ma Isass.exe Isass.dmp
+reference: https://www.huntress.com/blog/for-ransomware-time-to-ransom-is-money
+file_creation_date: May 14, 2025
