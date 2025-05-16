@@ -1,0 +1,46 @@
+description: AQUATIC PANDA, a China-based group, and APT35, a suspected Iranian nation-state
+  actor, have been observed exploiting CVE-2021-44228 (Log4j) to target organizations.  The
+  actors used various techniques including reverse shells, credential harvesting,
+  and modular PowerShell backdoors.
+attribution: AQUATIC PANDA (China-based group), APT35 (Suspected Iranian nation-state
+  actor)
+malware_families:
+- CharmPower
+authors:
+- EclecticIQ Threat Research
+TTPs:
+  processes:
+  - WinRAR.exe
+  - powershell.exe
+  - lsass.exe
+  commandline:
+  - C:\\Windows\\System32\\WinRAR.exe a C:\\temp\\dump.zip C:\\windows\\system32\\config\\SYSTEM
+  - powershell.exe -EncodedCommand <Base64 encoded PowerShell command>
+  - lsass.exe
+  powershell:
+  - '-EncodedCommand <Base64 encoded PowerShell command> '
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  network_connections:
+  - executable: powershell.exe
+    destination_address: <C2 server address>
+    port: ''
+  file_modifications:
+  - C:\\ProgramData\\
+  - C:\\Windows\\temp\\\\
+  persistence:
+  - Registry Run keys
+  pipes: []
+  process_relations: []
+IOCs:
+- CVE: 2021-44228
+- https://www.crowdstrike.com/blog/overwatch-exposes-aquatic-panda-in-possession-of-log-4-shell-exploit-tools
+- https://research.checkpoint.com/2022/apt35-exploits-log4j-vulnerability-to-distribute-new-modular-powershell-toolkit
+- https://www.microsoft.com/security/blog/2021/12/11/guidance-for-preventing-detecting-and-hunting-for-cve-2021-44228-log4j-2-exploitation
+- https://twitter.com/ericgeller/status/1480557042637099012
+- https://unit42.paloaltonetworks.com/web-skimmer-video-distribution
+- https://www.mandiant.com/resources/evasive-attacker-leverages-solarwinds-supply-chain-compromises-with-sunburst-backdoor-
+- https://helpdesk.kaseya.com/hc/en-gb/articles/4403440684689
+reference: https://blog.eclecticiq.com/apt35-and-aquatic-panda-exploit-the-log4j-vulnerability
+date_of_publication: January 18, 2022
+file_creation_date: May 16, 2025

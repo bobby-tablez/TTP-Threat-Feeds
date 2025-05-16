@@ -1,0 +1,55 @@
+description: HardBit Ransomware version 4.0 is observed in the wild, utilizing hidden
+  VNC (hVNC) and Hidden RDP (hRDP) for covert remote access.
+attribution: Cybereason Security Services
+malware_families:
+- HardBit Ransomware
+- Venom RAT
+- XWorm RAT
+- Pandora hVNC
+- Xeno RAT
+- Python Infostealer (Snake)
+authors:
+- Mark Tsipershtein
+- Cybereason Security Research Team
+TTPs:
+  processes:
+  - explorer.exe
+  - powershell.exe
+  - chrome.exe
+  - firefox.exe
+  - cvtres.exe
+  - xclient52.exe
+  - rdpwrap.dll
+  commandline:
+  - C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe --no-sandbox --allow-no-sandbox-job
+  - C:\\Program Files\\Mozilla Firefox\\firefox.exe -no-remote profile C:\\Users\\victim1\\AppDatalLocal\\Mozilla\\Firefox\\Fire
+    38 am FFox Data"
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: cvtres.exe
+    destination: Remote server
+  - executable: xclient52.exe
+    destination: Telegram Bot API or other well known platforms
+  file_modifications: []
+  persistence:
+  - Description: Utilizing hVNC and hRDP for persistent, stealth access.
+  pipes: []
+  process_relations:
+  - Parent process: xclient52.exe (XWorm)
+    Children:
+    - cvtres.exe
+    - powershell.exe
+    - chrome.exe
+    - explorer.exe
+  - Parent process: cvtres.exe
+    Children:
+    - powershell.exe
+    - chrome.exe
+IOCs:
+- Cobalt Strike BOF implementation of a Hidden Desktop
+reference: https://www.cybereason.com/blog/behind-closed-doors-the-rise-of-hidden-malicious-remote-access
+date_of_publication: May 16, 2025
+file_creation_date: May 16, 2025

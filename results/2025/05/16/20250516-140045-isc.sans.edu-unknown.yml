@@ -1,0 +1,25 @@
+description: Scanning activity targeting SonicWall devices for CVE-2021-20016 has
+  increased significantly. Multiple BACS students and DShield sensors have reported
+  probes related to specific URLs.
+attribution: Unknown
+IOCs:
+- 185.193.88.229
+- 185.193.88.178
+- 185.193.88.223
+- 141.98.80.125
+- 141.98.80.126
+- 141.98.80.118
+- 92.63.196.249
+- 92.63.196.152
+- 80.82.65.127
+- 45.146.130.12
+- https://isc.sans.edu/weblogs/urlhistory.html?url=L19fYXBpX18vdjEvY29uZmlnL2RvbWFpbnM=
+- https://isc.sans.edu/weblogs/urlhistory.html?url=L19fYXBpX18vdjEvbG9nb24=
+- https://isc.sans.edu/diary/Web+Scanning+Sonicwall+for+CVE202120016/31906/
+- https://es-la.tenable.com/blog/cve-2021-20016-zero-day-vulnerability-in-sonicwall-secure-mobile-access-sma-exploited
+- https://cow-prod-www-v3.azurewebsites.net/publications/security-advisories/2021-006/pdf
+authors:
+- Guy Bruneau
+reference: https://isc.sans.edu/diary/Web+Scanning+SonicWall+for+CVE202120016+Update/31952/#comments
+date_of_publication: May 14, 2025
+file_creation_date: May 16, 2025

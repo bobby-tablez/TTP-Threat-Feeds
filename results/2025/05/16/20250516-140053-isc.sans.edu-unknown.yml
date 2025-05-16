@@ -1,0 +1,18 @@
+description: Scanning activity targeting Sonicwall devices was observed starting April
+  22, 2023, with increased probing detected from April 23, 2025. The scans targeted
+  specific URLs related to configuration and logon functionalities.
+attribution: Unknown
+IOCs:
+- ip_addresses:
+  - 45.227.255.89
+  - 45.227.255.93
+  - 141.98.80.125
+  - 141.98.80.146
+- urls:
+  - https://isc.sans.edu/weblogs/urlhistory.html?url=L19fYXBpX18vdjEvY29uZmlnL2RvbWFpbnM=
+  - https://isc.sans.edu/weblogs/urlhistory.html?url=L19fYXBpX18vdjEvbG9nb24=
+authors:
+- Guy Bruneau
+reference: https://isc.sans.edu/diary/Web+Scanning+Sonicwall+for+CVE202120016/31906/
+date_of_publication: April 29, 2025
+file_creation_date: May 16, 2025

