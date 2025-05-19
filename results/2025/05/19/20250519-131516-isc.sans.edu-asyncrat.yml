@@ -1,0 +1,53 @@
+description: The report details a malware delivery chain utilizing AutoIT scripts
+  and culminating in the injection of Urshqbgpm.dll, potentially associated with AsyncRAT
+  and PureHVNC.
+attribution: Xavier Mertens (@xme)
+malware_families:
+- AsyncRAT
+- PureHVNC
+TTPs:
+  processes:
+  - 1. Project & Profit.exe
+  - Guard.exe
+  - jsc.exe
+  - SwiftWrite.pif
+  commandline:
+  - C:\\Windows\\System32\\cmd.exe /k echo [InternetShortcut] > "C:\\Users\\admin\\AppData\\Roaming\\Microsoft\\Windows\\Start
+    Menu\\Programs\\Startup\\SwiftWrite.url" & echo URL="C:\\Users\\admin\\AppData\\Local\\WordGenius
+    Technologies\\SwiftWrite.js" >> "C:\\Users\\admin\\AppData\\Roaming\\Microsoft\\Windows\\Start
+    Menu\\Programs\\Startup\\SwiftWrite.url" & exit
+  - new ActiveXObject("Wscript.Shell").Run("\\\"C:\\\\Users\\\\REM\\\\AppData\\\\Local\\\\WordGenius
+    Technologies\\\\SwiftWrite.pif\\\" \\\"C:\\\\Users\\\\REM\\\\AppData\\\\Local\\\\WordGenius
+    Technologies\\\\G\\\"\")
+  powershell:
+  - C:\\Users\\Public\\PublicProfile.ps1
+  registry_keys:
+  - C:\\Users\\admin\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\SwiftWrite.url
+  network_connections:
+  - executable: jsc.exe
+    destination_address: 139.99.188.124
+    port: 56001
+  file_modifications:
+  - C:\\Users\\Public\\Guard.exe
+  - C:\\Users\\Public\\PublicProfile.ps1
+  - C:\\Users\\Public\\Secure.au3
+  - C:\\Users\\admin\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\SwiftWrite.url
+  - C:\\Users\\admin\\AppData\\Local\\WordGenius Technologies\\SwiftWrite.js
+  - C:\\Users\\REM\\AppData\\Local\\WordGenius Technologies\\SwiftWrite.pif
+  - C:\\Users\\REM\\AppData\\Local\\WordGenius Technologies\\G
+  persistence:
+  - Startup directory .url file
+  pipes: []
+  process_relations:
+  - 1. Project & Profit.exe -> Guard.exe -> PublicProfile.ps1 execution
+  - SwiftWrite.pif -> G (second layer AutoIT script)
+  - jsc.exe injected with Urshqbgpm.dll
+IOCs:
+- hash: b5fbae9376db12a3fcbc99e83ccad97c87fb9e23370152d1452768a3676f5aeb
+- ip_address: 139.99.188.124
+- port: 56001
+authors:
+- Xavier Mertens (@xme)
+reference: https://isc.sans.edu/diary/RAT+Dropped+By+Two+Layers+of+AutoIT+Code/31960/#comments
+date_of_publication: May 19, 2025
+file_creation_date: May 19, 2025

