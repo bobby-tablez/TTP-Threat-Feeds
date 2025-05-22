@@ -1,0 +1,33 @@
+description: Storm-0558 exploited a compromised signing key intended for Microsoft
+  consumer accounts to issue tokens accepted by Azure AD enterprise services, bypassing
+  safeguards and granting access to resources like Outlook Web Access. The incident
+  highlights the dangers of cross-tenant token forgery in multi-tenant environments.
+attribution: Storm-0558
+TTPs:
+  processes:
+  - jwt
+  commandline:
+  - jwt encode --alg RS256 -m <payload> -k <public_key>
+  - jwt.encode(payload, None, algorithm=None, headers=headers)
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_modifications: []
+  persistence:
+  - Automate Key Rotation - Set a rotation interval (for example, every 90 days or
+    6 months)
+  - Fully Retire Old Keys - Double-check downstream services or caches, making sure
+    no part of your environment still accepts a retired key
+  - In multi-tenant systems, confirm each tenant has updated its references to the
+    JWKS.
+  pipes: []
+  process_relations: []
+IOCs:
+- https://login.example.com/realms/tenantA
+authors:
+- Damian Archer
+reference: https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/storm-0558-and-the-dangers-of-cross-tenant-token-forgery/
+date_of_publication: May 21, 2025
+file_creation_date: May 22, 2025

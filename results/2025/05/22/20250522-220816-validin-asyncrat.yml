@@ -1,0 +1,64 @@
+description: A tweet highlighted a ClickFix infection path, leading to the discovery
+  of hundreds of malicious Booking.com themed domains and infrastructure related to
+  AsyncRAT.
+attribution: Unknown (likely associated with ClickFix campaign)
+malware_families:
+- AsyncRAT
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - C:\\Windows\\System32\\cmd.exe /c start powershell.exe -ExecutionPolicy Bypass
+    -WindowStyle Hidden -File C:\\Users\\Public\\captcha.ps1
+  - powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\\Users\\Public\\captcha.ps1
+  powershell:
+  - 'param([string]$CaptchaText)
+
+    Write-Host $CaptchaText
+
+    '
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: powershell.exe
+    destination_address: 92.255.85[.]66
+    port: ''
+  - executable: powershell.exe
+    destination_address: 92.255.85[.]207
+    port: ''
+  file_modifications:
+  - C:\\Users\\Public\\captcha.ps1
+  - http://92.255.85[.]207/ret.exe
+  - http://92.255.85[.]207/module.bat
+  - C:\\Windows\\System32\\args.bat
+  - C:\\Windows\\System32\\voice.exe
+  persistence:
+  - Utilizes a PowerShell script (captcha.ps1) executed via cmd.exe with bypass execution
+    policy.
+  pipes: []
+  process_relations: []
+IOCs:
+- hash: 7d326ee03b94c0c1854b5a669aa046b1
+- ip: 92.255.85[.]66
+- ip: 92.255.85[.]207
+- url: https://cpte-x[.]click/MYW9LV1SMR616d
+- url: https://cpthevrf[.]click/F44GTGHOVB0snx
+- domain: bookviewmain24[.]com
+- domain: cpte-x[.]click
+- domain: rekaphcentre[.]site
+- domain: bobkngsiggn[.]com
+- domain: captchviews[.]click
+- domain: booker-auth[.]com
+- domain: bookinghhs[.]com
+- domain: bookingconfirmatorr[.]com
+- file_path: C:\\Users\\Public\\captcha.ps1
+- url: http://193.176.22[.]172/args.bat
+- url: http://193.176.22[.]172/voice.exe
+- hash: 6018807017afead14417566f975ffdb4
+- hash: 8c4ddd3659782109a5bd7fb8bc9dc674
+authors:
+- Sreekar Madabushi
+reference: https://www.validin.com/blog/finding_booking_themed_clickfix/
+date_of_publication: April 17, 2025
+file_creation_date: May 22, 2025

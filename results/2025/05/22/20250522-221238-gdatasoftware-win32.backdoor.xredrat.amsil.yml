@@ -1,0 +1,64 @@
+description: A USB-spreading worm and Floxif infection was discovered in printer software
+  downloads from Procolored. The malware includes an XRed backdoor, a clipbanker virus
+  (SnipVex), and file infector capabilities.
+attribution: Unknown
+malware_families:
+- Win32.Backdoor.XRedRAT.AMSIL
+- Trojan-Stealer.CoinStealer.HMSIL
+- Worm:Win32/AutoRun!atmn
+- MSIL.Trojan-Stealer.CoinStealer.H (SnipVex)
+- Floxif
+authors:
+- Karsten Hahn
+TTPs:
+  processes:
+  - PrintExp.exe
+  - vshost32.exe
+  - IconExtractor.dll
+  - Zgokr00.exe
+  - NWReceive.exe
+  - SETUP.EXE
+  - MEP\\Setup.exe
+  commandline:
+  - PrintExp.exe
+  - vshost32.exe
+  - IconExtractor.dll
+  - Zgokr00.exe
+  - NWReceive.exe
+  - SETUP.EXE
+  - MEP\\Setup.exe
+  powershell: ''
+  scripting_engine: ''
+  registry_keys:
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\ScdBcd
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\ClpBtcn
+  image_load: ''
+  network_connections: ''
+  file_modifications:
+  - Dibifu_9\\vshost32.exe
+  - Dibifu_9\\IconExtractor.dll
+  - Zgokr00.exe
+  - F13 Pro\\2.software\\PrintExp_X64_V5.7.6.5.77.2024.06.25.Single\\.NWReceive.exe
+  - F13 Pro\\2.software\\PrintExp_X64_V5.7.6.5.77.2024.06.25.Single\\.PrintExp.exe
+  - F13 Pro\\2.software\\PrintExp_X64_V5.7.6.5.77.2024.06.25.Single\\._cache_NWReceive.exe
+  - F13 Pro\\2.software\\PrintExp_X64_V5.7.6.5.77.2024.06.25.Single\\._cache_PrintExp.exe
+  - F13 Pro\\2.software\\PrintExp_X64_V5.7.6.5.77.2024.06.25.Single\\NWReceive.exe
+  - F13 Pro\\2.software\\PrintExp_X64_V5.7.6.5.77.2024.06.25.Single\\PrintExp.exe
+  persistence:
+  - Registry Run keys (ScdBcd, ClpBtcn)
+  pipes: ''
+  process_relations: ''
+IOCs:
+- 531d08606455898408672d88513b8a1ac284fdf1fe011019770801b7b46d5434 (XRed backdoor
+  SHA256)
+- 39df537aaefb0aa31019d053a61fabf93ba5f8f3934ad0d543cde6db1e8b35d1 (SnipVex SHA256)
+- 1BQZKqdp2CV3QV5nUEsqSg1ygegLmqRygj (SnipVex BTC wallet)
+- https://mega[.]nz/folder/TNAWTDKL#zR5Atn68a807Qn17FjXFxA
+- https://mega[.]nz/folder/zBgEiY4K#veoSD-6LgC12yZdqs1G_Owh
+- https://mega[.]nz/folder/3MBG0Rra#eebBaK_Fu6bJs3ZBIhUFiQh
+- https://mega[.]nz/folder/yEBVBbwY#0qxlY0S_DXosumSxP38nVgh
+- https://mega[.]nz/folder/zM413Jbb#crz2GQgj2EFAut4vxfS8Agh
+- https://mega[.]nz/folder/eMxjWAgT#r1YEU0KYupfcoBKQQrenSQh
+reference: https://www.gdatasoftware.com/blog/2025/05/38200-printer-infected-software-downloads
+date_of_publication: May 15, 2025
+file_creation_date: May 22, 2025

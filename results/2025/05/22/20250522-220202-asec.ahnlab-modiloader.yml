@@ -1,0 +1,54 @@
+description: DBatLoader (ModiLoader) malware is being distributed via email to Turkish
+  users impersonating a bank. The attachment executes SnakeKeylogger for information
+  theft.
+attribution: Pro-Russian threat actor
+malware_families:
+- ModiLoader
+- DBatLoader
+- SnakeKeylogger
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - esentutl.exe
+  - extrac32.exe
+  - svchost.pif
+  - easinvoker.exe
+  - loader.exe
+  - mercurymail.exe
+  commandline:
+  - esentutil.exe /r C:\Windows\System32\config\system
+  - cmd.exe /c mkdir "C:\\Windows\\SysWow64"
+  - cmd.exe /c copy /Y cmd.exe alpha.pif
+  - svchost.pif
+  - ping 127.0.0.1 -n 10 > nul
+  - del netutils.dll
+  - extrac32.exe /f:xkn.pif powershell.exe
+  - powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File "%UserProfile%\AppData\Local\Temp\neo.cmd"
+  powershell:
+  - -ExecutionPolicy Bypass -WindowStyle Hidden -File "%UserProfile%\AppData\Local\Temp\neo.cmd"
+  registry_keys: []
+  image_load:
+  - process: easinvoker.exe
+    dll: netutils.dll
+  network_connections: []
+  file_modifications:
+  - C:\\Windows\\SysWow64\\svchost.pif
+  - '%UserProfile%\AppData\Local\Temp\neo.cmd'
+  - '%UserProfile%\AppData\Local\Temp\xkn.pif'
+  - wxiygomE.pif
+  persistence:
+  - Adding subdirectories under C:\\ to Windows Defender exclusion paths.
+  pipes: []
+  process_relations:
+  - DBatLoader (x.exe) -> cmd.exe -> Esentutl -> mkdir -> copy cmd.exe as alpha.pif
+  - DBatLoader (x.exe) -> svchost.pif -> loads netutils.dll
+  - DBatLoader (x.exe) -> extrac32.exe -> powershell.exe -> neo.cmd
+  - loader.exe (wxiygomE.pif) -> SnakeKeylogger injection
+IOCs:
+- Telegram bot token (from Figure 15)
+authors:
+- AhnLab Security Intelligence Center (ASEC)
+reference: https://asec.ahnlab.com/en/88025/
+date_of_publication: May 15, 2025
+file_creation_date: May 22, 2025

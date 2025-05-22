@@ -1,0 +1,114 @@
+description: 'The Monthly Intelligence Insights report from Securonix Threat Labs
+  highlights several emerging cyber threats observed in April 2025, including APT36
+  exploiting the Pahalgam attack, UNC5174 advancing Linux espionage operations, Sapphire
+  Werewolf upgrading Amethyst stealer, and Gamaredon employing flux-like DNS techniques.
+  The report also details phishing campaigns targeting U.S. tax season and European
+  entities using RDP resource redirection, as well as ransomware threats like CrazyHunter
+  and PE32.
+
+  '
+attribution:
+- APT36 (Transparent Tribe)
+- UNC5174
+- UNC5221
+- Sapphire Werewolf
+- Gamaredon
+- ShadowPad/RedFoxtrot
+- Storm-0249
+- UNC5837
+- TAG-124
+malware_families:
+- Crimson RAT
+- VShell RAT
+- BRICKSTORM
+- Amethyst Stealer
+- Sliver implant
+- RaccoonO365 PhaaS
+- Latrodectus loader
+- AHKBot Looper
+- Remcos RAT
+- CrazyHunter Ransomware
+- PE32 Ransomware
+- GhostWeaver RAT
+- StealC
+- BOINC client
+- XorDDoS Trojan
+- Linux-based DDoS Malware
+- VIP Version XorDDoS
+- MintsLoader
+- GhostWeaver
+- Modified BOINC client
+TTPs:
+  processes:
+  - kworker/0:2
+  - msimg32.dll
+  - Packagec.ps1
+  - exe
+  - dllhost.exe
+  - mstsc.exe
+  - bb.exe
+  - crazyhunter.exe
+  - crazyhunter.sys
+  - ru.bat
+  - go*.exe
+  - SharpGPOAbuse (gpo.exe)
+  - auditd
+  - OSSEC
+  commandline:
+  - kworker/0:2
+  - msimg32.dll
+  - Packagec.ps1
+  - exe
+  - dllhost.exe -accepteula -r -ma lsass.exe C:\<path>
+  - mstsc.exe
+  - bb.exe
+  - crazyhunter.exe
+  - crazyhunter.sys
+  - ru.bat
+  - go*.exe
+  - SharpGPOAbuse (gpo.exe)
+  - auditd
+  - OSSEC
+  powershell:
+  - Packagec.ps1
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_modifications:
+  - C:\jnmhxrv cstm\jnmhxrv cstm\obj\Debug\jnmhxrv cstm.pdb
+  - WEISTT.jpg
+  - C:\ProgramData\SkyPDF\PDUDrv.blf
+  - Dvx.zip
+  persistence:
+  - /etc/init.d/
+  - /etc/crontab
+  - user-specific cron folders
+  pipes: []
+  process_relations: []
+IOCs:
+- gooogleasia[.]com
+- sex666vr[.]com
+- Telegram Bot API
+- REGRU-RU
+- Irs_Verification_Form.pdf
+- Tax_Refund_Eligibility_Document[.]xlsm
+- shareddocumentso365cloudauthstorage[.]com
+- Firebase storage
+- Dropbox
+- 400 IoCs available on our Threat Labs home page repository
+- '@ Hash'
+- '@ Domain'
+- '@ IP Address'
+- '@ URL'
+- '@ Email Address'
+- '@ Email Domain'
+- '@ IPPort'
+authors:
+- Dheeraj Kumar
+- Sina Chehreghani
+- Nitish Singh
+- Nikhil Kumar Chadhasecuron
+reference: https://www.securonix.com/blog/securonix-threat-labs-monthly-intelligence-insights-april-2025/
+date_of_publication: June 08, 2023
+file_creation_date: May 22, 2025

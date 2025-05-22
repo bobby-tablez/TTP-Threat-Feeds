@@ -1,0 +1,96 @@
+description: This report details an investigation into Lazarus APT Group infrastructure
+  related to the Bybit hack, leveraging Validinas host response and historic DNS databases
+  to identify additional indicators.
+attribution: Lazarus Group (aka UNC4899), North Korea
+TTPs:
+  processes:
+  - python3
+  commandline:
+  - /usr/bin/python3 /var/www/getstockprice.com/public/index.php
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: nginx
+    destination_address: 70.34.245[.]118
+    port: '443'
+  - executable: nginx
+    destination_address: 178.128.77[.]132
+    port: '443'
+  - executable: nginx
+    destination_address: 131.226.2[.]43
+    port: '443'
+  - executable: nginx
+    destination_address: 23.236.169[.]233
+    port: '443'
+  - executable: nginx
+    destination_address: 185.194.178[.]88
+    port: '443'
+  - executable: nginx
+    destination_address: 51.38.145[.]49
+    port: '443'
+  - executable: nginx
+    destination_address: 213.252.232[.]171
+    port: '443'
+  - executable: nginx
+    destination_address: 131.226.2[.]120
+    port: '443'
+  - executable: nginx
+    destination_address: 37.120.247[.]180
+    port: '443'
+  - executable: nginx
+    destination_address: 88.119.175[.]208
+    port: '443'
+  - executable: nginx
+    destination_address: 192.248.167[.]90
+    port: '443'
+  - executable: nginx
+    destination_address: 185.69.16[.]236
+    port: '443'
+  file_modifications: []
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- domain: getstockprice[.]com
+- ip: 70.34.245[.]118
+- domain: trashcrease[.]com
+- ip: 178.128.77[.]132
+- domain: anglerstatic[.]com
+- ip: 131.226.2[.]43
+- domain: goingladies[.]com
+- ip: 23.236.169[.]233
+- ip: 185.194.178[.]88
+- ip: 45.86.202[.]224
+- domain: gossipsnare[.]com
+- ip: 51.38.145[.]49
+- domain: showmanroast[.]com
+- ip: 213.252.232[.]171
+- domain: getstockprice[.]info
+- ip: 131.226.2[.]120
+- domain: eclairdomain[.]com
+- ip: 37.120.247[.]180
+- domain: replaydreary[.]com
+- ip: 88.119.175[.]208
+- domain: coreladao[.]com
+- domain: cdn.clubinfo[.]io
+- domain: getcoinprice[.]info
+- ip: 192.248.167[.]90
+- domain: firexch[.]com
+- domain: financecap[.]io
+- ip: 185.69.16[.]236
+- ip: 185.236.231[.]224
+- domain: stocksindex[.]org
+- domain: en[.]stocksindex[.]org
+- domain: wfinance[.]org
+- domain: en[.]wfinance[.]org
+- domain: stockinfo[.]io
+- domain: api[.]stockinfo[.]io
+- hash: b21405ce3c3456214ad8fc5263eeabb1
+- hash: f4407a84d90c5ecc1025
+authors:
+- Kenneth Kinion
+reference: https://www.validin.com/blog/bybit_hack_infrastructure_hunt/
+date_of_publication: March 11, 2025
+file_creation_date: May 22, 2025

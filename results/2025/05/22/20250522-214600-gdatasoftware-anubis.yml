@@ -1,0 +1,42 @@
+description: FIN7, a sophisticated criminal group, is utilizing a Python-based backdoor
+  (Anubis) deployed via phishing campaigns. The backdoor employs multi-layered obfuscation
+  and encryption techniques to evade detection and maintain persistence.
+attribution: FIN7
+malware_families:
+- Anubis
+TTPs:
+  processes:
+  - python.exe
+  - cmd.exe
+  commandline:
+  - pythonw.exe "C:\\Users\\Public\\conf.py"
+  - '"C:\\Windows\\System32\\cmd.exe" /c ping 8.8.8.8 -n 1 >nul'
+  powershell: ''
+  scripting_engine:
+  - python
+  registry_keys:
+  - HKEY_CURRENT_USER\\Software\\FormidableHandlers
+  image_load: ''
+  network_connections:
+  - executable: python.exe
+    destination_address: 38.134.148.205
+    port: '80'
+  - executable: python.exe
+    destination_address: 38.134.148.205
+    port: '443'
+  file_modifications:
+  - C:\\Users\\Public\\temp.py
+  persistence:
+  - Registry key under HKEY_CURRENT_USER\\Software\\ with random words.
+  pipes: ''
+  process_relations: ''
+IOCs:
+- 03a160127cce3a96bfa602456046cc443816af7179d771e300fec80c5ab9f00f
+- 5203f2667ab71d154499906d24f27f94e3ebdca4bba7fe55fe490b336bad89199
+- 6b9f84cc7bf11bdc3ce56c81cca550753790b3021aa70ec63b38d84b0b50f89e5
+- 255d5f476784fcef97f9c41b12665004c1b961e35ad445ed41e0d6dbbc4f8e
+- 38.134.148.205
+reference: https://www.gdatasoftware.com/blog/2025/03/38161-analysis-fin7-anubis-backdoor
+Authors: Timo Scholz-Fritsch
+date_of_publication: March 20, 2025
+file_creation_date: May 22, 2025

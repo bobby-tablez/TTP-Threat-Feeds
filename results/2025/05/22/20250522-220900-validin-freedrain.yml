@@ -1,0 +1,83 @@
+description: The FreeDrain network is a modern phishing operation that leverages free-tier
+  platforms to host content, distribute lure pages, and route victims. It adapts rapidly
+  to infrastructure takedowns and uses SEO manipulation to drive traffic to credential-harvesting
+  phishing sites.
+attribution: Unknown (likely based in the UTC+05:30 timezone)
+malware_families:
+- FreeDrain
+authors:
+- Kenneth Kinion
+- Tom Hegel
+- Sreekar Madabushi
+TTPs:
+  processes:
+  - chrome.exe
+  - msedge.exe
+  - node.exe
+  commandline:
+  - chrome.exe --new-window https://metamaskchromextan.gitbook\\.io/us
+  - msedge.exe --new-tab https://suprt-ios-trzorhard.gitbook\\.io/en-us
+  - node attacker.js
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load: ''
+  network_connections:
+  - executable: chrome.exe
+    destination: metamaskchromextan.gitbook\\.io
+    port: '443'
+  - executable: msedge.exe
+    destination: suprt-ios-trzorhard.gitbook\\.io
+    port: '443'
+  - executable: node.exe
+    destination: rfhwuwixxi.execute-api.us-east-1.amazonaws[.]com
+    port: '443'
+  file_modifications:
+  - C:\\Users\\Public\\aapp.js
+  persistence: ''
+  pipes: ''
+  process_relations: ''
+IOCs:
+- https://metamaskchromextan.gitbook\\.io/us
+- https://suprt-ios-trzorhard.gitbook\\.io/en-us
+- https://bridge-tziuur.gitbook\\.io/en-us
+- https://auth-ledger-com-cdn.webflow\\.io/
+- https://start---leddger-cdn-auth.webflow\\.io/
+- https://help--ledgre-auth-us.webflow\\.io/
+- https://home-trezsor-start.gitbook\\.io/en-us
+- https://wlt-phantom-wlt.webflow\\.io/
+- https://bridge-cen-trezseer.gitbook\\.io/en-us
+- https://ledgerauth-wellat.webflow\\.io/
+- https://ledgerivwaselet-us.webflow\\.io/
+- https://extentrust.gitbook\\.io/en-us
+- https://truststextion.gitbook\\.io/us
+- https://apps-support---mettmask.gitbook\\.io/us
+- https://cobo-wallet-digital-cdm.webflow\\.io/
+- https://extension--metaamsk-info.gitbook\\.io/us
+- https://bridge-docs--trzc.gitbook\\.io/en-us
+- https://suite-trezoreio.gitbook\\.io/us
+- https://auth--io-coinbausehelp.gitbook\\.io/us
+- https://help-blockf-cdnn.teachable\\.com/p/home
+- trighlandcomping[.]com
+- chopedansive[.]com
+- deconsorconsuperb[.]com
+- curphytompared[.]com
+- mingaryshestence[.]com
+- brasencewompture[.]com
+- penlabuseoribute[.]com
+- leatlyinsioning[.]com
+- coveryinting[.]com
+- coateethappallel[.]com
+- https://atomicwallet.azurewebsites[.]net/
+- https://bietbutylogn.azurewebsites[.]net/
+- https://biokefeiwltliv29gleed.azurewebsites[.]net/
+- https://bitgetwalt.azurewebsites[.]net/
+- https://bleuckfie-coins.azurewebsites[.]net/
+- https://bleuckkfiecoins.azurewebsites[.]net/
+- https://cnbse13liv.s3.eu-north-1.amazonaws[.]com/index.html
+- https://dft0-hjgkd26-fkj.s3.us-east-1.amazonaws[.]com/index.html
+- https://ledg-01jghe0fhdk.s3.eu-north-1.amazonaws[.]com/index.html
+- https://ledgar-live-walliet.s3.us-east-2.amazonaws[.]com/index.html
+reference: https://www.validin.com/blog/freedrain_unmasked/
+date_of_publication: May 08, 2025
+file_creation_date: May 22, 2025

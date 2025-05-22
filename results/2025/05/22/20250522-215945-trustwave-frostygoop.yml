@@ -1,0 +1,58 @@
+description: This report details cyberattacks targeting critical infrastructure in
+  Ukraine and other countries, highlighting tactics employed by various threat actors
+  including APT44 (Sandworm), CyberArmyofRussia_Reborn (CARR), and Cyber.Anarchy.Squad
+  (C.A.S). The attacks range from disrupting energy and water supply to compromising
+  telecommunications providers and technology companies.
+attribution: APT44 (aka Sandworm), CyberArmyofRussia_Reborn (CARR), Cyber.Anarchy.Squad
+  (C.A.S)
+malware_families:
+- FrostyGoop
+- AcidPour
+- AcidRain
+- POEMGATE
+- Unknown
+authors:
+- Pawel Knapczyk
+- Nikita Kazymirskyi
+TTPs:
+  processes:
+  - MikroTik router
+  - Security Account Manager (SAM)
+  - ENCO controllers
+  - VNC
+  - Unux
+  - Windows
+  commandline:
+  - Malicious Modbus commands sent to ENCO controllers
+  - web shell deployed
+  - AcidPour binary
+  powershell: ''
+  scripting_engine: ''
+  registry_keys:
+  - SAM registry hive
+  image_load: ''
+  network_connections:
+  - executable: FrostyGoop
+    destination_address: Modbus TCP over port 502
+  - executable: Weintek HMI controllers
+    destination_address: Unauthenticated VNC connections over port 5900 or 5901
+  file_modifications:
+  - /lib/libe.50.7
+  - /path/to/encrypted/files
+  persistence:
+  - Compromised employee accounts for ICS service provider
+  - Specialized software containing backdoors and vulnerabilities
+  - GPO (Group Policy Object) deployment of malware
+  - Encryption of virtual machines and physical workstations
+  pipes: ''
+  process_relations: ''
+IOCs:
+- Port 502 (Modbus TCP)
+- Port 5900 or 5901 (VNC)
+- 'AcidPour binary submission date: March 16, 2024'
+- 'AVANPOST website: avanpost.ru'
+- '390435'
+- 60T8
+reference: https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/the-russia-ukraine-cyber-war-part-3-attacks-on-telecom-and-critical-infrastructure/
+date_of_publication: March 05, 2025
+file_creation_date: May 22, 2025

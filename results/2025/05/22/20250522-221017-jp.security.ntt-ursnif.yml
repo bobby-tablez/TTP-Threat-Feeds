@@ -1,0 +1,58 @@
+description: This report details activity attributed to APT43 (Kimsuky) involving
+  the use of Microsoft Management Console (MMC) for malicious purposes, including
+  custom extensions and exploitation techniques.
+attribution: APT43 / Kimsuky
+malware_families:
+- URSNIF
+- DarkPlum
+- DarkPeony
+- BugPeony
+- Bitter
+- Patchwork
+- Sticky Werewolf
+- GhostClover
+- Kamikaze
+TTPs:
+  processes:
+  - explorer.exe
+  - mmc.exe
+  - wscript.exe
+  - services.exe
+  - msiexec.exe
+  commandline:
+  - explorer.exe
+  - mmc.exe "C:\\Userstest\\Downloadsmalicious.msc"
+  - wscript.exe "C:\\Users\\Public\\Documents\\qfmco.vbs"
+  - services.exe
+  - msiexec.exe /V | C:\\Userstest\\AppData\\LocalkjnBsLsJo20@24Contact.exe
+  powershell: ''
+  scripting_engine:
+  - VBScript
+  registry_keys: ''
+  image_load: ''
+  network_connections: ''
+  file_modifications:
+  - C:\\Userstest\\Downloadsmalicious.msc
+  - C:\\Users\\Public\\Documents\\qfmco.vbs
+  - C:\\Userstest\\AppData\\LocalkjnBsLsJo20@24Contact.exe
+  persistence:
+  - MMC extension usage for persistence.
+  pipes: ''
+  process_relations:
+  - explorer.exe -> mmc.exe
+  - mmc.exe -> wscript.exe
+  - msiexec.exe
+IOCs:
+- C:\\Userstest\\Downloadsmalicious.msc
+- C:\\Users\\Public\\Documents\\qfmco.vbs
+- C:\\Userstest\\AppData\\LocalkjnBsLsJo20@24Contact.exe
+- https://jp.security.ntt/tech_blog/controlplug
+- https://jp.security.ntt/tech_blog/appdomainmanager-injection
+- https://jp.security.ntt/tech_blog/jsac2025
+- https://jsac.jpcert.or.jp/archive/2025/pdf/JSAC2025_1_9_amata_rintaro_en.pdf
+- https://learn.microsoft.com/en-us/troubleshoot/windows-server/system-management-components/what-is-microsoft-management-console
+authors:
+- Masaya Motoda
+reference: https://jp.security.ntt/tech_blog/whitepaper-msc
+date_of_publication: April 01, 2025
+file_creation_date: May 22, 2025
