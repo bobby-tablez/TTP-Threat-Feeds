@@ -1,0 +1,143 @@
+description: This report details the analysis of a FormBook variant, focusing on its
+  payload operation, anti-analysis techniques, data collection methods, communication
+  with a C2 server, and control commands. The malware utilizes process hollowing,
+  Heavens Gate, and multiple layers of encryption to evade detection.
+attribution: Unknown (Attribution is not explicitly stated in the report)
+malware_families:
+- FormBook
+TTPs:
+  processes:
+  - ImagingDevices.exe
+  - PATHPING.EXE
+  - notepad.exe
+  - explorer.exe
+  - vmwareuser.exe
+  - vmwareservice.exe
+  - sandboxiedcomlaunch.exe
+  - sandboxierpcss.exe
+  - procmon.exe
+  - regmon.exe
+  - filemon.exe
+  - wireshark.exe
+  - netmon.exe
+  - python.exe
+  - perl.exe
+  commandline:
+  - C:\\Program Files (x86)\\Windows Photo Viewer\\ImagingDevices.exe
+  - C:\\Windows\\system32\\PATHPING.EXE
+  - C:\\Windows\\system32\\notepad.exe
+  - C:\\Windows\\System32\\mspaint.exe
+  - PATHPING.EXE
+  powershell: ''
+  scripting_engine: ''
+  registry_keys:
+  - HKCU\\SOFTWARE\\Microsoft\\Internet Explorer\\IntelliForms\\Storage2
+  - HKCU\\SOFTWARE\\Microsoft\\Windows\\Cookies
+  - HKCU\\SOFTWARE\\Microsoft\\Windows\\Cookies\\Low
+  - HKCU\\AppData\\Mozilla\\Firefox\\Profiles\\{ProfileName}\\Cookies.sqlite
+  image_load: ''
+  network_connections:
+  - executable: PATHPING.EXE
+    destination: www[.]grcgrg[.]net
+    port: ''
+    url: /jxyu/
+  - executable: notepad.exe
+    destination: www[.]manicure-nano[.]sbs
+    port: ''
+    url: /xkx8/
+  file_activity:
+  - C:\\Program Files (x86)\\Windows Photo Viewer\\ImagingDevices.exe
+  - '%temp%\\yzbtfb3.exe'
+  - '%WinDir%\\Cookies'
+  - '%AppData%\\Microsoft\\Windows\\Cookies'
+  - '%AppData%\\Microsoft\\Windows\\Cookies\\Low'
+  - '%LocalAppData%\\Microsoft\\Windows\\INetCookies'
+  - '%LocalAppData%\\Microsoft\\Windows\\INetCookies\\Low'
+  - '%LocalAppData%\\Google\\Chrome\\User Data\\Default\\Login Data'
+  - '%LocalAppData%\\Google\\Chrome\\User Data\\Default\\Cookies'
+  - '%LocalAppData%\\Google\\Chrome\\User Data\\Default\\Current Session'
+  persistence: ''
+  pipes: ''
+  process_relations:
+  - ImagingDevices.exe -> PATHPING.EXE (Process Hollowing)
+  - Explorer.exe -> Notepad.exe (Heavens Gate - Selected Child Process)
+IOCs:
+- '0x72FE2A27'
+- C:\\cuckoo\\Windows Photo Viewer\\ImagingDevices.exe
+- C:\\sandcastle\\ImagingDevices.exe
+- C:\\aswsnx\\ImagingDevices.exe
+- C:\\sandbox\\ImagingDevices.exe
+- C:\\smpdir\\ImagingDevices.exe
+- C:\\samroot\\ImagingDevices.exe
+- C:\\avctestsuite\\ImagingDevices.exe
+- www[.]manicure-nano[.]sbs/xkx8/
+- www[.]grcgrg[.]net/jxyu/
+- hxxp://www[.]arwintarim[.]xyz/shoy/
+- hxxp://www[.]promutuus[.]xyz/bpae/
+- hxxp://www[.]218735[.]bid/3f5o/
+- hxxp://www[.]vivamente[.]shop/xr41/
+- hxxp://www[.]segurooshop[.]shop/wcz8/
+- hxxp://www[.]hugeblockchain[.]xyz/1dpy/
+- hxxp://www[.]crazymeme[.]xyz/78bm/
+- hxxp://www[.]extremedoge[.]xyz/372c/
+- hxxp://www[.]685648[.]wang/3k4m/
+- hxxp://www[.]shibfestival[.]xyz/8538/
+- hxxp://www[.]promoconfortbaby[.]store/1pxl/
+- hxxp://www[.]balivegasbaru2[.]xyz/cfze/
+- hxxp://www[.]themutznuts[.]xyz/ks15/
+- hxxp://www[.]kpilal[.]info/9o26/
+- hxxp://www[.]dogeeditor[.]xyz/x5dz/
+- hxxp://www[.]adjokctp[.]icu/3ya5/
+- hxxp://www[.]kasun[.]wtf/u4ue/
+- hxxp://www[.]031235246[.]xyz/ml07/
+- hxxp://www[.]intention[.]digital/h6z3/
+- hxxp://www[.]prepaidbitcoin[.]xyz/rcx4/
+- hxxp://www[.]ddvids[.]xyz/uiki/
+- hxxp://www[.]zhuanphysical[.]shop/zcro/
+- hxxp://www[.]theweb[.]services/fb40/
+- hxxp://www[.]sdwd[.]wang/sfv4/
+- hxxp://www[.]lucynoel6465[.]shop/1i64/
+- hxxp://www[.]nhc7tdkp6[.]live/d9kr/
+- hxxp://www[.]ciptaan[.]xyz/fjwa/
+- hxxp://www[.]gluconolmx[.]shop/8370/
+- hxxp://www[.]shlomi[.]app/5nwk/
+- hxxp://www[.]garfo[.]xyz/35rt/
+- hxxp://www[.]caral[.]tokyo/plub/
+- hxxp://www[.]meritking[.]cloud/gakd/
+- hxxp://www[.]grcgrg[.]net/jxyu/
+- hxxp://www[.]nullus[.]xyz/pf7y/
+- hxxp://www[.]actionlow[.]live/0a0g/
+- hxxp://www[.]dangky88kfree[.]online/11lg/
+- hxxp://www[.]szty13[.]vip/abhi/
+- hxxp://www[.]arryongro-nambe[.]live/h108/
+- hxxp://www[.]dqvcbn[.]info/iby8/
+- hxxp://www[.]svapo-discount[.]net/s956/
+- hxxp://www[.]yueolt[.]shop/je6k/
+- hxxp://www[.]sigaque[.]today/u2nq/
+- hxxp://www[.]manicure-nano[.]sbs/xkx8/
+- hxxp://www[.]laohuc58[.]net/zyjq/
+- hxxp://www[.]iighpb[.]bid/jfhd/
+- hxxp://www[.]fjlgyc[.]info/txra/
+- hxxp://www[.]sbualdwhryi[.]info/dbdy/
+- hxxp://www[.]xrrkkv[.]info/eg97/
+- hxxp://www[.]08081[.]pink/2wr9/
+- hxxp://www[.]jyc11[.]top/xz2s/
+- hxxp://www[.]kdjsswzx[.]club/h3ut/
+- hxxp://www[.]gnlokn[.]info/lmor/
+- hxxp://www[.]btbjpu[.]info/pjhe/
+- hxxp://www[.]bellysweep[.]net/gr1r/
+- hxxp://www[.]dilgxp[.]info/7qht/
+- hxxp://www[.]leveledge[.]sbs/asbs/
+- hxxp://www[.]ethereumpartner[.]xyz/xou3/
+- hxxp://www[.]choujiezhibo[.]net/pu7t/
+- hxxp://www[.]domuss[.]asia/yf4f/
+- hxxp://www[.]seasay[.]xyz/xwy3/
+- hxxp://www[.]tumbetgirislinki[.]fit/i8hk/
+- hxxp://www[.]ef4refef[.]sbs/f88b/
+- hxxp://www[.]aicycling[.]pro/4m7q/
+- hxxp://www[.]autonomousrich[.]xyz/iej0/
+authors:
+- Xiaopeng Zhang
+reference: https://www.fortinet.com/blog/threat-research/infostealer-malware-formbook-spread-via-phishing-campaign
+date_of_publication: May 27, 2025
+file_creation_date: May 27, 2025

@@ -1,0 +1,64 @@
+description: This report details a macOS infostealer, "AppleProcessHub," that leverages
+  a Mach-O binary and a second-stage bash script to exfiltrate user data such as keychain
+  passwords and cryptocurrency wallets. The malware downloads the stealer script from
+  appleprocesshub[.]com.
+attribution: Unknown (potentially Chinese)
+malware_families:
+- AppleProcessHub
+TTPs:
+  processes:
+  - libsystd.dylib
+  - /bin/sh
+  - NSTask
+  commandline:
+  - /bin/sh
+  - 'NSTask setLaunchPath: /bin/sh'
+  - 'NSTask setArguments: (arrayWithObjects)'
+  - NSTask launch
+  - NSTask waitUntilExit
+  powershell: ''
+  scripting_engine:
+  - bash
+  registry_keys: ''
+  image_load: ''
+  network_connections:
+  - executable: libsystd.dylib
+    destination_address: appleprocesshub[.]com
+    port: ''
+    url: https://www.appleprocesshub[.]com/v1/resource?id=VMHFpWG6QLIW
+  - executable: /bin/sh
+    destination_address: appleprocesshub[.]com
+    port: ''
+    url: https://www.appleprocesshub[.]com/v1/resource?id=VMHFpWG6QLIW
+  file_activity:
+  - /etc/hosts
+  - .ssh
+  - Login.keychain-db
+  - bash_history
+  - zsh_history
+  - gitconfig
+  - /Users/$USER/.bash_history
+  - /Users/$USER/.zsh_history
+  - /Users/$USER/.gitconfig
+  - /Users/$USER/.ssh
+  - /Users/$USER/Library/Keychains/Login.keychain-db
+  persistence:
+  - Bash history modification
+  - Zsh history modification
+  - Git configuration access
+  - SSH directory access
+  - Keychain database access
+  pipes: ''
+  process_relations: ''
+IOCs:
+- hash: 3f86c4cc956a6df5ddfad5d03334ece07e78351dec3ca62390f203f82675e00f
+  description: Mach-O SHA256 Hash
+- hash: 639e824e329c429a53d0e64f3a4f254131443a669da93a59a755fb7171d49745
+  description: Bash Script SHA256 Hash
+- domain: appleprocesshub[.]com
+- 'ioreg -1 | grep IOPlatformSerialNumber | awk -F ''{print $4}'' '
+authors:
+- Christopher Lopez
+reference: https://www.kandji.io/blog/macos-appleprocesshub-stealer
+date_of_publication: May 23, 2025
+file_creation_date: May 27, 2025

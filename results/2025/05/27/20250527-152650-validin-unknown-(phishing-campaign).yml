@@ -1,0 +1,92 @@
+description: A sophisticated phishing attack targeted Troy Hunt, resulting in the
+  compromise of his Mailchimp account and linking to the Scattered Spider (aka 0ktapus)
+  threat group.
+attribution: Scattered Spider (aka 0ktapus)
+malware_families:
+- Unknown (Phishing Campaign)
+TTPs:
+  processes:
+  - Cloudflare
+  - DE-FIRSTCOLO
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: Cloudflare
+    destination_address: 159.100.6[.]244
+    port: '80'
+  - executable: DE-FIRSTCOLO
+    destination_address: 159.100.6[.]244
+    port: '5000'
+  file_activity:
+  - path: mailchimp-sso[.]com
+  persistence:
+  - Description: Recent domain registration (2025-03-24T19:23:30Z)
+  pipes: []
+  process_relations: []
+IOCs:
+- hash: 2df5eb19ccad19134585f8d52e98ee40
+  type: Favicon Hash
+- hash: b636601725429ecab7622d147f928229da369a25b7d91b6533c4576aa529fe9e
+  type: Favicon Hash
+- ip_address: 159.100.6[.]244
+- domain: mailchimp-sso[.]com
+- domain: mailchimp-ssologin[.]com
+- domain: server9-mailgun[.]com
+- domain: sendgridssoservices[.]com
+- domain: loginportal-sendgrid[.]net
+- domain: murrez.duckdns[.]org
+- domain: server9-sendgrid[.]net
+- domain: hubservices-crm[.]com
+- domain: asset-hyperliquid[.]com
+- domain: liquitidy-pepe[.]com
+- domain: worldofmobile[.]top
+- domain: eigenlayer-assets[.]com
+- domain: falseadvertisinginposts[.]com
+- domain: swell-assets[.]com
+- domain: iiiuvium-io[.]com
+- ip_address: 176.65.141[.]197
+- ip_address: 159.100.20[.]154
+- ip_address: 31.172.83[.]147
+- domain: activisionsuport[.]com
+- domain: rseponse25-sendgrid[.]com
+- domain: response11-sendgrid[.]com
+- domain: response12-sendgrid[.]com
+- domain: response13-sendgrid[.]com
+- domain: response14-sendgrid[.]com
+- domain: response15-sendgrid[.]com
+- domain: response16-sendgrid[.]com
+- domain: hub-sendgrid[.]com
+- domain: cloudflare-sendgrid[.]com
+- domain: complete-sendgrid[.]com
+- domain: panel-sendgrid[.]com
+- domain: responsesendgrid[.]com
+- domain: rseponse-manageprod[.]com
+- domain: 74511-icloud[.]com
+- domain: route-icloud[.]com
+- domain: help-icloud[.]com
+- domain: access-icloud[.]com
+- domain: activity-icloud[.]com
+- domain: 13597-binance[.]com
+- domain: 185679-binance[.]com
+- domain: mywallet-cbupgrade[.]com
+- domain: smart-walletupgrade[.]com
+- domain: cb-smartupgrade[.]com
+- domain: 993248-google[.]com
+- domain: activity-google[.]com
+- domain: activity-apple[.]com
+- domain: gmailcare[.]com
+- domain: mysite-clflre[.]com
+- domain: 90210-coinbase[.]com
+- domain: 193141-gmail[.]com
+- domain: 534212-gmail[.]com
+- domain: 554672-gmail[.]com
+- domain: 7654783-gmail[.]com
+- domain: 185674-gmail[.]com
+authors:
+- Kenneth Kinion
+reference: https://www.validin.com/blog/pulling_threads_on_phishing_campaign/
+date_of_publication: March 28, 2025
+file_creation_date: May 27, 2025

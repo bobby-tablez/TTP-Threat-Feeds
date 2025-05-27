@@ -1,0 +1,76 @@
+description: The report details activity related to the "DefendNot" malware, observed
+  through Sysmon logs and other security events. It highlights process access, registry
+  modifications, scheduled task creation/updates, and Windows Security Center state
+  changes.
+attribution: Unknown (Attribution is implied via GitHub repository link https://github.com/es3n1n/defendnot)
+malware_families:
+- defendnot
+- DefendNot
+TTPs:
+  processes:
+  - cmd.exe
+  - Taskmgr.exe
+  - svchost.exe
+  - defender-loader.exe
+  - defendnot-loader.exe
+  - Centre.exe
+  - umic.exe
+  commandline:
+  - '"C:\\Windows\\system32\\cmd.exe"'
+  - defendnot-loader.exe
+  - C:\\Windows\\System32\\svchost.exe
+  - C:\\Users\\Administrator. CONDEF\\Desktop\\x64\\defendnot-loader.exe --from-autorun
+  - C:\\Users\\Public\\Downloads\\Centre.exe
+  - umic /namespace:\\\\root\\securitycenter2 path antivirusproductdisplayName instanceGuid
+    pathToSignedProductExe pathToSignedReportingExe productStatetimestampwindous Defender
+    {D68DDC3A-831F-4Fae-9E44-DA132C1ACFA6}  windowsdefender:// %ProgramFiles%\\Windows
+    Defender\\MsMpeng.exe 393472Wed, 21 May 2025 20:32:42 GHThttps://github.com/es3nin/defendnot
+    {9DFB1402-8385-FAAE-37A0-636DBAS552ED}  https://github.com/es3nin/defendnot C:\\Windows\\System32\\Taskmgr.exe
+    266240Wed, 21 May 2025 20:32:38 GMTC:\\Users\\loki . MARVEL \\Desktop\\x64>
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Security Center\\Provider\\Av\\{9DFB1402-8385-FAAE-37A0-636DB45552ED}\\PRODUCTEXE
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Security Center\\Provider\\Av\\{D68DDC3A-831F-4fae-9E44-DA132C1ACF46}
+  - HKLM\\SOFTWARE\\Microsoft\\Security Center\\Provider\\Av\\{9DFB1402-8385-FAAE-37A0-636DB45552ED\\PRODUCTEXEDetails
+  - HKLM\\SOFTWARE\\Microsoft\\Security Center\\Provider\\Av\\{9DFB1402-8385-FAAE-37A0-636DB45552EDA\\DISPLAYNAME
+  image_load:
+  - process: Taskmgr.exe
+    dll: defendnot.dll
+  network_connections: []
+  file_activity:
+  - C:\\Users\\loki. MARVEL\\Desktop\\x64\\defendnot-loader.exe
+  - C:\\Users\\loki. MARVEL\\Desktop\\x 64\\ ctx.bin
+  - C:\\Windows\\System32\\Taskmgr.exe
+  - C:\\Windows\\System32\\svchost.exe
+  - C:\\Users\\Public\\Downloads\\Centre.exe
+  persistence:
+  - Autorun registry entries to reactivate the malicious security product following
+    system restarts.
+  - Scheduled Task Creation/Update (\\defendnotTask)
+  pipes: []
+  process_relations:
+  - defendnot-loader.exe -> Taskmgr.exe (injection)
+  - defendnot-loader.exe -> Taskmgr.exe
+  - svchost.exe -> Registry Modification
+IOCs:
+- hash: SHA1=82C2176532C73DBCAD449CA4B3EC30038D4DTIAF
+- hash: MD5=DB7827408CE156CEAEG48FA6DIDE5EGS
+- hash: SHA256=8764EFCCAC02505934D96BGEDIBBA3T61C140081E923FDEAT341D9928828FB64
+- hash: IMPHASH=7TEC4023C85149450AB388F0837192FED
+- url: https://github.com/es3n1n/defendnot
+- file: C:\\Windows\\System32\\Taskmgr.exe
+- file: C:\\Users\\loki. MARVEL\\Desktop\\x64\\defendnot-loader.exe
+- https://github.com/es3n1n/defendnot
+- C:\\Users\\Administrator. CONDEF\\Desktop\\x64\\defendnot-loader.exe
+- \\defendnotTask
+- S-1-5-18
+authors:
+- Andrew Schwartz
+- Matt Anderson
+- Tyler Bohlmann
+- Anton Ovrutsky
+- Greg Ake
+reference: https://www.huntress.com/blog/defendnot-detecting-malicious-security-product-bypass-techniques
+date_of_publication: May 27, 2025
+file_creation_date: May 27, 2025

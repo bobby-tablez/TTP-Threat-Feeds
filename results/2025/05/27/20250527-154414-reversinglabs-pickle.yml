@@ -1,0 +1,47 @@
+description: Three newly uploaded malicious packages on PyPI posing as a Python SDK
+  for interacting with Aliyun AI Labs services contain an infostealer payload hidden
+  inside a PyTorch model. The package delivers reconnaissance information to an attacker-controlled
+  server.
+attribution: Unknown
+malware_families:
+- Pickle
+- PyTorch
+TTPs:
+  processes:
+  - python.exe
+  - whoami.exe
+  - defaults.exe
+  - ipconfig.exe
+  - which.exe
+  - ifconfig
+  commandline:
+  - python.exe -m __main__: null
+  - whoami /all
+  - defaults read alibaba.alimeeting _utmc_lui_
+  - ipconfig /all
+  - which ip
+  - ifconfig
+  powershell: ''
+  scripting_engine: ''
+  registry_keys:
+  - ali baba.alimeeting _utmc_lui_
+  image_load: ''
+  network_connections:
+  - python.exe:
+    - destination: aksjdbajkb2jeblad.oss-cn-hongkong.aliyuncs.con/aksahlksd/
+    - port: ''
+  file_activity:
+  - C:\\Users\\Public\\.gitconfig
+  - /tmp/.gitconfig
+  persistence:
+  - Loaded from the __init__.py script upon installation.
+  pipes: ''
+  process_relations: ''
+IOCs:
+- aliyun-ai-labs-sdk 1.0.0
+- https://aksjdbajkb2jeblad.oss-cn-hongkong.aliyuncs.con/aksahlksd/
+authors:
+- Karlo Zanki
+reference: https://www.reversinglabs.com/blog/malicious-attack-method-on-hosted-ml-models-now-targets-pypi
+date_of_publication: May 23, 2025
+file_creation_date: May 27, 2025

@@ -1,0 +1,39 @@
+description: A targeted intrusion involving a critical market research company, likely
+  conducted by state-aligned espionage actors using living-off-the-land techniques.
+attribution: State-aligned espionage actors
+malware_families:
+- Mesh Agent
+authors:
+- Craig Sweeney
+TTPs:
+  processes:
+  - cmd.exe
+  - reg.exe
+  - service.exe
+  - web.exe
+  commandline:
+  - cmd.exe /Q /c dir c:\\temp\\1.bat 1> \\\\127.0.0.1\\ADMIN$\\______.______ 2>&1
+  - cmd.exe /Q /c c:\\temp\\1.bat 1> \\\\127.0.0.1\\ADMIN$\\_______._______ 2>&1
+  - reg add HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\WDigest /v
+    UseLogonCredential /t REG_DWORD /d 1 /f
+  - cmd.exe /c c:\\temp\\1.bat
+  registry_keys:
+  - HKLM\\System\\CurrentControlSet\\Control\\Lsa
+  - HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\WDigest
+  network_connections:
+  - executable: web.exe
+    destination_address: 127.0.0.1
+    port: ''
+  file_activity:
+  - c:\\temp\\1.bat
+  - C:\\Users\\Default\\AppData\\Local\\Temp\\service.exe
+  - C:\\Users\\Default\\AppData\\Local\\Temp\\web.exe
+  persistence:
+  - Created a service titled WebrootCheck with a Service File Name (command for the
+    service) of cmd.exe /c c:\\temp\\1.bat.
+IOCs:
+- 127.0.0.1
+- Kaopu Cloud HK Limited (AS138915)
+reference: https://www.huntress.com/blog/advanced-intrusion-targeting-executive-at-critical-marketing-research-company
+date_of_publication: May 27, 2025
+file_creation_date: May 27, 2025

@@ -1,0 +1,45 @@
+description: This report details a new backdoor malware utilizing the PyBitmessage
+  library for P2P communication and encryption to evade detection, distributed alongside
+  a Monero coin miner.
+attribution: Likely Russia or Russian-speaking country
+malware_families:
+- PyBitmessage Backdoor
+- Monero CoinMiner
+TTPs:
+  processes:
+  - WinRing0x64.sys
+  - idle_maintenance.exe
+  - python.exe
+  - powershell.exe
+  commandline:
+  - C:\\Users\\Public\\%Temp%\\3048491484896530841649\\idle_maintenance.exe
+  - python.exe -m http.server 8442
+  powershell:
+  - '# PowerShell script received from the threat actor and executed by the backdoor
+
+    (Content of the PowerShell script is not provided in the report)
+
+    '
+  registry_keys:
+  - '%TEMP%\\3048491484896530841649'
+  file_activity:
+  - '%Temp%\\3048491484896530841649\\config.json'
+  - '%Temp%\\3048491484896530841649\\WinRing0x64.sys'
+  - '%Temp%\\3048491484896530841649\\idle_maintenance.exe'
+  - '%TEMP%\\_MEI~~\\QtGui4.dll'
+  - '%TEMP%\\_MEI~~\\.pyc'
+  - '%TEMP%\\_MEI~~\\.pyd'
+  - '%.\\s\\'
+  persistence:
+  - The report does not provide specific details on persistence mechanisms.
+  pipes:
+  - No named pipes were mentioned in the report.
+  process_relations:
+  - Monero CoinMiner -> idle_maintenance.exe
+  - Backdoor -> python.exe (PyBitmessage)
+  - Backdoor -> powershell.exe (Execution of received script)
+IOCs:
+- spcs.bio
+reference: https://asec.ahnlab.com/en/88109/
+date_of_publication: May 20, 2025
+file_creation_date: May 27, 2025

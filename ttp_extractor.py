@@ -45,17 +45,18 @@ Extract the following information from this cyber threat report:
   - persistence: description in a list sub keys persistence methods used
   - pipes: list of any named pipes
   - process_relations: process trees based on your analysis
-- IOCs: list all indicators of compromise. These can include hashes, IPs, domains and URLs)
-- authors: List each author who contributed to the report.
+- IOCs: List all indicators of compromise. These can include hashes, IPs, domains and URLs) 
+- authors: List the name of each author who contributed to the report.
 
 Additional critical requirements:
-Do not make up information. Do not provide summaries to TTPs. Only return relevant technical data that is explicitly present in the report. if no TTPs, ignore.
-If the publication contains little useful data, lots of empty fields are acceptable
-Be very detailed (e.g: include ALL and FULL command line arguements).
-Never truncate outputs (e.g: ...), include full command line and URLs.
-Provide only technical data, for example, don't describe TTPs, IOCs and URLs. Only provide raw data where appropriate.
-For any key or subkey that contains no data, do not include the key or subkey in the YAML.
-Prefer the use of single quotes for YAML syntax over double quotes.
+- Do not make up information. Do not provide summaries to TTPs. Only return relevant technical data that is explicitly present in the report. if no TTPs, ignore.
+- No example scripts or data in YAML.
+- If the publication contains little useful data, lots of empty fields are acceptable.
+- Be very detailed (e.g: include ALL and FULL command line arguements).
+- Never truncate outputs (e.g: ...), include full command line and URLs.
+- Provide only technical data, for example, don't describe TTPs, IOCs and URLs. Only provide raw data where appropriate.
+- For any key or subkey that contains no data, do not include the key or subkey in the YAML.
+- Prefer the use of single quotes for YAML syntax over double quotes.
 
 Context:
 {text}
@@ -378,7 +379,7 @@ def split_text_into_chunks(text, chunk_size=25000, overlap=1500):  # ≈ 8k–9k
     return chunks
 
 def main():
-    MAX_ARTICLES_PER_SOURCE = 3
+    MAX_ARTICLES_PER_SOURCE = 5
     cached = read_cached_urls()
     with open(URLS_FILE, "r") as f:
         base_urls = [u.strip() for u in f if u.strip()]

@@ -1,0 +1,105 @@
+description: 'Between July 2024 and November 2024, Darktrace observed a cluster of
+  activity threads sharing notable similarities. The threads began with a malicious
+  actor using compromised user credentials to log in to the target organization''s
+  Check Point Remote Access virtual private network (VPN) from an attacker-controlled
+  device. A later data theft thread occurred within one of these organizations networks
+  several months after the ShadowPad intrusion.
+
+  '
+attribution:
+- APT41 (China-based threat actor)
+- "DPRK (Democratic People\u2019s Republic of Korea)"
+malware_families:
+- ShadowPad
+- Nailaolocker
+TTPs:
+  processes:
+  - Check Point Security Gateway
+  - RDP
+  - SMB
+  commandline:
+  - powershell.exe -EncodedCommand <encoded command>
+  - wscript.exe
+  - cmd.exe /c ProgramData\Oracle\Java\wksprt.exe
+  - cmd.exe /c ProgramData\Adobe\ARM\webservices.dll
+  - cmd.exe /c ProgramData\Oracle\Java\webservices.dll
+  - cmd.exe /c ProgramData\Microsoft\DRM\wksprt.exe
+  - cmd.exe /c ProgramData\Microsoft\DRM\webservices.dll
+  - cmd.exe /c ProgramData\Abletech\Client\webservices.dll
+  - cmd.exe /c ProgramData\Abletech\Client\client.exe
+  - cmd.exe /c ProgramData\Adobe\ARM\rzrmxrwfvp
+  - cmd.exe /c ProgramData\3Dconnexion\3DxWare\3DxWare.exe
+  - cmd.exe /c ProgramData\3Dconnexion\3DxWare\webservices.dll
+  - cmd.exe /c ProgramData\IDMComp\UltraCompare\updater.exe
+  - cmd.exe /c ProgramData\IDMComp\UltraCompare\webservices.dll
+  - cmd.exe /c ProgramData\IDMComp\UltraCompare\imtrqjsaqmm
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - C:\\PerfLogs\\a
+  image_load: []
+  network_connections:
+  - executable: ShadowPad
+    destination_address: 158.247.199[.]185 (dscriy.chtq[.]net)
+    port: ''
+    url: https
+  - executable: ShadowPad
+    destination_address: acybaq.chtq[.]net
+    port: ''
+    url: ''
+  file_activity:
+  - C:\PerfLogs\a
+  - c$ share on another internal system
+  - ProgramData\Oracle\java.log
+  - ProgramData\Oracle\duxwfnfo
+  - ProgramData\Adobe\ARM\webservices.dll
+  - ProgramData\Adobe\ARM\wksprt.exe
+  - ProgramData\Oracle\Java\wksprt.exe
+  - ProgramData\Oracle\Java\webservices.dll
+  - ProgramData\Microsoft\DRM\wksprt.exe
+  - ProgramData\Microsoft\DRM\webservices.dll
+  - ProgramData\Abletech\Client\webservices.dll
+  - ProgramData\Abletech\Client\client.exe
+  - ProgramData\Adobe\ARM\rzrmxrwfvp
+  - ProgramData\3Dconnexion\3DxWare\3DxWare.exe
+  - ProgramData\3Dconnexion\3DxWare\webservices.dll
+  - ProgramData\IDMComp\UltraCompare\updater.exe
+  - ProgramData\IDMComp\UltraCompare\webservices.dll
+  - ProgramData\IDMComp\UltraCompare\imtrqjsaqmm
+  persistence:
+  - Abuse of Microsoft RPC (MS-RPC) service, WMI to execute distributed payloads.
+  pipes: []
+  process_relations: []
+IOCs:
+- IP Address: 194.5.83[.]25 (ExpressVPN)
+- IP Address: 158.247.199[.]185 (dscriy.chtq[.]net)
+- Domain: acybaq.chtq[.]net
+- Domain: dscriy.chtq[.]net
+- Domain: yasuconsulting[.]com (45.158.12[.]7)
+- Domain: hobivan[.]net (94.73.151[.]72)
+- Domain: mediostresbarbas.com[.]ar (75.102.23[.]3)
+- Domain: mnmathleague[.]org (185.148.129[.]24)
+- Domain: goldenborek[.]com (94.138.200[.]40)
+- Domain: tunemmuhendislik[.]com (94.199.206[.]45)
+- Domain: anvil.org[.]ph (67.209.121[.]137)
+- Domain: partnerls[.]pl (5.187.53[.]50)
+- Domain: angoramedikal[.]com (89.19.29[.]128)
+- Domain: awork-designs[.]dk (78.46.20[.]225)
+- Domain: digitweco[.]com (38.54.95[.]190)
+- Domain: duepunti-studio[.]it (89.46.106[.]61)
+- Domain: scgestor.com[.]br (108.181.92[.]71)
+- Domain: lacapannadelsilenzio[.]it (86.107.36[.]15)
+- Domain: lovetamagotchith[.]com (203.170.190[.]137)
+- Domain: lieta[.]it (78.46.146[.]147)
+- File Name: perflogs\\1.txt
+- File Name: perflogs\\AppLaunch.exe
+- File Name: perflogs\\F4A3E8BE.tmp
+- File Name: perflogs\\mscoree.dll
+authors:
+- Sam Lister (R&D Detection Analyst)
+- Emma Foulger (Principal Cyber Analyst)
+- Nathaniel Jones (VP)
+- Darktrace Threat Research team
+reference: https://www.darktrace.com/blog/darktrace-detection-of-state-linked-shadowpad-malware
+date_of_publication: March 12, 2025
+file_creation_date: May 27, 2025

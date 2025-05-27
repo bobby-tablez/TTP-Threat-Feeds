@@ -1,0 +1,92 @@
+description: Targeted misinformation and propaganda campaigns are actively circulating
+  across social media platforms, online forums, and unofficial news outlets, aimed
+  at manipulating narratives and influencing public sentiment in the region.
+attribution: Bangladesh Armed Forces personnel and affiliated institutions
+malware_families:
+- TapiUnattend.exe
+- udscore.dll
+TTPs:
+  processes:
+  - explorer.exe
+  commandline:
+  - C:\\Windows\\System32\\TapiUnattend.exe
+  - C:\\Users\\Steven\\AppData\\Roaming\\Gapic\\Gapic.exe
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: explorer.exe
+    destination_address: advisory.army-govbd.info
+    port: ''
+    url: http://advisory.army-govbd.info/
+  - executable: TapiUnattend.exe
+    destination_address: ''
+    port: ''
+    url: ''
+  file_activity:
+  - C:\\Users\\Steven\\AppData\\Roaming\\Gapic\\TapiUnattend.exe
+  - C:\\Users\\Steven\\AppData\\Roaming\\Gapic\\Gapic.exe
+  - C:\\Windows\\System32\\udscore.dll
+  persistence:
+  - Registry modification (implied by TapiUnattend.exe usage)
+  pipes: []
+  process_relations: []
+IOCs:
+- hash: 725ded50e7f517addd12f029aeaf9a23f2b9ce6239b98820c8a12ea5cb79dbfa
+- hash: 57b9744b30903c7741e9966882815e1467be1115cbd6798ad4bfb3d334d3523d
+- hash: 558de2a01fbd76be171561c3c82fd6a8e2d4c913444850af99d44a4cfb41b680
+- hash: f464ad5c6aba13b42aa903bda0add7c074d45388da379747c83f2c3756c9b658
+- hash: 63f5445527c47e17b71e87eef4dd7a86883607a22830bcee5b1fabc5d03bab38
+- hash: 65c9e15d9b916b193ce1d96bb99c1c1f3ade0273270b56cf6e476a21b31a3491
+- hash: 7363887b6b0fe7cece3c21ad18515835922379c7d78c47cea745940a1061a6c4
+- hash: 40712a087a8280425f1b317e34e265c0329ffb0057be298d519fc5e0af6cb58f
+- hash: 69eee36642f274c724fadcfdf1f103ae0fd9b5f4bad7ac6a33b3c627d6114426
+- hash: 2d92d24b3abed7acac165b002bd5922f8f17b6e4944e658938fe022902fe6a7e
+- hash: 663a7b509db86ca498af57cc458139a76ee07c60d413d60a98921c7e901e0e3d
+- hash: 5ec639facb2cb9503059d519790279f1b9f510d8d63a2a2c44637b1d1dd1e538
+- hash: 0a7fce4e7456ecb12c95d28b6b4d263d9ca23a1de1e298234a904a319be6e708
+- hash: 00877fcfb31fdc23ca6987e569090f761ed414bdee0546bdbd3ce3acc44cc293
+- hash: 8d00c97d16e3733feee6b1bc6bd77b8423e0b79a812db55880f5b2d751a4bd47
+- hash: dc7066d972367f15c9b6e2e36a5c643ab87deed958cc27ac0fbf0ff1f4535a99
+- hash: 8dd189e390b168bff6caa82d5077f4eda8902c251fe0a0120aa42bd78e56f9bc
+- hash: 46785f7e5cd2966d30167cbd496333a5dd871b19e6a2833ab1a4157fc35e8ee5
+- hash: ac13697c19cf0b6767442fc001ca48d0d9e3c9340549d3e73539ea299e27015e
+- hash: 32e2d29143f57335c6477dc764350fed13b7e3873fb06491d9863a95b8921e92
+- hash: ffebc5f8fc3a0346f9767c64b5b040d7679e1d3726024e59fe134825e31c8b8c
+- hash: 208c335a3cccbdba6b1ec0c76ad3b751c6409712e493c24e2532a389d887e0af
+- hash: a90fd0e3d3be14b92b3dc809ddea9a0cc377b130ebb4c48a8891e4832a85c412
+- hash: fa5a3e215e4970b0c39b6bbfb9425aa6ee4a8bc1359d85f7052d99e663aee333
+- hash: bb9acc2d23afee3265b81326ce65cfddde3fc04648d3ba2d2ea22ec0e3d8f90e
+- hash: 5b5a1833d4daaf05699a009316a4d866851130b258f424f066b867a534ba944d
+- hash: 9b76d98c2641512c66e8f2f99b2d0bda86ec1a4809420b74feadfb8f4f7dbf48
+- hash: fb4695b45ac62e10f29e9a45c4190dce2fe6af71a96a2bd66e08c1a99416cc7e
+- hash: 677b4d9efcfcae9cbbd39b2b2cdc0df69d4a55460814747f60f35ea2e81dad2e
+- hash: 2be8ca1e2415b5ca1605977b2ff10ff9aef06e3be7eb39496bb18d3ba7772901
+- hash: 1c68ca3ede75946568bb00c39b7054cb2ae4fcbe2805061e38ed15f4d526262c
+- hash: 9700f9b614aa87c6137c4325951e59258cdb87f02df7a5ed4f4accea279ede26
+- hash: 74111c9b0ed748fc6bfc025d13a2ed08663b988cb69c044f1c6f153f9020294c
+- hash: a61335c10cf98064761806af6451b3cddd66641ccb35a6d8b915a02d6279f46a
+- hash: 1527cf10f00c798262b3347c00af8028fee3bc88a450bc2df7766b1118c62cd5
+- hash: 5891f4dfa47d5b268c5d82366c312ecda715da91e148afa6064f3058f3c5a69b
+- hash: e33e74e3925bc3f287ef817a186807a38d411524984a5d0930939646022206b0
+- hash: 1321fc1eefc3d3f5aae16a81ac139a31beaf2355935d94210abf69253d29b486
+- hash: 96d429d67a2663ef2cf3f45ccd0619adf0cd030f7fe70f072af1ce1d67ec52a3
+- hash: 22527dd1a62dc46dd4edd23a681657cf4c3477e9f90fb1ef63ef657608b9838c
+- hash: fb50c60c237ea00f29e4876b326f5f8e872f5ad6d1ca7c9925d9b901e573f788
+- hash: de54f8933ff81f93652ab824e8f9e60197135e1064f0ca4ca99df833a7a94e9d
+- hash: 47d77499968244911d0179fb858578de00dbb98079e33f5ed5d229d03eb04d67
+- hash: ffd26019b21da5833caf2b6974cbc9ce79d911653cdfbb6e59a8ac7d4cc80f51
+- hash: 15cf5271c7b9b8ad22c4c96bc8674d9835e8d419fc1a6077f3b59fbd7e59d112
+- hash: 54c4641f709e51622531dc3d04fd2f4a3bad2a42dca287e2777c04d59cbca789
+- hash: d3fb61c0211bd379bf80f15cf072fdbc1187fe95546fdfcfcbdf8918004f05e2
+- hash: 35cc327806ae0d760b94a5b3daedea9cdcb2ed0854a484c8ec3cded195e75037
+- hash: 896ddb35cde29b51ec5cf0da0197605d5fd754c1f9f45e97d40cd287fb5a2d25
+- ip: ''
+- domain: advisory.army-govbd.info
+- url: http://advisory.army-govbd.info/
+authors:
+- Santiago Pontiroli
+- Jozsef Gegeny
+- Prakas Thevendaran
+reference: https://www.acronis.com/en-us/cyber-protection-center/posts/from-banks-to-battalions-sidewinders-attacks-on-south-asias-public-sector/
+date_of_publication: May 13, 2025
+file_creation_date: May 27, 2025

@@ -1,0 +1,54 @@
+description: The report analyzes how threat actors utilize DB client tools (DBeaver,
+  Navicat, sqlcmd) to access and exfiltrate data from breached systems, focusing on
+  system logs, local records, and SQL server execution logs.
+attribution: Unknown
+malware_families:
+- DBeaver
+- Navicat
+- sqlcmd
+TTPs:
+  processes:
+  - dbeaver.exe
+  - navicat.exe
+  - sqlcmd.exe
+  - cmd.exe
+  commandline:
+  - C:\\Program Files\\DBeaver\\dbeaver.exe
+  - C:\\Program Files (x86)\\Navicat Premium 17\\Navicat.exe
+  - sqlcmd.exe
+  - cmd.exe /c "sqlcmd -S <Server Name> -U <Username> -P <Password> -d <DB Name> -Q
+    \"SELECT * FROM Users\" > C:\\Users\\Administrator\\Documents\\Navicat\\SQL Server\\Servers\\<Server
+    Name>\\<DB Name>\\<Schema Name>\\<File Name>.dat"
+  powershell: ''
+  scripting_engine: ''
+  registry_keys:
+  - HKEY_CURRENT_USER\\Software\\DBeaverData\\workspace<Version>
+  - HKEY_CURRENT_USER\\Documents\\Navicat\\SQL Server\\Servers
+  image_load: ''
+  network_connections: ''
+  file_activity:
+  - C:\\Users\\<Username>\\AppData\\Roaming\\DBeaverData\\workspace<Version>\\.metadata\\dbeaver-debug.log
+  - C:\\Users\\<Username>\\AppData\\Roaming\\DBeaverData\\workspace<Version>\\.metadata\\.log
+  - C:\\Users\\Administrator\\Documents\\Navicat\\SQL Server\\Servers\\<Server Name>\\<DB
+    Name>\\<Schema Name>\\<File Name>.nexptmssql
+  - . /home/your_username/.config/navicat/Premium/Logs/LogExport.txt
+  - C:\\Program Files\\Microsoft SQL Server\\MSSQLXX.<InstanceName>\\MSSQL\\Log\\ERRORLOG.*
+  - C:\\Program Files\\Microsoft SQL Server\\MSSQLXX.<InstanceName>\\MSSQL\\Log\\log_*.trc
+  - C:\\Users\\Administrator\\Documents\\Navicat\\SQL Server\\Servers\\<Server Name>\\<DB
+    Name>\\<Schema Name>\\<File Name>.dat
+  persistence:
+  - Installation of DB client tools (DBeaver, Navicat) on targeted systems.
+  pipes: ''
+  process_relations: ''
+IOCs:
+- dbeaver-debug.log
+- .log
+- .nexptmssql
+- LogExport.txt
+- ERRORLOG.*
+- log_*.trc
+authors:
+- AhnLab
+reference: https://asec.ahnlab.com/en/88134/
+date_of_publication: May 21, 2025
+file_creation_date: May 27, 2025

@@ -1,0 +1,52 @@
+description: The report details an investigation starting from malware analysis linked
+  to Mustang Panda/Red Delta, revealing potential operational overlaps between Red
+  Delta and APT41 through infrastructure pivoting.
+attribution: Mustang Panda / Red Delta (China-based), APT41
+malware_families:
+- PlugX
+TTPs:
+  processes:
+  - nginx
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: nginx
+    destination_address: 139.180.192[.]163
+    port: '443'
+  - executable: nginx
+    destination_address: 139.180.192[.]163
+    port: '8088'
+  file_activity: []
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- ip: 139.180.192[.]163
+- domain: jpkinki[.]com
+- banner_hash: 97dc22b3d6a00ef55d774041bc3b615f139.180.192[.]163 - AS 2047345
+- banner_hash: e30fb7845d2cda285b40e57001cfdb71139.180.192[.]163 - AS 2047345
+- jarm: 07d0bd16d21d21d07c07d0bd07d21dd7fc4c7c6ef19b77a4ca0787979cdc13
+- ip: 45.76.132[.]25
+- header_hash: d7001d5eaca56712100c
+- ip: 166.88.117[.]111
+- ip: 103.79.120[.]67
+- ip: 103.79.120[.]70
+- ip: 45.195.69[.]111
+- ip: 103.79.120[.]74
+- ip: 223.26.52[.]245
+- ip: 146.66.215[.]191
+- ip: 103.79.120[.]71
+- ip: 103.79.120[.]85
+- ip: 96.43.101[.]248
+- ip: 103.79.120[.]69
+- header_hash: 74003aa800b6e7effc1c
+- jarm: 2ad2ad0002ad2ad00042d42d00000000f78d2dc0ce6e5bbc5b8149a4872356
+- jarm: 2ad2ad0002ad2ad22c2ad2ad2ad2ad703dc1bf20eb9604decefea997eabff7
+authors:
+- Vasilis Orlof
+reference: https://www.validin.com/blog/hunting_pandas/
+date_of_publication: April 04, 2025
+file_creation_date: May 27, 2025
