@@ -1,0 +1,79 @@
+description: SentinelLABS has observed a campaign targeting opposition activists in
+  Belarus as well as Ukrainian military and government organizations. The campaign
+  has been in preparation since July-August 2024 and entered the active phase in November-December
+  2024.
+attribution: Belarusian government espionage efforts, UNC1151 (Mandiant), UAC-0057
+  (CERT-UA)
+malware_families:
+- Bruhdli32.dll
+TTPs:
+  processes:
+  - regsvr32.exe
+  - rundll32.exe
+  - MSBuild.exe
+  - cmd.exe
+  - excel.exe
+  - Certificate.exe
+  commandline:
+  - C:\\Windows\\System32\\regsvr32.exe /u /s "C:\\Temp\\Realtek(r)Audio.dll"
+  - rundll32.exe C:\\Users\\\\AppData\\Roaming\\Microsoft\\SystemCertificates\\CertificateCenter.dll,#1
+  - C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\MSBuild.exe %AppData%\\Roaming\\Microsoft\\SystemCertificates\\config
+  - rundll32.exe %AppData%\\Roaming\\Microsoft\\bruhdli32.dll,HelloWorld
+  - excel.exe
+  - MSBuild.exe %AppData%\\Roaming\\Microsoft\\SystemCertificates\\config
+  - Certificate.exe
+  powershell: null
+  scripting_engine: null
+  registry_keys:
+  - HKCU\\System\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Microsoft Certificate
+    Center
+  - '%APPDATA%|Roaming|Microsoft\\bruhdli32.dll'
+  - '%APPDATA%\\Roaming\\Microsoft\\SystemCertificates\\config'
+  - C:\\Windows|Microsoft. NET\\Framework|v4.0.30319|MSBuild.exe
+  image_load: null
+  network_connections: null
+  file_activity:
+  - '%Temp%\\Realtek(r)Audio.dll'
+  - '%AppData%\\Roaming\\Microsoft\\temp.xlsx'
+  - C:\\Users\\\\AppData\\Roaming\\Microsoft\\SystemCertificates\\CertificateCenter.dll
+  - '%APPDATA%\\Roaming\\Microsoft\\SystemCertificates\\Bin\\Certificate.exe'
+  - '%APPDATA%\\Roaming\\Microsoft\\SystemCertificates\\config'
+  - '%AppData%|Roaming|Microsoft\\bruhdli32.dll'
+  - 3pa3ok.x/s
+  - LibCMD.dIII
+  - '%APPDATA%\\Roaming\\Microsoft\\temp.xIsx'
+  - '%APPDATA%|Roaming|\\Microsoft|SystemCertificates|CertificateCenter.dll'
+  - C:\\Windows|Microsoft. NET\\Framework|v4.0.30319|MSBuild.exe
+  - '%AppData%\\Roaming\\Microsoft\\SystemCertificates\\Output\\Certificate.exe'
+  persistence:
+  - 'Registry Run key: HKCU\\System\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Microsoft
+    Certificate Center with value pointing to expanded environment variable string:rundll32.exe
+    C:\\Users\\\\AppData\\Roaming\\Microsoft\\SystemCertificates\\CertificateCenter.dll,#1'
+  - Dropper XLS deployed to %AppData%|Roaming|Microsoft\\bruhdli32.dll
+  pipes: null
+  process_relations:
+  - Excel.exe launches rundll32.exe, which loads Bruhdli32.dll.
+  - MSBuild.exe is used to build Certificate.exe.
+  - Certificate.exe is executed after the certificate is built.
+IOCs:
+- ebb30fd99c2e6cbae392c337df5876759e53730d
+- 18bcc91ad3eed529d44926f4ae65acf44480f39d64fca582cb69d9dc2afb1b432df58fb32ac18ca17261ad5d4e760aa88df94b734bc44598a090852a9fa00a4ee4e95bc50a3919d2d3c0be2a567d8845e5ebc7deca1ff1f0a4b1462d37ef813dad8413a6
+- vladimir.nikiforeach@gmail[.]com
+- https://everythingandthedog[.]shop/petsblog/2020/2/25/tips-for-taking-difficult-dogs-on-a-walk.jpg
+- 8d2bb96e69df059f279d97989690ce3e556a8318
+- https://sciencealert[.]shop/images/2024/11/black-hole-coronaxx.jpg
+- 52e894acf0e14d27f8997d2174c1f40d6d87bba9
+- https://cookingwithbooks[.]shop/images/qwerty.jpg
+- pigglywigglystores[.]shop/wp-content/themes/fp-wp-j-piggly-wiggly-nc/resources/images/logo/logo.png
+- 'File Path: %AppData%|Roaming|Microsoft\\bruhdli32.dll'
+- 'File Name: 3pa3ok.x/s'
+- 'File Name: LibCMD.dIII'
+- 'File Path: %APPDATA%\\Roaming\\Microsoft\\temp.xIsx'
+- 'File Path: %APPDATA%\\Roaming\\Microsoft\\SystemCertificates\\config'
+- 'File Path: C:\\Windows|Microsoft. NET\\Framework|v4.0.30319|MSBuild.exe'
+- 'File Path: %AppData%\\Roaming\\Microsoft\\SystemCertificates\\Output\\Certificate.exe'
+authors:
+- Tom Hegel
+reference: https://www.sentinelone.com/labs/ghostwriter-new-campaign-targets-ukrainian-government-and-belarusian-opposition/
+date_of_publication: February 25, 2025
+file_creation_date: May 29, 2025
