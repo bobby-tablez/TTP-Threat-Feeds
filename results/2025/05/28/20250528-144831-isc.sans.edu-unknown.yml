@@ -1,0 +1,56 @@
+description: This report details an attack observed on a DShield honeypot instance,
+  originating from IP address 63[.]212[.]157[.]187. The attacker executed various
+  commands to gather system information and potentially target Telegram session data
+  for SMS hijacking.
+attribution: Unknown (Attribution based on AbuseIPDB report)
+TTPs:
+  processes:
+  - ifconfig
+  - uname
+  - cat
+  - ps
+  - ls
+  - locate
+  - echo
+  commandline:
+  - ifconfig
+  - uname -a
+  - cat /proc/cpuinfo
+  - ps | grep [Mm]iner
+  - ps -ef | grep [Mm]iner
+  - ls -la ~/.local/share/TelegramDesktop/tdata /home/*/.local/share/TelegramDesktop/tdata
+    /dev/ttyGSM* /dev/ttyUSB-mod* /var/spool/sms/* /var/log/smsd.log /etc/smsd.conf*
+    /usr/bin/qmuxd /var/qmux_connect_socket /etc/config/simman /dev/modem* /var/config/sms/*
+  - locate D877F783D5D3EF8Cs
+  - echo Hi | cat -n
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - ~/.local/share/TelegramDesktop/tdata
+  - /home/*/.local/share/TelegramDesktop/tdata
+  - /dev/ttyGSM*
+  - /dev/ttyUSB-mod*
+  - /var/spool/sms/*
+  - /var/log/smsd.log
+  - /etc/smsd.conf*
+  - /usr/bin/qmuxd
+  - /var/qmux_connect_socket
+  - /etc/config/simman
+  - /dev/modem*
+  - /var/config/sms/*
+  persistence:
+  - The attacker may be attempting to establish persistence by targeting Telegram
+    session data and SMS gateway infrastructure.
+  pipes: []
+  process_relations: []
+IOCs:
+- 63.212.157.187
+- D877F783D5D3EF8Cs
+authors:
+- Jennifer Wilson
+reference: https://isc.sans.edu/diary/Guest+Diary+Exploring+a+Use+Case+of+Artificial+Intelligence+Assistance+with+Understanding+an+Attack/31980/#comments
+date_of_publication: May 28, 2025
+file_creation_date: May 28, 2025

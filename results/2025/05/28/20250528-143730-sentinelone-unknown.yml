@@ -1,0 +1,302 @@
+description: FreeDrain is a persistent phishing campaign leveraging free-tier platforms
+  to host lure pages that redirect victims to credential-harvesting sites. The campaign
+  utilizes SEO manipulation and adapts rapidly to infrastructure takedowns.
+attribution: Unknown (likely based in the UTC+05:30 timezone)
+malware_families:
+- Unknown
+authors:
+- Tom Hegel
+- Kenneth Kinion (Validin)
+- Sreekar Madabushi (Validin)
+TTPs:
+  processes:
+  - chrome.exe
+  - msedge.exe
+  commandline:
+  - C:\Program Files\Google\Chrome\Application\chrome.exe --new-window https://metamaskchromextan.gitbook\\.io/us
+  - C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --new-window https://suprt-ios-trzorhard.gitbook\\.io/en-us
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: chrome.exe
+    destination_address: metamaskchromextan.gitbook\\.io
+    port: ''
+  - executable: msedge.exe
+    destination_address: suprt-ios-trzorhard.gitbook\\.io
+    port: ''
+  file_activity:
+  - https://dft0-hjgkd26-fkj.s3.us-east-1.amazonaws[.]com/index.html
+  - https://atomicwallet.azurewebsites[.]net/
+  - https://bietbutylogn.azurewebsites[.]net/
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- https://metamaskchromextan.gitbook\\.io/us
+- https://suprt-ios-trzorhard.gitbook\\.io/en-us
+- https://bridge-tziuur.gitbook\\.io/en-us
+- https://auth-ledger-com-cdn.webflow\\.io/
+- https://startleddger-cdn-auth.webflow\\.io/
+- https://helpledgre-auth-us.webflow\\.io/
+- https://home-trezsor-start.gitbook\\.io/en-us
+- https://wlt-phantom-wlt.webflow\\.io/
+- https://bridge-cen-trezseer.gitbook\\.io/en-us
+- https://ledgerauth-wellat.webflow\\.io/
+- https://ledgerivwaselet-us.webflow\\.io/
+- https://extentrust.gitbook\\.io/en-us
+- https://truststextion.gitbook\\.io/us
+- https://apps-supportmettmask.gitbook\\.io/us
+- https://cobo-wallet-digital-cdm.webflow\\.io/
+- https://extensionmetaamsk-info.gitbook\\.io/us
+- https://bridge-docstrzc.gitbook\\.io/en-us
+- https://suite-trezoreio.gitbook\\.io/us
+- https://authio-coinbausehelp.gitbook\\.io/us
+- https://help-blockf-cdnn.teachable\\.com/p/home
+- affanytougees[.]com
+- ameddingpersusan[.]com
+- anicnicpriesert[.]com
+- antressmirestos[.]com
+- aparingupgger[.]com
+- biledherrywation[.]com
+- boutiondistan[.]com
+- brasencewompture[.]com
+- carefersoldidense[.]com
+- causesconighty[.]com
+- charweredrepicks[.]com
+- chazineconally[.]com
+- chierstimines[.]com
+- chopedansive[.]com
+- claredcarcing[.]com
+- coadormertranegal[.]com
+- coateethappallel[.]com
+- comaincology[.]com
+- coneryconstiny[.]com
+- conkeyprowse[.]com
+- coutioncargin[.]com
+- coveryinting[.]com
+- crefoxappecture[.]com
+- curphytompared[.]com
+- darylapsebaryanmar[.]com
+- deconsorconsuperb[.]com
+- disantumcomptions[.]com
+- distrypromited[.]com
+- escentdeveriber[.]com
+- fladestateins[.]com
+- flesterwisors[.]com
+- forrofilecabelle[.]com
+- gaiterimturches[.]com
+- goestodos[.]com
+- grawableaugespare[.]com
+- gresesticparray[.]com
+- guardawalle[.]com
+- hunnerdimental[.]com
+- issetheserepson[.]com
+- lamothyadjuncan[.]com
+- leatlyinsioning[.]com
+- leavesnottered[.]com
+- listationsomminder[.]com
+- litnentschelds[.]com
+- minarymacrefeat[.]com
+- mingaryshestence[.]com
+- nashiclehunded[.]com
+- obiansvieller[.]com
+- paticableharent[.]com
+- penlabuseoribute[.]com
+- peridneyperadebut[.]com
+- compladamousaribached[.]com
+- posectsinsive[.]com
+- pringingsernel[.]com
+- saverateaubtle[.]com
+- scientcontopped[.]com
+- screnceagrity[.]com
+- searranksdeveal[.]com
+- shotheatsgnovel[.]com
+- sonyonsa[.]com
+- stalitynotinium[.]com
+- storsianpreemed[.]com
+- swissborglogi[.]xyz
+- teleedlescestable[.]com
+- tirzrstartio[.]com
+- topsorthynaveneur[.]com
+- tralizetrulines[.]com
+- trighlandcomping[.]com
+- versaryconnedges[.]com
+- walitykildsence[.]com
+- wintrolancing[.]com
+- atomicwallet.azurewebsites[.]net
+- bietbutylogn.azurewebsites[.]net
+- biokefeiwltliv29gleed.azurewebsites[.]net
+- bitgetwalt.azurewebsites[.]net
+- bleuckfie-coins.azurewebsites[.]net
+- bleuckkfiecoins.azurewebsites[.]net
+- bleuickkfiescoins.azurewebsites[.]net
+- blocckfi-api.azurewebsites[.]net
+- blocikifi.azurewebsites[.]net
+- blockffiecoinas.azurewebsites[.]net
+- blockfi-api.azurewebsites[.]net
+- blockfiapp-apk.azurewebsites[.]net
+- blockfiicoins.azurewebsites[.]net
+- blockificoinz.azurewebsites[.]net
+- blockifiicoins.azurewebsites[.]net
+- blockkfi-api.azurewebsites[.]net
+- blockkfiapi-apk.azurewebsites[.]net
+- blockkkfifies.azurewebsites[.]net
+- bloickfie-app.azurewebsites[.]net
+- bloickfiicoins.azurewebsites[.]net
+- bloickkfieecoinss.azurewebsites[.]net
+- bloickkfieescoins876.azurewebsites[.]net
+- bloiickkfieecoinase.azurewebsites[.]net
+- blokfi-error.azurewebsites[.]net
+- blokkfiapp-api.azurewebsites[.]net
+- blokkifi.azurewebsites[.]net
+- bloockkfi-api.azurewebsites[.]net
+- blouckfi-api.azurewebsites[.]net
+- bluckfi-error.azurewebsites[.]net
+- bluckfilogn.azurewebsites[.]net
+- blueckficoinis.azurewebsites[.]net
+- bluickkfiecoins.azurewebsites[.]net
+- boloickfieecoins.azurewebsites[.]net
+- buloickkfieecoins876.azurewebsites[.]net
+- cbswlterliv487wlt.azurewebsites[.]net
+- cionbise-error.azurewebsites[.]net
+- cobowalletoffc.azurewebsites[.]net
+- cobowalletz.azurewebsites[.]net
+- coienebaiseerlivwlt02elisa.azurewebsites[.]net
+- coinibisasesn567.azurewebsites[.]net
+- dft0-hjgkd26-fkj.s3.us-east-1.amazonaws[.]com
+- edgeronwlet.azurewebsites[.]net
+- edgersuwlet.azurewebsites[.]net
+- eedu0s-jhdc-osxza.s3.us-east-1.amazonaws[.]com
+- errorciiobiosewds876.azurewebsites[.]net
+- errorcoibisaeseaenbaeb876.azurewebsites[.]net
+- errorlovblockfi876.azurewebsites[.]net
+- errorlovbloikcffie876.azurewebsites[.]net
+- errorlovbolockfiee987.azurewebsites[.]net
+- errorlovcobisaed786.azurewebsites[.]net
+- errorlovcoibioise876.azurewebsites[.]net
+- errorlovexdkekam879.azurewebsites[.]net
+- errorlovexds987.azurewebsites[.]net
+- errorlovtenizr987.azurewebsites[.]net
+- errorlovtrasenzjedsuties.azurewebsites[.]net
+- errorlovtreazezz876.azurewebsites[.]net
+- errorlovtrikmanen987.azurewebsites[.]net
+- errormetiamiasks876.azurewebsites[.]net
+- errormetismesk987.azurewebsites[.]net
+- errortreazeeasd-suties.azurewebsites[.]net
+- ertzirdnwwltliv.azurewebsites[.]net
+- exd98uswlterliv.azurewebsites[.]net
+- exdiusiwalet.azurewebsites[.]net
+- ezioron1wlet.azurewebsites[.]net
+- iotruzorsuite.azurewebsites[.]net
+- itrusttcepitalcoins.azurewebsites[.]net
+- kaikzx-slsld39-lkjf.s3.us-east-1.amazonaws[.]com
+- krakenzcoins.azurewebsites[.]net
+- ladzearwlt03jokesmko.azurewebsites[.]net
+- ldr-0gr-dsxz.s3.us-east-1.amazonaws[.]com
+- leddgerwallet.azurewebsites[.]net
+- leddgersacoins.azurewebsites[.]net
+- ledeagderwallet.azurewebsites[.]net
+- ledgar-live-walliet.s3.us-east-2.amazonaws[.]com
+- ledger-start-403.azurewebsites[.]net
+- ledger-start-api.azurewebsites[.]net
+- ledgercoinserror3.azurewebsites[.]net
+- ledgercoinsweb3.azurewebsites[.]net
+- ledgersapi-apk.azurewebsites[.]net
+- ledgersapp.azurewebsites[.]net
+- ledgirlvestart.azurewebsites[.]net
+- ledigerwaliteasee.azurewebsites[.]net
+- ledzaererwltliv30mariamon.azurewebsites[.]net
+- ledzor365livwlter.azurewebsites[.]net
+- legdrlievlgin.azurewebsites[.]net
+- leidgeierwalitese.azurewebsites[.]net
+- leidgirscoinsweb.azurewebsites[.]net
+- leldger-live.azurewebsites[.]net
+- lezor3021sxes.azurewebsites[.]net
+- lfg0-oiosh-hdh.s3.us-east-1.amazonaws[.]com
+- lgnwltcnbsliv.azurewebsites[.]net
+- ledgerwallest.azurewebsites[.]net
+- lzr13wlt.s3.eu-north-1.amazonaws[.]com
+- metamaskdn.azurewebsites[.]net
+- metamasksrs.azurewebsites[.]net
+- metamassk.azurewebsites[.]net
+- mmetamassk.azurewebsites[.]net
+- mtmsklivwlter57wlt.azurewebsites[.]net
+- ndaaxscoins.azurewebsites[.]net
+- ndaxcoins.azurewebsites[.]net
+- ndeauxcoinsweb.azurewebsites[.]net
+- neaiaxcoins.azurewebsites[.]net
+- oduisshweb3.azurewebsites[.]net
+- portal-treaeameaene876.azurewebsites[.]net
+- ra0-lkjd01-gfhjd.s3.eu-north-1.amazonaws[.]com
+- relkd28-lokdyuj.s3.us-east-1.amazonaws[.]com
+- sdfg0d28-djkfk.s3.us-east-1.amazonaws[.]com
+- secuxwallet-api.azurewebsites[.]net
+- sjdhd29-oiuw0.s3.us-east-1.amazonaws[.]com
+- solflareewerror.azurewebsites[.]net
+- suiitewalettrzior.azurewebsites[.]net
+- teirzoriiostart.azurewebsites[.]net
+- tereamanezheoakeeoake.azurewebsites[.]net
+- tereazeriwaleits.azurewebsites[.]net
+- terezercoinswalts.azurewebsites[.]net
+- terezercoinsweb.azurewebsites[.]net
+- tereziiorcoinsweb3.azurewebsites[.]net
+- terezieoreeae-walieats.azurewebsites[.]net
+- terezorcoinscweb3.azurewebsites[.]net
+- terezuiear-api.azurewebsites[.]net
+- terozeiorwltliv31wikub.azurewebsites[.]net
+- terozriosiuet.azurewebsites[.]net
+- terzoerirwlt476liv.azurewebsites[.]net
+- tirizeriostrt.azurewebsites[.]net
+- tirizurstrtio.azurewebsites[.]net
+- tirzwltliv09erds.azurewebsites[.]net
+- tizrerlivwlt897wlt.azurewebsites[.]net
+- tizrwlterliv45livwlt.azurewebsites[.]net
+- tr01-dkfjgk-slas.s3.eu-north-1.amazonaws[.]com
+- tr0ox-obnsj.s3.eu-north-1.amazonaws[.]com
+- tra09fjl-sodfjjkd.s3.us-east-1.amazonaws[.]com
+- traezor-suitez403.azurewebsites[.]net
+- traieazeariscoins.azurewebsites[.]net
+- tre876162ru0988zer.azurewebsites[.]net
+- treaizerecoins.azurewebsites[.]net
+- treauzearcoins.azurewebsites[.]net
+- treazerapi-apk.azurewebsites[.]net
+- trezerszcoins.azurewebsites[.]net
+- treaziexc-ax-bc.azurewebsites[.]net
+- trezirapi-apk.azurewebsites[.]net
+- trezosr-api.azurewebsites[.]net
+- treazsoirsuites.azurewebsites[.]net
+- treazuer-suite.azurewebsites[.]net
+- treizaers-coins.azurewebsites[.]net
+- treizoircoinerror3.azurewebsites[.]net
+- trezirwalogn.azurewebsites[.]net
+- treriertriliv34erwlt.azurewebsites[.]net
+- trezaereade-suite.azurewebsites[.]net
+- trezieserscoins.azurewebsites[.]net
+- trezor-suite.azurewebsites[.]net
+- trezirapp-api.azurewebsites[.]net
+- treziresacoins.azurewebsites[.]net
+- triezorwallets.azurewebsites[.]net
+- trioriorwlt485wltliv.azurewebsites[.]net
+- trizeriowaliet.azurewebsites[.]net
+- triziorecoinsweb3.azurewebsites[.]net
+- triziriosuite.azurewebsites[.]net
+- trizuriosiute.azurewebsites[.]net
+- trucetreizerr.azurewebsites[.]net
+- truiazearcoins.azurewebsites[.]net
+- trzeriostrt.azurewebsites[.]net
+- ttrzorappsuite.azurewebsites[.]net
+- tzr06wlt.s3.eu-north-1.amazonaws[.]com
+- uniswapv3login.azurewebsites[.]net
+- uphooldlogn.azurewebsites[.]net
+- web-treszor.azurewebsites[.]net
+- weberrortrezur886.azurewebsites[.]net
+- wltcbserlive467wlt.azurewebsites[.]net
+- wltlzr67erlivehsfjfd.azurewebsites[.]net
+- woleatcoebs34livwlt.azurewebsites[.]net
+- zen-ledger-error.azurewebsites[.]net
+- zenledgerscoinsweb.azurewebsites[.]net
+reference: https://www.sentinelone.com/labs/freedrain-unmasked-uncovering-an-industrial-scale-crypto-theft-network/
+date_of_publication: May 08, 2025
+file_creation_date: May 28, 2025

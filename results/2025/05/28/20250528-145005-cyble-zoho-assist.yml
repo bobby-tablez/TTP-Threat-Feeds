@@ -1,0 +1,61 @@
+description: The U.S. Federal Bureau of Investigation (FBI) has issued an alert warning
+  law firms about ongoing cyber threat activity linked to the Silent Ransom Group
+  (SRG), also known as Luna Moth, Chatty Spider, or UNC3753, targeting the legal sector
+  across the United States.
+attribution: Silent Ransom Group (SRG)/Luna Moth/Chatty Spider/UNC3753
+malware_families:
+- Zoho Assist
+- AnyDesk
+- Syncro
+- Splashtop
+- Atera
+- WinSCP
+- Rclone
+- BazarBackdoor
+- Backdoor
+- ReconnaissanceBackdoor
+- ExfiltrationBackdoor
+TTPs:
+  processes:
+  - WinSCP
+  - Rclone
+  - Zoho Assist
+  - AnyDesk
+  - Syncro
+  - Splashtop
+  - Atera
+  - SoftPerfect Network Scanner
+  commandline:
+  - WinSCP.exe
+  - Rclone.exe
+  - Zoho Assist.exe
+  - AnyDesk.exe
+  - Syncro.exe
+  - Splashtop.exe
+  - Atera.exe
+  - SoftPerfect Network Scanner.exe
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load: ''
+  network_connections: ''
+  file_activity: ''
+  persistence:
+  - Impersonating IT help desks to gain unauthorized remote access.
+  - Installing legitimate RMM tools to gain access and exfiltrate data.
+  - Utilizing portable versions of WinSCP to extract data without detection.
+  pipes: ''
+  process_relations: ''
+IOCs:
+- Unauthorized downloads of Zoho Assist, Syncro, AnyDesk, Splashtop, or Atera
+- WinSCP or Rclone activity tied to unknown external IP addresses
+- Emails or voicemails from anonymous entities claiming data theft
+- Subscription-related phishing emails urging callback actions
+- Employees receiving suspicious calls from fake IT support claiming to perform routine
+  maintenance
+authors:
+- FBI
+- Cyble Research and Intelligence Labs (CRIL)
+reference: https://cyble.com/blog/fbi-warns-silent-ransom-targeting-us-law-firms/
+date_of_publication: May 28, 2025
+file_creation_date: May 28, 2025

