@@ -1,0 +1,43 @@
+description: The official XPRL (Ripple) NPM package was compromised by attackers who
+  inserted a backdoor to steal cryptocurrency private keys and gain access to cryptocurrency
+  wallets.
+attribution: Unknown
+malware_families:
+- Backdoor
+TTPs:
+  processes:
+  - node
+  commandline:
+  - npm install xrpl
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: node
+    destination_address: 0x9c[.]xyz
+    port: ''
+    url: /xc
+  file_activity:
+  - path: src/index.ts
+  - path: src/Wallet/index.ts
+  - path: package.json
+  - path: build/xrp-latest-min.js
+  - path: build/xrp-latest.js
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- package_name: xrpl
+- versions:
+  - 4.2.4
+  - 4.2.3
+  - 4.2.2
+  - 4.2.1
+  - 2.14.2
+- domain: 0x9c[.]xyz
+authors:
+- Charlie Eriksen
+reference: https://www.aikido.dev/blog/xrp-supplychain-attack-official-npm-package-infected-with-crypto-stealing-backdoor
+date_of_publication: June 02, 2025
+file_creation_date: June 02, 2025

@@ -1,0 +1,63 @@
+description: The Sysdig Threat Research Team observed a malicious threat actor targeting
+  a misconfigured system hosting Open WebUI, an application providing an extensible,
+  self-hosted AI interface used to enhance large language models (LLMs). The attacker
+  injected malicious code and downloaded cryptominers.
+attribution: Unknown
+malware_families:
+- T-Rex
+- XMRig
+authors:
+- Miguel Hernandez
+- Alessandra Rizzo
+TTPs:
+  processes:
+  - uvicorn
+  - systemd
+  - python3
+  - tar
+  - zip
+  - javaw
+  - containerd-shim
+  - bash
+  - dash
+  commandline:
+  - uvicorn /usr/local/bin/unicorn open_webui.main:app --host 0.8.8.8 -port 8089 --forwarded
+    [0}-allow-ips *
+  - systemctl daemon-reload
+  - systemctl start ptorch_updater
+  - systemctl enable ptorch_updater
+  - /usr/bin/bash -c echo /tap/python.so >> /etc/ld.so.preload
+  - javaw -jar application-ref.jar
+  powershell: ''
+  scripting_engine:
+  - Python
+  - Java
+  registry_keys: ''
+  image_load: ''
+  network_connections: ''
+  file_activity:
+  - /etc/systemd/system/ptorch_updater.service
+  - /tap/python.so
+  - /usr/local/bin/uvicorn
+  - /usr/local/bin/open_webui.main
+  - microsoft-jdk-21.0.6-windows-x64.zip
+  - application-ref.jar
+  - INT_D.DAT
+  - INT_J.DAT
+  persistence:
+  - systemd service (ptorch_updater)
+  pipes: ''
+  process_relations: ''
+IOCs:
+- pool.supportxmr[.]com:443
+- rvn.2miners[.]com:6060
+- https://canary.discord.com/api/webhooks/1357293459207356527/GRsqv7AQyemZRuPB1ysrPUstczqL4OIi-I7RibSQtGS849zY64H7W_-c5UYYtrDBzXiq
+- https://gh-proxy.com/https://github.com/trexminer/T-Rex/releases/download/0.26.8/t-rex-0.26.8-linux.tar.gz
+- https://gh-proxy.com/https://github.com/xmrig/xmrig/releases/download/v6.22.2/xmrig-6.22.2-linux-static-x64.tar.gz
+- http://185.208.159.155:8000/application-ref.jar
+- eb00cf315c0cc2aa881e1324f990cc21f822ee4b4a22a74b128aad6bae5bb971
+- 41774276e569321880aed02b5a322704b14f638b0d0e3a9ed1a5791a1de905db
+- 833b989db37dc56b3d7aa24f3ee9e00216f6822818925558c64f074741c1bfd8
+reference: https://sysdig.com/blog/attacker-exploits-misconfigured-ai-tool-to-run-ai-generated-payload/
+date_of_publication: June 02, 2025
+file_creation_date: June 02, 2025

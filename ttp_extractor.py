@@ -305,7 +305,7 @@ def write_yaml(content, source, malware):
     day = now.strftime("%d")
     timestamp = now.strftime("%Y%m%d-%H%M%S")
 
-    output_dir = os.path.join("results", year, month, day)
+    output_dir = os.path.join("results", year, month)
     os.makedirs(output_dir, exist_ok=True)
 
     filename = os.path.join(output_dir, f"{timestamp}-{source}-{malware}.yml")

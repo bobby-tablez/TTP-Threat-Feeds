@@ -1,0 +1,44 @@
+description: This report details a malicious package, "os-info-checker-es6," and its
+  dependencies designed to execute arbitrary code on compromised systems. The attacker
+  employed sophisticated obfuscation techniques using Unicode Private Use Area (PUA)
+  characters and base64 encoding to hide the payload.
+attribution: Unknown
+malware_families:
+- os-info-checker-es6
+- vue-skip-to
+- vue-dev-serverr
+- vue-dummy
+- vue-bit
+TTPs:
+  processes:
+  - node
+  commandline:
+  - node preinstall.js
+  powershell: ''
+  scripting_engine:
+  - javascript
+  - rust
+  registry_keys:
+  - HKEY_CURRENT_USER\\TEMP\\\\pqlatt
+  image_load: ''
+  network_connections:
+  - process: node
+    destination: calendar.app.google.com
+    port: '443'
+  - process: node
+    url: http://140.82.54[.]223/2VqhA0lcH6ttO5XZEcFnEA%3D%3D
+  file_activity:
+  - run.txt
+  persistence:
+  - Creates a file at HKEY_CURRENT_USER\\TEMP\\\\pqlatt to prevent multiple executions.
+  pipes: ''
+  process_relations: ''
+IOCs:
+- 'Packages: os-info-checker-es6, skip-tot, vue-dev-serverr, vue-dummyy, vue-bit'
+- 'IPs: 140.82.54[.]223'
+- 'URLs: https://calendar.app[.]google/t56nfUUcugH9ZUkx9'
+authors:
+- Charlie Eriksen
+reference: https://www.aikido.dev/blog/youre-invited-delivering-malware-via-google-calendar-invites-and-puas
+date_of_publication: May 13, 2025
+file_creation_date: June 02, 2025

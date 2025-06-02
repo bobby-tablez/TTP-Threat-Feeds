@@ -1,0 +1,58 @@
+description: AhnLab has identified attacks installing CoinMiners in Korean Internet
+  cafes, targeting systems with Internet cafe management programs. The attackers used
+  Gh0st RAT to gain control and install T-Rex CoinMiner.
+attribution: Chinese C. Rufus Security Team (Gh0st RAT), Unknown (T-Rex CoinMiner)
+malware_families:
+- Gh0st RAT
+- T-Rex CoinMiner
+- PhoenixMiner
+- KillProc
+authors:
+- AhnLab Security Intelligence Center (ASEC)
+TTPs:
+  processes:
+  - cmd.exe
+  - mmc.exe
+  - mtn.exe
+  - syc.exe
+  - syn.exe
+  - tnt.exe
+  - Invoker.exe
+  - guard_c.exe
+  - guard_s.exe
+  - phoenixminer.exe
+  - miner.exe
+  - ethdcrminer64.exe
+  - mine.exe
+  - kminerclient.exe
+  - pms.exe
+  - chrome.exe
+  - scse.exe
+  - notice.exe
+  - mirc.exe
+  - svohost.exe
+  - scvhost.exe
+  - svvhost.exe
+  - geekminer.exe
+  - po4.exe
+  - conhost.exe
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - '%ProgramFiles% (x86)\\********\\**\\*****\\cmd.exe'
+  - C:\\map1800000.dll
+  - '%ProgramFiles% (x86)\\********\\**\\sound\\cmd.exe'
+  persistence:
+  - Gh0st RAT droppers installed in relevant paths
+  - Client process installed on a guest PC by Internet cafe management programs client
+  pipes: []
+  process_relations: []
+IOCs:
+- http://211.171.180.200/ms37.exe
+- /ms3T.exe
+reference: https://asec.ahnlab.com/en/88245/
+date_of_publication: May 26, 2025
+file_creation_date: June 02, 2025
