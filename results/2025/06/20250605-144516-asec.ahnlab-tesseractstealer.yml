@@ -1,0 +1,73 @@
+description: ViperSoftX is a malware that steals cryptocurrencies and executes commands
+  on infected systems, primarily targeting users in Korea. It utilizes various techniques
+  including PowerShell scripts, scheduled tasks, and DNS TXT records for command and
+  control.
+attribution: Unknown
+malware_families:
+- TesseractStealer
+- Quasar RAT
+- PureCrypter
+- PureHVNC
+- ClipBanker
+authors:
+- AhnLab Security Intelligence Center (ASEC)
+TTPs:
+  processes:
+  - powershell.exe
+  - wscript.exe
+  - chrome.exe
+  - msedge.exe
+  - brave.exe
+  - opera.exe
+  - firefox.exe
+  - vivaldi.exe
+  commandline:
+  - powershell.exe -ExecutionPolicy Bypass -File C:\Windows\Temp\ClipboardProtect.ps1
+  - wscript.exe "C:\Windows\Tasks\SchedulerTask.vbs"
+  - powershell.exe -WindowStyle Hidden -EncodedCommand [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("..."))
+  - powershell.exe -ExecutionPolicy Bypass -File "%SystemDirectory%\script.ps1"
+  powershell:
+  - '$a : wmail, fairu, bideo, privatproxy, ahoravideo
+
+    '
+  - '$b : endpoint, blog, chat, cdn, schnellvpn
+
+    '
+  - '$c : com, xyz
+
+    '
+  - Connect
+  - runcmd -Command $IkByJaHLXZtSH2YUG
+  - Decrypt-Text -EncryptedText $cnd
+  - '[Systen.Convert]: : FromBase64string($cnd)'
+  - '[Systen. Text.Encoding]: :UTF8.Getstring(Scnd)'
+  - runcnd -Command Scmd
+  registry_keys:
+  - HKLM\\SOFTWARE\\HPgs6ZtP670 / xr417LXh
+  network_connections:
+  - executable: powershell.exe
+    destination_address: 192.168.247.241
+    port: ''
+    url: http://wmail-blog[.]com/api/v1/$($guid)
+  - executable: powershell.exe
+    destination_address: 192.168.247.2
+    port: ''
+    url: http://wmail-blog[.]com
+  file_activity:
+  - C:\Windows\Temp\ClipboardProtect.ps1
+  - C:\Windows\Tasks\SchedulerTask.vbs
+  - '%SystemDirectory%\script.ps1'
+  persistence:
+  - Scheduled task using VBScript to execute PowerShell script.
+  - Scheduled task executing a PowerShell script located in %SystemDirectory%.
+  pipes: []
+  process_relations: []
+IOCs:
+- hash: ''
+- ip_address: 192.168.247.241
+- ip_address: 192.168.247.2
+- domain: wmail-blog[.]com
+- url: http://wmail-blog[.]com/api/v1/$($guid)
+reference: https://asec.ahnlab.com/en/88336/
+date_of_publication: June 02, 2025
+file_creation_date: June 05, 2025

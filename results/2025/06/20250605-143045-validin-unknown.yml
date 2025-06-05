@@ -1,0 +1,54 @@
+description: The report details the use of passive DNS and host response history to
+  identify unreported infrastructure potentially related to APT36, also known as Transparent
+  Tribe. It outlines a methodology for enriching initial indicators and pivoting through
+  DNS records and host responses to uncover additional domains and IPs associated
+  with the threat actor.
+attribution: APT36 / Transparent Tribe
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: N/A
+    destination_address: 93.127.133[.]58
+    port: N/A
+  - executable: N/A
+    destination_address: 37.221.64[.]134
+    port: N/A
+  file_activity:
+  - path: hxxps://jkpolice[.]gov[.]in[.]kashmirattack[.]exposed/service/home/
+  - path: dayenter[.]shop
+  - path: mail.dayenter[.]shop
+  - path: www[.]cetus-flamer[.]com
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- ip: 93.127.133[.]58
+- domain: kashmirattack[.]exposediaf[.]nic[.]in[.]ministryofdefenceindia[.]org
+- domain: ministryofdefenceindia[.]org
+- url: hxxps://jkpolice[.]gov[.]in[.]kashmirattack[.]exposed/service/home/
+- ip: 37.221.64[.]134
+- domain: mea[.]gov[.]in[.]indiandefence[.]services
+- domain: departmentofdefence[.]de
+- domain: defenceindia[.]ltd
+- domain: briefcases[.]email
+- domain: departmentofspace[.]info
+- ip: 45.141.58[.]224
+- ip: 78.40.143[.]188
+- ip: 78.40.143[.]189
+- ip: 176.65.143[.]215
+- domain: accounts[.]mgovcloud[.]in[.]storagecloud[.]download
+- domain: accounts[.]mgovcloud[.]in[.]virtualeoffice[.]cloud
+- domain: accounts[.]mgovcloud[.]in[.]cloudshare[.]digital
+- ip: 37.221.64[.]252
+- domain: 37-221-64-252[.]cprapid[.]com
+- etag: W/"18-yDYnaqhRYUMt/OyUu05l2wAGXRQ"
+authors:
+- Kenneth Kinion
+reference: https://www.validin.com/blog/illuminating_transparent_tribe/
+date_of_publication: June 02, 2025
+file_creation_date: June 05, 2025

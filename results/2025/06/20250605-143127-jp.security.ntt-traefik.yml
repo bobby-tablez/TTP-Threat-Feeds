@@ -1,0 +1,79 @@
+description: This report details exploitation of vulnerabilities in Traefik, AetherCache,
+  and Flask within the Hack The Box Business CTF environment.  The exploits leverage
+  a combination of API token bypass, cache smuggling, prototype pollution, CSP bypass,
+  DOM clobbering, HTML injection, Server-Side Template Injection (SSTI), and path
+  traversal techniques to achieve remote code execution.
+attribution: Hack The Box
+malware_families:
+- Traefik
+- AetherCache
+- Flask
+TTPs:
+  processes:
+  - tar
+  - exiftool
+  - readelf
+  - requests
+  - python3
+  - nc
+  commandline:
+  - tar -cvf /tmp/test.tar challenge
+  - /usr/bin/exiftool /tmp/test.tar
+  - /usr/bin/readelf -h /tmp/test.tar
+  - python3 exploit.py <rhost>
+  - nc -nv 127.0.0.1 6379
+  powershell: null
+  scripting_engine: null
+  registry_keys: null
+  image_load: null
+  network_connections:
+  - executable: requests
+    destination_address: 127.0.0.1
+    port: 6379
+    url: null
+    hostname: localhost
+  - executable: python3
+    destination_address: null
+    port: null
+    url: https://YOUR-SERVER/front_end_error/new/hack
+    hostname: YOUR-SERVER
+  - executable: nc
+    destination_address: 127.0.0.1
+    port: 6379
+    protocol: tcp
+  file_activity:
+  - /tmp/test.tar
+  - /app/application/datasets/
+  - /tmp/
+  - ../templates/index.html
+  - /bin/tar
+  persistence: null
+  pipes: null
+  process_relations: null
+IOCs:
+- 127.0.0.1:6379
+- https://YOUR-SERVER/?
+- /front_end_error/new/hack
+- /api/active_signals
+- /api/copy_signal_trade
+- /api/edit_trade
+- /upload_dataset
+- CVE-2024-45410
+- ip_address: 127.0.0.1
+- port: '6379'
+- string: hack key hack value
+- string: STORED.STORED
+- string: listsignal :b4abedfc-F11f-4asc-bobe-89554bee62d3
+- string: signal:bobcfcde-2499-47C7-bfc-157c07a0a22b
+- string: signal:cdo65151-23b8-4ab-addd-F241c51eF27dsignal
+- string: signal:2a1e28fc-a3a0-4b66-ac88-018e46356d94
+- string: signal:e6faeefs-8c29-Abbf-bess-1fe2adsb1402
+- string: user:sys_adwin
+- string: trade:de142c74-d699-49b6-91bs-d21634941Faahack_key1C
+- hostname: localhost
+- port: 13371
+authors:
+- NTT Security
+reference: https://jp.security.ntt/tech_blog/htb-business-ctf-2025-writeup-web
+date_of_publication: June 02, 2025
+file_creation_date: June 05, 2025

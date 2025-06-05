@@ -1,0 +1,57 @@
+description: Acronis TRU identified new variants of Chaos RAT, a known malware family,
+  in recent real-world Linux and Windows attacks. This analysis focuses on a Linux
+  variant and shares actionable detection strategies.
+attribution: Unknown
+malware_families:
+- Chaos RAT
+- CHAOS RAT
+authors:
+- Santiago Pontiroli
+- Gabor Molnar
+- Kirill Antonenko
+TTPs:
+  processes:
+  - go
+  - tar
+  - bash
+  - utils_ReadConfigFile
+  commandline:
+  - PORT=8080 SQLITE_DATABASE=chaos go run cmd/chaos/main.go
+  - tar -xzf NetworkAnalyzer.tar.gz
+  - /bin/bash
+  - '"github_com_tiagorlampert_CHAOS_client_app_handler_ ptr_Handler_ServerAvailable"'
+  - '"shutdown -5 -t7"'
+  - '"shutdown"'
+  - '"xdg-open %s"'
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load: ''
+  network_connections:
+  - executable: CHAOS (dev)
+    destination_address: 91.208.197.40
+    port: '7419'
+    url: http://91.208.197.40:7419/health
+  - executable: CHAOS (dev)
+    destination_address: 127.0.0.1
+    port: '8080'
+  file_activity:
+  - /etc/crontab
+  - NetworkAnalyzer.tar.gz
+  - /tmp/TEST8f89850cfeeada08ba6a23casc7957d2abeae888bi0e9b2e19694e7028c9a4b2f 99
+  persistence:
+  - Modification of /etc/crontab to update payload remotely.
+  pipes: ''
+  process_relations: ''
+IOCs:
+- SHA256: 1e074d9dca6ef0edd24afb2d13cafc5486cd4170c989ef60efd0bbb0
+- SHA256: a51416ea472658b5530a92163e64cfa51f983dfabe3da38e0646e92fb14de191
+- IP: 176.65.141.63
+- IP: 91.208.197.40
+- 'SHA1: 080fS6cea7acfd9c20fc931e53ea1225eb6000CT2f05276943e6cf0770504ced'
+- 'SHA256: 2f05276943e6cf077050464SFSTrojan.Linux.ChaosRAT.A'
+- 'IP: 91.208.197.40'
+- 'URL: http://91.208.197.40:7419/health'
+reference: https://www.acronis.com/en-us/cyber-protection-center/posts/from-open-source-to-open-threat-tracking-chaos-rats-evolution/
+date_of_publication: June 04, 2025
+file_creation_date: June 05, 2025
