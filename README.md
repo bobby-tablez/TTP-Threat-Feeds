@@ -1,8 +1,8 @@
 # TTP-Threat-Feeds
 
-![TTP-Threat-Feeds](assets/ttp-threat-feeds-header.png)
-
 **TTP-Threat-Feeds** is a script-powered threat feed generator designed to extract adversarial TTPs and IOCs using ✨AI✨
+
+![TTP-Threat-Feeds](assets/ttp-threat-feeds-header.png)
 
 The purpose of this project is to automate the discovery and parsing of threat actor behavior from published security research. By scraping posts from trusted vendors and blogs listed in `urls.txt`, the tool identifies relevant content, extracts observable adversary behaviors (TTPs) and then outputs structured, human-readable YAML files. These YAML files are designed to help detection engineers and threat researchers quickly derive detection opportunities and correlation logic.
 
