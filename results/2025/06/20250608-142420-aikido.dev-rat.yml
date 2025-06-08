@@ -1,0 +1,47 @@
+description: The threat actor behind the rand-user-agent compromise has continued
+  their attacks, now targeting popular packages with a combined million downloads
+  per week. The attack involves inserting malicious code into package files using
+  whitespace obfuscation to evade detection.
+attribution: Unknown (likely state-sponsored)
+malware_families:
+- RAT
+TTPs:
+  processes:
+  - node
+  - npm
+  - powershell
+  commandline:
+  - node lib/commonjs/index.js
+  - npm --prefix "C:\\Users\\Public\\Documents\\WindowsPowerShell" install socket.io-client
+  - npm --prefix "C:\\Users\\Public\\Documents\\WindowsPowerShell" install axios socket.io-client
+  powershell: ''
+  scripting_engine: ''
+  registry_keys:
+  - '%LOCALAPPDATA%\\Programs\\Python\\Python3127'
+  image_load: ''
+  network_connections:
+  - 'Executable: node, Destination Address: 136.0.9[.]8:3306, Protocol: http'
+  - 'Executable: node, Destination Address: 85.239.62[.]36:3306, Protocol: http'
+  - 'Executable: node, Destination Address: 136.0.9[.]8:27017, Protocol: http'
+  - 'Executable: node, Destination Address: 85.239.62[.]36:27017, Protocol: http'
+  - 'Executable: node, Destination Address: ip-api.com, Protocol: http'
+  file_activity:
+  - C:\\Users\\Public\\Documents\\WindowsPowerShell\\socket.io-client.tgz
+  - C:\\Users\\Public\\Documents\\WindowsPowerShell\\axios.tgz
+  persistence:
+  - '%LOCALAPPDATA%\\Programs\\Python\\Python3127'
+  pipes: ''
+  process_relations: ''
+IOCs:
+- 'IP Address: 136.0.9[.]8'
+- 'IP Address: 85.239.62[.]36'
+- 'URL: http://136.0.9[.]8:3306'
+- 'URL: http://85.239.62[.]36:3306'
+- 'URL: http://136.0.9[.]8:27017'
+- 'URL: http://85.239.62[.]36:27017'
+- 'URL: ip-api.com'
+authors:
+- Charlie Eriksen
+reference: https://www.aikido.dev/blog/supply-chain-attack-on-react-native-aria-ecosystem
+date_of_publication: June 06, 2025
+file_creation_date: June 08, 2025

@@ -1,0 +1,57 @@
+description: The Key Group ransomware family was first revealed on January 6, 2023,
+  continuing their operations since then. The group is a Russian-speaking, financially
+  motivated threat actor using Telegram channels for ransom negotiations and information
+  sharing.
+attribution: Russian-speaking cybercrime actor (Key Group / KEYGROUP777)
+malware_families:
+- Key Group Ransomware
+- NjRAT
+authors:
+- Arda Büyükkaya
+TTPs:
+  processes:
+  - vssadmin.exe
+  - wmic.exe
+  - bcdedit.exe
+  - wbadmin.exe
+  - Program.exe
+  commandline:
+  - vssadmin delete shadows /all /quiet
+  - wmic shadowcopy delete
+  - bcdedit /set {default} bootstatuspolicy ignoreallfailures
+  - bcdedit /set {default} recoveryenabled no
+  - wbadmin delete catalog -quiet
+  - Program.exe
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load: ''
+  network_connections:
+  - executable: Program.exe
+    destination_address: yip[.]su
+    url: https://yip.su/1S7LVa
+    port: ''
+  - executable: Program.exe
+    destination_address: iplogger[.]org
+  file_activity:
+  - C:\Windows\System32\drivers\etc\hosts
+  - C:\Users\Public\image.jpg
+  - C:\DownloadsTM
+  - C:\Personal
+  - C:\MyPictures
+  - C:\MyMusic
+  - C:\MyVideos
+  - C:\3D Objects
+  persistence:
+  - Modifying the hosts file to redirect traffic for anti-malware solutions.
+  pipes: ''
+  process_relations: ''
+IOCs:
+- hash: c2e1048e1e5130e36af297c73a83aff609ce91b4f137a4cbc1496d3791c6e75bd7d20a9d74a3f0b5b0b98de937ebbf857e1577b6e42d47b30ae597eee720d3b1
+- domain: darkstore[.]store
+- url: https://t.me/keygroup777Tg
+- ip_address: 77.88.55.60
+- bitcoin_address: bc1gjcq3adsro9cjq0f8agkktvvtgtrdxmtumli7nzk
+reference: https://blog.eclecticiq.com/decrypting-key-group-ransomware-emerging-financially-motivated-cyber-crime-gang
+date_of_publication: August 31, 2023
+file_creation_date: June 08, 2025

