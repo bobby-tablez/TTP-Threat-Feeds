@@ -1,0 +1,59 @@
+description: An active phishing campaign is targeting high-profile X accounts in an
+  attempt to hijack and exploit them for fraudulent activity. This campaign has been
+  observed targeting a variety of individual and organization accounts.
+attribution: Turkish-speaking actors
+malware_families:
+- DanaBot
+authors:
+- SentinelLABS
+TTPs:
+  processes:
+  - wget
+  - bash
+  commandline:
+  - wget http://repo.fastpanel.direct/install_fastpanel.sh -O -| bash
+  - apt-get update; apt-get install wget
+  - yum makecache; yum install wget
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: wget
+    destination_address: repo.fastpanel.direct
+  - executable: curl
+    destination_address: cdn.ampproject[.]org
+  file_activity:
+  - /tmp/install_fastpanel.sh
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+  domains:
+  - buy-tanai[.]com
+  - dataoptimix[.]com
+  - gamecodestudios[.]com
+  - infringe-x[.]com
+  - protection-x[.]com
+  - rewards-dawn[.]com
+  - securelogins-x[.]xyz
+  - shortwayscooter[.]com
+  - violationappeal-x[.]com
+  - violationcenter-x[.]com
+  - x-accountcenter[.]com
+  - x-changealerts[.]com
+  - x-logincheck[.]com
+  - x-loginhelp[.]com
+  - x-passwordrecovery[.]com
+  - x-recoveraccount[.]com
+  - x-suspiciouslogin[.]com
+  hashes:
+  - e2221e5c58a1a976e59fe1062c6db36d4951b81e
+  ips:
+  - 84.38.130[.]20
+  urls:
+  - https://cdn.ampproject[.]org/c/s/x-recoverysupport.com/reset/?username=[X-USERNAME]
+  - http://repo.fastpanel.direct/install_fastpanel.sh
+reference: https://www.sentinelone.com/labs/phishing-on-x-high-profile-account-targeting-campaign-returns/
+date_of_publication: January 31, 2025
+file_creation_date: June 12, 2025

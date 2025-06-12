@@ -1,0 +1,88 @@
+description: 'A May 2025 attack on a financial institution in Asia saw the Fog ransomware
+  deployed, alongside an unusual toolset, including some dual-use and open-source
+  pentesting tools not previously observed in ransomware attacks. The attackers used
+  legitimate employee monitoring software Syteca and several open-source pentesting
+  tools GC2, Adaptix, and Stowaway.
+
+  '
+attribution: Unknown
+malware_families:
+- Fog Ransomware
+- Process Watchdog
+- GC2
+- Stowaway
+- Adaptix C2 Agent Beacon
+TTPs:
+  processes:
+  - ipconfig /all
+  - netstat -anot
+  - regsvr32.exe
+  - taskkill.exe
+  - psexec64.exe
+  - cmd.exe
+  - SytecaClient.exe
+  - EkranClientSession.exe
+  - EkranController.exe
+  - grpcwebproxy.exe
+  - PamConnectionManager.exe
+  - usbdriverinstaller.exe
+  - usbolddriveruninstaller.exe
+  - runtimebroker.exe
+  commandline:
+  - cmd /c "ipconfig /all"
+  - cmd /c "netstat -anot|findstr 3389"
+  - '"CSIDL_SYSTEM\\regsvr32.exe" /s /u [REDACTED] Files\\Ekran System\\Ekran System\\Client\\SoundCapture_7.20.576.0.dll"'
+  - '"CSIDL_SYSTEM\\regsvr32.exe" /s /u [REDACTED] Files\\Ekran System\\Ekran System\\Client\\x86\\SoundCapture_7.20.576.0.dll"'
+  - '"CSIDL_SYSTEM\\regsvr32.exe" /s /u [REDACTED] Files\\Ekran System\\Ekran System\\Client\\CredentialProviderWrapper.dll"'
+  - '"CSIDL_SYSTEM\\regsvr32.exe" /s /u [REDACTED] Files\\Ekran System\\Ekran System\\Client\\CredentialProviderWrapper_7.20.576.0.dll"'
+  - CSIDL_SYSTEM\\taskkill.exe /f /im "EkranClient.exe"
+  - CSIDL_SYSTEM\\taskkill.exe /f /im "EkranClientSession.exe"
+  - CSIDL_SYSTEM\\taskkill.exe /f /im "EkranController.exe"
+  - CSIDL_SYSTEM\\taskkill.exe /f /im "grpcwebproxy.exe"
+  - CSIDL_SYSTEM\\taskkill.exe /f /im "PamConnectionManager.exe"
+  - '"CSIDL_SYSTEM_DRIVE\\program files\\ekran system\\ekran system\\tmp\\usbdriverinstaller.exe"
+    -u [REDACTED]'
+  - '"CSIDL_SYSTEM_DRIVE\\program files\\ekran system\\ekran system\\tmp\\usbolddriveruninstaller.exe"'
+  - psexec64.exe -accepteula \\\\192.168.8.52 -u <?,?> -p <?,?> -h -s cmd /c "del
+    C:\\users\\public\\SytecaClient.ini"
+  - psexec64.exe -accepteula \\\\192.168.8.150 -u <?,?> -p <?,?> -h -s cmd /c "rm
+    C:\\users\\public\\SytecaClient.exe"
+  - SMBExec was used to launch Syteca:cmd.exe /Q /c SytecaClient.exe 1> \\\\127.0.0.1\\ADMIN$\\__1748095766.8385904
+    2>&1
+  - psexec64.exe -accepteual \\\\192.168.8.52 -u <?,?> -p <?,?> -h -s cmd /c "CSIDL_COMMON_APPDATA\\microsoft\\devicesync\\windowsdevicesync.exe"
+  powershell: ''
+  scripting_engine: ''
+  registry_keys:
+  - '[REDACTED] Files\\Ekran System\\Ekran System\\Client\\SoundCapture_7.20.576.0.dll'
+  - '[REDACTED] Files\\Ekran System\\Ekran System\\Client\\x86\\SoundCapture_7.20.576.0.dll'
+  - '[REDACTED] Files\\Ekran System\\Ekran System\\Client\\CredentialProviderWrapper.dll'
+  - '[REDACTED] Files\\Ekran System\\Ekran System\\Client\\CredentialProviderWrapper_7.20.576.0.dll'
+  image_load: ''
+  network_connections: ''
+  file_activity:
+  - C:\\ProgramData\\Microsoft\\Windows\\Models\\AppxModels.exe
+  persistence:
+  - sc create SecurityHealthIron binPath= "CSIDL_SYSTEM\\diagsvcs\\runtimebroker.exe"
+    start= auto DisplayName= "Collect performance information about an application
+    by using command-line tools."
+  pipes: ''
+  process_relations: ''
+IOCs:
+- 181cf6f9b656a946e7d4ca7c7d8a5002d3d407b4e89973ecad60cee028ae5afa
+- 90a027f44f7275313b726028eaaed46f6918210d3b96b84e7b1b40d5f51d7e85
+- f6cfd936a706ba56c3dcae562ff5f75a630ff5e25fcb6149fe77345afd262aab
+- fcf1da46d66cc6a0a34d68fe79a33bc3e8439affdee942ed82f6623586b01dd1
+- 4d80c6fcd685961e60ba82fa10d34607d09dacf23d81105df558434f82d67a5e
+- 8ed42a1223bfaec9676780137c1080d248af9ac71766c0a80bed6eb4a1b9b4f1
+- e1f571f4bc564f000f18a10ebb7ee7f936463e17ebff75a11178cc9fb855fca4
+- f1c22cbd2d13c58ff9bafae2af33c33d5b05049de83f94b775cdd523e393ec40
+- 279f32c2bb367cc50e053fbd4b443f315823735a3d78ec4ee245860043f72406
+- b448321baae50220782e345ea629d4874cbd13356f54f2bbee857a90b5ce81f6
+- f37c62c5b92eecf177e3b7f98ac959e8a67de5f8721da275b6541437410ffae1
+- GEETE
+- 66.112.216[.]232
+- amanda[.]protoflint[.]com
+- 97.64.81[.]119
+reference: https://www.security.com/threat-intelligence/fog-ransomware-attack
+date_of_publication: June 12, 2025
+file_creation_date: June 12, 2025

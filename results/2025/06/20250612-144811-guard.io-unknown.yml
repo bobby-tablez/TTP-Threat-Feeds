@@ -1,0 +1,45 @@
+description: 'Guardio Labs has uncovered a serious vulnerability in the Opera browser
+  that allows malicious extensions to gain full access to permissive Private APIs,
+  enabling actions like screen capturing, browser setting modifications, and account
+  hijacking. This report details how a fully operational malicious extension exploiting
+  this vulnerability can be created and placed in the official Chrome Store, creating
+  a cross-browser-store attack.
+
+  '
+attribution: Unknown (Guardio Labs)
+TTPs:
+  processes:
+  - chrome.exe
+  commandline:
+  - chrome.exe --type=renderer
+  - chrome.exe --type=utility
+  - chrome.exe --type=browser
+  - chrome.exe --disable-gpu
+  - chrome.exe --ppapi-flash-path=/usr/lib/adobe-flashplugin/npflasher
+  - 'chrome.exe --type=renderer --field-trial-handle=... --lang=en-US ... '
+  powershell: []
+  scripting_engine:
+  - JavaScript
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: chrome.exe
+    destination_address: bad.dnsserver.xyz
+    port: ''
+  file_activity:
+  - chrome.runtime.getURL("injected.js")
+  - crypto-corner.op-test.net/#puppiesOn-eyJkbnNfb3Zlcl9odHRwcy5tb2RlIjoic2VjdXJlIiwiZG5zX292ZXJfaHR0cHMudGVtcGxhdGVzIjoiaHR0cHM6Ly9iYWQuZG5zc2VydmVyLnh5eiJ9
+  - C:\Users\...\AppData\Local\Google\Chrome\User Data\Default\Extensions\...\manifest.json
+  persistence:
+  - Browser extension installation granting special permissions.
+  pipes: []
+  process_relations: []
+IOCs:
+- crypto-corner.op-test.net
+- bad.dnsserver.xyz
+- pbsnguaicon
+authors:
+- Nati Tal
+reference: https://guard.io/labs/crossbarking-exploiting-a-0-day-opera-vulnerability-with-a-cross-browser-extension-store-attack
+date_of_publication: June 12, 2025
+file_creation_date: June 12, 2025

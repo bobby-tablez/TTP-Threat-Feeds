@@ -1,0 +1,30 @@
+description: A vulnerability in Microsoft Edge allowed attackers to install browser
+  extensions without user consent by exploiting a private API initially intended for
+  marketing purposes. The issue, classified as Moderate by MSRC, was resolved in February
+  2024 (CVE-2024a21388).
+attribution: Guardio Labs
+TTPs:
+  processes:
+  - chrome.exe
+  - msedge.exe
+  commandline:
+  - C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe
+  - chrome.exe --type=renderer --field-trial=2 --lang=en-US --disable-gpu --disable-software-rasterizer
+    --enable-main-frame-before-extensions --process-id=12345 --zygote-pid=67890
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - resources.pak
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- CVE-2024a21388
+authors:
+- Oleg Zaytsev
+reference: https://guard.io/labs/cve-2024-21388-microsoft-edges-marketing-api-exploited-for-covert-extension-installation
+date_of_publication: June 12, 2025
+file_creation_date: June 12, 2025

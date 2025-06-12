@@ -1,0 +1,40 @@
+description: The web3-wrapper-ethers package impersonates the popular etherslibrary
+  and contains obfuscated code designed to steal private keys. It is associated with
+  Void Dokkaebi, a group known for targeting developers in the web3/blockchain space.
+attribution: Void Dokkaebi (potentially linked to North Korean actors)
+malware_families:
+- Void Dokkeabi
+authors:
+- Charlie Eriksen
+TTPs:
+  processes:
+  - node
+  commandline:
+  - node --import=node_modules/web3-wrapper-ethers/src/wallet/wallet.js
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load: ''
+  network_connections:
+  - executable: node
+    destination_address: 74.119.194[.]244
+    port: null
+    url: http://74.119.194[.]244/fetch
+  file_activity:
+  - src/wallet/wallet.ts
+  - lib.esm/wallet/wallet.js
+  - lib.commonjs/wallet/wallet.js
+  - package.json
+  persistence:
+  - The package itself is designed to be installed and run, potentially establishing
+    persistence if used.
+  pipes: ''
+  process_relations: ''
+IOCs:
+- ip: 74.119.194[.]244
+- package: web3-wrapper-ethers
+- url: http://74.119.194[.]244/fetch
+- email: kaufman0913@gmail[.]com
+reference: https://www.aikido.dev/blog/malicious-package-web3
+date_of_publication: June 12, 2025
+file_creation_date: June 12, 2025

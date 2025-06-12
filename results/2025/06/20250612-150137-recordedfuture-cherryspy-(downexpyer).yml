@@ -1,0 +1,42 @@
+description: TAG-110, a Russia-aligned threat actor, has shifted its spearphishing
+  tactics against Tajikistan to rely on macro-enabled Word templates (.dotm files)
+  instead of HATVIBE. These documents target government, educational, and research
+  institutions within Tajikistan.
+attribution: TAG-110 (Russia-aligned), UAC-0063, APT28 (BlueDelta)
+malware_families:
+- CHERRYSPY (DownExPyer)
+- LOGPIE
+- PyPlunderPlug
+- HATVIBE
+TTPs:
+  processes:
+  - WINWORD.EXE
+  commandline:
+  - '"C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE" /mFile=d60e54854f2b28c2ce197f8a3b37440dfa8dea18ce7939a356f5503ece9e5eb7'
+  - '"C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE" /mFile=8508003c5aafdf89749d0abbfb9f5deb6d7b615f604bbb11b8702ddba2e365e7'
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Office<Version>\\Word\\Options\\LastTime
+  image_load: []
+  network_connections:
+  - executable: WINWORD.EXE
+    destination_address: 38.180.206.61
+    port: '443'
+    url: http://38.180.206.61/engine.php
+  file_activity:
+  - '%APPDATA%\\Microsoft\\Word\\STARTUP\<filename>.dotm'
+  persistence:
+  - Macro enabled Word template (.dotm) files are placed in the Microsoft Word STARTUP
+    folder for automatic execution.
+  pipes: []
+  process_relations: []
+IOCs:
+- hash: d60e54854f2b28c2ce197f8a3b37440dfa8dea18ce7939a356f5503ece9e5eb7
+- hash: 8508003c5aafdf89749d0abbfb9f5deb6d7b615f604bbb11b8702ddba2e365e7
+- ip: 38.180.206.61
+authors:
+- Insikt Group
+reference: https://www.recordedfuture.com/research/russia-aligned-tag-110-targets-tajikistan-with-macro-enabled
+date_of_publication: Ma 22, 2025
+file_creation_date: June 12, 2025

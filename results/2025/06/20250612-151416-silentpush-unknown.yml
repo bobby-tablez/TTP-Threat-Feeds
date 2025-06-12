@@ -1,0 +1,142 @@
+description: This report details ad library data from Meta, including information
+  about various advertisers and their active advertisements. The data includes URLs,
+  product descriptions, and some technical details related to the advertising platform.
+attribution: GhostVendors
+TTPs:
+  powershell: []
+  scripting_engine:
+  - javascript
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: wuurkf[.]com
+    destination_address: ''
+    url: wuurkf[.]com/collections/Tool-Box/products/Milwaukee-56-Premium-18-Drawer-Tool-Box-Chest-and-Cabinet-Combo-with-Electronic-Keypad-Lock
+    port: ''
+  - executable: wesonhz[.]shop
+    destination_address: ''
+    url: wesonhz[.]shop/products/Cold-Water-Gas-Pressure-Washer-Powered-by-Honda%C2%AE-with-AAA-Triplex-Pump-(4400-PSI-at-4.0-GPM)?utm_medium=paid&utm_source=fb&utm_id=120225268056530127&utm_content=120225269683470127&utm_term=120225269683300127&utm_campaign=120225268056530127
+    port: ''
+  - executable: kpwmua[.]com
+    destination_address: ''
+    url: ''
+    port: ''
+  - executable: vtmzox[.]com
+    destination_address: ''
+    url: ''
+    port: ''
+  - executable: acudcct[.]com
+    destination_address: ''
+    url: ''
+    port: ''
+  - executable: toolzde[.]com
+    destination_address: ''
+    url: ''
+    port: ''
+  - executable: yvnbpm[.]com
+    destination_address: ''
+    url: ''
+    port: ''
+  - executable: gardonset[.]com
+    destination_address: ''
+    url: ''
+    port: ''
+  - executable: rfbevents.js
+    destination: wrocxop.com
+    url: https://wrocxop.com/products/Cold-Water-Gas-Pressure-Washer-Powered-by-Honda%C2%AE-with-AAA-Triplex-Pump-(4400-PSI-at-40-GPM)
+    port: ''
+  - executable: jquery.min.js
+    destination: static.safesourcejs.com
+    url: https://static.safesourcejs.com/static/jsjquery.min.js
+    port: ''
+  - executable: slick0908.min.js
+    destination: static.safesourcejs.com
+    url: https://static.safesourcejs.com/static/jsslick0908.min.js
+    port: ''
+  - executable: vue.min,js
+    destination: static.safesourcejs.com
+    url: https://static.safesourcejs.com/static/jsvue.min,js
+    port: ''
+  - executable: masonry.min.js
+    destination: static.safesourcejs.com
+    url: https://static.safesourcejs.com/static/jsmasonry.minjs
+    port: ''
+  - executable: fingerprint.min.js
+    destination: static.safesourcejs.com
+    url: https://static.safesourcejs.com/static/jsfingerprint.min js
+    port: ''
+  - executable: chunk-common.46bdefde.css
+    destination: static.safesourcejs.com
+    url: https://static.safesourcejs.com/static/csschunk-common.46bdefde.css
+    port: ''
+  - executable: chunk-vendors.a43b2615.css
+    destination: static.safesourcejs.com
+    url: https://static.safesourcejs.com/static/csschunk-vendors.a43b2615.css
+    port: ''
+  file_activity:
+  - path: wuurkf[.]com/collections/Tool-Box/products/Milwaukee-56-Premium-18-Drawer-Tool-Box-Chest-and-Cabinet-Combo-with-Electronic-Keypad-Lock
+  - path: facebook[.]com/profile.php?id=61575534312860
+  - path: /products/Cold-Water-Gas-Pressure-Washer-Powered:londa -with-AAA-Triplex-Pump-(4400-PSI-at-4.0-GPM)
+  - path: d4QBHbQD32b.js
+  - path: rfbevents.js
+  - path: jquery.min js
+  - path: static.xx.fbcdn.net/rsrc.php/v4/yz/rfbevents.js
+  - path: connect.facebook.net/en_USdataiimage/jpeg;bas...J
+  - path: static.safesourcejs.com/static/jsslick0908.min.js
+  - path: static.safesourcejs.com/static/jsvue.min,js
+  - path: static.safesourcejs.com/static/jsmasonry.minjs
+  - path: static.safesourcejs.com/static/jsfingerprint.min js
+  - path: static.safesourcejs.com/static/jschunk-common.46bdefde.css
+  - path: static.safesourcejs.com/static/csschunk-vendors.a43b2615.css
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- hash: ''
+- ip: ''
+- domain: wuurkf[.]com
+- url: wuurkf[.]com/collections/Tool-Box/products/Milwaukee-56-Premium-18-Drawer-Tool-Box-Chest-and-Cabinet-Combo-with-Electronic-Keypad-Lock
+- domain: facebook[.]com
+- url: facebook[.]com/profile.php?id=61575534312860
+- domain: myamazonboxnews[.]com
+- domain: myamazonbox[.]com
+- domain: amzncenter[.]com
+- domain: costcosale[.]store
+- domain: nordstromss[.]shop
+- domain: saksavenueoff5th[.]shop
+- domain: lowessale[.]shop
+- domain: tractorsupply-us[.]com
+- domain: advanceautopartsog[.]com
+- domain: partycity-clearance[.]shop
+- domain: joannsave90[.]shop
+- domain: biglotsgifts[.]com
+- domain: egopowerplus[.]store
+- domain: geappliances[.]life
+- domain: birkenoutlet-us[.]com
+- domain: crocs-outlets[.]com
+- domain: us-skecherl[.]com
+- domain: hike-footwear-us[.]com
+- domain: vionic-online[.]com
+- domain: aloyogaoutlet[.]top
+- domain: onrunningsale-us[.]com
+- domain: vuoriclothing-us[.]shop
+- domain: icebreaker-sale[.]com
+- domain: nobull-warehouse[.]shop
+- domain: hukgears[.]shop
+- domain: naturallife-outlet[.]shop
+- domain: lukeslobstershop[.]com
+- domain: cousinsmainelobstershop[.]com
+- domain: whiteoakpasturesbfp[.]com
+- domain: sevensonsfarm[.]shop
+- domain: 44farms[.]shop
+- domain: tynerpondfarm[.]shop
+- domain: pipersfarms[.]shop
+- domain: rebelssportauonline[.]com
+- domain: thewoobles-sale[.]com
+- domain: massimoduttioutlets[.]com
+- url: https://wrocxop.com/products/Cold-Water-Gas-Pressure-Washer-Powered-by-Honda%C2%AE-with-AAA-Triplex-Pump-(4400-PSI-at-40-GPM)
+authors:
+- Silent Push Threat Analysts
+reference: https://www.silentpush.com/blog/ghostvendors/
+date_of_publication: June 09, 2025
+file_creation_date: June 12, 2025

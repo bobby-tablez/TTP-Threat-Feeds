@@ -1,0 +1,37 @@
+description: The Brontoo Technology Solutions attack involved a ransomware intrusion
+  by the RansomEXX group, impacting Indian banks and disrupting retail payments. The
+  initial access was gained through exploitation of CVE-2024-23897 in Jenkins.
+attribution: RansomEXX (suspected to be operating from Eastern Europe or Russia)
+malware_families:
+- RansomEXX
+authors:
+- Shwetanjali Rasal
+TTPs:
+  processes:
+  - jenkins-cli.jar
+  - java
+  commandline:
+  - /usr/bin/java -jar jenkins-clijar who-am-i
+  - POST /cli?remoting=false HTTP/1.1
+  - GET /cli?remoting=false HTTP/1.1
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load: ''
+  network_connections:
+  - executable: java
+    destination_address: 10.253.216.133
+    port: '8080'
+    url: ''
+    hostname: ''
+  file_activity:
+  - /etc/group
+  persistence: ''
+  pipes: ''
+  process_relations: ''
+IOCs:
+- hash: 4cae449450c07b7aa74314173c7b00d409eabfe22b86859f3b3acedd660
+- hash: sd4e57dbal163018dfb89I24de90288
+reference: https://blogs.juniper.net/en-us/threat-research/cve-2024-23897-enabled-ransomware-attack-on-indian-banks
+date_of_publication: August 13, 2024
+file_creation_date: June 12, 2025
