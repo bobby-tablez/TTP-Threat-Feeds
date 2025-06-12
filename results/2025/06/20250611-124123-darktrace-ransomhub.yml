@@ -1,0 +1,50 @@
+description: RansomHub is a rapidly gaining ransomware-as-a-service (RaaS) platform
+  adopted by threat actors like ScatteredSpider. The report details its tactics, techniques,
+  and procedures (TTPs), including reconnaissance, lateral movement, and data exfiltration.
+attribution: ScatteredSpider
+malware_families:
+- RansomHub
+authors:
+- Maria Geronikolou
+- Nahisha Nobregas
+TTPs:
+  processes:
+  - SecretServerSecretStealer
+  - Remmina
+  - Rclone
+  commandline:
+  - splashtop[.]com
+  - agent-api[.]atera[.]com
+  - 20.37.139[.]187
+  - st-v3-univ-srs-win-3720[.]api[.]splashtop[.]com
+  powershell:
+  - SecretServerSecretStealer
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: Device
+    destination_address: 38.244.145[.]85
+  - executable: Device
+    destination_address: 20.37.139[.]187
+    url: agent-api.atera[.]com
+  - executable: Device
+    destination_address: 108.157.150[.]120
+    url: ps.atera[.]com
+  - executable: Device
+    destination_address: st-v3-univ-srs-win-3720[.]api[.]splashtop[.]com
+  file_activity: []
+  persistence:
+  - RMM tools such as Atera and Splashtop are used to facilitate remote access.
+  pipes: []
+  process_relations: []
+IOCs:
+- 38.244.145[.]85
+- 20.37.139[.]187
+- agent-api.atera[.]com
+- 108.157.150[.]120
+- ps.atera[.]com
+- st-v3-univ-srs-win-3720[.]api[.]splashtop[.]com
+- .293ac3a
+reference: https://www.darktrace.com/blog/ransomhub-revisited-new-front-runner-in-the-ransomware-as-a-service-marketplace
+date_of_publication: February 6, 2025
+file_creation_date: June 11, 2025
