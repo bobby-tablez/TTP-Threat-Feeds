@@ -1,0 +1,73 @@
+description: Exploitation of CVE-2025-31324 in SAP NetWeaver Visual Composer allows
+  attackers to upload arbitrary files, potentially leading to remote code execution
+  and full system compromise.  Darktrace observed exploitation attempts before public
+  disclosure and detected associated malware like KrustyLoader.
+attribution: Chinese Advanced Persistent Threats (APTs) groups Chaya_004, UNC5221,
+  UNC5174, CL-STA-0048; RansomEXX (Storm-2460), BianLian, Qilin
+malware_families:
+- KrustyLoader
+- Sliver
+authors:
+- Signe Zaharka
+- Emily Megan Lim
+- Ryan Traill
+TTPs:
+  processes:
+  - certutil.exe
+  - powershell.exe
+  - msiexec.exe
+  - xmrigCCall/s.exe
+  commandline: []
+  powershell:
+  - -EncodedCommand IEx=aW4zMzU2Mzg0MDIxNzYwNDQyMjE1NjI=
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: certutil.exe
+    destination: cvvr9gl9namk9u955tsgaxy3upyezhnm6.oast[.]online
+    port: ''
+  - executable: powershell.exe
+    destination: 23.95.123[.]5
+    port: '666'
+  - executable: msiexec.exe
+    destination: abode-dashboard-media.s3.ap-south-1.amazonaws[.]com
+    port: ''
+  file_activity:
+  - cvvr9gl9namk9u955tsgaxy3upyezhnm6.oast[.]online
+  - abode-dashboard-media.s3.ap-south-1.amazonaws[.]com/nVW2lsYsYnv58
+  - abode-dashboard-media.s3.ap-south-1.amazonaws[.]com/UUTICMm
+  - beansdeals-static.s3.amazonaws[.]com/UsjKy
+  - brandnav-cms-storage.s3.amazonaws[.]com/3S1kc
+  - bringthenoiseappnew.s3.amazonaws[.]com/pp79zE
+  - f662135bdd8bf792a941ea222e8a1330
+  - fa645f33c0e3a98436a0161b19342f78683dbd9d
+  - 1d26fff4232bc64f9ab3c2b09281d932dd6afb84a24f32d772d3f7bc23d99c60
+  - 6900e844f887321f22dd606a6f2925ef
+  - da23dab4851df3ef7f6e5952a2fc9a6a57ab6983
+  - 17d65a9d8d40375b5b939b60f21eb06eb17054fc
+  - 8c8681e805e0ae7a7d1a609efc000c84
+  - 29274ca90e6dcf5ae4762739fcbadf01
+  - 3268f269371a81dbdce8c4eedffd8817c1ec2eadec9ba4ab043cb779c2f8a5d2
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- cvvr9gl9namk9u955tsgaxy3upyezhnm6.oast[.]online
+- abode-dashboard-media.s3.ap-south-1.amazonaws[.]com/nVW2lsYsYnv58
+- abode-dashboard-media.s3.ap-south-1.amazonaws[.]com/UUTICMm
+- beansdeals-static.s3.amazonaws[.]com/UsjKy
+- brandnav-cms-storage.s3.amazonaws[.]com/3S1kc
+- bringthenoiseappnew.s3.amazonaws[.]com/pp79zE
+- f662135bdd8bf792a941ea222e8a1330
+- fa645f33c0e3a98436a0161b19342f78683dbd9d
+- 1d26fff4232bc64f9ab3c2b09281d932dd6afb84a24f32d772d3f7bc23d99c60
+- 6900e844f887321f22dd606a6f2925ef
+- da23dab4851df3ef7f6e5952a2fc9a6a57ab6983
+- 17d65a9d8d40375b5b939b60f21eb06eb17054fc
+- 8c8681e805e0ae7a7d1a609efc000c84
+- 29274ca90e6dcf5ae4762739fcbadf01
+- 3268f269371a81dbdce8c4eedffd8817c1ec2eadec9ba4ab043cb779c2f8a5d2
+- 23.95.123[.]5:666
+reference: https://www.darktrace.com/blog/tracking-cve-2025-31324-darktraces-detection-of-sap-netweaver-exploitation-before-and-after-disclosure
+date_of_publication: June 16, 2025
+file_creation_date: June 17, 2025

@@ -1,0 +1,44 @@
+description: A JPEG image contains a steganographically hidden PE file. The payload
+  is extracted using jpegdump.py, byte-stats.py and base64dump.py tools.
+attribution: Unknown
+malware_families:
+- .NET DLL
+TTPs:
+  processes:
+  - jpegdump.py
+  - byte-stats.py
+  - base64dump.py
+  - sed
+  commandline:
+  - jpegdump.py 2169cb261d1e1528718cC063a1999297bfe26066ce 2be Fbbccbs16d82275C6.vir
+  - jpegdump.py -s 12 -d 2169cb261d1e1528718cC863a199929C7bFe26060Ce2befbbccbs16d82275c6.vir
+    | byte-stats|py -r
+  - jpegdump.py -s 12 -d 2169cb261d1e1528718cc863a199929C7bFe26060Ce2befbbccbs16d82275c6.vir
+    | sed "s/@/A/g" baseadunp . py
+  - set DSS_DEFAULT_HASH_ALGORITHMS=sha256
+  - jpegdump.py -s 12 -d 2169cb261d1e1528718cC863a1999297bfe26066ce 2befbbccbs16d82275c6.vir
+    | sed "s/@/A/g" |baseadunp . py
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load: ''
+  network_connections:
+  - executable: jpegdump.py
+    destination_address: zynova[.]kesug[.]com
+    url: hxxps://zynova[.]kesug[.]com/new_image.jpg
+    port: ''
+  file_activity:
+  - C:\\Demo\\2160cb261d1e1528718CC063a199929C7bfe26660Ce2befbbccbs16d8227C5C6.vir
+  persistence: ''
+  pipes: ''
+  process_relations: ''
+IOCs:
+- hash: 2169cb261d1e1528718cC063a1999297bfe26066ce
+- hash: 2be Fbbccbs16d82275C6
+- url: hxxps://zynova[.]kesug[.]com/new_image.jpg
+- environment_variable: DSS_DEFAULT_HASH_ALGORITHMS=sha256
+authors:
+- Didier Stevens
+reference: https://isc.sans.edu/diary/A+JPEG+With+A+Payload/32048/
+date_of_publication: June 16, 2025
+file_creation_date: June 17, 2025

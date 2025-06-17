@@ -1,0 +1,73 @@
+description: ClickFix baiting is an exploitation of the end user, making use of social
+  engineering techniques masquerading as error messages or routine verification processes,
+  that can result in malicious code execution. Threat actors utilize similar techniques,
+  tools and procedures (TTPs) to gain initial access.
+attribution: APT28, MuddyWater (linked to Russia and Iran)
+malware_families:
+- XWorm
+- Lumma
+- AsyncRAT
+authors:
+- Keanna Grelicha
+- Jennifer Beckett
+TTPs:
+  processes:
+  - powershell.exe
+  commandline:
+  - powershell.exe -EncodedCommand I="MS-Windows(Get-WmiObject -Namespace root/cimv2
+    -Class Win32_OperatingSystem).Caption";Invoke-Expression ([System.Reflection.Assembly]::LoadWithPartialName("System.Net.Http")).GetString([uri]$I)
+  - powershell.exe -EncodedCommand I="MS-Windows(Get-WmiObject -Namespace root/cimv2
+    -Class Win32_OperatingSystem).Caption";Invoke-Expression ([System.Reflection.Assembly]::LoadWithPartialName("System.Net.Http")).GetString([uri]$I)
+  powershell:
+  - I="MS-Windows(Get-WmiObject -Namespace root/cimv2 -Class Win32_OperatingSystem).Caption";Invoke-Expression
+    ([System.Reflection.Assembly]::LoadWithPartialName("System.Net.Http")).GetString([uri]$I)
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: powershell.exe
+    destination_address: 193.36.38[.]237
+    port: 8080
+  - executable: powershell.exe
+    destination_address: 188.34.195[.]44
+    port: 443
+  file_activity:
+  - /1741714208
+  - /1741718928
+  - /1743871488
+  - /1741200416
+  - /1741356624
+  - /ttt
+  - /1741965536
+  - /1.txt
+  - /1744205184
+  - /1744139920
+  - /1744134352
+  - /1744125600
+  - /1[.]php?s=527
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- hash: 34ff2f72c191434ce5f20ebc1a7e823794ac69bba9df70721829d66e7196b044
+- hash: 10a5eab3eef36e75bd3139fe3a3c760f54be33e3
+- ip_address: 141.193.213[.]11
+- ip_address: 141.193.213[.]10
+- ip_address: 64.94.84[.]217
+- ip_address: 138.199.156[.]22
+- ip_address: 94.181.229[.]250
+- ip_address: 216.245.184[.]181
+- ip_address: 212.237.217[.]182
+- ip_address: 168.119.96[.]41
+- ip_address: 193.36.38[.]237
+- ip_address: 188.34.195[.]44
+- ip_address: 205.196.186[.]70
+- hostname: rkuagqnmnypetvf[.]top
+- hostname: shorturl[.]at/UB6E6
+- hostname: tlgrm-redirect[.]icu
+- hostname: diagnostics.medgenome[.]com
+- uri: /1744205184
+- uri: /1744205200
+- uri: /init1234
+reference: https://www.darktrace.com/blog/unpacking-clickfix-darktraces-detection-of-a-prolific-social-engineering-tactic
+date_of_publication: June 05, 2025
+file_creation_date: June 17, 2025

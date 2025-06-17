@@ -1,0 +1,57 @@
+description: The report details a malicious Excel file (blcopy.xls) utilizing steganography
+  to conceal and execute payloads. The process involves downloading and executing
+  VBA scripts, PowerShell scripts, and ultimately a DLL (Katz stealer).
+attribution: Unknown
+malware_families:
+- Katz Stealer
+TTPs:
+  processes:
+  - oledump.py
+  - zipdump.py
+  - cmd.exe
+  - wscript.exe
+  - msxml2.serverxmlhttp
+  commandline:
+  - oledump.py blcopy.xls
+  - oledump.py blcopy.xls -s 14 -d | zipdump.py
+  - cmd.exe /c "
+  - C:\\Windows\\Temp\\invertase.bat"
+  - start "" /b wscript //nologo "C:\\Windows\\Temp\\poikilohydric.vbs"
+  - timeout /t 1 /nobreak >nul
+  - del "C:\\Windows\\Temp\\poikilohydric.vbs"
+  powershell: []
+  scripting_engine:
+  - VBScript
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: wscript.exe
+    destination_address: 107[.]172[.]235[.]203
+    port: ''
+    url: hxxp://107[.]172[.]235[.]203/245/wecreatedbestsolutionswithniceworkingskill.hta
+  - executable: wscript.exe
+    destination_address: paste[.]ee
+    port: ''
+    url: hxxp://paste[.]ee/d/tifhAljb/0
+  file_activity:
+  - C:\\Windows\\Temp\\invertase.bat
+  - C:\\Windows\\Temp\\poikilohydric.vbs
+  - new_image.jpg
+  persistence: []
+  pipes: []
+  process_relations:
+  - cmd.exe -> wscript.exe
+  - wscript.exe -> C:\\Windows\\Temp\\invertase.bat
+  - invertase.bat -> C:\\Windows\\Temp\\poikilohydric.vbs
+  - wscript.exe -> poikilohydric.vbs
+IOCs:
+- hash: c92c761a4c5c3f44e914d6654a678953d56d4d3a2329433afe1710b59c9acd3a
+- url: hxxp://107[.]172[.]235[.]203/245/wecreatedbestsolutionswithniceworkingskill.hta
+- url: hxxp://paste[.]ee/d/tifhAljb/0
+- hash: 352ef6f5c4568d6ed6a018a5128cf538d33ea72bd040f0fd3b9bca6bd6a5dae9
+- hash: 5a73927d56c0fd4a805489d5817e1aa4fbd491e5a91ed36f4a2babef74158912
+authors:
+- Xavier Mertens (@xme)
+reference: https://isc.sans.edu/diary/More%20Steganography!/32044
+date_of_publication: June 14, 2025
+file_creation_date: June 17, 2025

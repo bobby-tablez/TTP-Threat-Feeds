@@ -1,0 +1,59 @@
+description: Volexity has reported a cyber-espionage campaign undertaken by a suspected
+  Pakistan-based threat actor (UTA0137) targeting government entities in India. The
+  malware, DISGOMOJI, is written in Golang for Linux systems and leverages Discord
+  for command and control.
+attribution: Pakistan-based threat actor (UTA0137)
+malware_families:
+- DISGOMOJI
+authors:
+- Volexity
+TTPs:
+  processes:
+  - vmcoreinfo
+  - bash
+  - discord
+  - ps
+  - nmap
+  - chisel
+  - ligolo
+  - zenity
+  - sudo
+  commandline:
+  - vmcoreinfo
+  - /usr/bin/bash -c "cd <HomeDir>/.x86_64-linux-gnuin && ./vmcoreinfo; exec bash"
+  - expl0it-2 /usr/bin/sudo
+  powershell: ''
+  scripting_engine:
+  - bash
+  registry_keys: ''
+  image_load: ''
+  network_connections: ''
+  file_activity:
+  - .x86_64-linux-gnu/vmcoreinfo
+  - DSOP.pdf
+  - clawsindia[.]in/vmcoreinfo
+  - ordai[.]quest/vmcoreinfo
+  - LAN_Conf.sh
+  - WAN_Conf
+  - GNOME_Core.desktop
+  - ps_output.txt
+  - BID1.txt
+  - GID1.txt
+  - CID.txt
+  persistence:
+  - cron jobs (@reboot entry)
+  - XDG autostart entries (.desktop file in /home/<user>/.config/autostart)
+  pipes: ''
+  process_relations: ''
+IOCs:
+- MD5: 1443e58a298458c30ab91b37c0335bdadbacd756
+- MD5: 0d4111ab5471c7f5b909bff336ba8cd66f9d8630
+- MD5: e5182d13d66c3efaa7676510581d622f98471895
+- MD5: e1bdb995998ab338fc596777a78121fc49f002b5
+- MD5: 3dff44bede709295fffd3ae3e9599f6ab8197af4
+- MD5: 2dfe824d0298201e0efb30f16b3ce8a409ffe006
+- clawsindia[.]in
+- ordai[.]quest
+reference: https://www.volexity.com/blog/2024/06/13/disgomoji-malware-used-to-target-indian-government/
+date_of_publication: June 13, 2024
+file_creation_date: June 17, 2025

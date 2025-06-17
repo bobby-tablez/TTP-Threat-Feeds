@@ -1,0 +1,33 @@
+description: Medusa is a ransomware-as-a-service (RaaS) group that targets small and
+  medium-sized entities, employing double extortion tactics.
+attribution: Unknown
+malware_families:
+- Medusa
+TTPs:
+  processes:
+  - svchost.exe
+  - dllhost.exe
+  commandline:
+  - dllhost.exe /Processid:{3E5FC7F9-9A51-4367-9063-A120244FBEC7}
+  - dllhost.exe /Processid:{D2E7041B-2927-42fb-8E9F-7CE93B6DC937}
+  - dllhost.exe /Processid:{752438CB-E941-433F-BCB4-8B7D2329F0C8}
+  - dllhost.exe /Processid:{3AD05575-8857-4850-9277-11B85BDBBEA9}
+  - dllhost.exe /Processid:{4D111E08-CBF7-4112-A926-2C7920AF52FC}
+  - dllhost.exe /Processid:{17CCA47D-DAE5-4E4A-AC42-CC54E28F334A}
+  - dllhost.exe /Processid:{BDB57FF2-79B9-4205-9447-F5FE85F37312}
+  - dllhost.exe /Processid:{E9495B87-D950-4AB5-87A5-FF6D7@0BF3E90}
+  - dllhost.exe /Processid:{E10F6C3A-F1AE-4ADC-AA9D-2FE65525666E}
+  - dllhost.exe /Processid:{ddc@5a5a-3513-4e06-8eaf-54eclbc2dcea}
+  - dllhost.exe /Processid:{1f486a52-3cb1-48fd-8f50-b8dc300d9f9d}
+  - dllhost.exe /Processid:{45907811-1d3a~-11d0-891f-00aav@4b2e24}
+  - dllhost.exe /Processid:{4de225bf-cf59-4cfc-85f7-68b901185355}
+  - dllhost.exe /Processid:{F56F6FDD-AA9D-4618-A949-C1B91AF43B1A}
+  registry_keys:
+  - HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\UAC\\COMAutoApprovalList
+IOCs:
+- https://falcon.us-2.crowdstrike.com/investigate/search?end=&query=event_platform%3DWin%0A%7C%20in(field%3D%23event_simpleName%2Cvalues%3D%5B\"ProcessRollup2\"%2C\"SyntheticProcessRollup2\"%5D)%0A%7C...
+authors:
+- Unknown
+reference: https://intel471.com/blog/threat-hunting-case-study-medusa-ransomware
+date_of_publication: May 14, 2025
+file_creation_date: June 17, 2025

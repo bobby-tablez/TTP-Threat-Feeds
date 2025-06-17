@@ -1,0 +1,49 @@
+description: Guardio has been tracking a large-scale malware spreading campaign targeting
+  hundreds of thousands of users daily. The campaign utilizes malvertising and deceptive
+  ISO files to distribute malicious payloads.
+attribution: Unknown
+malware_families:
+- ISOtonic
+TTPs:
+  processes:
+  - explorer.exe
+  commandline:
+  - 'https://reukandthis[.]xyz/?cs=a2xMZFZfVXhUYF1cfVNuUlx7UGY&abt=0&red=1&sm=16&k=2022
+    evil dead game drop boost performance optimization link download&v=1.34.27.1&sts=0&prn=0&emb=0&tid=951554&inc=14&u=466215146980128&agec=1655732783&fs=1&mbkb=531.9148936170212&file=Uncharted:
+    Legacy of Thieves Collection Startup Crash Fix PC | Black Screen Fix 2022 Link
+    1&ref=https://www.possiblenow.xyz/2022/05/evil-dead-game-fps-drop-fix-boost-fps.html&osr=www.possiblenow.xyz&jst=0&enr=0&lcua=mozilla/5.0
+    (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/102.0.0.0
+    safari/537.36&tzd=-4&uloc=&if=0&ct=5&ctc=8&_TwFt=1655733070260&utr1=00:00:17&utr2=173&utr3=0&utr4=0&utr5=0&utr6=0&utr7=12'
+  - https://tioniamcurrentl[.]xyz/lp?cms=NTY5NjMHAgoBAAACDQUDAQABBgsHBQoATwwDAQcCBkoIAAYADgAAAgAARQ%3D%3D&fn=Your%20File%20Is%20Ready%20To%20Download&lpn=stepswin&extt=search-good.com%2F%3Ftid%3D952736cms
+  - https://ckgrounda[.]com/Your File Is Ready To Download.iso
+  network_connections:
+  - executable: explorer.exe
+    destination_address: reukandthis[.]xyz
+    port: ''
+  - executable: explorer.exe
+    destination_address: tioniamcurrentl[.]xyz
+    port: ''
+  - executable: explorer.exe
+    destination_address: ckgrounda[.]com
+    port: ''
+  file_activity:
+  - /path/to/iso/file.iso
+  persistence:
+  - Auto-generated ISO files with varying sizes and hashes to evade detection.
+IOCs:
+- reukandthis[.]xyz
+- tioniamcurrentl[.]xyz
+- ckgrounda[.]com
+- 'https://reukandthis[.]xyz/?cs=a2xMZFZfVXhUYF1cfVNuUlx7UGY&abt=0&red=1&sm=16&k=2022
+  evil dead game drop boost performance optimization link download&v=1.34.27.1&sts=0&prn=0&emb=0&tid=951554&inc=14&u=466215146980128&agec=1655732783&fs=1&mbkb=531.9148936170212&file=Uncharted:
+  Legacy of Thieves Collection Startup Crash Fix PC | Black Screen Fix 2022 Link 1&ref=https://www.possiblenow.xyz/2022/05/evil-dead-game-fps-drop-fix-boost-fps.html&osr=www.possiblenow.xyz&jst=0&enr=0&lcua=mozilla/5.0
+  (windows nt 10.0; win64; x64) applewebkit/537.36 (khtml, like gecko) chrome/102.0.0.0
+  safari/537.36&tzd=-4&uloc=&if=0&ct=5&ctc=8&_TwFt=1655733070260&utr1=00:00:17&utr2=173&utr3=0&utr4=0&utr5=0&utr6=0&utr7=12'
+- https://tioniamcurrentl[.]xyz/lp?cms=NTY5NjMHAgoBAAACDQUDAQABBgsHBQoATwwDAQcCBkoIAAYADgAAAgAARQ%3D%3D&fn=Your%20File%20Is%20Ready%20To%20Download&lpn=stepswin&extt=search-good.com%2F%3Ftid%3D952736cms
+- https://ckgrounda[.]com/Your File Is Ready To Download.iso
+authors:
+- Itay Schechter
+- Nati Tal
+reference: https://guard.io/labs/isotonic-1-malvertising-at-its-best-worst
+date_of_publication: September 22, 2022
+file_creation_date: June 17, 2025

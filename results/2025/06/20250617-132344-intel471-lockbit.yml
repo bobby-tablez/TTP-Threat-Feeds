@@ -1,0 +1,59 @@
+description: The DragonForce ransomware-as-a-service (RaaS) group has been observed
+  targeting organizations globally, particularly in the retail, financial, and manufacturing
+  sectors. They employ a dual-extortion strategy, encrypting data and threatening
+  to release exfiltrated information.
+attribution: DragonForce (likely based in Malaysia, main operator posts on RAMP cybercrime
+  forum), affiliated with TheCom/Scattered Spider
+malware_families:
+- LockBit
+- Conti
+TTPs:
+  processes:
+  - cnd.exe
+  - OneDriveSetup.exe
+  - Searchindexer.exe
+  - MicrosoftEdgeAutolLaunch_1453EE22FAC9EB73D23441DF5EBE97270
+  commandline:
+  - cnd.exe /q /c del /q "C:\\Program Files\\MicrosoftOneDrive\\Update\\OneDriveSetup.
+    exe"
+  - cnd.exe /q /c del /q "Ptversion\\RunOnce\\Delete Cached Update Binary OneDrive\\StandaloneUpdater\\OneDriveSetup.
+    exe"
+  registry_keys:
+  - HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce\\Delete Cached Standalone
+    Update Binary
+  - HKU\\S-1-5-21-627081621-193941968-867742347- 1601\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\MicrosoftEdgeAutoLaunch_1453EE22FAC9EB73D23441DF5EBE97270
+  persistence:
+  - Adding a program to the startup folder or referencing it with a registry run key.
+IOCs:
+- registry_key_name contains "Decoy"
+- TargetObject IN ("*\\\\software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run*"
+  ...)
+- TargetObject IN ("*\\\\software\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Windows\\\\Run*"
+  ...)
+- TargetObject IN ("*\\\\software\\\\Wow6432Node\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Windows\\\\Run*"
+  ...)
+- TargetObject IN ("*\\\\software\\\\WOW6432Node\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run*"
+  ...)
+- TargetObject IN ("*\\\\software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer\\\\User
+  Shell Folders*" ...)
+- TargetObject IN ("*\\\\software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer\\\\Shell
+  Folders*" ...)
+- TargetObject IN ("*\\\\software\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Winlogon\\\\Userinit*"
+  ...)
+- TargetObject IN ("*\\\\software\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Winlogon\\\\Shell*"
+  ...)
+- TargetObject IN ("*\\\\software\\\\Microsoft\\\\WindowsNT\\\\CurrentVersion\\\\Windows\\\\AppInit_DLLs*"
+  ...)
+- TargetObject IN ("*\\\\software\\\\Wow6432Node\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Windows\\\\AppInit_DLLs*"
+  ...)
+- TargetObject IN ("*\\\\software\\\\Microsoft\\\\WindowsNT\\\\CurrentVersion\\\\Windows\\\\Load*"
+  ...)
+- TargetObject IN ("*\\\\software\\\\Wow6432Node\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Windows\\\\Load*"
+  ...)
+- TargetObject IN ("*\\\\software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Policies\\\\Explorer\\\\Run*"
+  ...)
+authors:
+- Intel 471
+reference: https://intel471.com/blog/threat-hunting-case-study-dragonforce
+date_of_publication: June 10, 2025
+file_creation_date: June 17, 2025

