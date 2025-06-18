@@ -1,0 +1,71 @@
+description: This report details a real-world scenario where an attacker exploited
+  a vulnerable vsftpd service (version 2.3.4) on an AWS EC2 instance using Metasploit
+  to achieve Remote Code Execution (RCE). The attacker then leveraged the compromised
+  instance to escalate privileges, create a backdoor by creating a new IAM user with
+  administrator access.
+attribution: Unknown
+malware_families:
+- vsftpd 2.3.4
+authors:
+- Andre Rall
+TTPs:
+  processes:
+  - nmap
+  - vsftpd
+  - sshd
+  - apache2
+  - python3
+  - wget
+  commandline:
+  - sudo nmap --open -Pn -top-ports 1000 -T4 -sS -sC -sV I - 165
+  - vsftpd 2.3.4
+  - OpenSSH 7.6pl Ubuntu 4ubuntu0.7 (Ubuntu Linux)
+  - Apache httpd 2.4.29 ((Ubuntu))
+  - python3 script1of2.py
+  - python3 script2of2.py
+  - wget -qO- http://169.254.169.254/latest/meta-data/public-ipv4
+  - wget -qO- http://169.254.169.254/latest/meta-data/public
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load: ''
+  network_connections:
+  - executable: nmap
+    destination_address: I - 165
+    port: '21'
+  - executable: vsftpd
+    destination_address: I - 165
+    port: '21'
+  - executable: ssh
+    destination_address: I - 165
+    port: '22'
+  - executable: apache2
+    destination_address: I - 165
+    port: '80'
+  file_activity:
+  - /msf6 exploit (unix/ftp/vsftpd 234 backdoor)
+  - /bin/bash
+  - /scriptlof2.py
+  - /script2of2.py
+  - /usr/snap/var/vmlinuz
+  - /usr/snap/var/vmlinuz.old
+  persistence:
+  - Creation of a new IAM user named "BAD" with AdministratorAccess policy and an
+    access key.
+  pipes: ''
+  process_relations:
+  - nmap -> vsftpd
+  - vsftpd -> python3 (script1of2.py)
+  - python3 (script1of2.py) -> python3 (script2of2.py)
+IOCs:
+- hash: ''
+- ip_address: I - 165
+- domain: ''
+- url:
+  - http://169.254.169.254/latest/meta-data/public-ipv4
+  - http://169.254.169.254/latest/meta-data/public
+- filename: /scriptlof2.py
+- filename: /script2of2.py
+reference: https://www.uptycs.com/blog/threat-research-report-team/remote-code-execution-aws-cloud-security
+date_of_publication: March 18, 2025
+file_creation_date: June 18, 2025

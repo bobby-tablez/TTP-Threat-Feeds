@@ -1,0 +1,62 @@
+description: Check Point Research discovered malicious repositories distributing malware
+  via the Stargazers Ghost Network, targeting Minecraft users with a multi-stage attack
+  chain.
+attribution: Russian-speaking threat actor
+malware_families:
+- Java downloader
+- .NET stealer
+authors:
+- Jaromir Horejsi (@JaromirHorejsi)
+- Antonis Terefos (@Tera0017)
+TTPs:
+  processes:
+  - tasklist
+  - notepad
+  - java
+  commandline:
+  - java -jar FunnyMap-0.7.5.jar
+  - java -jar Oringo-1.8.9.jar
+  - java -jar Oringo-Client.1.8.9.jar
+  - java -jar Polar-1.8.9.jar
+  - java -jar PolarClient-v2.6.jar
+  - java -jar SkyblockExtras-1.8.9.jar
+  - java -jar Taunahi-V3.jar
+  - java -jar TaunahiPlus-V3.jar
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load: ''
+  network_connections:
+  - executable: java
+    destination_address: 147.45.79.104
+    port: ''
+    url: hxxp://147.45.79.104/download
+  - executable: java
+    destination_address: 147.45.79.104
+    port: '80'
+    url: hxxp://147.45.79[.]104
+  file_activity:
+  - C:\\Windows\\System32\\tasklist.exe
+  - '%APPDATA%/discord/Local Storage/leveldb'
+  - <installation_directory>\\.tlauncher\\legacy\\Minecraft\\game\\mods\\
+  persistence:
+  - Minecraft mods folder copy
+  pipes: ''
+  process_relations:
+  - Minecraft -> tasklist
+  - Minecraft -> notepad
+IOCs:
+- hash: 610486a827b9118c4443601c66524ba8036eb2bb
+- hash: 32c36b5892d2af4de4bd6c097814e56e672c5b21
+- hash: 4e17fb81ae629b923234147d500c27200ca48e3c
+- hash: 52f5bf7d2bc69fc89c3dedc85e2f7d7a0255aa9c
+- hash: 9f1b30ca6551bd982e54c4a57e70ab372083fc05
+- hash: a6e206f07cd91f9a7a2b764808778dbcbae108ec
+- ip: 147.45.79.104
+- url: hxxps://pastebin.com/raw/xCa3vSiP
+- url: hxxp://147.45.79[.]104/download
+- url: hxxp://147.45.79[.]104/cookies
+- url: hxxp://147.45.79[.]104
+reference: https://research.checkpoint.com/2025/minecraft-mod-malware-stargazers/
+date_of_publication: June 18, 2025
+file_creation_date: June 18, 2025
