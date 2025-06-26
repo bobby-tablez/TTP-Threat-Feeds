@@ -21,7 +21,7 @@ from dateutil.parser import parse as date_parse
 # CONFIG
 LLM_ENDPOINT = "http://127.0.0.1:1234/v1/chat/completions"
 HEADERS = {"Content-Type": "application/json"}
-MODEL_NAME = "gemma-3-12b-it@q8_0"
+MODEL_NAME = "phind-codellama-34b-v2"
 URLS_FILE = "urls.txt"
 CACHE_FILE = "processed_urls.txt"
 
@@ -33,7 +33,7 @@ Extract the following information from this cyber threat report:
 - description: A 1-2 sentence summary
 - attribution: Attribution (threat actor, APT group, country).
 - malware_families: Malware family names.
-- TTPs: Extract ALL actual observable indicators. Each TTP subkey containing list items as outlined (no deviation or truncation, only the data provided). TTPs include the following sub keys: (exclude the following sub keys if not present)
+- TTPs: Extract ALL actual observable indicators. No formal sentences in this section, just data. Each TTP subkey containing list items as outlined (no deviation or truncation, only the data provided). If no applicable data is found, provide empty keys. TTPs include the following sub keys:
   - processes: a list of all process names executed
   - commandline: Full list of process with commandline arguments
   - powershell: any and all powershell scripts

