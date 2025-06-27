@@ -1,0 +1,46 @@
+description: Russian threat actors UTA0352 and UTA0355 conducted targeted phishing
+  attacks against Microsoft 365 accounts using OAuth workflows.
+attribution: UTA0352, UTA0355 (Russian threat actors)
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: login.microsoftonline.com
+    destination_address: https://login.microsoftonline[.]com/organizations/oauth2/v2.0/authorize?state=https://mae.gov[.]ro/[REMOVED]&client_id=aebc6443-996d-45c2-90f0-388ff96faa56&scope=https://graph.microsoft.com/.default&response_type=code&redirect_uri=https://insiders.vscode.dev/redirect&login_hint=<EMAIL
+      HERE>
+  - executable: login.microsoftonline[.]com
+    destination_address: https://login.microsoftonline[.]com/common/oauth2/authorize?redirect=https://zoom.us/j/<snip>&client_id=aebc6443-996d-45c2-90f0-388ff96faa56&resource=https://graph.microsoft.com&response_type=code&redirect_uri=https://vscode-redirect.azurewebsites.net&login_hint=<removed>&ui_locales=en-US&mkt=en-US&client-request-id=<removed>
+  - executable: 127.0.0.1
+    destination_address: http://127.0.0.1:9217/callback?code=1.ARsAIGLD9ki0FE63WmhS-KbgFENkvK5tmX[snipped]D&session_state=[uuid]
+  - executable: login.microsoftonline.com
+    destination_address: https://login.microsoftonline.com/common/oauth2/authorize?url=https://teams.microsoft.com/[redacted]&client_id=29d9ed98-a469-4536-ade2-f981bc1d605e&resource=01cb2876-7ebd-4aa4-9cc9-d28bd4d359a9&response_type=code&redirect_uri=https%3A%2F%2Flogin.microsoftonline.com%2FWebApp%2FCloudDomainJoin%2F8&amr_values=ngcmfa&login_hint=<[email
+      protected]>
+  - executable: login.microsoftonline.com
+    destination_address: https://login.microsoftonline.com/WebApp/CloudDomainJoin/8?code=[redacted]&session_state=[redacted]
+  file_activity:
+  - path: PDF document purporting to be from the Romanian Ministry of Foreign Affairs
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- hxxps://login.microsoftonline[.]com/organizations/oauth2/v2.0/authorize?state=https://mae.gov[.]ro/[REMOVED]&client_id=aebc6443-996d-45c2-90f0-388ff96faa56&scope=https://graph.microsoft.com/.default&response_type=code&redirect_uri=https://insiders.vscode.dev/redirect&login_hint=<EMAIL
+  HERE>
+- hxxps://login.microsoftonline[.]com/common/oauth2/authorize?redirect=https://zoom.us/j/<snip>&client_id=aebc6443-996d-45c2-90f0-388ff96faa56&resource=https://graph.microsoft.com&response_type=code&redirect_uri=https://vscode-redirect.azurewebsites.net&login_hint=<removed>&ui_locales=en-US&mkt=en-US&client-request-id=<removed>
+- hxxp://127.0.0.1:9217/callback?code=1.ARsAIGLD9ki0FE63WmhS-KbgFENkvK5tmX[snipped]D&session_state=[uuid]
+- https://login.microsoftonline.com/common/oauth2/authorize?url=https://teams.microsoft.com/[redacted]&client_id=29d9ed98-a469-4536-ade2-f981bc1d605e&resource=01cb2876-7ebd-4aa4-9cc9-d28bd4d359a9&response_type=code&redirect_uri=https%3A%2F%2Flogin.microsoftonline.com%2FWebApp%2FCloudDomainJoin%2F8&amr_values=ngcmfa&login_hint=<[email
+  protected]>
+- https://login.microsoftonline.com/WebApp/CloudDomainJoin/8?code=[redacted]&session_state=[redacted]
+authors:
+- Charlie Gardner
+- Josh Duke
+- Matthew Meltzer
+- Sean Koessel
+- Steven Adair
+- Tom Lancaster
+reference: https://www.volexity.com/blog/2025/04/22/phishing-for-codes-russian-threat-actors-target-microsoft-365-oauth-workflows/
+date_of_publication: April 22, 2025
+file_creation_date: June 27, 2025

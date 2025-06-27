@@ -1,0 +1,174 @@
+description: Educated Manticore (APT42) uses spear-phishing to target Israeli individuals
+  and organizations, leveraging custom phishing kits built with React for credential
+  harvesting.
+attribution: Educated Manticore (APT42)
+malware_families:
+- CharmPower
+- PowerLess
+TTPs:
+  commandline:
+  - window.open("https" + ":" + "//sendly-ink" + "." + "shop/YtgtyyzP")
+  scripting_engine:
+  - <script defer="defer" src="/static/js/main.a184cc65.js"></script>
+  network_connections:
+  - executable: main.a184cc65.js
+    destination_address: idea-home.online
+    port: '8569'
+    url: https://idea-home.online:8569/info/param
+  file_activity:
+  - /static/js/main.a184cc65.js
+  - /styles/font.css
+  - /static/css/main.365793d0.css
+IOCs:
+  ips:
+  - 185.130.226[.]7
+  - 45.12.2[.]158
+  - 45.143.166[.]230
+  - 91.222.173[.]141
+  - 194.11.226[.]91
+  - 95.66.213[.]132
+  - 146.19.254[.]238
+  - 194.11.226[.]29
+  - 194.11.226[.]46
+  - 194.61.120[.]185
+  - 2.56.126[.]230
+  - 194.11.226[.]5
+  domains:
+  - conn-ectionor.cfd
+  - optionalynk.online
+  - ques-tion-ing.xyz
+  - sendly-ink.shop
+  - shaer-likn.store
+  - alison624.online
+  - bestshopu.online
+  - black-friday-store.online
+  - idea-home.online
+  - book-handwrite.online
+  - world-shop.online
+  - lenan-rex.online
+  - first-course.online
+  - reading-course.online
+  - make-house.online
+  - est5090.online
+  - zra-roll.online
+  - tomas-company.online
+  - clame-rade.online
+  - dmn-for-hall.online
+  - word-course.online
+  - clothes-show.online
+  - expressmarket.online
+  - loads-ideas.online
+  - sky-writer.online
+  - becker624.online
+  - adams-cooling.online
+  - stadium-fresh.online
+  - royalsoul.online
+  - live-message.online
+  - teammate-live.online
+  - wood-house.online
+  - ude-final.online
+  - city-splash.online
+  - door-black-meter.online
+  - prt-max.online
+  - albert-company.online
+  - human-fly900.online
+  - dmn-for-car.online
+  - good-student.online
+  - goods-companies.online
+  - pnl-worth.online
+  - ricardo-mell.online
+  - live-coaching.online
+  - wer-d.info
+  - spring-club.info
+  - all-for-city.info
+  - beta-man.info
+  - amg-car-ger.info
+  - cc-newton.info
+  - steve-brown.info
+  - connect-room.online
+  - live-gml.online
+  - roland-cc.online
+  - exir-juice.online
+  - yamal-group.online
+  - live-conn.online
+  - online-room.online
+  - platinum-cnt.info
+  - crysus-h.info
+  - lynda-tricks.online
+  - message-live.online
+  - white-life-bl.info
+  - meet-work.info
+  - prj-ph.info
+  - hrd-dmn.info
+  - ontp-clock-h.info
+  - work-meeting.info
+  - ph-crtdomain.info
+  - nsim-ph.info
+  - warning-d.info
+  - live-meet.infocfd
+  - live-meet.blog
+  - live-meet.infolive-meet.cloud
+  - live-meet.infolive-meet.livenetwork-show.online
+  - redirect-review.online
+  - arizonaclub.me
+  - backback.info
+  - beautygallery-shop.online
+  - network-game.xyz
+  - good-news.cfd
+  - network-show-a.online
+  - panel-network.online
+  - panel-redirect.online
+  - encryption-redirect.online
+  - thomas-mark.xyz
+  - rap-art.info
+  - anna-blog.info
+  - arrow-click.info
+  - best85best.online
+  - shadow-network.best
+  - good-news.fashionwarplogic.pro
+  - cyberlattice.pro
+  - show-verify.xyz
+  - top-game.online
+  - suite-moral.info
+  - nice-goods.online
+  - crysus-p.info
+  - wash-less.online
+  - ptr-cc.online
+  - white-car.online
+  - live-content.online
+  - bracs-lion.online
+  - storm-wave.online
+  - course-math.info
+  - food-tips-blog.online
+  - white-life.info
+  - ph-work.info
+  - normal-dmn.info
+  - panel-meeting.info
+  - prj-pa.info
+  - ontp-clock-p.info
+  - nsim-pa.info
+  - pa-crtdomain.info
+  - infinit-world.info
+  - alex-mendez-fire.info
+  - reg-d.info
+  - everything-here.info
+  - healthy-lifestyle.info
+  - fitalpha-man.info
+  - lesson-first.info
+  - master-club.info
+  - suite-moral.infopanel-meeting.info
+  - prj-pa.infonsim-pa.info
+  - pa-crtdomain.infopa-crtdomain.info
+  - infinit-world.info
+  - alex-mendez-fire.info
+  - reg-d.info
+  - everything-here.info
+  - healthy-lifestyle.info
+  - fitalpha-man.info
+  - lesson-first.info
+  - master-club.info
+authors:
+- Check Point Research
+reference: https://research.checkpoint.com/2025/iranian-educated-manticore-targets-leading-tech-academics/
+date_of_publication: June 25, 2025
+file_creation_date: June 27, 2025

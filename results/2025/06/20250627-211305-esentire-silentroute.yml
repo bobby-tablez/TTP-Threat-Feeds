@@ -1,0 +1,26 @@
+description: eSentires Threat Response Unit (TRU) identified an incident involving
+  the installation of a trojanized version of SonicWalls NetExtender VPN client. The
+  malicious application, dubbed SilentRoute malware by MSTIC and SonicWall, targets
+  usernames, passwords, and domain information.
+attribution: Threat actor(s) associated with the SilentRoute campaign
+malware_families:
+- SilentRoute
+TTPs:
+  processes:
+  - NeService.exe
+  - NetExtender.exe
+  commandline:
+  - NeService.exe /install
+  - NetExtender.exe /start
+  network_connections:
+  - process: NetExtender.exe
+    destination_address: 132.196.198.163
+    port: '8080'
+IOCs:
+- ip: 132.196.198.163
+- domain: sonicwall-netextender.com
+authors:
+- eSentires Threat Response Unit (TRU)
+reference: https://www.esentire.com/security-advisories/trojanized-sonicwall-vpn-client-detected
+date_of_publication: June 27, 2025
+file_creation_date: June 27, 2025

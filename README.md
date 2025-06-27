@@ -34,6 +34,7 @@ This project assumes a locally hosted LLM compatible with the OpenAI chat comple
 **Recommended model:**
 
 - [`gemma-3-12b-it@q8_0`](https://huggingface.co/Triangle104/gemma-3-12b-it-Q8_0-GGUF)
+- [`qwen2.5-coder-32b-instruct`](https://huggingface.co/Qwen/Qwen2.5-Coder-32B-Instruct)
 - Served locally via [LM Studio](https://lmstudio.ai)
 
 To change the endpoint or model, edit the `LLM_ENDPOINT` and `MODEL_NAME` variables in `ttp_extractor.py`.
