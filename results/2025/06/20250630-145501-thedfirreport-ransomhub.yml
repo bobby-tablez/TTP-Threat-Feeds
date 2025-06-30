@@ -1,0 +1,66 @@
+description: RansomHub ransomware attack involving multiple stages including initial
+  access via RDP, credential access, lateral movement, and deployment of Rclone for
+  exfiltration.
+attribution: Ransormb Affiliate
+malware_families:
+- Ransomhub
+TTPs:
+  processes:
+  - explorer.exe
+  - notepad.exe
+  - wscript.exe
+  - rclbat.exe
+  - rclone.exe
+  - vssadmin.exe
+  - fsutil.exe
+  - wevtutil.exe
+  - cmd.exe
+  - powershell.exe
+  - Get-VM
+  - Stop-VM
+  - Get-Ciminstance
+  - Remove-Ciminstance
+  commandline:
+  - cmd.exe Get-VM | where { $_Name -ne 'VMOI' -and$_Name -ne 'VM02' } | Stop-VM -Force
+  - powershell.exe Get-Ciminstance Win32_ShadowCopy |Remove-Ciminstance
+  - vssadmin.exe Delete Shadows /all /quiet
+  - fsutil behavior set SymlinkEvaluation R2L:1
+  - cmd.exefsutil behavior set SymlinkEvaluation R2R:1
+  - wevtutil cl security
+  - wevtutil cl system
+  - wevtutil cl application
+  powershell:
+  - Get-VM | where { $_Name -ne 'VMOI' -and$_Name -ne 'VM02' } | Stop-VM -Force
+  - Get-Ciminstance Win32_ShadowCopy |Remove-Ciminstance
+  scripting_engine:
+  - vbs
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: rclone.exe
+    destination: 38.100.205.207
+    port: 445
+  - executable: rclone.exe
+    destination: 38.180.245.207
+    port: 443
+  file_activity:
+  - C:\\Windows\\Explorer EXE
+  - C:\\ProgranData\\ssh
+  - C:\\ProgranData\\ssh\\andsd.exe
+  - \\1\\Users\\ \\AppData\\Roaming\\rclone\\rclone.conf
+  - C:\\Users\\a7\\Downloads\\windows_REDACTED_ without_hyperV\\
+  persistence:
+  - Atera and Splashtop Installed on a backup server
+  - Atera and Splashtop Installed on a second backup server
+  pipes: []
+  process_relations: []
+IOCs:
+- 38.100.205.207
+- SSH-2.Openssh_8.9p1Ubuntu-3ubuntuo. 10
+authors:
+- @tas_kmanager
+- @iiamaleks
+- UC2
+reference: https://thedfirreport.com/2025/06/30/hide-your-rdp-password-spray-leads-to-ransomhub-deployment/
+date_of_publication: June 30, 2025
+file_creation_date: June 30, 2025

