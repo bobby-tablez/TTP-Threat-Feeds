@@ -1,0 +1,128 @@
+description: TA829 and UNK_GreenSec use similar TTPs including phishing campaigns,
+  REM Proxy services, and Rebrandly redirectors. TA829 deploys SlipScreen loader followed
+  by RustyClaw or MeltingClaw loaders leading to SingleCamper or DustyHammock backdoors.
+  UNK_GreenSec deploys TransferLoader which drops Morpheus ransomware.
+attribution: TA829, UNK_GreenSec
+malware_families:
+- SlipScreen
+- RustyClaw
+- MeltingClaw
+- SingleCamper
+- DustyHammock
+- TransferLoader
+- Morpheus
+TTPs:
+  processes:
+  - SlipScreen.exe
+  - RustyClaw.dll
+  - MeltingClaw.dll
+  - ShadyHammock.dll
+  - loader_moder.dll
+  - message_module.dll
+  - SingleCamper.exe
+  - DustyHammock.exe
+  - TransferLoader.exe
+  - rdp.exe
+  - rusty.exe
+  - vivat.exe
+  - cmpn1.exe
+  - gaga1.exe
+  commandline:
+  - SlipScreen.exe
+  - RustyClaw.dll
+  - MeltingClaw.dll
+  - ShadyHammock.dll
+  - loader_moder.dll
+  - message_module.dll
+  - SingleCamper.exe
+  - DustyHammock.exe
+  - TransferLoader.exe
+  - rdp.exe -cnc_checkin
+  - rusty.exe -cnc_checkin
+  - vivat.exe -cnc_checkin
+  - cmpn1.exe -cnc_checkin
+  - gaga1.exe -cnc_checkin
+  powershell: []
+  scripting_engine:
+  - JavaScript
+  registry_keys:
+  - SOFTWARE\\Classes\\CLSID\\{2155fee3-2419-4373-b102-6843707eb41f}\\InprocServer32
+  - SOFTWARE\\Classes\\CLSID\\{30d49246-d217-465f-b00b-ac9ddd652eb7}\\InprocServer32
+  - SOFTWARE\\Classes\\CLSID\\{f82b4ef1-93a9-4dde-8015-f7950a1a6e31}\\InprocServer32
+  - HKEY_CURRENT_USER\\Control Panel\\Cursors\\BackupData\\Binary
+  - HKEY_CURRENT_USER\\Control Panel\\Colors\\FontColor\\Binary
+  - HKEY_CURRENT_USER\\Environment\\Cache\\Binary
+  - HKEY_CURRENT_USER\\Keyboard Layout\\Preload\\OldConfig\\Binary
+  image_load: []
+  network_connections:
+  - executable: SlipScreen.exe
+    destination_address: C2 server IP
+    port: Not specified in the report
+  - executable: ShadyHammock.dll
+    destination_address: C2 server IP
+    port: Not specified in the report
+  - executable: SingleCamper.exe
+    destination_address: C2 server IP
+    port: Not specified in the report
+  - executable: DustyHammock.exe
+    destination_address: C2 server IP
+    port: Not specified in the report
+  - executable: TransferLoader.exe
+    destination_address: C2 server IP
+    port: Not specified in the report
+  - executable: rdp.exe
+    destination: TA829 CnC server
+    port: '443'
+  - executable: rusty.exe
+    destination: TA829 CnC server
+    port: '443'
+  - executable: vivat.exe
+    destination: TA829 CnC server
+    port: '443'
+  - executable: cmpn1.exe
+    destination: TA829 CnC server
+    port: '443'
+  - executable: gaga1.exe
+    destination: TA829 CnC server
+    port: '443'
+  file_activity:
+  - SlipScreen.exe
+  - RustyClaw.dll
+  - MeltingClaw.dll
+  - ShadyHammock.dll
+  - loader_moder.dll
+  - message_module.dll
+  - SingleCamper.exe
+  - DustyHammock.exe
+  - TransferLoader.exe
+  - /path/to/rdp.exe
+  - /path/to/rusty.exe
+  - /path/to/vivat.exe
+  - /path/to/cmpn1.exe
+  - /path/to/gaga1.exe
+  persistence:
+  - COM hijacking via registry keys
+  pipes: []
+  process_relations:
+  - SlipScreen -> RustyClaw/MeltingClaw -> ShadyHammock/SingleCamper/DustyHammock
+  - TransferLoader -> Morpheus
+IOCs:
+- C2 server IP
+- ET Rules2862007
+- TA829 CnC Check-in - RDPE1 Variant
+- TA829 CnC Check-in - RUSTY Variant
+- TA829 CnC Check-in - VIVAT Variant
+- TA829 CnC Check-in - CMPN1 Variant
+- TA829 CnC Check-in - GAGA1 Variant
+- TA829 Requesting Next Stage
+- TA829 CnC Check-in With Unknown Identifier String
+- TransferLoader User-Agent Observed (Microsoft Edge/1.0)
+- TransferLoader Custom HTTP Header and Values Observed (X-Custom-Header)
+authors:
+- Greg Lesnewich
+- Selena Larson
+- Kelsey Merriman
+- David Galazin
+reference: https://www.proofpoint.com/us/blog/threat-insight/10-things-i-hate-about-attribution-romcom-vs-transferloader
+date_of_publication: June 30, 2025
+file_creation_date: July 07, 2025

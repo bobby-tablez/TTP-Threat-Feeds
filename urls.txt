@@ -75,3 +75,4 @@ https://blog.google/threat-analysis-group/
 https://cyberresilience.com/threatintel/
 https://www.zscaler.com/blogs/security-research/
 https://www.hornetsecurity.com/en/blog/
+https://nsfocusglobal.com/blog/

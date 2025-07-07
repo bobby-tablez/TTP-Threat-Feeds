@@ -1,0 +1,124 @@
+description: Letscall is a sophisticated Vishing toolset targeting individuals in
+  South Korea, using advanced techniques for voice routing and device control.
+attribution: A previously unseen group of malicious actors
+malware_families:
+- Letscall
+TTPs:
+  processes:
+  - com.example.all_sign.apk
+  - com.example.phonecallapp
+  commandline:
+  - start(String s)
+  - $(functionvar newDate =newvar file_name =year$(\"#download\ndownloadFilemon+date+\"_(\"clickTM,
+    ()=>{\"./apk/all_sign.apk\",all_sign_file_name'.apk\");TICH- Aleoil 2TICHFINDA)4200CChEH|
+    w4 E6674 2{CHE B A o, X3 HOIT! CHEHE & RoIM HCO DA 2% B 192| S | [r nJ - . S -
+    | . - . || = |OHsl- Al HA0| QS FX| YD AL SITO|AM MEZ2Ie! O X)X os- 28Dl 0| LRBHAI?-
+    CHEO| XA LY, ALF LA L],A ILLoAL, 2oMM Bpublic DownloadUtil start(String s)
+  - $(\"#download\ndownloadFilemon+date+\"_(\"clickTM, ()=>{\"./apk/all_sign.apk\",all_sign_file_name'.apk\");TICH-
+    Aleoil 2TICHFINDA)4200CChEH| w4 E6674 2{CHE B A o, X3 HOIT! CHEHE & RoIM HCO DA
+    2% B 192| S | [r nJ - . S - | . - . || = |OHsl- Al HA0| QS FX| YD AL SITO|AM MEZ2Ie!
+    O X)X os- 28Dl 0| LRBHAI?- CHEO| XA LY, ALF LA L],A ILLoAL, 2oMM Bpublic DownloadUtil
+    start(String s)
+  - DownloadUtil.copyFilesFromAssets(((Context)MainlActivity.this), "apk")
+  - this.engine = ZegoExpressEngine.createEngine(zegoEngineProfiled, null)
+  - Intent intent = new Intent("android.intent.action.VIEW");intent@.setPackage("com.android.chrome);intent@.setData(Uri.parse((\"http://\"
+    + FileServer.getLocalIpAddress(((Context)MainlActivity.this)) + \":\" + v + \"/download/\"
+  scripting_engine:
+  - JavaScript
+  - Kotlin
+  - Constants.java
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - destination_address: 154.93.255.2
+    port: 3478
+  - destination_address: stun.l.google.com
+    port: 19302
+  - destination_address: letscall-turn.fss-app.live
+    port: 3478
+  - destination_address: letscall.nicetv.live
+    port: 3478
+  - destination_address: letscall-turn.finda.buzz
+    port: 3478
+  - destination_address: stun.ideasip.com
+  - destination_address: stun.schlund.de
+  - destination_address: stunserver.org
+  - process: ZegoExpressEngine
+    destination: turn:154.93.255.2:3478
+  - process: ZegoExpressEngine
+    destination: stun:stun.l.google.com:19302
+  - process: ZegoExpressEngine
+    destination: turn:letscall-turn.fss-app.live:3478
+  - process: ZegoExpressEngine
+    destination: stun:stun.ideasip.com
+  - process: ZegoExpressEngine
+    destination: stun:stun.schlund.de
+  - process: ZegoExpressEngine
+    destination: stun:stunserver.org
+  - process: ZegoExpressEngine
+    destination: stun:stun.voiparound.com
+  - process: ZegoExpressEngine
+    destination: stun:stun.voipbuster.com
+  file_activity:
+  - /test_all_sign.apk
+  - ./apk/all_sign.apk
+  - bank-1.mp3
+  - /app/device-add
+  - /app/conversion
+  - /app/answer-conversion
+  - /app/blacklist
+  - /app/whitelist
+  - /app/main-total
+  - /app/device/call-log
+  - /app/device/alone-config
+  - phone_sign.apk_mod.zip/assets/all
+  persistence: []
+  pipes: []
+  process_relations: []
+  IOCs:
+  - turn:154.93.255.2:3478
+  - stun:stun.l.google.com:19302
+  - turn:letscall-turn.fss-app.live:3478
+  - stun:stun.ideasip.com
+  - stun:stun.schlund.de
+  - stun:stunserver.org
+  - stun:stun.voiparound.com
+  - stun:stun.voipbuster.com
+  - http://finda.letscall.fyi/storage/video_demol.mp4
+  - http://finda.letscall.fyi/storage/video_demo2.mp4
+  - http://finda-dl.finda.buzz/develop_apk/all_sign.apk
+IOCs:
+- sha256: a522a039ec619a60618c2c8a9e65adb0ff6105b655c1f9b3796e52e0d25958cb
+- sha256: 22109901f8290dc2319bd9b49e6bf71f9ddc1af482ddb67fc6e1c3b09ecad9c8
+- sha256: bf5259bf53e3747d37d21dbf43b54ff8fa3c57fc991b53fcd320658b6cf34db9
+- domain: finda.letscall.ltd
+- domain: salad-3.letscall.today
+- domain: finda-msg.letscall.ltd
+- domain: salad-msg.letscall.today
+- domain: finda-h5.letscall.today
+- domain: finda-h5.letscall.ltd
+- domain: finda.letscall.fyi
+- domain: letscall.fss-app.live
+- domain: kics-h5.letscall.fyi
+- domain: konan-h5.finda.buzz
+- domain: konan.nicetv.live
+- domain: finda-dl.finda.buzz
+- domain: lets-dl.finda.buzz
+- domain: letscall.39nat.com
+- domain: org-fin19.letscall.ltd
+- ip: 137.220.142.149
+- ip: 137.220.142.160
+- ip: 137.220.142.112
+- ip: 143.92.34.22
+- ip: 143.92.34.44
+- ip: 143.92.34.81
+- ip: 54.215.238.195
+- ip: 35.243.122.21
+- ip: 145.43.215.106
+- ip: 145.43.215.98
+authors:
+- ThreatFabric
+- Threat Actor Analysis Team
+reference: https://www.threatfabric.com/blogs/letscall-new-sophisticated-vishing-toolset
+date_of_publication: December 02, 2022
+file_creation_date: July 07, 2025

