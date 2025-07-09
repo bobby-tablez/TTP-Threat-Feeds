@@ -8,7 +8,7 @@ The purpose of this project is to automate the discovery and parsing of threat a
 
 ---
 
-## ⚙️ How It Works
+##  How It Works
 
 - Scrapes URLs from vetted threat intel sources (`urls.txt`)
 - Extracts the text of each publication including embedded image OCR for screenshots
@@ -48,18 +48,18 @@ Some vendors embed command-line samples or TTPs in screenshots. This tool includ
 
 ---
 
-## 🛠 Requirements
+##  Requirements
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## 💬 Contributing
+##  Contributing
 Pull requests are welcome for improvements, especially new URL sources, parser fixes or enhancements to the LLM prompt.
 
 ---
 
-## ⚠️ Disclaimer
+## ⚠️ Disclaimer ⚠️
 
 This **vibe-coded** project generates results via LLM which can be prone to make mistakes. While it produces highly useful results, because of this it is not designed for ingestion into automated pipelines or alerting systems.
 
