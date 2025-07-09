@@ -1,0 +1,84 @@
+description: LightSpy is a surveillance framework targeting multiple platforms, including
+  macOS. It uses publicly available exploits to deliver implants and exfiltrate private
+  information from affected systems.
+attribution: Threat actor group using LightSpy framework.
+malware_families:
+- LightSpy
+- MacOS10S like implant layout
+TTPs:
+  processes:
+  - launchd
+  - curl
+  - ssudo
+  - ddss
+  - zip
+  - macircloader
+  - FMDB
+  - SocketRocket
+  - /bin/bash
+  commandline:
+  - curl -O [URL]
+  - '[Executable] --option'
+  - - /bin/bash
+    - e
+    - payload_cmd_placeholder
+  powershell: []
+  scripting_engine:
+  - Bash script for downloading files
+  - Shell Script o UPDATE
+  registry_keys: []
+  image_load:
+  - ssudo MachO x86_64 file
+  - ddss MachO x86_64 file
+  network_connections:
+  - executable: curl
+    destination_address: '[C2 server IP]'
+    port: '[Port number]'
+  - executable: curl
+    destination_address: http://45.134.168.138:50001/customer/c-1664330891278/Mac0513V0-3/ssudo
+  - executable: curl
+    destination_address: http://103.27.109.217:52202/963852741/csm/tem1/13.0-3/ddss
+  - executable: curl
+    destination_address: http://103.27.109.217:52202/963852741/csm/tem1/13.0-3/mac.zip
+  file_activity:
+  - /var/containers/Bundle/AppleAppLit/
+  - /Users/Shared/update.app/Contents
+  - config.json
+  - macversion.json
+  - macmanifest.json
+  - /tmp/ssudo
+  - /tmp/ddss
+  - /tmp/mac.zip
+  - /Applications/AppleUpdates/update
+  - /Library/LaunchDaemons/update.plist
+  persistence:
+    methods:
+    - LaunchDaemon plist configuration
+  pipes: []
+  process_relations:
+  - '[Parent Process] -> [Child Process]'
+IOCs:
+  hashes:
+  - 8a4f8a755ca123e9c3aa77b525f59ce99f1f2e288afc2e29afb6d15573776a16
+  - 94e7c9bd8c6234e30987d526413d80c450652d4cef55d931c932edd722c1055b
+  - 65dee715b928f07da356e8bce7a762b0ab4c140ebea63e4bd66c2eb85e0fa2dc
+  - 048ab442a2617f37c3145c0c2bdda057baa09e017a29e649f17d43c95a34e69f
+  - 97607d1b12d7234a42a62cdff4d6a7b2b5b93bf38d827b9e4448b0d7bd5da464
+  - a381ea6193f3efd3b587c4a8e67706bLf
+  - d13c1140b55acc9120aa@0dae223fae6
+  - 31028fcdb5313ae7e7868df1d3f567eb
+  IPs:
+  - 103.27.109[.]217
+  domains:
+  - 103.27.109.217
+  - 103.43.17.53
+  urls:
+  - http://103.27.109.217:52202/963852741/mac/plugins/484c8bebafl675b7
+  - http://103.27.109.217:52202/963852741/mac/plugins/7e3211e5a00d2783
+  - http://103.27.109.217:52202/963852741/mac/plugins/26f7d6b449f01571
+authors:
+- Huntress researchers team
+- Unknown
+reference: https://www.threatfabric.com/blogs/lightspy-implant-for-macos
+date_of_publication: May 29, 2024
+file_creation_date: July 09, 2025

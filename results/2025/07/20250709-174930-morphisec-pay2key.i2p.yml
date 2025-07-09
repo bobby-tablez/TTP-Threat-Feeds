@@ -1,0 +1,73 @@
+description: Pay2Key.I2P is an Iranian-backed ransomware-as-a-service (RaaS) operation
+  targeting Western organizations, linked to the Fox Kitten APT group and Mimic ransomware.
+attribution: Threat actor offering discounts for attacks against Israel and the United
+  States, with a focus on supporting Iran.
+malware_families:
+- Pay2Key.I2P
+- Mimic
+- Pay2Key
+TTPs:
+  processes:
+  - powrprof.exe
+  - wsc_proxy.exe
+  - enc-build.exe
+  - d1dGO7pUI7
+  commandline:
+  - 7zip SFX archive extraction
+  - setup.cmd execution with PowerShell
+  - enc-build.exe --non-encryption mode
+  - '@echo off% <#%'
+  - set "0=%~f0"&set 1=%*&cd/d "%~dpo"
+  - powershell -nop -c iex ([io.file]::ReadAllText($env:0))
+  - del /f data.bin datal.bin
+  - 7za x -y -p%psw% o"%out%" data2.bin
+  - start "." /wait "enc-build.exe"
+  powershell:
+  - '<# ... #> (CMD logic wrapped in PowerShell comment block)'
+  - decode function for XOR decryption
+  - dynamic compilation and execution of C# code
+  - powershell -nop -c iex ([io.file]::ReadAllText($env:0))
+  - '& ([scriptblock]::Create([System.Text.Encoding]::UTF8.GetString($encodedData)))'
+  - '%ps% -nop -c "iex (Get-Content -Path .\\task.psl | Out-String)"'
+  scripting_engine:
+  - echo (|powrprof|find "done"||echo(|powrprof
+  registry_keys:
+  - Exclusion of .exe files from Windows Defender scanning
+  - reg query HKEY_USERS\\S-1-5-19
+  image_load:
+  - 7za.exe loaded from data1.bin
+  - 7za.exe
+  network_connections: null
+  file_activity:
+  - '%SystemDrive%\\Program Files\\Avast Software\\Avast\\powrprof.exe'
+  - '%LOCALAPPDATA%\\<GUID>\\browser.exe'
+  - '%SystemDrive%\\Program Files\\Avast Software\\Avast\\data.bin'
+  - '%SystemDrive%\\Program Files\\Avast Software\\Avast\\datal.bin'
+  - '%SystemDrive%\\Program Files\\Avast Software\\Avast\\data2.bin'
+  - '%SystemDrive%\\Program Files\\Avast Software\\Avast\\data3.bin'
+  - '%SystemDrive%\\Program Files\\Avast Software\\Avast\\data4.bin'
+  - '%SystemDrive%\\Program Files\\Avast Software\\Avast\\data5.bin'
+  persistence:
+  - Scheduled task for postponed ransomware execution
+  - Task Scheduler task creation with PowerShell script execution
+  pipes: null
+  process_relations: null
+IOCs:
+  hashes:
+  - <hashes of malicious binaries>
+  IPs: null
+  domains:
+  - pay2key.i2p
+  - pay2key.com
+  - https://client.pay2key.com/2user_id=ID_PLACEHOLDER
+  - http://pay2key I, 2/
+  URLs:
+  - https://pay2key.i2p
+  - https://pay2key.com
+  urls:
+  - https://github.com/PurpleI2P/i2pdbrouser/releases/tag/latest
+authors:
+- Ilia Kulmin
+reference: https://www.morphisec.com/blog/pay2key-resurgence-iranian-cyber-warfare/
+date_of_publication: July 08, 2025
+file_creation_date: July 09, 2025

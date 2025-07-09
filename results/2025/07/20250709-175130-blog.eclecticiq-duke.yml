@@ -1,0 +1,50 @@
+description: Two PDF documents targeting Ministries of Foreign Affairs of NATO aligned
+  countries, masquerading as from the German embassy. One delivered a Duke malware
+  variant linked to APT29.
+attribution: "APT29 (CozyBear, The Dukes, Cloaked Ursa, Nobelium, UNC2452), attributed\
+  \ to Russia\u2019s SVR."
+malware_families:
+- Duke
+TTPs:
+  processes:
+  - msoev.exe
+  commandline:
+  - msoev.exe /c "C:\\Windows\\Tasks\\mso.dll"
+  powershell: []
+  scripting_engine:
+  - JavaScript
+  registry_keys: []
+  image_load:
+  - Process: msoev.exe
+    DLLs:
+    - AppVIsvSubsystems64.dll
+    - Mso.dll
+  network_connections:
+  - executable: mshta.exe
+    destination_address: toyy.zulipchat.com
+    port: 443
+  - executable: mshta.exe
+    destination_address: sgrhf.org.pk
+    port: 80
+  file_activity:
+  - created: C:\\Windows\\Tasks\\mso.dll
+  - dropped: C:\\Windows\\Tasks\\AppVIsvSubsystems64.dll
+  - dropped: C:\\Windows\\Tasks\\Msoev.exe
+  persistence:
+  - DLL Sideloading in msoev.exe
+  pipes: []
+  process_relations:
+  - parent: mshta.exe
+    child: msoev.exe
+IOCs:
+  hashes:
+  - 0be11b4f34ede748892ea49e473d82db5e1389b494edc86e17ff1783ed6b9d37d817f36361f7ac80aba95f98fe5d337d
+  domains:
+  - toyy.zulipchat.com
+  - sgrhf.org.pk
+  - edenparkweddings.com
+authors:
+- Arda Büyükkaya
+reference: https://blog.eclecticiq.com/german-embassy-lure-likely-part-of-campaign-against-nato-aligned-ministries-of-foreign-affairs
+date_of_publication: July 10, 2023
+file_creation_date: July 09, 2025

@@ -1,0 +1,34 @@
+description: 'DCRAT Impersonating the Colombian Government: Multi-layered obfuscation
+  used to deploy a remote access trojan targeting organizations in Colombia.'
+attribution: Threat actor impersonating a Colombian government entity.
+malware_families:
+- DCRAT
+TTPs:
+  persistence:
+    scheduled_task: schtasks /create /f /sc onlogon /rl highest /tn "TASK NAME" /tr
+      "\\\"FULL PATH OF THE EXECUTABLE\\\"" & exit
+    registry_run_key: HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\
+    batch file: '@echo off
+                timeout 3 > NUL
+                START "" "DROPPED FILE LOCATION"
+                CD xxx\AppData\Local\Temp\
+                DEL "BAT FILE NAME" /he flags:'
+IOCs:
+  hashes:
+  - db21cc64fb7a7ed9075c96600b7e7e7007a0df7cb837189c6551010a6f828590
+  - 34b8040d3dad4bd9f34738fbc3363fcda819ac479db8497fb857865cee77ad89
+  - b0f3c7ea17875b5e1545678b3878ce268ff4bde718b66254ce01b0bb864801b8
+  - 77a22e30e4cc900379fd4b04c707d2dfd174858c8e1ee3f1cbecd4ece1fab3fe
+  IPs:
+  - 176.65.144.19:8848
+  domains:
+  - paste.ee
+  URLs:
+  - hxxps[:]//paste[.]ee/d/jYHEqBJ3/0
+  - hxxps[:]//paste[.]ee/d/oAqRiS3g
+  - hxxp[:]//ia601205[.]us[.]archive[.]org/26/items/new_image_20250430/new_image[.]jpg
+authors:
+- Ariel Litvak
+reference: https://www.fortinet.com/blog/threat-research/dcrat-impersonating-the-columbian-government
+date_of_publication: July 01, 2025
+file_creation_date: July 09, 2025

@@ -1,0 +1,79 @@
+description: LightSpy is a spyware targeting iOS devices, exploiting vulnerabilities
+  to gain access and escalate privileges. It includes destructive plugins capable
+  of disrupting device operations.
+attribution: Threat actor using publicly available exploits and jailbreak kits, likely
+  based in China.
+malware_families:
+- LightSpy
+TTPs:
+  processes:
+  - FrameworkLoader
+  - Jailbreakd
+  - dylib
+  - light
+  - loadJailbreakd
+  - p12
+  - test
+  commandline: []
+  powershell: []
+  scripting_engine:
+    VBS: []
+    JScript: []
+    Python: []
+    bash: []
+  registry_keys: []
+  image_load:
+  - FrameworkLoader -> Jailbreakd
+  - dylib -> light
+  network_connections:
+  - FrameworkLoader -> C2 server via WebSocket
+  - Core -> C2 server for communication and updates
+  file_activity:
+  - /var/containers/Bundle/jb13/amfidebilitate
+  - /var/containers/Bundle/jb13/jbexec
+  - /var/containers/Bundle/bb
+  - /var/containers/Bundle/cc
+  - /var/containers/Bundle/b.plist
+  persistence:
+    methods:
+    - launchctl binary for auto-start during system boot
+    - plist file indicating FrameworkLoader start during boot
+  pipes: []
+  process_relations:
+  - index.html -> 20012001330.png -> FrameworkLoader -> Core -> Plugins
+IOCs:
+  IPs:
+  - 103.27.109[.]217
+  - 43.248.136[.]110
+  - 222.219.183[.]84
+  - 103.27.109[.]28
+  domains: []
+  URLs:
+  - hxxp://103.27.109[.]217:52202/963852741/ios/IOS123-133/index.html
+  - hxxp://103.27.109[.]217:52202/963852741/csm/tem2/0914-3/aaa13
+  - hxxp://103.27.109[.]217:52202/963852741/csm/tem2/0914-3/eee
+  - hxxp://103.27.109[.]217:52202/963852741/csm/tem2/0914-3/bb
+  - hxxp://103.27.109[.]217:52202/963852741/csm/tem2/0914-3/cc
+  - hxxp://103.27.109[.]217:52202/963852741/csm/tem2/0914-3/b.plist
+  hashes:
+  - 02dd4603043cca0f5c641b98446ecb52eaca0f354ad7241d565722eaaa0710f4e4e2eccc3a545a3c925fe4f54cb1f9c7d6259098c01659781900876543a89eba
+  - 347a82e5ab252da7a17ab5b9ab1f9cfaeb383cd2fdd1ae551569da9acd952633
+  - 0682f6855b5c046f65e021bd9834d22314a7797a6a8c621ebc203bf2520080e0
+  - f31b9ca07b9d70aee742d92e2b8f7c9ea6033beff6b85a64900cfd7b8878c3a0
+  - 1339966b7e8d291af077f89ae566c613604f642c69a1b0e64a17f56aee1ff9706ee4590714ce28e2f1730aa454fff993c669c3bb2ff487768abe13687946241
+  - c3acb5e1ea8965a1202f932518c052bfac77bfbc5b64a01a5538e51174f97c36d9c147b65499ac7ca4d7ab8cab5367092f4ea5158a10da82e96ac8b732320ad2
+  - dd0f33e40d7f2af5d993286ae4d13948c4aab92b26963a37f650160427fc78a6
+  - ca3254c5eada6456085d83c8360d043f21e7fb25ff5ac5296b3fd090fe788f02
+  - 165d5292aab6128321fadfb0b9c5b8111eb1bf0ec958d7ca82c03319dc9d9db3
+  - 5cdcb1cacb27c539494e02aba7e264e0959741184215c69da66a11a5815c502520012001241.png
+    (decrypted) 89ff38bd4a8c2773447eacd6c3fe82a92e02aa68b7efae8aae42b1b9f01a480720012001330.png
+    (decrypted) 9cf003a978eac7a68e1f6762df61aa22f68280c0df91042a249b501e75ff1d92200000112.png
+    (decrypted) bd2a6d543564963960faafd83b1fbe12b238b38e797be35596a38cc560d029b7aaa1226644ef5c8118d88b98648058ea5e9561b3bef983b78e6d91964cb392c12d273aaa12
+    (decrypted) 6d6301a1221283beb09cca91d2430f3ca979b540db37b129a26c646dcafd9745aaa1322490eb6347283328220f33df497e67148253e29175d97446f4fdc7b7d5caef8aaa13
+    (decrypted) 0da53982d0be92399a077f6eae9fa332e8b736ff16425b4343eefb5e8d2869d4b.plist
+    (decrypted) 9a8103f28152ba0e82a7775fcd83e05cf0c3e301fae031091e8a326047984b74cc9086ff8136674efcbbd7afb
+authors:
+- ThreatFabric
+reference: https://www.threatfabric.com/blogs/lightspy-implant-for-ios
+date_of_publication: October 29, 2024
+file_creation_date: July 09, 2025

@@ -21,7 +21,7 @@ from dateutil.parser import parse as date_parse
 # CONFIG
 LLM_ENDPOINT = "http://127.0.0.1:1234/v1/chat/completions"
 HEADERS = {"Content-Type": "application/json"}
-MODEL_NAME = "qwen2.5-coder-32b-instruct"
+MODEL_NAME = "phi-4"
 URLS_FILE = "urls.txt"
 CACHE_FILE = "processed_urls.txt"
 
@@ -49,14 +49,14 @@ Extract the following information from this cyber threat report:
 - authors: List the name of each author who contributed to the report.
 
 Additional critical requirements:
+- Only return the raw YAML content. Do not include explanations, introductions or comments.
 - Do not make up information. Do not provide summaries to TTPs. Only return relevant technical data that is explicitly present in the report. if no TTPs, ignore.
-- No example scripts or data in YAML.
 - If the publication contains little useful data, lots of empty fields are acceptable.
-- Be very detailed (e.g: include ALL and FULL command line arguements).
+- Include ALL and FULL command line arguements.
 - Never truncate outputs (e.g: ...), include full command line and URLs.
 - Provide only technical data, for example, don't describe TTPs, IOCs and URLs. Only provide raw data where appropriate.
 - For any key or subkey that contains no data, do not include the key or subkey in the YAML.
-- Prefer the use of single quotes for YAML syntax over double quotes.
+- Use compact YAML formatting. Use single quotes for all strings. Do not use double quotes, multiline (|) syntax, or comments.
 
 Context:
 {text}
