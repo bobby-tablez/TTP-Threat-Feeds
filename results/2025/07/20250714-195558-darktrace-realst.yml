@@ -1,0 +1,67 @@
+description: Threat actors are targeting cryptocurrency users through social engineering
+  schemes involving fake software companies.
+attribution: Meeten campaign by Cado Security Labs and Darktrace research.
+malware_families:
+- Realst
+- Atomic Stealer
+TTPs:
+  processes:
+  - Electron application
+  - bash script
+  - multiarch macOS binary
+  - Python
+  - InstallerHelper.app
+  commandline:
+  - app-launcher://verification?token=...
+  - msiexec /i <path> /quiet /norestart
+  - AdmZip(...).extractAllTo(...)
+  powershell: []
+  scripting_engine:
+  - bash script
+  - AppleScript
+  - Objective-C/Swift binary
+  registry_keys: []
+  image_load:
+  - Python retrieved and stored in /AppData/Temp
+  network_connections:
+  - executable: POST request
+    destination_address: 45.94.47.167/contact
+    port: ''
+  - executable: install.sh
+    destination_address: 77.73.129.18:80/install.sh
+  - executable: collect-metrics
+    destination_address: https://mrajhhosdoahjsd.com/collect-metrics
+  - executable: RDP
+    destination_address: 10.401.39
+    hostname: ''
+    port: ''
+  file_activity:
+  - /tmp/out.zip
+  - /tmp/InstallerHelper.app
+  - /tmp/.SwoxApp
+  persistence:
+    methods:
+    - macOS LaunchAgent
+    - plist configuration with RunAtLoad and KeepAlive keys
+  pipes: []
+  process_relations: []
+IOCs:
+  domains:
+  - manboon.com
+  - gaetanorealty.com
+  - trouveur.com
+  - bigpinellas.com
+  - dsandbox.com
+  - conceptwo.com
+  - aceartist.com
+  - ekodirect.com
+  - https://mrajhhosdoahjsd.com/
+  urls:
+  - http://45.94.47.112/contact
+  - https://isnimitz.com/zxc/app.zip
+  hashes: []
+authors:
+- Darktrace Research Team
+reference: https://www.darktrace.com/blog/crypto-wallets-continue-to-be-drained-in-elaborate-social-media-scam
+date_of_publication: June 18, 2025
+file_creation_date: July 14, 2025

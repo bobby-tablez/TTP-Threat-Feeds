@@ -1,0 +1,30 @@
+description: Dark 101 ransomware encrypts personal files, deletes backups and recovery
+  options, demands Bitcoin ransom.
+attribution: Dark 101 malware family.
+malware_families:
+- Dark 101
+TTPs:
+  processes:
+  - svchost.exe
+  commandline:
+  - vssadmin delete shadows /all /quiet
+  - wmic shadowcopy delete
+  - wbadmin delete catalog quiet
+  registry_keys:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DisableTaskMgr
+    = '1'
+  file_activity:
+  - '%APPDATA%\\svchost.exe'
+  - read_it.txt
+  persistence:
+    methods:
+    - copies itself to %Appdata% and renames to svchost.exe
+  process_relations: []
+IOCs:
+  hashes:
+  - MSIL/Kryptik.SAC!tr.ransom
+authors:
+- Bryan Lu
+reference: https://www.fortinet.com/blog/threat-research/fortisandbox-detects-dark-101-ransomware-despite-evasion-techniques
+date_of_publication: July 14, 2025
+file_creation_date: July 14, 2025
