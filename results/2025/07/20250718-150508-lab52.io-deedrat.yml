@@ -1,0 +1,46 @@
+description: LAB52 has uncovered a new phishing campaign deploying DeedRATa modular
+  backdoor attributed to Chinese threat actors. The campaign leverages the legitimate
+  signed binary MambaSafeModeUI.exe, part of the VIPRE Antivirus Premium software,
+  which is vulnerable to DLL side-loading.
+attribution: Chinese threat actor
+malware_families:
+- DeedRAT
+TTPs:
+  processes:
+  - MambaSafeModeUI.exe
+  - MicRun.exe
+  - SBAMBRES.DLL
+  - svchost.exe
+  - taskeng.exe
+  - iexplore.exe
+  - WmiPrvSE.exe
+  - reg.exe
+  - sc.exe
+  commandline:
+  - C:\\ProgramData\\Micro\\Defaults\\MicRun.exe -YZPBERA_TPAHQZ_CBPMITDKum
+  - C:\\Windows\\SysWOW64\\reg.exe ADD HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\MicRun
+    /v "C:\\ProgramData\\Micro\\Defaults\\MicRun.exe -YZPBERA_TPAHQZ_CBPMITDKum"
+  - C:\\Windows\\SysWOW64\\sc.exe create MicRun binPath= "C:\\ProgramData\\Micro\\Defaults\\MicRun.exe"
+    start= auto
+  description: LAB52 has uncovered a new phishing campaign deploying DeedRATa modular
+    backdoor attributed to Chinese threat actors.
+  attribution: Chinese threat actor
+  malware_families: DeedRAT
+  TTPs:
+    processes:
+    - MambaSafeModeUI.exe
+    - MicRun.exe
+    - SBAMBRES.DLL
+    - svchost.exe
+    - taskeng.exe
+    - iexplore.exe
+    - WmiPrvSE.exe
+    - reg.exe
+    - sc.exe
+    description: LAB52 has uncovered a new phishing campaign deploying DeedRATa modular
+      backdoor attributed to Chinese threat actors.
+    attribution: Chinese threat actor
+    malware_families: DeedRAT
+reference: https://lab52.io/blog/deedrat-backdoor-enhanced-by-chinese-apts-with-advanced-capabilities/
+date_of_publication: July 18, 2025
+file_creation_date: July 18, 2025

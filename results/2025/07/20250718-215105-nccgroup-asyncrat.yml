@@ -1,0 +1,66 @@
+description: This report details an incident response engagement involving AsyncRAT,
+  initiated by a malicious Facebook advert leading to drive-by compromise and subsequent
+  exploitation.
+attribution: Unknown (likely associated with APT group)
+malware_families:
+- AsyncRAT
+authors:
+- NCC Group DFIR Team
+TTPs:
+  processes:
+  - ScreenConnect.ClientService.exe
+  - pw.exe
+  - Mshta.exe
+  - CHCP.COM
+  - python310.dll
+  - vcruntime140.dll
+  - powershell.exe
+  commandline:
+  - '"C:\\Program Files (x86)\\ScreenConnectClient (aeef6885fa9229dd)\\\\ScreenConnect.ClientService.exe"
+    ?e=Access&y=Guest&h=jtsec.innocreed.com...'
+  - C:\\Windows\\Prefetch\\MSHTA.EXE -5D4FFD8E.pf
+  - C:\\Windows\\Prefetch\\CHCP.COM-2CF9B15C.pf
+  - C:\\xmetavip\\pw.exe
+  - powershell.exe -Command Set-ItemProperty HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+    -Name "9f.bat" -Value "C:\\xmetavip\\9f.bat"
+  powershell: []
+  scripting_engine:
+  - VBScript
+  - JScript
+  - Python
+  registry_keys:
+  - HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load: []
+  network_connections:
+  - executable: ScreenConnect.ClientService.exe
+    destination_address: 194.26.192[.]107
+  - executable: AsyncRAT
+    destination_address: 185.149.232[.]197
+    port: 56001
+  file_activity:
+  - C:\\Users\\<USER>\\Downloads\\Creation_Made_By_GrokAI.mp4
+  - C:\\Windows\\Prefetch\\CREATION_MADE_BY_GROKAI.MP4 -3F3E21F6.pf
+  - C:\\Users\\<USER>\\AppData\\Local\\Temp\\ScreenConnect\\24.4.4.9118\\aeef6885fa9229dd\\ScreenConnect.ClientSetup.msi
+  - C:\\xmetavip
+  - C:\\Users\\<USER>\\AppData\\Local\\Temp\\Log.tmp
+  - C:\\Users\\<USER>\\AppData\\Local\\Temp\\[REDACTED]\\REDACTED.zip
+  - C:\\xmetavip\\9f.bat
+  - C:\\xmetavip\\vcruntime140.dll
+  - C:\\xmetavip\\python310.dll
+  - C:\\xmetavip\\pw.exe
+  persistence:
+  - Registry Run Keys
+  pipes: []
+  process_relations: []
+IOCs:
+- domain: canvadreamlab[.]xyz
+- url: hxxps://shortenworld[.]com/branded-domain/canvadreamlab.xyz
+- url: hxxps://l.facebook[.]com/l.php? u=http%3A%2F%2Fcanvadreamlab.xyz%2Fai%3Futm_medium%3Dpaid%26utm_source...
+- domain: jtsec.innocreed[.]com
+- ip: 194.26.192[.]107
+- url: hxxps://authenticate-meta[.]com/purelogbank2
+- ip: 185.149.232[.]197
+- port: 56001
+reference: https://www.nccgroup.com/us/research-blog/masquerade-you-downloaded-screenconnect-not-grok-ai/
+date_of_publication: July 18, 2025
+file_creation_date: July 18, 2025

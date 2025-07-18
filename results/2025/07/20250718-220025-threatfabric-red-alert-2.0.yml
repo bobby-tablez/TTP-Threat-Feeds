@@ -1,0 +1,43 @@
+description: A new Android banking trojan dubbed Red Alert 2.0 has been discovered,
+  exhibiting advanced capabilities such as overlay attacks, SMS control, contact list
+  harvesting, and novel techniques like blocking incoming calls from banks and retrieving
+  C2 addresses from Twitter.
+attribution: Unknown
+malware_families:
+- Red Alert 2.0
+TTPs:
+  processes:
+  - /system/bin/toolbox
+  commandline:
+  - /system/bin/toolbox ps -p -P -x-c
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load: ''
+  network_connections: ''
+  file_activity:
+  - /data/data/com.patixof.dxtrix/strings.xml
+  - /data/data/com.acronic/strings.xml
+  - /data/data/com.glsoftwre.fmc/strings.xml
+  - /data/data/com.aox.exsoft/strings.xml
+  - /data/data/com.bankofireland.mobilebanking/strings.xml
+  persistence: ''
+  pipes: ''
+  process_relations: ''
+IOCs:
+- 'SHA256: a7c9cfa4ad14b0b9f907db0a1bef626327e1348515a4ae61a20387d6ec8fea78'
+- 'SHA256: bb0c8992c9eb052934c7f341a6b7992f8bb01c078865c4e562fd9b84637c1e1b'
+- 'SHA256: 79424db82573e1d7e60f94489c5ca1992f8d65422dbb8805d65f418d20bbd03a'
+- 'SHA256: 4d74b31907745ba0715d356e7854389830e519f5051878485c4be8779bb55736'
+- 'SHA256: 2dc19f81352e84a45bd7f916afa3353d7f710338494d44802f271e1f3d972aed'
+- 'SHA256: 9eaa3bb33c36626cd13fc94f9de88b0f390ac5219cc04a08ee5961d59bf4946b'
+- 'SHA256: dc11d9eb2b09c2bf74136b313e752075afb05c2f82d1f5fdd2379e46089eb776'
+- 'SHA256: 3e47f075b9d0b2eb840b8bbd49017ffb743f9973c274ec04b4db209af73300d6'
+- 'SHA256: 05ea7239e4df91e7ffd57fba8cc81751836d03fa7c2c4aa1913739f023b046f0'
+- 'SHA256: 3a5ddb598e20ca7dfa79a9682751322a869695c500bdfb0c91c8e2ffb02cd6da'
+- 'Twitter handle: d8585cf920cb893a (example, dynamically generated)'
+authors:
+- ThreatFabric
+reference: https://www.threatfabric.com/blogs/new_android_trojan_targeting_over_60_banks_and_social_apps
+date_of_publication: September 01, 2017
+file_creation_date: July 18, 2025

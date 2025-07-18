@@ -1,0 +1,56 @@
+description: A previously unknown vulnerability (CVE-2025-31324) in SAP NetWeaver
+  Visual Composer was exploited to upload malicious JSP files and gain remote code
+  execution, targeting exposed enterprise systems. Attackers deployed webshells for
+  persistence and used Cobalt Strike beacons for post-exploitation activities.
+attribution: Likely ransomware-driven actors (BlackBasta or Qilin)
+malware_families:
+- Cobalt Strike
+TTPs:
+  processes:
+  - ipconfig.exe
+  - systeminfo.exe
+  - tasklist.exe
+  - whoami.exe
+  - ping.exe
+  - powershell.exe
+  commandline:
+  - ipconfig /all
+  - systeminfo
+  - tasklist
+  - whoami
+  - ping 184.174.96.67
+  - ping 88.119.174.107
+  - powershell -nop -windowstyle hidden -encodedcommand .JABZADOATGE!184.174.96.67:38
+  powershell:
+  - .JABZADOATGE!184.174.96.67:38
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: ping.exe
+    destination_address: 184.174.96.67
+  - executable: ping.exe
+    destination_address: 88.119.174.107
+  file_activity:
+  - https://88.119.174[.]107:22443/file.ext
+  persistence:
+  - JSP webshells deployed for remote access and command execution
+  pipes: []
+  process_relations: []
+IOCs:
+- 184.174.96[.]67
+- 184.174.96[.]74
+- 88.119.174[.]107
+- 177.54.223[.]241
+- 80.131.145[.]73
+- officetoolservices[.]com
+- networkmaintenanceservice[.]com
+- misctoolsupdate[.]com
+- leapsummergetis[.]com
+- onlinenetworkupdate[.]com
+- d7e4bb95401a19f9bf7ca280a4e743229998494790ab129b31b2a6c1cebebec7
+- '1357776117'
+authors:
+- Agora IT LLC
+reference: https://research.kudelskisecurity.com/2025/07/14/adversary-infrastructure-and-indicators-behind-the-sap-netweaver-0-day-exploitation/
+date_of_publication: July 14, 2025
+file_creation_date: July 18, 2025

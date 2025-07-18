@@ -1,0 +1,41 @@
+description: Crux is a never-before-publicized ransomware variant claiming affiliation
+  with the BlackByte group. Initial access vectors include RDP and valid credential
+  compromise.
+attribution: BlackByte
+malware_families: '- Crux'
+TTPs:
+  processes:
+  - Unrips.exe
+  - svchost.exe
+  - cmd.exe
+  - bcdedit.exe
+  - rclone.exe
+  - Explorer.EXE
+  commandline:
+  - C:\\Users\\[REDACTED]\\Desktop\\Unrips.exe -a [REDACTED]
+  - C:\\Windows\\system32\\svchost.exe -a [REDACTED]
+  - Cmd.exe /c bcdedit /set {default} bootstatuspolicy ignoreallfailures
+  - 'rclone.exe copy X:\\\\Accounting mega: redacted'
+  powershell: ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load: ''
+  network_connections: ''
+  file_activity:
+  - C:\\Windows\\system32\\drivers\\cfxdlfvk.sys
+  - crux_readme_[random].txt
+  persistence:
+  - bcdedit /set {default} bootstatuspolicy ignoreallfailures
+  pipes: ''
+  process_relations:
+  - C:\\Users\\[REDACTED]\\Desktop\\Unrips.exe -> C:\\Windows\\system32\\svchost.exe
+    -> Cmd.exe -> bcdedit.exe
+IOCs:
+- BlackBCruxSupport@onionmail.org
+- https://developers.zoom.us/docs/sdk/native-sdks/
+- https://support.us0Sweb-7o0m.biz/842799/check
+authors: 
+- Huntress Adversary Tactics
+reference: https://www.huntress.com/blog/crux-ransomware
+date_of_publication: July 18, 2025
+file_creation_date: July 18, 2025

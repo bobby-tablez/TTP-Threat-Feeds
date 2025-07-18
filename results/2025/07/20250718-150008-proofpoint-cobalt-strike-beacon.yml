@@ -1,0 +1,75 @@
+description: Between March and June 2025, Proofpoint Threat Research observed three
+  Chinese state-sponsored threat actors conduct targeted phishing campaigns against
+  the Taiwanese semiconductor industry. The motive was likely espionage.
+attribution: China-aligned
+malware_families:
+- Cobalt Strike Beacon
+- Voldemort
+- HealthKick
+- SparkRAT
+- SideWalk
+authors:
+- Proofpoint Threat Research
+TTPs:
+  processes:
+  - javaw.exe
+  - CiscoCollabHost.exe
+  - schtasks.exe
+  - Store.vbs
+  - rc4.log
+  - C:\Windows\System32\cmd.exe
+  commandline:
+  - C:\\ProgramData\\zumArSAB\\.pdf.lnk
+  - C:\\Users\\Public\\Videos\\javaw.exe
+  - schtasks.exe /Create /TN "SystemHealthMonitor" /TR "\\\"C:\\ProgramData\\zumArSAB\\[PDF]
+    Introduction Documents 2 - 250409.Exe\\\" -run\" /SC MINUTE /MO 5 /F
+  - C:\\Windows\\System32\\cmd.exe
+  powershell: ''
+  scripting_engine:
+  - VBS
+  registry_keys:
+  - HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load: ''
+  network_connections:
+  - executable: javaw.exe
+    destination_address: 166.88.61[.]35
+    port: 443
+  - executable: Unknown
+    destination_address: 82.118.16[.]72
+    port: 465
+  - executable: Unknown
+    destination_address: 45.141.139[.]222
+    port: 465
+  file_activity:
+  - C:\\Users\\Public\\Videos\\javaw.exe
+  - C:\\Users\\Public\\Videos\\jli.dll
+  - C:\\Users\\Public\\Videos\\rc4.log
+  - C:\\ProgramData\\zumArSAB\\[PDF] Introduction Documents 2 - 250409.Exe
+  - C:\\ProgramData\\zumArSAB\\.pdf.lnk
+  persistence:
+  - HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run key value
+    for runs to the path of the DLL sideloading executable javaw.exe.
+  - Scheduled task named SystemHealthMonitor
+  pipes: ''
+  process_relations: ''
+IOCs:
+- hash: qwxsfvdtv
+- ip: 166.88.61[.]35
+- domain: api[.]moctw[.]info
+- url: hxxps://api[.]moctw[.]info/Intro.pdf
+- domain: ema.moctw[.]info
+- ip: 82.118.16[.]72
+- ip: 80.85.156[.]234
+- domain: accshieldportal[.]com
+- domain: acesportal[.]com
+- url: https://brilliant-bubblegum-137cfe[.]netlify[.]app/files/Introduction%20Document.zip
+- ip: 45.141.139[.]222
+- domain: ema.moctw[.]info
+- domain: mx.moctw[.]info
+- ip: 43.247.132[.]96
+- sha256: 000062e9e212231328b660f759f8878ac47604b9609f71c05ad19d7ef56b17a8
+authors:
+- Mark Kelly
+reference: https://www.proofpoint.com/us/blog/threat-insight/phish-china-aligned-espionage-actors-ramp-up-taiwan-semiconductor-targeting
+date_of_publication: July 16, 2025
+file_creation_date: July 18, 2025

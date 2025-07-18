@@ -21,26 +21,25 @@ from dateutil.parser import parse as date_parse
 # CONFIG
 LLM_ENDPOINT = "http://127.0.0.1:1234/v1/chat/completions"
 HEADERS = {"Content-Type": "application/json"}
-MODEL_NAME = "phi-4"
+MODEL_NAME = "gemma-3-12b-it@q8_0"
 URLS_FILE = "urls.txt"
 CACHE_FILE = "processed_urls.txt"
 
 PROMPT_TEMPLATE = """
-I need you to create a technical YAML Report. The purpose of the YAML report is to present raw data from public security advisories. All information bust be actual. 
-We need raw commands executed by attackers, registry keys, executed code as part of the TTPs section. Return all results in YAML format with the following keys: description, attribution, malware_families, TTPs, IOCs, authors
-Extract the following information from this cyber threat report:
+Create a technical YAML Report based on threat data with the goal of extracting TTPs and IoCs. The purpose of the report is to highlight raw data extracted from public security advisories. 
+Extract the following information from this cyber threat report and present it in the following format:
 
 - description: A 1-2 sentence summary
 - attribution: Attribution (threat actor, APT group, country).
 - malware_families: Malware family names.
 - TTPs: Extract ALL actual observable indicators. No formal sentences in this section, just data. Each TTP subkey containing list items as outlined (no deviation or truncation, only the data provided). If no applicable data is found, provide empty keys. TTPs include the following sub keys:
-  - processes: a list of all process names executed
+  - processes: a list of all process names that were apart of the report
   - commandline: Full list of process with commandline arguments
   - powershell: any and all powershell scripts
   - scripting_engine: other scripts such as VBS, JScript, Python, bash, etc.
   - registry_keys: Windows registry keys impacted
   - image_load: Provide details as to processes involved with loaded DLL, or SO libraries
-  - network_connections: Processes related, list executables that made network connections, their destination address, URL, or hostname along with ports. 
+  - network_connections: Processes related - list executables that made network connections, their destination address, URL or hostname along with ports. 
   - file_activity: List of files created, dropped, accessed or deleted (full paths)
   - persistence: description in a list sub keys persistence methods used
   - pipes: list of any named pipes
@@ -50,13 +49,14 @@ Extract the following information from this cyber threat report:
 
 Additional critical requirements:
 - Only return the raw YAML content. Do not include explanations, introductions or comments.
-- Do not make up information. Do not provide summaries to TTPs. Only return relevant technical data that is explicitly present in the report. if no TTPs, ignore.
-- If the publication contains little useful data, lots of empty fields are acceptable.
+- Do not make up information. Do not provide summaries to TTPs. Only return relevant technical data that is explicitly present in the report.
+- If the publication contains little useful data, empty fields are acceptable.
+- No example commands or speculated data.
 - Include ALL and FULL command line arguements.
 - Never truncate outputs (e.g: ...), include full command line and URLs.
 - Provide only technical data, for example, don't describe TTPs, IOCs and URLs. Only provide raw data where appropriate.
 - For any key or subkey that contains no data, do not include the key or subkey in the YAML.
-- Use compact YAML formatting. Use single quotes for all strings. Do not use double quotes, multiline (|) syntax, or comments.
+- Use compact YAML formatting. Use single quotes for all strings.
 
 Context:
 {text}

