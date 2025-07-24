@@ -1,0 +1,41 @@
+description: Malware hidden in WordPress mu-plugins folder fetches a remote payload
+  and executes it, providing persistent access.
+malware_families:
+- wp-index.php
+TTPs:
+  processes:
+  - php
+  commandline:
+  - php /wp-content/mu-plugins/wp-index.php
+  powershell: []
+  scripting_engine:
+  - ROT13-obfuscated URL in PHP script
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: php
+    destination: hxxps://1870y4rr4y3d1k757673q[.]xyz/cron.php
+    port: 443
+  file_activity:
+  - /wp-content/mu-plugins/wp-index.php
+  - .sess-[hash].php inside the uploads directory
+  - /wp-content/themes/pricing-table-3.php
+  - /wp-content/plugins/wp-bot-protect/wp-bot-protect.php
+  persistence:
+  - WordPress mu-plugins folder
+  - Database option key: _hdra_core
+  pipes: []
+  process_relations:
+  - php -> wp-index.php -> cron.php
+IOCs:
+- wp-content/mu-plugins/wp-index.php
+- str_rot13('uggcf://1870l4ee4l3q1x757673d.klm/peba.cuc')
+- hxxps://1870y4rr4y3d1k757673q[.]xyz/cron.php
+- _hdra_core
+- .sess-[hash].php inside the uploads directory
+- officialwp
+authors:
+- Puja Srivastava
+reference: https://blog.sucuri.net/2025/07/uncovering-a-stealthy-wordpress-backdoor-in-mu-plugins.html
+date_of_publication: July 22, 2025
+file_creation_date: July 24, 2025

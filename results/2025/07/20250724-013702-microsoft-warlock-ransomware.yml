@@ -1,0 +1,72 @@
+description: 'July 23, 2025 update on exploitation activity by Storm-2603 leading
+  to Warlock ransomware deployment. New information includes updated attribution,
+  IoCs, and mitigation guidance.
+
+  '
+attribution:
+- Linen Typhoon (Chinese nation-state actor)
+- Violet Typhoon (Chinese nation-state actor)
+- Storm-2603 (China-based threat actor)
+- Storm-2603
+malware_families:
+- Warlock ransomware
+- Warlock Ransomware
+TTPs:
+  processes:
+  - w3wp.exe
+  - cmd.exe
+  - powershell.exe
+  - services.exe
+  - whoami.exe
+  - PsExec.exe
+  - Mimikatz.exe
+  commandline:
+  - cmd.exe /c whoami
+  - powershell.exe -EncodedCommand ...
+  - whoami
+  - PsExec.exe -accepteula -s cmd
+  - services.exe sc config WinDefend start= disabled
+  scripting_engine:
+  - Impacket wmiexec
+  registry_keys:
+  - HKLM\SOFTWARE\Microsoft\Windows Defender
+  image_load: []
+  network_connections:
+  - w3wp.exe -> update.updatemicfosoft.com:443
+  - PsExec.exe -> [destination IP]
+  file_activity:
+  - C:\inetpub\wwwroot\wss\VirtualDirectories\80\spinstall0.aspx
+  - C:\ProgramData\WarlockRansomware.exe
+  - C:\Users\Public\MachineKey.txt
+  persistence:
+  - Scheduled tasks creation
+  - IIS component manipulation to load .NET assemblies
+  - Scheduled Task
+  - Web Shell
+  - IIS Components
+  pipes: []
+  process_relations:
+  - w3wp.exe -> cmd.exe -> powershell.exe
+  - whoami -> cmd.exe -> PsExec.exe -> services.exe
+IOCs:
+  hashes:
+  - 92bb4ddb98eeaf11fc15bb32e71d0a63256a0ed826a03ba293ce3a8bf057a514
+  - 24480dbe306597da1ba393b6e30d542673066f98826cc07ac4b9033137f37dbf
+  - ''
+  IPs:
+  - 131.226.2.6
+  - 134.199.202.205
+  - 104.238.159.149
+  - 188.130.206.168
+  - '[destination IP]'
+  domains:
+  - update.updatemicfosoft.com
+  - example.com
+  URLs:
+  - http://example.com/web-shell.php
+authors:
+- Microsoft Security Response Center (MSRC)
+- Microsoft Threat Intelligence Team
+reference: https://www.microsoft.com/en-us/security/blog/2025/07/22/disrupting-active-exploitation-of-on-premises-sharepoint-vulnerabilities/
+date_of_publication: July 23, 2025
+file_creation_date: July 24, 2025

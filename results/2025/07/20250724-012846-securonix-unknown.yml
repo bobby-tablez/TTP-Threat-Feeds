@@ -1,0 +1,39 @@
+description: 'Microsoft disclosed a critical vulnerability in SharePoint: CVE-2025-53770,
+  a remote code execution (RCE) flaw actively exploited in the wild.'
+attribution:
+- Microsoft
+TTPs:
+  processes:
+  - w3wp.exe
+  - powershell.exe
+  - cmd.exe
+  commandline:
+  - powershell.exe -w 1 -nop -ep bypass -enc UwBlAHQALQB...
+  powershell:
+  - -w 1 -nop -ep bypass -enc UwBlAHQALQB...
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - C:\\Program Files\\Common Files\\microsoft shared\\Web Server Extensions\\16\\TEMPLATE\\LAYOUTS\\spinstall0.aspx
+  persistence: []
+  pipes: []
+  process_relations:
+  - w3wp.exe -> powershell.exe
+IOCs:
+  hashes:
+  - 1EE307CA0D075064F97D04D036E558043F2F6ECOSICHTCOSE0ACDSIBIGHIGA0F
+  - D14922C5441F407Ca28ECAD0IICIEDTA
+  IPs: []
+  domains: []
+  URLs:
+  - https://msrc.microsoft.com/blog/2025/07/customer-guidance-for-sharepoint-vulnerability-cve-2025-53770/
+authors:
+- Tim Peck
+- Abhishek Narasimhan
+- Sai Tadimeti
+- Kumaramanivel Ramanathan
+reference: https://www.securonix.com/blog/simulating-cve-2025-53770-in-sharepoint-for-real-world-detection-engineering/
+date_of_publication: July 24, 2025
+file_creation_date: July 24, 2025

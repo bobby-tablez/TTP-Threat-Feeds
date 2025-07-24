@@ -21,7 +21,7 @@ from dateutil.parser import parse as date_parse
 # CONFIG
 LLM_ENDPOINT = "http://127.0.0.1:1234/v1/chat/completions"
 HEADERS = {"Content-Type": "application/json"}
-MODEL_NAME = "gemma-3-12b-it@q8_0"
+MODEL_NAME = "devstral-small-2505"
 URLS_FILE = "urls.txt"
 CACHE_FILE = "processed_urls.txt"
 

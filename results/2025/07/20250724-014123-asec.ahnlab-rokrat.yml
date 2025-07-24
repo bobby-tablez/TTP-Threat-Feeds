@@ -1,0 +1,40 @@
+description: RokRAT malware distributed via malicious Hangul (.HWP) documents, using
+  OLE objects and DLL side-loading techniques.
+attribution:
+- APT37 (North Korea)
+malware_families:
+- RokRAT
+TTPs:
+  processes:
+  - ShellRunas.exe
+  - Hangul.exe
+  commandline:
+  - '%TEMP%\\ShellRunas.exe'
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - ShellRunas.exe -> credui.dll
+  network_connections:
+  - 'ShellRunas.exe -> Dropbox (URL: https://www.dropbox.com/s/.../Father.jpg)'
+  file_activity:
+  - '%TEMP%\\ShellRunas.exe'
+  - '%TEMP%\\credui.dll'
+  - '%TEMP%\\Father.jpg'
+  persistence: []
+  pipes: []
+  process_relations:
+  - Hangul.exe -> ShellRunas.exe
+IOCs:
+  hashes:
+  - 'SHA256(ShellRunas.exe): ...'
+  - 'SHA256(credui.dll): ...'
+  IPs: []
+  domains:
+  - dropbox.com
+  URLs:
+  - https://www.dropbox.com/s/.../Father.jpg
+authors:
+- AhnLab SEcurity intelligence Center (ASEC)
+reference: https://asec.ahnlab.com/en/89130/
+date_of_publication: July 21, 2025
+file_creation_date: July 24, 2025

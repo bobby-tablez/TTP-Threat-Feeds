@@ -1,0 +1,48 @@
+description: 'A critical zero-day vulnerability (CVE-2025-53770) in Microsoft SharePoint
+  Server allows unauthenticated remote code execution through a deserialization flaw
+  in the ToolPane interface. Attackers are exploiting this bug to deploy web shells,
+  extract MachineKey secrets, and maintain persistent access.
+
+  '
+attribution:
+- KLE5ESK AN RESEARCH
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: w3wp.exe
+    destination_address: 107.191.58[.]76
+    port: 80
+  - process: w3wp.exe
+    destination_address: 104.238.159[.]149
+    port: 80
+  - process: w3wp.exe
+    destination_address: 96.9.125[.]147
+    port: 80
+  file_activity:
+  - path: \\TEMPLATE\\LAYOUTS\\spinstall0.aspx
+  - path: Unexpected .aspx or .ashx files in SharePoint virtual directories
+  persistence:
+  - method: Web shell deployment (spinstall0.aspx)
+  - method: Extraction of ASP.NET MachineKey secrets
+  pipes: []
+  process_relations: []
+IOCs:
+  file_hashes: []
+  ips:
+  - 107.191.58[.]76
+  - 104.238.159[.]149
+  - 96.9.125[.]147
+  domains: []
+  urls:
+  - /_layouts/15/ToolPane.aspx?DisplayMode=Edit
+  - /_layouts/SignOut.aspx
+authors:
+- KLE5ESK AN RESEARCH
+reference: https://research.kudelskisecurity.com/2025/07/23/microsoft-sharepoint-on-premise-vulnerability-cve-2025-53770-under-active-exploitation/
+date_of_publication: July 23, 2025
+file_creation_date: July 24, 2025
