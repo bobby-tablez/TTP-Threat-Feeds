@@ -1,0 +1,91 @@
+description: Complex infection chain starting with an email containing an ISO image,
+  using Microsoft Build Engine to compile malicious C# code and employing AppDomain
+  Manager Injection.
+attribution:
+- BBTok banker
+malware_families:
+- Trammy.dll
+TTPs:
+  processes:
+  - msedge.exe
+  - DANFE10103128566164.exe
+  - MSBuild.exe
+  - computerdefaults.exe
+  - CCProxy.exe
+  - explorer.exe
+  commandline:
+  - DANFE10103128566164.exe /nologo DANFE10103128566164.xml
+  - MSBuild.exe /nologo DANFE10103128566164.xml
+  powershell:
+  - '$nums = @(<extracted keys>)
+    $assembly = [Reflection.Assembly].LoadFile("DANFE10103128566164_antidebug_fixed.dll")
+    $method = $assembly.ManifestModule.ResolveMethod(0x6000005)
+    $gen = $method.MakeGenericMethod([string])
+    $nums | ForEach-Object { try { "$($_):" + $gen.Invoke($null, @( $_.PSObject.BaseObject
+    )) } catch {} } > result.txt
+    '
+  scripting_engine:
+  - "import clr\nclr.AddReference(r'dnlib.dll')\nimport dnlib\nfrom dnlib.DotNet import\
+    \ *\nfrom dnlib.DotNet.Emit import OpCodes\n\ndef extract_values_from_method(method):\n\
+    \    if not method.HasBody: return []\n    values = []\n    instr = [x for x in\
+    \ method.Body.Instructions]\n    while len(instr) >= 2:\n        ldc_i4 = instr[0]\n\
+    \        call_instr = instr[1]\n        if ldc_i4.OpCode.Code == OpCodes.Ldc_I4.Code\
+    \ and call_instr.OpCode.Code == OpCodes.Call.Code:\n            print('found pattern\
+    \ in', method)\n            i4_val = ldc_i4.GetLdcI4Value()\n            print('value',\
+    \ i4_val)\n            values.append(i4_val)\n        instr = instr[1:]\n    return\
+    \ values\n\ndef extract_values_from_module(module):\n    values = []\n    for\
+    \ t in module.GetTypes():\n        for m in t.Methods:\n            values.extend(extract_values_from_method(m))\n\
+    \    return values\n\nafile = r\"DANFE10103128566164.dll\"\nmodule = ModuleDefMD.Load(afile)\n\
+    values = extract_values_from_module(module)\nprint(values)\nprint('done')\n"
+  registry_keys:
+  - C:\\ProgramData\\regid.5498-06.com.microsoft
+  image_load: []
+  network_connections:
+  - MSBuild.exe -> hxxps://contador.danfajuda(dot)com/contador/save.php
+  - MSBuild.exe -> hxxps://fileondemandd(dot)site/
+  - explorer.exe -> hxxp://pingservice(dot)blogdns(dot)com/myPath
+  file_activity:
+  - C:\\ProgramData\\regid.5498-06.com.microsoft\\MSBuild.exe
+  - C:\\ProgramData\\internal_drive_version2.3.4.txt
+  - C:\\ProgramData\\log.txt
+  - C:\\Program Files\\SearchIndexer\\CCProxy.exe
+  - C:\\Program Files\\SearchIndexer\\wke.dll
+  persistence:
+  - Local service registration for CCProxy.exe and explorer.exe
+  pipes: []
+  process_relations:
+  - msedge.exe -> DANFE10103128566164.exe
+  - DANFE10103128566164.exe -> MSBuild.exe
+  - MSBuild.exe -> computerdefaults.exe
+IOCs:
+  hashes:
+  - 09027fa9653bdf2b4a291071f7e8a72f14d1ba5d0912ed188708f9edd6a084fe
+  - 2ff420e3d01893868a50162df57e8463d1746d3965b76025ed88db9bb13388af
+  - 5e5a58bfabd96f0c78c1e12fa2625aba9c84aa3bd4c9bb99d079d6ccb6e46650
+  - dc03070d50fdd31c89491d139adfb211daf171d03e9e6d88aac43e7ff44e4fef
+  - ddf84fdc080bd55f6f2b409e596b6f7a040c4ab1eb4b965b3f709a0f7faa4e02
+  - b60eb62f6c24d4a495a0dab95cc49624ac5099a2cc21f8bd010a410401ab8cc3
+  - 7566131ce0ecba1710c1a7552491120751b58d6d55f867e61a886b8e5606afc3
+  - ac044dd9ae8f18d928cf39d24525e2474930faf8e83c6e3ad52496ecab11f510
+  - 276a1e9f62e21c675fdad9c7bf0a489560cbd959ac617839aeb9a0bc3cd41366
+  - 24fac4ef193014e34fc30f7a4b7ccc0b1232ab02f164f105888aabe06efbacc3
+  - 8e7f0a51d7593cf76576b767ab03ed331d822c09f6812015550dbd6843853ce7
+  - 7559c440245aeeca28e67b7f13d198ba8add343e8d48df92b7116a337c98b763
+  - a3afed0dabefde9bb8f8f905ab24fc2f554aa77e3a94b05ed35cffc20c201e15
+  - 35db2b34412ad7a1644a8ee82925a88369bc58f6effc11d8ec6d5f81650d897e
+  - 27914c36fd422528d8370cbbc0e45af1ba2c3aeedca1579d92968649b3f562f7
+  - 2d2c2ba0f0d155233cdcbf41a9cf166a6ce9b80a6ab4395821ce658afe04aaba
+  - cb1d2659508a4f50060997ee0e60604598cb38bd2bb90962c6a51d8b798a03b6
+  urls:
+  - hxxps://contador.danfajuda(dot)com/contador/save.php
+  - hxxps://fileondemandd(dot)site/
+  - hxxp://pingservice(dot)blogdns(dot)com/myPath
+  domains:
+  - contador.danfajuda(dot)com
+  - fileondemandd(dot)site
+  - pingservice(dot)blogdns(dot)com
+authors:
+- Marius Benthin
+reference: https://www.gdatasoftware.com/blog/2024/09/38039-bbtok-deobfuscating-net-loader
+date_of_publication: September 26, 2024
+file_creation_date: July 28, 2025

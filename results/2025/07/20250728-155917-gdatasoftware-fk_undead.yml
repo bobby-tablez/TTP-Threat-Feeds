@@ -1,0 +1,80 @@
+description: Rootkit loader disguises itself as a legitimate Windows utility, installs
+  as a system service, and downloads encrypted payloads from attacker-controlled servers.
+malware_families:
+- FK_Undead
+TTPs:
+  processes:
+  - ws3ifsl.sys
+  - EventStore.dat
+  - txlsddlx64.dat
+  - txlsddlx64_7.dat
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKLM\System\CurrentControlSet\services\ws3ifsl
+  - HKLM\SYSTEM\CurrentControlSet\Services\[EventStore/<fingerprint>]
+  - HKLM\SYSTEM\ControlSet001\Services\[EventStore/<fingerprint>]
+  - HKLM\SYSTEM\ControlSet002\Services\[EventStore/<fingerprint>]
+  - HKLM\SYSTEM\ControlSet003\Services\[EventStore/<fingerprint>]
+  image_load: []
+  network_connections:
+  - executable: ws3ifsl.sys
+    destination_address: tjxgood[.]com
+    port: 38005
+  - executable: ws3ifsl.sys
+    destination_address: tjxupdates[.]com
+    port: 38005
+  - executable: ws3ifsl.sys
+    destination_address: 101.37.76.254
+    port: 31005
+  - executable: ws3ifsl.sys
+    destination_address: microsoftdns2.com
+    port: 27688
+  file_activity:
+  - C:\Windows\System32\drivers\ws3ifsl.sys
+  - C:\ProgramData\Microsoft\Windows\EventStore.dat
+  - C:\ProgramData\Microsoft\Windows\Templates.log
+  - C:\ProgramData\Microsoft\Templates.tmp
+  - C:\ProgramData\Microsoft\Crypto\RSA\connect.dat
+  persistence:
+  - HKLM\System\CurrentControlSet\services\ws3ifsl
+  - HKLM\SYSTEM\CurrentControlSet\Services\[EventStore/<fingerprint>]
+  - HKLM\SYSTEM\ControlSet001\Services\[EventStore/<fingerprint>]
+  - HKLM\SYSTEM\ControlSet002\Services\[EventStore/<fingerprint>]
+  - HKLM\SYSTEM\ControlSet003\Services\[EventStore/<fingerprint>]
+  pipes: []
+  process_relations:
+  - ws3ifsl.sys -> EventStore.dat
+IOCs:
+  hashes:
+  - adf0bed4734b416c0c958e096593e93726ba9eb2b39c88645e02033755e16a1b
+  - 046442a7e16166225a0c070bf8d311caddc48cbe61a4b82d462d8dd4501cfd00
+  - 33a305cf2ff910c833e3c8efd77e9f55fc1344215f75a4c8feda6fd5d8e98628
+  - 6af4343fd0ce9b27a2862f75d409d4021efc3160c40a5bda174b2ad30086722d
+  - 10d8591dd18e061febabe0384dc64e5516b7e7e54be87ca0ac35e11f698b0cc2
+  - ca8061f5ee59cba8f8f4e036eddc5f470e0936ebec470a0ebd4e84ab0475ece2
+  - 708f4f45f7515d2b94de5772ee883cfd579dbff216e8a8db3181d2cf0e2a2770
+  - 1f5dcc5b0916a77087f160130d5eadb26fe8ee9d47177d19944773d562c03e8e
+  IPs:
+  - 101.37.76.254
+  domains:
+  - tjxgood[.]com
+  - tjxupdates[.]com
+  - microsoftdns2.com
+  URLs:
+  - hxxp://tjxgood[.]com:38005/auth.bin
+  - hxxp://tjxupdates[.]com:38005/auth.bin
+  - hxxp://tjxgood[.]com:38005/auth7.bin
+  - hxxp://tjxupdates[.]com:38005/auth7.bin
+  - hxxp://101[.]37[.]76[.]254:31005/txlsddlx64.dat
+  - hxxp://101[.]37[.]76[.]254:31005/txlsddlx64_7.dat
+  - hxxp://microsoftdns2.com:27688/html/png/V[yyyyMMddHHmmssfff].dat
+  - hxxp://microsoftdns2.com:27688/html/jpg/U[yyyyMMddHHmmssfff].dat
+  certificate_thumbprint:
+  - e2d6c9b698932d209c9fab3f96c48d476a44669a
+authors:
+- Marius Benthin
+reference: https://www.gdatasoftware.com/blog/2024/12/38091-analysis-fk-undead
+date_of_publication: December 10, 2024
+file_creation_date: July 28, 2025

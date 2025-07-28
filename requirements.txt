@@ -5,3 +5,4 @@ pytesseract
 Pillow
 trafilatura
 pyyaml
+latest-user-agents

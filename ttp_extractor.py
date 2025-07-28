@@ -16,7 +16,7 @@ import collections
 import unicodedata
 import string
 from dateutil.parser import parse as date_parse
-
+from latest_user_agents import get_latest_user_agents, get_random_user_agent
 
 # CONFIG
 LLM_ENDPOINT = "http://127.0.0.1:1234/v1/chat/completions"
@@ -197,9 +197,7 @@ def is_security_report(text, url):
     return score >= 2
 
 def fetch_html_content(url):
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
-    }
+    headers = {"User-Agent": get_random_user_agent()}
     resp = requests.get(url, headers=headers)
     return resp.text
 

