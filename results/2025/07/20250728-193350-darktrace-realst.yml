@@ -1,0 +1,55 @@
+description: Cryptocurrency users are targeted by threat actors in an elaborate social
+  engineering scheme using fake startup companies and compromised X accounts to trick
+  victims into downloading malware disguised as video meeting software.
+attribution:
+- CrazyEvil
+malware_families:
+- Realst
+- Atomic Stealer
+TTPs:
+  processes:
+  - Electron application
+  - Python
+  commandline:
+  - msiexec /i * /quiet /norestart
+  powershell: []
+  scripting_engine:
+  - AppleScript
+  - bash script
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - 45[.]94[.]47[.]167/contact
+  - https://mrajhhosdoahjsd[.]com/install_dynamic.sh
+  - https://mrajhhoshoahjsd[.]com/collect-metrics
+  file_activity:
+  - /AppData/Temp/Python
+  - /tmp/SwoxApp
+  - /tmp/out.zip
+  - /tmp/install_dynamic.sh
+  - /tmp/InstallerHelper.app
+  persistence:
+  - Launch Agent via plist configuration
+  pipes: []
+  process_relations:
+  - Electron application -> Python commands from C2 infrastructure
+IOCs:
+- manboon[.]com
+- https://gaetanorealty[.]com
+- troveur[.]com
+- bigpinellas[.]com
+- dsandbox[.]com
+- conceptwo[.]com
+- aceartist[.]com
+- turismoelcasco[.]com
+- ekodirect[.]com
+- https://mrajhhosdoahjsd[.]com
+- https://isnimitz.com/zxc/app[.]zip
+- http://45[.]94[.]47[.]112/contact
+- 45[.]94[.]47[.]167/contact
+- 77[.]73[.]129[.]18:80
+authors:
+- Darktrace
+reference: https://www.darktrace.com/blog/crypto-wallets-continue-to-be-drained-in-elaborate-social-media-scam
+date_of_publication: June 18, 2025
+file_creation_date: July 28, 2025

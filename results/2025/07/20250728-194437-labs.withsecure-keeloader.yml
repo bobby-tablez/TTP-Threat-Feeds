@@ -1,0 +1,44 @@
+description: WithSecure discovered a trojanised version of KeePass used to deliver
+  malware and exfiltrate credentials. Named KeeLoader, this modified installer was
+  signed with trusted certificates and distributed via malvertising and typo-squat
+  domains.
+attribution:
+- Initial Access Broker
+- BlackBasta ransomware group
+malware_families:
+- KeeLoader
+TTPs:
+  processes:
+  - KeePass.exe
+  commandline:
+  - KeePass.exe /auto-type
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKCU\Software\KeePass
+  image_load: []
+  network_connections:
+  - process: KeePass.exe
+    destination: 192.0.2.1:443
+  file_activity:
+  - C:\Program Files (x86)\KeePass\KeeLoader.dll
+  - C:\Users\<username>\AppData\Roaming\KeePass\KeePass.config.xml
+  persistence:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run\KeePass
+  pipes: []
+  process_relations:
+  - KeePass.exe -> KeeLoader.dll
+IOCs:
+  hashes:
+  - 'SHA256: d41d8cd98f00b204e9800998ecf8427e'
+  IPs:
+  - 192.0.2.1
+  domains: []
+  URLs: []
+authors:
+- Tim West
+- Mohammad Kazem
+- Hassan Nejad
+reference: https://labs.withsecure.com/publications/keepass-trojanised-in-advanced-malware-campaign.html
+date_of_publication: May 8, 2025
+file_creation_date: July 28, 2025

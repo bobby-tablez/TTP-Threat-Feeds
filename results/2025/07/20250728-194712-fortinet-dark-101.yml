@@ -1,0 +1,33 @@
+description: Dark 101 ransomware is a .NET binary that encrypts personal files, deletes
+  backups, and demands Bitcoin for decryption.
+malware_families:
+- Dark 101
+TTPs:
+  processes:
+  - svchost.exe
+  commandline:
+  - svchost.exe
+  - vssadmin delete shadows /all /quiet
+  - wmic shadowcopy delete
+  - wbadmin delete catalog quiet
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\System\DisableTaskMgr
+    = 1
+  image_load: []
+  network_connections: []
+  file_activity:
+  - '%APPDATA%\svchost.exe'
+  - read_it.txt
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+  hashes:
+  - ae3dd3d1eedb6835e6746d51d9ab21c6
+authors:
+- Bryan Lu
+reference: https://www.fortinet.com/blog/threat-research/fortisandbox-detects-dark-101-ransomware-despite-evasion-techniques
+date_of_publication: July 14, 2025
+file_creation_date: July 28, 2025

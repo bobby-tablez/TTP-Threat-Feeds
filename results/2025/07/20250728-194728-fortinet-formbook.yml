@@ -1,0 +1,47 @@
+description: Phishing campaign targeting old version Office Application users through
+  malicious email attachments exploiting CVE-2017-0199 to deploy FormBook malware.
+attribution:
+- Unknown
+malware_families:
+- FormBook
+TTPs:
+  processes:
+  - mshta.exe
+  - sihost.exe
+  commandline:
+  - mshta.exe hxxp[:]//agr[.]my/P6bJNr
+  powershell: []
+  scripting_engine:
+  - wef.hta
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - mshta.exe -> hxxp[:]//agr[.]my/P6bJNr
+  - sihost.exe -> hxxp[:]//172[.]245[.]123[.]32/xampp/hh/wef[.]hta
+  file_activity:
+  - '%APPDATA%\\springmaker'
+  - '%TEMP%\\springmaker'
+  persistence: []
+  pipes: []
+  process_relations:
+  - mshta.exe -> sihost.exe -> springmaker
+IOCs:
+  hashes:
+  - 33A1696D69874AD86501F739A0186F0E4C0301B5A45D73DA903F91539C0DB427
+  - 2BFBF6792CA46219259424EFBBBEE09DDBE6AE8FD9426C50AA0326A530AC5B14
+  - 7E16ED31277C31C0370B391A1FC73F77D7F0CD13CC3BAB0EAA9E2F303B6019AF
+  - A619B1057BCCB69C4D00366F62EBD6E969935CCA65FA40FDBFE1B95E36BA605D
+  - 3843F96588773E2E463A4DA492C875B3241A4842D0C087A19C948E2BE0898364
+  IPs:
+  - 172.245.123.32
+  domains:
+  - agr[.]my
+  URLs:
+  - hxxp[:]//agr[.]my/P6bJNr
+  - hxxp[:]//172[.]245[.]123[.]32/xampp/hh/wef[.]hta
+  - hxxp[:]//172[.]245[.]123[.]32/199/sihost[.]exe
+authors:
+- Shiyin Lin
+reference: https://www.fortinet.com/blog/threat-research/how-a-malicious-excel-file-cve-2017-0199-delivers-the-formbook-payload
+date_of_publication: June 05, 2025
+file_creation_date: July 28, 2025

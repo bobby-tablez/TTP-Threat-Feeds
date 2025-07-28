@@ -5,7 +5,7 @@ import json
 import requests
 import feedparser
 from bs4 import BeautifulSoup
-from datetime import datetime
+from datetime import datetime, timedelta
 from urllib.parse import urljoin, urlparse
 import signal
 from io import BytesIO
@@ -65,7 +65,8 @@ Context:
 bad_patterns = [
     r"/faq", r"/platform", r"/news", r"/industry", r"/category", r"/tag",
     r"/features", r"/services", r"/page", r"/newsletter", r"\?paged=\d+",
-    r"\?_paged=\d+", r"/about", r"guide", r"howto", r"how-to", r"/feed"
+    r"\?_paged=\d+", r"/about", r"guide", r"howto", r"how-to", r"/feed",
+    r"rsac"
 ]
 
 
@@ -376,6 +377,10 @@ def split_text_into_chunks(text, chunk_size=25000, overlap=1500):  # ≈ 8k–9k
         start = end - overlap  # overlap for context continuity
     return chunks
 
+def is_feed_url(url):
+    rss_indicators = ["/rss", "/feed", ".xml"]
+    return any(ind in url.lower() for ind in rss_indicators)
+
 def main():
     MAX_ARTICLES_PER_SOURCE = 5
     cached = read_cached_urls()
@@ -386,12 +391,12 @@ def main():
         print(f"Scanning: {base}")
         try:
             links = []
-            if base.endswith(".xml") or "rss" in base:
+            if is_feed_url(base):
                 feed = feedparser.parse(base)
                 for entry in feed.entries:
                     if hasattr(entry, 'published_parsed'):
                         pub_date = datetime(*entry.published_parsed[:6])
-                        if pub_date.date() == datetime.utcnow().date():
+                        if pub_date.date() >= (datetime.utcnow().date() - timedelta(days=7)):
                             links.append(entry.link)
                     else:
                         links.append(entry.link)
