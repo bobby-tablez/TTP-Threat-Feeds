@@ -29,7 +29,6 @@ https://www.nccgroup.com/us/research-blog/feed/
 https://www.cyfirma.com/cyber-research/
 https://www.proofpoint.com/us/blog/threat-insight/
 https://labs.withsecure.com/publications
-https://www.mcafee.com/blogs/feed
 https://news.sophos.com/en-us/feed/
 https://blog.eclecticiq.com/?type=intelligence-research#overview
 https://www.aquasec.com/category/research/feed/

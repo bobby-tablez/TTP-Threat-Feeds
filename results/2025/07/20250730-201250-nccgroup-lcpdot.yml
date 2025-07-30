@@ -1,0 +1,58 @@
+description: Lazarus used LinkedIn profiles to impersonate employees of other legitimate
+  companies. They communicated with target employees through communication channels
+  such as WhatsApp. The group entices victims to download job adverts (zip files)
+  containing malicious documents that lead to the execution of malware.
+attribution:
+- Lazarus
+malware_families:
+- LCPDot
+TTPs:
+  processes:
+  - rundll32.exe
+  - JavaPackage.dll
+  commandline:
+  - c:\windows\system32\rundll32.exe C:\ProgramData\Oracle\Java\JavaPackage.dll,VpnUserInterface
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - rundll32.exe
+  - JavaPackage.dll
+  network_connections:
+  - global-job[.]org
+  - ats[.]apvit[.]com
+  - bugs-hpsm[.]mobitechnologies[.]com
+  - thefrostery[.]co[.]uk
+  - shoppingbagsdirect[.]com
+  file_activity:
+  - C:\ProgramData\Oracle\Java\JavaPackage.dll
+  - '%APPDATA%\Local\VirtualStore.cab'
+  persistence:
+  - Scheduled task named "Windows Java Vpn Interface"
+  pipes: []
+  process_relations:
+  - rundll32.exe -> JavaPackage.dll
+IOCs:
+  domains:
+  - ats[.]apvit[.]com
+  - bugs-hpsm[.]mobitechnologies[.]com
+  - global-job[.]org
+  - thefrostery[.]co[.]uk
+  - shoppingbagsdirect[.]com
+  ip_addresses:
+  - 13[.]88[.]245[.]250
+  hashes:
+    Javapackage.dll:
+      MD5: AFBCB626B770B1F87FF9B5721D2F3235
+      SHA1: D25A4F20C0B9D982D63FC0135798384C17226B55
+      SHA256: FD02E0F5FCF97022AC266A3E54888080F66760D731903FC32DF2E17E6E1E4C64
+    Virtualstore.cab:
+      MD5: 49C2821A940846BDACB8A3457BE4663C
+      SHA1: 0A6F762A47557E369DB8655A0D14AB088926E05B
+      SHA256: F4E314E8007104974681D92267673AC22721F756D8E1925142D9C26DC8A0FFB4
+authors:
+- Michael Matthews
+- Nikolaos Pantazopoulos
+reference: https://www.nccgroup.com/research-blog/north-korea-s-lazarus-their-initial-access-trade-craft-using-social-media-and-social-engineering/
+date_of_publication: May 05, 2022
+file_creation_date: July 30, 2025

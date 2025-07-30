@@ -1,0 +1,33 @@
+description: This article explains how to write a custom ROP chain to bypass Data
+  Execution Prevention (DEP) on a Windows 10 system. DEP makes certain parts of memory
+  non-executable, and the main goal is to use a ROP chain to combine several ROP gadgets
+  together to bypass DEP and execute code on the stack.
+attribution: Unknown
+TTPs:
+  processes:
+  - ASX2MP3Converter.exe
+  commandline:
+  - rp-win.exe -f "C:\\Program Files (x86)\\Mini-stream\\ASX to MP3 Converter\\MSA2Mfilter03.dll"
+    -r 5 --bad-bytes \\x0a\\x00 > rop.txt
+  powershell: []
+  scripting_engine:
+  - Python
+  registry_keys: []
+  image_load:
+  - ASX2MP3Converter.exe
+  - MSA2Mfilter03.dll
+  network_connections: []
+  file_activity:
+  - C:\\Program Files (x86)\\Mini-stream\\ASX to MP3 Converter\\MSA2Mfilter03.dll
+  - exploit.m3u
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- rp-win.exe
+- C:\Program Files (x86)\Mini-stream\ASX to MP3 Converter\MSA2Mfilter03.dll
+authors:
+- Alex Zaviyalov
+reference: https://www.nccgroup.com/research-blog/defeating-windows-dep-with-a-custom-rop-chain/
+date_of_publication: June 12, 2023
+file_creation_date: July 30, 2025

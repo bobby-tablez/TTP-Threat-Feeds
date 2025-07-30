@@ -1,0 +1,42 @@
+description: On 21st February 2025, Bybit suffered the largest cryptocurrency theft
+  ever recorded, with more than $1.4 billion assets drained from its cold wallet due
+  to a compromised transaction approval process.
+attribution:
+- Lazarus (North-Korea state-sponsored group)
+TTPs:
+  processes:
+  - safe-client.safe.global
+  commandline:
+  - 'POST /v1/chains/1/transactions/0x1Db92e2EeBC8E0c075a02BeA49a2935BcD2dFCF4/propose
+    HTTP/1.1 Host: safe-client.safe.global Content-Type: application/json {"to": "0xf89d7b9c864f589bbF53a82105107622B35EaA40",
+    "value": "60000000000000000000000", "data": "0x", "operation": 0, "baseGas": "0",
+    "gasPrice": "0", "gasToken": "0x0000000000000000000000000000000000000000", "refundReceiver":
+    "0x0000000000000000000000000000000000000000", "nonce": "0", "safeTxGas": "45745",
+    "safeTxHash": "0x49bbd85fbd95873e0580d8212cfd28e31592f4958abe4596ae075", "sender":
+    "0x6cd5327027190eF45476D80B5D3BdE2E80f6aCbC", "signature": "[SIGNED_DATA_OF_THE_DATA_ABOVE_BY_SENDER]"}'
+  powershell: []
+  scripting_engine:
+  - JavaScript
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - safe-client.safe.global
+  file_activity:
+  - 0x1db92e2EeBC8E0c075a02BeA49a2935BcD2dFCF4/transactions/history
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+  hashes: []
+  IPs: []
+  domains:
+  - safe-client.safe.global
+  URLs:
+  - https://safe-client.safe.global/v1/chains/1/transactions/0x1Db92e2EeBC8E0c075a02BeA49a2935BcD2dFCF4/propose
+authors:
+- Mario Rivas
+- Ruben Santos 
+- Jorge Sanz
+reference: https://www.nccgroup.com/research-blog/in-depth-technical-analysis-of-the-bybit-hack/
+date_of_publication: March 10, 2025
+file_creation_date: July 30, 2025

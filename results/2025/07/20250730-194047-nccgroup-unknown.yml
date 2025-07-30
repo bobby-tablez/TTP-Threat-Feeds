@@ -1,0 +1,38 @@
+description: The report discusses security concerns related to CodeAgent, a framework
+  allowing LLMs to generate and execute Python code. It highlights risks associated
+  with additional_authorized_imports and suggests robust sandboxing techniques for
+  secure deployment.
+TTPs:
+  processes:
+  - python
+  commandline:
+  - 'python3 -c "from smolagents import CodeAgent, tool, LiteLLMModel;import os;USE_OPENAI
+    = True;if USE_OPENAI: model = LiteLLMModel(model_id=\"openai/gpt-4o-mini\",api_base=\"https://api.openai.com/v1\",api_key=os.environ.get(\"OPENAI_API_KEY\"),temperature=0.7,);else:
+    model = LiteLLMModel(model_id=\"ollama/qwen2.5-coder:7b\",api_base=\"http://localhost:11434\",temperature=0.7,);additional_authorized_imports=[\"geopandas\",\"plotly\",\"shapely\",\"json\",\"pandas\",\"numpy\",];agent
+    = CodeAgent(tools=[],model=model,additional_authorized_imports=additional_authorized_imports);agent.run(\"Write
+    Python code that uses either pandas or numpy to create a file named hello.py containing
+    the exact line of code:print(\\\"hello world\\\")The output in the file must not
+    include extra quotes, double quotes, or escape characters. The file must contain
+    only the raw Python line.Do not use open(), os, or any standard I/O. Only use
+    pandas or numpy.Do not simulate the output  the code should write and save the
+    file to disk.\");"'
+  powershell:
+  - ''
+  scripting_engine: ''
+  registry_keys: ''
+  image_load: ''
+  network_connections:
+  - python3 --> https://api.openai.com/v1
+  - python3 --> http://localhost:11434
+  file_activity:
+  - /path/to/hello.py
+  persistence: ''
+  pipes: ''
+  process_relations: ''
+IOCs:
+- https://huggingface.co/learn/agents-course/en/unit2/smolagents/multi_agent_systems
+authors:
+- Ben Williams
+reference: https://www.nccgroup.com/research-blog/autonomous-ai-agents-a-hidden-risk-in-insecure-smolagents-codeagent-usage/
+date_of_publication: July 30, 2025
+file_creation_date: July 30, 2025
