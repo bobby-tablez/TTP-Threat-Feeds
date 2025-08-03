@@ -1,0 +1,49 @@
+description: Threat actors have adapted their methods to bypass security defenses
+  and exploit Google Accelerated Mobile Pages (AMP) and Google redirect methods.
+attribution:
+- threat actor
+TTPs:
+  processes:
+  - powershell.exe
+  - cmd.exe
+  - wscript.exe
+  commandline:
+  - powershell.exe -NoP -NonI -W Hidden -Exec Bypass "Invoke-WebRequest -Uri hxxps[://]www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=hxxps[://]lcredubaiproperty[.]com/&ved="
+  - cmd.exe /c start "" "hxxps[://]maps.google.com/url?q=hxxps[://]google.com/amp/s/booking.reservation-approve-53465342.cfd/p/192401157"
+  - wscript.exe "hxxps[://]translate.google.com.sg/translate?hl=&sl=auto&tl=ja&u=hancentc.github.io/ethanc"
+  powershell:
+  - Invoke-WebRequest -Uri hxxps[://]www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=hxxps[://]lcredubaiproperty[.]com/&ved=
+  scripting_engine:
+  - wscript.exe
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: powershell.exe
+    destination: hxxps[://]www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=hxxps[://]lcredubaiproperty[.]com/&ved=
+  - process: cmd.exe
+    destination: hxxps[://]maps.google.com/url?q=hxxps[://]google.com/amp/s/booking.reservation-approve-53465342.cfd/p/192401157
+  - process: wscript.exe
+    destination: hxxps[://]translate.google.com.sg/translate?hl=&sl=auto&tl=ja&u=hancentc.github.io/ethanc
+  file_activity:
+  - C:\Windows\Temp\tempfile.txt
+  persistence: []
+  pipes: []
+  process_relations:
+  - powershell.exe -> cmd.exe
+IOCs:
+  hashes: []
+  IPs:
+  - 192.0.2.1
+  domains:
+  - google.com
+  - maps.google.com
+  - translate.google.com.sg
+  URLs:
+  - hxxps[://]www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=hxxps[://]lcredubaiproperty[.]com/&ved=
+  - hxxps[://]maps.google.com/url?q=hxxps[://]google.com/amp/s/booking.reservation-approve-53465342.cfd/p/192401157
+  - hxxps[://]translate.google.com.sg/translate?hl=&sl=auto&tl=ja&u=hancentc.github.io/ethanc
+authors:
+- Clint Ilagan, Cofense Intelligence Team
+reference: https://cofense.com/blog/google-redirect-abuse-in-2024-key-trends-tactics
+date_of_publication: July 30, 2025
+file_creation_date: August 03, 2025

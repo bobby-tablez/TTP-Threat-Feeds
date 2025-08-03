@@ -1,0 +1,230 @@
+description: Pro-Ukrainian hacker group attacked industrial organization in Russia.
+  The report includes details on the malware used, TTPs, and IoCs.
+attribution:
+- Pro-Ukrainian hacker group
+- Cyber Partisan
+malware_families:
+- DNSCat2
+- Pryanik wiper
+- Gost tunnel tool
+- Vasilek backdoor
+- Vasilek
+TTPs:
+  processes:
+  - agmservice.exe
+  - wsussvc.exe
+  - rtkaudioservice.exe
+  - tv_w64.exe
+  - tv_w640001.exe
+  - telegramupdater.exe
+  - update0002.exe
+  - updater.exe
+  - wsus.exe
+  - wsus0001.exe
+  - bddeeeee.sys
+  - bits.exe
+  - def.dll
+  - netsvc.exe
+  - s.exe
+  - spp.exe
+  - ss.exe
+  - graphics2d.dll
+  - gsdll32.dll
+  - lvfs.exe
+  - taskmon.exe
+  - vmtoolsd.exe
+  - vmware.exe
+  - FwcProxy.exe
+  - FortiGateUpdate.manifest
+  - FortiGateUpdate.dll
+  - Rar.exe
+  - evx.exe
+  - spp.exe
+  - updater.exe
+  - pew.exe
+  - pde.exe
+  - mstfc.exe
+  - iis.exe
+  - winhttp.exe
+  commandline: []
+  powershell: null
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\services\\FortiGateUpdate
+  image_load: []
+  network_connections:
+  - agmservice.exe - 3a01[.]net
+  - wsussvc.exe - 3a01[.]net
+  - rtkaudioservice.exe - 3a01[.]net
+  - tv_w64.exe - 3a01[.]net
+  - tv_w640001.exe - 3a01[.]net
+  - telegramupdater.exe - 3a01[.]net
+  - update0002.exe - 3a01[.]net
+  - updater.exe - 3a01[.]net
+  - wsus.exe - 3a01[.]net
+  - wsus0001.exe - 3a01[.]net
+  - bddeeeee.sys - 3a01[.]net
+  - bits.exe - 3a01[.]net
+  - def.dll - 3a01[.]net
+  - netsvc.exe - 3a01[.]net
+  - s.exe - 3a01[.]net
+  - spp.exe - 3a01[.]net
+  - ss.exe - 3a01[.]net
+  - graphics2d.dll - 3a01[.]net
+  - gsdll32.dll - 3a01[.]net
+  - lvfs.exe - 3a01[.]net
+  - taskmon.exe - 3a01[.]net
+  - vmtoolsd.exe - 3a01[.]net
+  - vmware.exe - 3a01[.]net
+  - FwcProxy.exe - 3a01[.]net
+  - FortiGateUpdate.manifest - 3a01[.]net
+  - FortiGateUpdate.dll - 3a01[.]net
+  - Rar.exe - 3a01[.]net
+  - evx.exe - 3a01[.]net
+  - spp.exe - 3a01[.]net
+  - updater.exe - 3a01[.]net
+  - pew.exe - 3a01[.]net
+  - pde.exe - 3a01[.]net
+  - mstfc.exe - 3a01[.]net
+  - iis.exe - 3a01[.]net
+  - winhttp.exe - 3a01[.]net
+  - process: mstfc.exe
+    destination: myPC
+    port: null
+  file_activity:
+  - c:\program files\common files\adobe\adobegcclient\agmservice.exe
+  - c:\program files\common files\microsoft shared\update\wsussvc.exe
+  - c:\program files\realtek\audio\hda\rtkaudioservice.exe
+  - c:\program files\teamviewer\version9\tv_w64.exe
+  - c:\teamviewer\version9\tv_w640001.exe
+  - c:\users\user\appdata\roaming\telegram desktop\telegramupdater.exe
+  - c:\users\user\appdata\roaming\telegram desktop\update0002.exe
+  - c:\users\user\appdata\roaming\telegram desktop\updater.exe
+  - c:\windows 2016 update\wsus.exe
+  - c:\windows 2016 update\wsus0001.exe
+  - c:\windows\bddeeeee.sys
+  - c:\windows\bits.exe
+  - c:\windows\def.dll
+  - c:\windows\netsvc.exe
+  - c:\windows\s.exe
+  - c:\windows\spp.exe
+  - c:\windows\ss.exe
+  - c:\windows\system32\graphics2d.dll
+  - c:\windows\system32\gsdll32.dll
+  - c:\windows\system32\lvfs.exe
+  - c:\windows\taskmon.exe
+  - c:\windows\vmtoolsd.exe
+  - c:\windows\vmware.exe
+  - C:\Program Files\forefront tmg client\FwcProxy.exe
+  - C:\Windows\System32\FortiGateUpdate.manifest
+  - C:\Windows\System32\FortiGateUpdate.dll
+  - C:\Windows\Temp\Rar.exe
+  - C:\Program Files (x86)\Google\GoogleUpdater\129.0.6651.0\Crashpad\evx.exe
+  - C:\Program Files (x86)\Google\GoogleUpdater\129.0.6651.0\Crashpad\spp.exe
+  - C:\Program Files (x86)\Google\GoogleUpdater\129.0.6651.0\Crashpad\updater.exe
+  - c:\Users\%UserName%\AppData\Roaming\Brother\pew.exe
+  - c:\Users\%UserName%\AppData\Roaming\Brother\pde.exe
+  - C:\WINDOWS\TEMP\mstfc.exe
+  - c:\windows\system32\iis.exe
+  - c:\windows\system32\winhttp.exe
+  persistence: []
+  pipes: []
+  process_relations:
+  - mstfc.exe
+IOCs:
+- 7C730289B150582D65622FEE14DAF1DE
+- A0D7545DCD71267D2D051A4646F91FEB
+- B3F91A4BFCD2EEB346E323B5CBEF2833
+- D9F7489A2CB324DB909CE49548E1DB79
+- 021C89550F2CC0067891693C0B2301E6
+- 13F9BE1C7501154E82626D883219B0F1
+- A4120003348FEDA59ED2A3B278E149BD
+- B78859EB6FD560548E1A99356D14FBB5
+- C19970454202AFF1D5AC289B0C0752DA
+- CC9E931FC7BFE857284BF2EC661399EE
+- CE338924524961F9553C49B3C2D6EBDE
+- 749B194B2746479157048E08F36C0B05
+- D1A8081FF646A83666C7AA69204C17A5
+- 0216931A3ED18710FD0CC247E9B98454
+- 0368CCD16376517659B6BA0A63A33086
+- 043A1AE4CB4FD6B2E46D70091FDFDA80
+- 0AB6D6546094D93817E45390F77B840A
+- 1192D60F12AC800DEB3BB94A326E2EFC
+- 1606FF3CA7201B1EDD99A4885AD74479
+- 18769F7D5AE7182135873EA29B586608
+- 1F024F1BCF190DAB60FAE70F0760F92C
+- 28408044F467FD6033E8E9272CF4AD0C
+- 2BA3CE248489F54233FE66D232B8B399
+- 2FFD44AF4277E78C0DCCF0DEB722FA71
+- 3559069687B0F9982F29DCED5FED40B6
+- 39E2604706EB137FF70619E21511F602
+- 3B627D73EDE057BA29E3707736382FD7
+- 457E261456BA5AC6BE9EF9ED4F46518E
+- 45DA308F63B3675E8D0EB4D440D54319
+- 46D785CD365E0B1514D156AB6EBC8C20
+- 4A5EB4BCD4CA4E024DCB608D5E0C2DDD
+- 5047C19C15DF7A356E76959F7921D09A
+- 513AF4462F64719BD7861A2DAFF8E15D
+- 56090EEEF953847D3E4D59729242EC24
+- 5B88416749CDFE192393144EFAE82492
+- 5CA2662B8DE5CC7D56A8E425EF59FBDD
+- 5E29F706DB2FF0BFA9BE481960D52B0C
+- 5F0E6A992521661AA30F627981C89CFD
+- 60290EA2D6149BA5678A8F1FB7ABD1E1
+- 6ADA80A78D15C39B6511D435389A0C32
+- 6CB10D35E6884089CB192E3AB09BF921
+- 718DF1E53B6B208AC46CF135251661DF
+- 74D7FD33236D1024ADAD272C27FA4A04
+- 7524640B6C66411C9F7A4494FA9ACA1C
+- 7EE9A254AC0F571C6889793AF4CFCD3B
+- 89ED6D4EF883A6B6C095CBB2CCFD774E
+- 916B54455CCB7673FB28469B08B3340B
+- 99634F5A23DB7AF8827AFFD095C5E0C0
+- 9A102379C85547C543CA4B4A8FAB99EC
+- 9B5E70FA77FFDC845AC96EAE7F013BB0
+- 9F61EABEE7FEDE49BEEB7DA793FE4025
+- A268C3D5CAC25D9C03A2960E4EC6F756
+- A402859D74BCCDEB1E074D1EF837BF70
+- A5B2129462C6D78521F544A37F8CA21F
+- A681FE14BC71B14A91000FA8065153BF
+- A70AF2DB482B8BC2C442B5E55AB6F91B
+- A7EE2BE8288FCDAE91B5E4022B95AD3A
+- ADDBB3DEA38C7F114D9B55AC473AF9BD
+- BAC437D80CD0C65A7937681A9BF5A5E0
+- BE47583211DF677350E13EF82198D2D5
+- C060237A1C8D2DCCEFD46F99209312B9
+- C8C7128B536ACFB2A1531B0CB016F1CE
+- CE3CB372FC86A1BF8B8965F941903909
+- E596F7165F9792E9B201E00585ED3694
+- E5D80BF63B2D4DA0E6B1E91B4DC0E35A
+- E6F319DA7D9230850974E0B2FA664450
+- ED03D170568479661BBE47D3B72AABB6
+- F82207C8CA5C44FF3F3D3341C5B01F4C
+- FB966F7055BCDF8D21CE32E4DD71317C
+- FCE38AB03134AD9C4B63845FA456C3E2
+- FF230F470B3E77CF63CB17BC7A2745BB
+- 6470C04186BD618D612FF765B4234C61
+- eef8bb0e23f4633ca53d3ac767294b20
+- a31f4e073c5700f3195b52caaa950971
+- 21a558d7fc3934055302b8a0da78f830
+- 952FC71A3B89BB6E6BB191A66EB4CA12
+- F72E9453C6B9044FBE5BAC9B5EE4E65F
+- 05c17f58b31dbeb2c15d44d1a460a3e0
+- 0633ed1e19ad9e1c6212c1f326e03d73
+- 8CE8DF9CA659D0678F0236CB13FE8505
+- BF33354D4D1EDD928617B68365C2DF02
+- 9BBBC01EE96D575DCFC2137FD319A379
+- 3a01[.]net
+- 0ce[.]org
+- gov-by[.]com
+- 7cp[.]org
+- 91j[.]org
+- vmware.org[.]mx
+- 103.219.153[.]203
+- p-society[.]org
+- sha256: 45bc02d2bedf48bef2651ca04b3a31ca54250946a9dd73e42360b1e380300a
+authors:
+- Cyber Partisan
+reference: https://ics-cert.kaspersky.com/publications/reports/2025/06/05/ttps-of-cyber-partisans-activity-aimed-at-espionage-and-disruption/
+date_of_publication: June 05, 2025
+file_creation_date: August 03, 2025

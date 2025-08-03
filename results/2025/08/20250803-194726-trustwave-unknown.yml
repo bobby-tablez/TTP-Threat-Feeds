@@ -1,0 +1,59 @@
+description: CVE-2024-7348, a race condition vulnerability in PostgreSQL's pg_dump
+  utility, allows attackers with sufficient privileges to execute arbitrary SQL commands
+  as the superuser.
+attribution:
+- Noah Misch
+TTPs:
+  processes:
+  - pg_dump
+  - postgres
+  - nc
+  - /bin/sh
+  commandline:
+  - pg_dump -U postgres -d Adventureworks > trash.dump
+  - psql -c "CREATE DATABASE \\\"Adventureworks\\"
+  - psql -d Adventureworks < install.sql
+  - /usr/local/pgsql/bin/postgres -D /usr/local/pgsql/data
+  - nc -lnvp 80
+  - '/bin/sh @: can''t access tty; job control turned off'
+  powershell: []
+  scripting_engine:
+  - auto_setup.sql
+  - auto_attack.sql
+  - auto_clean.sql
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - pg_dump -> [destination address]
+  - postgres -> [destination address]
+  - process: nc
+    destination: 127.0.0.1
+    port: 80
+  file_activity:
+  - /tmp/result
+  - /tmp/postgres/DBSample/Adventureworks
+  - auto_setup.sql
+  - auto_attack.sql
+  - auto_clean.sql
+  persistence:
+  - CREATE SEQUENCE IF NOT EXISTS public.sequence_trigger
+  - CREATE VIEW public.sequence_trigger as SELECT *,last_value as result from update_extension()
+  pipes: []
+  process_relations:
+  - pg_dump -> postgres
+IOCs:
+  hashes:
+  - 5ccaca1dbesabzs7d1ceseses73aseT1ab
+  - f5ccacalsbesan2e7dicescses7325c71ablc
+  - 42/cBuco2e6f98126b302230ebdead22c235b667
+  - md5: 144a65eb288b4241192e5cc9c8le4eba
+  - md5: fd12a212dd810545c4b7b791e71f08c5
+  - md5: d99d247ef3bf08d47425b22825191e74
+  URLs:
+  - https://github.com/postgres/postgres
+  - https://gist.github.com/richardkundl/b68afdcf68240dcff50a
+authors:
+- Rox Harvey Rosales
+reference: https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/back-up-with-care-but-neglecting-patches-can-leave-you-in-despair/
+date_of_publication: July 31, 2025
+file_creation_date: August 03, 2025

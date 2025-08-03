@@ -1,0 +1,55 @@
+description: The Greenbug APT group uses a RAT with various versions, including version
+  5.0.0, to collect user information and execute wiper malware Disstrack.
+attribution:
+- Greenbug
+malware_families:
+- ISM RAT
+TTPs:
+  processes:
+  - Ism.exe
+  commandline:
+  - cmd /a /c echo %userdomain%%username% >>\"%localappdata%MicrosoftWindowsjTmp765643.txt\"
+    2> 1
+  - cmd /a /c ipconfig /all >>\"%localappdata%MicrosoftWindowsjTmp765643.txt\"
+  - cmd /a /c net view >>\"%localappdata%MicrosoftWindowsjTmp765643.txt\"
+  - cmd /a /c net user administrator /domain >>\"%localappdata%MicrosoftWindowsjTmp765643.txt\"
+  - cmd /a /c netstat -ant >>\"%localappdata%MicrosoftWindowsjTmp765643.txt\"
+  - cmd /a /c systeminfo >> \"%localappdata%MicrosoftWindowsjTmp765643.txt\"
+  - cmd /a /c tasklist >> \"%localappdata%MicrosoftWindowsjTmp765643.txt\"
+  - cmd /a /c sc query >> \"%localappdata%MicrosoftWindowsjTmp765643.txt\"
+  - cmd /u /c WMIC /Node:localhost /Namespace:rootSecurityCenter Path AntiVirusProduct
+    Get /Format:List >> \"%localappdata%MicrosoftWindowsTmp765643.txt\"
+  - cmd /u /c WMIC /Node:localhost /Namespace:rootSecurityCenter2 Path AntiVirusProduct
+    Get /Format:List >> \"%localappdata%MicrosoftWindowsTmp765643.txt\"
+  - cmd /u /c WMIC /Node:localhost /Namespace:rootSecurityCenter Path FirewallProduct
+    Get /Format:List >> \"%localappdata%MicrosoftWindowsTmp765643.txt\"
+  - cmd /u /c WMIC /Node:localhost /Namespace:rootSecurityCenter2 Path FirewallProduct
+    Get /Format:List >> \"%localappdata%MicrosoftWindowsTmp765643.txt\"
+  - cmd /u /c WMIC /Node:localhost /Namespace:rootSecurityCenter Path AntiSpywareProduct
+    Get /Format:List >> \"%localappdata%MicrosoftWindowsTmp765643.txt\"
+  - cmd /u /c WMIC /Node:localhost /Namespace:rootSecurityCenter2 Path AntiSpywareProduct
+    Get /Format:List >> \"%localappdata%MicrosoftWindowsTmp765643.txt\"
+  powershell:
+  - Invoke-BypassUAC
+  - invoke-psuacme
+  scripting_engine: null
+  registry_keys: null
+  image_load: null
+  network_connections:
+  - 'POST //Home/CC HTTP/1.1Connection: Keep-AliveContent-Type: application/x-www-form-urlencodedUser-Agent:
+    WinHttpClientContent-Length: 0Host: update.winappupdater.com'
+  file_activity:
+  - '%localappdata%MicrosoftWindowsTmpFiles'
+  persistence: null
+  pipes: null
+  process_relations: null
+IOCs:
+- 146a112cb01cd4b8e06d36304f6bdf7b
+- fa3dbe37108b752c38bf5870b5862ce5
+- bf4b07c7b4a4504c4192bd68476d63b5
+- update.winappupdater.com
+authors:
+- Ahmed Zaki
+reference: https://www.nccgroup.com/research-blog/ism-rat/
+date_of_publication: February 17, 2017
+file_creation_date: August 03, 2025
