@@ -1,0 +1,52 @@
+description: New DarkCloud campaign observed in July 2025, using phishing emails with
+  RAR archives containing JavaScript files that execute PowerShell code to load a
+  .NET DLL and deploy the fileless DarkCloud payload.
+malware_families:
+- DarkCloud
+TTPs:
+  processes:
+  - WScript.exe
+  - cmd.exe
+  - MSBuild.exe
+  commandline:
+  - cmd.exe /C copy *.js C:\\Users\\Public\\Downloads\\edriophthalma.js
+  powershell: '$cosmea = ''powershell -w hidden -noprofile -ep bypass -c'';
+
+    $effortless = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String(''...''));
+
+    Invoke-Expression $cosmea + $effortless
+
+    '
+  scripting_engine:
+  - Quote
+  registry_keys:
+  - HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load: []
+  network_connections:
+  - process: WScript.exe
+    destination: hxxp://paste[.]ee/d/0WhDakVP/0
+    port: 80
+  - process: MSBuild.exe
+    destination: http://showip.NET
+    port: 80
+  file_activity:
+  - C:\\Users\\Public\\Downloads\\edriophthalma.js
+  - '%Windir%\\Microsoft.NET\\Framework\\v4.0.30319\\MSBuild.exe'
+  persistence:
+  - HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  pipes: []
+  process_relations:
+  - WScript.exe -> cmd.exe
+  - cmd.exe -> MSBuild.exe
+IOCs:
+  hashes:
+  - 381AA445E173341F39E464E4F79B89C9ED058631BCBBB2792D9ECBDF9FFE027D
+  - 82BA4340BE2E07BB74347ADE0B7B43F12CF8503A8FA535F154D2E228EFBEF69C
+  urls:
+  - hxxps://archive[.]org/download/universe-1733359315202-8750/universe-1733359315202-8750.jpg
+  - hxxp://paste[.]ee/d/0WhDakVP/0
+authors:
+- Xiaopeng Zhang 
+reference: https://www.fortinet.com/blog/threat-research/unveiling-a-new-variant-of-the-darkcloud-campaign
+date_of_publication: August 07, 2025
+file_creation_date: August 12, 2025

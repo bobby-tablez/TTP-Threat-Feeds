@@ -1,0 +1,50 @@
+description: SVG files are being weaponized to execute phishing attacks by embedding
+  JavaScript that redirects users to malicious sites.
+attribution:
+- threat_actor: Unknown
+  APT_group: Unknown
+  country: Unknown
+malware_families:
+- SVG Phishing
+TTPs:
+  processes:
+  - browser.exe
+  commandline:
+  - C:\Program Files\Internet Explorer\iexplore.exe "C:\Users\User\Downloads\Upcoming
+    Meeting.svg"
+  powershell: []
+  scripting_engine:
+  - <script><![CDATA[var Y = "long_hex_encoded_string"; var q = "q"; var v = ""; for
+    (var i = 0, l = Y.length; i < l; i++) { v += String.fromCharCode(Y.charCodeAt(i)
+    ^ q.charCodeAt(0)); } window.location = "javascript:" + v;]]></script>
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: iexplore.exe
+    destination_address: hju[.]yxfbynit[.]es
+    URL: https://hju[.]yxfbynit[.]es/koRfAEHVFeQZ!bM9
+    port: 443
+  file_activity:
+  - C:\Users\User\Downloads\Upcoming Meeting.svg
+  persistence: []
+  pipes: []
+  process_relations:
+  - iexplore.exe -> hju[.]yxfbynit[.]es
+IOCs:
+  hashes:
+  - c78a99a4e6c04ae3c8d49c8351818090
+  - f68e333c9310af3503942e066f8c9ed1
+  - 2ecce89fa1e5de9f94d038744fc34219
+  - 6b51979ffae37fa27f0ed13e2bbcf37e
+  - 4aea855cde4c963016ed36566ae113b7
+  - 84ca41529259a2cea825403363074538
+  IPs: []
+  domains:
+  - hju[.]yxfbynit[.]es
+  URLs:
+  - https://hju[.]yxfbynit[.]es/koRfAEHVFeQZ!bM9
+authors:
+- Rumana Siddiqui
+reference: https://www.seqrite.com/blog/unmasking-the-svg-threat-how-hackers-use-vector-graphics-for-phishing-attacks/
+date_of_publication: August 07, 2025
+file_creation_date: August 12, 2025

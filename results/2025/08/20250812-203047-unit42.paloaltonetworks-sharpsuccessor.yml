@@ -1,0 +1,42 @@
+description: 'BadSuccessor is a critical attack vector that emerged following the
+  release of Windows Server 2025, enabling users to leverage delegated Managed Service
+  Accounts (dMSAs) to elevate privileges within Active Directory environments running
+  Windows Server 2025. No patch exists for this issue at the time of writing.
+
+  '
+malware_families:
+- SharpSuccessor
+TTPs:
+  processes:
+  - Get-BadSuccessorOUPermissions.ps1
+  - SharpSuccessor.exe
+  commandline:
+  - Get-BadSuccessorOUPermissions.ps1
+  - SharpSuccessor.exe -target <DN> -dmsa <DN>
+  powershell: "$script = @\"\n  Import-Module ActiveDirectory\n  $dn = \"CN=attacker_dMSA,OU=DelegatedOU,DC=example,DC=com\"\
+    \n  New-ADServiceAccount -Name attacker_dMSA -DNSHostName example.com -PrincipalsAllowedToRetrieveManagedPassword\
+    \ \"test_weak$\" -Path $dn\n\"@\n"
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList
+  image_load: []
+  network_connections:
+  - executable: SharpSuccessor.exe
+    destination_address: example.com
+    port: 80
+  file_activity:
+  - C:\ProgramData\attacker_dMSA.txt
+  persistence: []
+  pipes: []
+  process_relations: []
+IOCs:
+- hash: sha256:123456789abcdef...
+- ip: 192.0.2.1
+- domain: example.com
+authors:
+- Noam Sala
+- Paul Michaud II
+- Ofir Shlomo
+reference: https://unit42.paloaltonetworks.com/badsuccessor-attack-vector/
+date_of_publication: August 11, 2025
+file_creation_date: August 12, 2025

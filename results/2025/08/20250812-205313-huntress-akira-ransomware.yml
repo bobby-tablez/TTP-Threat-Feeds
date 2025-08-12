@@ -1,0 +1,82 @@
+description: SonicWall seventh-generation firewall appliances are being targeted by
+  threat actors to deploy ransomware. The attacks involve the use of legitimate Windows
+  drivers in BYOVD attacks and disabling security tools.
+attribution:
+- Akira Ransomware Group
+malware_families:
+- Akira Ransomware
+TTPs:
+  processes:
+  - powershell.exe
+  - vssadmin.exe
+  - wbadmin.exe
+  - netsh.exe
+  - nltest.exe
+  - PING.EXE
+  - WinRAR.exe
+  - fzsftp.exe
+  - msiexec.exe
+  - reg.exe
+  - SystemSettingsAdminFlows.exe
+  commandline:
+  - powershell.exe -Command "Get-WmiObject Win32_Shadowcopy | Remove-WmiObject"
+  - vssadmin.exe delete shadows /all /quiet
+  - wbadmin.exe start backup -backupTarget:\\\\localhost\\c$\\ProgramData\\ -include:C:\\Windows\\NTDS\\NTDS.dit
+    C:\\Windows\\System32\\config\\SYSTEM C:\\Windows\\System32\\config\\SECURITY
+    -quiet
+  - netsh advfirewall firewall add rule name="allow RemoteDesktop" dir=in protocol=TCP
+    localport=3389 action=allow
+  - New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server (sshd)' -Enabled True
+    -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
+  - '"C:\\Program Files\\WinRAR\\WinRAR.exe" a -ep1 -scul -r0 -iext -imon1 -- . X:\\[Redacted]C:\\ProgramData\\shares.txt'
+  - '"C:\\Program Files\\FileZilla FTP Client\\fzsftp.exe" -v'
+  - msiexec.exe /i "C:\\ProgramData\\OpenSSHa.msi"
+  - net.exe user lockadmin Msnc?42da /add
+  - reg.exe add "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList"
+    /t REG_DWORD /v commuser /d 0 /f
+  - net user [REDACTED] VRT83g$%ce /add
+  - net localgroup Administrators [redacted] /add
+  - net localgroup "Remote Desktop Users" [redacted] /add
+  - net group "Domain Admins" azuresync /add
+  - cmd.exe /Q /c net user backupSQL Password123$ /add /dom 1> \\\\Windows\\\\Temp\\\\tinhLg
+    2>&1
+  - cmd.exe /Q /c net group "Domain Admins" backupSQL /dom /add 1> \\Windows\\Temp\\NDqyOI
+    2>&1
+  - '"C:\\Windows\\system32\\SystemSettingsAdminFlows.exe" Defender DisableEnhancedNotifications
+    1'
+  scripting_engine:
+  - C:\\ProgramData\\2.bat
+  - C:\\ProgramData\\1.bat
+  registry_keys:
+  - HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList
+  image_load: []
+  network_connections:
+  - PING.EXE 192.168.xx.xxx
+  file_activity:
+  - \\??\\C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\2\\rwdrv.sys
+  - \\??\\C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\2\\hlpdrv.sys
+  persistence: []
+  pipes: []
+  process_relations:
+  - powershell.exe -> Get-WmiObject Win32_Shadowcopy | Remove-WmiObject
+IOCs:
+  hashes:
+  - d080f553c9b1276317441894ec6861573fa64fb1fae46165a55302e782b1614d
+  - 1b153070934033deace7f04e77a72abe4e7e259271f885e25d81dc6337a9313d
+  IPs:
+  - 142.252.99[.]59
+  - 45.86.208[.]240
+  - 77.247.126[.]239
+  - 104.238.205[.]105
+  - 104.238.220[.]216
+  - 181.215.182[.]64
+  - 193.163.194[.]7
+  - 193.239.236[.]149
+  - 194.33.45[.]155
+  domains:
+  - ''
+authors:
+- Team Huntress
+reference: https://www.huntress.com/blog/exploitation-of-sonicwall-vpn
+date_of_publication: August 12, 2025
+file_creation_date: August 12, 2025

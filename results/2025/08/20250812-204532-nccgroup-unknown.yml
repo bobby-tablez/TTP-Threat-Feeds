@@ -1,0 +1,56 @@
+description: 'This report details the detection of offensive and obfuscated PowerShell
+  scripts using Windows Event Log 4104, leveraging machine learning models to identify
+  malicious activities.
+
+  '
+TTPs:
+  processes:
+  - powershell.exe
+  commandline:
+  - powershell.exe -NoP -NonI -W Hidden -Exec Bypass -Enc JABjAGwAaQBlAHIA...
+  powershell:
+  - '$script = [System.Text.Encoding]::ASCII.GetString([Convert]::FromBase64String(''JABjAGwAaQBlAHIA...''))
+
+    Invoke-Expression $script
+
+    '
+  - '$encodedScript = ''JABjAGwAaQBlAHIA...''
+
+    $decodedScript = [System.Text.Encoding]::ASCII.GetString([Convert]::FromBase64String($encodedScript))
+
+    Invoke-Expression $decodedScript
+
+    '
+  scripting_engine:
+  - "function Invoke-Obfuscation {\n  param (\n    [Parameter(Mandatory=$true)]\n\
+    \    [string]$script\n  )\n  $obfuscated = [System.Text.Encoding]::ASCII.GetString([Convert]::FromBase64String($script))\n\
+    \  Invoke-Expression $obfuscated\n}\n"
+  registry_keys:
+  - HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System
+  image_load: null
+  network_connections: null
+  file_activity:
+  - C:\Users\user\AppData\Local\Temp\PowerUp.ps1
+  persistence:
+  - Scheduled Tasks
+  - Registry Run Keys
+  pipes: null
+  process_relations: null
+IOCs:
+  hashes:
+  - 'SHA256: d41d8cd98f00b204e9800998ecf8427e'
+  IPs: null
+  domains: null
+  URLs:
+  - https://github.com/PowerShellMafia/PowerSploit/blob/master/Privesc/PowerUp.ps1
+  - https://github.com/danielbohannon/Invoke-Obfuscation
+  - https://arxiv.org/pdf/1905.09538.pdf
+  - https://www.fireeye.com/blog/threat-research/2018/07/malicious-powershell-detection-via-machine-learning.html
+  - https://github.com/danielbohannon/Revoke-Obfuscation/tree/master/DataScience
+  - https://www.powershellgallery.com/
+  - https://www.nccgroup.com/uk/our-research/managing-powershell-in-a-modern-corporate-environment/
+authors:
+- Joost Jansen
+reference: https://www.nccgroup.com/research-blog/machine-learning-from-idea-to-reality-a-powershell-case-study/
+date_of_publication: September 02, 2020
+file_creation_date: August 12, 2025

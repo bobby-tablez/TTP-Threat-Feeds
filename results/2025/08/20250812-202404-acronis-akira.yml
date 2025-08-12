@@ -1,0 +1,62 @@
+description: Acronis Threat Research Unit (TRU) analyzed recent samples of Akira and
+  Lynx ransomware families to see the latest changes and tweaks implemented by the
+  groups.
+attribution:
+- Akira
+- Lynx
+malware_families:
+- Akira
+- Lynx
+TTPs:
+  processes:
+  - WinMain
+  - WTSEnumerateProcess
+  - CoSetProxyBlanket
+  - GetSystemInfo
+  - Restart Manager API
+  - SetVolumeMountPointW
+  - EnumServicesStatusExW
+  - ControlService
+  - CryptGenRandom
+  - CryptStringToBinaryA
+  - Lynx.exe
+  commandline:
+  - C:\Windows\System32\cmd.exe /c powershell -Command "Get-WmiObject Win32_ShadowCopy
+    | ForEach-Object { $_.Delete() }"
+  - C:\Windows\System32\cmd.exe /c powershell -Command "Stop-Process -Name sql,veeam,backup,exchange,java,notepad"
+  - Lynx.exe
+  powershell:
+  - Get-WmiObject Win32_ShadowCopy | ForEach-Object { $_.Delete() }
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: Akira 
+    destination_address: https://akiral2iz6a7qgd3ayp3l6yub7xx2uep76idk3u2kollpj5z3z636bad.onion
+    port: ''
+  - executable: Akira
+    destination_address: https://akiralkzxzq2dsrzsrvbr2xgbbu2wgsmxryd4csgfameg52n7efvr2id.onion
+    port: ''
+  - 'Lynx.exe - Destination: http://lynxchtext, Port: 80'
+  file_activity:
+  - C:\Users\DEV\Desktop\test\test1.json
+  - C:\Users\DEV\Desktop\test\test2.png
+  - C:\Users\DEV\Desktop\test\test3.json
+  - C:\Users\DEV\Desktop\test\test4.png
+  - C:\Users\DEV\Desktop\test\test5.json
+  - C:\Users\DEV\Desktop\test\test6.png
+  persistence: []
+  pipes: []
+  process_relations:
+  - WinMain -> WTSEnumerateProcess
+  - CoSetProxyBlanket -> GetSystemInfo
+  - Restart Manager API -> SetVolumeMountPointW
+  - EnumServicesStatusExW -> ControlService
+  - CryptGenRandom -> CryptStringToBinaryA
+IOCs:
+- http://lynxchtext
+authors:
+- Acronis Threat Research Unit (TRU)
+reference: https://www.acronis.com/en-us/tru/posts/msps-a-top-target-for-akira-and-lynx-ransomware/
+date_of_publication: August 12, 2025
+file_creation_date: August 12, 2025

