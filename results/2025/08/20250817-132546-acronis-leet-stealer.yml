@@ -1,0 +1,89 @@
+description: The Acronis Threat Research Unit (TRU) uncovered a new malware campaign
+  involving Leet Stealer, RMC Stealer and Sniffer Stealer. These campaigns combine
+  social engineering, gaming hype and stolen branding assets to trick victims into
+  installing malware disguised as indie game titles such as Baruda Quest, Warstorm
+  Fire and Dire Talon.
+attribution:
+- Unknown
+malware_families:
+- Leet Stealer
+- RMC Stealer
+- Sniffer Stealer
+TTPs:
+  processes:
+  - BarudaQuest.exe
+  - WarstormFireSetup.exe
+  - DireTalon_1.2.8.exe
+  - Warheirs.exe
+  - watcher.exe
+  - mitmdump.exe
+  - mitmproxy.exe
+  - mitmweb.exe
+  - Insomnia.exe
+  commandline:
+  - BarudaQuest.exe
+  - Warstormfire.com/download/warstormfire.rar
+  - Warstormfire.com/download/WarstormfireSetup.rar
+  - dropbox.com/scl/fi/eg0bxaplyr87vbt7t46m8/DireTalon_1.2.8.rar?rlkey=6wl2es2khx4x0blyzq9wwxnqj&st=0s3igvro&dl=1
+  - cdn.discordapp.com/attachments/1345333906966183958/1345335616187007017/Warheirs.rar?ex=67c42cee&is=67c2db6e&hm=bb404897fbc8b87eda9000e3845083f00713cea43fac17f0922fc2f098347eb4
+  powershell:
+  - fakeErr_[random_characters].vbs
+  scripting_engine:
+  - VBScript
+  - JScript
+  - Python
+  - Bash
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - BarudaQuest.exe - hxxps://cdn.discordapp.com/attachments/1308872370601070710/1353442772497072158/BarudaQuest.exe?ex=67e1ab4e&is=67e059ce&hm=63b73c6a74e2e31f6b439fec1c4094a6fd76a894db328effab4ac8ef603e75ad
+  - WarstormFireSetup.exe - hxxps://warstormfire.com/download/warstormfire.rar - hxxps://warstormfire.com/download/WarstormfireSetup.rar
+  - DireTalon_1.2.8.exe - hxxps://www.dropbox.com/scl/fi/eg0bxaplyr87vbt7t46m8/DireTalon_1.2.8.rar?rlkey=6wl2es2khx4x0blyzq9wwxnqj&st=0s3igvro&dl=1
+  - Warheirs.exe - hxxps://cdn.discordapp.com/attachments/1345333906966183958/1345335616187007017/Warheirs.rar?ex=67c42cee&is=67c2db6e&hm=bb404897fbc8b87eda9000e3845083f00713cea43fac17f0922fc2f098347eb4
+  - process: watcher.exe
+    destination_address: 88.132.231.71
+    port: ''
+  - process: mitmdump.exe
+    destination_address: BEE7370C-8C0C-4
+    port: ''
+  - process: mitmproxy.exe
+    destination_address: AppOnFly-VPS
+    port: ''
+  - process: mitmweb.exe
+    destination_address: fv-az269-80
+    port: ''
+  file_activity:
+  - C:\Program Files (x86)\BarudaQuest\BarudaQuest.exe
+  - C:\Users\Public\Downloads\Warstormfire.rar
+  - C:\Users\Public\Downloads\WarstormfireSetup.rar
+  - C:\Users\Public\Downloads\DireTalon_1.2.8.rar
+  - C:\Users\Public\Downloads\Warheirs.rar
+  - path: C:\Users\WDAGUtilityAccount\AppData\Local\Autofill
+  - path: C:\Users\WDAGUtilityAccount\AppData\Local\Cookies
+  - path: C:\Users\WDAGUtilityAccount\AppData\Local\Passwords
+  persistence:
+  - method: Added to startup via script
+  pipes: []
+  process_relations:
+  - BarudaQuest.exe - fakeErr_[random_characters].vbs
+  - parent_process: watcher.exe
+    child_processes:
+    - mitmdump.exe
+    - mitmproxy.exe
+    - mitmweb.exe
+    - Insomnia.exe
+IOCs:
+  hashes:
+  - ''
+  IPs:
+  - 88.132.231.71
+  domains: []
+  URLs:
+  - https://api.gofile.io/servers
+  - https://mail.google.com
+authors:
+- Jozsef Gegeny
+- Ilia Dafchev
+reference: https://www.acronis.com/en-us/tru/posts/threat-actors-go-gaming-electron-based-stealers-in-disguise/
+date_of_publication: July 23, 2025
+file_creation_date: August 17, 2025

