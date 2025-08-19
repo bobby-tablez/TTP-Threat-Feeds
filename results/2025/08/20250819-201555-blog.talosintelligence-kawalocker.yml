@@ -1,0 +1,51 @@
+description:
+- KaWalLocker is a ransomware variant that encrypts files and demands payment for
+  decryption.
+attribution:
+- Qilin
+- Unknown
+malware_families:
+- KaWaLocker
+- KaWalLocker
+TTPs:
+  processes:
+  - calc.exe
+  commandline:
+  - calc
+  - vssadmin.exe Delete Shadows /all /quiet
+  - vssadmin.exe delete shadows /all /quiet
+  - wmic shadowcopy delete /nointeractive
+  - cmd.exe /c wevtutil cl security | wevtutil cl system | wevtutil cl application
+  - cmd.exe /C ping 127.0.0.1 -n 2 > nul && del /F
+  powershell:
+  - ''
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\Software\Classes\.C3680868C
+  image_load: []
+  network_connections:
+  - calc.exe -> localhost:4242
+  file_activity:
+  - C:\Users\Public\Documents\.C3680868C.ico
+  - C:\!!Restore-My-file-Kavva.txt
+  - '!!Restore-My-file-K1Vva.txt'
+  - '!!Restore-My-file-Kavva.txt'
+IOCs:
+  hashes:
+  - ''
+  - 20593486643baaB39CEDABSFZ7
+  - 'dOIS2EDABSF2TI17AExtended Detection and Response:CiscoXDRisco Secure Email Threat
+    DefenseSecure Internet Gateway: Cisco UmbrellaEmailN/ANetwork security: Cisco
+    Secure FirewallN/AAnalytics: Cisco Secure Network AnalyticsN/AAEndpoint: Cisco
+    Secure EndpointMulti-Cloud Security:co MultiCloud DefenseN/ASecurity Service Edge
+    (SSE):Cisco Secure Access.'
+  IPs:
+  - 127.0.0.1
+  domains: []
+  URLs:
+  - http://kawa.onion
+authors:
+- Takahiro Takeda
+reference: https://blog.talosintelligence.com/ransomware_incidents_in_japan_during_the_first_half_of_2025/
+date_of_publication: August 19, 2025
+file_creation_date: August 19, 2025

