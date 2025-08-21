@@ -1,0 +1,61 @@
+description: UNC3944 is a financially motivated threat group targeting multiple industries
+  including retail, airline, and insurance. They use social engineering tactics to
+  compromise user accounts and pivot within the VMware vSphere environment to exfiltrate
+  data and deploy ransomware.
+attribution:
+- UNC3944
+TTPs:
+  processes:
+  - wsmprovhost.exe
+  - net.exe
+  - vim-cmd
+  - esxcli system settings kernel set -s execInstalledOnly -v FALSE
+  - scp
+  - ssh
+  - nohup
+  commandline:
+  - wsmprovhost.exe
+  - net group "ESX Admins" /add
+  - vim-cmd vmsvc/power.off <VM_ID>
+  - esxcli system settings kernel set -s execInstalledOnly -v FALSE
+  - scp custom_ransomware_binary /tmp/
+  - ssh root@192.168.40.1
+  - nohup ./custom_ransomware_binary &
+  powershell: []
+  scripting_engine:
+  - vim-cmd vmsvc/power.off <VM_ID>
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: wsmprovhost.exe
+    destination_address: ''
+    URL_or_hostname: ''
+    port: ''
+  - executable: scp
+    destination_address: 192.168.40.1
+    port: '22'
+  - executable: ssh
+    destination_address: 192.168.40.1
+    port: '22'
+  file_activity:
+  - C:\Windows\System32\wsmprovhost.exe
+  - /tmp/custom_ransomware_binary
+  - .vmdk files
+  - .vmx files
+  persistence: []
+  pipes: []
+  process_relations:
+  - vim-cmd -> esxcli system settings kernel set -s execInstalledOnly -v FALSE
+  - scp -> ssh -> nohup ./custom_ransomware_binary &
+IOCs:
+  hashes:
+  - PREfEReg33333333202506 2572201:31 6577240000
+  IPs:
+  - 192.168.40.1
+  domains: []
+  URLs: []
+authors:
+- Mandiant
+reference: https://cloud.google.com/blog/topics/threat-intelligence/defending-vsphere-from-unc3944
+date_of_publication: August 21, 2025
+file_creation_date: August 21, 2025

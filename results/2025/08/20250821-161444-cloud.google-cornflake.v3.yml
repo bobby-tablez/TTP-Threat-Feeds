@@ -1,0 +1,59 @@
+description: This investigation highlights the collaborative nature of modern cyber
+  threats, where UNC5518 leverages compromised websites and deceptive ClickFix lures
+  to gain initial access.
+attribution:
+- UNC5518
+- UNC5774
+malware_families:
+- CORNFLAKE.V3
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - rundll32.exe
+  commandline:
+  - cmd.exe /s /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v "random_appdata_dirname"
+    /t REG_SZ /d "\\"<php_binary_path>"\\"<script_path>"\" /f
+  - powershell.exe C:\Windows\System32\rundll32.exe"{WINDYTWIST.SEA Backdoor}" start
+  powershell:
+  - C:\Windows\System32\rundll32.exe"{WINDYTWIST.SEA Backdoor}" start
+  scripting_engine: []
+  registry_keys:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+  image_load: []
+  network_connections:
+  - process: powershell.exe
+    destination: nodejs.org
+    port: ''
+  - process: mshta.exe
+    destination: windows.php.net
+    port: ''
+  file_activity:
+  - C:\Windows\System32\rundll32.exe"{WINDYTWIST.SEA Backdoor}"
+  persistence:
+  - reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v "random_appdata_dirname"
+    /t REG_SZ /d "\\"<php_binary_path>"\\"<script_path>"\" /f
+  pipes: []
+  process_relations: []
+IOCs:
+  hashes: []
+  IPs:
+  - 104.26.13.89
+  - 151.101.129.223
+  domains:
+  - nodejs.org
+  - windows.php.net
+authors:
+- Diana Ion
+- Yash Gupta
+- Rufus Brown
+- Mike Hunhoff
+- Genwei Jiang
+- Mon Liclican
+- Preston Lewis
+- Steve Sedotto
+- Elvis Miezitis
+- Rommel Joven
+reference: https://cloud.google.com/blog/topics/threat-intelligence/analyzing-cornflake-v3-backdoor
+date_of_publication: August 20, 2025
+file_creation_date: August 21, 2025

@@ -75,3 +75,5 @@ https://www.group-ib.com/feed/blogfeed/
 https://hybrid-analysis.blogspot.com/
 https://www.greynoise.io/blog/rss.xml
 https://snyk.io/blog/feed/
+https://binarydefense.com/resources/arc-labs
+https://cloud.google.com/blog/topics/threat-intelligence/

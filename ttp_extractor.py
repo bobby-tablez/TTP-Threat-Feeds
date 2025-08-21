@@ -49,7 +49,8 @@ Extract the following information from this cyber threat report and present it i
 
 Additional critical requirements:
 - Only return the raw YAML content. Do not include explanations, introductions or comments.
-- Do not make up information. Do not provide summaries to TTPs. Only return relevant technical data that is explicitly present in the report.
+- If there are no explicit technical details (e.g., command lines, registry keys, process names, etc.), return an empty YAML with only the description, authors, and IOCs keys.
+- Do NOT guess or infer any data — even if it seems likely. Do not generate placeholder or generic TTPs.
 - If the publication contains little useful data, empty fields are acceptable.
 - No example commands or speculated data.
 - Include ALL and FULL command line arguements.
@@ -57,6 +58,7 @@ Additional critical requirements:
 - Provide only technical data, for example, don't describe TTPs, IOCs and URLs. Only provide raw data where appropriate.
 - For any key or subkey that contains no data, do not include the key or subkey in the YAML.
 - Use compact YAML formatting. Use single quotes for all strings.
+- If no TTPs are clearly described, leave the entire TTPs: key out of the YAML.
 
 Context:
 {text}
@@ -320,6 +322,7 @@ def handle_article(url, cached):
 
     if not is_security_report(text, url):
         print("   ⚠️ Skipped (not a security advisory)")
+        append_to_cache(url)
         return
 
     try:

