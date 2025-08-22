@@ -1,0 +1,51 @@
+description: "Paper Werewolf used WinRAR directory traversal RCE (CVE\u20112025\u2011\
+  6218) and a zero\u2011day ADS exploit to drop malicious executables into startup\
+  \ folders, establishing persistence via auto\u2011run."
+attribution: Paper Werewolf (GOFFEE)
+malware_families:
+- xpsrchvw*
+- WinRunApp.exe
+TTPs:
+  processes:
+  - xpsrchvw74.exe
+  - xpsrchvw71.exe
+  - xpsrchvw72.exe
+  - xpsrchvw73.exe
+  - WinRunApp.exe
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: xpsrchvw74.exe
+    destination: 89.110.88[.]155
+    port: '8090'
+  file_activity:
+  - '%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\xpsrchvw74.exe'
+  - '%SYSTEMDRIVE%\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\xpsrchvw71.exe'
+  - '%SYSTEMDRIVE%\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\xpsrchvw72.exe'
+  - '%SYSTEMDRIVE%\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\xpsrchvw73.exe'
+  - '%LOCALAPPDATA%\\WinRunApp.exe'
+  - '%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\WinRunApp.lnk'
+  persistence:
+  - "Auto\u2011run via Startup folder entries"
+  process_relations: []
+IOCs:
+- 89.110.88[.]155
+- 89.110.98[.]2694.242.51[.]73
+- MD5:9a69b948e261363463da38bdbf828b14
+- SHA1:40e647d61a00fd7240e54dba45ce95c5d33cae43
+- SHA256:fe2587dd8d9755b7b3a106b6e46519a1ce0a8191eb20821d2f957326dbf912e9
+- MD5:942220fc9382f44ae82061d1fc63f41e
+- SHA1:7ff3d32e78c5626135a73bba4a011058f714ae86
+- SHA256:bf74820d40d281c28d5928b01e5b68d6caf85b5b9188bf4efb627765d708bcff
+- MD5:6b4d7a63aa2a8b2a5a3fbad6c8e6533e
+- SHA1:d3820a1248bf54ce8a3d05bf688bcd97e1c41d8e
+- SHA256:28a2b98ae214376ccd549a8b0dccafad31c8b234d0b81a0e8817579566615567
+- MD5:eaba94b5237d2625fa38bc924e5347c4
+- SHA1:6c0e52b8ed746b5b8ebef1ef2226093260659ae8
+- SHA256:d2c3fe8b9a4e0e5b7bcc087d52295ab30dc25b1410f50de35470383528c9d844
+reference: https://bi.zone/eng/expertise/blog/paper-werewolf-atakuet-rossiyu-s-ispolzovaniem-uyazvimosti-nulevogo-dnya-v-winrar/
+date_of_publication: April 18, 2025
+file_creation_date: August 22, 2025

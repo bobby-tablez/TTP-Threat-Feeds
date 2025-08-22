@@ -1,0 +1,47 @@
+description: Bloody Wolf used phishing PDFs to deliver JAR loaders that deployed NetSupport
+  client and achieved persistence via batch files.
+attribution: Bloody Wolf
+malware_families:
+- NetSupport
+TTPs:
+  processes:
+  - update.bat
+  - run.bat
+  commandline: []
+  powershell: []
+  scripting_engine:
+  - batch file
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: update.bat
+    destination: hxxps://pastebin[.]com/raw/pruy96p1to
+    port: ''
+  - executable: run.bat
+    destination: Telegram chat
+    port: ''
+  file_activity:
+  - '%APPDATA%\\NCALayerUpdated'
+  - '%APPDATA%\\NCALayerUpdated\\update.bat'
+  - '%APPDATA%\\NCALayerUpdated\\run.bat'
+  - '%APPDATA%\\CryptoProJCP'
+  - '%APPDATA%\\CryptoProJCP\\update.bat'
+  - '%APPDATA%\\CryptoProJCP\\run.bat'
+  persistence:
+  - run.bat ensures persistence on the compromised system
+  process_relations: []
+IOCs:
+- 473596b2f09910b0484bac76190de4868b7d4ac756c46c102dc3bd91609d239e
+- 10cd57a425b72d4f21c8f88b5d4033fad4477dd147cdf13b013f6391168c63bb
+- b2c776a9554e2919f7a7e287f2954674fc5dbd6a10f342558ad98b606d664075
+- 6ae7b754e74a6aa9f803037a8252cf5acfe5b8e8d82ae4b9b9a38826c4586702
+- salyk-notofocations[.]com
+- 1994Collective[.]com
+- 1994Collective13[.]com
+- yessenov[.]comozhet[.]com
+- kazsrv[.]online
+- hxxps://pastebin[.]com/raw/pruy96p1to
+- hxxps://pastebin[.]com/raw/hLUWEXTH
+reference: https://bi.zone/eng/expertise/blog/evolyutsiya-bloody-wolf-novye-tseli-novye-sredstva-ataki/
+date_of_publication: April 18, 2025
+file_creation_date: August 22, 2025

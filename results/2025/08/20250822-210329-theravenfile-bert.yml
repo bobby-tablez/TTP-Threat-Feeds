@@ -1,0 +1,44 @@
+description: "BERT ransomware active mid\u2011March to May\u202F2025 targeting Windows\
+  \ and Linux via phishing."
+attribution: Unknown threat actor group, Russian infrastructure used for hosting.
+malware_families:
+- BERT
+- Revil
+TTPs:
+  processes: []
+  commandline: []
+  powershell:
+  - '[Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))
+    {Write-Host "Start-Process PowerShell -ArgumentList "-NoProfile -ExecutionPolicy
+    Bypass -File"$PSCommandPath"" -Verb RunAsexitWrite-Host "[*]Windows Defender..."'
+  - Invoke-WebRequest -Uri $downloadUrl -OutFile $destPath -ErrorAction Stop
+  scripting_engine: []
+  registry_keys:
+  - HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Defender
+  - HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Real-Time Protection
+  - HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Cloud Based Protection
+  - HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System
+  image_load: []
+  network_connections:
+  - process: payload.exe
+    destination: 185.100.157.74
+    port: ''
+  - process: powershell script
+    destination: 82.115.223.89
+    port: '3030'
+  file_activity:
+  - D:\\new folder\\Tiger\\newcryptor\\obj\\Release\\newcryptor.pdb
+  - C:\\temp\\payload.exe
+  persistence: []
+  process_relations: []
+IOCs:
+- 185.100.157.74
+- 82.115.223.89:3030
+- bertblogsoqmm4ow7nqyh5ik7etsmefdbf25stauecytvwy7tkgizhad.onion
+- wtwdv3ss4d637dka7iafl7737ucykei7pluzc7is3mgo2vl5nmq7eeid.onion
+- 00fdc504be1788231aa7b7d2d1335893
+authors: 
+- RakeshKrish
+reference: https://theravenfile.com/2025/06/16/bert-ransomware/
+date_of_publication: June 16, 2025
+file_creation_date: August 22, 2025

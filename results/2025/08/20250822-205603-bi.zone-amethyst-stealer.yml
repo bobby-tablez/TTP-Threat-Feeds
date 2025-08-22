@@ -1,0 +1,31 @@
+description: Sapphire Werewolf refines Amethyst stealer to attack energy companies
+attribution: Sapphire Werewolf
+malware_families:
+- Amethyst stealer
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: ''
+    destination: hxxp://canarytokens[.]com/traffic/tags/static/xjemqlqirwqru9pkrh3j4ztmf/payments.js
+    port: ''
+  - executable: ''
+    destination: wondrous-bluejay-lively.ngrok-free[.]app
+    port: ''
+  - executable: ''
+    destination: checkip.dyndns[.]org
+    port: ''
+  file_activity: []
+  persistence: []
+  process_relations: []
+IOCs:
+- hxxp://canarytokens[.]com/traffic/tags/static/xjemqlqirwqru9pkrh3j4ztmf/payments.js
+- wondrous-bluejay-lively.ngrok-free[.]app
+- checkip.dyndns[.]org
+reference: https://bi.zone/eng/expertise/blog/kamen-ogranennyy-sapphire-werewolf-ispolzuet-novuyu-versiyu-amethyst-stealer-dlya-atak-na-tek/
+date_of_publication: April 18, 2025
+file_creation_date: August 22, 2025

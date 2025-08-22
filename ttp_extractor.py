@@ -33,13 +33,10 @@ Additional critical requirements:
 - Only return the raw YAML content. Do not include explanations, introductions or comments.
 - If there are no explicit technical details (e.g., command lines, registry keys, process names, etc.), return an empty YAML with only the description, authors, and IOCs keys.
 - Do NOT guess or infer any data — even if it seems likely. Do not generate placeholder or generic TTPs.
-- If the publication contains little useful data, empty fields are acceptable.
-- No example commands or speculated data.
-- When commands are present, include ALL and FULL command line arguements.
-- Provide only technical data, for example, don't describe TTPs, IOCs and URLs. Only provide raw data where appropriate.
+- When commands are present, include ALL and FULL command line arguements (no truncation).
 - Use compact YAML formatting. Use single quotes for all strings.
 
-Format Template:
+Include the follwing YAML tags (template):
 - description: A 1-2 sentence summary
 - attribution: Attribution (threat actor, APT group, country).
 - malware_families: Malware family names.
@@ -55,7 +52,7 @@ Format Template:
   - persistence: description in a list sub keys persistence methods used
   - process_relations: process trees based on your analysis
 - IOCs: List all indicators of compromise. These can include hashes, IPs, domains and URLs) 
-- authors: List each persons name or author who contributed to the report.
+- authors: Identify and list the people who contributed to the report (the authors).
 
 Context:
 {text}
@@ -64,7 +61,7 @@ Context:
 bad_patterns = [
     r"/faq", r"/platform", r"/industry", r"/category", r"/tag",
     r"/features", r"/services", r"/page", r"/newsletter", r"\?paged=\d+",
-    r"\?_paged=\d+", r"/about", r"guide", r"howto", r"how-to", r"rsac", r"monthly", r"quarterly"
+    r"\?_paged=\d+", r"/about", r"guide", r"howto", r"how-to", r"rsac", r"weekly", r"monthly", r"quarterly"
 ]
 
 def merge_yamls(chunks):

