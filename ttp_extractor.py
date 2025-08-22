@@ -21,7 +21,7 @@ from latest_user_agents import get_latest_user_agents, get_random_user_agent
 # CONFIG
 LLM_ENDPOINT = "http://127.0.0.1:1234/v1/chat/completions"
 HEADERS = {"Content-Type": "application/json"}
-MODEL_NAME = "devstral-small-2505"
+MODEL_NAME = "openai/gpt-oss-20b"
 URLS_FILE = "urls.txt"
 CACHE_FILE = "processed_urls.txt"
 
@@ -29,10 +29,21 @@ PROMPT_TEMPLATE = """
 Create a technical YAML Report based on threat data with the goal of extracting TTPs and IoCs. The purpose of the report is to highlight raw data extracted from public security advisories. 
 Extract the following information from this cyber threat report and present it in the following format:
 
+Additional critical requirements:
+- Only return the raw YAML content. Do not include explanations, introductions or comments.
+- If there are no explicit technical details (e.g., command lines, registry keys, process names, etc.), return an empty YAML with only the description, authors, and IOCs keys.
+- Do NOT guess or infer any data — even if it seems likely. Do not generate placeholder or generic TTPs.
+- If the publication contains little useful data, empty fields are acceptable.
+- No example commands or speculated data.
+- When commands are present, include ALL and FULL command line arguements.
+- Provide only technical data, for example, don't describe TTPs, IOCs and URLs. Only provide raw data where appropriate.
+- Use compact YAML formatting. Use single quotes for all strings.
+
+Format Template:
 - description: A 1-2 sentence summary
 - attribution: Attribution (threat actor, APT group, country).
 - malware_families: Malware family names.
-- TTPs: Extract ALL actual observable indicators. No formal sentences in this section, just data. Each TTP subkey containing list items as outlined (no deviation or truncation, only the data provided). If no applicable data is found, provide empty keys. TTPs include the following sub keys:
+- TTPs: Extract ALL identified observable indicators. No formal sentences in this section, just data. Each TTP subkey containing list items as outlined. If no applicable data is found, provide empty keys. TTPs include the following sub keys:
   - processes: a list of all process names that were apart of the report
   - commandline: Full list of process with commandline arguments
   - powershell: any and all powershell scripts
@@ -42,35 +53,19 @@ Extract the following information from this cyber threat report and present it i
   - network_connections: Processes related - list executables that made network connections, their destination address, URL or hostname along with ports. 
   - file_activity: List of files created, dropped, accessed or deleted (full paths)
   - persistence: description in a list sub keys persistence methods used
-  - pipes: list of any named pipes
   - process_relations: process trees based on your analysis
 - IOCs: List all indicators of compromise. These can include hashes, IPs, domains and URLs) 
-- authors: List the name of each author who contributed to the report.
-
-Additional critical requirements:
-- Only return the raw YAML content. Do not include explanations, introductions or comments.
-- If there are no explicit technical details (e.g., command lines, registry keys, process names, etc.), return an empty YAML with only the description, authors, and IOCs keys.
-- Do NOT guess or infer any data — even if it seems likely. Do not generate placeholder or generic TTPs.
-- If the publication contains little useful data, empty fields are acceptable.
-- No example commands or speculated data.
-- Include ALL and FULL command line arguements.
-- Never truncate outputs (e.g: ...), include full command line and URLs.
-- Provide only technical data, for example, don't describe TTPs, IOCs and URLs. Only provide raw data where appropriate.
-- For any key or subkey that contains no data, do not include the key or subkey in the YAML.
-- Use compact YAML formatting. Use single quotes for all strings.
-- If no TTPs are clearly described, leave the entire TTPs: key out of the YAML.
+- authors: List each persons name or author who contributed to the report.
 
 Context:
 {text}
 """
 
 bad_patterns = [
-    r"/faq", r"/platform", r"/news", r"/industry", r"/category", r"/tag",
+    r"/faq", r"/platform", r"/industry", r"/category", r"/tag",
     r"/features", r"/services", r"/page", r"/newsletter", r"\?paged=\d+",
-    r"\?_paged=\d+", r"/about", r"guide", r"howto", r"how-to", r"/feed",
-    r"rsac"
+    r"\?_paged=\d+", r"/about", r"guide", r"howto", r"how-to", r"rsac", r"monthly", r"quarterly"
 ]
-
 
 def merge_yamls(chunks):
     merged = {}
@@ -79,39 +74,55 @@ def merge_yamls(chunks):
             data = yaml.safe_load(chunk)
         except yaml.YAMLError:
             continue
+
+        # NEW: normalize list-of-dicts to one dict
+        if isinstance(data, list):
+            tmp = {}
+            for item in data:
+                if isinstance(item, dict):
+                    for k, v in item.items():
+                        if k not in tmp:
+                            tmp[k] = v
+                        else:
+                            if isinstance(v, list) and isinstance(tmp[k], list):
+                                tmp[k].extend(x for x in v if x not in tmp[k])
+                            elif isinstance(v, dict) and isinstance(tmp[k], dict):
+                                for sk, sv in v.items():
+                                    if sk not in tmp[k]:
+                                        tmp[k][sk] = sv
+                                    elif isinstance(sv, list) and isinstance(tmp[k][sk], list):
+                                        tmp[k][sk].extend(x for x in sv if x not in tmp[k][sk])
+                                    else:
+                                        tmp[k][sk] = sv
+                            else:
+                                tmp[k] = v
+            data = tmp
+
         if not isinstance(data, dict):
             continue
+
         for key, value in data.items():
-            if not value:
+            if value in (None, "", [], {}):
                 continue
             if key not in merged:
                 merged[key] = value
-            elif isinstance(value, list):
-                if isinstance(merged[key], list):
-                    merged[key].extend(v for v in value if v not in merged[key])
-                else:
-                    merged[key] = value
-            elif isinstance(value, dict):
-                if isinstance(merged[key], dict):
-                    for subkey, subval in value.items():
-                        if not subval:
-                            continue
-                        if subkey not in merged[key]:
-                            merged[key][subkey] = subval
-                        elif isinstance(subval, list):
-                            if isinstance(merged[key][subkey], list):
-                                merged[key][subkey].extend(v for v in subval if v not in merged[key][subkey])
-                            else:
-                                merged[key][subkey] = subval
-                        else:
-                            if len(str(subval)) > len(str(merged[key][subkey])):
-                                merged[key][subkey] = subval
-                else:
-                    merged[key] = value
+            elif isinstance(value, list) and isinstance(merged.get(key), list):
+                merged[key].extend(v for v in value if v not in merged[key])
+            elif isinstance(value, dict) and isinstance(merged.get(key), dict):
+                for subkey, subval in value.items():
+                    if subval in (None, "", [], {}):
+                        continue
+                    if subkey not in merged[key]:
+                        merged[key][subkey] = subval
+                    elif isinstance(subval, list) and isinstance(merged[key][subkey], list):
+                        merged[key][subkey].extend(v for v in subval if v not in merged[key][subkey])
+                    else:
+                        merged[key][subkey] = subval
             else:
                 if len(str(value)) > len(str(merged[key])):
                     merged[key] = value
     return merged
+
 
 
 def clean_text(text):
@@ -256,11 +267,95 @@ def extract_text_from_images(img_urls):
             continue
     return "\n".join(extracted)
 
+import yaml
+import re
+
+def extract_yaml_from_response(raw_response: str) -> str:
+    """
+    Return a YAML string if we can confidently parse it (with or without fences).
+    Accepts:
+      - fenced blocks ```yaml ... ```
+      - bare YAML dict
+      - YAML list of dicts (we'll merge into one dict)
+    Returns '' if nothing valid is found.
+    """
+    if not raw_response or not raw_response.strip():
+        return ""
+
+    # 1) Prefer fenced block if present
+    m = re.search(r"```(?:yaml)?\s*(.*?)\s*```", raw_response, re.DOTALL | re.IGNORECASE)
+    candidate = m.group(1).strip() if m else raw_response.strip()
+
+    # 2) Try parsing as-is
+    doc = _try_parse_yaml(candidate)
+    if doc is not None:
+        # normalize to a single dict YAML
+        normalized = _normalize_yaml_doc(doc)
+        if normalized:
+            return yaml.dump(normalized, sort_keys=False).strip()
+
+    # 3) Heuristic: sometimes trailing partial lines break YAML; trim to last complete line and retry
+    lines = candidate.splitlines()
+    if len(lines) > 3:
+        trimmed = "\n".join(lines[:-1]).strip()
+        doc2 = _try_parse_yaml(trimmed)
+        if doc2 is not None:
+            normalized = _normalize_yaml_doc(doc2)
+            if normalized:
+                return yaml.dump(normalized, sort_keys=False).strip()
+
+    return ""
+
+def _try_parse_yaml(s: str):
+    try:
+        return yaml.safe_load(s)
+    except Exception:
+        return None
+
+def _normalize_yaml_doc(doc):
+    """
+    Accept:
+      - dict: return as-is
+      - list: if it's a list of dicts, merge; if it's a list of 'key:value' items, coalesce
+    """
+    if isinstance(doc, dict):
+        return doc
+
+    if isinstance(doc, list):
+        merged = {}
+        for item in doc:
+            if isinstance(item, dict):
+                for k, v in item.items():
+                    if k not in merged:
+                        merged[k] = v
+                    else:
+                        # merge lists/dicts sensibly
+                        if isinstance(v, list) and isinstance(merged[k], list):
+                            merged[k].extend(x for x in v if x not in merged[k])
+                        elif isinstance(v, dict) and isinstance(merged[k], dict):
+                            for sk, sv in v.items():
+                                if sk not in merged[k]:
+                                    merged[k][sk] = sv
+                                elif isinstance(sv, list) and isinstance(merged[k][sk], list):
+                                    merged[k][sk].extend(x for x in sv if x not in merged[k][sk])
+                                else:
+                                    merged[k][sk] = sv
+                        else:
+                            merged[k] = v
+            else:
+                # ignore scalars in a top-level list; not useful here
+                continue
+        return merged if merged else None
+
+    # anything else — ignore
+    return None
+
+
 def ask_llm(text):
     import json
     from math import ceil
 
-    estimated_tokens = ceil(len(text) / 3.5)  # crude approximation: 1 token ≈ 3.5 chars
+    estimated_tokens = ceil(len(text) / 3.5)
     if estimated_tokens > 12000:
         print(f"    ⚠️ Skipped (input too long: ~{estimated_tokens} tokens)")
         return ""
@@ -285,9 +380,9 @@ def ask_llm(text):
             return ""
 
         raw_response = data["choices"][0]["message"]["content"]
-        match = re.search(r"```(?:yaml)?\s*(.*?)\s*```", raw_response, re.DOTALL)
-        if match:
-            return match.group(1).strip()
+        yaml_candidate = extract_yaml_from_response(raw_response)
+        if yaml_candidate:
+            return yaml_candidate
 
         print("    ⚠️ No valid YAML block found — dumping raw response:")
         print(raw_response[:500])
@@ -297,6 +392,7 @@ def ask_llm(text):
         print(f"    ❌ LLM request failed: {e}")
         print("    ❌ Payload text (truncated):", text[:500])
         return ""
+
 
 
 def write_yaml(content, source, malware):
