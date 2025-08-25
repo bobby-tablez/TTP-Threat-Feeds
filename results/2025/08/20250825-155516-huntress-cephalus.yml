@@ -1,0 +1,76 @@
+description: Cephalus ransomware deployed via DLL sideloading using SentinelBrowserNativeHost.exe
+  and MEGAcmdUpdater.exe.
+attribution: Unknown threat actor
+malware_families:
+- Cephalus
+TTPs:
+  processes:
+  - SentinelBrowserNativeHost.exe
+  - MEGAcmdUpdater.exe
+  commandline:
+  - '''C:\Users\[user]\Downloads\SentinelBrowserNativeHost.exe'''
+  - '''C:\Users\[user]\AppData\Local\MEGAcmd\MEGAcmdUpdater.exe --normal-update --do-not-install
+    --version 2010100'''
+  powershell:
+  - powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Add-MpPreference
+    -ExclusionProcess \\"svchost.exe\\""
+  - powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Add-MpPreference
+    -ExclusionPath \\"C:\\Windows\\System32\\svchost.exe\\""
+  - powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Add-MpPreference
+    -ExclusionPath \\"C:\\Windows\\Temp\\""
+  - powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Add-MpPreference
+    -ExclusionExtension \\".cache\\""
+  - powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Add-MpPreference
+    -ExclusionExtension \\".tmp\\""
+  - powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Add-MpPreference
+    -ExclusionExtension \\".dat\\""
+  - powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Add-MpPreference
+    -ExclusionExtension \\".sss\\""
+  - powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Set-MpPreference
+    -DisableRealtimeMonitoring $true"
+  - powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Stop-Service
+    -Name \\"SecurityHealthService\\" -Force -ErrorAction SilentlyContinue"
+  - powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Stop-Service
+    -Name \\"Sense\\" -Force -ErrorAction SilentlyContinue"
+  - powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Stop-Service
+    -Name \\"WinDefend\\" -Force -ErrorAction SilentlyContinue"
+  - powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Stop-Service
+    -Name \\"WdNisSvc\\" -Force -ErrorAction SilentlyContinue"
+  - powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Set-Service -Name
+    \\"WinDefend\\" -StartupType Disabled -ErrorAction SilentlyContinue"
+  - powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Set-Service -Name
+    \\"WdNisSvc\\" -StartupType Disabled -ErrorAction SilentlyContinue"
+  - powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Set-Service -Name
+    \\"SecurityHealthService\\" -StartupType Disabled -ErrorAction SilentlyContinue"
+  - powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Set-Service -Name
+    \\"Sense\\" -StartupType Disabled -ErrorAction SilentlyContinue"
+  - powershell -WindowStyle Hidden -ExecutionPolicy Bypass -Command "Set-MpPreference
+    -DisableRealtimeMonitoring $false"
+  scripting_engine: []
+  registry_keys:
+  - HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Exclusions\\Paths\\C:\\Windows\\System32\\svchost.exe
+  - HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Real-Time Protection\\DisableScanOnRealtimeEnable
+  - HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Real-Time Protection\\DisableRealtimeMonitoring
+  - HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\DisableAntiSpyware
+  - HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Real-Time Protection\\DisableBehaviorMonitoring
+  - HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Real-Time Protection\\DisableOnAccessProtection
+  image_load: []
+  network_connections:
+  - process: MEGAcmdUpdater.exe
+    destination: https://mega.nz
+  file_activity:
+  - C:\\Users\\[user]\\Downloads\\data.bin
+  persistence: []
+  process_relations:
+  - parent: SentinelBrowserNativeHost.exe
+    child: vssadmin
+  - parent: SentinelBrowserNativeHost.exe
+    child: powershell
+  - parent: SentinelBrowserNativeHost.exe
+    child: cmd /C reg add ...
+authors:
+- Harlan Carvey
+- Lindsey O'Donnell-Welch
+reference: https://www.huntress.com/blog/cephalus-ransomware
+date_of_publication: August 21, 2025
+file_creation_date: August 25, 2025

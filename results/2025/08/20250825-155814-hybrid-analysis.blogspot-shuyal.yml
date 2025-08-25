@@ -1,0 +1,51 @@
+description: "SHUYAL is a credential\u2011stealing malware that targets 19 browsers,\
+  \ captures screenshots and clipboard data, exfiltrates via Telegram, and self\u2011\
+  deletes."
+attribution: Unknown threat actor
+malware_families:
+- SHUYAL
+TTPs:
+  processes:
+  - wmic
+  - powershell
+  - taskmgr.exe
+  - util.bat
+  commandline:
+  - wmic diskdrive get model,serialnumber
+  - wmic path Win32_Keyboard get Description,DeviceID
+  - wmic path Win32_PointingDevice get Description,PNPDeviceID
+  - wmic path Win32_DesktopMonitor get Description,PNPDeviceID
+  - powershell -command (Get-ItemProperty 'HKCU:\\Control Panel\\Desktop').Wallpaper
+  - powershell -command Compress-Archive -Path %TEMP%\\runtime -DestinationPath runtime.zip
+  powershell:
+  - Compress-Archive -Path %TEMP%\runtime -DestinationPath runtime.zip
+  - (Get-ItemProperty ''HKCU:\Control Panel\Desktop'').Wallpaper
+  scripting_engine: []
+  registry_keys:
+  - Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DisableTaskMgr
+  image_load: []
+  network_connections:
+  - executable: powershell
+    destination: https://apltele000002468C514190/gram.org/bot7s22000002468CS1A1A0
+    port: ''
+  file_activity:
+  - '%TEMP%\\runtime.zip'
+  - '%TEMP%\\ss.png'
+  - '%TEMP%\\clipboard.txt'
+  - '%TEMP%\\history.txt'
+  - '%TEMP%\\saved_passwords.txt'
+  - '%TEMP%\\debug_log.txt'
+  - util.bat
+  persistence:
+  - CopyFileA to Startup folder
+  process_relations: []
+IOCs:
+  hashes:
+  - 810d4850ee216df639648a37004a0d4d12752194924a53312d3403bed7ed55
+  domains:
+  - apltele000002468C514190/gram.org/bot7s22000002468CS1A1A0
+authors:
+- Vlad Pasca
+reference: https://hybrid-analysis.blogspot.com/2025/07/new-advanced-stealer-shuyal-targets.html
+date_of_publication: August 25, 2025
+file_creation_date: August 25, 2025

@@ -1,0 +1,53 @@
+description: "WinRAR path\u2011traversal exploit used by RomCom to drop DLLs and LNKs\
+  \ for persistence."
+attribution: "RomCom (Russia\u2011aligned APT)"
+malware_families:
+- Mythic
+- SnipBot
+- RustyClaw
+TTPs:
+  processes:
+  - msedge.dll
+  - Updater.lnk
+  - Display Settings.lnk
+  - Complaint.exe
+  - ApbxHelper.exe
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKCU\\SOFTWARE\\Classes\\CLSID\\{1299CF18-C4F5-4B6A-BB0F-2299F0398E27}\\InprocServer32
+  image_load: []
+  network_connections:
+  - executable: msedge.dll
+    url: https://srlaptop.com/s/0.7.8/clarity.js
+  - executable: ApbxHelper.exe
+    url: https://campanole.com/TOfrPOseJKZ
+  - executable: Complaint.exe
+    url: https://melamorri.com/iEZGPctehTZ
+  - executable: Complaint.exe
+    url: https://gohazeldale.com
+  file_activity:
+  - '%TEMP%\\msedge.dll'
+  - '%LOCALAPPDATA%\\ApbxHelper.exe'
+  - '%LOCALAPPDATA%\\Complaint.exe'
+  - Windows Startup Directory\\Updater.lnk
+  - Windows Startup Directory\\Display Settings.lnk
+  - Windows Startup Directory\\Settings.lnk
+  persistence:
+  - COM hijacking via HKCU\\SOFTWARE\\Classes\\CLSID\\{1299CF18-C4F5-4B6A-BB0F-2299F0398E27}\\InprocServer32
+    pointing to %TEMP%\\msedge.dll
+  process_relations: []
+IOCs:
+- 01D32FE88ECDEA2B934A00805E138034BF85BF83
+- srlaptop.com
+- campanole.com
+- melamorri.com
+- gohazeldale.com
+authors:
+- Anton Cherepanov
+- Peter Strýček
+- Damien Schaeffer
+reference: https://www.welivesecurity.com/en/eset-research/update-winrar-tools-now-romcom-and-others-exploiting-zero-day-vulnerability/
+date_of_publication: August 11, 2025
+file_creation_date: August 25, 2025

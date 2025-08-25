@@ -1,0 +1,35 @@
+description: A malicious code snippet targeting credential theft and data exfiltration.
+attribution: Turkish threat actor (unspecified)
+malware_families:
+- Snake Keylogger
+TTPs:
+  processes: []
+  commandline:
+  - '''C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe'' Add-MpPreference
+    -ExclusionPath "C:\\Users\\Jason\\Desktop\\TEKL\304\260F \304\260STE\304\236\304\260
+    - TUSA\305\236 T\303\234RK HAVACILIK UZAY SANAY\304\260\304\260_xlsx.exe"'
+  - '''C:\\Windows\\System32\\schtasks.exe'' /Create /TN "Updates\\oNqxPR" /XML "C:\\Users\\Administrator\\AppData\\Local\\Temp\\tmp3E09.tmp"'
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - C:\\\\Users\\\\Jason\\\\Desktop\\\\TEKLAF ASTEAA - TUSAA TARK HAVACILIK UZAY SANAYAA_xlsx.exe
+  persistence:
+  - Windows Defender exclusion via PowerShell Add-MpPreference
+  - Scheduled task creation with schtasks.exe
+  process_relations: []
+IOCs:
+  hashes:
+  - 0cb819d32cb3a2f218c5a17c02bb8c06935e926ebacf1e40a746b01e960c68e4
+  ips:
+  - 89.208.29.130
+  - 69.55.5.249
+  - 141.226.236.91
+  - 73.23.155.57
+authors:
+- Utku Çorbacı / Malwation
+reference: https://www.malwation.com/blog/technical-analysis-of-phishing-campaigns-targeting-the-defense-industry-delivering-snake-keylogger
+date_of_publication: February 11, 2025
+file_creation_date: August 25, 2025
