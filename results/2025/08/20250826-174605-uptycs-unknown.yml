@@ -1,0 +1,26 @@
+description: The report discusses an outage caused by a Crowdstrike kernel driver
+  upgrade and outlines a passive mode solution using Uptycs sensors.
+TTPs:
+  processes: []
+  commandline: []
+  powershell:
+  - "$filePath = \"C:\\\\windows\\\\system32\\\\drivers\\\\Crowdstrike\\\\CSAGENT.SYS\"\
+    \n$newFileName = \"CSAGENT_OLD.SYS\"\n$newFilePath = \"C:\\\\windows\\\\system32\\\
+    \\drivers\\\\Crowdstrike\\\\$newFileName\"\nif (Test-Path $filePath) {\n  Rename-Item\
+    \ -Path $filePath -NewName $newFileName\n  Write-Output \"File renamed successfully\
+    \ from 'CSAGENT.SYS' to'CSAGENT_OLD.SYS'\"\n} else {\n  Write-Output \"File 'CSAGENT.SYS'\
+    \ not found in the specified directory.\"\n"
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - C:\\windows\\system32\\drivers\\Crowdstrike\\CSAGENT.SYS
+  - C:\\windows\\system32\\drivers\\Crowdstrike\\CSAGENT_OLD.SYS
+  persistence: []
+  process_relations: []
+Authors:
+- Abhinav Mishra
+reference: https://www.uptycs.com/blog/threat-research-report-team/crowdstrike-outage-less-intrusive-malware-detection
+date_of_publication: July 19, 2024
+file_creation_date: August 26, 2025

