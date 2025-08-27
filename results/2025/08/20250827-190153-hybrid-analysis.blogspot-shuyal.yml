@@ -1,0 +1,40 @@
+description: "SHUYAL is a credential\u2011stealing malware that targets 19 browsers,\
+  \ captures screenshots and clipboard data, exfiltrates via Telegram, disables Task\
+  \ Manager, and self\u2011deletes."
+attribution: Unknown
+malware_families:
+- SHUYAL
+TTPs:
+  processes:
+  - taskmgr.exe
+  - wmic
+  - powershell
+  - util.bat
+  commandline:
+  - powershell -command (Get-ItemProperty 'HKCU:\\Control Panel\\Desktop').Wallpaper
+  - wmic diskdrive get model,serialnumber
+  - wmic path Win32_Keyboard get Description,DeviceID
+  - wmic path Win32_PointingDevice get Description,PNPDeviceID
+  - wmic path Win32_DesktopMonitor get Description,PNPDeviceID
+  powershell:
+  - powershell -command (Get-ItemProperty 'HKCU:\\Control Panel\\Desktop').Wallpaper
+  scripting_engine: []
+  registry_keys:
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DisableTaskMgr
+  image_load: []
+  network_connections: []
+  file_activity:
+  - runtime.zip
+  - ss.png
+  - clipboard.txt
+  - saved_passwords.txt
+  - history.txt
+  - debug_log.txt
+  persistence:
+  - Copy to Startup folder via CopyFileA
+  process_relations: []
+authors:
+- Vlad Pasca
+reference: https://hybrid-analysis.blogspot.com/search/label/SHUYAL%20stealer
+date_of_publication: August 27, 2025
+file_creation_date: August 27, 2025

@@ -1,0 +1,14 @@
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+reference: https://research.kudelskisecurity.com/
+date_of_publication: August 19, 2025
+file_creation_date: August 27, 2025

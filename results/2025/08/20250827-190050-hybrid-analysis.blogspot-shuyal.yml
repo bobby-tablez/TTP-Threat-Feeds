@@ -1,0 +1,44 @@
+description: "SHUYAL is a sophisticated stealer that harvests credentials from 19\
+  \ browsers, captures screenshots and clipboard data, exfiltrates via Telegram, disables\
+  \ Task Manager, and self\u2011deletes."
+attribution: Unknown threat actor
+malware_families:
+- SHUYAL
+TTPs:
+  processes:
+  - wmic
+  - powershell
+  - taskmgr.exe
+  - util.bat
+  commandline:
+  - wmic diskdrive get model,serialnumber
+  - wmic path Win32_Keyboard get Description,DeviceID
+  - wmic path Win32_PointingDevice get Description,PNPDeviceID
+  - wmic path Win32_DesktopMonitor get Description,PNPDeviceID
+  - powershell -command (Get-ItemProperty 'HKCU:\\Control Panel\\Desktop').Wallpaper
+  powershell:
+  - Compress-Archive -Path $env:TEMP\* -DestinationPath runtime.zip
+  scripting_engine: []
+  registry_keys:
+  - HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Systen\DisableTaskMgr
+  image_load: []
+  network_connections:
+  - executable: powershell
+    destination: https://telegram.org/bot7s22000002468CS1A1A0
+    port: 443
+  file_activity:
+  - runtime.zip
+  - ss.png
+  - clipboard.txt
+  - saved_passwords.txt
+  - history.txt
+  - debug_log.txt
+  - util.bat
+  persistence:
+  - CopyFileA to Startup folder via SHGetSpecialFolderPathA
+  process_relations: []
+authors:
+- Vlad Pasca
+reference: https://hybrid-analysis.blogspot.com/search/label/SHUYAL%20hybrid%20analysis
+date_of_publication: August 27, 2025
+file_creation_date: August 27, 2025

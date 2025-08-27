@@ -1,0 +1,63 @@
+description: "Malicious npm packages \u201Csolanacore\u201D, \u201Csolana-login\u201D\
+  \ and \u201Cwalletcore-gen\u201D install Windows trojans that keylog, capture screenshots\
+  \ and exfiltrate data via Slack WebHooks, ImgBB API and Discord WebHooks."
+attribution: Unknown threat actor; no attribution to a specific APT group or country.
+malware_families:
+- Solana Crypto Stealer
+TTPs:
+  processes:
+  - WebBrowser.exe
+  - accessibility.ps1
+  - intel_keyboard_driver.ps1
+  - install.js
+  - index.js
+  - savepaste.js
+  commandline:
+  - powershell -ExecutionPolicy Bypass -File "intel_keyboard_driver.ps1"
+  - powershell -ExecutionPolicy Bypass -File "accessibility.ps1"
+  - node install.js
+  - node index.js
+  - node savepaste.js
+  powershell:
+  - intel_keyboard_driver.ps1
+  - accessibility.ps1
+  scripting_engine:
+  - install.js
+  - index.js
+  - savepaste.js
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: intel_keyboard_driver.ps1
+    destination: hooks.slack.com/services/T086XXXX/B086RTXXXXX/YYYYYYYY
+    port: 443
+  - process: accessibility.ps1
+    destination: api.imgbb.com/1/upload?key=32XXXXXXXXXX^&expiration=604800^&name=%USERDOMAIN%-$timestamp
+    port: 443
+  - process: savepaste.js
+    destination: discord webhook URL (username LOCKBITAI)
+    port: 443
+  file_activity:
+  - C:\\ProgramData\\Intel\\ok.txt
+  - C:\\ProgramData\\Intel\\pds.txt
+  - '*.png'
+  - WebBrowser.exe
+  persistence: []
+  process_relations:
+  - postinstall command triggers intel_keyboard_driver.ps1 via PowerShell
+IOCs:
+  hashes: []
+  ips: []
+  domains:
+  - hooks.slack.com
+  - api.imgbb.com
+  - discord.com
+  urls:
+  - https://hooks.slack.com/services/T086XXXX/B086RTXXXXX/YYYYYYYY
+  - https://api.imgbb.com/1/upload?key=32XXXXXXXXXX^&expiration=604800^&name=%USERDOMAIN%-$timestamp
+authors:
+- Adam Reynolds
+- Ax Sharma
+reference: https://www.sonatype.com/blog/npm-packages-target-solana-devs-drop-keylogging-trojans
+date_of_publication: January 08, 2025
+file_creation_date: August 27, 2025

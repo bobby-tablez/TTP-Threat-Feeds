@@ -1,0 +1,28 @@
+description: Storm-0501 is a ransomware actor that targets Azure environments, leveraging
+  compromised Entra Connect servers and DCSync attacks to gain domain admin privileges,
+  move laterally, and exfiltrate data.
+attribution: "Storm\u20110501 (financially motivated threat actor)"
+malware_families:
+- Sabbath
+- Embargo
+TTPs:
+  processes: []
+  commandline:
+  - '''sc query sensesc query windefend'''
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence:
+  - Maliciously added federated domain to Entra ID tenant for backdoor access
+  process_relations: []
+authors:
+- Microsoft Threat Intelligence
+- Omri Refaeli
+- Karam Abu Hanna
+- Alon Marom
+reference: https://www.microsoft.com/en-us/security/blog/2025/08/27/storm-0501s-evolving-techniques-lead-to-cloud-based-ransomware/
+date_of_publication: August 27, 2025
+file_creation_date: August 27, 2025

@@ -1,0 +1,68 @@
+description: Spearphishing campaign using a zipped attachment that sideloads Snake
+  Keylogger via jsadebugd.exe and InstallUtil.exe, with persistence through a Run
+  registry key and exfiltration over SMTP.
+attribution: Snake Keylogger (Russian origin)
+malware_families:
+- Snake Keylogger
+TTPs:
+  processes:
+  - jsadebugd.exe
+  - InstallUtil.exe
+  - cmd.exe
+  commandline:
+  - '''cmd.exe /C start  /D %USERPROFILE%\SystemRootDoc %USERPROFILE%\SystemRootDoc\001
+    PETROLEUMLTD LLP KSK SCO 1 ORIGINAL (1).exe'''
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\001 PETROLEUMLTD LLP KSK SCO
+    1 ORIGINAL (1)
+  image_load: []
+  network_connections: []
+  file_activity:
+  - '%USERPROFILE%\\SystemRootDoc\\001 PETROLEUMLTD LLP KSK SCO 1 ORIGINAL (1).exe'
+  - '%USERPROFILE%\\SystemRootDoc\\concrt141.dll'
+  persistence:
+  - Run registry key entry for 001 PETROLEUMLTD LLP KSK SCO 1 ORIGINAL (1)
+  process_relations: []
+IOCs:
+  hashes:
+  - 0171212441aef19491692062218aaa6fba9684f59e162691ab056a7369569ad9
+  - 07dd7611034b2199726f006f93f144751d1f94e596908f8c5c2f5dcd245530af
+  - 0877f1e39454438733df34bfec11fc23023a449c6ece07f0d15a852d140e64c5
+  - 132ac2a27f43b1a830986c6d74b1e5cc855b248c93fa69893421c79d73a21fdb
+  - 19c4eac334c6218e8a9fae3c0bae8a28beb75c474780f3a567974e96f94cf35a
+  - 2e52628677cd6615c58b99ba3a85b3e41f60d752e2651293dcddcb814b9f6d18
+  - 3d0df3b1329d9f7dae79678325e3855734a0f31f995c32fe2ec6632d5043e40c
+  - 4855d6832e2889cfb0047e515b761c365bf8792ff30a84571ace896b7903f702
+  - 54468a4c1261c1c3f4136854c29a50080be77416d040b083ac51776c957a1182
+  - 5739aa1e1e86c11fb29cc40451bd55a06f3b8a98a58d364525a571d6b3c5c44c
+  - 6d7158bf300a5a8769d106500a60141e63436bfc35cab1d24e047aad1dc880ce
+  - 7cc53ec159a15cb2eacb8db7de25b35f2ef0e7aef0f3aa712c13560de16ddc20
+  - 7daf0aa227d0e846edd1229cd744e3afd8ca3898e12836605d8f08038ef34203
+  - 830703e20378110b1db917fcd498fa731aafed37fb1055c002693662053ad13c
+  - 9f092c5069fdf376163326428b27d3f44283f6a5cc7fc6e57b5f8584919b7d8b
+  - abec75593c542693e475be1d3b6e51cffcb599acaa5089ea578f13f30316d628
+  - b33d93e82b4a964c1306d40b054e6a2703e050357a513ab8873651dd4b669f4b
+  - c9065f726d9bce286d1df97516f7fa04004fa4fea0719933926a58b8cb93b9a0
+  - ccde5a1ae465a65b483f8f97e3d4b97957fc869cc4aca8b4fdd02a821aaf45a8
+  - d244fede5f1b101146f733ec426fc7bb604ee4a7ab51ee88d8055b6866c7f708
+  - d3ca4ed0a462c73c55d3aed4cfa5a969eacfdde152f67437fe3bb14fefb17612
+  - d44bae3e448d78cdb976b7f811be53f32efb28d0d2ba964d09edd79a95dcc4b3
+  - dbf6d6a302e7c9f7ef1bbc32e4efd61ded782e08ef16ad86a7a4858b4e1e9d9d
+  - e31eda04b9ee78bb41c990eca89554ffadab27a5c47d5efd66f11f5947958dde
+  - eb56af5727614192c73d71b8a7c22933872076cb9e62380320dfe09937d4f052
+  - f099cb320a26b6284e9ca24b352b19d2109bb3df0beeded3c34377c9b934ed3b
+  - f44877b93c347c93a38c05c9144030d144a4af7c243a57957479448c23b081cd
+  - f4cc2b43480778392d4ea48e6af1ac47f646b3c3f295797752be2be20d13067e
+  - f57ac8aa79dbe0a7a746f8de245361d912fe1f59f43d5cde835e94a2dbf0cfdb
+  - fe223090ea59abc54312c48ed89765ea5c8821df78134adc094cd799973dde3952
+  ip_addresses: []
+  domains:
+  - reallyfreegeoip.org
+  - checkip.dyndns.org
+  - serverhar244@gpsamsterdamqroup[.]com
+  - harrysnakelogger@dklak[.]cam
+reference: https://lab52.io/blog/snake-keylogger-in-geopolitical-affairs-abuse-of-trusted-java-utilities-in-cybercrime-operations/
+date_of_publication: June 27, 2025
+file_creation_date: August 27, 2025

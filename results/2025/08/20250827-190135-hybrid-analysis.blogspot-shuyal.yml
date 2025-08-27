@@ -1,0 +1,55 @@
+description: "SHUYAL is a credential\u2011stealing malware that targets 19 browsers,\
+  \ captures screenshots and clipboard data, exfiltrates via a Telegram bot, disables\
+  \ Task Manager, and self\u2011deletes."
+attribution: Unknown threat actor; no country attribution provided
+malware_families:
+- SHUYAL
+TTPs:
+  processes:
+  - taskmgr.exe
+  - wmic
+  - powershell
+  - util.bat
+  commandline:
+  - wmic diskdrive get model,serialnumber
+  - wmic path Win32_Keyboard get Description,DeviceID
+  - wmic path Win32_PointingDevice get Description,PNPDeviceID
+  - wmic path Win32_PointingDevice get Description,PNPDeviceID
+  - wmic path Win32_DesktopMonitor get Description,PNPDeviceID
+  - powershell -command "Get-ItemProperty 'HKCU:\\Control Panel\\Desktop'.Wallpaper"
+  - powershell -command "Compress-Archive -Path $env:TEMP\\* -DestinationPath runtime.zip"
+  powershell:
+  - Get-ItemProperty 'HKCU:\\Control Panel\\Desktop'.Wallpaper
+  - Compress-Archive -Path $env:TEMP\\* -DestinationPath runtime.zip
+  scripting_engine: []
+  registry_keys:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Systen\DisableTaskMgr
+  image_load: []
+  network_connections:
+  - executable: powershell
+    destination: https://apltele000002468c514190/gram.org/bot7s22000002468cs1a1a0
+    port: 443
+  file_activity:
+  - C:\\Users\\<User>\\AppData\\Roaming\\Discord\\Local State
+  - runtime.zip
+  - ss.png
+  - clipboard.txt
+  - saved_passwords.txt
+  - history.txt
+  - debug_log.txt
+  - util.bat
+  persistence:
+  - CopyFileA to Startup folder via SHGetSpecialFolderPathA
+  process_relations: []
+IOCs:
+  hashes:
+  - 810d4850ee216df639648a37004a0d4d12752194924a53312d3403bed7ed55.9MiB
+  ips: []
+  domains: []
+  urls:
+  - https://apltele000002468c514190/gram.org/bot7s22000002468cs1a1a0
+authors:
+- Vlad Pasca
+reference: https://hybrid-analysis.blogspot.com/search/label/SHUYAL%20research
+date_of_publication: August 27, 2025
+file_creation_date: August 27, 2025

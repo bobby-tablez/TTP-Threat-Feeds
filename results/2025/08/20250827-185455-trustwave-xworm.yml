@@ -1,0 +1,66 @@
+description: "Malicious ScreenConnect installer used to deliver Xworm RAT via AI\u2011\
+  themed lures."
+attribution: Threat actors using social engineering; no specific group identified.
+malware_families:
+- Xworm
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine:
+  - mshta.exe
+  - pythonw.exe (renamed pw.exe)
+  - cmd.exe
+  registry_keys:
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\WindowsSecurity
+  image_load: []
+  network_connections:
+  - executable: ScreenConnect.ClientService.exe
+    destination: instance-keoxeq-relay.screenconnect.com
+    port: 443
+  - executable: pw.exe
+    destination: github.com/trieule99911/vianhthuongbtc
+    port: null
+  - executable: pw.exe
+    destination: 5.181.165.102
+    port: 7705
+  file_activity:
+  - C:\\Users\\Mguise\\ONEDRI~1\\DOCUME~1\\loadding\\Temp\\X-META~1.BAT
+  - C:\\xmetavip\\backup.bat
+  - C:\\xmetavip\\basse64.txt
+  - C:\\xmetavip\\buquabua.txt
+  persistence:
+  - 'Registry Run key modification: HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\WindowsSecurity'
+  process_relations: []
+IOCs:
+  hashes: []
+  ips:
+  - 5.181.165.102
+  domains:
+  - gptgrok.ai
+  - anhemvn6.com
+  - anhemvn4.com
+  - github.com
+  urls:
+  - https://gptgrok.ai
+  - https://anhemvn6.com
+  - https://anhemvn4.com/5btc.zip
+  - https://github.com/trieule99911/vianhthuongbtc
+  - https://raw.githubusercontent.com/trieule99911/vianhthuongbtc/refs/heads/main/basse64.txt
+  - https://raw.githubusercontent.com/trieule99911/vianhthuongbtc/refs/heads/main/backpuppure.txt
+  - https://raw.githubusercontent.com/trieule99911/vianhthuongbtc/refs/heads/main/abcdegia.txt
+  - https://raw.githubusercontent.com/trieule99911/vianhthuongbtc/refs/heads/main/Nhwneafyp.txt
+  - https://raw.githubusercontent.com/trieule99911/vianhthuongbtc/refs/heads/main/Hzcbmqnqwlv.txt
+  - https://raw.githubusercontent.com/trieule99911/vianhthuongbtc/refs/heads/main/Exppiyt.txt
+  - https://raw.githubusercontent.com/trieule99911/vianhthuongbtc/refs/heads/main/x-metavn.txt
+  - https://raw.githubusercontent.com/trieule99911/vianhthuongbtc/refs/heads/main/purecoookielog.txt
+  - https://raw.githubusercontent.com/trieule99911/vianhthuongbtc/refs/heads/main/exepurelog.txt
+  - https://raw.githubusercontent.com/trieule99911/vianhthuongbtc/refs/heads/main/cccccccccccccccccccccccc.txt
+  - https://raw.githubusercontent.com/trieule99911/vianhthuongbtc/refs/heads/main/buquabua.txt
+authors:
+- Bolesław Szołtysik
+- Chris Tomboc
+- Serhii Melnyk
+reference: https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/malicious-screen-connect-campaign-abuses-ai-themed-lures-for-xworm-delivery/
+date_of_publication: August 27, 2025
+file_creation_date: August 27, 2025

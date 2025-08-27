@@ -1,0 +1,47 @@
+description: "SHUYAL is a credential\u2011stealing malware that targets 19 browsers,\
+  \ captures screenshots and clipboard data, exfiltrates via Telegram, and self\u2011\
+  deletes."
+attribution: Unknown threat actor; no country attribution provided
+malware_families:
+- SHUYAL
+TTPs:
+  processes: []
+  commandline: []
+  powershell:
+  - '''powershell -command (Get-ItemProperty ''''HKCU:\Control Panel\Desktop'''').Wallpaper'''
+  - '''powershell -command Compress-Archive -Path $env:TEMP\runtime\* -DestinationPath
+    $env:TEMP\runtime.zip'''
+  scripting_engine: []
+  registry_keys:
+  - HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System\DisableTaskMgr
+  image_load: []
+  network_connections:
+  - process: ''
+    destination: https://apl tele000002468C514190
+    port: ''
+  - process: ''
+    destination: https://...bot7s22000002468CS1A1A0
+    port: ''
+  file_activity:
+  - C:\\Users\\<User>\\AppData\\Roaming\\Discord\\Local State
+  - runtime.zip
+  - ss.png
+  - clipboard.txt
+  - saved_passwords.txt
+  - history.txt
+  - debug_log.txt
+  persistence:
+  - Copies itself to the Startup folder via CopyFileA
+  - Disables Task Manager by setting DisableTaskMgr=1
+  process_relations: []
+IOCs:
+  hashes:
+  - 810d4850ee216df639648a37004a0d4d12752194924a53312d3403bed7ed55.9MiB
+  urls:
+  - https://apl tele000002468C514190
+  - https://...bot7s22000002468CS1A1A0
+authors:
+- Vlad Pasca
+reference: https://hybrid-analysis.blogspot.com/search/label/SHUYAL%20analysis
+date_of_publication: August 27, 2025
+file_creation_date: August 27, 2025
