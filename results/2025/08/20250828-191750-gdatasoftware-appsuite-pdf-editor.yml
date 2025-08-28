@@ -1,0 +1,67 @@
+description: AppSuite PDF Editor is a malicious trojan that installs via an MSI, downloads
+  a backdoor, creates scheduled tasks, and communicates with C2 servers.
+attribution: Unknown threat actor
+malware_families:
+- AppSuite PDF Editor
+TTPs:
+  processes:
+  - PDF Editor.exe
+  - Uninstall PDF Editor.exe
+  commandline:
+  - '"%USERPROFILE%\PDF Editor\PDF Editor.exe" --cm=--partialupdate'
+  - '"%USERPROFILE%\PDF Editor\PDF Editor.exe" --cm=--backupupdate'
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: PDF Editor.exe
+    destination: hxxps://appsuites(dot)ai
+    port: ''
+  - process: PDF Editor.exe
+    destination: hxxps://sdk.appsuites(dot)ai
+    port: ''
+  - process: PDF Editor.exe
+    destination: hxxps://log.appsuites(dot)ai
+    port: ''
+  - process: PDF Editor.exe
+    destination: hxxps://on.appsuites(dot)ai
+    port: ''
+  file_activity:
+  - '%LOCALAPPDATA%\Programs\PDF Editor'
+  - '%USERPROFILE%\PDF Editor'
+  - '%USERPROFILE%\PDF Editor\resources\app\w-electron\bin\release\state'
+  - '%USERPROFILE%\PDF Editor\resources\app\w-electron\bin\release\LOG1'
+  persistence:
+  - 'Scheduled Task: PDFEditorScheduledTask (runs PDF Editor.exe --cm=--partialupdate)'
+  - 'Scheduled Task: PDFEditorUScheduledTask (runs PDF Editor.exe --cm=--backupupdate)'
+  - 'Scheduled Task: ShiftLaunchTask'
+  - 'Scheduled Task: OneLaunchLaunchTask'
+  - 'Scheduled Task: WaveBrowser-StartAtLogin'
+  - 'Run Key: PDFEditorUpdater with value %USERPROFILE%\PDF Editor\PDF Editor.exe'
+  process_relations: []
+IOCs:
+  hashes:
+  - fde67ba523b2c1e517d679ad4eaf87925c6bbf2f171b9212462dc9a855faa34b
+  - b3ef2e11c855f4812e64230632f125db5e7da1df3e9e34fdb2f088ebe5e16603
+  - 6022fd372dca7d6d366d9df894e8313b7f0bd821035dd9fa7c860b14e8c414f2
+  - da3c6ec20a006ec4b289a90488f824f0f72098a2f5c2d3f37d7a2d4a83b344a0
+  - cb15e1ec1a472631c53378d54f2043ba57586e3a28329c9dbf40cb69d7c10d2c
+  - 956f7e8e156205b8cbf9b9f16bae0e43404641ad8feaaf5f59f8ba7c54f15e24
+  - 104428a78aa75b4b0bc945a2067c0e42c8dfd5d0baf3cb18e0f6e4686bdc0755
+  urls:
+  - hxxps://appsuites(dot)ai
+  - hxxps://sdk.appsuites(dot)ai
+  - hxxps://log.appsuites(dot)ai
+  - hxxps://on.appsuites(dot)ai
+  - hxxps://vault.appsuites(dot)ai/AppSuite-PDF-1.0.28.exe
+  - hxxps://pdfmeta(dot)com
+  - hxxps://pdfartisan(dot)com
+  - hxxps://appsuites(dot)ai
+  - hxxps://pdfreplace(dot)com
+authors:
+- Karsten Hahn
+- Louis Sorita
+reference: https://www.gdatasoftware.com/blog/2025/08/38257-appsuite-pdf-editor-backdoor-analysis
+date_of_publication: August 28, 2025
+file_creation_date: August 28, 2025
