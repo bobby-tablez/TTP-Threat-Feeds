@@ -478,6 +478,7 @@ def is_feed_url(url):
     rss_indicators = ["/rss", "/feed", ".xml"]
     return any(ind in url.lower() for ind in rss_indicators)
 
+
 def main():
     MAX_ARTICLES_PER_SOURCE = 5
     cached = read_cached_urls()
@@ -521,7 +522,6 @@ def main():
 
         except Exception as e:
             print(f"  Failed to scan {base}: {e}")
-
 
 if __name__ == "__main__":
     main()

