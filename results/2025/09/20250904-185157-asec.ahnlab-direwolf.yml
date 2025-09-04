@@ -1,0 +1,38 @@
+description: DireWolf ransomware uses double extortion, encrypting files and threatening
+  to leak data.
+attribution: DireWolf ransomware group
+malware_families:
+- DireWolf
+TTPs:
+  processes:
+  - eventlog
+  - sqlservr.exe
+  - vss.exe
+  - memtas.exe
+  - tomcat6.exe
+  - onenote.exe
+  - outlook.exe
+  commandline:
+  - Get-WmiObject -Class win32_service -Filter name = eventlog
+  - taskkill /PID <pid> /F
+  - vssadmin delete shadows /all /quiet
+  - wbadmin stop job -quiet
+  - wbadmin delete backup -keepVersions:0 -quiet
+  - bcdedit /set {default} recoveryenabled No
+  - bcdedit /set {default} bootstatuspolicy ignoreallfailures
+  - wevtutil cl Application
+  - cmd /c start shutdown -r -f -t 10
+  - timeout /T 3 & del <malicious_exe>
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - C:\\runfinish.exe
+  - HowToRecoveryFiles.txt
+  persistence: []
+  process_relations: []
+reference: https://asec.ahnlab.com/en/89944/
+date_of_publication: August 31, 2025
+file_creation_date: September 04, 2025

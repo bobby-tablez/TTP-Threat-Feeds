@@ -1,0 +1,46 @@
+description: ViewState deserialization attack on Sitecore using exposed machine key,
+  leading to remote code execution and subsequent reconnaissance, privilege escalation,
+  persistence, and lateral movement.
+attribution: Mandiant Threat Defense (internal investigation)
+malware_families:
+- WEEPSTEEL
+- DWAGENT
+- EARTHWORM
+- SHARPHOUND
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine:
+  - C:\\Users\\Public\\Music\\1.vbs
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - C:\\Users\\Public\\Music\\7za.exe
+  - C:\\Users\\Public\\Music\\lfe.ico
+  - C:\\Users\\Public\\Music\\1.vbs
+  - C:\\Users\\asp$\\Downloads\\dwagent.exe
+  - C:\\Users\\asp$\\Downloads\\main.exe
+  - C:\\Users\\asp$\\Downloads\\GoToken.exe
+  - C:\\Users\\Public\\Music\\sh.exe
+  persistence:
+  - 'Created local administrator accounts: asp$, sawadmin'
+  - Installed DWAGENT as a service with SYSTEM privilege
+  - Modified password expiration settings for admin accounts
+  process_relations: []
+IOCs:
+  hashes:
+  - 223b873c50380fe9a39f1a22b6abf8d46db506e1c08d08312902f6f3cd1f7ac3
+  - b3f83721f24f7ee5eb19f24747b7668ff96da7dfd9be947e6e24a688ecc0a52b
+  domains: []
+  urls: []
+authors:
+- Rommel Joven
+- Josh Fleischer
+- Joseph Sciuto
+- Andi Slok
+- Choon Kiat Ng
+reference: https://cloud.google.com/blog/topics/threat-intelligence/viewstate-deserialization-zero-day-vulnerability
+date_of_publication: September 04, 2025
+file_creation_date: September 04, 2025

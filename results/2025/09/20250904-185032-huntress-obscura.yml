@@ -1,0 +1,32 @@
+description: "Obscura ransomware variant discovered by Huntress on 29\u202FAug\u202F\
+  2025."
+attribution: Unknown threat actor
+malware_families:
+- Obscura
+TTPs:
+  processes:
+  - cmd.exe
+  commandline:
+  - cmd.exe /C netsh firewall set service type = remotedesktop mode = enable > \Windows\Temp\SJYfXB
+    2>&1
+  - cmd.exe /c vssadmin delete shadows /all /quiet
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - C:\\WINDOWS\\sysvol\\sysvol\\[domain].local\\scripts\\
+  - C:\\README-OBSCURA.txt
+  persistence:
+  - Scheduled task SystemUpdate on multiple hosts (NETLOGON share execution)
+  - Scheduled task iJHcEkAG enabling RDP via firewall
+  process_relations: []
+authors:
+- Harlan Carvey
+- Lindsey O'Donnell-Welch
+- Alden Schmidt
+- Anna Pham
+reference: https://www.huntress.com/blog/obscura-ransomware-variant
+date_of_publication: August 29, 2025
+file_creation_date: September 04, 2025

