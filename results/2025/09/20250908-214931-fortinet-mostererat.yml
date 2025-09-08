@@ -1,0 +1,56 @@
+description: A phishing campaign delivers a staged payload that uses an Easy Programming
+  Language (EPL) to deploy a Remote Access Trojan (RAT) called MostereRAT, which disables
+  security tools, creates services, installs remote access utilities, and persists
+  via scheduled tasks, services, and hidden accounts.
+attribution: MostereRAT, unknown APT group, Japan
+malware_families:
+- MostereRAT
+TTPs:
+  processes:
+  - document.exe
+  - WpnCoreSvc
+  - WinSvc_
+  - svchost.exe
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: document.exe
+    destination: http://{C2 Domain}:9001/9001.conf
+    port: 9001
+  - executable: document.exe
+    destination: http://{C2 Domain}:9002/9002.conf
+    port: 9002
+  - executable: module 2
+    destination: '{C2 Domain}'
+    port: 8000
+  file_activity:
+  - C:\\ProgramData\\Windows\\document.exe
+  - C:\\ProgramData\\Windows\\svchost.exe
+  - C:\\ProgramData\\Windows\\svchost.db
+  - C:\\ProgramData\\Windows\\maindll.db
+  - C:\\ProgramData\\Windows\\elsedll.db
+  - C:\\ProgramData\\Windows\\tmp\\<generated filename>
+  persistence:
+  - 'Scheduled tasks: Microsoft\\Windows\\winrshost, Microsoft\\Windows\\winresume'
+  - 'Service creation: WpnCoreSvc (automatic start), WinSvc_ (demand start)'
+  - Hidden account created via registry key HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList
+  process_relations: []
+IOCs:
+  domains:
+  - www.efu66.comm
+  - mostere.com
+  - huanyu3333.com
+  - idkua93dkh9590764478t18822056bck.com
+  - osjfd923bk78735547771x3690026ddl.com
+  - zzzzzz0379098305467195353458278.com
+  - xxxxxx25433693728080140850916444.com
+  hashes:
+  - d281e41521ea88f923cf11389943a046557a2d73c20d30b64e02af1c04c64ed14e3cdeba19e5749aa88329bc3ac67acd777ea7925ba0825a421cada083706a4e546a3418a26f2a83a2619d6c808985c149a0a1e22656553ce8172ca15622fd9b3c621b0c91b758767f883cbd041c8ef701b9806a78f2ae1e08f932b43fb433bb926b2b9349dbd4704e117304c2f0edfd266e4c91fb9325ecb11ba83fe17bc383
+authors:
+- Yurren Wan
+reference: https://www.fortinet.com/blog/threat-research/mostererat-deployed-anydesk-tightvnc-for-covert-full-access
+date_of_publication: September 08, 2025
+file_creation_date: September 08, 2025

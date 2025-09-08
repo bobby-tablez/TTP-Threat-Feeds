@@ -1,0 +1,101 @@
+description: "A multi\u2011stage intrusion involving discovery, reconnaissance, lateral\
+  \ movement, and data exfiltration using custom tools such as Grixba, netscan.exe,\
+  \ GRB_NET.exe, SharpHound (sh.exe), Adfind.exe, WinRAR, FS64.exe, and a backdoor\
+  \ named Betruger (ccs.exe)."
+attribution: "APT group suspected to be affiliated with RansomHub or a ransomware\u2011\
+  as\u2011a\u2011service provider."
+malware_families:
+- SectopRAT
+- SystemBC
+- Betruger
+- Grixba
+- netscan
+- GRB_NET
+- SharpHound
+- Adfind
+- WinRAR
+- FS64
+- QuickAgent2
+- GT_NET
+- AdFind
+TTPs:
+  processes:
+  - net.exe
+  - cmd.exe
+  - PsExec.exe
+  - rundll32.exe
+  - msbuild.exe
+  - sh.exe
+  - AdFind.exe
+  - SharpHound.exe
+  - GT_NET.exe
+  - GRB_NET.exe
+  - ccs.exe
+  - winrar.exe
+  - winscp.exe
+  - psexec.exe
+  - powershell.exe
+  commandline:
+  - net user Admon Qwerty12345! /add
+  - net localgroup Administrators Admon /add
+  - PsExec.exe -accepteula -s -d \\\\EZZIEENGEEER cmd /c rundll32 C:\\Users\\Public\\Music\\WakeWordEngine.dll,Reset
+  - PsExec.exe -accepteula -s -d \\\\EXEXUEEEAED cmd /c rundll32 C:\\Users\\Public\\Music\\WakeWordEngine.dll,Reset
+  - PsExec.exe -accepteula -s -d \\\\IEERZEYSM cmd /c rundl132 C:\\Users\\Public\\Music\\WakeWordEngine.dll,Reset
+  - sh.exe -c all -d
+  - AdFind.exe -subnets -f 100% @ (objectCategory=subnet)
+  - GT_NET.exe -m scanall
+  - GRB_NET.exe -m scanall -i f -d list.txt
+  powershell: []
+  scripting_engine:
+  - rundll32 C:\\Users\\Public\\Music\\WakeWordEngine.dll,Reset
+  registry_keys:
+  - HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsDefender\\Real-Time Protection
+  - HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsDefender\\DisableAntiSpyware
+  - HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsDefender\\Real-Time\\Protection\\DisableBehaviorMonitoring
+  - HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsDefender\\Real-Time\\Protection\\DisableIntrusionPreventionSystem
+  image_load: []
+  network_connections:
+  - process: net.exe
+    destination_ip: 45.141.87.45
+  - executable: winscp.exe
+    destination_ip: 144.202.61.209
+    port: 21
+  - executable: ccs.exe
+    destination_host: 504e1c95.host.njalla.net
+    port: 80
+  - executable: ccs.exe
+    destination_ip: 80.78.28.149
+    port: 443
+  file_activity:
+  - C:\\Users\\ \\AppData\\Roaming\\QuickAgent2\\ChromeAlt_dbg.exe
+  - C:\\Users\\Public\\Music\\GT_NET.exe
+  - C:\\Users\\Public\\Music\\GRB_NET.exe
+  - C:\\Users\\Public\\Music\\AdFind.exe
+  - C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\MSBuild.exe
+  - path: C:\\Users\\Public\\Music\\ccs.exe
+  - path: C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\MSBuild.exe
+  - path: C:\\Users\\Public\\Music\\WinSCP.exe
+  persistence:
+  - Registry Run Keys / Startup Folder
+  - Local Account creation (Admon)
+  process_relations: []
+authors:
+- r3nzsec
+- EncapsulateJ
+- rkonicekr
+- Adam Rowe
+IOCs:
+  hashes:
+  - SHA1=A5BADC2DD4DBAABED5F0A3646F7248BFO060A2F
+  - MD5=31890A7DE89936F922D44D677F681A7F
+  - SHA256=7CAC7725E266F12ABA8C50FD1598D4001201BCAOE7ACA901508307E36S5AFFF42
+  ips:
+  - 45.141.87.45
+  - 80.78.28.149
+  - 144.202.61.209
+  domains:
+  - 504e1c95.host.njalla.net
+  urls: []
+reference: https://thedfirreport.com/2025/09/08/blurring-the-lines-intrusion-shows-connection-with-three-major-ransomware-gangs/
+date_of_publication: September 08, 2025
+file_creation_date: September 08, 2025
