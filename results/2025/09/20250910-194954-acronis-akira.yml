@@ -1,0 +1,50 @@
+description: "Akira and Lynx ransomware families use stolen credentials, VPN exploitation,\
+  \ privilege escalation, defense evasion, shadow copy deletion, event log clearing,\
+  \ double\u2011extortion tactics, and process/service termination to encrypt victim\
+  \ files."
+attribution: Russian threat actors (possible Wizard Spider lineage for Akira; Russian
+  underground forums for Lynx)
+malware_families:
+- Akira
+- Lynx
+TTPs:
+  processes: []
+  commandline:
+  - --dir <directory path>
+  - --verbose
+  - --kill
+  - --stop-process
+  - --load-drives
+  - --hide-cmd
+  - --no-background
+  - --safe-mode
+  - --encrypt-network
+  - --file <file>
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: Akira.exe
+    destination: https://akiral2iz6a7qgd3ayp3l6yub7xx2uep76idk3u2kollpj5z3z636bad.onion
+    port: null
+  - process: Akira.exe
+    destination: https://akiralkzxzq2dsrzsrvbr2xgbbu2wgsmxryd4csgfameg52n7efvr2id.onion
+    port: null
+  file_activity:
+  - /path/to/created/logfile.log
+  - /path/to/dropped/file.exe
+  persistence: []
+  process_relations: []
+IOCs:
+  files:
+  - 88da2b1cee373d5f11949c1ade22af0badf16591a871978a9e02f70480e547b2
+  - 571f5de9dd0d509ed7e5242b9b7473c2b2cbb36ba64d38b32122a0a337d6cf8b
+  urls:
+  - https://akiral2iz6a7qgd3ayp3l6yub7xx2uep76idk3u2kollpj5z3z636bad.onion
+  - https://akiralkzxzq2dsrzsrvbr2xgbbu2wgsmxryd4csgfameg52n7efvr2id.onion
+  domains: []
+  ips: []
+reference: https://www.acronis.com/en/tru/posts/msps-a-top-target-for-akira-and-lynx-ransomware
+date_of_publication: August 04, 2025
+file_creation_date: September 10, 2025

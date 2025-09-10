@@ -1,0 +1,36 @@
+description: New variant of AMOS (Atomic) Stealer targeting macOS, using a Crack Installer
+  dropper and Python script for credential theft and exfiltration.
+attribution: Russian threat actor
+malware_families:
+- AMOS (Atomic) Stealer
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine:
+  - Python script dropped at /var/tmp/olx
+  - AppleScript executed via osascript -e
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: python script
+    destination: 5.42.65.114
+    port: ''
+  file_activity:
+  - /var/tmp/olx
+  - /var/tmp/olx__constpswfilegrabber()
+  - ~/Library/Containers/com.apple.Safari/Data/Library/Cookies.binarycookies
+  - ~/Library/Keychains/login.keychain-db
+  - ~/Library/Application Support/Binance/app-store.json
+  persistence: []
+  process_relations: []
+IOCs:
+  ip_addresses:
+  - 5.42.65.114
+  domains_and_urls: []
+  hashes: []
+authors:
+- Andrei LAPUSNEANU
+reference: https://www.bitdefender.com/en-us/blog/labs/when-stealers-converge-new-variant-of-atomic-stealer-in-the-wild
+date_of_publication: February 27, 2024
+file_creation_date: September 10, 2025

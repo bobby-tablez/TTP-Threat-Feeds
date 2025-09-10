@@ -1,0 +1,35 @@
+description: A malvertising campaign using Electron apps to deliver the SYS01 InfoStealer,
+  leveraging PowerShell, 7zip, PHP, and sandbox checks.
+attribution: Unknown threat actor; no specific group or country identified.
+malware_families:
+- SYS01 InfoStealer
+TTPs:
+  processes:
+  - php.exe
+  - main.js
+  - 7z.exe
+  commandline:
+  - '''powershell.exe'' -ExecutionPolicy Bypass -File ''script.ps1'''
+  - '''php.exe'' index.php'
+  - '''7z.exe'' x archive.zip -pPASSWORD -oC:\Temp\'
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: php.exe
+    destination: https://{C2_DOMAIN}/api/rss?a=ping
+    port: 443
+  file_activity:
+  - C:\\Temp\\archive.zip
+  - C:\\Temp\\app.asar
+  - C:\\Temp\\index.php
+  - C:\\Temp\\include.php
+  persistence:
+  - Task Scheduler task created by include.php
+  process_relations: []
+IOCs:
+  domains: []
+reference: https://www.bitdefender.com/en-us/blog/labs/unmasking-the-sys01-infostealer-threat-bitdefender-labs-tracks-global-malvertising-campaign-targeting-meta-business-pages
+date_of_publication: October 30, 2024
+file_creation_date: September 10, 2025

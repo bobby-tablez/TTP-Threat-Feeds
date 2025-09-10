@@ -1,0 +1,48 @@
+description: Emotet intrusion via obfuscated Excel macros that download a loader and
+  execute it with regsvr32, then load an encrypted payload into memory and persist
+  as a Windows service.
+attribution: TA542 (Mummy Spider)
+malware_families:
+- Emotet
+- Qakbot
+- CobaltStrike
+TTPs:
+  processes:
+  - regsvr32.exe
+  commandline:
+  - C:\\Windows\\System32\\regsvr32.exe /S .\\soci1.ocx
+  - C:\\Windows\\system32\\regsvr32.exe /5 ..\\soci2.00x
+  - C:\\Windows\\system32\\regsvr32.exe /5 ..\\soci3.0cx
+  - C:\\Windows\\System32\\regsvr32.exe /S ..\\socid.ocx
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - '%HOMEPATH%\\soci1.ocx'
+  - '%HOMEPATH%\\soci2.ocx'
+  - '%HOMEPATH%\\soci3.ocx'
+  - '%HOMEPATH%\\soci4.ocx'
+  - '%SYSTEM32%\\qbknp\\cdiwaui.dll'
+  persistence:
+  - Windows service that executes the payload via regsvr32.exe
+  process_relations: []
+IOCs:
+  hashes:
+  - 625121dba58742d70d59010af2a452649101cc0d6a3c956352e0c19bf31c7fc3
+  urls:
+  - https://cointrade.world/receipts/0LjXVwpQrhw/
+  - http://www.garantihaliyikama.com/wp-admin/jp64lssPHEe2ii/
+  - http://haircutbar.com/cgi-bin/BC3WAQ8zJY4ALXA4/
+  - http://airhobi.com/system/WLvH1ygkOYQO/
+  domains:
+  - cointrade.world
+  - garantihaliyikama.com
+  - haircutbar.com
+  - airhobi.com
+authors:
+- EclecticIQ Threat Research Team
+reference: https://blog.eclecticiq.com/emotet-downloader-document-uses-regsvr32-for-execution
+date_of_publication: July 21, 2022
+file_creation_date: September 10, 2025

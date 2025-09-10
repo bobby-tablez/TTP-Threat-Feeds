@@ -1,0 +1,54 @@
+description: "Zero\u2011day vulnerability CVE-2024-55956 in Cleo managed file transfer\
+  \ platforms allows unauthenticated execution of arbitrary Bash or PowerShell commands\
+  \ via the Autorun directory."
+attribution: CL0P
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - healthcheck.txt
+  - healthchecktemplate.txt
+  - 60282967-dc91-40ef-a34c-38e992509c2c.xml
+  persistence:
+  - Autorun files in the default Autorun directory
+  process_relations: []
+IOCs:
+  hashes:
+  - 6705eea898ef1155417361fa71b1078b7aaab61e7597d2a080aa38df4ad87b1c
+  ips:
+  - 45.182.189.102
+  - 216.245.221.83
+  - 92.51.2.221
+  - 67.220.94.173
+  - 184.107.3.70
+  - 186.162.118.133
+  - 186.128.224.0
+  - 186.136.204.137
+  - 58.180.61.138
+  - 45.140.145.68
+  - 6.149.249.226
+  - 192.119.99.42
+  - 176.123.4.226
+  - 80.82.78.42
+  - 176.125.101.115
+  - 45.182.189.226
+  - 185.162.128.100
+  - 185.162.128.219
+  - 6.184.168.25
+  - 181.214.147.164
+  - 209.127.121.38
+  - 89.248.172.139
+  - 5.149.228.109
+  - 176.123.4.146
+  - 45.182.189.102
+  - 176.123.5.126
+  urls:
+  - 45.182.189.102/dpixel
+reference: https://www.cybereason.com/blog/cve-2024-55956-cleo-vulnerability
+date_of_publication: December 13, 2024
+file_creation_date: September 10, 2025

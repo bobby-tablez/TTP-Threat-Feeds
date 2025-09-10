@@ -1,0 +1,35 @@
+description: "NightshadeC2 is a supply\u2011chain malware that uses a .NET loader\
+  \ to download a C or Python variant, establishes persistence via registry keys,\
+  \ and communicates over multiple TCP ports."
+attribution: Unknown threat actor
+malware_families:
+- NightshadeC2
+TTPs:
+  processes: []
+  commandline:
+  - rundl132 "C:\\Windows\\System32\\shell32.d11"
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: ''
+    destination_address: wa.ip-api.con
+    port: 89
+    protocol: HTTP
+  - executable: ''
+    destination_address: steamcommunity.com
+    port: 80
+    protocol: HTTP
+  file_activity: []
+  persistence: []
+  process_relations: []
+IOCs:
+  domains:
+  - wa.ip-api.con
+  - steamcommunity.com
+  ips: []
+  hashes: []
+reference: https://www.esentire.com/blog/new-botnet-emerges-from-the-shadows-nightshadec2
+date_of_publication: September 10, 2025
+file_creation_date: September 10, 2025

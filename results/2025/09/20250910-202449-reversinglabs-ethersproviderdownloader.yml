@@ -1,0 +1,51 @@
+description: "Malicious npm packages ethers-provider2 and ethers-providerz download\
+  \ a second\u2011stage payload that patches the local ethers package to provide a\
+  \ reverse shell."
+attribution: ReversingLabs (RL) research team
+malware_families:
+- EthersProviderDownloader
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: ssh client from ethers-provider2
+    destination_address: 5.199.166.1
+    port: 31337
+    protocol: TCP
+  file_activity:
+  - created: '*node_modules/loader.js*'
+  - accessed: '*node_modules/provider-jsonrpc.js*'
+  - deleted: '*temporary download file*'
+  persistence:
+  - Patching local ethers package provider-jsonrpc.js with malicious code
+  - "Creating loader.js in node_modules to re\u2011download and execute payload on\
+    \ subsequent runs"
+  process_relations: []
+IOCs:
+  hashes:
+  - 28097346af95ca7e9f24b77c810f542128491690
+  - 66d0ea94c1643b369b869e3548ced3461f6ee322
+  - c80a089155404aba2b9dcbc131ab11c015695649
+  - 7c9c383d2388f81e0f7735dc589d1e8a08d1fa63
+  - 6ac79d567ae5c409895420a8a0ff4787c4dbf5cd
+  - d4eacc28799e91489e9ae9e215412db09a714a8d
+  - 3606a97199b0b955801bc57585f5f1545eab76db
+  - 6669e7f1ec8344e466b77733265b26794fc49d45
+  - cfee90691b26e44c9d4a69ed2e7945d0e5d81457
+  - d227c1a31755373a2e5fef982784c216b02e8209
+  - d298e1d0d334abbe9100a8ee803113786840d1b1
+  - 4a47a251f45b1ed61f68eba1f5d2becc78db1ee9
+  - f404a2eb6dd82faf6a5840cdde196d8e746791a0
+  - 58675df3f34ec966e74ff7a7740e9d7894667b4b
+  urls:
+  - hxxp://5.199.166.1:31337/install
+  - hxxp://5.199.166.1:31337/config
+authors:
+- Lucija Valentić
+reference: https://www.reversinglabs.com/blog/malicious-npm-patch-delivers-reverse-shell
+date_of_publication: March 26, 2025
+file_creation_date: September 10, 2025
