@@ -1,0 +1,38 @@
+description: Mustang Panda used a malicious ISO with an LNK shortcut to deliver PlugX
+  malware via DLL hijacking and registry run key persistence.
+attribution: Mustang Panda (APT group), China
+malware_families:
+- PlugX
+TTPs:
+  processes:
+  - LMIGuardianSvc.exe
+  - cmd.exe
+  - WINWORD.EXE
+  commandline:
+  - '"C:\\Windows\\System32\\cmd.exe" /q /c "System Volume Information\\ \test2022.ucp"'
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\LMIGuardian Update
+  image_load: []
+  network_connections:
+  - process: LMIGuardianSvc.exe
+    destination: 217.12.206.116
+    port: 443
+  file_activity: []
+  persistence:
+  - Registry Run Key (HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run)
+  process_relations: []
+IOCs:
+  hashes:
+  - ee2c8909089f53aafc421d9853c01856b0a9015eba12aa0382e98417d28aef3f
+  - 8c4926dd32204b6a666b274a78ccfb16fe84bbd7d6bc218a5310970c4c5d9450
+  - 723d804cfc334cad788f86c39c7fb58b42f452a72191f7f39400cf05d980b4f3
+  - 2c0273394cda1b07680913edd70d3438a098bb4468f16eebf2f50d060cdf4e96
+  - 26c855264896db95ed46e502f2d318e5f2ad25b59bdc47bd7ffe92646102ae0d
+  ips:
+  - 217.12.206.116
+  - 45.134.83.29
+reference: https://blog.eclecticiq.com/mustang-panda-apt-group-uses-european-commission-themed-lure-to-deliver-plugx-malware
+date_of_publication: October 26, 2022
+file_creation_date: September 16, 2025

@@ -1,0 +1,38 @@
+description: Threat actor accessed SonicWall VPN, used plaintext Huntress recovery
+  codes to log into the portal, removed EDR agents and deleted shadow copies.
+attribution: Unknown threat actor, likely associated with Akira ransomware
+malware_families:
+- Akira
+TTPs:
+  processes: []
+  commandline:
+  - certutil -store My
+  - certutil -exportPFX 1d967729be08ef8c4bf86874c9542b4e C:\\temp\\cert.pfx
+  - certutil -exportPFX 1d967729be08ef8c4bf86874c9542b4e C:\\cert.pfx
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: ''
+    destination_address: 104.238.221.69
+    port: ''
+  file_activity:
+  - C:\\temp\\cert.pfx
+  - C:\\cert.pfx
+  - C:\\windows\\system32\\NOTEPAD.EXE \\192.168.1.51\\c$\\Users\\<redacted>\\Desktop\\Huntress_recovery_codes-<redacted>.txt
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 6f1192ea8d20d8e94f2b140440bdfc74d95987be7b3ae2098c692fdea42c4a69
+  ips:
+  - 104.238.221.69
+  domains: []
+  urls: []
+authors:
+- Michael Elford
+- Chad Hudson
+reference: https://www.huntress.com/blog/dangers-of-storing-unencrypted-passwords
+date_of_publication: September 15, 2025
+file_creation_date: September 16, 2025

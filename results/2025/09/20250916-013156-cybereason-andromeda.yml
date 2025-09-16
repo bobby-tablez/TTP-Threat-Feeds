@@ -1,0 +1,67 @@
+description: Andromeda/Gamarue backdoor leveraging removable media, DLL injection
+  via rundll32, and C2 communication with domains such as suckmycocklameavindustry.in.
+attribution: Unknown threat actor (potential Turla association)
+malware_families:
+- Andromeda
+- Gamarue
+TTPs:
+  processes:
+  - rundll32.exe
+  - svchost.exe
+  - trustedinstaller.exe
+  - huzevusuqig.exe
+  - zomofeqitiya.exe
+  - googlechrome.exe
+  - msiexec.exe
+  - cmd.exe
+  commandline:
+  - C:\\Windows\\system32\\rundll32.exe" ~$WF.FAT32,_ldr@16 desktop.ini RET TLS "
+    "
+  - rundll32.exe C:\\WINDOWS\\system32\\davclnt.dll,DavSetCookie [hostname] http://[server]/Common/5.%20CHIEF%20OFFICER/0%20OLD%20CH%20OFFICER/!!!%20Mihai
+    /De%20Luat%20Acasa/desktop.ini
+  - C:\\Windows\\System32\\netsh.exe" firewall add allowedprogram "C:\\GoogleChrome\\GoogleChrome.exe"
+    "GoogleChrome.exe" ENABLE
+  powershell: []
+  scripting_engine:
+  - C:\\GoogleChrome\\GoogleChrome.a3x
+  registry_keys:
+  - hklm\\system\\controlset001\\services\\xboxnetapisvc\\imagepath
+  image_load: []
+  network_connections:
+  - process: rundll32.exe
+    destination: suckmycocklameavindustry.in
+    port: 80
+  - process: trustedinstaller.exe
+    destination: 34.29.71.138
+    port: 80
+  file_activity:
+  - C:\\Users\\User\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\Startup.pif
+  persistence:
+  - Registry key adopeupdate set to C:\\GoogleChrome\\GoogleUpdate.lnk
+  - Registry key adopeflash set to C:\\GoogleChrome\\GoogleChrome.exe /AutoIt3ExecuteScript
+    C:\\GoogleChrome\\GoogleChrome.a3x
+  process_relations: []
+IOCs:
+  hashes:
+  - 274c2facba9d04e1f3cbf31528af0ac162da5db7b0fb70192b26c18858893f09e9d75d2e52f3f475
+  - 2620d60d8283936d6671713477cdd9ae2e28eb1b
+  - 72bc039f1d37b610ba6c4b577dbe82feba37e813
+  - c20c26d9f4f9bff3cf4c29b5c1c30252d938eddb
+  - e4fcf9c1ee2dcc115f5fc8f074fa56ffd484aac9
+  - cae4e8c730de5a01d30aabeb3e5cb2136090ed8d
+  ips:
+  - 34.29.71.138
+  - 104.198.2.251
+  - 184.105.192.235
+  - 35.204.181.10
+  - 44.200.43.61
+  - 192.168.7.52
+  domains:
+  - suckmycocklameavindustry.in
+  - deltaheavy.ru
+authors:
+- Elena Odier
+- Sunny Dhiver
+reference: https://www.cybereason.com/blog/new-cluster-andromeda-gamrue-c2
+date_of_publication: September 15, 2025
+file_creation_date: September 16, 2025

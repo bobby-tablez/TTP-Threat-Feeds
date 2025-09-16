@@ -1,0 +1,71 @@
+description: "Supply\u2011chain attack leveraging DLL side\u2011loading via a legitimate\
+  \ PDF reader to deliver the Rhadamanthys stealer."
+attribution: Rhadamanthys (APT), unknown country
+malware_families:
+- Rhadamanthys
+- LummaC2
+- ResolverRAT
+- VolkUpdater
+TTPs:
+  processes:
+  - cmd.exe
+  - reg.exe
+  - rundll32.exe
+  commandline:
+  - cmd.exe /C reg add "HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run" /v
+    "Volk Sensor" /t REG_SZ /d "rundll32.exe C:\\Users\\alex\\Documents\\VolkUpdater0987.dll"
+    EntryPoint /f & exit
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\VolkUpdater0987.dll
+  - HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load: []
+  network_connections:
+  - process: cmd.exe
+    destination: 147.124.219.157
+    port: 3243
+  file_activity:
+  - C:\\Users\\Public\\Documents\\VolkUpdater0987.dll
+  - C:\\Program Files (x86)\\Haihaisoft PDF Reader\\Proof_of_copyright_infringement.exe
+  - C:\\Program Files (x86)\\Haihaisoft PDF Reader\\msimg32.dll
+  - C:\\Users\\alex\\Documents\\VolkUpdater0987.dll
+  persistence:
+  - "DLL side\u2011loading into Haihaisoft PDF Reader"
+  - Autorun registry key HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  - Registry Run key modification
+  process_relations: []
+IOCs:
+  IPs:
+  - 147.124.219.157
+  URLs:
+  - https://tr.ee/a3IIBd
+  - https://t2m.co
+  - https://goo.su
+  - https://kiteaero.net/?u=https://www.mediafire.com/file_premium/p0n1kb5cjg81o89/Proof_of_copyright_infringement/file
+  - http://humanitify.com
+  - http://humantily.com
+  - http://kitaeero.net
+  - http://omicomgr.com
+  - http://tranedg.com
+  - http://tranfedg.com
+  - http://xdaochain.net
+  Hashes:
+  - 22CBE36E44D055CCB801B276C07708391F27F0D5
+  - 7526A425D342E19162E4905C7158E081E9B2704C
+  - D3C08C5DDCAA1629981919F20CB3E1EC7B918E8E
+  - DB7FBA5F8CA2A2056C4A339B0398BC9967A03897
+  - 920A8803FD5F31C53CCA3C0A0D6F5F217DC0D0CA
+  Filenames:
+  - '*.zip'
+  ip_addresses:
+  - 147.124.219.157
+  domains:
+  - kiteaero.net
+  - mediafire.com
+authors:
+- Alexander Sevtsov
+- Ruslan Rustchev
+reference: https://www.cybereason.com/blog/rhadamanthys-stealer-europe
+date_of_publication: September 16, 2025
+file_creation_date: September 16, 2025

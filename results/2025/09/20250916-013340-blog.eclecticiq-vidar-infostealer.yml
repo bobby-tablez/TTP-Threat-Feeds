@@ -1,0 +1,62 @@
+description: "Spear\u2011phishing email with a malicious Excel XLL attachment that\
+  \ downloads and executes the Vidar infostealer, which later exfiltrates data to\
+  \ multiple C2 servers."
+attribution: "Unknown ransomware\u2011affiliated actor"
+malware_families:
+- Vidar Infostealer
+- LockBit 2.0
+- Djvu
+- GrandCrab
+- Vidar
+TTPs:
+  processes:
+  - Excel.exe
+  - Date2023.exe
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: Excel.exe
+    destination: 135.181.87.234
+  - executable: Excel.exe
+    destination: 78.47.226.24
+  - executable: Excel.exe
+    destination: 116.202.183.154
+  - executable: Excel.exe
+    destination: steamcommunity.com
+  - executable: Excel.exe
+    destination: t.me
+  file_activity:
+  - C:\\Windows\\temp\\Date2023.exe
+  - C:\\Windows\\temp\\FileTest.zip
+  - C:\\Windows\\temp\\Excel.xlsx
+  - SZOI-Wyciek-20-03-2023.xll
+  - app4j.org/Date2023.zip
+  - app4j.org/Wyciek-NFZ-16-03-2023.xlsx
+  persistence: []
+  process_relations:
+  - parent: Excel.exe
+    child: Date2023.exe
+IOCs:
+  hashes:
+  - 0f9677642599cf23aafe225ee2dbe403f305dc5801298b83ba19f6b939a8f914
+  - 9916a835c20ea3eb75657f34eeb0fa152e72b374954bea087445d7e383e68455
+  ips:
+  - 135.181.87.234
+  - 78.47.226.24
+  - 116.202.183.154
+  domains_and_urls:
+  - hxxps://app4j.org/Date2023.zip
+  - hxxps://app4j.org/Wyciek-NFZ-16-03-2023.xlsx
+  - hxxp://135.181.87.234
+  - hxxps://steamcommunity.com/profiles/76561199486572327
+  - hxxp://78.47.226.24
+  - hxxps://t.me/zaskullz
+  - hxxp://116.202.183.154
+authors:
+- EclecticIQ Intelligence & Research Team
+reference: https://blog.eclecticiq.com/polish-healthcare-industry-targeted-by-vidar-infostealer-likely-linked-to-djvu-ransomware
+date_of_publication: March 20, 2023
+file_creation_date: September 16, 2025

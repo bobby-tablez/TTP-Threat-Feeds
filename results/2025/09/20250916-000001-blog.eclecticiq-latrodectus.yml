@@ -1,0 +1,54 @@
+description: Malvertising campaign using obfuscated JavaScript downloader Latrodectus
+  to deliver Brute Ratel C4 with persistence via registry Run key and C2 domains.
+attribution: LUNAR SPIDER, Russia
+malware_families:
+- Latrodectus
+- Brute Ratel C4
+- Lunar Spider
+- BokBotHVNC
+- ALPHV/BlackCat
+- ContiRas
+- TRAVELINGSPIDER
+- TWISTEDSPDER
+- Wizard Spider
+TTPs:
+  processes:
+  - rundll32.exe
+  - msiexec.exe
+  commandline:
+  - rundll32.exe vierm_soft_x64.dll
+  - msiexec.exe /i dsa.msi
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\RunThis
+  image_load: []
+  network_connections:
+  - process: rundll32.exe
+    destination: bazarunet.com
+    port: null
+  - process: rundll32.exe
+    destination: greshunka.com
+    port: null
+  - process: rundll32.exe
+    destination: tiguanin.com
+    port: null
+  file_activity:
+  - C:\\Users\\<user>\\AppData\\Roaming\\vierm_soft_x64.dll
+  - 45.14.244.124/dsa.msi
+  persistence:
+  - Registry Run key HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\RunThis
+  process_relations: []
+IOCs:
+  hashes:
+  - 937d07239cbfee2d34b7f1fae762ac72b52fb2b710e87e02fa758f452aa62913
+  - 28f5e949ecad3606c430cea5a34d0f3e7218f239bcfa758a834dceb649e78abc
+  ips: []
+  domains:
+  - peronikilinfer.com
+  - bazarunet.com
+  - greshunka.com
+  - tiguanin.com
+reference: https://blog.eclecticiq.com/inside-intelligence-center-lunar-spider-enabling-ransomware-attacks-on-financial-sector-with-brute-ratel-c4-and-latrodectus
+date_of_publication: October 15, 2024
+file_creation_date: September 16, 2025

