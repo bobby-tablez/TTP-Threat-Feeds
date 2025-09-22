@@ -1,0 +1,64 @@
+description: A Linux-based mining operation that installs and runs custom binaries
+  (masscan, pnscan, httpgd) and modifies system services for persistence.
+attribution: APT group unknown
+malware_families:
+- ''
+- Monero miner
+TTPs:
+  processes:
+  - masscan
+  - pnscan
+  - httpgd
+  - nnt.sh
+  - crontab
+  - sshd
+  commandline:
+  - masscan nax-rate 10000 p6379 -shard $( seq 1 22000 | sort -R | head -n1 )/22000
+    exclude 255.255.255.25
+  - httpgd keepalive no-color cpu-priority 5 o dev.fugglesoft.me:5443 ~tls -0 80.211.206.105:9900
+    u B4nw3MQdDIZRghGBtls coin monero background &#./httpgd keepalive no-color --cpu-priority
+    5 -o dev.fugglesoft.me:5443 tls o 80.211.206.105:9000 u 84nw3MQdDIzRgh1s
+  - crontab -l > "$crondir"Tock_cron
+  - chmod 777 /etc/httpgd
+  - chattr +ia /etc/httpgd
+  - cat .dat | rediscli -h $h -p $p raw &
+  powershell: []
+  scripting_engine:
+  - /tmp/nnt.sh
+  - /tmp/httpgd
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: masscan
+    destination: 80.211.206.105:9900
+  - process: httpgd
+    destination: dev.fugglesoft.me:5443
+  - process: httpgd
+    destination: 80.211.206.105:9000
+  file_activity:
+  - /var/lib/apt/lists/*m
+  - /usr/local/bin/pnscan
+  - /usr/bin/pnscan
+  - /etc/httpgd
+  - /etc/nnt.sh
+  - /tmp/nnt.sh
+  - /tmp/httpgd
+  persistence:
+  - cron job modification (crontab)
+  - chattr +ia on system binaries (/bin/ps.original, /usr/bin/cdl, /usr/bin/wd1lbody)
+  - SSH backdoor key addition to ~/.ssh/authorized_keys
+  process_relations: []
+IOCs:
+  ip_addresses:
+  - 80.211.206.105
+  domains:
+  - dev.fugglesoft.me
+  - natalstatus.org
+  urls:
+  - http://natalstatus.org/b2f628fff19fdag99999999/1.0.4.tar.gz
+  - http://natalstatus.org/ep9TS2/pnscan.tar.gz
+authors:
+- Abhishek Mathew
+reference: https://www.cloudsek.com/blog/the-ghost-in-the-machine-the-complete-dossier-on-ta-natalstatus-and-the-cryptojacking-turf-war
+date_of_publication: August 22, 2025
+file_creation_date: September 22, 2025

@@ -1,0 +1,62 @@
+description: Analysis of OneStart, ManualFinder, and AppSuite malware families revealing
+  shared infrastructure.
+attribution: Unknown
+malware_families:
+- OneStart
+- ManualFinder
+- AppSuite
+TTPs:
+  processes:
+  - node.exe
+  - electron
+  - powershell
+  - GameOffer.exe
+  commandline: []
+  powershell:
+  - powershell script run from %temp%
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: node.exe
+    destination: https://7df4va.com/r1?ei=1fLlck&dt=a559552e&uri=www.7df4va.com%2f
+    port: ''
+  - executable: node.exe
+    destination: https://mka3e8.com
+    port: ''
+  - executable: node.exe
+    destination: https://onestartapi.com/api/bb/updates.txt
+    port: ''
+  - executable: node.exe
+    destination: https://onestartapi.com/chr/ob/ext/update
+    port: ''
+  - executable: node.exe
+    destination: sdk.appsuites.ai/api/s3/new?fid=ip&version=1.0.28
+    port: ''
+  file_activity:
+  - '%appdata%\\OneStart.ai\\OneStart\\<version_number>\\onestart.dll'
+  - '%temp%\\powershell script run from %temp%'
+  - OneStartInstaller-v4.5.224.8.msi
+  - GameOffer.exe
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 44ad9111f14c83be400bba303df5dc54ab699bb4f6e8144d052ac19812cd4fac
+  - 77e4dab34cb6c2169c47463b4ed81efe61185446c304b392dd9b0cbe2b31c67c
+  - 1ff8268fa64c8f55eb750c4433c1e9e47dc7359b7fcc653215423ed3fe5d8b4d
+  - 7ad613dee75da11ef9b7a92823bda3e290491e245956f5a192a3207a5f11d9a0
+  - be50abcaa65744e1d62ed858911a8ed665a4743a1f1e6db515cbd661052bd3f9
+  - 6b6fc62a294d5ef1c619d623f1cf6d735d9f191df9ef5c745b0881b1e01b8565
+  - a704398d2446d297938d773f22e3a703b8e8b9a411edcf0f821dff6e975f2724
+  - 90b2e64ce4c6b2a0048158755281466b60b83ac1a8b43bb28614ec67c9fe52eb
+  domains:
+  - 7df4va.com
+  - mka3e8.com
+  - onestartapi.com
+  - sdk.appsuites.ai
+authors:
+- Banu Ramakrishnan
+reference: https://feeds.feedblitz.com/~/924889430/0/gdatasecurityblog-en~AppSuite-OneStart-ManualFinder-The-Nexus-of-Deception
+date_of_publication: September 15, 2025
+file_creation_date: September 22, 2025

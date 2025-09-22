@@ -1,0 +1,102 @@
+description: "Nimbus Manticore (UNC1549) is an Iran\u2011nexus APT group that targets\
+  \ aerospace, defense and telecommunications organizations in the Middle East and\
+  \ Europe through spear\u2011phishing campaigns delivering custom implants such as\
+  \ Minibike/MiniJunk and MiniBrowse."
+attribution: "Iranian threat actor \u2013 Nimbus Manticore (UNC1549)"
+malware_families:
+- Minibike
+- MiniJunk
+- MiniBrowse
+- Minibrowse
+TTPs:
+  processes:
+  - setup.exe
+  - SenseSampleUploader.exe
+  - userenv.dll
+  - Setup.exe
+  - MigAutoPlay.exe
+  - xmllite.dll
+  - dxgi.dll
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: setup.exe
+    destination: send-feedback-296.azurewebsites.net
+    port: ''
+  file_activity:
+  - C:\\Program Files\\Windows Defender Advanced Threat Protection\\SenseSampleUploader.exexmllite.dll
+  - C:\\Program Files\\Windows Defender Advanced Threat Protection\\xmllite.dll
+  - C:\\Program Files\\Windows Defender Advanced Threat Protection\\dxgi.dll
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 23c0b4f1733284934c071df2bf953a1a894bb77c84cff71d9bfcf80ce3dc4c16
+  - 0b2c137ef9087cb4635e110f8e12bb0ed43b6d6e30c62d1f880db20778b73c9a
+  - 6780116ec3eb7d26cf721607e14f352957a495d97d74234aade67adbdc3ed339
+  - 41d60b7090607e0d4048a3317b45ec7af637d27e5c3e6e89ea8bdcad62c15bf9
+  - 4260328c81e13a65a081be30958d94b945fea6f2a483d051c52537798b100c69
+  - a37d36ade863966fb8520ea819b1fd580bc13314fac6e73cb62f74192021dab9
+  - 5d832f1da0c7e07927dcf72d6a6f011bfc7737dc34f39c561d1457af83e04e70
+  - ffeacef025ef32ad092eea4761e4eec3c96d4ac46682a0ae15c9303b5c654e3ec22b12d8b1e21468ed5d163efbf7fee306e357053d454e1683ddc3fe14d25db54da158293f93db27906e364a33e5adf8de07a97edaba052d4a9c1c3c3a7f234d061c28a9cf06c9f338655a520d13d9b0373ba9826a2759f989985713b5a4ba2bbc9f2abce42141329b2ecd0bf5d63e329a657a0d7f33ccdf78b87cf4e172fbd1e69c7ea1301e8d723f775ee911900fbf7caf8dcd9c85728f178f0703c4e6c5c0e77b7ec4ace252d37956d6a68663692e6bde90cdbbb07c1b8990bfaa311ecfb2b43487153219d960b585c5e3ea5bb38f6ea04ec9830cca183eb39ccc95d157931b629042b5f08b7460975b5ecabc5b195fcbdf76ea50416f512a3ae7a677614af8a1c69c03002222980963a5d50ab9257bc4a1f2f486c3e7912d75558432be88954de96c7fcc84fb062ca1e68831ae5745cf091ef5fb2cb2622edf2358e749e0afe679de1a84301048ce1313a057af456e7ee055519b3693654bbb73120838769ec7899729aac48481272d4b305cefffa7799dcdad88d02278ee14315a0a8cc13b4667af3a3e6ed905ae73683ee78d2c608a00e566ae446003da47947320097fa4f5251c81f080d80d1f75ad4cc8f5bc751e7c6df5addcfca268d59107737bd0cf0c50670102e7fc6499e8d912ce1f5bd389fad5358d5cae53884593c337ac2e3b58fd0c0ef8a42226be4d26a64235da059986ec7f5990d5c50d47b7a6cfadcd7c77865f27b8f749b7df805ee76cf6e4575cbe0c4d9c29b75f8260210a802fced2db5b554470f5e9ad26f37b6b3f4f3dae336b3deea3f189933d007c17e3d8b9b3ba39dbb6f4da3ed492140ffc167bde5dee005a35228ce156bed413af622d53ff76014f650b3180bc87a23d40dc861a005f47a6977cb2fba8907259c3cf7ab405ae67c4ad4704c2ae33b2cf60f5b0ccdaff65c2ec44f5913664805d446c9b5985bf904c546c2474cbf94d6d6b2a18a4c82a1407c23a5a5eca3cd828f038260e4ff052250ade1edaab87de194e87a9afeff903695799bcbc3571918b1311008e7771ed1126b79c9a6a1093b2598282221cad8524c061943185272fbe58142df54fccb26a6f65de0d0e09324c84e8d85e7549d4d04e0aa81e4c7b1ae2f3c0f8054483046c9f593114bc3ddc3613f71af6b30d2e4b7e7faec1f26e72ae6d766995d246e4956ad5e6b167a3d9d939542d6d80ec7301f337e00bb109cc220432cf
+  - Minibrowse9b186530f291f0e6ebc981399c956e1de3ba26b0315b945a263250c06831f281
+  - ffeacef025ef32ad092eea4761e4eec3c96d4ac46682a0ae15c9303b5c654e3ec22b12d8b1e21468ed5d163efbf7fee306e357053d454e1683ddc3fe14d25db54da158293f93db27906e364a33e5adf8de07a97edaba052d4a9c1c3c3a7f234d061c28a9cf06c9f338655a520d13d9b0373ba9826a2759f989985713b5a4ba2bbc9f2abce42141329b2ecd0bf5d63e329a657a0d7f33ccdf78b87cf4e172fbd1e69c7ea1301e8d723f775ee911900fbf7caf8dcd9c85728f178f0703c4e6c5c0e77b7ec4ace252d37956d6a68663692e6bde90cdbbb07c1b8990bfaa311ecfb2b43487153219d960b585c5e3ea5bb38f6ea04ec9830cca183eb39ccc95d157931b629042b5f08b7460975b5ecabc5b195fcbdf76ea50416f512a3ae7a677614af8a1c69c03002222980963a5d50ab9257bc4a1f2f486c3e7912d75558432be88954de96c7fcc84fb062ca1e68831ae5745cf091ef5fb2cb2622edf2358e749e0afe679de1a84301048ce1313a057af456e7ee055519b3693654bbb73120838769ec7899729aac48481272d4b305cefffa7799dcdad88d02278ee14315a0a8cc13b4667af3a3e6ed905ae73683ee78d2c608a00e566ae446003da47947320097fa4f5251c81f080d80d1f75ad4cc8f5bc751e7c6df5addcfca268d59107737bd0cf0c50670102e7fc6499e8d912ce1f5bd389fad5358d5cae53884593c337ac2e3b58fd0c0ef8a42226be4d26a64235da059986ec7f5990d5c50d47b7a6cfadcd7c77865f27b8f749b7df805ee76cf6e4575cbe0c4d9c29b75f8260210a802fced2db5b9b554470f5e9ad26f37b6b3f4f3dae336b3deea3f189933d007c17e3d8b9b3ba39dbb6f4da3ed492140ffc167bde5dee005a35228ce156bed413af622d53ff76014f650b3180bc87a23d40dc861a005f47a6977cb2fba8907259c3cf7ab405ae67c4ad4704c2ae33b2cf60f5b0ccdaff65c2ec44f5913664805d446c9b5985bf904c546c2474cbf94d6d6b2a18a4c82a1407c23a5a5eca3cd828f038260e4ff052250ade1edaab87de194e87a9afeff903695799bcbc3571918b1311008e7771ed1126b79c9a6a1093b2598282221cad8524c061943185272fbe58142df54fccb26a6f65de0d0e09324c84e885e7549d4d04e0aa81e4c7b1ae2f3c0f8054483046c9f593114bc3ddc3613f71af6b30d2e4b7e7faec1f26e72ae6d766995d246e4956ad5e6b167a3d9d939542d6d80ec7301f337e00bb109cc220432cf
+  domains:
+  - services-update-check.azurewebsites.net
+  - send-feedback.azurewebsites.net
+  - send-feedback-413.azurewebsites.net
+  - send-feedback-838.azurewebsites.net
+  - send-feedback-296.azurewebsites.net
+  - telespazio-careers.com
+  - update-health-service.azurewebsites.net
+  - check-backup-service.azurewebsites.net
+  - check-backup-service-288.azurewebsites.net
+  - check-backup-service-179.azurewebsites.net
+  - check-backup-service-736.azurewebsites.net
+  - asylimed.azurewebsites.net
+  - clinichaven.azurewebsites.net
+  - healsanctum.azurewebsites.net
+  - mediasylum.azurewebsites.net
+  - therashelter.azurewebsites.net
+  - arabiccountriestalent.com
+  - arabiccountriestalenthr.azurewebsites.net
+  - arabiccountriestalents.azurewebsites.net
+  - arabiccountriestalentshr.azurewebsites.net
+  - talenthumanresourcestalent.com
+  - carebytesolutions.azurewebsites.net
+  - medicoreit.azurewebsites.net
+  - smartmediq.azurewebsites.net
+  - vitatechlink.azurewebsites.net
+  - biolinksystems.azurewebsites.net
+  - digicura.azurewebsites.net
+  - healthcarefluent.com
+  - hivemedtech.azurewebsites.net
+  - neurocloudhq.azurewebsites.net
+  - marsoxygen.azurewebsites.net
+  - nanobreathe.azurewebsites.net
+  - turbulencemd.azurewebsites.net
+  - zerogmed.azurewebsites.net
+  - virgomarketingsolutions.com
+  - virgomarketingsolutions.com
+  - tions.com
+  - airtravellog.com
+  - masterflexiblecloud.azurewebsites.net
+  - storagewiz.co.azurewebsites.net
+  - thecloudappbox.azurewebsites.net
+  - arabiccountriestalent.azurewebsites.net
+  - focusfusion.eastus.cloudapp.azure.com
+  - frameforward.azurewebsites.net
+  - tacticalsnap.eastus.cloudapp.azure.com
+  - thetacticstore.com
+  - lensvisionary.azurewebsites.net
+  - wellnessglowluth.azurewebsites.net
+  - activehealthlab.azurewebsites.net
+  - netehealthpsuluth.com
+  - grownehealth.eastus.cloudapp.azure.com
+  ips: []
+reference: https://research.checkpoint.com/2025/nimbus-manticore-deploys-new-malware-targeting-europe/
+date_of_publication: September 22, 2025
+file_creation_date: September 22, 2025

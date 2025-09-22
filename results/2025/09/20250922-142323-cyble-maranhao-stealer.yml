@@ -1,0 +1,85 @@
+description: Maranhao Stealer uses Node.js and reflective DLL injection to exfiltrate
+  data via API endpoints.
+attribution: Maranhao Gang
+malware_families:
+- Maranhao Stealer
+TTPs:
+  processes:
+  - chrome.exe
+  - brave.exe
+  - msedge.exe
+  - node.exe
+  - Maranhao Stealer.exe
+  - Fnafdoomlauncher.exe
+  - HauntedSetup.exe
+  commandline:
+  - '"C:\\Users\\<user>\\AppData\\Local\\Temp\\thkbdfwpx"'
+  - /s /c "t 5 foprcess xeaty s icprocess oWi oyam 32 o e /4"
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - 'HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\ Windows\\CurrentVersion\\RunT Pramnch
+    [ me e orePileid ) 0cfou) Rz s ntze)B i) e N e gL UiRun0nce I Scremneiise ().oWimgre
+    628S fend e 21%))Siendee 7525 st o 540= i omd exe (5356)4 atinb exe (5336)e 5520e
+    (1959[ S Ve ota... C: MM SR At ocal\\Propres\\Mtionch Updaterpdetar st B0 b 7RSO8
+    JMNINIET(C\\Widos\\Syten 32 Conos s \\77,C-\\Widows e 2\\canhos xe DA Frce /1(C\\Windows
+    stem32veg exe-(C\\Windows sysem2nd exe(C\\Windosysen 32 exe(C\\Windons system32md
+    exe(C\\Windows\\osem 322t exe(CA\\Windons ysem2cnd exe(C\\Widowsysem 322 axe(C\\Windows
+    sysem32nd exeICAWindows\\system32\\atrb exe.Wi ayen32 e exe'
+  - HKCU\\Setwae Icrosct Windows CurertVerion\\ P/ dserWi ysem3Z\\cmd e 14 /sl = C\\Usrs\\
+    s AppDate Lol Pogras Wicrosch Ut pdser e< + C\\Users\\ S gDt \\Local Prorans eross
+    Updaterupdter sC\\Windowsysen32cnd exe
+  image_load: []
+  network_connections:
+  - process: Maranhao Stealer.exe
+    destination: api.maranhaogang.fun
+    port: 443
+  - process: Maranhao Stealer.exe
+    destination: api.maranhaogang.fun/socket.io/?id=undefined&EIO=4&transport=
+  - process: Maranhao Stealer.exe
+    destination: api.maranhaogang.fun/victim
+  - process: Maranhao Stealer.exe
+    destination: api.maranhaogang.fun/upload
+  file_activity:
+  - C:\\Users\\<user>\\AppData\\Local\\Temp\\thkbdfwpx
+  - C:\\Users\\<user>\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Historysub_1400012A0(v39,L"
+  - C:\\Users\\<user>\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Login Data
+  - C:\\Users\\<user>\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\CookiesTMsp+a6],m13e
+    TN I e e TR B|0 aoo_aooW0 sexquono rm sscgasesopWOU 78D 214D
+  - C:\\Users\\<user>\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Web Datas
+    2]
+  - C:\\Users\\<user>\\AppData\\Local\\Temp\\thkbdfwpxUscreen.jpegsystem.txtbrowsersBraveL_pefaulthistory.txtlogins.txtoogle
+    ChromeLpefaultcookies.txtdownloads.txthistory.txtlogins.txt
+  - C:\\Users\\<user>\\AppData\\Local\\Temp\\thkbdfwpxUscreen.jpegsystem.txtbrowsersBraveL_pefaulthistory.txtlogins.txtoogle
+    ChromeLpefaultcookies.txtdownloads.txthistory.txtlogins.txt
+  persistence:
+  - 'Registry Run key: HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\ Windows\\CurrentVersion\\RunT
+    Pramnch ...'
+  process_relations: []
+IOCs:
+- 7782f373c32dd2c2017a1cf44b070944fb24add03cc95c6106c2ef4ef01bbc27
+- 7eb7103109977c1af4076be0f234160ce356150173b0e536aa97598d4583ef9b
+- 863b34c260b9b393f466f99b9199d28a588a2bf4daf83174664fff0b7073093b
+- 97813e1c66dc8922b8242d24a7a56409b57ce19c61042ffda93031c43a358b9b
+- 97eda27517bb85a0385c4ad6c090a84be38e97998248f4dacfc379b2958209c0
+- 9da9d5717b7ee173854a0a4646964415e80b9ec2fa2a0cbe932c0054d5b71362
+- 9e6d264b3ab48faf8c89a6e3afb7fe05039bdd82f1fc4af7d3298f9d4337578e
+- a6b68fbdb15945a83bfc84c47f9ee584126f085efac95a89785302134b0a11c0
+- b0973b4a9b8f713a0760e65f717b6fb7b392c2e8e14e07dddfefecb915cca6b2
+- b0a3311f94eb2e87c560b2cde9029a8a5293883777a28fddbf4e4d0672d985f0
+- b50924f958bb6b49ede6497401dcadc328e3538adf5dca6d66362bcd321a3d00
+- c20e72a39a2e4b808bc86dd2a7c88a54c58accbdbe96e405b769f9096b9c97af
+- c8a0cd84d6c8a4d5f7a893744538cbc8b08417468b9c5bd5032b7cdf6d060b34
+- d312535b87913542d3f3d0814bb792773c3a2ed561cca43e03892642bf59027a
+- d45faeb90d706476c2ad52c183c4ca2e2d72fe2bf840d0f38b83193997a2cdde
+- 0737f726e751d757e253b0c7aefd697552b075aff9dd661e354c1e87bc132c9a
+- 4b13407aaf3a4bb239387de96840db6f246f651a010298212b1020c927fa8f96
+- https://api.maranhaogang.fun/infectURLNotifies TA about the infection in the victim
+- https://api.maranhaogang.fun:443/socket.io/?id=undefined&EIO=4&transport=
+- https://api.maranhaogang.fun/victim
+- https://api.maranhaogang.fun/upload
+authors:
+- Antonis Terefos (@Tera0017)
+reference: https://cyble.com/blog/inside-maranhao-stealer-node-js-powered-infostealer/
+date_of_publication: September 16, 2025
+file_creation_date: September 22, 2025

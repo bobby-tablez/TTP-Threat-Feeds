@@ -1,0 +1,56 @@
+description: BlockBlasters patch contains a multi-stage malware campaign involving
+  batch files, VBS loaders, and malicious executables that exfiltrate user data to
+  C2 servers.
+attribution: EncryptHub
+malware_families:
+- StealC
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell
+  commandline:
+  - '''cmd.exe /c game2.bat'''
+  - '''cmd.exe /c launch1.vbs'''
+  - '''cmd.exe /c test.vbs'''
+  - '''powershell -NoProfile -ExecutionPolicy Bypass -Command "Get-ChildItem"'''
+  powershell: []
+  scripting_engine:
+  - launch1.vbs
+  - test.vbs
+  - game2.bat
+  - 1.bat
+  - test.bat
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: game2.bat
+    destination: 203.188.171.156
+    port: 30815
+  - process: Client-built2.exe
+    destination: 203.188.171.156
+    port: null
+  - process: Block1.exe
+    destination: 45.83.28.99
+    port: null
+  file_activity:
+  - C:\\SteamLibrary\\steamapps\\common\\BlockBlasters\\Engine\\Binaries\\ThirdParty\\Ogg\\cwe\\Client-built2.exe
+  - C:\\SteamLibrary\\steamapps\\common\\BlockBlasters\\Engine\\Binaries\\ThirdParty\\Ogg\\cwe\\Block1.exe
+  persistence:
+  - Adds folder to Microsoft Defender exemption list
+  process_relations: []
+IOCs:
+  hashes:
+  - cd817345f9e62fa8e9b66e47b645278e74f2a2cf59b8a81b88d1b2ec54b9933d
+  - 58a97ab524b704172a8f68fda92daa802b706e397adede410b6475a4eb229c9b
+  - 17c3d4c216b2cde74b143bfc2f0c73279f2a007f627e3a764036baf272b4971a
+  - 59f80ca5386ed29eda3efb01a92fa31fb7b73168e84456ac06f88fdb4cd82e9e
+  ips:
+  - 203.188.171.156
+  - 45.83.28.99
+  domains: []
+  urls: []
+authors:
+- Arvin Lauren Tan
+reference: https://feeds.feedblitz.com/~/925181471/0/gdatasecurityblog-en~BlockBlasters-Infected-Steam-game-downloads-malware-disguised-as-patch
+date_of_publication: September 22, 2025
+file_creation_date: September 22, 2025
