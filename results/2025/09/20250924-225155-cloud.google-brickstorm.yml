@@ -1,0 +1,62 @@
+description: BRICKSTORM is a stealthy backdoor used by UNC5221 to maintain persistence
+  on network appliances and VMware vCenter/ESXi hosts, leveraging lateral movement,
+  credential theft, and covert C2 channels.
+attribution: Google Threat Intelligence Group (GTIG)
+malware_families:
+- BRICKSTORM
+TTPs:
+  processes:
+  - brickstorm
+  - slaystyle
+  commandline:
+  - '''sed -i s/export TEXTDOMAIN=vami-lighttp/export TEXTDOMAIN=vami-lighttp\n\/path/to/brickstorm/g
+    /opt/vmware/etc/init.d/vami-lighttpsed'''
+  - '''sed -i $a\SETCOLOR_WARNING="echo -en `/path/to/brickstorm`\\033[0;33m" /etc/sysconfig/init'''
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+    destination_ip: 45.90.28.160
+    port: 443
+  - process: ''
+    destination_ip: 45.90.30.160
+    port: 443
+  - process: ''
+    destination_ip: 149.112.112.112
+    port: 443
+  - process: ''
+    destination_ip: 149.112.112.11
+    port: 443
+  file_activity:
+  - /opt/vmware/etc/init.d/vami-lighttp
+  - /etc/sysconfig/init
+  persistence:
+  - Modified init.d, rc.local, or systemd startup scripts to launch BRICKSTORM on
+    reboot.
+  process_relations: []
+authors:
+- Sarah Yoder
+- John Wolfram
+- Ashley Pearson
+- Doug Bienstock
+- Josh Madeley
+- Josh Murchie
+- Brad Slaybaugh
+- Matt Lin
+- Geoff Carstairs
+- Austin Larsen
+- Nick Simonian
+- Ryan Tomcik
+- Google Threat Intelligence Group (GTIG)
+IOCs:
+  ip_addresses:
+  - 45.90.28.160
+  - 45.90.30.160
+  - 149.112.112.112
+  - 149.112.112.11
+  domains: []
+  hashes: []
+reference: https://cloud.google.com/blog/topics/threat-intelligence/brickstorm-espionage-campaign
+date_of_publication: September 24, 2025
+file_creation_date: September 24, 2025

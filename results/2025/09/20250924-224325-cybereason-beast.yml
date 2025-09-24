@@ -1,0 +1,52 @@
+description: Beast ransomware is a RaaS that encrypts files on Windows, Linux and
+  ESXi systems, uses a unique mutex for execution control, performs SMB scans, stops
+  services, deletes shadow copies, and drops ransom notes.
+attribution: Beast Ransomware group (APT?)
+malware_families:
+- Beast
+TTPs:
+  processes:
+  - beast.exe
+  - svchost.exe
+  commandline:
+  - beast.exe
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: beast.exe
+    destination: 10.8.2.4
+    port: 445
+    protocol: TCP
+  - process: beast.exe
+    destination: 10.0.2.2
+    port: 445
+    protocol: TCP
+  - process: beast.exe
+    destination: 10.0.2.3
+    port: 445
+    protocol: TCP
+  - process: svchost.exe
+    destination: 8.8.8.8
+    port: 536
+    protocol: UDP
+  file_activity:
+  - README.txt
+  persistence:
+  - Creates mutex named "BEAST HERE?"
+  process_relations: []
+IOCs:
+  hashes:
+  - 4c44ac1eea4bc7f4ea542d611b5658d7ac2729d79abe750da83f1581cd832eaf
+  - 369034bf1d793fe56ea4d683a156722d825ad9829fc128117f82a26bc1d0480b
+  - e01f5c7067dc984dceb883b10444b1a5b0f22ebd500baf9d9a88207f5033285d
+  - dd09a2ef31d018fd83f186e3eaaccccdaa8a8c8779ced668abb06dc934d89a2d
+  - dbbe792e6c804518909f8990a836552573522d126547429d6cd3fcb1f60d542c
+  domains:
+  - iplogger.co/1v1i85.torrent
+authors:
+- Mark Tsipershtein
+reference: https://www.cybereason.com/blog/threat-analysis-beast-ransomware
+date_of_publication: September 24, 2025
+file_creation_date: September 24, 2025

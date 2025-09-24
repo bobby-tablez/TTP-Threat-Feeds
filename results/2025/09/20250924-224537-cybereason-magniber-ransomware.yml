@@ -1,0 +1,56 @@
+description: The report discusses how malicious MSI files can be used to execute code
+  with elevated privileges and outlines examples from Magniber Ransomware, MatanBuchus
+  Loader, and Qbot.
+attribution: Unknown
+malware_families:
+- Magniber Ransomware
+- MatanBuchus Loader
+- Qbot / Qakbot
+- Qbot
+- Zloader
+TTPs:
+  processes:
+  - regsvr32.exe
+  - wscript.exe
+  - msiexec.exe
+  commandline:
+  - regsvr32.exe scrobj.dll /s /u /n /i:../../../Users/Public/x9au7i1
+  - 'regsvr32.exe scrobj.dll /s /u /n /i:../../../Users/Public/x9au7ilC:\\Windows\\System32\\MsiExec
+    exe -Embedding 846C2CA775A5875A128FF8EA31DF59D6C:\\Windows\\system32\\msiexec.exe
+    /V''C:\\Windows\\System32\\msiexec.exe /i C:\\Users\\\\Desktop\\7916446155\\4b43e2.msi\"remnux@remnux:~$
+    file MB.msiMB.msi: Composite Document File V2 Document, Little Endian, Os: Windows,
+    Version 6.2, MSI Installer,Code page: 1252, Title: Installation Database, Subject:
+    Adobe Font Pack 3.0.12.9, Author: Adobe Inc|., Keywords: Installer, Comments:
+    Adobe Font Pack, Template: Intel;1033, Revision Number: {20BC971C-913C-4948-9C90-6E85B0BF418C},
+    Create Time/Date: Thu Jun 16 10:55:20 2022, Last Saved Time/Date: ThuJun 16 10:55:20
+    2022, Number of Pages: 200, Number of Words:ws Installer XML Toolset (3.11.2.4516),
+    Security: 210, Name of Creating Application: Windo|Digital Signature Details 7General  advancedDigital
+    Signature InformationThis digitalsignature i OK.Sianer informationName:Emait [Not
+    avaiabieSigning tme: ot avaiabieView CertfiateCountersignaturesNemeofsigner:  E-mailaddress:  TmestampDetaiko
+    MB.msi - OrcaFile Edit Tebles Transform ToolsView HelpDEd sR2@BF =8 g FTables
+    Action T.. Source TargetAdminExecuteSequence RunApplicationQQQ 226 INSTALLLOCATIONregsvr32.exe
+    -n - Instal [#main_dIlAdminUiSequenceRunApplicationNotifyVBs 226  INSTALLLOCATION  wscript.exe
+    [#notify_vbs]AdviExecuteSequenceComponentTablesAdminExecuteSequenceAdminUlSequenceAdviExecuteSequenceComponentCustomActionirectoryINSTALLLOCATIONLocalAppDataFolderTARGETDRDirectory_ParentLocalAppDataFolderTARGETDRDefaultDirwiivuity|AdobeFontPackSourceDirTables
+    File Component_ FileNa...'
+  - regsvr32.exe & appDatalocation & \"\\SetupTestT\\1.dl\"
+  powershell: []
+  scripting_engine:
+  - Set objShell = CreateObject( "WScript.Shell" )appDatalocation=objShell.ExpandEnvironmentStrings("%localappdata%")objShell.run
+  - "regsvr32.exe" & appDataLocation & "\\SetupTest\\1l.dll"
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - C:\\Users\\<UserName>\\AppData\\Local\\SetupTest\\1.dll
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - c0beb47f629a5debe0e99790d16a4d04afe786d6fb42c5ab6dfcaed84d86e7ad
+  authors:
+  - Kotaro Ogino
+  - Ralph Villanueva
+  - Robin Plumer
+reference: https://www.cybereason.com/blog/threat-analysis-msi-masquerading-as-software-installer
+date_of_publication: September 24, 2025
+file_creation_date: September 24, 2025
