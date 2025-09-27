@@ -1,0 +1,67 @@
+description: "DLL side\u2011loading attacks are a common persistence and privilege\
+  \ escalation technique that leverages the Windows DLL search order to load malicious\
+  \ DLLs into legitimate processes."
+attribution: Cybereason Global SOC
+malware_families:
+- PlugX
+- NetWire
+- Remcos
+- Kaseya
+- PoisonIVY
+- REvil
+- Operation SoftCell
+TTPs:
+  processes: []
+  commandline:
+  - '''powershell.cxe ~10p ~w hiddan -o WWBOAGUAIANUATHAZABYAHYASQSSAGUAUKBVAGKAbGBOAEGA)OO
+    R DL WAIAG - Madle, 0 ul_peason_W, Lo elswiteh (u1_reason_for_call)ie s ADllunregisterserver();'''
+  powershell: []
+  scripting_engine:
+  - '''python win.py -tey g Tdenticication'''
+  - '''python win.py -tpython win.py.sane directory a5 VW for ddentifying DL Sidetosding\espatat\espaint\espaint\espaintexe
+    cnarasp.exe -n a1lC:\Progean Files\Intemmet Explorer\fexplore. exeC:\progran Files\Intemmet
+    Explorer\fesplore.C:\Progran Files\Intemnet Explorer\iesploreApplication: OneDrive.exeModulesC:\Users\erans\AppData\Local\Microsoft\OneDrive\OneDrive.exeC:\Users\erans\AppData\Local\Microsoft\OneDrive\18.212.1021.0008_3\ucrtbase.dilC:\Users\erans\AppData\Local\Microsoft\OneDrive\18.212.1021.0008_3\LoggingPlatform.dilC:\Users!\erans\AppData\Local\Microsoft\OneDrive\18.212.1021.0008_3\MSVCP140.dllC:\Users\erans\AppData\Local\Microsoft\OneDrive\18.212.1021.0008_3\VCRUNTIMELA0.dilC:\Users\erans\AppData\Local\Microsoft\OneDrive\18.212.1021.0008_3\Filesyncclient.dilCi\Users\erans\AppData\Local\Microsoft\OneDrive\18.212.1021.0008_3\ETWLog.dllC:\Users\erans\AppData\Local\Microsoft\OneDrive\18.212.1021.0008_3\RemoteAccess.dilC:\Users\erans\AppData\
+    Local\Microsoft\OneDrive\18.212.1021.0008_3\FileSyncsessions.dil(C:\Users\erans\AppData\Local\Microsoft\OneDrive\18.212.1021.0008_3\Telemetry.dil<wsc.dllPartofthe
+    8 Hiack Libs pojecteDL spestied by an aplcaton wihout pathare searchd o cators
+    iSoaci e, B/ i & ko . I 8 ocabon ht o seached baor oR e s e eS s UTRE ATTLORS
+    e 13740 o Eet . L S PVendor AvastResources Qnetero1010Vuinerabify-Disclosure@secureist
+    comLast updated 15days.00Expected LocationsThe fle vac.a11 is nomally found in
+    the folowing pathVulnerable ExecutablesThe folowing executable atempis 1 10ad
+    wec. a1.'
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: ''
+    destination: 192.168.80.1
+    port: ''
+  - process: ''
+    destination: 192.168.84.11
+    port: ''
+  - process: ''
+    destination: 192.168.84.131
+    port: ''
+  file_activity: []
+  persistence: []
+  process_relations: []
+authors:
+- Derrick Masters, Principal Security Analyst, Cybereason Global SOC
+- Loic Castel, Principal Security Analyst, Cybereason Global SOC
+- Chen Erlich, Lead Threat Researcher, Cybereason Nocturnus
+- Derrick Masters
+- Loic Castel
+- Chen Erlich
+IOCs:
+  hashes: []
+  ips:
+  - 192.168.80.1
+  - 192.168.84.11
+  - 192.168.84.131
+  domains: []
+  urls: []
+authors:
+- Derrick Masters
+- Loïc Castel
+- Chen Erlich
+reference: https://www.cybereason.com/blog/threat-analysis-report-dll-side-loading-widely-abused
+date_of_publication: September 27, 2025
+file_creation_date: September 27, 2025

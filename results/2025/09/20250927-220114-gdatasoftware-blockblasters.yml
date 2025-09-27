@@ -1,0 +1,48 @@
+description: A malicious patch for the Steam game BlockBlasters was discovered, containing
+  batch files, VBS loaders, and two main payload executables that exfiltrate user
+  data and establish C2 communication.
+attribution: EncryptHub
+malware_families:
+- BlockBlasters
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine:
+  - Launch1.vbs
+  - Test.vbs
+  - game2.bat
+  - 1.bat
+  - test.bat
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: game2.bat
+    destination: 203.188.171.156:30815/upload
+  - executable: Client-built2.exe
+    destination: 203.188.171.156
+  - executable: Block1.exe
+    destination: 45.83.28.99
+  file_activity:
+  - C:\\SteamLibrary\\steamapps\\common\\BlockBlasters\\Engine\\Binaries\\ThirdParty\\Ogg\\cwe\\Client-built2.exe
+  - C:\\SteamLibrary\\steamapps\\common\\BlockBlasters\\Engine\\Binaries\\ThirdParty\\Ogg\\cwe\\Block1.exe
+  persistence:
+  - Added destination folder to Microsoft Defender exemption list
+  process_relations: []
+IOCs:
+- 203.188.171.156
+- 45.83.28.99
+- cd817345f9e62fa8e9b66e47b645278e74f2a2cf59b8a81b88d1b2ec54b9933d
+- 58a97ab524b704172a8f68fda92daa802b706e397adede410b6475a4eb229c9b
+- 17c3d4c216b2cde74b143bfc2f0c73279f2a007f627e3a764036baf272b4971a
+- 59f80ca5386ed29eda3efb01a92fa31fb7b73168e84456ac06f88fdb4cd82e9e
+- 3766a8654d3954c8c91e658fa8f8ddcd6844a13956318242a31f52e205d467d0
+- 1a1328e0d0042d071bca13ff9a13116d8f3cf77e6e9769293e2b144c9b73b3BAT.Trojan-Stealer.StimBlaster.F
+- c3404f768f436924e954e48d35c27a9d44c02b7a346096929a1b26a1693b20b3Script.Malware.BatchRunner.A@ioc[2]
+- b2f84d595e8abf3b7aa744c737cacc2cc34c9afd6e7167e55369161bc5372a9bScript.Malware.BatchRunner.A@ioc[3]
+- 4cae16e643a03eec4e68f7d727224e0bbf5415ebb0a831eb72cb7ff31027605BAT.Trojan-Stealer.StimBlaster.I
+authors:
+- Arvin Lauren Tan
+reference: https://www.gdatasoftware.com/blog/2025/09/38265-steam-blockblasters-game-downloads-malware
+date_of_publication: September 22, 2025
+file_creation_date: September 27, 2025

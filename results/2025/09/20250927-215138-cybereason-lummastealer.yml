@@ -1,0 +1,81 @@
+description: "LummaStealer is a sophisticated data\u2011stealing malware that side\u2011\
+  loads into vulnerable processes and exfiltrates information over obfuscated C2 channels."
+attribution: "Cuckoo Spear (nation\u2011state threat actor targeting Japanese companies)"
+malware_families:
+- LummaStealer
+TTPs:
+  processes: []
+  commandline:
+  - powershell.exe -eCQB ZAGEAAABhACAAT gBOAHQAABWAHMAOGAVACBACABY AGEACABS AGWAZQBYACAAY
+    BAL AGMAZABUAC AADEB1AHQAL WBWAHTADWBWAGWADAB AHIATgA=
+  - START-BitSTRANSFER -Source $mMTPD6x8 -Destination $AAMVISFIexPanD-aRcHive -Path
+    $AAMVISFI -DestinationPath $txk4mUW] -ForceReMOVE-iTEm $AAMVIOFIsTaRT-ProCESs
+    $KTXsevu3NEw-ItEmproperTY -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run'
+    -Name|'V7nefSx0' -Value $KTXs@VU3 -PropertyType 'String'
+  powershell:
+  - powershell.exe -eCQB ZAGEAAABhACAAT gBOAHQAABWAHMAOGAVACBACABY AGEACABS AGWAZQBYACAAY
+    BAL AGMAZABUAC AADEB1AHQAL WBWAHTADWBWAGWADAB AHIATgA=
+  scripting_engine:
+  - AutoHotKey & AutoIT scripts
+  registry_keys:
+  - HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence:
+  - Registry Run Keys / Startup Folder (Boot or Logon Autostart Execution)
+  process_relations: []
+IOCs:
+- report1.b-cdn.net
+- 89.187.169.3
+- Mega03.b-cdn.net
+- 84.17.38.250
+- filesblack404.b-cdn.net
+- zone02.b-cdn.net
+- click1.b-cdn.net
+- Mato-camp-v1.b-cdn.net
+- 156.146.56.169
+- report3.b-cdn.net
+- proffoduwnuq.shop
+- 104.21.17.3
+- pardaoboccia.shop
+- naggersanimism.shop
+- conservaitiwo.shop
+- a3.bigdownloadtech.shop
+- steppyplantnw.shop
+- 104.21.20.40
+- 172.67.191.81
+- downcheck.nyc3.cdn.digitaloceanspaces.com
+- 172.64.145.29
+- ces.com
+- clicktogo.click
+- matteryshzh.cfd
+- 172.67.151.251
+- 104.21.33.45
+- 172.67.193.251
+- 169.150.207.210
+- 188.114.96.12
+- 188.114.97.12
+- https://steamcommunity.com/profiles/76561199724331900
+- bfc1422d1c5351561087bd3e6d82ffbad5221dae
+- 128a085b84667420359bfd5b7bad0a431ca89e35
+- 9f3651ad5725848c880c24f8e749205a7e1e78c1
+- f3e5a2e477cac4bab85940a2158eed78f2d74441
+- a01fa9facf3a13c5a9c079d79974842abff2a3f2
+- 99b8464e2aabff3f35899ead95dfac83f5edac51
+- afdefcd9eb251202665388635c0109b5f7b4c0a5
+- f89f91e33bf59d0a07dfb1c4d7246d74a05dd67d
+- 594d61532fb2aea88f2e3245473b600d351ee398
+- e264ba0e9987b0ad0812e5dd4dd3075531cfe269
+- c07e49c362f0c21513507726994a9bd040c0d4eb
+- 128a085b84667420359bfd5b7bad0a431ca89e35
+- f2c37ad5ca8877186c846b6dfb2cb761f5353305
+- f2c37ad5ca8877186c846b6dfb2cb761f5353305
+authors:
+- Ralph Villanueva
+- Gal Romano
+- Elena Odier
+- MHema Loganathan
+reference: https://www.cybereason.com/blog/threat-analysis-rise-of-lummastealer
+date_of_publication: September 27, 2025
+file_creation_date: September 27, 2025
