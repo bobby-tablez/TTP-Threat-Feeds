@@ -1,0 +1,66 @@
+description: A .NET loader uses steganography to hide a Quasar RAT stager and payload
+  inside image resources, then extracts and executes the embedded code.
+attribution: Quasar RAT (APT group unknown), United States
+malware_families:
+- Quasar RAT
+- Quasar
+TTPs:
+  processes: []
+  commandline:
+  - shutdown.exe /r /t 0
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\QuasarLoader
+  - HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\QuasarLoader
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\StartupApproved\\Run\\QuasarLoader.url
+  image_load: []
+  network_connections:
+  - process: quasar_loader.exe
+    destination: api.ipify.org
+    port: 443
+  - process: quasar_loader.exe
+    destination: ipwho.is
+    port: 443
+  file_activity:
+  - C:\\Users\\<user>\\AppData\\Roaming\\QuasarLoader.url
+  - C:\\Windows\\Temp\\quasar_payload.exe
+  persistence:
+  - Registry Run key
+  - Startup folder .URL shortcut
+  - Scheduled task via schtasks.exe with highest privileges
+  - Runas elevation attempts
+  process_relations: []
+IOCs:
+  hashes:
+  - 7300535ef26158bdb916366b717390fc36eb570473ed7805c18b101367c68af5
+  - abb1291f05e30b2c0ede259914a1e8d389e78109e83d0cc1573b3a2dba5f6778
+  - 0e60ec28b9f93bff7e94142f6ffeae605303c0e49d262f98ed9291f56c1d6d9c
+  - 8c7b8e90bef30d07480ef31e6ec3ff8c4ae660912429466b634c74057d7943dd
+  - ce744d26c1adb79f1d7a2d51db1838f33ddab7d165fdfb1727c2ec4917161857
+  - ee16b728f9349c098dc5fc0ecfa5b57af898560c1570e53366101809492662ab
+  - 8c02bf4930c4e52c75a617366a12d7374a7f02e5e97c40dc57e4ab7ebbda661a
+  - 694ba08164ceacda976ace02b328050d8f01eceea82b852b05dbe0e7be286b44
+  - c2647bf49224666dc10191c758ed59eb9af813b0a6d9ac1f64dbf94557d4995e
+  - f2392e04e5ffb9bcee95ce763a7686322a9abd7210af28ef3f653402515a6013
+  - 976336ef319fb3eedc60f19703a4bff9d3c6c798c83b0fd80a2e3e4c1e86680a
+  - 6bb21551577d98edc3a3c4db8d941258f86c89db185fa2095f54ad4944a62b87
+  - 6bfaef5dc204e1b5a1da28f9e6ca73c3c0ad9724abb42412c755a4d9c03d0285
+  - 8e0af283e7c58a6308a4b5d1b62ecf1eb4bf6e2c9566228c6b44e642bc954bcf
+  ips: []
+  domains:
+  - api.ipify.org
+  - ipwho.is
+authors:
+- Teoderick Contreras
+- Nasreddine Bencherchali
+- Michael Haag
+- Lou Stella
+- Bhavin Patel
+- Rod Soto
+- Eric McGinnis
+- Patrick Bareiss
+- John Levy
+reference: https://www.splunk.com/en_us/blog/security/image-steganography-quasar-rat-detection.html
+date_of_publication: July 21, 2025
+file_creation_date: October 01, 2025

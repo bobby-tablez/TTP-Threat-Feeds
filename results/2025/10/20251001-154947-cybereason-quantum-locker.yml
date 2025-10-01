@@ -1,0 +1,99 @@
+description: Quantum Locker ransomware utilizes IcedID for initial access, followed
+  by reconnaissance and lateral movement before executing the encryption routine.
+attribution: APT group unknown; likely associated with Quantum Locker gang
+malware_families:
+- Quantum Locker
+- MountLocker
+TTPs:
+  processes:
+  - Cmd.exe
+  - msftesql.exe
+  - sqlbrowser.exe
+  - sqlwriter.exe
+  - oracle.exe
+  - ocssd.exe
+  - dbsnmp.exe
+  - synctime.exe
+  - agntsvc.exe
+  - isqlplussvc.exe
+  - xfssvccon.exe
+  - sqlservr.exe
+  - encsvc.exe
+  - ocautoupds.exe
+  - mydesktopservice.exe
+  - firefoxconfig.exe
+  - mydesktopqos.exe
+  - ocomm.exe
+  - mysqld.exe
+  - sqlagent.exe
+  - mysqld-nt.exe
+  - mysqld-opt.exe
+  - dbeng50.exe
+  - sqbcoreservice.exe
+  - excel.exe
+  - infopath.exe
+  - msaccess.exe
+  - mspub.exe
+  - onenote.exe
+  - outlook.exe
+  - powerpnt.exe
+  - sqlservr.exe
+  - visio.exe
+  - winword.exe
+  - wordpad.exe
+  - QBW32.exe
+  - QBW64.exe
+  - ipython.exe
+  - wpython.exe
+  - python.exe
+  - dumpcap.exe
+  - procmon.exe
+  - procmon64.exe
+  - procexp.exe
+  - procexp64.exe
+  - thebat.exe
+  - steam.exe
+  - thebat64.exe
+  - thunderbird.exe
+  commandline:
+  - '''Cmd.exe /c chcp >&2 Ipconfig /all Systeminfo Net config workstation Nltest
+    /domain_trusts /all_trusts Net view /all /domain Net view /all Net group Domain
+    Admins /domain'''
+  powershell: []
+  scripting_engine:
+  - adfind.bat
+  - ns.bat
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: IcedID
+    destination_ip: 138.68.42.130
+    port: '80'
+  - process: IcedID
+    destination_ip: 157.245.142.66
+    port: '188'
+  - process: IcedID
+    destination_ip: 166.154.118
+    port: '80'
+  file_activity:
+  - <ransom_binary>.exe.log
+  - README_TO_DECRYPT.html
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - b63e94928da25e18caa1506305b9ca3dedc267e747dfa4710860e757d2cc8192
+  - 8d30ab8260760e12a8990866eced1567ced257e0cb2fc9f7d2ea9278064352082
+  ips:
+  - 138.68.42.130
+  - 157.245.142.66
+  - 166.154.118
+  domains:
+  - dilimoretast.com
+  - antnosience.com
+  - oceriesfornot.top
+authors:
+- LIOR ROCHBERGER
+reference: https://www.cybereason.com/blog/cybereason-vs.-quantum-locker-ransomware
+date_of_publication: October 01, 2025
+file_creation_date: October 01, 2025

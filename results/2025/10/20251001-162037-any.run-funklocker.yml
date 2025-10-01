@@ -1,0 +1,42 @@
+description: FunkLocker is a ransomware strain by the FunkSec group that abuses legitimate
+  Windows tools and PowerShell scripts to terminate processes, stop services, disable
+  security features, delete shadow copies, and encrypt files locally with a .funksec
+  extension.
+attribution: FunkSec Ransomware Group (Argentina/Uruguay)
+malware_families:
+- FunkLocker
+TTPs:
+  processes:
+  - taskkill.exe
+  - sc.exe
+  - net.exe
+  - net1.exe
+  - powershell.exe
+  commandline: []
+  powershell:
+  - Set-MpPreference -DisableRealtimeMonitoring $true
+  - wevtutil sl Security /e:false
+  - wevtutil sl Application /e:false
+  - Set-ExecutionPolicy Bypass -Scope Process -Force
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: net.exe
+    destination: Active sessions on local machine
+    port: null
+  file_activity:
+  - C:\\Users\\admin\\Desktop\\README-ZasRvdSR44.md
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - c233aec7917cf34294c19dd60ff79a6e0fac5ed6f0cb57af98013c08201a7a1c
+  - e29d95bfb815be80075f0f8bef4fa690abcc461e31a7b3b73106bfcd5cd79033
+  urls:
+  - https://www.gendigital.com/blog/insights/research/funksec-ai
+authors:
+- Mauro Eldritch
+reference: https://any.run/cybersecurity-blog/funklocker-malware-analysis
+date_of_publication: October 01, 2025
+file_creation_date: October 01, 2025

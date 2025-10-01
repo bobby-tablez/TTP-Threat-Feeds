@@ -1,0 +1,33 @@
+description: Short initial report on Medusa ransomware activity, highlighting a script
+  to create a SafeBoot service and reboot into Safe Mode.
+attribution: Medusa Ransomware Group (RansomedVC affiliation)
+malware_families:
+- Medusa
+TTPs:
+  processes:
+  - sc
+  - reg
+  - bcdedit
+  - shutdown
+  commandline:
+  - sc create CheckSafeMode binpath="C:\\UsersPublicCheckSafeMode.exe" type=own start=auto
+    DisplayName="CheckSafeMode"
+  - reg add "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\SafeBoot\\Minimal\\CheckSafeMode"
+    /f /v"Service"
+  - bcdedit /set {current} safeboot Minimal
+  - shutdown /r /f /t 00
+  powershell: []
+  scripting_engine:
+  - temp.sh (bash script referenced but content not provided)
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\SafeBoot\\Minimal\\CheckSafeMode
+  image_load: []
+  network_connections: []
+  file_activity:
+  - C:\\UsersPublicCheckSafeMode.exe
+  persistence:
+  - Create Windows service CheckSafeMode with auto-start in Safe Mode
+  process_relations: []
+reference: https://theravenfile.com/2025/07/10/medusa-ransomware-exposed-by-ransomedvc
+date_of_publication: July 10, 2025
+file_creation_date: October 01, 2025

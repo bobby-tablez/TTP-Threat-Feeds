@@ -1,0 +1,17 @@
+description: A 404 error page was encountered, indicating the target resource could
+  not be found.
+attribution: Unknown
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+reference: https://hunt.io/blog/blog/spotting-sparkrat-detection-tactics-and-sandbox-findings
+date_of_publication: October 01, 2025
+file_creation_date: October 01, 2025

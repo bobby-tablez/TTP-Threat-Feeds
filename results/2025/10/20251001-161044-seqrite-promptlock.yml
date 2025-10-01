@@ -1,0 +1,51 @@
+description: "PromptLock is an AI\u2011powered ransomware that uses Lua scripts and\
+  \ SPECK encryption to scan, encrypt, or exfiltrate files across Windows, Linux,\
+  \ and macOS."
+attribution: Unknown
+malware_families:
+- PromptLock
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine:
+  - "Lua scripts generated from hard\u2011coded prompts"
+  registry_keys:
+  - HKLM\\System\\CurrentControlSet\\Services\\Tcpip\\Parameters\\WinsoMSEDGEWIN10
+  - HKLM\\System\\CurrentControlSet\\Control\\State Separation\\Redirectic
+  - HKLM\\Software\\Microsoft\\LanguageOverlay\\OverayPackages\\en-!
+  image_load: []
+  network_connections:
+  - process: ''
+    destination_address: 172.42.0.253
+    port: 8443
+  file_activity:
+  - C:\\scan.log
+  - C:\\target_file_list.log
+  - C:\\payloads.txt
+  - Ransom note (dynamic)
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - ed229f3442f2d45f6fdd4f3a4c552c1c
+  - 2fdffdf0b099cc195316a85636e9636d
+  - 1854a4427eef0f74d16ad555617775ff
+  - 806f552041f211a35e434112a0165568
+  - 74eb831b26a21d954261658c72145128
+  - ac377e26c24f50b4d9aaa933d788c18c
+  - F7cf07f2bf07cfc054ac909d8ae6223d
+  ips: []
+  domains: []
+  urls: []
+authors:
+- Shrutirupa Banerjee
+- Rayapati Lakshmi Prasanna Sai
+- Pranav Pravin Hondrao
+- Subhajeet Singha
+- Kartikkumar Ishvarbhai Jivani
+- Aravind Raj
+- Rahul Kumar Mishra
+reference: https://www.seqrite.com/blog/promptlock-first-ai-powered-ransomware
+date_of_publication: August 29, 2025
+file_creation_date: October 01, 2025

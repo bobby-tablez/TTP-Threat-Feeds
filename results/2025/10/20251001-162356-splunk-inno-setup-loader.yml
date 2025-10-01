@@ -1,0 +1,39 @@
+description: This blog provides guidance on detecting malicious Inno-Setup installers
+  and their components.
+malware_families:
+- Inno-Setup Loader
+TTPs:
+  processes: []
+  commandline:
+  - idp.exe x <package.zip> -o<output path> -y -p<password>
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - '*\\AppData\\Local\\Google\\Chrome\\User Data'
+  - '*\\AppData\\Local\\Chromium\\User Data'
+  - '*\\AppData\\Local\\Microsoft\\Edge\\User Data'
+  - '*\\AppData\\Local\\BraveSoftware\\Brave-Browser\\User Data'
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 0d5311014c66423261d1069fda108dab33673bd68d697e22adb096db05d851b70ee63776197a80de42e164314cea55453aa24d8eabca0b481f778eba7215c16012876f134bde914fe87b7abb8e6b0727b2ffe9e9334797b7dcbaa1c1ac612ed68f55ad8c8dec23576097595d2789c9d53c92a6575e5e53bfbc51699d52d0d30a
+  ips: []
+  domains: []
+  urls: []
+authors:
+- Teoderick Contreras
+- Nasreddine Bencherchali
+- Michael Haag
+- Jose Hernandez
+- Lou Stella
+- Bhavin Patel
+- Rod Soto
+- Eric McGinnis
+- Patrick Bareiss
+reference: https://www.splunk.com/en_us/blog/security/inno-setup-malware-redline-stealer-campaign.html
+date_of_publication: October 01, 2025
+file_creation_date: October 01, 2025

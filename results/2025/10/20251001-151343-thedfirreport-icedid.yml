@@ -1,0 +1,64 @@
+description: "A ransomware campaign leveraging a mix of custom malware and third\u2011\
+  party tools such as AnyDesk, Cobalt Strike, and PowerShell scripts for lateral movement\
+  \ and data exfiltration."
+attribution: APT group unknown; activity linked to multiple threat actors including
+  IcedID and Cobalt Strike
+malware_families:
+- IcedID
+- Cobalt Strike
+- AnyDesk
+- Nokoyawa Ransomware
+TTPs:
+  processes:
+  - csrss.exe
+  - explorer.exe
+  - powershell.exe
+  - cmd.exe
+  - svchost.exe
+  - rundll32.exe
+  - regsvr32.exe
+  - notepad++.exe
+  - winword.exe
+  - excel.exe
+  commandline: []
+  powershell:
+  - powershell -nop -exec bypass -EncodedCommand QWAB6AFWAUABYAGBAZWBYAGEAbQBEAGEAdABhAFWASQBOAFMAVABBAEWATAAUAHAACWAXAA==
+  scripting_engine:
+  - INSTALL.ps1
+  - GET_ID.bat
+  - AD.bat
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: csrss.exe
+    destination_ip: 91.215.85.183
+    port: 80
+  - process: csrss.exe
+    destination_ip: 45.155.204.5
+    port: 22
+  file_activity:
+  - C:\\ProgramData\\AnyDesk.exe
+  - C:\\Users\\<user>\\AppData\\Local\\Temp\\agaloz.dll
+  - C:\\Windows\\System32\\rundl132.exe
+  - C:\\ProgramData\\INSTALL.ps1
+  persistence:
+  - Service installation (AnyDesk Service)
+  process_relations:
+  - parent: cmd.exe
+    child: powershell.exe
+  - parent: svchost.exe
+    child: csrss.exe
+IOCs:
+- 91.215.85.183
+- 45.155.204.55
+- 45.61.139.206
+- 193.149.129.131
+- 5.255.102.167
+- 5.255.105.55
+- 45.155.204.5
+- 45.155.204.55
+- msc-mvc-updates.com
+- mrassociattes.com
+reference: https://thedfirreport.com/2024/04/01/from-onenote-to-ransomnote-an-ice-cold-intrusion
+date_of_publication: April 01, 2024
+file_creation_date: October 01, 2025

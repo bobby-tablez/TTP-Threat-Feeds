@@ -1,0 +1,22 @@
+description: A technique to hijack Windows Defender by creating a symbolic link in
+  the Platform folder, allowing an attacker to control the executable directory.
+attribution: Unknown
+TTPs:
+  processes: []
+  commandline:
+  - mklink /D "C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\5.18.25070.5-0"
+    "C:\\TMP\\AV"
+  - rmdir "C:\\ProgramData\\Microsoft\\Windows Defender\\Platform\\5.18.25070.5-0"
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+authors:
+- Two Seven One Three
+reference: https://www.zerosalarium.com/2025/09/Break-Protective-Shell-Windows-Defender-Folder-Redirect-Technique-Symlink.html
+date_of_publication: September 07, 2025
+file_creation_date: October 01, 2025

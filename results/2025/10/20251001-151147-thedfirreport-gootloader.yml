@@ -1,0 +1,88 @@
+description: A malicious campaign using a Gootloader-based loader that drops a .NET
+  launcher and Cobalt Strike beacon, leveraging PowerShell, WScript, and scheduled
+  tasks for persistence.
+attribution: APT group unknown; likely state-sponsored actor
+malware_families:
+- Gootloader
+- SystemBC
+- Cobalt Strike
+- CobaltStrike
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+authors:
+- '@_pete_0'
+- '@malforsec'
+- '@r3nzsec'
+IOCs:
+  hashes:
+    sha1: 2CE12A317BEBF8293F3544433A550972A5967996
+    md5: 08EB78ESBEQ1
+  ips:
+  - 91.215.85.143
+  - 91.92.136.20
+  domains:
+  - hrclubphilippines.com
+  - mediacratia.ru
+  - daraltanweer.com
+  - ukrainians.today
+  - my-little-kitchen.com
+  - montages.no
+  - pocketofpreschool.com
+  - blog.lilianpraskova.cz
+  - sitmeanssit.com
+  - artmodel.com.ua
+  - mediacratial.ru
+  - montages.lno
+  - blog.lilianpraskoval.cz
+  - artmodel.com
+  - blog.lilianpraskoval.Jcz
+  - hrclubphilippines.Jcom
+  - mediacratia.Jru
+  - daraltanweer.Jcom
+  - my-little-kitchen.Jcom
+  - montages.Jno
+  - pocketofpreschool.Jcom
+  - sitmeanssit.Jcom
+  - artmodel.Jcom
+  - adversary.com
+  urls:
+  - https://hrclubphilippines.com/xmlrpc.php
+  - https://mediacratial.ru/xmlrpc.php
+  - https://daraltanweer.com/xmlrpc.php
+  - https://ukrainians.today/xmlrpc.php
+  - https://my-little-kitchen.com/xmlrpc.php
+  - https://montages.lno/xmlrpc.php
+  - https://pocketofpreschool.com/xmlrpc.php
+  - https://blog.lilianpraskoval.cz/xmlrpc.php
+  - https://sitmeanssit.com/xmlrpc.php
+  - https://artmodel.com/xmlrpc.php
+  - https://aboveandbeyondmovers.com/downloads.php
+  - http://hrclubphilippines.xmlrpc.php
+  - http://mediacratia.xmlrpc.php
+  - http://daraltanweer.xmlrpc.php
+  - http://ukrainians.today/xmlrpc.php
+  - http://my-little-kitchen.xmlrpc.php
+  - https://montages.xmlrpc.php
+  - http://pocketofpreschool.xmlrpc.php
+  - http://sitmeanssit.xmlrpc.php
+  - http://artmodel.xmlrpc.php
+  - http://adversary.com/xmlrpc.php
+  ip_addresses:
+  - 91.215.85.143
+  - 91.92.136.20
+  - 108.160.158.102
+  - 172.67.200.238
+  - 104.21.21.226
+  - 23.235.194.157
+reference: https://thedfirreport.com/2024/02/26/seo-poisoning-to-domain-control-the-gootloader-saga-continues
+date_of_publication: February 26, 2024
+file_creation_date: October 01, 2025

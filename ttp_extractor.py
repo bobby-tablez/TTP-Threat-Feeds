@@ -287,11 +287,11 @@ THREAT_POSITIVE = {
     "ioc", "iocs", "ttp", "ttps", "exploit", "loader", "stealer", "backdoor",
     "campaign", "dfir", "ir", "forensic", "shellcode", "c2", "command-and-control",
     "botnet", "phishing", "initial-access", "persistence", "lateral", "exfiltration",
-    "tactics", "techniques", "procedure", "tactic", "technique", "procedure"
+    "tactics", "techniques", "procedure", "tactic", "technique", "procedure", "intrusion"
 }
 
 MARKETING_NEGATIVE = {
-    "press", "event", "webinar", "podcast", "release", "roadmap", "meet", "q&a",
+    "press", "event", "webinar", "podcast", "release", "roadmap", "q&a",
     "feature", "product", "platform", "pricing", "case-study", "customer", "partner",
     "announcement", "announcing", "guide", "howto", "how-to", "newsletter",
     "weekly", "monthly", "quarterly", "hiring", "career", "culture", "tips"
@@ -302,8 +302,8 @@ def is_probable_research_link(href: str, link_text: str = "") -> bool:
     t = (link_text or "").lower()
 
     # require the URL path to look like an article/post (contains a slug)
-    if not re.search(r"/\w[\w-]{3,}$", u):  # e.g., /blog/some-interesting-slug
-        return False
+    #if not re.search(r"/\w[\w-]{3,}$", u):  # e.g., /blog/some-interesting-slug
+    #    return False
 
     # strong negatives first (kill obvious marketing/corp posts)
     if any(f"/{neg}/" in u for neg in MARKETING_NEGATIVE):

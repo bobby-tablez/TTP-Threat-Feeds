@@ -1,0 +1,59 @@
+description: "Raccoon Stealer 2.0 (RecordBreaker) is a data\u2011stealing malware\
+  \ that collects credentials, browser data, crypto wallets, arbitrary files, and\
+  \ Telegram data, then exfiltrates it to encrypted C&C servers."
+malware_families:
+- Raccoon Stealer 2.0
+- RecordBreaker
+- Raccoon
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - \\AppData\\LocalLow\\nss3.dll
+  - \\AppData\\LocalLow\\msvcp140.dll
+  - \\AppData\\LocalLow\\vcruntime140.dll
+  - \\AppData\\LocalLow\\mozglue.dll
+  - \\AppData\\LocalLow\\freebl3.dll
+  - \\AppData\\LocalLow\\softokn3.dll
+  - \\AppData\\LocalLow\\sqlite3.dll
+  - cookies.txt
+  - autofill.txt
+  - passwords.txt
+  - formhistory.sqlite
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - c65b7afb05ee2b2687e6280594019068c3d3829182dfe8604ce4adf2116cc46e
+  - 2db7fd3c9c3c4b67f2d50a5a50e8c69154dc859780dd487c28a4e6ed1af90d01
+  - 9d02e952396bdff3abfe5654e07b7a713c84268a225e11ed9a3bf338ed1e424c
+  - 4191faf7e5eb105a0f4c5c6ed3e9e9c71014e8aa39bbee313bc92d1411e9e862
+  - b2ae93d30c8beb0b26f03d4a8325ac89b92a299e8f853e5caa51bb32575b06c6
+  - 44be3153c15c2d18f49674a092c135d3482fb89b77a1b2063d01d02985555fe0
+  - 1b4640e3d5c872f4b8d199f3cff2970319345c766e697a37de65d10a1cffa102
+  urls:
+  - http://[C2 address]/
+  - http://[C2 address]/aN7jD0qO6kT5bK5bQ4eR8fE1xP7hL2vK/nss3.dll
+  - http://[C2 address]/aN7jD0qO6kT5bK5bQ4eR8fE1xP7hL2vK/msvcp140.dll
+  - http://[C2 address]/aN7jD0qO6kT5bK5bQ4eR8fE1xP7hL2vK/vcruntime140.dll
+  - http://[C2 address]/aN7jD0qO6kT5bK5bQ4eR8fE1xP7hL2vK/mozglue.dll
+  - http://[C2 address]/aN7jD0qO6kT5bK5bQ4eR8fE1xP7hL2vK/freebl3.dll
+  - http://[C2 address]/aN7jD0qO6kT5bK5bQ4eR8fE1xP7hL2vK/sqlite3.dll
+  - http://[C2 address]/[config token]
+  - http://[C2 address]/aN7jD0qO6kT5bK5bQ4eR8fE1xP7hL2vK/softokn3.dll
+  - http://51.140.255.32/
+  - http://51.104.40.109/
+  - http://89.208.103.4/
+  ips:
+  - 51.140.255.32
+  - 51.104.40.109
+  - 89.208.103.4
+attribution: Unknown threat actor
+reference: https://any.run/cybersecurity-blog/raccoon-stealer-v2-malware-analysis
+date_of_publication: August 30, 2022
+file_creation_date: October 01, 2025

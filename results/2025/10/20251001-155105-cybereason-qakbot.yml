@@ -1,0 +1,78 @@
+description: The report describes a multi-stage infection chain involving image files,
+  VBS scripts, DLL loaders, process injection, and command execution to establish
+  Cobalt Strike C2 connections.
+malware_families:
+- Qakbot
+- CobaltStrike
+TTPs:
+  processes:
+  - regsvr32.exe
+  - iexplore.exe
+  - getmac.exe
+  - ping
+  - nslookup
+  - route.exe
+  - conhost.exe
+  - rundll32.exe
+  - cmd.exe
+  - wmic
+  - vssadmin.exe
+  commandline:
+  - cmd.exe /c c:\\windows\\av1.bat
+  - cmd.exe /c C:\\Windows\\SysNative\\vssadmin.exe delete shadows /all /quiet
+  powershell: []
+  scripting_engine:
+  - CV.VBS
+  registry_keys: []
+  image_load:
+  - fwpolicymgr.dil
+  - plugin_payload.dil
+  network_connections:
+  - process: iexplore.exe
+    destination: 108.177.235.29
+    port: 443
+    protocol: HTTP
+  - process: iexplore.exe
+    destination: 74.6.143.251
+    port: 72
+    protocol: HTTP
+  - process: iexplore.exe
+    destination: 172.90.139.138
+    port: 68
+    protocol: HTTP
+  - process: iexplore.exe
+    destination: 94.63.65.146
+    port: 94
+    protocol: HTTP
+  - process: iexplore.exe
+    destination: yahoo.com
+    port: null
+    protocol: DNS
+  - process: iexplore.exe
+    destination: www.yahoo.com
+    port: null
+    protocol: DNS
+  - process: iexplore.exe
+    destination: www.xfinity.com
+    port: null
+    protocol: DNS
+  file_activity:
+  - c:\\users\\public\\cob_54.dil
+  - C:\\Windows\\av1.bat
+  persistence: []
+  process_relations: []
+IOCs:
+  ip_addresses:
+  - 108.177.235.29
+  - 74.6.143.251
+  - 172.90.139.138
+  - 94.63.65.146
+  domains:
+  - yahoo.com
+  - www.yahoo.com
+  - www.xfinity.com
+  urls:
+  - http://108.177.235.29:443/preserve/somebody/UIOOT18Z&
+reference: https://www.cybereason.com/blog/threat-alert-aggressive-qakbot-campaign-and-the-black-basta-ransomware-group-targeting-u.s.-companies
+date_of_publication: October 01, 2025
+file_creation_date: October 01, 2025

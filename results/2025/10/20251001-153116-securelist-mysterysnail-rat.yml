@@ -1,0 +1,44 @@
+description: MysterySnail RAT and its variants were discovered in 2021 and used by
+  the IronHusky APT to target Mongolia and Russia.
+attribution: IronHusky, Chinese-speaking threat actor
+malware_families:
+- MysterySnail RAT
+- MysteryMonoSnail
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine:
+  - MMC script
+  registry_keys:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\CiscoCollabHost.exe
+  image_load:
+  - CiscoCollabHost.exe loads CiscoSparkLauncher.dll via DLL sideloading
+  network_connections:
+  - executable: CiscoCollabHost.exe
+    destination: https://ppng.io
+    port: ''
+  - executable: MysterySnail RAT components
+    destination:
+    - watch-smcsvc.com
+    - leotolstoys.com
+    port: ''
+  file_activity:
+  - '%AppData%\\Cisco\\Plugins\\X86\\bin\\etc\\Update\\lure.docx'
+  - '%AppData%\\Cisco\\Plugins\\X86\\bin\\etc\\Update\\CiscoCollabHost.exe'
+  - C:\\Windows\\Temp\\attach.dat
+  persistence:
+  - Run registry key entry for CiscoCollabHost.exe
+  - Service installation of MysterySnail RAT DLL
+  process_relations: []
+IOCs:
+  hashes: []
+  ips: []
+  domains:
+  - ppng.io
+  - watch-smcsvc.com
+  - leotolstoys.com
+  urls: []
+reference: https://securelist.com/mysterysnail-new-version/116226
+date_of_publication: April 17, 2025
+file_creation_date: October 01, 2025

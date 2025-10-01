@@ -1,0 +1,35 @@
+description: Redeemer 2.0 is a C++ ransomware that copies itself into the Windows
+  directory with legitimate file names such as sqlserver1.exe or svchost.exe, then
+  executes to encrypt files while attempting to kill processes, stop services, clear
+  event logs and delete shadow copies.
+attribution: Cybereason Global SOC Team; Mark Tsipershtein
+malware_families:
+- Redeemer
+TTPs:
+  processes:
+  - sqlserver1.exe
+  - svchost.exe
+  - cmd.exe
+  commandline:
+  - cmd.exe /c taskkill F.*
+  - cmd.exe /c net stop *BackupExecA GUMNDOsystem32\\cmd.exe /c net stopgentAccelerator
+    /y >nul
+  - cmd.exe /c wevtutil clear-logApplicationCAWINDOWS\\system32\\cmd.exe /c wevtutil
+    .@ Evidence (1)w copy deletion via VImpact  Inhibit System Recovery Propertiesemd.exe
+    18156C:AWINDOWS\\system32\\cmd.exe /c vssadmin delete shadows (8/Al /Qui -ystem32\\cmd.exe
+    /c vssadminW cybereason -THREE SECRETS TOENDING RANSOMWARE_Targeting the Ener~
+    .W cybereason
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+authors:
+- Mark Tsipershtein
+- Cybereason Global SOC Team
+reference: https://www.cybereason.com/blog/threat-alert-inside-the-redeemer-2.0-ransomware
+date_of_publication: October 01, 2025
+file_creation_date: October 01, 2025

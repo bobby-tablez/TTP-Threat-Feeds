@@ -1,0 +1,82 @@
+description: The report contains fragmented evidence of a Windows-based threat that
+  uses PowerShell, cmd.exe, and various system utilities to execute malicious code,
+  modify registry Run keys, and perform credential harvesting via Rubeus/SharpHound.
+attribution: APT group unknown; actor linked to ransomware activity
+malware_families:
+- Cobalt Strike
+- SystemBC
+- BlackSuit
+TTPs:
+  processes:
+  - 7z.exe
+  - notepad.exe
+  - wordpad.exe
+  - RtWin64.exe
+  - SC.exe
+  - socks32.exe
+  - qwe.exe
+  - 123.txt
+  commandline: []
+  powershell:
+  - Get-DataInfo.ps1
+  - FromBase64String
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: RtWin64.exe
+    destination: svchorst.com
+    port: 443
+  - executable: RtWin64.exe
+    destination: wq.regsvcast.com
+    port: 443
+  - executable: RtWin64.exe
+    destination: as.regsvcast.com
+    port: 443
+  - executable: RtWin64.exe
+    destination: zx.regsvcast.com
+    port: 443
+  - executable: RtWin64.exe
+    destination: qw.regsvcast.com
+    port: 443
+  - executable: RtWin64.exe
+    destination: 104.21.76.140
+    port: null
+  - executable: RtWin64.exe
+    destination: 172.67.196.25
+    port: null
+  file_activity:
+  - C:\\Users\\AllWindows.csv
+  - c:\\users directory
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - b5266cd35d1b3770b05ad6870c0c4bde
+  - 3bf1142b3294c23852852053135ec0df
+  - 519dc779533b4ff0fc67727fecadba82
+  - 820cfde780306e759bb434da509f7a91
+  - b54240c98ca23202e58a1580135ad14c
+  - cd55256904f1964b90b51089b46f1a933fec3e8e
+  - 3900ebc7766f3894fb1eb300460376ad
+  - 9b02dd2a1a15e94922be3f85129083ac
+  - 76a2363d509cc7174c4abee9a7d7ae68
+  - ed44877077716103973cbbebd531f38e
+  - 0bb61c0cff022e73b7c29dd6f1ccf0e2
+  ips:
+  - 104.21.76.140
+  - 172.67.196.25
+  - 147.78.47.178
+  - 137.220.61.94
+  - 15.197.130.221
+  domains:
+  - svchorst.com
+  - wq.regsvcast.com
+  - as.regsvcast.com
+  - zx.regsvcast.com
+  - qw.regsvcast.com
+authors:
+- Florian Roth (Nextron Systems)
+reference: https://thedfirreport.com/2024/08/26/blacksuit-ransomware
+date_of_publication: August 26, 2024
+file_creation_date: October 01, 2025

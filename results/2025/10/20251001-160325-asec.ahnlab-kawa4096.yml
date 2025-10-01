@@ -1,0 +1,31 @@
+description: Kawa4096 ransomware automatically appends the -all argument when executed
+  without arguments and encrypts all target files.
+attribution: Kawa4096
+malware_families:
+- Kawa4096
+TTPs:
+  processes:
+  - sqlservr.exe
+  - excel.exe
+  - firefox.exe
+  - notepad.exe
+  - outlook.exe
+  - powerpnt.exe
+  - winword.exe
+  - wordpad.exe
+  commandline:
+  - vssadmin.exe Delete Shadows /all /quiet
+  - wmic shadowcopy delete /nointerface
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - '!!Restore-My-file-Kavva.txt (created in each encrypted folder and system root)'
+  - .dmp files created by MiniDumpWriteDump API
+  persistence: []
+  process_relations: []
+reference: https://asec.ahnlab.com/en/90207
+date_of_publication: September 17, 2025
+file_creation_date: October 01, 2025

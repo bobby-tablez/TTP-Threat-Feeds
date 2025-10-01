@@ -1,0 +1,49 @@
+description: The report contains obfuscated code and references to scheduled tasks,
+  PowerShell execution, and a remote access tool installation.
+malware_families:
+- AnyDesk
+- IcedID
+- CobaltStrike
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 0d8a41ec847391807acbd55cbd69338b5066e67f22bc342971b8958113696e6c838f6c58f6e5dbff14ef272ce07743887a16decbee2607f512ff2a9045415c8e0c05dbb4
+  - bff696bb76ea1db900c694a9b57a954bca10c09416a16416e510406a323bb97b0b0703ef332afc80371187881ef9a6f80e5c244b44af746b20342b8722f7b56b61604953
+  - Riadnc1.dlla144aa7a0b98de3974c547e3a09f4fb234c9702c66faadb4ce90980315b666be8ce35a139da84133ed36960523e3c332189eca71ca42d847e2e79b78d182da8da4546830
+  - magni.w7e9ef45d19332c22f1f3a316035dcb1b4e0222fd381d878650c9ebeb1bcbbfdfc34cabc5839cf7905dc3337bebe7f8ba127961e6cd40c52ec3a1e09084c9c1ccd202418emagni.w.bat
+  - magni.w.batb3495023a3a664850e1e5e174c4b1b0838cd9f715584463b4fdecfbac421d24077e9024365edf9bc2c15ef125ff58ac597125b040c487640860d84eea93b9ef6b5bb8ca6update.dll
+  ips:
+  - 143.110.245.38:443
+  - 159.89.124.188:443
+  - 188.114.97.7:443
+  - 151.236.9.176:443
+  - 159.223.95.82:443
+  - 194.58.68.187:443
+  - 87.251.67.168:443
+  - 151.236.9.166:443
+  domains:
+  - moashraya.com
+  - ultrascihictur.com
+  - opscokir.com
+  - restohalto.site
+  - ewacootili.com
+  - magiaptoy.com
+  - fraktomaam.com
+  - compatricammote.com
+  - commoashraya.com
+  urls:
+  - https://moashraya.com/out/t.php
+attribution: Unknown
+reference: https://thedfirreport.com/2024/04/29/from-icedid-to-dagon-locker-ransomware-in-29-days
+date_of_publication: April 29, 2024
+file_creation_date: October 01, 2025
