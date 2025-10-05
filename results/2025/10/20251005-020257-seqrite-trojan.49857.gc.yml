@@ -1,0 +1,42 @@
+description: "Two high\u2011severity WinRAR vulnerabilities (CVE\u20112025\u20116218\
+  \ and CVE\u20112025\u20118088) allow attackers to write files outside the intended\
+  \ extraction directory, enabling stealthy persistence via Startup folder or NTFS\
+  \ ADS."
+attribution: RomCom, Paper Werewolf (GOFFEE)
+malware_families:
+- Trojan.49857.GC
+- Trojan.49856.GC
+- Ghanarava.1754899322556336
+TTPs:
+  processes:
+  - UnRAR.exe
+  - cmd.exe
+  - powershell.exe
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - '%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\*.exe'
+  - 'txt: payload.exe (NTFS ADS)'
+  persistence:
+  - "Drop executable into Startup folder for auto\u2011execution on login."
+  - Hide payload in NTFS ADS within a benign file to evade detection.
+  process_relations:
+  - "UnRAR.exe \u2192 cmd.exe"
+  - "UnRAR.exe \u2192 powershell.exe"
+IOCs:
+  hashes:
+  - 49023b86fde4430faf22b9c39e921541e20224c47fa46ff473f880d5ae5bc1f1
+  - a25d011e2d8e9288de74d78aba4c9412a0ad8b321253ef1122451d2a3d176efa
+  - 4da20b8b16f006a6a745032165be68c42efef9709c8e133e39d4b6951cca5179
+  - 8082956ace8b016ae8ce16e4a777fe347c7f80f8a576a6f935f9d636a30204e7
+authors:
+- Nandini Seth
+- Sanjay Katkar
+- Mahua Chakrabarthy
+reference: https://www.seqrite.com/blog/winrar-directory-traversal-ntfs-ads-vulnerabilities-cve-2025-6218-cve-2025-8088
+date_of_publication: August 25, 2025
+file_creation_date: October 05, 2025

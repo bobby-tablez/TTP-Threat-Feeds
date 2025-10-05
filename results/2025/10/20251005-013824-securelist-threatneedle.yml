@@ -1,0 +1,110 @@
+description: Operation SyncHole was a Lazarus group watering hole campaign targeting
+  South Korean organizations, leveraging Cross EX and Innorix Agent vulnerabilities
+  to deliver ThreatNeedle, wAgent, SIGNBT, and COPPERHEDGE.
+attribution: Lazarus Group (North Korea)
+malware_families:
+- ThreatNeedle
+- wAgent
+- Agamemnon downloader
+- SIGNBT
+- COPPERHEDGE
+- Trojan.Win64.Lazarus.*
+- Trojan.Win32.Lazarus.*
+- MEM:Trojan.Win32.Cometer.gen
+- MEM:Trojan.Win32.SEPEH.gen
+- Trojan.Win32.Manuscrypt.*
+- Trojan.Win64.Manuscrypt.*
+- Trojan.Win32.Zenpak.*
+TTPs:
+  processes:
+  - SyncHost.exe
+  - Cross EX
+  - ThreatNeedle
+  - wAgent
+  - Agamemnon downloader
+  - SIGNBT
+  - COPPERHEDGE
+  - LPEClient
+  - USERENV.dll
+  - AppVShNotify.exe
+  commandline:
+  - rundll32.exe c:\\Programdata\\intel\\util.dat, afunix 1W2-UUE-ZNO-B99Z
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: SyncHost.exe
+    destination: www.smartmanagerex.com
+  - process: SyncHost.exe
+    destination: thek-portal.com
+  - executable: ''
+    destination: www.smartmanagerex.com
+    port: ''
+  - executable: ''
+    destination: builsf.com/inc/left.php
+    port: ''
+  - executable: ''
+    destination: www.rsdf.kr/wp-content/uploads/2024/01/index.php
+    port: ''
+  - executable: ''
+    destination: www.shcpump.com/admin/form/skin/formBasic/style.php
+    port: ''
+  - executable: ''
+    destination: htns.com/eng/skin/member/basic/skin.php
+    port: ''
+  - executable: ''
+    destination: kadsm.org/skin/board/basic/write_comment_skin.php
+    port: ''
+  - executable: ''
+    destination: bluekostec.com/eng/community/write.asp
+    port: ''
+  - executable: ''
+    destination: dream.bluit.gethompy.com/mobile/skin/board/gallery/index.skin.php
+    port: ''
+  file_activity:
+  - C:\\System32\\PCAuditex.dll
+  - f1bcb4c5aa35220757d09fc5feea193b
+  - dc0e17879d66ea9409cdf679bfea388
+  - C:\\ProgramData\\intel\\util.dat
+  - '%AppData%\\hnc\\_net.tmp'
+  - C:\\Windows\\system32\\[target service]ex.dll
+  - C:\\Windows\\system32\\wlbsctrl.dll
+  - C:\\Windows\\system32\\C_27102.NLS
+  - C:\\Windows\\system32\\[random]{5}.dat
+  persistence:
+  - Loaded as ServiceDLL value of legitimate service netsvcs, IKEEXT or SSP
+  - Sideloaded USERENV.dll via Innorix abuser
+  process_relations: []
+IOCs:
+  hashes:
+  - f1bcb4c5aa35220757d09fc5feea193b
+  - dc0e17879d66ea9409cdf679bfea388
+  - dc0e17879d66ea9409cdf679bfea388c
+  - 2d47ef0089010d9b699cd1bbbc66f10a
+  domains:
+  - www.smartmanagerex.com
+  - thek-portal.com
+  - smartmanagerex.com
+  - builsf.com
+  - rsdf.kr
+  - shcpump.com
+  - htns.com
+  - kadsm.org
+  - bluekostec.com
+  - dream.bluit.gethompy.com
+  urls:
+  - https://thek-portal.com/eng/career/index.asp
+  - hxxps://builsf.com/inc/left.php
+  - hxxps://www.rsdf.kr/wp-content/uploads/2024/01/index.phph
+  - hxxp://www.shcpump.com/admin/form/skin/formBasic/style.phph
+  - hxxps://htns.com/eng/skin/member/basic/skin.phph
+  - hxxps://kadsm.org/skin/board/basic/write_comment_skin.phph
+  - hxxp://bluekostec.com/eng/community/write.asph
+  - hxxp://dream.bluit.gethompy.com/mobile/skin/board/gallery/index.skin.php
+authors:
+- Sojun Ryu
+- Vasily Berdnikov
+reference: https://securelist.com/operation-synchole-watering-hole-attacks-by-lazarus/116326
+date_of_publication: April 24, 2025
+file_creation_date: October 05, 2025

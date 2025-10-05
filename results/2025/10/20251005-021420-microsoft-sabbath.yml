@@ -1,0 +1,30 @@
+description: "Storm\u20110501 evolved from on\u2011premises ransomware to cloud\u2011\
+  based tactics, leveraging Azure and Entra ID for data exfiltration, destruction,\
+  \ and ransom."
+attribution: "Storm\u20110501, financially motivated threat actor"
+malware_families:
+- Sabbath
+- Embargo
+TTPs:
+  processes:
+  - sc
+  - quser.exe
+  - net.exe
+  commandline:
+  - '''sc query sensesc'''
+  - '''sc query windefend'''
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+authors:
+- Omri Refaeli
+- Karam Abu Hanna
+- Alon Marom
+reference: https://www.microsoft.com/en-us/security/blog/2025/08/27/storm-0501s-evolving-techniques-lead-to-cloud-based-ransomware
+date_of_publication: August 27, 2025
+file_creation_date: October 05, 2025

@@ -1,0 +1,60 @@
+description: XCSSET malware infects Xcode projects and uses AppleScript, LaunchDaemon
+  persistence, and clipboard hijacking.
+attribution: APT group unknown; suspected state-sponsored actor
+malware_families:
+- XCSSET
+TTPs:
+  processes: []
+  commandline:
+  - '''osascript'' ''-e'' ''do shell script "echo ... | launchctl load -w" with administrator
+    privileges'''
+  - '''chmod +x /tmp/launchdaemon.plist'''
+  - '''sh'' ''-c'' ''echo ... | sh'''
+  powershell: []
+  scripting_engine:
+  - "AppleScript (run\u2011only compiled)"
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - /Users/Shared/.root
+  - /tmp/System Settings.app
+  persistence:
+  - LaunchDaemon plist creation
+  - Hidden LaunchDaemon persistence via /tmp/.root
+  process_relations: []
+IOCs:
+  hashes:
+  - 12ea52c4089d100e679a2350f03e598b2f3feebfbbd2ed5631a2a7a20b07e826
+  - 5a212c5ce1e0f41e721ce0940afb381b694a2e32a6d19c1d2210f703636362df
+  - 0fbd0e1995472f308cf1ac8229a02c277035404426769fa50947a72c95ad7d31
+  - f3bc158619b2aad17def966f0ac8dddc2107e4911a7c488d358d906f27ac2a2b
+  ips: []
+  domains:
+  - cdntor.ru
+  - checkcdn.ru
+  - cdcache.ru
+  - applecdn.ru
+  - flowcdn.ru
+  - elasticdns.ru
+  - rublenet.ru
+  - figmastars.ru
+  - bulksec.ru
+  - adobetrix.ru
+  - figmacat.ru
+  - digichat.ru
+  - diggimax.ru
+  - cdnroute.ru
+  - sigmanow.ru
+  - fixmates.ru
+  - mdscache.ru
+  - trinitysol.ru
+  - verifysign.ru
+  - digitalcdn.ru
+  - windsecure.ru
+  - adobecdn.ru
+authors:
+- Microsoft Threat Intelligence Team
+reference: https://www.microsoft.com/en-us/security/blog/2025/09/25/xcsset-evolves-again-analyzing-the-latest-updates-to-xcssets-inventory
+date_of_publication: September 25, 2025
+file_creation_date: October 05, 2025

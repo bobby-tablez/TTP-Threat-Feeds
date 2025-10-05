@@ -1,0 +1,77 @@
+description: Operation SyncHole was a Lazarus group watering hole campaign targeting
+  South Korean organizations via Cross EX and Innorix Agent vulnerabilities, deploying
+  ThreatNeedle, wAgent, SIGNBT, COPPERHEDGE, and LPEClient.
+attribution:
+- Lazarus Group
+- South Korea
+malware_families:
+- ThreatNeedle
+- wAgent
+- Agamemnon downloader
+- SIGNBT
+- COPPERHEDGE
+- LPEClient
+- Trojan.Win64.Lazarus.*
+- Trojan.Win32.Lazarus.*
+- MEM:Trojan.Win32.Cometer.gen
+- MEM:Trojan.Win32.SEPEH.gen
+- Trojan.Win32.Manuscrypt.*
+- Trojan.Win64.Manuscrypt.*
+- Trojan.Win32.Zenpak.*
+TTPs:
+  processes:
+  - SyncHost.exe
+  - Cross EX
+  - ThreatNeedle
+  - wAgent
+  - Agamemnon downloader
+  - SIGNBT
+  - COPPERHEDGE
+  - LPEClient
+  commandline:
+  - rundll32.exe c:\Programdata\intel\util.dat, afunix 1W2-UUE-ZNO-B99Z
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - C:\\Windows\\system32\\PCAuditex.dll
+  - C:\\ProgramData\\intel\\util.dat
+  - C:\\Windows\\system32\\wlbsctrl.dll
+  - C:\\Windows\\system32\\C_27102.NLS
+  - C:\\Windows\\system32\\[random]{5}.dat
+  - C:\\Windows\\system32\\[random]{5}.dll
+  network_connections: []
+  file_activity:
+  - C:\\System32\\PCAuditex.dll
+  - C:\\ProgramData\\intel\\util.dat
+  - C:\\Windows\\system32\\wlbsctrl.dll
+  - C:\\Windows\\system32\\C_27102.NLS
+  - C:\\Windows\\system32\\[random]{5}.dat
+  - C:\\Windows\\system32\\[random]{5}.dll
+  persistence:
+  - SyncHost.exe registered as service
+  process_relations: []
+IOCs:
+  hashes:
+  - f1bcb4c5aa35220757d09fc5feea193b
+  - dc0e17879d66ea9409cdf679bfea388
+  - dc0e17879d66ea9409cdf679bfea388c
+  - 2d47ef0089010d9b699cd1bbbc66f10a
+  domains:
+  - www.smartmanagerex.com
+  - thek-portal.com
+  urls:
+  - hxxps://thek-portal.com/eng/career/index.html
+  - hxxps://builsf.com/inc/left.php
+  - hxxps://www.rsdf.kr/wp-content/uploads/2024/01/index.php
+  - http://www.shcpump.com/admin/form/skin/formBasic/style.php
+  - https://htns.com/eng/skin/member/basic/skin.php
+  - https://kadsm.org/skin/board/basic/write_comment_skin.php
+  - http://bluekostec.com/eng/community/write.asp
+  - http://dream.bluit.gethompy.com/mobile/skin/board/gallery/index.skin.php
+authors:
+- Sojun Ryu
+- Vasily Berdnikov
+reference: https://securelist.com/operation-synchole-watering-hole-attacks-by-lazarus/116326
+date_of_publication: April 24, 2025
+file_creation_date: October 05, 2025

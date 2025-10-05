@@ -1,0 +1,52 @@
+description: The report details how legitimate remote access tools are abused for
+  ransomware campaigns, outlining stages from initial access to impact.
+attribution: Unknown threat actor or APT group; no specific attribution provided.
+malware_families:
+- LockBit
+- D3adCrypt
+- Makop
+- Mallox
+- Phobos
+- Beast
+- Dharma
+- Proton / Shinra
+- MedusaLocker
+- CERBER
+- GlobeImposter 2.0
+- Ryuk
+- Mimic
+- LockXXX
+- Dyamond
+- RansomHub
+- BlueSky
+- Cerber 4.0 / 5.0
+TTPs:
+  processes: []
+  commandline:
+  - '''anydesk.exe install C:\ProgramData\AnyDesk silent start-with-win'''
+  - '''UltraViewer_Setup.exe /VERYSILENT /NORESTART'''
+  - '''msiexec /i AppAnywhere.msi /quiet /norestart'''
+  - '''rustdesk.exe service install password Str0ngPass123'''
+  - '''CloneDesk_Setup.exe /S /D=C:\ProgramData\CloneDesk'''
+  - '''Splashtop_Streamer.exe /s /i silent=1 precheck=0 confirm=0'''
+  - '''tightvnc-setup.exe /S /NORESTART'''
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence:
+  - Registry Run Keys
+  - Hidden scheduled tasks
+  - Configuration file modifications (e.g., config.toml for RustDesk)
+  - Privilege escalation via PowerRun or TrustedInstaller to run tools as SYSTEM
+  process_relations: []
+authors:
+- Matin Tadvi
+- Mahua Chakrabarthy
+- Sanjay Katkar
+reference: https://www.seqrite.com/blog/exploiting-legitimate-remote-access-tools-in-ransomware-campaigns
+date_of_publication: October 03, 2025
+file_creation_date: October 05, 2025

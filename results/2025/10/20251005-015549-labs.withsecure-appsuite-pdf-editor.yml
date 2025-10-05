@@ -1,0 +1,47 @@
+description: "TamperedChef is a malware campaign that used a convincing ad\u2011driven\
+  \ PDF editor decoy to steal browser credentials and establish persistence via autorun\
+  \ registry entries."
+attribution: Unknown threat actor, investigated by Strategic Threat Intelligence &
+  Research Group (STINGR)
+malware_families:
+- AppSuite PDF Editor
+- AppSuite Print
+- S3-Forge
+TTPs:
+  processes:
+  - PDF Editor.exe
+  - elevate.exe
+  commandline: []
+  powershell: []
+  scripting_engine:
+  - pdfeditor.js
+  - Utilityaddon.node
+  - appsuite-print.js
+  registry_keys:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\AppSuite PDF Editor
+  image_load:
+  - process: PDF Editor.exe
+    loaded_module: Utilityaddon.node
+  network_connections:
+  - executable: PDF Editor.exe
+    destination: vault.appsuites.ai
+  - executable: PDF Editor.exe
+    destination: pdf-tool.appsuites.ai
+  - executable: PDF Editor.exe
+    destination: freeonlinetools.info
+  file_activity:
+  - path: '%USERPROFILE%\\AppSuite PDF Editor'
+  persistence:
+  - Autorun registry entry at logon
+  process_relations: []
+IOCs:
+  domains:
+  - vault.appsuites.ai
+  - pdf-tool.appsuites.ai
+  - freeonlinetools.info
+authors:
+- Elias Koivula
+- Jeremy Ong
+reference: https://labs.withsecure.com/publications/tamperedchef.html
+date_of_publication: March 10, 2025
+file_creation_date: October 05, 2025

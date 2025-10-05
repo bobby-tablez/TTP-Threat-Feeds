@@ -1,0 +1,111 @@
+description: Operation SyncHole was a Lazarus group watering hole campaign targeting
+  South Korean organizations, leveraging vulnerabilities in Cross EX and Innorix Agent
+  to deliver ThreatNeedle, wAgent, SIGNBT, and COPPERHEDGE.
+attribution: Lazarus Group
+malware_families:
+- ThreatNeedle
+- wAgent
+- Agamemnon downloader
+- SIGNBT
+- COPPERHEDGE
+- Lazarus
+- Cometer
+- SEPEH
+- Manuscrypt
+- Zenpak
+TTPs:
+  processes:
+  - SyncHost.exe
+  - Cross EX
+  - ThreatNeedle
+  - wAgent
+  - Agamemnon downloader
+  - SIGNBT
+  - COPPERHEDGE
+  - LPEClient
+  - USERENV.dll
+  - SIGNBT 0.0.1
+  - SIGNBT 1.2
+  - Innorix abuser
+  commandline:
+  - rundll32.exe c:\\Programdata\\intel\\util.dat, afunix 1W2-UUE-ZNO-B99Z
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - C:\\System32\\PCAuditex.dll
+  - C:\\ProgramData\\intel\\util.dat
+  - C:\\Windows\\system32\\wlbsctrl.dll
+  - C:\\Windows\\system32\\C_27102.NLS
+  - C:\\Windows\\system32\\[random]{5}.dat
+  network_connections:
+  - process: SyncHost.exe
+    destination: www.smartmanagerex.com
+    port: null
+  - process: SyncHost.exe
+    destination: thek-portal.com
+    port: null
+  - process: SyncHost.exe
+    url: http://www.smartmanagerex.com
+  - process: SyncHost.exe
+    url: https://thek-portal.com/eng/career/index.asp
+  - process: SyncHost.exe
+    url: https://builsf.com/inc/left.php
+  - process: SyncHost.exe
+    url: http://www.rsdf.kr/wp-content/uploads/2024/01/index.php
+  - process: SyncHost.exe
+    url: http://www.shcpump.com/admin/form/skin/formBasic/style.php
+  - process: SyncHost.exe
+    url: https://htns.com/eng/skin/member/basic/skin.php
+  - process: SyncHost.exe
+    url: https://kadsm.org/skin/board/basic/write_comment_skin.php
+  - process: SyncHost.exe
+    url: http://bluekostec.com/eng/community/write.asp
+  - process: SyncHost.exe
+    url: http://dream.bluit.gethompy.com/mobile/skin/board/gallery/index.skin.php
+  file_activity:
+  - C:\\System32\\PCAuditex.dll
+  - C:\\ProgramData\\intel\\util.dat
+  - C:\\ProgramData\\Intel\\USERENV.dll
+  - C:\\Windows\\system32\\wlbsctrl.dll
+  - C:\\Windows\\system32\\C_27102.NLS
+  - C:\\Windows\\system32\\[random]{5}.dat
+  persistence:
+  - Loaded as ServiceDLL in netsvcs group
+  - Registered as IKEEXT service
+  - Registered as Security Service Provider (SSP)
+  - Registered as service
+  - Installed for persistence
+  process_relations: []
+IOCs:
+  hashes:
+  - f1bcb4c5aa35220757d09fc5feea193b
+  - dc0e17879d66ea9409cdf679bfea388
+  - 2d47ef0089010d9b699cd1bbbc66f10a
+  domains:
+  - www.smartmanagerex.com
+  - thek-portal.com
+  - builsf.com
+  - rsdf.kr
+  - shcpump.com
+  - htns.com
+  - kadsm.org
+  - bluekostec.com
+  - dream.bluit.gethompy.com
+  ips: []
+  urls:
+  - http://www.smartmanagerex.com
+  - https://thek-portal.com/eng/career/index.asp
+  - https://builsf.com/inc/left.php
+  - http://www.rsdf.kr/wp-content/uploads/2024/01/index.php
+  - http://www.shcpump.com/admin/form/skin/formBasic/style.php
+  - https://htns.com/eng/skin/member/basic/skin.php
+  - https://kadsm.org/skin/board/basic/write_comment_skin.php
+  - http://bluekostec.com/eng/community/write.asp
+  - http://dream.bluit.gethompy.com/mobile/skin/board/gallery/index.skin.php
+authors:
+- Sojun Ryu
+- Vasily Berdnikov
+reference: https://securelist.com/operation-synchole-watering-hole-attacks-by-lazarus/116326
+date_of_publication: April 24, 2025
+file_creation_date: October 05, 2025

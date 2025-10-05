@@ -1,0 +1,59 @@
+description: "A Golang\u2011based Linux malware called DISGOMOJI used by a suspected\
+  \ Pakistan\u2011based threat actor (UTA0137) for espionage against Indian government\
+  \ entities, leveraging Discord C2 with emoji commands and multiple persistence mechanisms."
+attribution: UTA0137 (suspected Pakistan-based threat actor)
+malware_families:
+- DISGOMOJI
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine:
+  - LAN_Conf.sh
+  - uevent_seqnum.sh
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: ''
+    destination: clawsindia.in
+    port: ''
+  - process: ''
+    destination: ordai.quest
+    port: ''
+  - process: ''
+    destination: oshi.at
+    port: ''
+  - process: ''
+    destination: transfer.sh
+    port: ''
+  file_activity:
+  - /home/<user>/.config/autostart/GNOME_Core.desktop
+  - /home/<user>/.config/autostart/GNOME_GNU.desktop
+  - .x86_64-linux-gnu/uevent_seqnum.sh
+  - .x86_64-linux-gnu/BID1.txt
+  - .x86_64-linux-gnu/GID1.txt
+  - .x86_64-linux-gnu/CID.txt
+  - ps_output.txt
+  persistence:
+  - cron @reboot entry
+  - XDG autostart .desktop files in ~/.config/autostart
+  process_relations: []
+IOCs:
+  hashes:
+  - MD5: 1443e58a298458c30ab91b37c0335bdadbacd7562
+  - MD5: 0d4111ab5471c7f5b909bff336ba8cd66f9d86303
+  - MD5: e5182d13d66c3efaa7676510581d622f984718954
+  - MD5: e1bdb995998ab338fc596777a78121fc49f002b55
+  - MD5: 3dff44bede709295fffd3ae3e9599f6ab8197af46
+  - MD5: 2dfe824d0298201e0efb30f16b3ce8a409ffe006
+  domains:
+  - clawsindia.in
+  - ordai.quest
+  - oshi.at
+  - transfer.sh
+  urls:
+  - https://ordai.quest/ADMIN_CONTROL/BID1.txt
+  - https://ordai.quest/ADMIN_CONTROL/GID1.txt
+reference: https://www.volexity.com/blog/2024/06/13/disgomoji-malware-used-to-target-indian-government
+date_of_publication: June 13, 2024
+file_creation_date: October 05, 2025

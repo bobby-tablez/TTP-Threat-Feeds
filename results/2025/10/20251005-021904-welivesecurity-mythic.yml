@@ -1,0 +1,71 @@
+description: "The report describes the RomCom backdoor\u2019s use of HTTP/HTTPS for\
+  \ command and control, encryption via SSL certificates, and exfiltration over the\
+  \ C&C channel."
+attribution: "RomCom (Russia\u2011aligned)"
+malware_families:
+- Mythic
+- SnipBot variant
+- RustyClaw
+- RomCom
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKCU\SOFTWARE\Classes\CLSID\{1299CF18-C4F5-4B6A-BB0F-2299F0398E27}\InprocServer32
+  image_load: []
+  network_connections:
+  - process: Mythic agent DLL
+    destination: https://srlaptop.com/s/0.7.8/clarity.js
+    port: 443
+  - process: SnipBot variant shellcode
+    destination: https://campanole.com/TOfrPOseJKZ
+    port: 443
+  - process: RustyClaw downloader
+    destination: https://melamorri.com/iEZGPctehTZ
+    port: 443
+  - process: MeltingClaw payload
+    destination: https://gohazeldale.com
+    port: 443
+  file_activity:
+  - '%TEMP%\msedge.dll'
+  - '%LOCALAPPDATA%\ApbxHelper.exe'
+  - '%LOCALAPPDATA%\Complaint.exe'
+  - '%STARTUP%\Updater.lnk'
+  - '%STARTUP%\Display Settings.lnk'
+  - '%STARTUP%\Settings.lnk'
+  persistence:
+  - 'Registry Run Keys / Startup Folder: LNK in Startup folder'
+  - 'Component Object Model Hijacking: CLSID {1299CF18-C4F5-4B6A-BB0F-2299F0398E27}'
+  process_relations: []
+IOCs:
+  hashes:
+  - SHA1: 01D32FE88ECDEA2B934A00805E138034BF85BF83
+  - SHA1: AE687BEF963CB30A3788
+  - SHA1: AB79081D0E26EA278D3D
+  - SHA1: 1AEA26A2E2A7711F89D0
+  - SHA1: 371A5B8BA86FBCAB80D4
+  - SHA1: D43F49E6A586658B5422
+  - SHA1: F77DBA76010A9988C9CE
+  - SHA1: 676086860055F6591FED
+  - SHA1: 1F25E062E8E9A4F1792C
+  - SHA1: C340625C779911165E39
+  - SHA1: C94A6BD6EC88385E4E83
+  ips:
+  - 162.19.175.44
+  - 194.36.209.127
+  - 85.158.108.62
+  - 185.173.235.134
+  domains:
+  - srlaptop.com
+  - campanole.com
+  - melamorri.com
+  - gohazeldale.com
+authors:
+- Anton Cherepanov
+- Peter Strýček
+- Damien Schaeffer
+reference: https://www.welivesecurity.com/en/eset-research/update-winrar-tools-now-romcom-and-others-exploiting-zero-day-vulnerability
+date_of_publication: August 11, 2025
+file_creation_date: October 05, 2025
