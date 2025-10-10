@@ -1,0 +1,60 @@
+description: Fake Microsoft Teams installers deliver the Oyster backdoor by dropping
+  a malicious DLL into AppData and using rundll32.exe for execution.
+malware_families:
+- Oyster (Broomstick)
+TTPs:
+  processes:
+  - rundll32.exe
+  - CaptureService
+  commandline:
+  - rundll32.exe C:\Users\<user>\AppData\Roaming\<DLL>
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: rundll32.exe
+    destination: nickbush24.com
+    port: null
+  - process: rundll32.exe
+    destination: teams-install.icu
+    port: null
+  - process: rundll32.exe
+    destination: 185.28.119.228
+    port: null
+  file_activity:
+  - C:\\Users\\<user>\\AppData\\Roaming\\<DLL>
+  persistence:
+  - Scheduled task named CaptureService that launches rundll32.exe with the malicious
+    DLL.
+  process_relations:
+  - parent: CaptureService
+    child: rundll32.exe
+IOCs:
+  hashes:
+    MD5:
+    - d28b4136a7e6148de5c26a055c711f4f
+    - d5ecd8120b6a107513b9871ec0475ace
+    SHA1:
+    - 8d8ceba1b31f4ace5a9c44225014d3947fbf205a
+    - e7f8da0b97f4207738ce895ef15be4133122b307
+    SHA256:
+    - 90b633cacfa185dd912a945f370e14191644ecff1300dbce72e2477171753396
+    - 9dc86863e3188912c3816e8ba21eda939107b8823f1afc190c466a7d5ca708d1
+    - ac5065a351313cc522ab6004b98578a2704d2f636fc2ca78764ab239f4f594a3
+    - d46bd618ffe30edea56561462b50eb23feb4b253316e16008d99abb4b3d48a02
+    - d47f28bf33f5f6ee348f465aabbfff606a0feddb1fb4bd375b282ba1b818ce9a
+  IPs:
+  - 185.28.119.228
+  - 45.66.248.112
+  - 54.39.83.187
+  domains:
+  - maddeehot.online
+  - nickbush24.com
+  - teams-install.icu
+  - teams-install.top
+  - techwisenetwork.com
+  hostnames: []
+reference: https://socradar.io/fake-microsoft-teams-installers-oyster-backdoor
+date_of_publication: October 06, 2025
+file_creation_date: October 09, 2025

