@@ -1,0 +1,30 @@
+description: Qilin ransomware uses a password argument to trigger encryption, deletes
+  volume shadow copies and event logs, terminates services and processes, and persists
+  via registry keys.
+attribution: "Qilin (Agenda) \u2013 Ransomware-as-a-Service group"
+malware_families:
+- Qilin
+TTPs:
+  processes: []
+  commandline:
+  - wmic service where name=vss call ChangeStartMode Manual
+  - net start vss
+  - vssadmin.exe delete shadows /all /quiet
+  - net stop vss
+  - wmic service where name=vss call ChangeStartMode Disabled
+  powershell:
+  - $logs = Get-WinEvent -ListLog * | Where-Object {$_.RecordCount} | Select-Object
+    -ExpandProperty LogName ; ForEach ( $l in $logs | Sort | Get-Unique ) {[System.Diagnostics.Eventing.Reader.EventLogSession]::GlobalSession.ClearLog($l)}
+  scripting_engine: []
+  registry_keys:
+  - HKCU\\Software\\<Random6Chars> (prefixed with *)
+  image_load: []
+  network_connections: []
+  file_activity:
+  - '%TEMP%\\QLOG'
+  persistence:
+  - Registry Run key with random name, prefixed with * to execute in safe mode
+  process_relations: []
+reference: https://asec.ahnlab.com/en/90497
+date_of_publication: September 29, 2025
+file_creation_date: October 14, 2025

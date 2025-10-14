@@ -1,0 +1,65 @@
+description: Stealit malware campaign uses Node.js Single Executable Application to
+  deliver payloads and establish persistence via startup scripts.
+attribution: Unknown threat actor, likely a commercial RAT service
+malware_families:
+- Stealit
+TTPs:
+  processes:
+  - cache.exe
+  - game_cache.exe
+  - stats_db.exe
+  - startup.vbs
+  commandline:
+  - cache.exe all -o {current directory}\output -v --no-kill
+  powershell:
+  - Add-MpPreference -ExclusionPath {directory}
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: cache.exe
+    destination: https://root.iloveanimals.shop/panelping
+    port: ''
+  - executable: game_cache.exe
+    destination: https://root.iloveanimals.shop/download/game_cache
+    port: ''
+  - executable: stats_db.exe
+    destination: https://root.iloveanimals.shop/download/stats_db
+    port: ''
+  - executable: cache.exe
+    destination: https://root.illoveanimals.shop/download/save_data
+    port: ''
+  file_activity:
+  - C:\\Users\\PC\\AppData\\Local\\errorlx\\error.log
+  - '%UserProfile%\\Appdata\\Local\\{word list}\\{random alphanumeric}\\{filename}.exe.br'
+  - '%UserProfile%\\Appdata\\Local\\{word list}\\{random alphanumeric}\\{filename}.exe'
+  - '%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\startup.vbs'
+  persistence:
+  - 'Startup folder: %APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\startup.vbs'
+  process_relations: []
+IOCs:
+  domains:
+  - stealituptaded.lol
+  - iloveanimals.shop
+  - root.iloveanimals.shop
+  - mediafire.com
+  - discordapp.com
+  - cdn.discordapp.com
+  - download1529.mediafire.com
+  urls:
+  - https://iloveanimals.shop/
+  - https://root.iloveanimals.shop/panelping
+  - https://root.iloveanimals.shop/download/save_data
+  - https://root.iloveanimals.shop/download/stats_db
+  - https://root.iloveanimals.shop/download/game_cache
+  - https://stealituptaded.lol/download/save_data
+  - https://stealituptaded.lol/download/stats_db
+  - https://stealituptaded.lol/download/game_cache
+  ips: []
+  hashes: []
+authors:
+- Eduardo Altares
+- Joie Salvio 
+reference: https://www.fortinet.com/blog/threat-research/stealit-campaign-abuses-nodejs-single-executable-application
+date_of_publication: October 10, 2025
+file_creation_date: October 14, 2025

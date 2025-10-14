@@ -1,0 +1,38 @@
+description: "A phishing campaign using an SVG attachment to deliver a multi\u2011\
+  stage loader that injects AsyncRAT into MSBuild.exe."
+attribution: APT unknown, Colombia
+malware_families:
+- AsyncRAT
+TTPs:
+  processes:
+  - MSBuild.exe
+  - actualiza.vbs
+  - veooZ.ps1
+  - classlibrary3.dll
+  - AsyncRAT
+  commandline:
+  - powershell -ExecutionPolicy Bypass -File SVBMz/1
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+  image_load: []
+  network_connections: []
+  file_activity:
+  - C:\Users\<user>\AppData\Local\Temp\Ysemg.txt
+  - C:\Users\<user>\AppData\Local\Temp\classlibrary3.dll
+  - C:\Users\<user>\AppData\Local\Temp\AsyncRAT.exe
+  persistence:
+  - Adds Run key under HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+  - Creates scheduled task onlogon via schtasks /create /f /sc onlogon /rl highest
+  process_relations: []
+IOCs:
+  hashes:
+  - b1ed63ee45ec48b324bf126446fdc888817081c745aa14fcb15d76f029e80e156da792b17c4bba72ca995061e040f984f3b56b3cfe462e4f8a32c989cd0c5a7c5fad0c5b6e5a758059c5a4e633424555fe0fc2949addeefa6506b50215329ed9
+  domains:
+  - dpaste.org
+authors:
+- SEQRITE0 Juan Camilo Castillo
+reference: https://www.seqrite.com/blog/judicial-notification-phish-colombia-svg-asyncrat
+date_of_publication: October 13, 2025
+file_creation_date: October 14, 2025
