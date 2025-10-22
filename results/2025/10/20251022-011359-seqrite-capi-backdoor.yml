@@ -1,0 +1,42 @@
+description: "A spear\u2011phishing campaign targeting the Russian automobile and\
+  \ e\u2011commerce sectors using a malicious ZIP containing a decoy PDF, an LNK launcher,\
+  \ and a .NET DLL backdoor that exfiltrates browser data and establishes persistence\
+  \ via LNK and scheduled task."
+attribution: Unknown
+malware_families:
+- CAPI Backdoor
+- adobe.dll
+TTPs:
+  processes:
+  - rundll32.exe
+  commandline:
+  - rundll32.exe <path>\adobe.dll,config
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: rundll32.exe
+    destination: 223.75.96
+    port: 443
+  file_activity:
+  - Microsoft.lnk
+  persistence:
+  - LNK in Startup folder
+  - Scheduled Task named AdobePDF
+  process_relations: []
+IOCs:
+  hashes:
+  - c6a6fcec59e1eaf1ea3f4d046ee72ffe
+  - 957b34952d92510e95df02e3600b8b21
+  - c0adfd84dfae8880ff6fd30748150d32
+  ips:
+  - 223.75.96
+  domains:
+  - carprlce.ru
+authors:
+- Priya Patel
+- Subhajeet Singha
+reference: https://www.seqrite.com/blog/seqrite-capi-backdoor-dotnet-stealer-russian-auto-commerce-oct-2025
+date_of_publication: October 17, 2025
+file_creation_date: October 22, 2025

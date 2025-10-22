@@ -1,0 +1,67 @@
+description: "FortiGuard Labs identified a multi\u2011stage phishing campaign delivering\
+  \ HoldingHands via PDFs, Word and Excel documents across Taiwan, Japan, China and\
+  \ Malaysia."
+attribution: APT actor unknown; activity linked to Taiwan, Japan, Mainland China,
+  Malaysia
+malware_families:
+- Winos 4.0
+- HoldingHands
+TTPs:
+  processes:
+  - svchost.exe
+  - taskhostw.exe
+  - dokan2.dll
+  - TimeBrokerClient.dll
+  - system.dat
+  - sw.dat
+  - msvchost.dat
+  - wkscli.dll
+  - BackDoor.pdb
+  commandline: []
+  powershell: []
+  scripting_engine:
+  - VBS
+  - Python
+  registry_keys:
+  - HKEY_CURRENT_USER\\SOFTWARE\\HHClient
+  image_load:
+  - process: dokan2.dll
+    loaded_by: Dokumen audit cukai dan sampel bahan.exe
+  - process: TimeBrokerClient.dll
+    loaded_by: svchost.exe
+  - process: system.dat
+    loaded_by: msvchost.exe
+  network_connections:
+  - executable: svchost.exe
+    destination_ip: 156.251.17.9
+    port: null
+  file_activity:
+  - path: C:\\Windows\\System32\\vchost.ini
+  - path: C:\\Windows\\System32\\TimeBrokerClient.dll
+  - path: C:\\Windows\\System32\\msvchost.dat
+  - path: C:\\Windows\\System32\\system.dat
+  - path: C:\\Windows\\System32\\wkscli.dll
+  persistence:
+  - Task Scheduler service via svchost.exe
+  process_relations:
+  - parent: dokan2.dll
+    child: sw.dat
+  - parent: svchost.exe
+    child: TimeBrokerClient.dll
+  - parent: msvchost.exe
+    child: system.dat
+IOCs:
+  hashes: []
+  ips:
+  - 156.251.17.9
+  domains:
+  - twsww.xin
+  - twczb.com
+  urls:
+  - https://twsww.xin/download.html
+  - https://twczb.com
+authors:
+- Pei Han Liao
+reference: https://www.fortinet.com/blog/threat-research/tracking-malware-and-attack-expansion-a-hacker-groups-journey-across-asia
+date_of_publication: October 17, 2025
+file_creation_date: October 22, 2025

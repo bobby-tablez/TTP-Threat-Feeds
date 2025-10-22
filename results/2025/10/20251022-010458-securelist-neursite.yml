@@ -1,0 +1,39 @@
+description: "PassiveNeuron is a server\u2011targeted APT campaign that uses SQL injection,\
+  \ web shells, and multi\u2011stage DLL loaders to deploy custom backdoors such as\
+  \ Neursite, NeuralExecutor, and Cobalt Strike."
+attribution: "Chinese\u2011speaking threat actor (low confidence)"
+malware_families:
+- Neursite
+- NeuralExecutor
+- Cobalt Strike
+TTPs:
+  processes:
+  - svchost.exe
+  - msdtc.exe
+  - WmiPrvSE.exe
+  - msiexec.exe
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence:
+  - DLL hijacking via C:\\Windows\\System32\\wlbsctrl.dll, TSMSISrv.dll, oci.dll
+  process_relations: []
+IOCs:
+  hashes:
+  - 12ec42446db8039e2a2d8c22d7fd2946406db41215f7d333db2f2c9d60c3958b44a64331ec1c937a8385dfeeee6678fd8dcf258f66fa0cec1e4a800fa1f6c2a2d587724ade76218aa58c78523f6fa14ef806083c919e49aca3f301d082815b30
+  - 751f47a688ae075bba11cf0235f4f6ee
+  domains: []
+  urls:
+  - https://github.com/
+  files:
+  - imjp14k.dll
+authors:
+- Georgy Kucherin
+- Saurabh Sharma
+reference: https://securelist.com/passiveneuron-campaign-with-apt-implants-and-cobalt-strike/117745
+date_of_publication: October 21, 2025
+file_creation_date: October 22, 2025
