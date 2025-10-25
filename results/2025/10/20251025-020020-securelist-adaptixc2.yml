@@ -1,0 +1,62 @@
+description: "AdaptixC2 post\u2011exploitation framework delivered via malicious npm\
+  \ package https-proxy-utils, dropping OS\u2011specific payloads and achieving persistence\
+  \ through DLL sideloading on Windows, LaunchAgents on macOS, and executable in /tmp/.fonts-unix\
+  \ on Linux."
+attribution: Unknown threat actor; no specific attribution provided
+malware_families:
+- AdaptixC2
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine:
+  - node scripts/postinstall.js
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: msdtc.exe
+    destination: https://cloudcenter.top/sys/update
+    port: ''
+  - executable: macosUpdate
+    destination: https://cloudcenter.top/macos_update_arm
+    port: ''
+  - executable: macosUpdate
+    destination: https://cloudcenter.top/macos_update_x64
+    port: ''
+  - executable: linux_update_x64
+    destination: https://cloudcenter.top/linux_update_x64
+    port: ''
+  - executable: linux_update_arm
+    destination: https://cloudcenter.top/linux_update_arm
+    port: ''
+  file_activity:
+  - path: C:\\Windows\\Tasks\\msdtctm.dll
+  - path: C:\\Windows\\Tasks\\msdtc.exe
+  - path: /tmp/.fonts-unix
+  - path: ~/Library/LaunchAgents/macosUpdate.plist
+  - path: ~/Library/LaunchAgents/macos_update_arm
+  - path: ~/Library/LaunchAgents/macos_update_x64
+  persistence:
+  - DLL sideloading via msdtc.exe in C:\\Windows\\Tasks
+  - LaunchAgent plist autostart on macOS
+  - Executable in /tmp/.fonts-unix with execute permissions on Linux
+  process_relations: []
+IOCs:
+  hashes:
+  - DFBC0606E16A89D980C9B674385B448E
+  - B8E27A88730B124868C1390F3BC42709669BDBEF9E92C3526302CA37DC48D21FEDAC632C9B9FF2A2DA0EACAAB63627F4764C9E6B6F38DF11DC752CB071AE26F904931B7DFD123E6026B460D87D842897
+  ips: []
+  domains:
+  - cloudcenter.top
+  urls:
+  - https://cloudcenter.top/sys/update
+  - https://cloudcenter.top/macos_update_arm
+  - https://cloudcenter.top/macos_update_x64
+  - https://cloudcenter.top/macosUpdate.plist
+  - https://cloudcenter.top/linux_update_x64
+  - https://cloudcenter.top/linux_update_arm
+authors:
+- Rob Wu <rob@rob.nl>
+reference: https://securelist.com/adaptixc2-agent-found-in-an-npm-package/117784
+date_of_publication: October 17, 2025
+file_creation_date: October 25, 2025

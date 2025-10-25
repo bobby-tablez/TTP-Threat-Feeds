@@ -1,0 +1,78 @@
+description: Agenda ransomware deployed a Linux variant on Windows systems via legitimate
+  remote management tools.
+attribution: Qilin (Agenda), China
+malware_families:
+- Agenda
+TTPs:
+  processes:
+  - rundll32.exe
+  - cmd.exe
+  - net.exe
+  - powershell.exe
+  - netscan.exe
+  - SRManager.exe
+  - WinSCP.exe
+  commandline:
+  - C:\Windows\System32\rundll32.exe socks64.dll,rundll
+  - C:\ProgramData\Veeam\socks64.dll
+  - net user Supportt ***** /add
+  - net localgroup Administrators Supportt /add
+  - net user Administrator *****
+  - nltest /domain_trusts
+  - net group "domain admins" /domain
+  - C:\Users\Administrator.<REDACTED>\Desktop\netscan.exe
+  - C:\Users\Administrator.<REDACTED>\Documents\netscan.exe
+  - powershell.exe -e [base64-encoded payload]
+  - C:\Program Files (x86)\Splashtop\Splashtop Remote\Server\SRManager.exe C:\Users\<REDACTED>\Desktop\mmh_linux_x86-64
+  powershell:
+  - powershell.exe -e [base64-encoded payload]
+  scripting_engine:
+  - C:\\Program Files (x86)\\Splashtop\\Splashtop Remote\\Server\\SRManager.exe
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: socks64.dll
+    destination: 45.221.64.245/mot/
+  - process: socks64.dll
+    destination: 104.164.55.7/231/means.d
+  - process: SRManager.exe
+    destination: 146.70.104.163:4396
+  file_activity:
+  - C:\\Users\\<REDACTED>\\AppData\\Local\\Programs\\WinSCP\\WinSCP.exe
+  - C:\\Users\\<REDACTED>\\Desktop\\mmh_linux_x86-64.filepart
+  - C:\\Users\\<REDACTED>\\Desktop\\mmh_linux_x86-64
+  - C:\\Program Files (x86)\\Splashtop\\Splashtop Remote\\Server\\SRManager.exe
+  - C:\\Users\\Administrator.<REDACTED>\\Downloads\\2stX.exe
+  - C:\\Users\\Administrator.<REDACTED>\\Downloads\\Or2.exe
+  - C:\\Users\\Administrator.<REDACTED>\\Downloads\\2stX\\eskle.sys
+  - C:\\Users\\Administrator.<REDACTED>\\Downloads\\msimg32.dll
+  - '%TEMP%\\rwdrv.sys'
+  - '%TEMP%\\hlpdrv.sys'
+  - C:\\Users\\<REDACTED>\\Desktop\\test.exe
+  - C:\\Users\\<REDACTED>\\Desktop\\1.exe
+  - C:\\Users\\<REDACTED>\\Desktop\\2.exe
+  - C:\\Users\\<REDACTED>\\Desktop\\3.exe
+  persistence:
+  - Created backdoor account Supportt with admin rights
+  - Reset Administrator password
+  - Loaded SOCKS proxy DLL via rundll32.exe
+  - Installed AnyDesk via ATERA Networks RMM
+  - Installed ScreenConnect via ATERA Networks RMM
+  process_relations: []
+IOCs:
+  hashes: []
+  ips:
+  - 45.221.64.245
+  - 104.164.55.7
+  - 146.70.104.163
+  domains:
+  - pub-959ff112c2eb41ce8f7b24e38c9b4f94.r2.dev
+  - pub-2149a070e76f4ccabd67228f754768dc.r2.dev
+  urls:
+  - hxxps://pub-959ff112c2eb41ce8f7b24e38c9b4f94[.]r2[.]dev/Google-Captcha-Continue-Latest-J-KL-3[.]html
+  - hxxps://pub-2149a070e76f4ccabd67228f754768dc[.]r2[.]dev/I-Google-Captcha-Continue-Latest-27-L-1[.]html
+authors:
+- Trend Research Team
+reference: https://www.trendmicro.com/en_us/research/25/j/agenda-ransomware-deploys-linux-variant-on-windows-systems.html
+date_of_publication: October 23, 2025
+file_creation_date: October 25, 2025

