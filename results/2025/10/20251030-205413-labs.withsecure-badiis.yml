@@ -1,0 +1,77 @@
+description: WEBJACK is an IIS hijacking campaign that deploys malicious IIS modules
+  (fashttp.dll, cgihttp.dll) to perform SEO poisoning and redirect users to gambling
+  sites.
+attribution: Chinese-speaking threat actor, likely DragonRank or similar
+malware_families:
+- BadIIS
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: Cobalt Strike beacon
+    destination_address: 79.142.76.244
+    port: ''
+  - executable: SoftEther VPN client
+    destination_address: internal IP (not disclosed)
+    port: ''
+  file_activity:
+  - path: fashttp.dll
+  - path: cgihttp.dll
+  persistence:
+  - Malicious IIS modules (RegisterModule, CHttpModule handlers)
+  - XlAnyLoader executing ca.bin payloads
+  - SoftEther VPN for remote access and tunneling
+  - FScan network scanner
+  - Sharp4RemoveLog clearing Windows event logs
+  - CnCrypt Protect hiding files and DLL redirection
+  - GoToHTTP HTTP-based C2 utility
+  - Cobalt Strike beacon
+  process_relations: []
+IOCs:
+  IPs:
+  - 79.142.76.244
+  Domains:
+  - tdk.hunanduodao.com
+  - tdk.jmfwy.com
+  - jiankong.sneaws.com
+  - seo.667759.com
+  - google2.sneaws.com
+  - kaifa.sneaws.com
+  - w3c.sneaws.com
+  - w5c.sneaws.com
+  - w5r.sneaws.com
+  - google.sneaws.com
+  - jk.667759.com
+  SHA256:
+  - 11265422e79f2cd057ee1ae38a16e5db54039711ae8cdb9e177aebfde5666f32
+  - c9b4657b6aea927bb0f601f2063e743f8702408c98d01ca3332692b29c4d90ca
+  - c65dea5d6ab244520a794de0bc9a232050b632b391b3cd3a616661f03d9d2619
+  - b0842c9916449de6d4b4159d6c5af747d6fb40609510d6a8d2eb669932c1f661
+  - 72cf397738724b1f555c147005c61c058619405846460a60b02a2af75b57a81e
+  - c17d1bb654bfa9ff9f612d37c1204585cfc76d663818a23aac78ba43e35e3df0
+  - 9a2fd34e22c5f3d3d5fb96e3cd514dad7b03ed7bf53a87e7d8d9b73987d02ece
+  - 98d4d3de1af9d8568ededbddad4ed5a2072393985421462f44d12e482a1a36af
+  - 6b60b6df8a1a95f51ffe57255c05d26eb9e113857efac3b29d6ef080b8d414f3
+  - 561fcf1a2d6cc2170d2b538f416e95d981663984e384da51b36ffe97d2653dcd
+  - 767576a2b67a3a53883b174a50c83192d0930a4ce213af5f5093e6ee26910d2b
+  - ffbad7beab3e0888d6957637f2ec80156402ad540e9c92ebb243fe27bea1f598
+  - 00c7efe65ab90c03678359f5ba6b24d9f938a28205652dd61f15d7a31323cf1b
+  - bab9a644aff24cf313210cc6632f71d935a428ea0efb3823c0dbe6dccabe4b73
+  - cbbe63d47e377ab93a39d11554b3024760868bf667db388efc62e6f2850b5d89
+  - 86b8605b4870be8c3e83e51b4e3ee80e781a7c5a0104ffa656da651a03579c5a
+  - d8c0ef6dbf7d4572f92d3a492f32061ab8f3dd46beb9ff5a0bf9bf550935458c
+  - 48ec6530470b295db455bf2c72dc4fbd18672725f45821304f966d436b428865
+  - e51ea911a281097be040ac2871134e6c7d5c3b37c8b46d2267ad40a18a05d2ec
+  - ffa835cd05558fa52a12e91136c4e8a3e7393b3155a6be7877812c6e7d1ff811
+  hashes:
+  - ffa835cd05558fa52a12e91136c4e8a3e7393b3155a6be7877812c6e7d1ff811
+authors:
+- Jeremy Ong
+- Mohammad Kazem Hassan Nejad
+reference: https://labs.withsecure.com/publications/webjack.html
+date_of_publication: October 27, 2025
+file_creation_date: October 30, 2025

