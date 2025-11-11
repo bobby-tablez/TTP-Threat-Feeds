@@ -1,0 +1,42 @@
+description: "DragonForce RaaS infection involved network scanning, brute\u2011forcing\
+  \ credentials, data exfiltration over SSH to 45.135.232.229, and SMB\u2011based\
+  \ ransomware encryption with .df_wina files and areadme.txt ransom notes."
+attribution: DragonForce (Ransomware-as-a-Service)
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - SYSTEM\\CurrentControlSet\\Control\\WMI\\Security
+  - Software\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Taskcache\\Tasks
+  image_load: []
+  network_connections:
+  - process: ''
+    destination_address: 45.135.232.229
+    protocol: TCP
+    port: 22
+    description: SSH data exfiltration
+  file_activity:
+  - action: deleted
+    path: '*\\adelete.mea'
+  - action: created
+    path: '*\\areadme.txt'
+  - action: encrypted
+    extension: .df_wina
+  persistence:
+  - Scheduled task via Schedule\\Taskcache\\Tasks
+  - WMI Security key modification (SYSTEM\\CurrentControlSet\\Control\\WMI\\Security)
+  process_relations: []
+IOCs:
+  ip_addresses:
+  - 45.135.232.229
+  domains: []
+  hashes: []
+authors:
+- Justin Torres, Senior Cyber Analyst
+- Nathaniel Jones, VP, Security & AI Strategy, FCISO
+- Emma Foulger, Global Threat Research Operations Lead
+reference: https://www.darktrace.com/blog/tracking-a-dragon-investigating-a-dragonforce-affiliated-ransomware-attack-with-darktrace
+date_of_publication: November 11, 2025
+file_creation_date: November 11, 2025

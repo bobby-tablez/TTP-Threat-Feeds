@@ -466,15 +466,23 @@ def extract_yaml_from_response(raw_response: str) -> str:
         if normalized:
             return yaml.dump(normalized, sort_keys=False).strip()
 
-    # 3) Heuristic: sometimes trailing partial lines break YAML; trim to last complete line and retry
+    # Try parsing progressively shorter tails to salvage partial YAML
     lines = candidate.splitlines()
-    if len(lines) > 3:
-        trimmed = "\n".join(lines[:-1]).strip()
+    for cutoff in range(len(lines), max(len(lines) - 10, 0), -1):
+        trimmed = "\n".join(lines[:cutoff]).strip()
         doc2 = _try_parse_yaml(trimmed)
-        if doc2 is not None:
+        if doc2:
             normalized = _normalize_yaml_doc(doc2)
             if normalized:
+                print("    ⚙️ Salvaged partial YAML block.")
                 return yaml.dump(normalized, sort_keys=False).strip()
+
+    # As a last resort, extract anything that looks like a key: value pair
+    rough_pairs = re.findall(r"^([A-Za-z0-9_]+):\s*(.+)$", candidate, re.M)
+    if rough_pairs:
+        salvaged = {k: v for k, v in rough_pairs}
+        print("    ⚙️ Reconstructed rough YAML from key-value pairs.")
+        return yaml.dump(salvaged, sort_keys=False).strip()
 
     return ""
 

@@ -1,0 +1,65 @@
+description: "LANDFALL is an Android spyware family that exploits the CVE-2025-21042\
+  \ vulnerability in Samsung\u2019s image\u2011processing library to deliver malicious\
+  \ DNG files via WhatsApp."
+attribution: Unknown threat actor, suspected private sector offensive actors (PSOAs)
+  operating in the Middle East
+malware_families:
+- LANDFALL
+TTPs:
+  processes:
+  - id
+  - /system/bin/sh
+  commandline:
+  - '''/system/bin/id'''
+  - '''/system/bin/sh -c <cmd>'''
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: b.so
+    destination: https://<cnc_base_url>/is/
+    port: 443
+  file_activity:
+  - /data/data/com.samsung.ipservice/files/l.so
+  - /data/data/com.samsung.ipservice/files/aa.so
+  - /data/data/com.samsung.ipservice/files/dec_a.so
+  - /storage/emulated/0/Android/media/com.whatsapp/WhatsApp/Media/WhatsApp Images/hacked.jpg
+  persistence: []
+  process_relations:
+  - parent: b.so
+    child: id
+IOCs:
+  hashes:
+  - 9297888746158e38d320b05b27b0032b2cc29231be8990d87bc46f1e06456f93
+  - b06dec10e8ad0005ebb9da24204c96cb2e297bd8d418bc1c8983d066c0997756
+  - c0f30c2a2d6f95b57128e78dc0b7180e69315057e62809de1926b75f86516b2e
+  - d2fafc7100f33a11089e98b660a85bd479eab761b137cca83b1f6d19629dd3b0
+  - 384f073d3d51e0f2e1586b6050af62de886ff448735d963dfc026580096d81bd
+  - 211311468f3673f005031d5f77d4d716e80cbf3c1f0bb1f148f2200920513261
+  - ffeeb0356abb56c5084756a5ab0a39002832403bca5290bb6d794d14b642ffe2
+  - b975b499baa3119ac5c2b3379306d4e50b9610e9bba3e56de7dfd3927a96032d
+  ip_addresses:
+  - 194.76.224.127
+  - 91.132.92.35
+  - 92.243.65.240
+  - 192.36.57.56
+  - 46.246.28.75
+  - 45.155.250.158
+  domains:
+  - brightvideodesigns.com
+  - hotelsitereview.com
+  - healthyeatingontherun.com
+  - projectmanagerskills.com
+  ips:
+  - 45.155.250.158
+  - 46.246.28.75
+  - 91.132.92.35
+  - 92.243.65.240
+  - 192.36.57.56
+  - 194.76.224.127
+authors:
+- Unit 42
+reference: https://unit42.paloaltonetworks.com/landfall-is-new-commercial-grade-android-spyware/
+date_of_publication: November 11, 2025
+file_creation_date: November 11, 2025

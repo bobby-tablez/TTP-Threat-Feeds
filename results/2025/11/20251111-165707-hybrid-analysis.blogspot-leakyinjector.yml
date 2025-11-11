@@ -1,0 +1,41 @@
+description: The report describes a malicious client communicating with a local server
+  at 127.0.0.1 on port 49696 and using the domain everstead.group for HTTP requests.
+attribution: Unknown
+malware_families:
+- LeakyInjector
+- LeakyStealer
+TTPs:
+  processes:
+  - explorer.exe
+  - MicrosoftEdgeUpdateCore.exe
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\EdgeUpdateCore
+  image_load: []
+  network_connections:
+  - process: explorer.exe
+    destination: 45.151.62.120
+    port: 443
+    protocol: TCP
+  file_activity:
+  - '%AppData%\\MicrosoftEdgeUpdateCore.exe'
+  - C:\\Users\\<User>\\AppData\\Local\\Temp\\history_%d.db
+  persistence:
+  - Run registry key entry EdgeUpdateCore under HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+  process_relations: []
+IOCs:
+  hashes:
+  - dea8653698cea84e063165524c3e8c8141de246a29b9b8de40be3943fd1c6f14
+  ips:
+  - 45.151.62.120
+  domains:
+  - everstead.group
+  - ip-ptr.tech
+authors:
+- Vlad Pasca
+- Radu-Emanuel Chiscariu
+reference: https://hybrid-analysis.blogspot.com/search/label/Crypto%20stealer
+date_of_publication: November 11, 2025
+file_creation_date: November 11, 2025

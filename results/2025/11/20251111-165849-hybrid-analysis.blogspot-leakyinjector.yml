@@ -1,0 +1,43 @@
+description: Two-stage malware (LeakyInjector and LeakyStealer) that injects into
+  explorer.exe to steal cryptocurrency wallet data and browser history.
+attribution: Unknown actor
+malware_families:
+- LeakyInjector
+- LeakyStealer
+TTPs:
+  processes:
+  - explorer.exe
+  - MicrosoftEdgeUpdateCore.exe
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\EdgeUpdateCore
+  image_load:
+  - "LeakyStealer injected into explorer.exe via low\u2011level APIs"
+  network_connections:
+  - process: LeakyStealer
+    destination_address: 45.151.62.120
+    port: 443
+    protocol: TCP
+    domain: everstead.group
+  file_activity:
+  - '%AppData%\\MicrosoftEdgeUpdateCore.exe'
+  - C:\\Users\\<User>\\AppData\\Local\\Temp\\history_%d.db
+  persistence:
+  - Run registry key EdgeUpdateCore under HKCU Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  process_relations:
+  - LeakyInjector -> explorer.exe (injection)
+IOCs:
+  hashes:
+  - dea8653698cea84e063165524c3e8c8141de246a29b9b8de40be3943fd1c6f14
+  ips:
+  - 45.151.62.120
+  domains:
+  - everstead.group
+authors:
+- Vlad Pasca
+- "Radu\u2011Emanuel Chiscariu"
+reference: https://hybrid-analysis.blogspot.com/search/label/cryptowallet%20stealer
+date_of_publication: November 11, 2025
+file_creation_date: November 11, 2025

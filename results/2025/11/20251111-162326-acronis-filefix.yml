@@ -1,0 +1,47 @@
+description: "The report discusses Acronis Threat Research Unit\u2019s investigation\
+  \ of FileFix, SideWinder and ShadowVector campaigns, highlighting YARA rule development,\
+  \ PowerShell de\u2011obfuscation techniques, and VirusTotal Livehunt usage for tracking\
+  \ malicious URLs and decoy files."
+attribution: Acronis Threat Research Unit (TRU) with VirusTotal
+malware_families:
+- FileFix
+- SideWinder
+- Shadow Vector
+- ShadowVector
+TTPs:
+  processes: []
+  commandline: []
+  powershell:
+  - "[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String(\"\u2026\
+    \"))"
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: ''
+    destination_address: 165.123.102.139
+    port: ''
+  - executable: ''
+    destination_address: 185.123.102.139
+    port: ''
+  file_activity:
+  - C:\\Users\\research\\EULA.rtF
+  - C:\\sers\\research\\EULA.xtf
+  persistence: []
+  process_relations: []
+authors:
+- Santiago Pontiroli
+- Eliad Kimhy
+- Jose Luis Sanchez Martinez
+- Acronis Threat Research Unit
+IOCs:
+  hashes:
+  - 1955c6914097477d5141f720c9e8fa44b4fe189e854da298d85090cbc338b35a
+  ips:
+  - 165.123.102.139
+  - 185.123.102.139
+  domains: []
+  urls: []
+reference: https://www.acronis.com/en/tru/posts/acronis-tru-alliance-virustotal-tracking-filefix-shadow-vector-and-sidewinder
+date_of_publication: November 11, 2025
+file_creation_date: November 11, 2025

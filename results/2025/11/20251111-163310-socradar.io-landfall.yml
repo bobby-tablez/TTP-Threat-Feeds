@@ -1,0 +1,47 @@
+description: "CVE\u20112025\u201121042 is a critical out\u2011of\u2011bounds write\
+  \ vulnerability in Samsung\u2019s libimagecodec.quram.so library that was actively\
+  \ exploited by the LANDFALL spyware campaign via malicious DNG image files."
+malware_families:
+- LANDFALL
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - /data/data/com.samsung.ipservice/files/embedded.zip/b.so
+  - /data/data/com.samsung.ipservice/files/embedded.zip/l.so
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 9297888746158e38d320b05b27b0032b2cc29231be8990d87bc46f1e06456f93
+  - b06dec10e8ad0005ebb9da24204c96cb2e297bd8d418bc1c8983d066c0997756
+  - c0f30c2a2d6f95b57128e78dc0b7180e69315057e62809de1926b75f86516b2e
+  - b975b499baa3119ac5c2b3379306d4e50b9610e9bba3e56de7dfd3927a96032d
+  - 29882a3c426273a7302e852aa77662e168b6d44dcebfca53757e29a9cdf02483
+  - b45817ffb0355badcc89f2b7d48eecf00ebdf2b966ac986514f9d971f6c57d18
+  - ffeeb0356abb56c5084756a5ab0a39002832403bca5290bb6d794d14b642ffe2
+  - d2fafc7100f33a11089e98b660a85bd479eab761b137cca83b1f6d19629dd3b0
+  - a62a2400bf93ed84ebadf22b441924f904d3fcda7d1507ba309a4b1801d44495
+  - 384f073d3d51e0f2e1586b6050af62de886ff448735d963dfc026580096d81bd
+  - 211311468f3673f005031d5f77d4d716e80cbf3c1f0bb1f148f2200920513261
+  - 69cf56ac6f3888efa7a1306977f431fd1edb369a5fd4591ce37b72b7e01955ee
+  ips:
+  - 194.76.224.127
+  - 91.132.92.35
+  - 92.243.65.240
+  - 192.36.57.56
+  - 46.246.28.75
+  - 45.155.250.158
+  domains:
+  - brightvideodesigns.com
+  - hotelsitereview.com
+  - healthyeatingontherun.com
+  - projectmanagerskills.com
+reference: https://socradar.io/cve-2025-21042-samsung-galaxy-0day-landfall-spyware
+date_of_publication: November 11, 2025
+file_creation_date: November 11, 2025

@@ -1,0 +1,138 @@
+description: Gootloader is a JavaScript-based loader used by Storm-0494 to deliver
+  ransomware families via Vanilla Tempest, with persistence through Startup folder
+  shortcuts and lateral movement via WinRM.
+attribution: Storm-0494 / Vanilla Tempest
+malware_families:
+- Gootloader
+- Vanilla Tempest
+- Supper SOCKS5 backdoor
+TTPs:
+  processes:
+  - wscript.exe
+  - powershell.exe
+  - cmd.exe
+  - Failover Dependency.exe
+  - Zoxsimio\Failover Dependency.exe
+  - explorer.exe
+  commandline:
+  - powershell & powershell
+  - 'cmd.exe /Q /c echo C:\\Windows\\system32\\cmd.exe /C vssadmin list shadows /for=C:
+    ^> C:\\Windows\\Temp\\__output > C:\\Windows\\TEMP\\execute.bat & C:\\Windows\\system32\\cmd.exe
+    /Q /c C:\\Windows\\TEMP\\execute.bat & del C:\\Windows\\TEMP\\execute.bat'
+  - net user <username> /domain-nltest /dclist
+  - net group "domain admins" /domain-nltest /domain_trusts
+  - C:\\Windows\\system32\\wscript.exe C:\\Users\\username\\Downloads\\Missouri_Utility_Easement_Guide_2023(1)\\Missouri_Utility_Easement_Guide_2023.js
+  - C:\\Users\\username\\AppData\\Local\\Zoxsimio\\Failover Dependency.exe /FAILOV~1ULB
+    DllRegisterServer
+  - cmd.exe /C ping 1.1.1.1 -n 1 -w 3000 > Nul & Del /f /q "<path>"
+  - powershell.exe -ExecutionPolicy Bypass -NoProfile -WindowStyle Hidden -EncodedCommand
+    <encoded>
+  powershell: []
+  scripting_engine:
+  - JavaScript
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: ''
+    destination_address: ''
+    url_or_hostname: ''
+    port: ''
+  - process: wscript.exe
+    destination: 103.253.42.91
+    port: 80
+  - process: wscript.exe
+    destination: 91.236.230.134
+    port: 443
+  - process: wscript.exe
+    destination: 213.232.236.138
+    port: 80
+  - process: wscript.exe
+    destination: 146.19.49.177
+    port: 443
+  - process: wscript.exe
+    destination: 178.32.224.219
+    port: 80
+  - process: wscript.exe
+    destination: 37.59.205.2
+    port: 443
+  - process: wscript.exe
+    destination: 193.104.58.64
+    port: 80
+  file_activity:
+  - C:\\Users\\username\\AppData\\Roaming\\ISIS Drivers\\Outreach Services.lnk
+  - C:\\Users\\username\\AppData\\Roaming\\PFU\\Molecular Ecology.lnk
+  - C:\\Users\\username\\AppData\\Local\\Zoxsimio\\Failover Dependency.exe
+  - C:\\Users\\username\\AppData\\Roaming\\ISIS Drivers\\
+  - C:\\Users\\username\\AppData\\Roaming\\Nuance\\
+  - C:\\Users\\username\\AppData\\Roaming\\PFU\\
+  persistence:
+  - Startup folder shortcuts using Windows 8.3 short filenames
+  - Startup folder
+  - Scheduled task
+  process_relations: []
+IOCs:
+  hashes:
+  - cf44aa11a17b3dad61cae715f4ea27c0cbf80732a1a7a1c530a5c9d3d183482a
+  - b9a61652dffd2ab3ec3b7e95829759fc43665c27e9642d4b2d4d2f7287254034
+  - c2326db8acae0cf9c5fc734e01d6f6c1cd78473b27044955c5761ec7fd479964
+  - ad88076fd75d80e963d07f03d7ae35d4e55bd49634baf92743eece19ec901e94
+  - 7557d5fed880ee1e292aba464ffdc12021f9acbe0ee3a2313519ecd7f94ec5c4
+  - 5ec9e926d4fb4237cf297d0d920cf0e9a5409f0226ee555bd8c89b97a659f4b0
+  - 87cbe9a5e9da0dba04dbd8046b90dbd8ee531e99fd6b351eae1ae5df5aa67439
+  - c2b9782c55f75bb1797cb4fbae0290b44d0fcad51bf4f2c11c52ebbe3526d2ac
+  ips:
+  - 103.253.42.91
+  - 91.236.230.134
+  - 213.232.236.138
+  - 146.19.49.177
+  - 178.32.224.219
+  - 37.59.205.2
+  - 193.104.58.64
+  domains:
+  - cortinaspraga.com
+  - cookcountyjudges.org
+  - x.fybw.org
+  - jungutah.com
+  - influenceimmo.com
+  - tokyocheapo.com
+  - espressonisten.de
+  - tiresdoc.com
+  - hotporntv.net
+  - yourboxspring.nl
+  - filmcrewnepal.com
+  - yoga-penzberg.de
+  - sugarbeecrafts.com
+  - www.worldwealthbuilders.com
+  - lepolice.com
+  - www.lovestu.com
+  - bluehamham.com
+  - vps3nter.ir
+  - whiskymuseum.at
+  - latimp.eu
+  - soliedgypt.net
+  - wessper.com
+  - www.pathfindertravels.se
+  - www.smithcoinc.biz
+  - kollabmi.se
+  - xxxmorritas.com
+  - onsk.dk
+  - villasaze.ir
+  - blossomthemesdemo.com
+  - headedforspace.com
+  - spirits-station.fr
+  - www.us.registration.fcaministers.com
+  - motoz.com.au
+  - routinelynomadic.com
+  - www.wagenbaugrabs.ch
+  - studentspoint.org
+  - dailykhabrain.com.pk
+  - myanimals.com
+  - www2.pelisyseries.net
+  - Missouri_Utility_Easement_Guide_2023.js
+  - HOA_Committee_Meeting_Agenda_Template.js
+  urls: []
+authors:
+- Anna Pham
+reference: https://www.huntress.com/blog/gootloader-threat-detection-woff2-obfuscation
+date_of_publication: November 11, 2025
+file_creation_date: November 11, 2025

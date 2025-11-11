@@ -1,0 +1,54 @@
+description: "Silent Lynx is a threat group that uses spear\u2011phishing with malicious\
+  \ archives to deliver PowerShell reverse shells, C++ loaders and .NET implants targeting\
+  \ Central\u2011Asian diplomatic entities."
+attribution: Silent Lynx (APT group), suspected Russian origin
+TTPs:
+  processes:
+  - powershell.exe
+  - silent_loader.exe
+  - laplas.exe
+  - SilentSweeper.exe
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - ef627bad812c25a665e886044217371f9e817770b892f65cff5877b02458374e
+  - 5b58133de33e818e082a5661d151326bce5eeddea0ef4d860024c1dbb9f94639
+  - 5bae9c364ee4f89af83e1c7d3d6ee93e7f2ea7bd72f9da47d78a88ab5cfbd5d4
+  - 72a36e1da800b5acec485ba8fa603cd2713de4ecc78498fcb5d306fc3e448c7b
+  - 5e3533df6aa40e86063dd0c9d1cd235f4523d8a67d864aa958403d7b3273eaaf
+  - b58f672e7fe22b3a41b507211480c660003823f814d58c04334ca9b7cdd01f92
+  - ae51aef21ea4b422ef0c7eb025356e45d1ce405d66afbb3f6479d10d0600bcfd
+  - 0bce0e213690120afc94b53390d93a8874562de5ddcc5511c7b9b9d95cf8a15d
+  - 821f1ee371482bfa9b5ff1aff33705ed16e0147a9375d7a9969974c43b9e16e8
+  - 262f9c63c46a0c20d1feecbd0cad75dcb8f731aa5982fef47d2a87217ecda45b
+  - 123901fa1f91f68dacd9ec972e2137be7e1586f69e419fc12d82ab362ace0ba9
+  - 6cb54ec004ff8b311e73ef8a8f69b8dd043b7b84c5499f4c6d79d462cea941d8
+  - 97969978799100c7be211b9bf8a152bbd826ba6cb55377284537b381a4814216
+  - 9de8bbc961ff450332f40935b739d6d546f4b2abf45aec713e86b37b0799526d
+  - b5a4f459bdff7947f27474840062cfce14ee2b1a0ef84da100679bc4aa2fcf77
+  - ffda4f894ca784ce34386c52b18d61c399eb2fc8c9af721933a5de1a8fff9e1b
+  - 2c8efe6eb9f02bf003d489e846111ef3c6cab32168e6f02af7396e93938118dd
+  - 1531f13142f
+  ips:
+  - 62.113.66.137
+  urls:
+  - https://raw.githubusercontent.com/GoBuster7777/asdrefs/heads/main/1.ps1
+  - http://62.113.66.137/ssdpdrv.exe
+  - http://62.113.66.137/liberypto-3.dil
+  - http://62.113.66.137/libssl-3.dll
+authors:
+- Subhajeet Singha
+- Priya Patel
+- Sathwik Ram Prakki
+malware_families: []
+reference: https://www.seqrite.com/blog/operation-peek-a-baku-silent-lynx-apt-dushanbe-espionage
+date_of_publication: November 03, 2025
+file_creation_date: November 11, 2025

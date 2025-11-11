@@ -1,4 +1,3 @@
-https://thedfirreport.com/
 https://www.kandji.io/blog/feed
 https://www.validin.com/blog/
 https://www.enki.co.kr/media-center/blog/
@@ -7,6 +6,7 @@ https://www.darktrace.com/blog/
 https://blog.qualys.com/vulnerabilities-threat-research/feed
 https://www.acronis.com/en-us/tru/
 https://cert.gov.ua/api/articles/rss
+https://thedfirreport.com/
 https://feeds.feedblitz.com/GDataSecurityBlog-EN&x=1
 https://www.jamf.com/blog/rss/
 https://securelist.com/category/apt-reports/
@@ -98,3 +98,4 @@ https://blog.sekoia.io/category/threat-research/
 https://zimperium.com/blog-tag?tag=threat-research
 https://blog.xlab.qianxin.com/tag/apt/
 https://www.zerosalarium.com/
+https://www.cyderes.com/howler-cell

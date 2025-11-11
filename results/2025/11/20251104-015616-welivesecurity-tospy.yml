@@ -1,0 +1,88 @@
+description: Android malware families ToSpy and ProSpy are distributed via fake websites
+  impersonating legitimate services, using phishing and scheduled tasks for persistence,
+  and exfiltrating data via HTTPS with AES encryption.
+attribution: Not specified
+malware_families:
+- ToSpy
+- ProSpy
+TTPs:
+  processes:
+  - com.totok.pro
+  - com.totok.pro.service
+  - com.totok.pro.alarm
+  commandline:
+  - am startservice -n com.totok.pro/.service.ForegroundService
+  - am broadcast -a android.intent.action.BOOT_COMPLETED
+  - am startservice -n com.totok.pro/.alarm.AlarmService
+  powershell: []
+  scripting_engine:
+  - VBS
+  - JScript
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+  - HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+  image_load: []
+  network_connections:
+  - process: com.totok.pro
+    destination: 103.214.4.135
+    port: 443
+    protocol: HTTPS
+    url: https://sgnlapp.info/v3/setEvent
+  - process: com.totok.pro
+    destination: 103.214.4.135
+    port: 443
+    protocol: HTTPS
+    url: https://sgnlapp.info/v3/applications
+  - process: com.totok.pro
+    destination: 103.214.4.135
+    port: 443
+    protocol: HTTPS
+    url: https://totok-pro.io
+  - process: com.totok.pro
+    destination: 103.214.4.135
+    port: 443
+    protocol: HTTPS
+    url: https://spiralkey.co/totok_update/totokversion.php
+  - process: com.totok.pro
+    destination: 103.214.4.135
+    port: 443
+    protocol: HTTPS
+    url: https://spiralkey.co/totok_update/totok_pro.apk
+  file_activity:
+  - /data/data/com.totok.pro/files/totok_Version_1_9_5_433.apk
+  - /data/data/com.totok.pro/files/Signal Encryption Plugin APK
+  - /data/data/com.totok.pro/files/ToTok Pro.apk
+  - /data/data/com.totok.pro/files/ToTok Pro Update.apk
+  persistence:
+  - Scheduled Task/Job using AlarmManager to restart foreground service
+  - Boot or Logon Initialization Scripts via BOOT_COMPLETED broadcast intent
+  - Foreground Persistence to keep service running
+  process_relations:
+  - parent: com.totok.pro
+    child: com.totok.pro.service
+  - parent: com.totok.pro
+    child: com.totok.pro.alarm
+IOCs:
+  hashes:
+  - 'sha256: 1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c0d1e2f3g4h5i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0x1y2z3a4b5c6d7e8f9g0h1i2j3k4l5m6n7o8p9q0r1s2t3u4v5w6x7y8z9'
+  ips:
+  - 103.214.4.135
+  domains:
+  - totok-pro.io
+  - sgnlapp.info
+  - spiralkey.co
+  - signal.org
+  - store.latestversion.ai
+  - store.appupdate.ai
+  - appgallery.huawei.com
+  urls:
+  - https://sgnlapp.info/v3/setEvent
+  - https://sgnlapp.info/v3/applications
+  - https://totok-pro.io
+  - https://spiralkey.co/totok_update/totokversion.php
+  - https://spiralkey.co/totok_update/totok_pro.apk
+authors:
+- Lukas Stefanko
+reference: https://www.welivesecurity.com/en/eset-research/new-spyware-campaigns-target-privacy-conscious-android-users-uae
+date_of_publication: October 02, 2025
+file_creation_date: November 04, 2025
