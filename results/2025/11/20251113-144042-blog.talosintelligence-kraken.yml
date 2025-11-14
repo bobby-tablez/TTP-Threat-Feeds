@@ -1,0 +1,42 @@
+description: "Kraken ransomware group uses SMB exploits for initial access, installs\
+  \ Cloudflared and SSHFS for persistence and exfiltration, then deploys a cross\u2011\
+  platform encryptor with extensive command\u2011line options."
+attribution: Kraken (Russian-speaking APT), Russia
+malware_families:
+- Kraken
+TTPs:
+  processes: []
+  commandline:
+  - Encryptor.exe key <32-byte key> -path <\\\\targeted path for encryption> -timeout-d
+  - chmod +x ./encryptor.elf && ./encryptor.elf path-d -timeout
+  powershell:
+  - powershell -c "Set-ExecutionPolicy bypass"
+  - powershell -c "get-vm | format-list"
+  - powershell -c "get-vm | Get-VMHardDiskDrive | ForEach-Object {$_.Path}"
+  - powershell -c "get-vm | stop-vm -force -turnoff"
+  scripting_engine:
+  - esxcli vm process list
+  - esxcli vm process kill --type=force --world-id=fork_as_daemon()
+  - rm -f /var/logs/*
+  - rm -f /.ash_history
+  - rm -f ransomware binary path
+  - rm -f delete the script _bye_bye_.sh"
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence:
+  - Installed Cloudflared tool and configured a reverse tunnel.
+  - Installed SSHFS tool for data exfiltration.
+  process_relations: []
+IOCs:
+  hashes: []
+  ips: []
+  domains: []
+  urls: []
+authors:
+- Chetan Raghuprasad
+- Michael Szeliga
+reference: https://blog.talosintelligence.com/kraken-ransomware-group
+date_of_publication: November 13, 2025
+file_creation_date: November 13, 2025
