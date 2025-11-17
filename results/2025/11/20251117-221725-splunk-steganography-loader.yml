@@ -1,0 +1,38 @@
+description: A .NET steganographic loader delivers Lokibot, using image files as stagers
+  and injecting into vbc.exe and lsass.exe.
+attribution: Splunk Threat Research Team (STRT)
+malware_families:
+- Steganography Loader
+- Lokibot
+TTPs:
+  processes:
+  - vbc.exe
+  - lsass.exe
+  - schtasks.exe
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - process: vbc.exe
+    loaded_module: sqlite3.dll, mozsqlite3.dll, nss3.dll
+  network_connections: []
+  file_activity:
+  - '%temp%\\<random>.exe'
+  - C:\\Windows\\System32\\sqlite3.dll
+  - C:\\Windows\\System32\\mozsqlite3.dll
+  - C:\\Windows\\System32\\nss3.dll
+  persistence:
+  - Scheduled task created via schtasks.exe pointing to dropped Lokibot copy
+  process_relations: []
+IOCs:
+  hashes:
+  - 6b8cd32010895abeebbe3f8acfc9718748dfaa7b6a6a5994178b5b1712121c02
+  - dce6b152b3a0a2aef99b6b837813d9bb8335d4de7555af0e175c84a137380dd5
+  - afadf2ba580bb4b4ebf838defaa64f03da77b6a0418f9fab29fea55558ebfcf7
+  - d8fcaf8be0aa2646663d12005285f5afc10a2ed324fc963b50adcd79802a716a
+authors:
+- Teoderick Contreras
+reference: https://www.splunk.com/en_us/blog/security/updated-net-steganography-loader-lokibot-malware-analysis.html
+date_of_publication: November 14, 2025
+file_creation_date: November 17, 2025

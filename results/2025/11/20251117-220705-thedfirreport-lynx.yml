@@ -1,0 +1,69 @@
+description: "RDP-based intrusion with lateral movement via domain admin accounts,\
+  \ use of SoftPerfect Network Scanner for discovery, collection of files compressed\
+  \ with 7\u2011Zip, exfiltration to temp.sh, deployment of Lynx ransomware on backup\
+  \ servers."
+attribution: "Railnet LLC (front for Virtualine) \u2013 likely a criminal group"
+malware_families:
+- Lynx
+- Lynx ransomware
+TTPs:
+  processes:
+  - cmd.exe
+  - netscan.exe
+  - mstsc.exe
+  - explorer.exe
+  - taskmgr.exe
+  - ServerManager.exe
+  - mmc.exe
+  - dsa.msc
+  - lusrmgr.msc
+  - SecEdit.exe
+  - regedit.exe
+  - 7zG.exe
+  - AnyDesk
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: mstsc.exe
+    destination: 195.211.190.189
+    port: 3389
+  - process: mstsc.exe
+    destination: 77.90.153.30
+    port: 3389
+  file_activity:
+  - C:\\Users\\%UserProfile%\\nxc\\workspaces\\smb.db
+  - C:\\Users\\%UserProfile%\\nxc\\workspace.conf
+  - C:\\Users\\%UserProfile%\\Desktop\\temp.sh
+  - C:\\Users\\%UserProfile%\\Desktop\\*.zip
+  persistence:
+  - "Creation of domain admin accounts with never\u2011expire passwords"
+  - Installation of AnyDesk service on domain controller
+  process_relations: []
+IOCs:
+  ip_addresses:
+  - 195.211.190.189
+  - 77.90.153.30
+  domains:
+  - temp.sh
+  - railnet.llc
+  - lynxchatly4zludmhni75jruhycnogvkxbaprohxmyzfaeufsgixroad.onion
+  - lynxblogxstazsarfyk2pvhdvasigghbaznthnzmsipzeoduruz3xwqd.onion
+  ips:
+  - 195.211.190.189
+  - 77.90.153.30
+  - 195.211.1908.189
+  - 195.211.1968.189
+  - 51.91.79.17
+  - 77.98.153.38
+  - 77.98.153.30
+  urls:
+  - https://temp.sh/upload
+authors:
+- Friff
+- Daniel Casenove
+reference: https://thedfirreport.com/2025/11/17/cats-got-your-files-lynx-ransomware
+date_of_publication: November 17, 2025
+file_creation_date: November 17, 2025

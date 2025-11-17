@@ -1,0 +1,59 @@
+description: "Two interconnected malware campaigns in 2025 used brand impersonation\
+  \ to deliver Gh0st RAT variants to Chinese\u2011speaking users."
+attribution: APT group unknown; activity linked to Chinese threat actors
+malware_families:
+- Gh0st RAT
+TTPs:
+  processes:
+  - '[System Process]5.exe'
+  - wsc_proxy.exe
+  commandline: []
+  powershell:
+  - powershell.exe -Command "Add-MpPreference -ExclusionPath <path>"
+  scripting_engine:
+  - VBScript embedded in MSI custom action
+  registry_keys: []
+  image_load:
+  - "wsc_proxy.exe loads wsc.dll via side\u2011loading"
+  network_connections:
+  - executable: '[System Process]5.exe'
+    destination: xiaobaituziha.com (103.181.134.138)
+    port: 8080
+  - executable: downloaded binary from fs-im-kefu.7moor-fs1.com
+    destination: fs-im-kefu.7moor-fs1.com
+    port: 80
+  file_activity:
+  - path: C:\\Program Files\\xiazailianjieoss.zip\\installer.msi
+  - path: C:\\Temp\\[System Process]5.exe
+  - path: C:\\Temp\\wsc_proxy.exe
+  - path: C:\\Temp\\wsc.dll
+  persistence:
+  - Scheduled task created by Gh0st RAT
+  - Windows Defender exclusions added via PowerShell
+  process_relations:
+  - installer.msi (msiexec) -> [System Process]5.exe
+  - wsc_proxy.exe loads wsc.dll
+IOCs:
+  hashes:
+  - c37d0c9c9da830e6173b71a3bcc5203fbb66241ccd7d704b3a1d809cadd551b2
+  - 495ea08268fd9cf52643a986b7b035415660eb411d8484e2c3b54e2c4e466a58
+  - 7267a303abb5fcae2e6f5c3ecf3b50d204f760dabdfc5600bd248fcfad3fc133
+  - 299e6791e4eb85617c4fab7f27ac53fb70cd038671f011007831b558c318b369
+  - 1395627eca4ca8229c3e7da0a48a36d130ce6b016bb6da750b3d992888b20ab8
+  - 2232612b09b636698afcdb995b822adf21c34fb8979dd63f8d01f0d038acb454
+  ips:
+  - 156.251.25.112
+  - 156.251.25.43
+  - 154.82.84.227
+  - 103.181.134.138
+  domains:
+  - xiazailianjieoss.com
+  - fs-im-kefu.7moor-fs1.com
+  - xiaobaituziha.com
+authors:
+- Shehroze Farooqi
+- Bradley Duncan
+- Alex Starov
+reference: https://unit42.paloaltonetworks.com/impersonation-campaigns-deliver-gh0st-rat/
+date_of_publication: October 29, 2025
+file_creation_date: November 17, 2025
