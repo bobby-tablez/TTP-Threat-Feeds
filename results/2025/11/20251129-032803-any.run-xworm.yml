@@ -1,0 +1,66 @@
+description: Multi-stage loaders and stealers were observed in November, including
+  XWorm, JSGuLdr, PhantomStealer, PDFChampions, Efimer, BTMOB, Monkey, Phoenix, NonEuclid,
+  Valkyrie, Sfuzuan, and Sorvepotel.
+malware_families:
+- XWorm
+- JSGuLdr
+- PhantomStealer
+- PDFChampions
+- Efimer
+- BTMOB
+- Monkey
+- Phoenix
+- NonEuclid
+- Valkyrie
+- Sfuzuan
+- Sorvepotel
+TTPs:
+  processes:
+  - powershell.exe
+  - wscript.exe
+  - explorer.exe
+  - msiexec.exe
+  - cmd.exe
+  - curl.exe
+  commandline:
+  - powershell.exe $Citize=$env:appdata+\\Registreri62;$Guazuma=gc $Citize;$Aristape=$Guazuma[4460..4462]
+    -join
+  powershell: []
+  scripting_engine:
+  - JScript
+  - VBS
+  registry_keys: []
+  image_load:
+  - XWorm loads a .NET assembly directly from memory (Vile.png)
+  - PhantomStealer is injected into msiexec.exe via in-memory loading
+  network_connections:
+  - process: curl.exe
+    destination: '*.onion/route.php'
+  - process: powershell.exe
+    destination: hxxps://drive.google.com/uc?export=download&id=1gUB_fKBej5Va_l3ZSEXk_7r5Q4EeJuwd
+  file_activity:
+  - C:\\Users\\PUBLIC\\Kile.cmd
+  - C:\\Users\\PUBLIC\\Vile.png
+  - C:\\Users\\PUBLIC\\Mands.png
+  - '%APPDATA%\\Registreri62'
+  - '%APPDATA%\\Autorise131.Tel'
+  - C:\\Users\\admin\\AppData\\Local\\Temp\\Valkyrie.zip
+  - C:\\Windows\\864ac8.txt
+  - /data/data/*/shared_prefs/BTConfig.xml
+  - /etc/systemd/system/monkey.service
+  persistence:
+  - In-memory loader execution (XWorm, PhantomStealer)
+  - COM-based PowerShell launch via explorer.exe (JSGuLdr)
+  - "Mutex creation (PDFChampions \u2013 Champion.T)"
+  - Copying itself for persistence (Phoenix)
+  - Cron, rc.local, systemd service (Monkey)
+  process_relations:
+  - "wscript.exe \u2192 explorer.exe \u2192 powershell.exe \u2192 msiexec.exe"
+  - "JavaScript dropper \u2192 PowerShell loader \u2192 in-memory .NET assembly load"
+IOCs:
+  urls:
+  - hxxps://drive.google.com/uc?export=download&id=1gUB_fKBej5Va_l3ZSEXk_7r5Q4EeJuwd
+  - '*.onion/route.php'
+reference: https://any.run/cybersecurity-blog/major-cyber-attacks-november-2025
+date_of_publication: November 29, 2025
+file_creation_date: November 29, 2025

@@ -1,0 +1,52 @@
+description: "The report details multiple NTLM\u2011related vulnerabilities and associated\
+  \ threat campaigns that exploit hash leakage via crafted files (.url, .library-ms)\
+  \ to deliver malware such as Remcos RAT, PhantomCore, and AveMaria."
+attribution: BlindEagle (APT), Head Mare (hacktivist group)
+malware_families:
+- Remcos RAT
+- PhantomCore
+- AveMaria (Warzone)
+TTPs:
+  processes:
+  - cmd.exe
+  - rundll32.exe
+  commandline:
+  - COMSPEC % / Q / c echo whoami ^ & gt ; % SYSTEMROOT % \\ Temp \\ __output & gt
+    ; % TEMP % \\ execute . bat
+  - 'cmd.exe / Q / c CMD . exe / Q / c for / f "tokens=1,2 delims= " ^% A in ("tasklist
+    /fi "Imagename eq lsass.exe" | find "lsass"") do rundll32 . exe C : \\ windows
+    \\ System32 \\ comsvcs . dll , #+0000^24 ^%B'
+  - 'cmd . exE / Q / c for / f "tokens=1,2 delims= " ^% A in ("tAsKLISt /fi "Imagename
+    eq lSAss.ex*" | find "lsass"") do rundll32 . exe C : \\ Windows \\ Temp \\ BDjnNmiX
+    . dll #+0000^24 ^%B'
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - reg:\\\\REGISTRY\\MACHINE\\SYSTEM\\ControlSet001\\Services\\YlHXQbXO
+  - HKLM\\SYSTEM\\ControlSet001\\Services\\YlHXQbXO1C
+  image_load: []
+  network_connections: []
+  file_activity:
+  - '*.url files used as initial droppers'
+  - '*.library-ms files inside ZIP/RAR archives'
+  - ZIP archives containing malicious payloads
+  - '%TEMP%\\execute.bat'
+  - '%TEMP%\\__output'
+  - C:\\Windows\\Temp\\vdpk2Y.sav
+  - C:\\Windows\\Temp\\BDjnNmiX.dll
+  - C:\\Windows\\Temp\\sFp3bL291.tar.log
+  persistence:
+  - Suspicious service entry created under HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Services\\YlHXQbXO
+  process_relations: []
+IOCs:
+  ip_addresses:
+  - 45.87.246.40
+  - 185.227.82.72
+  domains:
+  - document-file[.]ru
+  urls: []
+authors:
+- Leandro Cuozzo
+reference: https://securelist.com/ntlm-abuse-in-2025/118132
+date_of_publication: November 26, 2025
+file_creation_date: November 29, 2025

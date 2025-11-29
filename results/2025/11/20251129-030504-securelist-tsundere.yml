@@ -1,0 +1,73 @@
+description: Tsundere botnet uses MSI installers or PowerShell scripts to deploy Node.js-based
+  implants that persist via registry Run keys and pm2, communicating over WebSocket
+  C2 servers hosted on Ethereum smart contracts.
+attribution: "Russian-speaking threat actor \u201Ckoneko\u201D"
+malware_families:
+- Tsundere
+TTPs:
+  processes:
+  - node.exe
+  - npm.cmd
+  - npx.cmd
+  - powershell
+  - cmd.exe
+  commandline:
+  - powershell -WindowStyle Hidden -NoLogo -enc JABuAG[...]ACkAOwAiAA==
+  - '$nodePath = "$env:LOCALAPPDATA\nodejs\node.exe"; & $nodePath -e "const { spawn
+    } = require(''child_process''); spawn(process.env.LOCALAPPDATA + ''\\nodejs\\node.exe'',
+    [''B4jHWzJnlABB2B7''], { detached: true, stdio: ''ignore'', windowsHide: true,
+    cwd: __dirname }).unref();"'
+  powershell:
+  - Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' -Name
+    '<random>' -Value 'cmd.exe /c pm2 start <path> && exit'
+  scripting_engine:
+  - nodejs/B4jHWzJnlABB2B7
+  registry_keys:
+  - HKCU:\Software\Microsoft\Windows\CurrentVersion\Run
+  image_load: {}
+  network_connections:
+  - process: node.exe
+    destination: 185.28.119.179
+    port: 1234
+  - process: node.exe
+    destination: 196.251.72.192
+    port: 1234
+  - process: node.exe
+    destination: 103.246.145.201
+    port: 1234
+  - process: node.exe
+    destination: 193.24.123.68
+    port: 3011
+  - process: node.exe
+    destination: 62.60.226.179
+    port: 3001
+  file_activity:
+  - '%APPDATA%\\Local\\NodeJS\\B4jHWzJnlABB2B7'
+  - '%APPDATA%\\Local\\nodejs\\node_modules\\ethers'
+  - '%APPDATA%\\Local\\nodejs\\pm2'
+  - '%APPDATA%\\Local\\NodeJS\\node-v18.17.0-win-x64.zip'
+  - '%APPDATA%\\Local\\NodeJS\\package.json'
+  persistence:
+  - Registry Run key entry
+  - pm2 process manager startup
+  process_relations: {}
+IOCs:
+  hashes:
+  - 235A93C7A4B79135E4D3C220F9313421760B026EDFE2546798CDC136D0A338347E70530BE2BFFCFADEC74DE6DC2823575CC5381A1B4AC275D221ECC57B85F7C3AD885646DAEE05159902F32499713008A7ED440BB7114FAD21ABFA2D4E3790A07CF2FD60B6368FBAC5517787AB798EA2E64527A9FF2CAF0C2D90E2238262B59A31231FD3F3A88A27B37EC9A23E92EBBCFFBDE4340FC156089F968A3BD5AA7A57E7AF0705BA1EE2B6FBF5E619C3B2747EBFD7642671A5788722D74D62D8647DF98D504BA5A434F392CC05EBE0ED42B58687CE512032A5D1422399566ECE5E24CFB06845C9586DCC27EDBE387EAAE8853FDB06453806DACAFDC7135F3B0DEA4A8F
+  - 2l+jfiPEJufKA1bmMTesfxcBmQwFmmamIGM0b4YfkPQ=
+  - NxrqwWI+zQB+XL4+I/042A==
+  ips:
+  - 185.28.119.179
+  - 196.251.72.192
+  - 103.246.145.201
+  - 193.24.123.68
+  - 62.60.226.179
+  domains:
+  - nodejs.org
+  urls:
+  - hxxps://idk.1f2e[REDACTED]07a4[.]net/api/builds/{BUILD-ID}.msi
+authors:
+- Lisandro Ubiedo
+reference: https://securelist.com/tsundere-node-js-botnet-uses-ethereum-blockchain/117979
+date_of_publication: November 20, 2025
+file_creation_date: November 29, 2025

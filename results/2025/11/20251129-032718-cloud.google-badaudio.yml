@@ -1,0 +1,103 @@
+description: "APT24 uses the BADAUDIO downloader to deliver encrypted payloads such\
+  \ as Cobalt Strike Beacon via web compromise and supply\u2011chain attacks."
+attribution: Google Threat Intelligence Group (GTIG)
+malware_families:
+- BADAUDIO
+- Cobalt Strike Beacon
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine:
+  - JavaScript code that loads FingerprintJS2 and sends a fingerprint to https://www.twisinbeth.com/query.php?id=<hash>
+  - VBS, BAT, LNK files used to place BADAUDIO DLL into user directories
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: ''
+    destination_address: wispy.geneva.workers.dev
+    url_or_hostname: https://wispy.geneva.workers.dev/pub/static/img/merged?version=65feddea0367
+    port: 443
+  - executable: ''
+    destination_address: www.availableextens.com
+    url_or_hostname: http://www.availableextens.com
+    port: 80
+  - executable: ''
+    destination_address: www.twisinbeth.com
+    url_or_hostname: http://www.twisinbeth.com
+    port: 80
+  - executable: ''
+    destination_address: www.decathlonm.com
+    url_or_hostname: http://www.decathlonm.com
+    port: 80
+  - executable: ''
+    destination_address: www.gerikinage.com
+    url_or_hostname: http://www.gerikinage.com
+    port: 80
+  - executable: ''
+    destination_address: www.p9-car.com
+    url_or_hostname: http://www.p9-car.com
+    port: 80
+  - executable: ''
+    destination_address: www.growth.com
+    url_or_hostname: http://www.growth.com
+    port: 80
+  - executable: ''
+    destination_address: www.brighyt.com
+    url_or_hostname: http://www.brighyt.com
+    port: 80
+  - executable: ''
+    destination_address: taiwantradoshows.com
+    url_or_hostname: http://taiwantradoshows.com
+    port: 80
+  - executable: ''
+    destination_address: jsdelivrs.com
+    url_or_hostname: http://jsdelivrs.com
+    port: 80
+  - executable: ''
+    destination_address: brendns.workers.dev
+    url_or_hostname: https://brendns.workers.dev
+    port: 443
+  - executable: ''
+    destination_address: cundis.com
+    url_or_hostname: http://cundis.com
+    port: 80
+  - executable: ''
+    destination_address: trcloudflare.com
+    url_or_hostname: https://trcloudflare.com
+    port: 443
+  - executable: ''
+    destination_address: roller.johallow.workers.dev
+    url_or_hostname: https://roller.johallow.workers.dev
+    port: 443
+  file_activity: []
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 9ce49c07c6de455d37ac86d0460a8ad2544dc15fb5c2907ed61569b69eefd182d23ca261291e4bad67859b5d4ee295a3e1ac995b398ccd4c06d2f96340b4b5f8cfade5d162a3d94e4cba1e7696636499756649b571f3285dd79dea1f5311adcdf086c65954f911e70261c729be2cdfa2a86e39c939edee23983090198f06503cf1e9d57e0433e074c47ee09c5697f93fde7ff50df27317c657f399feac63373a176407b1e885496e62e1e761bbbb1686e8c805410e7aec4ee03c95a0c4e9876fc7565ed061e5e8b2f8aca67d93b994a74465e6b9b01936ecbf64c09ac6ee38b983fb652af10df4574fa536700fa00ed567637b66f189d0bbdb911bd2634b4f0
+  - 88fa2b5489d178e59d33428ba4088d114025acd1febfa8f7971f29130bda1213032c333eab80d58d60228691971d79b2c4cd6b9013bae53374dd986faa0f3f4cae8473a027b0bcc65d1db225848904e54935736ab943edf3590b847cb571f9800e98baf6d3b67ca9c994eb5eb9bbd40584be68b0db9ca76f417fb3bcec9cf95855e02a81986aa313b663c3049d30ea0158641a451cb8190233c09bef335ef5c788fa2b5489d178e59d33428ba4088d114025acd1febfa8f7971f29130bda1213032c333eab80d58d60228691971d79b2c4cd6b9013bae53374dd986faa0f3f4cae8473a027b0bcc65d1db225848904e54935736ab943edf3590b847cb571f9800e98baf6d3b67ca9c994eb5eb9bbd40584be68b0db9ca76f417fb3bcec9cf95855e02a81986aa313b663c3049d30ea0158641a451cb8190233c09bef335ef5c707226a716d4c8e012d6fabeffe2545b3abfc0b1b9d2fccfa500d3910e27ca65b5c37130523c57a7d8583c1563f56a2e2f21eef5976380fdb3544be62c6ad2de51f31ddd2f598bd193b125a345a709eedc3b5661b0645fc08fa19e93d83ea5459c4e910b443b183e6d5d4e865dd8f978fd635cd21c765d988e92a5fd60a4428f52ea075c6cd3c065e541976cdc2ec381a88b748966f960965fdbe72a5ec970d4e07226a716d4c8e012d6fabeffe2545b3abfc0b1b9d2fccfa500d3910e27ca65b5c37130523c57a7d8583c1563f56a2e2f21eef5976380fdb35
+  domains:
+  - wispy.geneva.workers.dev
+  - www.availableextens.com
+  - www.twisinbeth.com
+  - www.decathlonm.com
+  - www.gerikinage.com
+  - www.p9-car.com
+  - www.growth.com
+  - www.brighyt.com
+  - taiwantradoshows.com
+  - jsdelivrs.com
+  - brendns.workers.dev
+  - cundis.com
+  - trcloudflare.com
+  - roller.johallow.workers.dev
+  ip_addresses: []
+authors:
+- Harsh Parashar
+- Tierra Duncan
+- Dan Perez
+- Google Threat Intelligence Group (GTIG)
+reference: https://cloud.google.com/blog/topics/threat-intelligence/apt24-pivot-to-multi-vector-attacks
+date_of_publication: November 29, 2025
+file_creation_date: November 29, 2025

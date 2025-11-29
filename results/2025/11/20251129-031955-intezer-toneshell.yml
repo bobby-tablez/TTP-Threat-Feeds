@@ -1,0 +1,43 @@
+description: ToneShell backdoor variant delivered via DLL sideloading, targeting Myanmar
+  and linked to the Mustang Panda group.
+attribution: Mustang Panda (China-nexus group)
+malware_families:
+- ToneShell
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: <unknown>
+    destination: 146.70.29.229
+    port: 443
+  file_activity:
+  - C:\\Users\\<user>\\AppData\\<random-6-chars>\\SkinH.dll
+  - C:\\Users\\<user>\\AppData\\<random-6-chars>\\msvcr100.dll
+  - C:\\Users\\<user>\\AppData\\<random-6-chars>\\msvcp100.dll
+  - C:\\Users\\<user>\\AppData\\<random-6-chars>\\mfc100.dll
+  - C:\\Users\\<user>\\AppData\\<random-6-chars>\\svchosts.exe
+  - C:\\ProgramData\\SystemRuntimeLag.inc
+  persistence:
+  - Task Scheduler task named dokanctl executing %APPDATA%\\<random-6-chars>\\svchosts.exe
+    every minute
+  - Single-instance mutex Global\\SingleCorporation12AD8B
+  process_relations: []
+IOCs:
+  hashes:
+  - 1272a0853651069ed4dc505007e8525f99e1454f9e033bcc2e58d60fdafa4f0
+  - e7b29611c789a6225aebbc9fee3710a57b51537693cb2ec16e2177c22392b546
+  - a58868b3d50b775de99278eeb14da8b7409b165aa45313c6d9fa35ac30d2cda2
+  - 543024edc9f160cc1cedcffc3de52bfa656daa0ec9ed351331d97faaa67d0d99
+  ip_addresses:
+  - 146.70.29.229
+  domains: []
+  urls: []
+authors:
+- Zach Walker
+reference: https://intezer.com/frankenstein-variant-of-the-toneshell-backdoor-targeting-myanmar
+date_of_publication: September 10, 2025
+file_creation_date: November 29, 2025

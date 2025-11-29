@@ -1,0 +1,58 @@
+description: "RelayNFC is an Android malware that performs real\u2011time NFC relay\
+  \ attacks via a WebSocket C&C server."
+attribution: Unknown threat actor, Brazil targeting users
+malware_families:
+- RelayNFC
+- cartao-seguro.apk
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: ''
+    destination_address: 31.97.17.73
+    port: 3000
+  - executable: ''
+    destination_address: 72.60.255.182
+    port: 3000
+  - executable: ''
+    destination_address: 82.25.70.65
+    port: 3000
+  - executable: ''
+    destination_address: 72.60.146.139
+    port: 3000
+  - executable: ''
+    destination_address: 72.61.55.178
+    port: 3000
+  file_activity:
+  - path: /path/to/cartao-seguro.apk
+    hash_sha256: 5905aa58853a05e860c87e9feeeea7c32b43859c8e703485e233429cec8d38dc
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 5df7ded7e5ba815f563193140e4f303fff50c78aac475b7c3409b0271131dbab
+  - f474e7fdc1185351fd613c2bd9e683d13cc4fa143e28e50ced808bd1ad5ccd1a
+  - 76b6b2f0254a8a62eaeed02ab34828e9097f5cf2571ec3fd8230850efb709c68
+  - 5905aa58853a05e860c87e9feeeea7c32b43859c8e703485e233429cec8d38dc
+  - 4124d196a5c7706c7d03d0da6fc19df5833793e30716b04f2259f5faa9816b45
+  urls:
+  - hxxps://maisseguraca[.]site/
+  - hxxp://proseguro[.]site/
+  - hxxps://test.ikotech[.]online/
+  - hxxps://maisseguro[.]site/
+  - hxxp://maisprotecao[.]site/
+  ips:
+  - 31.97.17.73
+  - 72.60.255.182
+  - 82.25.70.65
+  - 72.60.146.139
+  - 72.61.55.178
+authors:
+- Cyble Research and Intelligence Labs (CRIL)
+reference: https://cyble.com/blog/relaynfc-nfc-relay-malware-targeting-brazil/
+date_of_publication: November 25, 2025
+file_creation_date: November 29, 2025

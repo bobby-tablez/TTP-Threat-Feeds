@@ -1,0 +1,59 @@
+description: "ESET researchers analyzed PlushDaemon\u2019s EdgeStepper network implant,\
+  \ LittleDaemon downloader and DaemonicLogistics loader used to hijack software updates."
+attribution: PlushDaemon (China-aligned threat actor)
+malware_families:
+- EdgeStepper
+- LittleDaemon
+- DaemonicLogistics
+- SlowStepper
+TTPs:
+  processes: []
+  commandline:
+  - '''iptables'' ''-t'' ''nat'' ''-I'' ''PREROUTING'' ''-p'' ''udp'' ''--dport''
+    ''53'' ''-j'' ''REDIRECT'' ''--to-port'' ''<value_from_toPort>'''
+  - '''iptables'' ''-t'' ''filter'' ''-I'' ''INPUT'' ''-p'' ''udp'' ''--dport'' ''<value_from_toPort>''
+    ''-j'' ''ACCEPT'''
+  - '''iptables'' ''-t'' ''nat'' ''-D'' ''PREROUTING'' ''*'''
+  - '''iptables'' ''-t'' ''filter'' ''-D'' ''INPUT'' ''-p'' ''udp'' ''dport'' ''<value_from_toPort>''
+    ''-j'' ''ACCEPT'''
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: EdgeStepper
+    destination: ds20221202.dsc.wcsset.com
+    port: 1090
+  - process: LittleDaemon
+    destination: ime.sogou.com
+    port: 80
+  - process: DaemonicLogistics
+    destination: ime.sogou.com
+    port: 80
+  file_activity:
+  - /etc/bioset.conf
+  - bioset
+  - bioset.conf
+  - popup_4.2.0.2246.dll
+  - sogou_wubi_15.4.0.250_0000.exe
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 8F569641691ECB3888CD
+  - 06177810D61A69F34091
+  - 69974455D8C13C5D57C1
+  - 2857BC730952682D39F4
+  ips:
+  - 8.212.132.120
+  - 47.242.198.250
+  domains:
+  - ds20221202.dsc.wcsset.com
+  - test.dsc.wcsset.com
+  - ime.sogou.com
+authors:
+- Facundo Muñoz
+- Dávid Gábriš
+reference: https://www.welivesecurity.com/en/eset-research/plushdaemon-compromises-network-devices-for-adversary-in-the-middle-attacks
+date_of_publication: November 19, 2025
+file_creation_date: November 29, 2025

