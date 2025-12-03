@@ -1,2 +1,3 @@
 .venv/
 processed_urls.txt
+output.log

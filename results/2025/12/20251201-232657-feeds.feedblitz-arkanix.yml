@@ -1,0 +1,37 @@
+description: "Arkanix is a short-lived stealer that steals credentials, browser\
+  \ data, screenshots, VPN accounts, and more, using both Python and C++ variants."
+attribution: Unknown actor; no specific threat group or country identified
+malware_families:
+- Arkanix
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine:
+  - Python
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - executable: loader.dll
+    destination: hxxps://arkanix.pw/stealer.py
+    port: 443
+  - executable: ChromeElevator
+    destination: hxxps://arkanix.pw/api/upload/direct
+    port: 443
+  file_activity:
+  - path: '%TEMP%\\ChromeElevator.exe'
+  - path: C:\\Users\\<user>\\Desktop\\*.{ext}
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 6ea644285d7d24e09689ef46a9e131483b6763bc14f336060afaeffe37e4beb5
+  - 6960d27fea1f5b28565cd240977b531cc8a195188fc81fa24c924da4f59a1389
+  urls:
+  - hxxps://arkanix.pw/stealer.py
+  - hxxps://arkanix.pw/delivery
+  - hxxps://arkanix.pw/api/upload/direct
+  ip_addresses: []
+reference: https://feeds.feedblitz.com/~/930747470/0/gdatasecurityblog-en~Arkanix-Stealer-Newly-discovered-short-term-profit-malware
+date_of_publication: December 01, 2025
+file_creation_date: December 01, 2025

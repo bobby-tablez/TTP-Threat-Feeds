@@ -1,0 +1,118 @@
+description: Water Saci campaign uses multi-format malware delivery via WhatsApp,
+  transitioning from PowerShell to Python for broader compatibility and enhanced automation.
+attribution: Water Saci
+malware_families:
+- Banking Trojan
+- WhatsApp Automation Script
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - python.exe
+  - svchost.exe
+  commandline:
+  - instalar.bat
+  - DaXGkoD7.exe
+  - run.vbs
+  - starter.bat
+  - whatsz.py
+  - ar.bat
+  - python whatsz.py
+  powershell:
+  - tadeu.ps1
+  scripting_engine:
+  - VBS
+  - Python
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\VGAuthService
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\vm3dservice
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\VMTools
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\vmvss
+  - HKEY_CURRENT_USER\\Software\\MyUniqueApp
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  - HKEY_CURRENT_USER\\Software\\MeuApp
+  image_load: []
+  network_connections:
+  - svchost.exe, hxxps://serverseistemasatu.com/data.php?recebe, 443
+  file_activity:
+  - C:\\temp\\instalar.bat
+  - DaXGkoD7.exe
+  - Ons7rxGC.log
+  - run.vbs
+  - starter.bat
+  - ucJDpQ.tda
+  - fKmkzW.dmp
+  - chrome.exe
+  - firefox.exe
+  - msedge.exe
+  - NavegadorExclusivoBradesco.exe
+  - Opera.exe
+  - C:\\Program Files (x86)\\scpbradBradesco banking software
+  - C:\\Program Files\\WarsawWarsaw security module deployed by Banco do Brasil (BB)
+    and Caixa Economica Federal (CEF)
+  - C:\\Program Files\\Topaz OFDTopaz OFD anti-fraud module deployed by Banco do Brasil
+    (BB) and Caixa Economica Federal (CEF)
+  - C:\\SicoobnetSicoob banking software
+  - AppData\\Local\\Aplicativo ItauItau banking application
+  persistence:
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  process_relations:
+  - instalar.bat->DaXGkoD7.exe
+  - DaXGkoD7.exe->svchost.exe
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - serverseistemasatu.com
+  - www.santander.com.br
+  - autoatendimento.bb.com.br
+  - internetbanking.caixa.gov.br
+  - www.sicredi.com.br
+  - banco.bradescoBradesco
+  - sicoob.com.br
+  - bmgbmg-bmgbtg-pactualapp.btgpactual.com
+  - bs2empresas.bs2.com
+  - itau-itau-personalite-iitau
+  - itau-uniclass-itau
+  - itau-bba-itau
+  - itau-bbae-itau
+  - itau-empresas-itau
+  - itau-crypto-exchange-entrar-binance
+  - okx-okx
+  - crypto.com-log-in-crypto.com
+  - facao-login-e-acesse-a-sua-conta-do-novadax-novadax
+  - facao-login-e-opere-bitget-bitget
+  - login-bybit-bybit-default_wallet
+  - login-acesse-sua-conta-coinext-coinext
+  urls:
+  - hxxps://serverseistemasatu.com/data.php?recebe
+  - www.santander.com.br
+  - autoatendimento.bb.com.br
+  - internetbanking.caixa.gov.br
+  - www.sicredi.com.br
+  - banco.bradescoBradesco
+  - sicoob.com.br
+  - bmgbmg-bmgbtg-pactualapp.btgpactual.com
+  - bs2empresas.bs2.com
+  - itau-itau-personalite-iitau
+  - itau-uniclass-itau
+  - itau-bba-itau
+  - itau-bbae-itau
+  - itau-empresas-itau
+  - itau-crypto-exchange-entrar-binance
+  - okx-okx
+  - crypto.com-log-in-crypto.com
+  - facao-login-e-acesse-a-sua-conta-do-novadax-novadax
+  - facao-login-e-opere-bitget-bitget
+  - login-bybit-bybit-default_wallet
+  - login-acesse-sua-conta-coinext-coinext
+authors:
+- Jeffrey Francis Bonaobra
+- Sarah Pearl Camiling
+- Joe Soares
+- Byron Gelera
+- Ian Kenefick
+- Emmanuel Panopio
+reference: https://www.trendmicro.com/en_us/research/25/l/water-saci.html
+date_of_publication: December 02, 2025
+file_creation_date: December 03, 2025
