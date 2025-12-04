@@ -1,0 +1,29 @@
+description: Jamf Connect facilitates identity-first strategies like zero trust by
+  unifying authentication, access, and monitoring to secure users and devices.
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - Jamf Pro->nom.telemetrydeck.com
+  - Jamf Pro->app.launchdarkly.com
+  - Jamf Pro->mobile.launchdarkly.com
+  - Jamf Pro->clientstream.launchdarkly.com
+  file_activity: []
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - nom.telemetrydeck.com
+  - app.launchdarkly.com
+  - mobile.launchdarkly.com
+  - clientstream.launchdarkly.com
+  urls: []
+reference: https://www.jamf.com/blog/jamf-connect-qa/
+date_of_publication: December 04, 2025
+file_creation_date: December 04, 2025

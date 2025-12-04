@@ -1,0 +1,41 @@
+description: Shai-Hulud 2.0 is a two-stage worm-like malware that spreads via compromised
+  npm packages and steals credentials from various environments.
+malware_families:
+- HEUR:Worm.Script.Shulud.gen
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - bash
+  commandline:
+  - powershell -c "irm bun.sh/install.psl|iex"
+  - curl -fsSL https://bun.sh/install | bash
+  - node setup_bun.js
+  - gh auth token
+  - npm publish ${pkgUpd}
+  powershell:
+  - irm bun.sh/install.psl|iex
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - setup_bun.js
+  - bun_environment.js
+  - .npmrc
+  - contents.json
+  - environment.json
+  - cloud.json
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - github.com
+  urls:
+  - https://bun.sh/install
+  - https://raw.githubusercontent.com/${owner}/${repoName}/main/contents.json
+reference: https://securelist.com/shai-hulud-2-0/118214/
+date_of_publication: December 03, 2025
+file_creation_date: December 04, 2025

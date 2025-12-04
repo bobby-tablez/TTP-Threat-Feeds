@@ -56,6 +56,7 @@ CRITICAL RULES:
 4. If scripts are obfuscated (base64/hex), include them verbatim
 5. Extract code from <pre>, <code>, and <table> blocks with full context
 6. Use single quotes for strings, compact YAML formatting
+7. As all data is important, do not truncate long command, registry, or path strings (e.g., "...")
 
 OUTPUT SCHEMA:
 description: <1-2 sentence threat summary>

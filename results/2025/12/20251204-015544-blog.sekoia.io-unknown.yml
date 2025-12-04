@@ -1,0 +1,127 @@
+description: Calisto (ColdRiver) conducts spear phishing campaigns targeting Western
+  entities, especially those supporting Ukraine, using the ClickFix technique and
+  impersonation of trusted contacts.
+attribution: Calisto (ColdRiver or Star Blizzard)
+TTPs:
+  processes:
+  - powershell.exe
+  commandline: []
+  powershell: []
+  scripting_engine:
+  - JavaScript
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - account.simpleasip[.]org
+  - scorelikelygateway.simleasip[.]org
+  file_activity:
+  - 'PEACE NEGOTIATIONS: [REDACTED] DECLARATION.pdf'
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 196.44.117[.]196
+  domains:
+  - admin.artemood[.]com
+  - mittalcpa[.]com
+  - esclerosemultiplario[.]com.br
+  - myoseguridad[.]net
+  - esourcesol[.]com
+  - cranium[.]id
+  - sopatrasoftware[.]net
+  - setimgfont[.]com
+  - ageyeboo[.]com
+  - doggiewalkietalkie[.]company
+  - napsubrow[.]com
+  - collappendrow[.]net
+  - acmathj[.]org
+  - partizan-cryptobox[.]com
+  - drivenginfra[.]com
+  - proton-decrypt[.]com
+  - astrocosmograv[.]com
+  - bridgevisionassetmanagement[.]net
+  - sysgentuore[.]com
+  - enepascm[.]net
+  - cloudmediaportal[.]com
+  - addnamestamp[.]net
+  - agentsbreakcursor[.]org
+  - agilegapvalue[.]com
+  - applicationformsubmit[.]me
+  - argosurflooms[.]com
+  - atheismatoninoosers[.]net
+  - baayaygnu[.]com
+  - biochemsys[.]org
+  - bridgevisionassets[.]net
+  - ceehogrho[.]org
+  - checkshowlabel[.]org
+  - classmechthermo[.]com
+  - cowsetmom[.]com
+  - documentsec[.]com
+  - fohmaspub[.]org
+  - forcelistcon[.]com
+  - gemtarfad[.]com
+  - gymaisbad[.]org
+  - harmenganaleng[.]com
+  - inkwaxmil[.]com
+  - inmeoaf[.]com
+  - jamyexraw[.]com
+  - kwargsdirgrid[.]com
+  - lamiderot[.]eu
+  - layoutdatatype[.]org
+  - leaseselfid[.]com
+  - lekgodmop[.]com
+  - levtawrig[.]eu
+  - logmanzoo[.]com
+  - maddeehot[.]online
+  - mainboxtype[.]net
+  - mapaji[.]com
+  - menustatusbar[.]org
+  - midemucoped[.]org
+  - mobtuxawe[.]org
+  - mofamole[.]com
+  - ned-application-proposal[.]org
+  - ned-granting-opportunitis[.]org
+  - ned-granting-potential[.]org
+  - netyintry[.]com
+  - nextgenscloud[.]com
+  - noonevinedreammer[.]org
+  - objectwidgetfont[.]org
+  - onlineviewdoc[.]com
+  - ovaradiumnon[.]org
+  - owntrywad[.]com
+  - parkcaprigra[.]com
+  - pietabyew[.]org
+  - prostaffcover[.]org
+  - psybehavconf[.]com
+  - raxpoprig[.]org
+  - reftospy[.]com
+  - requestspatchcopy[.]net
+  - returnselfdata[.]net
+  - saghughap[.]com
+  - sendhostargs[.]com
+  - setproxytrue[.]net
+  - simleasip[.]org
+  - sizarebabrhino[.]org
+  - slacksfulgurbairn[.]org
+  - sobcozsee[.]com
+  - soborsshe[.]com
+  - socalstrategy[.]info
+  - towegospa[.]com
+  - trekpoofedbange[.]org
+  - tryledsox[.]com
+  - tucklocsqueal[.]org
+  - weblangdata[.]com
+  - yehmaways[.]com
+  urls:
+  - hxxps://admin.artemood[.]com/vendor/plugx/*.php
+  - hxxps://mittalcpa[.]com/wp-content/plugins/bungs/*.php
+  - hxxps://esclerosemultiplario[.]com.br/wp-content/plugins/areada/*.php
+  - hxxps://myoseguridad[.]net/prueba/phantomrise/*.php
+  - hxxps://esourcesol[.]com/wp-content/plugins/leykos/*.php
+  - hxxps://cranium[.]id/plugins/unite/*.php
+authors:
+- TDR
+reference: https://blog.sekoia.io/ngo-reporters-without-borders-targeted-by-calisto-in-recent-campaign/
+date_of_publication: December 03, 2025
+file_creation_date: December 04, 2025

