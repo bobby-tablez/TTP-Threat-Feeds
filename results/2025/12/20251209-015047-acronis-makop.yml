@@ -1,0 +1,105 @@
+description: Makop ransomware strain derived from Phobos, exploiting exposed RDP systems
+  and using various tools for network scanning, lateral movement, privilege escalation,
+  and encryption.
+malware_families:
+- Makop
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - svchost.exe
+  - nlbrute.exe
+  - netscan.exe
+  - advanced-ip-scanner.exe
+  - masscan.exe
+  - disable-defender.exe
+  - hlpdrv.sys
+  - quickheal-uninstaller.exe
+  - processhacker.exe
+  - iobitunlocker.exe
+  - lazagne.exe
+  - mimikatz.exe
+  - crackaccount.exe
+  - accountrestore.exe
+  - netpass.exe
+  - bug_hand.exe
+  commandline:
+  - NLBrute
+  - Advanced IP Scanner
+  - Masscan
+  - Disable Defender Control v2.0
+  - Quick Heal Antivirus
+  - Process Hacker
+  - IOBitUnlocker
+  - Lazagne
+  - Mimikatz
+  - CrackAccount
+  - Account Restore
+  - Netpass
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Windows Defender
+  image_load:
+  - hlpdrv.sys
+  network_connections:
+  - nlbrute.exe, destination, port
+  - netscan.exe, destination, port
+  - masscan.exe, destination, port
+  file_activity:
+  - C:\\Users\\Desktop\\23538854357.2ip
+  - C:\\users\\Desktop\\Dummy Files\\sample1.py
+  - C:\\sers\\Desktop\\Dummy Files\\sample1.ppt
+  - C:\\users\\Desktop\\Dummy Files\\pw.txt
+  - C:\\users\\Desktop\\Dummy Files\\check_internet_connection.bat
+  - C:\\sers\\Desktop\\Dummy Files\\sample1.csv
+  - C:\\sers\\Desktop\\Dummy Files\\Notes.pdf
+  - C:\\sers\\Desktop\\Dummy Files\\sample1.js
+  - C:\\sers\\Desktop\\Dummy Files\\sample1.json
+  - C:\\sers\\Desktop\\Dummy Files\\sample1.doc
+  persistence: []
+  process_relations:
+  - svchost.exe->bug_hand.exe
+IOCs:
+  hashes:
+  - 10ea5ac09ec72101c6f8656f3f08f6f9495f8b43849f27928efd6485cee04913
+  - 6752d24da3565761c94ab10d3010e1be702221783f9b509209f97a8e32003767
+  - aac0c5ad612fb9a0ac3b4bbfd71b8931fc762f8e11fdf3ffb33ef22076f9c4bc
+  - 0a4a0f0df5eea57f16a76bff6489dd95a7089afba8e9e5c8bcadc46870af33fbo
+  - a903f4d8f126a830b8f12e05c035b86e4dfd65cb1fd64d0d0b503035b49d0cb7
+  - 6cf6dd6119abcb2751c2692fb93a623b5b4bd290cb3dc217fa9fe09dd721fcdd
+  - 7470ae5b55ca282695d2f7c4896344622c94292a915aa63e55000beeb2c1350e
+  - ca08299002fa6181d249115907ee29356e698d72ff06afdca05431c1ed38db35
+  - fb1dd40577af7ac4d8c32506e78e39841ff6d05ee643c18270ef26eac798df3f
+  - 0745633619afd654735ea99f32721e3865d8132917f30e292e3f9273977dc021
+  - 5b9407df404506219bd672a33440783c5c214eefa7feb9923c6f9fded8183610
+  - c7e471218b00cdec4f7845a80f1c5b069ee97bf270f878ea45b2dd53aad14798
+  - 0d468fa92767ca1abe881155224d94879b575860e403636d3dbb550e9b9a6a7ao
+  - 5994db4362ded8bf15f81f134e14b9ed581cd2e073709b5fae6b2363bae455e9
+  - 7470ae5b55ca282695d2f7c4896344622c94292a915aa63e55000beeb2c1350e
+  - f181b8ae88f6c657c3ec3d1d5e8420fbf340c543b3d9292947ae035e3591b664
+  - 43c3b5dbc18ebbc55c127d197255446d5f3e074fdac37f3e901b718acbe7c833
+  - dfControlo 20c730c7033b5bdc0a6510825e90449ba8f87942d2d7f61fa1ba5f100e98c141
+  - disable-defender.exe
+  - Hlpdrv.sys
+  - bd1f381e5a3db22e88776b7873d4d2835e9a1ec620571d2b1da0c58f81c84a56
+  - QuickHeal Uninstaller
+  - Proc.exe ProcessHacker
+  - IOBitUnlocker
+  - NLBrute
+  - Lazagne
+  - Mimikatz
+  - CrackAccount
+  - Account Restore
+  - Netpass
+  - GuLoader - MUI
+  - GuLoader - VBS
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- Ilia Dafchev
+- Darrel Virtusio
+reference: https://www.acronis.com/en/tru/posts/makop-ransomware-guloader-and-privilege-escalation-in-attacks-against-indian-businesses
+date_of_publication: December 09, 2025
+file_creation_date: December 09, 2025

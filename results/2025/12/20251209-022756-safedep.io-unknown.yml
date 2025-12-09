@@ -1,0 +1,42 @@
+description: 'Unpacking CVE-2025-55182: React Server Components RCE Exploit Deep Dive
+  and SBOM-Driven Identification'
+TTPs:
+  processes:
+  - bash
+  - python3
+  commandline:
+  - dockerrun-it-p3000:3000--rm-v$(pwd):/appnode:24bash
+  - cd/app&&npx[email protected]cve-2025-66478-app
+  - cd/app/cve-2025-66478-app&&npmrundev
+  - dockerrun-it--net=host--rm-v$(pwd):/apppython:3.13bash
+  - pipinstallrequests
+  - cd/app&&python3CVE-2025-55182.pyhttp://127.0.0.1:3000--check
+  - cd/app&&python3CVE-2025-55182.pyhttp://127.0.0.1:3000-c\"touch /tmp/h4x\"
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - python3CVE-2025-55182.py
+  - http://127.0.0.1:3000
+  - nc
+  - 192.168.64.1
+  - '9999'
+  file_activity:
+  - /tmp/h4x
+  - /tmp/f
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 127.0.0.1
+  - 192.168.64.1
+  domains: []
+  urls:
+  - http://127.0.0.1:3000
+authors:
+- SafeDep Team
+reference: https://safedep.io/react-server-nextjs-critical-vulnerability-find-and-fix-with-sbom
+date_of_publication: December 09, 2025
+file_creation_date: December 09, 2025

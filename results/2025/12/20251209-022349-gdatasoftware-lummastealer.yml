@@ -1,0 +1,42 @@
+description: Malware campaign on Itch.io using spam comments to distribute nexe-compiled
+  JavaScript files containing LummaStealer.
+malware_families:
+- LummaStealer
+TTPs:
+  processes:
+  - game.exe
+  - powershell.exe
+  commandline:
+  - tasklist /fo csv
+  - wmic path win32_VideoController get name /value
+  - wmic path Win32_VideoController get CurrentRefreshRate /value
+  - wmic diskdrive get model /value
+  - powershell -Command Get-CimInstance Win32_VideoController | Select-Object -ExpandProperty
+    Name
+  powershell:
+  - Get-CimInstance Win32_VideoController | Select-Object -ExpandProperty Name
+  scripting_engine:
+  - JavaScript
+  registry_keys: []
+  image_load:
+  - modules.node
+  network_connections: []
+  file_activity:
+  - '%temp%/modules.node'
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 79250523a057a7dd9a6080099c8c2f83eb683ab9b37ecab149fc73524f7c4bd1
+  - 102b99b00a60f33246bd89bd2b3cb9cfae2844d453484e932b3a5ca634fb308c
+  - 80e538cabade94e1883f9e72bb608dc02f79808aec48136b5bbb00c2a1717f64
+  - 1d405b03bc5913b6b43c06550ef0b9b02196b270625e4dc5fa0c37e8a424be25
+  - a2bacb00dfdb338b496d3128705f76c8cc935e6bd33e06271fb3e34d769d0a2b
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- Josemaria Grana
+reference: https://www.gdatasoftware.com/blog/2025/12/38310-lumma-stealer-itchio-patreon
+date_of_publication: December 08, 2025
+file_creation_date: December 09, 2025

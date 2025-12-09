@@ -1,0 +1,48 @@
+description: CoinMiner malware is being spread via USB in South Korea, using VBS and
+  BAT files to execute and hide the infection.
+malware_families:
+- DIRTYBULK
+- CUTFAIL
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - printui.exe
+  - svcinsty64.exe
+  - svctrl64.exe
+  commandline: []
+  powershell: []
+  scripting_engine:
+  - VBS
+  - BAT
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\DcomLaunch
+  image_load:
+  - printui.dll
+  - u826437.dll
+  network_connections:
+  - svctrl64.exe -> r2.hashpoolpx[.]net:443
+  file_activity:
+  - C:\\Windows \\System32\\u211553.dat
+  - C:\\Windows \\System32\\printui.dll
+  - '%SystemDirectory%\\svcinsty64.exe'
+  - '%SystemDirectory%\\svctrl64.exe'
+  - '%SystemDirectory%\\wsvcz\\wlogz.dat'
+  persistence:
+  - Registering DcomLaunch service with u826437.dll
+  process_relations:
+  - printui.exe -> svcinsty64.exe
+  - svcinsty64.exe -> svctrl64.exe
+IOCs:
+  hashes: []
+  ip_addresses:
+  - r2.hashpoolpx[.]net
+  domains:
+  - r2.hashpoolpx[.]net
+  urls: []
+authors:
+- AhnLab SEcurity intelligence Center (ASEC)
+- Mandiant
+reference: https://asec.ahnlab.com/en/91415
+date_of_publication: November 27, 2025
+file_creation_date: December 09, 2025

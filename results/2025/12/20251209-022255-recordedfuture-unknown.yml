@@ -1,0 +1,37 @@
+description: Critical React2Shell vulnerability actively exploited by Chinese threat
+  actors targeting React Server Components.
+attribution: Earth Lamia, Jackpot Panda
+TTPs:
+  processes:
+  - npm
+  commandline:
+  - npm run audit
+  - '$ npm audit reportnext 16.0.0-canary.0 - 16.0.6Severity: criticalNext.js is vulnerable
+    to RCE in React flight protocol - https://github.com/advisories/GHSA-9qr9-h5gf-34mp'
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - 143.198.92.82
+  - 206.237.3.150
+  - 45.77.33.136
+  - 183.6.80.214
+  file_activity: []
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 143.198.92.82
+  - 206.237.3.150
+  - 45.77.33.136
+  - 183.6.80.214
+  domains: []
+  urls:
+  - https://github.com/advisories/GHSA-9qr9-h5gf-34mp
+authors:
+- Recorded Future
+reference: https://www.recordedfuture.com/blog/critical-react2shell-vulnerability
+date_of_publication: December 09, 2025
+file_creation_date: December 09, 2025

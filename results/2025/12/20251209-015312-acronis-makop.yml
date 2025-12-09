@@ -1,0 +1,127 @@
+description: Makop ransomware strain derived from Phobos, exploiting exposed RDP systems
+  and using a mix of off-the-shelf tools including network scanners, AV killers, local
+  privilege escalation exploits, and GuLoader.
+malware_families:
+- Makop
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - nlbrute.exe
+  - netscan.exe
+  - advanced-ip-scanner.exe
+  - masscan.exe
+  - mimikatz.exe
+  - laZagne.exe
+  - crackaccount.exe
+  - accountrestore.exe
+  - disable-defender.exe
+  - hlpdrv.sys
+  - quickheal-uninstaller.exe
+  - processhacker.exe
+  - iobitunlocker.exe
+  commandline:
+  - Disable-Defender
+  - nlbrute.exe -servers=192.168.0.1-100,192.168.2.0 -ports=3389,3390 -customarg=open-only
+    -pars.format=IP:Port vv ~banners
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - hlpdrv.sys
+  network_connections:
+  - nlbrute.exe
+  - netscan.exe
+  - advanced-ip-scanner.exe
+  - masscan.exe
+  file_activity:
+  - C:\\Users\\Desktop\\23538854357.2ip
+  - C:\\users\\Desktop\\Dummy Files\\sample1.py
+  - C:\\sers\\Desktop\\Dummy Files\\sample1.ppt
+  - C:\\users\\Desktop\\Dummy Files\\pw.txt
+  - C:\\users\\Desktop\\Dummy Files\\check_internet_connection.bat
+  - C:\\sers\\Desktop\\Dummy Files\\sample1.csv
+  - C:\\sers\\Desktop\\Dummy Files\\Notes.pdf
+  - C:\\sers\\Desktop\\Dummy Files\\sample1.js
+  - C:\\sers\\Desktop\\Dummy Files\\sample1.json
+  - C:\\sers\\Desktop\\Dummy Files\\sample1.doc
+  persistence: []
+  process_relations:
+  - nlbrute.exe -> bug_hand.exe
+IOCs:
+  hashes:
+  - 10ea5ac09ec72101c6f8656f3f08f6f9495f8b43849f27928efd6485cee04913
+  - 6752d24da3565761c94ab10d3010e1be702221783f9b509209f97a8e32003767
+  - aac0c5ad612fb9a0ac3b4bbfd71b8931fc762f8e11fdf3ffb33ef22076f9c4bc
+  - 0a4a0f0df5eea57f16a76bff6489dd95a7089afba8e9e5c8bcadc46870af33fb
+  - a903f4d8f126a830b8f12e05c035b86e4dfd65cb1fd64d0d0b503035b49d0cb7
+  - 6cf6dd6119abcb2751c2692fb93a623b5b4bd290cb3dc217fa9fe09dd721fcdd
+  - 7470ae5b55ca282695d2f7c4896344622c94292a915aa63e55000beeb2c1350e
+  - ca08299002fa6181d249115907ee29356e698d72ff06afdca05431c1ed38db35
+  - fb1dd40577af7ac4d8c32506e78e39841ff6d05ee643c18270ef26eac798df3f
+  - 0745633619afd654735ea99f32721e3865d8132917f30e292e3f9273977dc021
+  - 5b9407df404506219bd672a33440783c5c214eefa7feb9923c6f9fded8183610
+  - c7e471218b00cdec4f7845a80f1c5b069ee97bf270f878ea45b2dd53aad14798
+  - 0d468fa92767ca1abe881155224d94879b575860e403636d3dbb550e9b9a6a7a
+  - 5994db4362ded8bf15f81f134e14b9ed581cd2e073709b5fae6b2363bae455e9
+  - 7470ae5b55ca282695d2f7c4896344622c94292a915aa63e55000beeb2c1350e
+  - f181b8ae88f6c657c3ec3d1d5e8420fbf340c543b3d9292947ae035e3591b664
+  - 43c3b5dbc18ebbc55c127d197255446d5f3e074fdac37f3e901b718acbe7c833
+  - 20c730c7033b5bdc0a6510825e90449ba8f87942d2d7f61fa1ba5f100e98c141
+  - 1ef6c1a4dfdc39b63bfe650ca81ab89510de6c0d3d7c608ac5be80033e559326
+  - feb09cc39b1520d228e9e9274500b8c229016d6fc8018a2bf19aa9d3601492c5
+  - bd1f381e5a3db22e88776b7873d4d2835e9a1ec620571d2b1da0c58f81c84a56
+  - 5b7b280b53ff3cf95ead4fd4a435cd28294c5fce6a924ec52e500a109deb868b
+  - 16f83f056177c4ec24c7e99d01ca9d9d6713bd0497eeedb777a3ffefa99c97f0
+  - 5caacdc577c27110f639d4d7c0241607c1bc53ee6f5dbd337793d05cc57e703f
+  - 41a328c3bb66e94d73e861699a5ebc4a5c0c7fcee2129e5ecd98c7bde1f95e8e
+  - bd2c2cf0631d881ed382817afcce2b093f4e412ffb170a719e2762f250abfea4
+  - eaa9dc1c9dc8620549fee54d81399488292349d2c8767b58b7d0396564fb43e7
+  - 37d2a1626dc205d60f0bec8746ab256569267e4ef2f8f84dff4d9d792aa3af30
+  - 1845fe8545b6708e64250b8807f26d095f1875cc1f6159b24c2d0589feb74f0c
+  - ffa28db79daca3b93a283ce2a6ff24791956a768cb5fc791c075b638416b51f4
+  - a332f863da1709b27b62f3a3f2a06dca48c7dabe6b8db76ec7bb81ce3786e527
+  - 3cc5ee93a9ba1fc57389705283b760c8bd61f35e9398bbfa3210e2becf6d4b05
+  - 61c0810a23580cf492a6ba4f7654566108331e7a4134c968c2d6a05261b2d8a1
+  - 8c57b97b04d7eabbae651c3400a5e6b897aea1ae8964507389340c44b99c523a
+  - a8bf7da7e2f62296985e1aadbac8373f5ac813ac158047f5b5579a3f900fd85b
+  - 3fa65f17518d10af9ed316fbd0395bf39b3b75a63a5374ff071cbba4b642e4a3
+  - 6e95adda5f24fdf805ad10ae70069484def3d47419db5503f2c44b130eedf591
+  - e97bdf7fafb1cb2a2bf0a4e14f51e18a34f3ff2f6f7b99731e93070d50801bef
+  - 3902165d0645afdb4b7d95f5cc55d65ecee17d3b77a31d51170e0beae3fd296a
+  - b044c6dbd55747c3592ac527215c3dbf71f92aa4bd8eee5e29ddad571b9335b4
+  - 4c6cf8dda0c55fafab37569d2e11621c42e17f37a290b13087215190f7518d73
+  - 10c0dd2878bd0ab9732cd593febf61d94bb2b798bf0aa1c8fa45ddf8c7092cbc
+  - 17fb52476016677db5a93505c4a1c356984bc1f6a4456870f920ac90a7846180
+  - 51fd557a7325dd58cfcabebbbc33ef452d93f812c189360d4f2bf87c6df0a59c
+  - c7d994eb2042633172bd8866c9f163be531444ce3126d5f340edd25cbdb473d4
+  - f47e3555461472f23ab4766e4d5b6f6fd260e335a6abc31b860e569a720a5446
+  - dd748db20e3909596ab18ce3f0b1264e2cfe9f67dfb4bce7d4f9c085ec1fce0a
+  - 92c65b58c4925534c2ce78e54b0e11ecaf45ed8cf0344ebff46cdfc4f2fe0d84
+  - 3da3b704547f6f4a1497107e78856d434a408306b92ba7c6e270c7c9790aa576
+  - a1a6005cc3eb66063ae33f769fc2d335487b2ed7f92c161e49ad013ffed11ec8
+  - 8b9c7d2554fe315199fae656448dc193accbec162d4afff3f204ce2346507a8a
+  - be2b45b7df8e7dea6fb6e72d776f41c50686c2c9cfbaf4d456bcc268f10ab083
+  - 722fff8f38197d1449df500ae31a95bb34a6ddaba56834b13eaaff2b0f9f1c8b
+  - 26d5748ffe6bd95e3fee6ce184d388a1a681006dc23a0f08d53c083c593c193b
+  - 4b036cc9930bb42454172f888b8fde1087797fc0c9d31ab546748bd2496bd3e5
+  - f20721945a0a4150470e63bc81c9312cbb5802a60615ae4393283273a62cf8a2
+  - de903a297afc249bb7d68fef6c885a4c945d740a487fe3e9144a8499a7094131
+  - 37ff328175acd45ef27d3d339c3127a7612ad713fccd9c9aae01656dfbf13056
+  - 8f7569e82bd339f3e24431884687b095f678971f20053787d93359672bb9f687
+  - 5cdabf41672241798bcca94a7fdb25974ba5ab2289ebadc982149b3014677ae3
+  - b5c2474397fb38a4dd9edab78b6e5178832074ba5bab9bac3f0cad7bc0660cf2
+  - 5ff803269d6491dd3f0267f6f07b8869e3f08d62cf2110b552bba2cc3d75d26a
+  - c8afb68260b9036d8e65811927c379112274a2526cc161c7f1502457a501a0d3
+  - 01f34180bb635022681723eef73c19adf330d7a32a2e6639c27b1ee5777312be
+  - c8e8cca4ee3c4f4ce4f2076ed93cca058fa1ff88d5ffe49d8d293b27ad25ef68
+  - 8315327f22eff069457c02ddda1ea32a31964e1b8ab688709bcb96c6ccbb6212
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- Ilia Dafchev
+- Darrel Virtusio
+reference: https://www.acronis.com/en/tru/posts/makop-ransomware-guloader-and-privilege-escalation-in-attacks-against-indian-businesses
+date_of_publication: December 09, 2025
+file_creation_date: December 09, 2025

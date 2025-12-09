@@ -1,0 +1,53 @@
+description: CastleRAT is a Remote Access Trojan (RAT) that communicates with a command-and-control
+  server using RC4 encryption, gathers system information, and performs various malicious
+  activities including clipboard scraping, keylogging, screen capture, and persistence.
+malware_families:
+- CastleRAT
+TTPs:
+  processes:
+  - rundll32.exe
+  - ComputerDefaults.exe
+  - chrome.exe
+  - msedge.exe
+  - brave.exe
+  - firefox.exe
+  - eventvwr.exe
+  - fodhelper.exe
+  - slui.exe
+  - sdclt.exe
+  - mmc.exe
+  - colorcpl.exe
+  - wsreset.exe
+  - esentutl.exe
+  - PkgMgr.exe
+  commandline:
+  - 'rundll32.exe shell32.dll, #61'
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - CastleRAT -> www[.]ip-api[.]com
+  - CastleRAT -> C2 server
+  file_activity:
+  - '%appdata%/PythonFilee dropped File'
+  - '%appdata%/keylog.txt'
+  persistence:
+  - Scheduled Task that runs a local copy of the malware at system startup
+  process_relations:
+  - ComputerDefaults.exe -> malware process
+IOCs:
+  hashes:
+  - 963c012d56c62093d105ab5044517fdcce4ab826f7782b3e377932da1df6896d
+  - f2ff4cbcd6d015af20e4e858b0f216c077ec6d146d3b2e0cbe68b56b3db7a0be
+  - 4ef63fa536134ad296e83e37f9d323beb45087f7d306debdc3e096fed8357395
+  - 282fa3476294e2b57aa9a8ab4bc1cc00f334197298e4afb2aae812b77e755207
+  ip_addresses: []
+  domains:
+  - www[.]ip-api[.]com
+  urls: []
+authors:
+- Teoderick Contreras
+reference: https://www.splunk.com/en_us/blog/security/castlerat-malware-detection-splunk-mitre-attck.html
+date_of_publication: December 09, 2025
+file_creation_date: December 09, 2025
