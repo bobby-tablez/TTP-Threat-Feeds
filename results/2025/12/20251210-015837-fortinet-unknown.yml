@@ -1,0 +1,56 @@
+description: Threat actor used anti forensic techniques including deletion of files,
+  clearing logs, and obfuscation to cover tracks during a ransomware attack.
+TTPs:
+  processes:
+  - svchost.exe
+  - MpCrmdRun.exe
+  - MsMpEng.exe
+  - gomer.exe
+  - SearchIndexer.exe
+  - ShellExperienceHost.exe
+  - Systemd.exe
+  - cmd.exe
+  commandline:
+  - C:\\Windows\\System32\\svhost.exe TM --mode fast --verbose
+  - C:\\User IR Deskiop\\gomer.exe
+  - C:\\Windows\\SystemApps\\Microsoft.Windows.Cortana_cwSn!h2tzyewy\\SearchIndexer.exe
+    -ServerNo
+  - CAWindows\\SystemApps\\ShellExperienceHost_cwSnTh2byewy\\ShellExperienceHost.exe
+    -Server
+  - CAWindows\\System32\\svhost.exe
+  - C:\\Windows\\System32\\cmd.exe /C "C\\svhost\\delsve,bat"
+  - C:\\Windows\\System32\\cmd.exe /C CAsvhostipsdelsvebat
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\DataCollection
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\DataCollection\\Users
+  image_load: []
+  network_connections: []
+  file_activity:
+  - C:\\ProgramData\\Microsoft\\Diagnosis\\ETLLogs\\AutoLogger\\AutoLogger-Diagtrack-Listener.etl
+  - C:\\ProgramData\\Microsoft\\Windows Defender\\Platform4,1.25030.2-0\\MpCrmdRun.exe
+  - C:\\ProgramData\\Microsoft\\Windows Defender\\Platform4,1.25020.2-0\\MsMpEng.exe
+  - C:\\User IR Deskiop\\gomer.exe
+  - C:\\Windows\\SystemApps\\Microsoft.Windows.Cortana_cwSn!h2tzyewy\\SearchIndexer.exe
+  - CAWindows\\SystemApps\\ShellExperienceHost_cwSnTh2byewy\\ShellExperienceHost.exe
+  - CAWindows\\System32\\svhost.exe
+  - C:\\svhost\\delsve,bat
+  persistence: []
+  process_relations:
+  - svhost.exe->MsMpEng.exe
+  - svhost.exe->gomer.exe
+  - svhost.exe->SearchIndexer.exe
+  - svhost.exe->ShellExperienceHost.exe
+  - cmd.exe->delsve.bat
+  - cmd.exe->ipsdelsvebat
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- Faisal Qureshi
+reference: https://www.fortinet.com/blog/threat-research/uncovering-hidden-forensic-evidence-in-windows-mystery-of-autologger
+date_of_publication: December 09, 2025
+file_creation_date: December 10, 2025

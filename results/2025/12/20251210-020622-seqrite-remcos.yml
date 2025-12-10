@@ -1,0 +1,36 @@
+description: Malware authors craft phishing emails and malicious attachments disguised
+  as termination notices to exploit employee anxiety, delivering Remcos RAT.
+malware_families:
+- Remcos
+TTPs:
+  processes:
+  - staff record pdf.exe
+  - remcos.exe
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  - HKCU\\Software\\Rmc-<VictimID>Key
+  image_load: []
+  network_connections:
+  - c:\\ProgramData\\Remcos\\remcos.exe->196.251.116.219
+  file_activity:
+  - C:\\Users\\admin\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\
+  - c:\\ProgramData\\Remcos\\remcos.exe
+  persistence:
+  - HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run- Rmc-4E12ZU = c:\\ProgramData\\Remcos\\remcos.exe
+  process_relations: []
+IOCs:
+  hashes:
+  - c95f2a7556902302f352c97b7eed41596f7d3f42fa6fe3b0399c42473f511acc76c28350c8952aef08216d9493bae385
+  ip_addresses:
+  - 196.251.116.219
+  domains: []
+  urls: []
+authors:
+- Prashil Moon
+- Rumana Siddiqui
+reference: https://www.seqrite.com/blog/deceptive-layoff-themed-hr-email-distributes-remcos-rat-malware/
+date_of_publication: December 09, 2025
+file_creation_date: December 10, 2025

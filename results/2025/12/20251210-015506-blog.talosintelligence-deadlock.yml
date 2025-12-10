@@ -1,0 +1,83 @@
+description: Cisco Talos uncovered new TTPs linked to a financially motivated threat
+  actor targeting victims with DeadLock ransomware using the BYOVD technique and PowerShell
+  scripts.
+malware_families:
+- DeadLock
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - EDRGay.exe
+  - BdApiUtil.sys
+  - AnyDesk.exe
+  - SystemSettingsAdminFlows.exe
+  - rundll32.exe
+  - mstsc.exe
+  - mmc.exe
+  - iexplore.exe
+  commandline:
+  - CreateFile()
+  - DeviceIOControl()
+  - ZwTerminateProcess()
+  - Test-AdminRunAsexec bypass
+  - reg add HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server /v fDenyTSConnections
+    /t REG_DWORD /d 0 /f
+  - netsh advfirewall firewall add rule name=allow RemoteDesktop dir=in protocol=TCP
+    localport=3389 action=allow
+  - sc config RemoteRegistry start= demand
+  - sc start RemoteRegistry
+  - C:\\AnyDesk.exe --install C:\\Program Files (x86)\\AnyDesk --start-with-win --silent
+    --update-disabled
+  - C:\\Program Files (x86)\\AnyDesk\\AnyDesk.exe --start-service
+  - C:\\Program Files (x86)\\AnyDesk\\AnyDesk.exe --set-password
+  - C:\\Program Files (x86)\\AnyDesk\\AnyDesk.exe --control
+  - ping
+  - Quser
+  - 'mstsc /v:'
+  - 'mmc.exe compmgmt.msc /computer: INTERNAL IP ADDRESS'
+  - Nltest /dclist
+  - SystemSettingsAdminFlows.exe Defender RTP 1
+  - SystemSettingsAdminFlows.exe Defender SpynetReporting 0
+  - SystemSettingsAdminFlows.exe Defender SubmitSamplesConsent 0
+  - SystemSettingsAdminFlows.exe Defender DisableEnhancedNotifications 1
+  - chcp 65001
+  - rundll32.exe
+  powershell:
+  - Test-AdminRunAsexec bypass
+  scripting_engine: []
+  registry_keys:
+  - HKLM\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server
+  - RemoteRegistry
+  - Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Icons
+  - DefaultIcon
+  - SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FileExts\\.dlock
+  image_load: []
+  network_connections:
+  - 'mstsc /v:'
+  - INTERNAL IP ADDRESS
+  - 'Nltest dclist: DC HOST NAME'
+  file_activity:                                                                                  
+  - C:\\Program Files (x86)\\AnyDesk
+  - run[.]txt
+  - print$
+  - prnproc$
+  persistence:
+  - RemoteRegistry start= demand
+  - AnyDesk.exe --start-with-win
+  - AnyDesk.exe --set-password
+  - AnyDesk.exe --control
+  process_relations: []
+CVEs:
+- CVE-2024-51324
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+attribution: 'null'
+authors:
+- Jordyn Dunk
+- Chetan Raghuprasad
+reference: https://blog.talosintelligence.com/byovd-loader-deadlock-ransomware/
+date_of_publication: December 09, 2025
+file_creation_date: December 10, 2025

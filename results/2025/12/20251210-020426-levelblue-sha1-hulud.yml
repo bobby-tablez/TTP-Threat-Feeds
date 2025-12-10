@@ -1,0 +1,38 @@
+description: Sha1-Hulud uses trojaned npm packages to steal credentials, propagate
+  malware, and execute remote code via GitHub Actions.
+attribution: Sha1-Hulud
+malware_families:
+- Sha1-Hulud
+TTPs:
+  processes:
+  - npm
+  commandline:
+  - powershell -noexit "& \"\"C:\\My Scripts\\MyEvilScript.ps1\"\""
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - setup_bun.js
+  - bun_environment.js
+  - ~/.dev-env/
+  - .github/workflows/discussion.yaml
+  - 'Sha1-Hulud: The Second Coming'
+  persistence:
+  - GitHub Actions runner in ~/.dev-env/
+  process_relations: []
+IOCs:
+  hashes:
+  - 62ee164b9b306250c1172583f138c9614139264f889fa99614903c12755468d0
+  - f099c5d9ec417d4445a0328ac0ada9cde79fc37410914103ae9c609cbc0ee068
+  - cbb9bc5a8496243e02f3cc080efbe3e4a1430ba0671f2e43a202bf45b05479cd
+  - a3894003ad1d293ba96d77881ccd2071446dc3f65f434669b49b3da92421901a
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- Karl Sigler
+reference: https://levelblue.com/en-us/resources/blogs/spiderlabs-blog/sha1-hulud-the-second-coming-of-the-new-npm-github-worm/
+date_of_publication: December 03, 2025
+file_creation_date: December 10, 2025

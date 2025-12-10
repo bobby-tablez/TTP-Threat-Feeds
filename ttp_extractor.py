@@ -16,8 +16,14 @@ import collections
 import unicodedata
 import string
 from dateutil.parser import parse as date_parse
-from latest_user_agents import get_latest_user_agents, get_random_user_agent
 import logging
+
+# Try to use curl_cffi for better browser impersonation, fallback to requests
+try:
+    from curl_cffi import requests as cf_requests
+    USE_CURL_CFFI = True
+except ImportError:
+    USE_CURL_CFFI = False
 
 # CONFIG
 LLM_ENDPOINT = "http://127.0.0.1:1234/v1/chat/completions"
@@ -26,6 +32,7 @@ MODEL_NAME = "qwen2.5-coder-32b-instruct"
 URLS_FILE = "urls.txt"
 CACHE_FILE = "processed_urls.txt"
 VERBOSE = os.getenv("VERBOSE", "1") == "1"  # Set VERBOSE=0 to disable detailed logging
+REQUEST_DELAY = float(os.getenv("REQUEST_DELAY", "2.0"))  # Seconds between requests to same domain
 
 # Setup logging - dual output to console and file
 logger = logging.getLogger(__name__)
@@ -73,6 +80,7 @@ TTPs:
   file_activity: [<full file paths created/dropped/accessed/deleted>]
   persistence: [<persistence mechanism descriptions>]
   process_relations: [<parent->child process trees>]
+CVEs: [<List of any CVEs identified related to the threat report>]
 IOCs:
   hashes: [<MD5, SHA1, SHA256>]
   ip_addresses: [<IPv4/IPv6>]
@@ -297,25 +305,64 @@ def is_security_report(text, url):
 
     return is_report
 
+# Track last request time per domain for rate limiting
+_domain_last_request = {}
+
 def fetch_html_content(url, timeout=20):
-    headers = {
-        "User-Agent": get_random_user_agent(),
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-        "Accept-Language": "en-US,en;q=0.8",
-        "Connection": "close",
-    }
+    """Fetch HTML with polite rate limiting and automatic Chrome impersonation."""
+    import time
+    from urllib.parse import urlparse
+
+    # Rate limit per domain
+    domain = urlparse(url).netloc
+    if domain in _domain_last_request:
+        elapsed = time.time() - _domain_last_request[domain]
+        if elapsed < REQUEST_DELAY:
+            sleep_time = REQUEST_DELAY - elapsed
+            logger.info(f"    ⏱️ Rate limiting: sleeping {sleep_time:.1f}s for {domain}")
+            time.sleep(sleep_time)
+
+    _domain_last_request[domain] = time.time()
+
     try:
-        resp = requests.get(url, headers=headers, timeout=timeout, allow_redirects=True)
+        if USE_CURL_CFFI:
+            # Use curl_cffi with automatic Chrome impersonation (always latest stable)
+            # This mimics real Chrome's TLS fingerprint + HTTP/2 + headers automatically
+            resp = cf_requests.get(url, impersonate="chrome", timeout=timeout, allow_redirects=True)
+        else:
+            # Fallback to requests with manual headers
+            headers = {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+                "Accept-Language": "en-US,en;q=0.9",
+                "Accept-Encoding": "gzip, deflate, br",
+                "DNT": "1",
+                "Connection": "keep-alive",
+                "Upgrade-Insecure-Requests": "1",
+                "Sec-Fetch-Dest": "document",
+                "Sec-Fetch-Mode": "navigate",
+                "Sec-Fetch-Site": "none",
+                "Sec-Fetch-User": "?1",
+                "Cache-Control": "max-age=0",
+            }
+            resp = requests.get(url, headers=headers, timeout=timeout, allow_redirects=True)
+
         status = resp.status_code
         if status >= 400:
-            print(f"    ⚠️ HTTP {status} fetching {url}")
+            logger.warning(f"    ⚠️ HTTP {status} fetching {url}")
         text = resp.text or ""
-        # very common CF interstitial
+
+        # Detect common anti-bot challenges
         if 'cf-browser-verification' in text or 'Just a moment' in text:
-            print("    ⚠️ Cloudflare interstitial detected.")
+            logger.warning(f"    ⚠️ Cloudflare challenge detected for {domain}")
+        elif 'px-captcha' in text or 'PerimeterX' in text:
+            logger.warning(f"    ⚠️ PerimeterX challenge detected for {domain}")
+        elif 'distil_r_captcha' in text:
+            logger.warning(f"    ⚠️ Distil Networks challenge detected for {domain}")
+
         return text
     except Exception as e:
-        print(f"    ❌ fetch failed for {url}: {e}")
+        logger.error(f"    ❌ Fetch failed for {url}: {e}")
         return ""
 
 def discover_rss_feeds(soup, base_url):
@@ -523,24 +570,110 @@ def extract_text_from_page(url):
 
     return rich, html
 
-def extract_images_from_html(html):
+def extract_images_from_html(html, base_url):
+    """Extract image URLs from HTML, handling both absolute and relative URLs."""
     soup = BeautifulSoup(html, "html.parser")
-    return [img['src'] for img in soup.find_all('img') if img.get('src') and img['src'].startswith('http')]
+    img_urls = []
+
+    for img in soup.find_all('img'):
+        # Try multiple src attributes (handles lazy loading)
+        src = img.get('src') or img.get('data-src') or img.get('data-lazy-src')
+        if not src:
+            continue
+
+        # Convert relative URLs to absolute
+        full_url = urljoin(base_url, src)
+
+        # Only include http/https URLs
+        if full_url.startswith('http'):
+            img_urls.append(full_url)
+
+    logger.info(f"    Found {len(img_urls)} images in HTML")
+    return img_urls
+
+def preprocess_image_for_ocr(img):
+    """Preprocess image to improve OCR accuracy for code/terminal screenshots."""
+    from PIL import ImageEnhance, ImageFilter
+
+    # Convert to grayscale
+    img = img.convert('L')
+
+    # Increase contrast (helps with low-contrast terminal screenshots)
+    enhancer = ImageEnhance.Contrast(img)
+    img = enhancer.enhance(2.0)
+
+    # Apply sharpening
+    img = img.filter(ImageFilter.SHARPEN)
+
+    # Apply binary threshold (black text on white background works best)
+    # This helps with dark terminal screenshots
+    img = img.point(lambda x: 0 if x < 140 else 255, '1')
+
+    return img
 
 def extract_text_from_images(img_urls):
-    headers = {
-        "User-Agent": "Mozilla/5.0 (compatible; Bingbot/2.0; +http://www.bing.com/bingbot.htm)"
-    }
+    """Extract text from images using OCR with preprocessing and error handling."""
     extracted = []
-    for img_url in img_urls:
+    success_count = 0
+
+    for idx, img_url in enumerate(img_urls, 1):
         try:
-            img_data = requests.get(img_url, headers=headers).content
+            logger.info(f"    OCR [{idx}/{len(img_urls)}]: {img_url[:80]}...")
+
+            # Download image
+            if USE_CURL_CFFI:
+                resp = cf_requests.get(img_url, impersonate="chrome", timeout=10)
+            else:
+                headers = {
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+                    "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+                    "Referer": "https://www.google.com/",
+                }
+                resp = requests.get(img_url, headers=headers, timeout=10)
+
+            resp.raise_for_status()
+            img_data = resp.content
+
+            # Open and check image dimensions
             img = Image.open(BytesIO(img_data))
-            text = pytesseract.image_to_string(img)
-            extracted.append(text)
-        except Exception:
+            width, height = img.size
+
+            # Skip tiny images (likely icons/logos)
+            if width < 100 or height < 100:
+                logger.info(f"      ⏩ Skipped (too small: {width}x{height})")
+                continue
+
+            # Skip very large images (likely not screenshots)
+            if width > 3000 or height > 3000:
+                logger.info(f"      ⏩ Skipped (too large: {width}x{height})")
+                continue
+
+            logger.info(f"      Image size: {width}x{height}")
+
+            # Preprocess for better OCR
+            processed_img = preprocess_image_for_ocr(img)
+
+            # Run OCR with optimized settings for code/terminal text
+            # PSM 6 = Assume uniform block of text (good for code blocks)
+            # PSM 11 = Sparse text (good for screenshots with mixed content)
+            custom_config = r'--oem 3 --psm 6'
+            text = pytesseract.image_to_string(processed_img, config=custom_config)
+
+            if text.strip():
+                extracted.append(f"=== Image {idx}: {img_url} ===\n{text.strip()}")
+                success_count += 1
+                logger.info(f"      ✓ Extracted {len(text.strip())} characters")
+            else:
+                logger.info(f"      ⚠️ No text found")
+
+        except requests.RequestException as e:
+            logger.warning(f"      ❌ Failed to download: {e}")
+        except Exception as e:
+            logger.warning(f"      ❌ OCR failed: {e}")
             continue
-    return "\n".join(extracted)
+
+    logger.info(f"    OCR Summary: {success_count}/{len(img_urls)} images extracted successfully")
+    return "\n\n".join(extracted)
 
 import yaml
 import re
@@ -750,7 +883,7 @@ def handle_article(url, cached, start_urls):
         return
 
     try:
-        image_urls = extract_images_from_html(raw_html)
+        image_urls = extract_images_from_html(raw_html, url)
         image_text = extract_text_from_images(image_urls)
         full_text = clean_text(text + "\n" + image_text)
 
@@ -822,6 +955,12 @@ def main():
     cached = read_cached_urls()
     with open(URLS_FILE, "r") as f:
         base_urls = [u.strip() for u in f if u.strip()]
+
+    # Log which HTTP client is being used
+    if USE_CURL_CFFI:
+        logger.info("🌐 Using curl_cffi with automatic Chrome impersonation (TLS + HTTP/2 fingerprinting)")
+    else:
+        logger.info("🌐 Using requests library with manual headers (curl_cffi not installed)")
 
     logger.info(f"Starting scan with {len(base_urls)} sources, {len(cached)} cached URLs")
 
