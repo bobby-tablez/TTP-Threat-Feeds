@@ -1,0 +1,165 @@
+description: '''Report detailing various components of a suspected malicious software
+  suite including drivers, executables, and build details.'''
+attribution: Silver Fox APT
+malware_families: '[''Silver Fox Winos'']'
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - dwm.exe
+  - ipconfig.exe
+  - CreateProcessithTokenW
+  - CreateProcessithLogonW
+  commandline:
+  - cmd /c start /min ipconfig /release
+  - cmd /c start /min ipconfig /renew
+  - cmd / start /min ipconfig /renew
+  powershell: []
+  scripting_engine:
+  - Python
+  registry_keys:
+  - HKLM\\SYSTEM\\CurrentControlSet\\Services\\kernelquick
+  - HKLM\\SOFTWARE\\IpDates
+  - HKLM\\SYSTEM\\CurrentControlSet\\Services\\kernelquick\\SERVICE_KERNEL_DRIVER
+  - HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\Shell
+  - HKEY_LOCAL_MACHINE\\SOFTWARE
+  - \\\\Registry\\\\Machine\\\\Software
+  - \\\\Registry\\\\Machine\\\\SYSTEM\\\\CurrentControlSet\\\\services\\\\kernelquick
+  image_load:
+  - Driver Plugin.dll
+  - Driver Plugin.dll_Driver Functions.sys_KernelQuick_Hidden.sys
+  - ntdll.d11
+  - dwm.exe
+  network_connections: []
+  file_activity:
+  - C:\\Windows\\System32\\drivers\\DsArk64.sys
+  - C:\\Windows\\System32\\drivers\\360AntiSteal64.sys
+  - C:\\Windows\\System32\\drivers\\360FsFlt.sys
+  - C:\\Windows\\System32\\drivers\\360netmon.sys
+  - C:\\Windows\\System32\\drivers\\360AntiAttack64.sys
+  - C:\\Windows\\System32\\drivers\\360AntiHijack64.sys
+  - C:\\Windows\\System32\\drivers\\360AntiExploit64.sys
+  - C:\\Windows\\System32\\drivers\\360AntiHacker64.sys
+  - C:\\Windows\\System32\\drivers\\BAPIDRV64.sys
+  - C:\\Windows\\System32\\drivers\\360reskit64.sys
+  - C:\\Windows\\System32\\drivers\\360qpesv64.sys
+  - C:\\Windows\\System32\\drivers\\360Sensor64.sys
+  - C:\\Windows\\System32\\drivers\\360Box64.sys
+  - C:\\Program Files (x86)\\360\\360Safe\\deepscan\\AtS64.sys
+  - C:\\Windows\\System32\\drivers\\sysdiag_win10.sys
+  - C:\\Windows\\System32\\drivers\\hrwfpdrv_win10.sys
+  - C:\\Windows\\System32\\drivers\\sysdiag.sys
+  - C:\\Windows\\System32\\drivers\\hrwfpdrv.sys
+  - C:\\Windows\\System32\\drivers\\TAOAcceleratorEx64_ev.sys
+  - C:\\Windows\\System32\\drivers\\TAOAccelerator64.sys
+  - C:\\Windows\\System32\\drivers\\qmbsecx64.sys
+  - C:\\Windows\\System32\\drivers\\TFsFltX64_ev.sys
+  - C:\\Windows\\System32\\drivers\\TAOKernel64.sys
+  - C:\\Windows\\System32\\drivers\\ksapi64.sys
+  - C:\\Program Files (x86)\\kingsoft\\kingsoft antivirus\\security\\kxescan\\kdhacker64_ev.sys
+  - C:\\Program Files (x86)\\kingsoft\\kingsoft antivirus\\security\\kxescan\\kdhacker64.sys
+  - C:\\Windows\\System32\\drivers\\kavbootc64_ev.sys
+  - C:\\Windows\\System32\\drivers\\KAVBootC64.sys
+  - C:\\Windows\\System32\\drivers\\kisknl.sys
+  - C:\\Windows\\System32\\drivers\\bootsafe64.sys
+  - C:\\Windows\\System32\\drivers\\ksthlp64.sys
+  - C:\\Program Files (x86)\\kingsoft\\kingsoft antivirus\\security\\ksde\\kisnetflt64.sys
+  - C:\\Program Files (x86)\\kingsoft\\kingsoft antivirus\\security\\ksnetm\\kisnetm64.sys
+  - C:\\Program Files (x86)\\kingsoft\\kingsoft antivirus\\khwinfo64.sys
+  - C:\\Windows\\System32\\drivers\\klgse.sys
+  - C:\\Windows\\System32\\drivers\\klhk.sys
+  - C:\\Windows\\System32\\drivers\\klflt.sys
+  - C:\\Windows\\System32\\drivers\\klif.sys
+  - C:\\Windows\\System32\\drivers\\klwtp.sys
+  - C:\\Windows\\System32\\drivers\\klim6.sys
+  - C:\\Windows\\System32\\drivers\\klkbdflt2.sys
+  - C:\\Windows\\System32\\drivers\\cm_km.sys
+  - C:\\Windows\\System32\\drivers\\kldisk.sys
+  - C:\\Windows\\System32\\drivers\\klwfp.sys
+  - C:\\Windows\\System32\\drivers\\kneps.sys
+  - C:\\Windows\\System32\\drivers\\klpd.sys
+  - C:\\Windows\\System32\\drivers\\klupd_klif_arkmon.sys
+  - C:\\Windows\\System32\\drivers\\klupd_klif_klbg.sys
+  - C:\\Windows\\System32\\drivers\\klbackupdisk.sys
+  - C:\\Windows\\System32\\drivers\\klupd_klif_klark.sys
+  - C:\\Windows\\System32\\drivers\\klupd_klif_mark.sys
+  - C:\\ProgramData\\Kaspersky Lab\\AVP21.3\\Bases\\klids.sys
+  - C:\\Windows\\system32\\dwm.exe
+  - 23423.txt
+  - kernelquick.sys
+  persistence:
+  - Write Startup Directory
+  - Write Registry Startup
+  - Scheduled Task
+  - SetDriverStartType_SystemStart()
+  - Add Startup via Local Group Policy
+  - Create scheduled tasks for persistence
+  - Modify registry keys for driver settings
+  - Set driver start type to SYSTEM_START
+  process_relations:
+  - UserMode Shellcode Storage and Injection -> dwm.exe
+  - cmd.exe -> ipconfig.exe
+  - CreateProcessithTokenW -> dwm.exe
+  - CreateProcessithLogonW -> dwm.exe
+IOCs:
+  hashes:
+  - 7f5bad67cec7492b023ca08e8fa3ed5db9eb186fab0472b34993fe3cb96383be
+  - a57dd44b7bc6233496657867cf053199213289f58c1c3c8d4eb565ed3707deb1
+  - 74d70f53748125eb4439cb790817fb1d0e9159f75c7dd5148444f507ba6dee1d
+  - 0a6376107abdf30ea14f4bdaf785b2db7d18e0818bd332511dcce3824b8a42b6
+  - ed4a064ef099e0ea40faf4b1e3618f20c52833b148ae578f80f09eabd2d6acd2
+  - 2c34d8fc0881d3cd4fb693fc5fe2edf405b8424174d3dbb800385fd70969f39d
+  - 79daa001c67dc83bdd6189417ccf4bf83ea5da4c6211bbac91c1d7d55f76fa5f
+  - 14b85b07bfdd134e709ff973871d75d33ecca964457373b76b34a70183c2b1d0
+  - 2aa029088c04eb10b056c18fcc39395936e6f01ee9ebdeed2558e4899116ee86
+  - 1bd71ea3b9409a6e86fac12039258f8ed8b59261ff2509673544e4a548987931
+  - 13d7380344bf1f9e17e8970c01127a2fe2528d3e640b36ef478ccd4024033411
+  - 61598b986aeaeb24d7565a7bb3a113e61f88b4d4c6169d2bd7fd0b988d3e41c9
+  - dee2b2da6b917d2dc7d3dcbbd3c505dd4f128c07059659f9e891000faef2512c
+  - 746f2d5d727511c1bd1ad936f35ac0851a520aadcf201f0d5e23dc6cd728dd4a
+  - 9dd0e7dccc7105a30b3a71f10126be4ee5a8e770e743fc4f0bbea0e45cafb39f
+  - 96c54665cda4f04e9ff60faebcd993d0cf98988258249d9e00fe563be7923899
+  - aaf8258585d086cce588a3e870eb485270ee135087eee9ef8766db9f86677ecd
+  - 90f24d6175e1b5fac4e2844e77554ff03dec2174f18c07c008699af540fe2788
+  - 6f79ee17dbb75d1ed7e0535a7b498c2249d538c0836d6ecee16fec491b200ce9
+  - 9f456f3125d7f6ce907e13ec637b9b8c6e4a43b1c9f352d233cfebbc2d0fff32
+  - 93e75eada1b8f155bdb41c1af0f7d7ea390b280c6f49c8834c11af2e8f6c3a1c
+  - 054a22279de7a8c0fd75a72b39648dd2429bef07c268756087ed96792dde4a4c
+  - 860acd2b9aec21cf03e1c5ec8f79b1ef4e7b78eb9ba7a6c0a915586957356aea
+  - 5dcde82f7a2db50dddf9b42dab3e3affabedfe237d7c956a1de660a702fa74b6
+  - 4d0517229ef88f2410a2a1983eaf4036872911c8cf31c3ceb38c11210d02e91e
+  - 9e82fe6322585d613c8409fa445394e2e38f24ef85733b8dafcfa3ce8dc23517
+  - 9ec3c31ca3bcdd4597d3e928e36fb0202a5111da7e5d169c58bd97b4ae61ee38
+  - 35fbedfafa9a2267d8eab711ce0e9db66dca304a4b4379d7a965ce3893b51fc1
+  - 85296ee0d867175da1b790f472824f6e702930676aa9b41c4f40f62f41e91652
+  - e22fb0c295eefaeb4b25a0b9038a0c60cec9389b894fa22902a7122ddb8779a2
+  - 5e4085553f083d1fd31d673f0746670dfc1f9ebb9911f2fe754e59d9ca6176dc
+  - dca90d7d9e5770acbd991af69bafa80fe596430c29c78d5036a8fb08ff900e12
+  - d17bf1c3d50bf4acba18418b0cdcc524be268848b15542e4895a74dd0e4606fb
+  - 55c07dd40ffcf07d569b8b762513cdbfc51e7a4c77ce6613524794515b7d6682
+  - 7c9554c18a6b8fe87a570dd5cd5a0f041a782fc2424ab02ac675e474e2e0a9ce
+  - e60298307befa4b22eeedef02019a39c93729567fcd4a7745350fd27a92538bd
+  - 05e578a967168b704d8bdcba95a8d69fdda25854263e037990add05ccb403115
+  - e19ae27f03c252d4e7b44c462a4edaa1ae759888bcd25cb7863c3c08c35936f1
+  - a38b91c061157011a00d29c5e3169fbf2b29c0b0cacc0153dc0cf9918e92c9b7
+  - b5949ce7e802740e9548ba83ccdb20470fa405fdf9866b3fc3f85a393882
+  ip_addresses: []
+  domains: []
+  urls:
+  - https://www.sun-rat.com/
+  - https://github.com/GkaMei/winos4.0
+  - https://github.com/Logkiss/Rat-winos4.0-gh0st/tree/master/WinosOriginal Hidden
+    rootkit driver
+  - https://github.com/horsicq/Detect-It-Easy
+  - https://www.angusj.com/resourcehacker/
+  - https://lief.re/
+  - https://learn.microsoft.com/en-us/windows-hardware/drivers/install/kernel-mode-code-signing-policywindows-vista-and-later-#exceptions
+  - https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/design/microsoft-recommended-driver-block-rules
+  - https://github.com/antonioCoco/MalSeclogon
+  - https://github.com/joxeankoret/diaphora
+authors:
+- Check Point
+CVEs: '[]'
+reference: https://research.checkpoint.com/2025/cracking-valleyrat-from-builder-secrets-to-kernel-rootkits/
+date_of_publication: December 10, 2025
+file_creation_date: December 11, 2025

@@ -1,0 +1,54 @@
+description: Threat actors used a combination of malware families including ROMCOM
+  RAT and targeted various entities in Europe, US, and Ukraine.
+TTPs:
+  processes:
+  - powershell.exe
+  - cmd.exe
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - linkedservice[.]com
+  - linkexseexvice[.]com
+  - doubletwistertop[.]Jcom
+  - buyicecream[.]jcom
+  - doubletwistertop[.Jcom, GreasedLightning, 80
+  - buyicecream[.jcom, GreasedLightning, 80
+  file_activity:
+  - C:\\ProgramData\\Microsoft\\Windows\\SystemProcessHost.exe
+  - C:\\ProgramData\\..\\SystemProcessHost.exe
+  persistence:
+  - Scheduled task to launch SystemProcessHost.exe at every boot with SYSTEM privileges
+  - Create and run scheduled task Payload running as SYSTEM
+  process_relations: []
+CVEs:
+- CVE-2018-6065
+- CVE-2023-36884
+- CVE-2024-9680
+- CVE-2024-49039
+- CVE-2025-8088
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - tdmsec[.]com
+  - redirect-woxkspace[.]com
+  - linkedservice[.]com
+  - linkexseexvice[.]com
+  - doubletwistertop[.]Jcom
+  - buyicecream[.]jcom
+  - doubletwistertop[.Jcom
+  - buyicecream[.jcom
+  urls:
+  - hxxps://tdmsec[.]com/blog/how-to-improve-security?utmad=cb3ae61f-9103-479c-a79e-7131e77ce2e8
+  - hxxp://redirect-woxkspace[.]com/functions.js?t=1957652862
+authors:
+- Stephen Hilt
+malware_families:
+- ROMCOM RAT
+- GreasedLightning
+reference: https://www.trendmicro.com/en_us/research/25/l/SHADOW-VOID-042.html
+date_of_publication: December 11, 2025
+file_creation_date: December 11, 2025

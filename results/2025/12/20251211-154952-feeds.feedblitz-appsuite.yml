@@ -1,0 +1,44 @@
+description: Browser hijackers use various techniques including modifying browser
+  preference files, simulating key presses, and manipulating command line arguments
+  to extend their control.
+malware_families:
+- AppSuite
+- BRATbrowser
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - chrome.exe --load-extension=<path>
+  powershell:
+  - configuration.ps1
+  scripting_engine:
+  - VBS
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Google\\Chrome\\ExtensionInstallForcelist
+  image_load:
+  - UtilityAddon.node
+  network_connections: []
+  file_activity:
+  - '%APPDATA%\\Mozilla\\Firefox\\Profiles\\<profilename>\\prefs.js'
+  - '%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default\\Preferences'
+  - '%TEMP%\\temp_cleanup.ico'
+  - LOCALAPPDATA\\DiagnosticNET\\configuration.ps1
+  persistence:
+  - Scheduled tasks running VBS and PowerShell scripts
+  process_relations: []
+IOCs:
+  hashes:
+  - 6022fd372dca7d6d366d9df894e8313b7f0bd821035dd9fa7c860b14e8c414f2
+  - 6ae8c50e3b800a6a0bff787e1e24dbc84fb8f5138e5516ebbdc17f980b471512
+  - a1c49a02d19bb93e45a0ec6c331bba7e615c6f05ae43d0dfd36cf4d8e2534c6a
+  - 1d9bebfec33fa5a5381f0d1fcc3a57e83a2f693a2e0d688cdb86abfa7484a28d
+  - 847a629e3f3c4068c26201ed5e727cda98b3ac3d832061feae0708ff8007d4fb
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- Author of the report
+reference: https://feeds.feedblitz.com/~/932739746/0/gdatasecurityblog-en~Browser-Hijacking-Three-Technique-Studies
+date_of_publication: December 10, 2025
+file_creation_date: December 11, 2025

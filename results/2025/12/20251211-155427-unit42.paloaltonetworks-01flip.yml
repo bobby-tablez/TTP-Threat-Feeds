@@ -1,0 +1,66 @@
+description: Financially motivated attackers used the 01flip ransomware, a Rust-based
+  ransomware targeting victims in the Asia-Pacific region.
+malware_families:
+- 01flip
+- Unknown
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - ping 127.0.0.7 -n 5 > Nul & fsutil file setZeroData offset=0 length=4194303 ${self_name} > Nul & Del /f /q ${self_name}
+  - sleep 5 && dd if=/dev/urandom of=${self_name} bs=1M count=4 > /dev/null 2>&1 && rm ${self_name} > /dev/null 2>&1
+  - powershell.exe -NoProfile -WindowStyle Hidden -File C:\\Users\\User\\Downloads\\script.ps1
+  powershell:
+  - IwB3A34IB3GTAL2424254| 11Bmfi%%fiq;fifgggmfifi342]()24]54 S455A102E37 4603,o 7'F5256347B78813>7
+    J250425L;B' ror
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - cipher
+  - rsa
+  - tokio
+  - base64
+  - ctr
+  - generic-array
+  - aes
+  - gimli
+  - hashbrown
+  - mio
+  - num-bigint-dig
+  - parking_lot
+  - pem-rfc7468
+  - rand
+  - rand_chacha
+  - rand_core
+  - rsa
+  - smallvec
+  - spin
+  - walkdir
+  - winapi-util
+  - zeroize
+  network_connections: []
+  file_activity:
+  - RECOVER-YOUR-FILE.TXT
+  - ${self_name}
+  - C:\\Users\\User\\Downloads\\script.ps1
+  - image.jpg.91329991434f8b0219a1368ef36add.0.01flip
+  - RECOVER-YOUR-FILETXT 6/24/2025 3:19 PM
+  persistence: []
+  process_relations: []
+CVEs:
+- CVE-2019-11580
+IOCs:
+  hashes:
+  - 6aad1c36ab9c7c44350ebe3a17178b4fd93c2aa296e2af212ab28d711c0889a3
+  - e5834b7bdd70ec904470d541713e38fe933e96a4e49f80dbfb25148d9674f957
+  - ba41f0c7ea36cefe7bc9827b3cf27308362a4d07a8c97109704df5d209bce191
+  ip_addresses: []
+  domains:
+  - proton.me
+  - getsession.org
+  urls:
+  - https://getsession.org
+reference: https://unit42.paloaltonetworks.com/new-ransomware-01flip-written-in-rust/
+date_of_publication: November 25, 2025
+file_creation_date: December 11, 2025

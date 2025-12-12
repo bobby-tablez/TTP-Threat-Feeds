@@ -1,0 +1,35 @@
+description: Phishing kits are advanced attack platforms that use fake login pages
+  and reverse proxies to steal credentials, bypass MFA, and hijack live sessions.
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - CA\\Users\\admir\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\f77b7946-7dff-4cce-ab3c-71af9c0d1fe2.tmp
+  - CAUsers\\admin\\AppData\\Local\\Microsoft\\Edge\\User Data\\Last Browser
+  - CAUsers\\admin\\AppData\\Local\\Temp\\chrome_Unpacker_BeginUnzipping7480_1080297098\\service_worker_bin_prod.js
+  - CAUsers\\admin\\AppData\\Local\\Temp\\chrome_Unpacker_BeginUnzipping7480_1080297098\\offscreendocument_mainjs
+  - CAUsers\\admirMAppData\\Local\\Temp\\chrome_Unpacker_BeginUnzipping7480_1080297098\\page_embed_script
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - CA\\Users\\admir\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\f77b7946-7dff-4cce-ab3c-71af9c0d1fe2.tmpcdbdee2aeab9cc6aB3331bbedbdc2caada299d21329efb0336fc02282e1839a8
+  - CAUsers\\admin\\AppData\\Local\\Microsoft\\Edge\\User Data\\Last Browser9c70f76603b84fc2bb298efa37ccI191128bec336329cc11468cfadbe3b13774
+  - CAUsers\\admin\\AppData\\Local\\Temp\\chrome_Unpacker_BeginUnzipping7480_1080297098\\service_worker_bin_prod.js7d9db5467f742f61038384aa1a241ab525456afad92a2ac7119957c428e55139
+  - CAUsers\\admin\\AppData\\Local\\Temp\\chrome_Unpacker_BeginUnzipping7480_1080297098\\offscreendocument_mainjscde7hB69eabf32a349fh51717fdcd899f15fd7a485580f4aacl8c7631648732f7
+  - CAUsers\\admirMAppData\\Local\\Temp\\chrome_Unpacker_BeginUnzipping7480_1080297098\\page_embed_scriptis7ee0270708160bd5b316f4b025099992792a953c07d3ab619789abf7252ab9f0
+  ip_addresses: []
+  domains:
+  - anterospt.carrd.co
+  urls:
+  - https://iraD1.safelinks.protection.outlook.com/?url=https%3A%2F%2Fanterospt.carrd.co%2F
+reference: https://any.run/cybersecurity-blog/phishkit-attacks-101/
+date_of_publication: December 11, 2025
+file_creation_date: December 11, 2025

