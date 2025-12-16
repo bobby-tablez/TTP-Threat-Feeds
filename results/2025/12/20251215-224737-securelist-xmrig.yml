@@ -1,0 +1,117 @@
+description: Exploitation of CVE-2025-55182 in React Server Components allows attackers
+  to execute commands, read/write files, and deploy malware including XMRig.
+malware_families:
+- XMRig
+- RondoDox
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - wget
+  - curl
+  - bash
+  commandline:
+  - whoami
+  - echo $((42507*44590))
+  - rm /dev/health.sh
+  - sudo killall -9 health.sh bot x86 fghgf xmrig;sudo pkill -9 health.sh
+  - pkill -9 health.sh bot x86 fghgf xmrig;pkill -9 health.sh
+  - rm /dev/shm/fghgfrm /tmp/fghgfrm /tmp/config.json
+  - systemctl disable c3pool_miner
+  - systemctl stop c3pool_miner
+  - for p in /proc/[0-9]*; do pid=${p##/proc/}; [ ! -e \"$p/exe\" ] && kill -9 \"$pid\"
+    && continue; exelink=$(ls \"$p/exe\"); [[ \"$exelink\" == *\"/lib\"* ]] && continue;
+    for dir in tmp var dev mnt run home; do [[ \"${exelink#*/$dir/}\" != \"$exelink\"
+    ]]; kill -9 \"$pid\" && break; done; done
+  - setenforce 0
+  - service apparmor stop
+  - mount remount,rw /
+  powershell:
+  - wget
+  - curl
+  - wget from BusyBox
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - /dev/health.sh
+  - /tmp/fghgf
+  - /tmp/config.json
+  persistence:
+  - disable c3pool_miner
+  - stop c3pool_miner
+  - kill -9 health.sh bot x86 fghgf xmrig
+  - pkill -9 health.sh bot x86 fghgf xmrig
+  - rm /dev/shm/fghgfrm /tmp/fghgfrm /tmp/config.json
+  process_relations: []
+CVEs:
+- CVE-2025-55182
+IOCs:
+  hashes:
+  - 0450fe19cfb91660e9874c0ce7a121e0
+  - 3ba4d5e0cf0557f03ee5a97a2de56511
+  - 622f904bb82c8118da2966a957526a2b791f123b
+  - aaff1b92873bd4b7a969387c6381ebf8f0349b8d
+  - 47c5e623bbcef6be82057e481a2d07b177d9d94463a7441
+  ip_addresses:
+  - 172.237.55.180
+  - 176.117.107.154
+  - 193.34.213.150
+  - 23.132.164.54
+  - 31.56.27.76
+  - 31.56.27.97
+  - 41.231.37.153
+  - 51.81.104.115
+  - 59.7.217.245
+  - 68.142.129.4
+  - 89.144.31.18
+  - 51.91.77.94:13339
+  - 51.91.77.94:13337
+  domains:
+  - hxxp://gfxnick.emerald.usbx[.]me
+  - hxxp://meomeoli.mooo[.]com:8820/CLoadPXP/
+  - hxxps://api.hellknight[.]xyz
+  - hxxps://gist.githubusercontent[.]com/demonic-agents/39e943f4de855e2aef12f34324cbf150/raw/e767e1cef1c35738689ba4df9c6f7f29a6afba1a/
+  urls:
+  - hxxp://172.237.55.180/bh
+  - hxxp://172.237.55.180/ch
+  - hxxp://176.117.107.154/both
+  - hxxp://193.34.213.150/nuts/bolt
+  - hxxp://193.34.213.150/nuts/x86
+  - hxxp://23.132.164.54/both
+  - hxxp://31.56.27.76/n2/x86
+  - hxxp://31.56.27.97/scripts/4thepool_miner[.]sh
+  - hxxp://41.231.37.153/rondo[.]aqu[.]sh
+  - hxxp://41.231.37.153/rondo[.]arc700
+  - hxxp://41.231.37.153/rondo[.]armeb
+  - hxxp://41.231.37.153/rondo[.]armebhfh
+  - hxxp://41.231.37.153/rondo[.]armv4l
+  - hxxp://41.231.37.153/rondo[.]armv5l
+  - hxxp://41.231.37.153/rondo[.]armv6l
+  - hxxp://41.231.37.153/rondo[.]armv7l
+  - hxxp://41.231.37.153/rondo[.]i486
+  - hxxp://41.231.37.153/rondo[.]i586
+  - hxxp://41.231.37.153/rondo[.]i686
+  - hxxp://41.231.37.153/rondo[.]m68k
+  - hxxp://41.231.37.153/rondo[.]mips
+  - hxxp://41.231.37.153/rondo[.]mipsel
+  - hxxp://41.231.37.153/rondo[.]powerpc
+  - hxxp://41.231.37.153/rondo[.]powerpc-440fp
+  - hxxp://41.231.37.153/rondo[.]sh4
+  - hxxp://41.231.37.153/rondo[.]sparc
+  - hxxp://41.231.37.153/rondo[.]x86_64
+  - hxxp://51.81.104.115/nuts/bolt
+  - hxxp://51.81.104.115/nuts/x86
+  - hxxp://59.7.217.245:7070/app2
+  - hxxp://59.7.217.245:7070/c[.]sh
+  - hxxp://68.142.129.4:8277/download/c[.]sh
+  - hxxp://89.144.31.18/nuts/bolt
+  - hxxp://89.144.31.18/nuts/x86
+  - hxxps://api.hellknight[.]xyz/jsh
+  - hxxps://gist.githubusercontent[.]com/demonic-agents/39e943f4de855e2aef12f34324cbf150/raw/e767e1cef1c35738689ba4df9c6f7f29a6afba1a/setup_c3pool_miner[.]sh
+authors:
+- Yaroslav Shmelev
+reference: https://securelist.com/cve-2025-55182-exploitation/118331/
+date_of_publication: December 11, 2025
+file_creation_date: December 15, 2025

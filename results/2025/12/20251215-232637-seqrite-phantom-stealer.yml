@@ -1,0 +1,47 @@
+description: Russian phishing campaign using a fake payment confirmation lure to deliver
+  Phantom stealer malware through a multi-stage attachment chain.
+attribution: Operation MoneyMount-ISO
+malware_families:
+- Phantom Stealer
+TTPs:
+  processes:
+  - HvNC.exe
+  - cmd.exe
+  - powershell.exe
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load:
+  - CreativeAI.dll
+  network_connections:
+  - Telegram module hxxps://discordapp.com/api/webhooks/143138186644...EPOWJm74GOZpqJMIKIKTAAWsSKMiUIaLaShpn_VTGWZPjJNYj6_ioSs-BQNZt1WK-
+  - Discord module hxxps://discordapp.com/api/webhooks/143138186644...EPOWJm74GOZpqJMIKIKTAAWsSKMiUIaLaShpn_VTGWZPjJNYj6_ioSs-BQNZt1WK-
+  file_activity:
+  - HvNC.exe
+  - CreativeAI.dll
+  - grabbed files in archive
+  persistence:
+  - Run keys for persistence
+  process_relations: []
+IOCs:
+  hashes:
+  - 27bc3c4eed4e70ff5a438815b1694f83150c36d351ae1095c2811c962591e1bf
+  - 4b16604768565571f692d3fa84bda41ad8e244f95fbe6ab37b62291c5f9b3599
+  - 60994115258335b1e380002c7efcbb47682f644cb6a41585a1737b136e7544f9
+  - 78826700c53185405a0a3897848ca8474920804a01172f987a18bd3ef9a4fc77
+  ip_addresses: []
+  domains:
+  - iskra-svarka.ru
+  - agroterminal.c
+  urls:
+  - hxxps://discordapp.com/api/webhooks/143138186644...EPOWJm74GOZpqJMIKIKTAAWsSKMiUIaLaShpn_VTGWZPjJNYj6_ioSs-BQNZt1WK-
+authors:
+- Dixit Panchal
+- Soumen Burma
+- Kartik Jivani
+reference: https://www.seqrite.com/blog/operation-moneymount-iso-deploying-phantom-stealer-via-iso-mounted-executables/
+date_of_publication: December 12, 2025
+file_creation_date: December 15, 2025

