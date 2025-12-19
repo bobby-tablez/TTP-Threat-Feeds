@@ -1,0 +1,37 @@
+description: Researchers demonstrated a remote code execution vulnerability in the
+  Unisoc UIS7862A modem, allowing full control over vehicle head units.
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - 'lat /dev/sttu_lte5 & sleep 8.1; echo -e "AT+SPSERVICETYPE?\\rTM > /dev/stty lte5
+    *HSPSERVICETYPE: ,28644343970Kconsole:/ #'
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - modem, eNB, 3G/4G port
+  file_activity:
+  - /dev/sttu_lte5
+  - /dev/stty lte5
+  persistence:
+  - Using ROP chain to patch NAS protocol handler
+  process_relations: []
+CVEs:
+- CVE-2024-39431
+- CVE-2024-39432
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - https://securelist.com/wp-content/themes/securelist2020/assets/images/enterprise-menu-icons/industrial-cybersecurity.png
+  - https://media.kasperskydaily.com/wp-content/uploads/sites/92/2024/04/10052437/k_Next_RGB_black_icon.png
+authors:
+- Alexander Kozlov
+- Sergey Anufrienko
+reference: https://securelist.com/attacking-car-modem/118463/
+date_of_publication: December 16, 2025
+file_creation_date: December 19, 2025

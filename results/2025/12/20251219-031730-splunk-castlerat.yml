@@ -1,0 +1,63 @@
+description: CastleRAT is a Remote Access Trojan (RAT) that gathers system information,
+  exfiltrates clipboard data, and performs various malicious activities including
+  keylogging, screen capture, and persistence through scheduled tasks.
+malware_families:
+- CastleRAT
+- Castlerat
+TTPs:
+  processes:
+  - rundll32.exe
+  - ComputerDefaults.exe
+  - chrome.exe
+  - msedge.exe
+  - brave.exe
+  - firefox.exe
+  commandline:
+  - 'rundll32.exe shell32.dll, #61'
+  - '"C:\\Temp\\castlerat_SEMIFIX.exe"'
+  - '"--mute-audio --do-not-de-elevate"'
+  powershell:
+  - Not explicitly provided in the report
+  - New-ScheduledTaskAction -Execute "powershell.exe", New-ScheduledTaskTrigger -RepetitionInterval
+    (New-TimeSpan -Minutes 2) -RepeatIndefinitely
+  - Register-ScheduledTask -TaskName "task_name" -User "SYSTEM" -RunLevel Highest
+    -Action $action -Settings $settings
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load: []
+  network_connections: []
+  file_activity:
+  - C:\\Temp\\castlerat_SEMIFIX.exe
+  - C:\\Temp\\castlerat_SEMIFIX_s.exe
+  - C:\\Temp\\test.exe
+  persistence:
+  - Registers a Scheduled Task that runs a local copy of the malware at system startup
+  - Scheduled task creation to run PowerShell script
+  process_relations:
+  - ComputerDefaults.exe -> [malware process]
+  - ComputerDefaults.exe -> castlerat_SEMIFIX.exe
+IOCs:
+  hashes:
+  - MD5=66904-1C08- ADSA-6904-83000000FBG3
+  - MD5=66904-FAB7- ABF7-6904-02020000FER3
+  ip_addresses: []
+  domains:
+  - www.ip-api.com
+  - steamcommunity.com
+  - ip-api.com
+  urls: []
+authors:
+- Teoderick Contreras
+- Michael Haag
+- Nasreddine Bencherchali
+- Lou Stella
+- Bhavin Patel
+- Rod Soto
+- Eric McGinnis
+- Patrick Bareiss
+- Raven Tait
+- Jose Hernandez
+reference: https://www.splunk.com/en_us/blog/security/castlerat-malware-detection-splunk-mitre-attck
+date_of_publication: December 19, 2025
+file_creation_date: December 19, 2025

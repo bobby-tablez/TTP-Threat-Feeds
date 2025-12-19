@@ -1,0 +1,37 @@
+description: Researchers discovered methods to bypass CloudTrail logging for AWS Service
+  Catalog and Control Tower services using gamma endpoints.
+TTPs:
+  processes:
+  - powershell.exe
+  commandline:
+  - powershell.exe -NoProfile -WindowStyle Hidden -File C:\\Users\\Public\\Documents\\setup.ps1
+  powershell:
+  - IwB3AHMAaABlAGwAbAAgAC0ATgBPAFByAG8AZgBpAGwAZQAgAC0AVwBpAG4AZA9TAHQAWQBsZSBIAEgASABpAGQAZABlAG4AIAB8ACAALQBjACAAJwAkAGUAbgB2ADoAcwB5AHMAdABlbABvAGMAYwB1AHAAcgBlAFMAZQBydmljAGUAPQBTAGkAeABpAHMAaABlAE4AZQB0AHcAbwByAGsALgBBAGwAYwBoAGEASABFAHgAaQB0AGkAbwBuACcA
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load: []
+  network_connections:
+  - aws242-servicecatalog-gamma.us-east-1.amazonaws.com
+  - prod.us-east-1.blackbeard.aws.a2z.com
+  file_activity:
+  - C:\\Users\\Public\\Documents\\setup.ps1
+  - C:\\Users\\Public\\Documents\\malicious.dll
+  persistence:
+  - Adding a scheduled task to run PowerShell script at startup
+  process_relations: []
+IOCs:
+  hashes:
+  - 234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef12345678
+  ip_addresses: []
+  domains:
+  - aws242-servicecatalog-beta.us-east-1.amazonaws.com
+  - aws242-servicecatalog-gamma.us-east-1.amazonaws.com
+  - gamma.us-east-1.blackbeard.aws.a2z.com
+  - prod.us-east-1.blackbeard.aws.a2z.com
+  urls: []
+authors:
+- Nick Frichette
+reference: https://securitylabs.datadoghq.com/articles/bypass-cloudtrail-aws-service-catalog-and-other
+date_of_publication: March 20, 2023
+file_creation_date: December 19, 2025

@@ -1,0 +1,33 @@
+description: Threat actors are abusing remote monitoring and management (RMM) tools
+  for access to and persistence in victim environments.
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - C:\\WINDOWS\\system32\\sc.exe start GoToResolve_2362921307173827601
+  - c:\\program files (x86)\\screenconnect client (fdeeb5df8057eef0)\\screenconnect.clientservice.exe
+  - C:\\Users\\REDACTED\\Downloads\\276Special%10Invitation9756.msi
+  - NewAMG2908.exe
+  - OPENINVITATION.exe
+  - Thanksgiving-iv.exe
+  - Contract Revised.exe
+  - EVITEINVITERSOLVELIST.exe
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - C:\\Users\\REDACTED\\Downloads\\276Special%10Invitation9756.msi
+  - NewAMG2908.exe
+  - OPENINVITATION.exe
+  - Thanksgiving-iv.exe
+  - Contract Revised.exe
+  - EVITEINVITERSOLVELIST.exe
+authors:
+- Austin Worline
+- Lindsey O'Donnell-Welch
+reference: https://www.huntress.com/blog/series-of-unfortunate-rmm-events
+date_of_publication: December 19, 2025
+file_creation_date: December 19, 2025

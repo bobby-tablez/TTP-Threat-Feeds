@@ -1,0 +1,153 @@
+description: LongNosedGoblin, a China-aligned APT group, targets governmental entities
+  in Southeast Asia and Japan using custom tools like NosyHistorian, NosyDoor, NosyStealer,
+  NosyDownloader, NosyLogger, and others.
+attribution: LongNosedGoblin
+malware_families:
+- NosyHistorian
+- NosyDoor
+- NosyStealer
+- NosyDownloader
+- NosyLogger
+- ReverseSocks5
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - pmp.exe
+  - notepad.exe
+  - UevAppMonitor.exe
+  - TCOCertified.exe
+  - AdobeHelper.exe
+  - HPSupportAssistant
+  - RTLWVern.exe
+  - hpSmartAdapter.exe
+  - hputils.exe
+  - IGCCSvc.exe
+  - HPNDFInterface.exe
+  - bemsvc.exe
+  - HPDeviceCheck.exe
+  - HP.OCF.exe
+  - ax_installer.exe
+  - btdevmanager.exe
+  - SERV.II
+  commandline:
+  - -connect 118.107.234[.]29:8080 -psk "58fi04qQ" /F
+  - -connect 118.107.234[.]29:8080 -psk "15Kaf22N3b"
+  - TCOCertified.exe TCOEdge.exe
+  powershell:
+  - Invoke-Expression
+  - powershell.exe -ExecutionPolicy Bypass -File C:\\Windows\\Temp\\output.avi
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load:
+  - SharedReg.dll
+  - log.cached
+  - netfxsbs9.hkf
+  - UevAppMonitor.exe.config
+  - SERV.dll
+  - msi.dll
+  - mscorsvc.dll
+  - amsi.dll
+  network_connections:
+  - pmp.exe, 118.107.234[.]29, 8080
+  - notepad.exe, 118.107.234[.]29, 8080
+  - ReverseSocks5,118.107.234[.]29,8080
+  - NosyDownloader,118.107.234[.]26,80
+  - NosyDownloader,103.159.132[.]30,80
+  - NosyDownloader,101.99.88[.]113,80
+  file_activity:
+  - C:\\Windows\\Microsoft.NET\\Framework\\SharedReg.dll
+  - C:\\Windows\\Microsoft.NET\\Framework\\log.cached
+  - C:\\Windows\\Microsoft.NET\\Framework\\netfxsbs9.hkf
+  - C:\\Windows\\Microsoft.NET\\Framework\\UevAppMonitor.exe.config
+  - C:\\ProgramData\\Microsoft\\WDF\\MDE.dat
+  - C:\\ProgramData\\Microsoft\\WDF\\mfd.dat
+  - C:\\Windows\\Temp\\TS_D418.tmp
+  - C:\\Windows\\Temp\\output.avi
+  - C:\\Windows\\Microsoft.NET\\Framework\\UevAppMonitor.exe
+  - C:\\Windows\\System32\\UevAppMonitor.exe
+  - C:\\Windows\\System32\\SharedReg.dll
+  - C:\\Windows\\System32\\log.cached
+  - C:\\Windows\\System32\\netfxsbs9.hkf
+  - SharedReg.dl1*
+  - log.cached*
+  - netfxsbsg.hkf*
+  - UevAppMenitor.exe.config
+  - MDE.dat
+  - mfd.dat
+  persistence:
+  - Scheduled task OneDrive Reporting Task-S-1-5-21-<GUID>
+  - Scheduled task Daily Check Task
+  - 'Scheduled Task/Job: Scheduled Task'
+  - 'Hijack Execution Flow: AppDomainManager'
+  - TaskScheduler
+  - Run key modification
+  process_relations:
+  - pmp.exe->SERV.dll
+  - notepad.exe->msi.dll
+  - UevAppMonitor.exe->SharedReg.dll
+  - powershell.exe->TCOCertified.exe
+IOCs:
+  hashes:
+  - 4E3F6E9D0F443F4C4297
+  - CD745BD2636F607CC4FB
+  - 154A35DD4117DB760699
+  - B1D4A283A9CCC9E34993
+  - 77D2A8CB316B7A470E76
+  - F93E449C5520C4718E28
+  - 1959E2198D6F81B2604D
+  - E0B44715BC4C327C04E6
+  - 43C8AE8561E7E3BF9CD7
+  - D11FC2D6159CB8BA392B
+  - A0A80AC293645076EBAE
+  - DDBBAE33E04A49D17DD2
+  - 60158C509446893B3B57
+  - F5B7440EE25116A49EC5
+  - 85939C56BFCACD0993E6
+  - C66F9FEC0F8CBF577840
+  - 4C2FCCE3BAB4144D90C7
+  - 161A25CB0B8FA998BF1B
+  - 4D61A9FBBCC4F7A37BE2
+  - 5AE440805719250AAEFE
+  - E93D32C739825519A10A
+  - 212126896D38C1EE5732
+  - CFFE15AA4D0F9E6577CC
+  - 6AC22CE60B706E3B9A79
+  - 2C1959DD85424CEDC96B
+  - 46107B1292B830D9BCEB
+  - 581464978C29B2BC79C6
+  - 0D91A0E52212EC44E32C
+  - 48D715466857FB0C6CD0
+  - 563677CFACD328EA2478
+  - AC2264C56121141DAF75
+  - 70A615BC580522E1EEE4
+  - E9C5E4AA335DFBD25786
+  - EC9CEB599DF3BDFFAD53
+  ip_addresses:
+  - 118.107.234[.]29
+  - 118.107.234[.]26
+  - 103.159.132[.]30
+  - 101.99.88[.]113
+  - 101.99.88[.]188
+  - 38.54.17[.]131
+  domains:
+  - www.sslvpn
+  - www.thread
+  - www.blaze
+  - www.privacy
+  - Kaopu Cloud HK Limited
+  urls:
+  - https://graph.microsoft.com/v1.0/drive
+  - https://login.microsoftonline.com/common/oauth2/v2.0/token
+  - https://web-assets.esetstatic.com/wls/2025/12-25/longnosedgoblin/figure-3.png
+  - https://web-assets.esetstatic.com/wls/2025/12-25/longnosedgoblin/figure-5-1.png
+  - https://web-assets.esetstatic.com/wls/2025/12-25/longnosedgoblin/figure-6.png
+  - https://web-assets.esetstatic.com/tn/-x145/wls/2025/12-25/eset-threat-report-h2-2025.jpg
+authors:
+- Anton Cherepanov
+- Peter Strýček
+reference: https://www.welivesecurity.com/en/eset-research/longnosedgoblin-tries-sniff-out-governmental-affairs-southeast-asia-japan/
+date_of_publication: December 18, 2025
+file_creation_date: December 19, 2025

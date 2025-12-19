@@ -1,0 +1,61 @@
+description: Vulnerabilities in Common Unix Printing System (CUPS) components allow
+  arbitrary remote code execution through UDP port 631.
+TTPs:
+  processes:
+  - cups-browsed
+  - foomatic-rip
+  commandline:
+  - dpkg -l | grep cups-browsed
+  - systemctl status cups-browsed
+  - netstat -tunapl | grep :631
+  - grep BrowseRemoteProtocols /etc/cups/cups-browsed.conf
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - libcupsfilters
+  - libppd
+  - cups-filters
+  network_connections:
+  - udp/631
+  - http://172.232.150[.]214:12345/printers/vul_scanning
+  - http://194.113.74[.]187:631/printers/amongus
+  - http://172.214.128[.]90:65000/printers/YmVuaWduYmUK
+  - http://80.94.95[.]85:65000/printers/YmVuaWduYmUK
+  - http://192.34.63[.]88:5674/printers/securitytest3/
+  file_activity:
+  - /etc/cups/cups-browsed.conf
+  persistence: []
+  process_relations:
+  - cups-browsed->foomatic-rip
+CVEs:
+- CVE-2024-47176
+- CVE-2024-47076
+- CVE-2024-47175
+- CVE-2024-47177
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 107.170.78[.]108
+  - 134.122.95[.]96
+  - 143.244.47[.]70
+  - 165.22.130[.]131
+  - 167.99.104[.]150
+  - 170.130.204[.]101
+  - 172.234.96[.]249
+  - 185.242.226[.]32
+  - 194.113.74[.]187
+  - 195.228.75[.]121
+  domains: []
+  urls:
+  - http://172.232.150[.]214:12345/printers/vul_scanning
+  - http://194.113.74[.]187:631/printers/amongus
+  - http://172.214.128[.]90:65000/printers/YmVuaWduYmUK
+  - http://80.94.95[.]85:65000/printers/YmVuaWduYmUK
+  - http://192.34.63[.]88:5674/printers/securitytest3/
+authors:
+- Nick Frichette
+- Christophe Tafani-Dereeper
+reference: https://securitylabs.datadoghq.com/articles/emerging-vulnerability-cups
+date_of_publication: October 01, 2024
+file_creation_date: December 19, 2025

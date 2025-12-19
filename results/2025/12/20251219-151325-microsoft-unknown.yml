@@ -1,0 +1,54 @@
+description: Shai-Hulud 2.0 attack involves compromised packages in supply chain,
+  leading to credential harvesting and exfiltration.
+TTPs:
+  processes:
+  - node.exe
+  - bash
+  - dash
+  - sh
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - setup_bun.js
+  - bun_environment.js
+  - --name SHA1HULUD
+  - curl -fsSL https://bun.sh/install | bash
+  - powershell -c irm https://bun.sh/install.ps1 | iex
+  - az account get-access-token
+  - azd auth token
+  - trufflehog
+  - Invoke-WebRequest
+  - curl
+  - npm install
+  powershell:
+  - Invoke-WebRequest
+  - irm https://bun.sh/install.ps1 | iex
+  - iwr https://bun.sh/install.ps1
+  - Invoke-WebRequest -Uri <URL> -OutFile <file>
+  - <script content>
+  scripting_engine:
+  - JavaScript
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - setup_bun.js
+  - bun_environment.js
+  - GitHub Actions Runner archive
+  - TruffleHog
+  - Runner.Listener.exe
+  - AppData/Roaming/Microsoft/Crypto/Keys
+  - TruffleHog.zip
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - bun.sh
+  urls:
+  - https://bun.sh/install
+  - <URL>
+reference: https://www.microsoft.com/en-us/security/blog/2025/12/09/shai-hulud-2-0-guidance-for-detecting-investigating-and-defending-against-the-supply-chain-attack
+date_of_publication: December 09, 2025
+file_creation_date: December 19, 2025

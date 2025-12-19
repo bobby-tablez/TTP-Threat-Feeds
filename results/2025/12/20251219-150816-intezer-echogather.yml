@@ -1,0 +1,52 @@
+description: Threat actors used an XLL file to deliver a backdoor named EchoGather,
+  targeting Russian organizations via Excel add-ins.
+attribution: Paper Werewolf (aka GOFFEE)
+malware_families:
+- EchoGather
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - CreateProcessW mswp.exe CREATE_NO_WINDOW
+  powershell:
+  - mswt.ps1
+  - docc1.ps1
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - fast-eda.my:443
+  - ruzeda.com/blogs/drafts/publish/schedule/seosso/login/mfa/verify/token/refresh/ips/blocklist/whitelist
+  file_activity:
+  - '%APPDATA%\\Microsoft\\Windows\\mswp.exe'
+  - C:\\Users\\user\\AppData\\Roaming\\Microsoft\\Windows\\docc1.ps1
+  - '%APPDATA%\\Microsoft\\Windows\\run.bat'
+  - ._.lnk:.._.._.._.._.._Roaming_Microsoft_Windows_run.bat
+  persistence:
+  - Scheduled task via run.bat in Startup folder
+  process_relations: []
+CVEs:
+- CVE-2025-8088
+IOCs:
+  hashes:
+  - 0506a6fcee0d4bf731f1825484582180978995a8f9b84fc59b6e631f720915da
+  - 74fab6adc77307ef9767e710d97c885352763e68518b2109d860bb45e9d0a8eb
+  ip_addresses:
+  - 199.59.243.228
+  - 172.64.80.1
+  - 94.103.3.82
+  - 162.255.119.43
+  - 5.45.85.43
+  - 193.233.18.137
+  domains:
+  - fast-eda.my
+  - ruzeda.com
+  urls:
+  - https://fast-eda.my/dostavka/lavka/kategorii/zakuski/sushi/sety/skidki/regiony/msk/birylievo
+  - https://2k-linep[.]com/upload/docc1.ps1
+authors:
+- Nicole Fishbein
+reference: https://intezer.com/blog/tracing-a-paper-werewolf-campaign-through-ai-generated-decoys-and-excel-xlls/
+date_of_publication: December 19, 2025
+file_creation_date: December 19, 2025

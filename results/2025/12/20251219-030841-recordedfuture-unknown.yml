@@ -1,0 +1,143 @@
+description: BlueDelta conducted a credential-harvesting campaign against UKR.NET
+  users using themed login pages and phishing PDF lures.
+attribution: Threat ActorMain Intelligence Directarate (GRU)
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline: []
+  powershell: []
+  scripting_engine:
+  - JavaScript
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: browser
+    destination: kfghjerrlknsm.line.pm
+    port: '11962'
+  - process: browser
+    destination: jkbfgkjdffghh.linkpc.net
+    port: '10176'
+  - process: browser
+    destination: jkbfgkjdffghh.linkpc.net
+    port: '17461'
+  - jkbfgkjdffghh.linkpc.net:10176
+  - jkbfgkjdffghh.linkpc.net:17461
+  - kfghjerrlknsm.line.pm:11962
+  - kfghjerrlknsm.line.pm:15254
+  file_activity:
+  - PDF lures containing links to credential harvesting pages
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 009440551eb6ea83da1a28361ebf44b3d022f204b99b82b83e266ec4807d18eb
+  - 1919d9c67a9ce00382f65b4bc1e1d1f4e4c0b296bc20ca45ba8fef8c188138ec
+  - 1a4c609fb75a54c7016736e471b6f92aaed7bb51257f3946e4ece9dd9125500c
+  - 20a3bf615c257d0c79ed82c428c3c182298876e52356988dd72dc20b2f12a217
+  - 2431578b5ba5a8569a689807bdb827e3d445a16cc013ed8eba7b7bfea661d76a
+  - 2f8e8b2783c8c47da0f265199671f3cae4e31b2a03999fff12aa3090c74c7a51
+  - 44935484933a13fb6632e8db92229cf1c5777333fa5a3c0a374b37428add69fb
+  - 53142380d75e3f54490f2896b58f308e6b91bec841d09b4e88985cb5b7812031
+  - 5fd8153dbb4620ab589aaa83815afce34135e5a0a5af10876fb3b0fff344c64b
+  - 64b26a92652bfb67cbe18217b6508fce460eff859526b2e256d3f1b9eab338b0
+  - 704b0a4f2f2195d22340471b9bdb06244047f7042728dd7f6aa6e3c5e30c9bc1
+  - 86a9ca34790e219ddc371fa154c51a9a2930e2afdebf4fc0889d2ba94d6acfc1
+  - 8b77e8199c61c0d97b7a40e35feedf21a168a62696b18bbb4d49766332c2c8a8
+  - 8f1994f2474512430f7c998dc6c57d0fd215860a24b58f90325122bb6d8a224c
+  - 95783d875ee50ef619f455a715150f414ed00157a6579ae6f73ccd72c394c5d8
+  - 9f394a9cb2e54e7be10c41b997e7dc85b882c4c7dd203b6984ca2aea151a47b5
+  - c0890f375af0f503c873878b1b09a1c5147b72ab38511d9911e847c10622c0aa
+  - ce421ab3db97f4b68d6e688c8ad5a6bafe82612d23df3257128433578c3caffb
+  - be3cccc2c62c0033aebcf91a6587eb815a1994cf268c42cf92ed856b6cf556aa
+  - c194f619d1ed73c0f0721d818564aa8238aceba94d1e721942c5cb67cbba68ff
+  - f5d2edbf1af6bf7db3f29e77a99883e39b5bc4ec483af4de47e8a75574248649
+  - fa8a4d544ffb3ca9d51448772f478f303602023e0cd70af4b9f85d3b72b4cd27
+  ip_addresses:
+  - 3.67.15.169
+  - 5.135.199.21
+  - 18.157.68.73
+  - 51.161.109.50
+  - 73.80.9.137
+  - 179.43.141.80
+  - 3.67.15.16
+  domains:
+  - kfghjerrlknsm.line.pm
+  - jkbfgkjdffghh.linkpc.net
+  - ukraine.html-5.me
+  - ukrainesafe.is-great.org
+  - 1961-51-161-109-50.ngrok-free.app
+  - 2884-51-161-109-50.ngrok-free.app
+  - 2a06-51-161-109-50.ngrok-free.app
+  - 3576-51-161-109-50.ngrok-free.app
+  - 3bb1-51-161-109-50.ngrok-free.app
+  - 5ae39a1b39d45d08f947bdf0ee0452ae.serveo.net
+  - 7dc8-51-161-109-50.ngrok-free.app
+  - 838f-51-161-109-50.ngrok-free.app
+  - abaf-5-135-199-21.ngrok-free.app
+  - c4cb-51-161-109-50.ngrok-free.app
+  - dd06-51-161-109-50.ngrok-free.app
+  - efbc-51-161-109-50.ngrok-free.app
+  - chujdrtuityui.mydiscussion.net
+  - doads.org
+  - fgtufyiotgiyuidrti.blogspot.com
+  - linkcuts.com
+  - ln.run
+  urls:
+  - chujdrtuityui.mydiscussion.net
+  - doads.org/9f75f0rn
+  - doads.org/nyj0zysx
+  - doads.org/ojitcaie
+  - doads.org/pyivk3q9
+  - doads.org/ut3japnm
+  - fgtufyiotgiyuidrti.blogspot.com
+  - ln.run/IYNx4
+  - run.mocky.io/v3/0e41f7c1-4ab8-4d69-a8a5-e872ba5e4096
+  - run.mocky.io/v3/11273092-7220-4b85-b8d8-758c5fd141a2
+  - run.mocky.io/v3/1a7c2ded-9e67-485d-a9f0-5bc8f2e42f0e
+  - run.mocky.io/v3/1ec1c1ca-1116-4a92-82e4-7cd9e01bfe15
+  - run.mocky.io/v3/2987b99c-a0fd-4f82-a772-f84b24e537c1
+  - run.mocky.io/v3/2a14133a-bfe6-469d-8d96-8937b22b3d78
+  - run.mocky.io/v3/47d78e98-8d12-452a-922b-bae56450a393
+  - run.mocky.io/v3/4ddade26-9929-4860-9db1-b8a8945c3124
+  - run.mocky.io/v3/4e14d583-bbf5-4af3-9a86-4c0938a7802a
+  - run.mocky.io/v3/5b93a218-29cf-4f3e-9e52-bd605cb3791e
+  - run.mocky.io/v3/6ba09505-fa73-4d92-b209-641bfc51b6e2
+  - run.mocky.io/v3/72fa0a52-6e6e-43ad-b1c2-4782945d6050
+  - run.mocky.io/v3/7832d0dc-ca6b-4b74-9d3d-604ad492a8d3
+  - run.mocky.io/v3/8076bf0a-5c36-4d06-b12d-bfb2dc88aee4
+  - run.mocky.io/v3/8f375df9-2633-4adc-b328-140cafaf3b06
+  - run.mocky.io/v3/a6cadae8-c28a-428f-b4e9-dca5a4453f0b
+  - run.mocky.io/v3/b07be5c3-8801-46a5-a395-43446dc1a797
+  - run.mocky.io/v3/b66fd0ff-6a00-468a-b072-56e8e3457b75
+  - run.mocky.io/v3/df8e33e0-4c17-4564-917f-9fbff17f4571
+  - run.mocky.io/v3/e6e34194-3b33-4c91-9a46-8e3c8beaccf0
+  - run.mocky.io/v3/f45d88b1-9d37-4485-9977-c98f16c8322b
+  - run.mocky.io/v3/fe9b7278-d810-40b0-9716-776dbce2ee44
+  - t.ly/XjLH2
+  - tiny.cc/295kzz
+  - tinyurl.com/2hypvv9y
+  - tinyurl.com/2mncfbc8
+  - tinyurl.com/3swez53m
+  - tinyurl.com/53dc5zzx
+  - tinyurl.com/5ekbp2uv
+  - tinyurl.com/bddre9dp
+  - tinyurl.com/k3r2vvjh
+  - tuyt8erti867i.synergize.co
+  - ukrainesafeurl.talebco.ir
+  - jkbfgkjdffghh.linkpc.net:10176
+  - jkbfgkjdffghh.linkpc.net:17461
+  - kfghjerrlknsm.line.pm:11962
+  - kfghjerrlknsm.line.pm:15254
+  - linkcuts.com/5xu034g2
+  - linkcuts.com/8dejsa3x
+  - linkcuts.com/gumcrr51
+  - linkcuts.org/6bf4tq0y
+  - linkcuts.org/9f75f0rn
+  - linkcuts.org/fe6iazfp
+authors:
+- Recorded Futures Insikt Group
+- Threat ActorMain Intelligence Directarate (GRU)
+reference: https://www.recordedfuture.com/research/bluedeltas-persistent-campaign-against-ukrnet
+date_of_publication: March 13, 2025
+file_creation_date: December 19, 2025

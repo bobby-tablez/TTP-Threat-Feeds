@@ -1,0 +1,44 @@
+description: Cisco Talos discovered a campaign targeting Cisco AsyncOS Software and
+  related appliances using custom tools including AquaShell, AquaTunnel, Chisel, and
+  AquaPurge.
+attribution: UAT-9686
+malware_families:
+- AquaShell
+- AquaTunnel
+- Chisel
+- AquaPurge
+TTPs:
+  processes:
+  - python
+  - sh
+  commandline:
+  - sleep 10 & 1s ${commandlog} 2>/dev/nullss egrep ${cpt} ${commandlog} >/dev/null && echo "$(cat ${commandlog} | egrep -v ${cpt}) > ${commandlog} &)(sleep 10 & 1s ${euqguilog} 2>/dev/nullss egrep ${ept} ${euqguilog} >/dev/null &6echo "$(cat ${euqguilog} | egrep -v ${ept})" > ${euqguilog} &)rm -f /data/tmp/PKGFILErm -rf /data/tmp/BINDIRexit @
+  powershell: []
+  scripting_engine:
+  - Python
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - /data/web/euq_webui/htdocs/index.py
+  - /data/log/heimdall/commandd/commandd.current
+  - /data/pub/euqgui_logs/euqgui.current
+  persistence:
+  - AquaShell embedded in /data/web/euq_webui/htdocs/index.py
+  process_relations: []
+IOCs:
+  hashes:
+  - 2db8ad6e0f43e93cc557fbda0271a436f9f2a478b1607073d4ee3d20a87ae7ef
+  - 145424de9f7d5dd73b599328ada03aa6d6cdcee8d5fe0f7cb832297183dbe4ca
+  - 85a0b22bd17f7f87566bd335349ef89e24a5a19f899825b4d178ce6240f58bfc
+  ip_addresses:
+  - 172.233.67.176
+  - 172.237.29.147
+  - 38.54.56.95
+  domains: []
+  urls: []
+authors:
+- Cisco Talos
+reference: https://blog.talosintelligence.com/uat-9686/
+date_of_publication: December 17, 2025
+file_creation_date: December 19, 2025
