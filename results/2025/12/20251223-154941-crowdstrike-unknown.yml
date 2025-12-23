@@ -1,0 +1,38 @@
+description: CrowdStrike discusses advancements in AI-driven security, focusing on
+  expert data, scientific benchmarking, continuous feedback, and adversarial robustness.
+TTPs:
+  processes:
+  - igixtrayex.exe
+  commandline:
+  - bash -c "eval $(dec, \"<strings\", \"execy)\"
+  - bash -c "bb4decode(\"Niwb3JBTHINYZHLdCxzdiInand2z, G9203M0c295a2vOLriy Y241 dChzh2Nr
+    ZXuquzesusF (@) =110505 19TVE JFQIOp0SHYZ3ubriYdC gol JEHE Ay TTxTinANTULKS k7b3A.ZHV
+    i halnZpbGabygpl DApOyBcy SkeXAYKHMZ sZH Run pariod -S2LnR1<DE0cY Sk IbnBcKSyKTEHPXHIYnByb2HL
+    C3HIYZFSCHTIS 0NAvC2iLCTHTIOpOMm=\\\"; eval $(compiledac, \" cstring. . 25, 2025
+    @9:12:54 o0:00:00.010 Nov. 25, 2025 @9112:54[ fro Hgh Process Kiedet TzGcopne,
+    Wmdreh, Gowete o - [ stz S, Conie ot syuems Dot s Contol via Rt Ao Toclss - png
+    P23E0. oot Fokoniisl. Unassired - nowoSe[F R A e o [T i S, Bash hascroatod 1 Intorati
+    tomninal for & amats host. Chack the process o t decermina f malcicus commands
+    wer oxecuted ande Beomon.. sh LS Y Fakoninsl. Unessgned - new T e ru ey"
+  powershell: []
+  scripting_engine:
+  - Bash
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - /inelpublwvwroo! drectory?igftrayex.exe
+  - detected-windows-0abacbat
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- Ted Driggs
+- Chase Midler
+reference: https://www.crowdstrike.com/en-us/blog/inside-crowdstrikes-science-backed-approach-to-building-soc-agents/
+date_of_publication: December 23, 2025
+file_creation_date: December 23, 2025

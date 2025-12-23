@@ -1,0 +1,58 @@
+description: Tax-themed phishing campaign targeting Indian businesses with multi-stage
+  infection chain deploying persistent RATs or infostealer malware.
+malware_families:
+- Remote Access Trojan
+TTPs:
+  processes:
+  - setup_Ir5swQ3EpeuBpePEpew=.exe
+  - Sibuia.exe
+  - NSecRTS.exe
+  commandline:
+  - CAWINDOWS\\System32\\Carbostexe
+  - \\Downloads\\Review Annexure.zip\\setup_Ir5swQ3EpeuBpePEpew=.exe
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\NSecRTS
+  image_load:
+  - sibca.dll
+  - sibuia.exe
+  - sibys.exe
+  - sibcir.anl
+  - tente.zsp.all
+  - zip.an1
+  network_connections:
+  - NSecRTS.exe, 154.91.84.3, 48991
+  - NSecRTS.exe, 154.91.84.3, 48992
+  - NSecRTS.exe, 154.91.84.3, 3898
+  - NSecRTS.exe, 45.113.192.102, 80
+  - NSecRTS.exe, 103.235.46.102, 80
+  file_activity:
+  - C:\\Program Files\\Common Files\\NSEC\\Data
+  - \\Downloads\\Review Annexure.zip\\setup_Ir5swQ3EpeuBpePEpew=.exe
+  - C:\\Program Files (x86)\\Common Files\\NSEC\\Data
+  persistence:
+  - NSecRTS.exe registered as a persistent background service
+  process_relations:
+  - setup_Ir5swQ3EpeuBpePEpew=.exe->Sibuia.exe
+  - Sibuia.exe->setup_Ir5swQ3EpeuBpePEpew=.exe
+IOCs:
+  hashes:
+  - 4001854be1ae8e12b6dda124679a4077F00F824FCAFBA9B26675AE8242F0B6A0
+  - F00F824FCAFBA9B26675AE8242F0B6A0
+  ip_addresses:
+  - 154.91.84.3
+  - 45.113.192.102
+  - 103.235.46.102
+  domains:
+  - www.akjys.top
+  urls:
+  - hxxps://www.akjys.top/
+authors:
+- Prashil Moon
+- Jyoti Karlekar
+- Sanjay Katkar
+- Bineesh P
+reference: https://www.seqrite.com/blog/indian-income-tax-themed-phishing-campaign-targets-local-businesses
+date_of_publication: December 22, 2025
+file_creation_date: December 23, 2025

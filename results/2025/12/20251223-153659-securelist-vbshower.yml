@@ -1,0 +1,190 @@
+description: Cloud Atlas group targets Eastern Europe and Central Asia using phishing
+  emails with malicious DOC(X) attachments exploiting CVE-2018-0802 to download and
+  execute VBShower backdoor.
+attribution: Cloud Atlas group
+malware_families:
+- VBShower
+- PowerShower
+- VBCloud
+- CloudAtlas
+- Unknown
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - wscript.exe
+  commandline:
+  - wscript.exe /B %Public%\\Libraries\\MicrosoftEdgeUpdate.vbs
+  - cmd.exe /c schtasks /query /v /fo CSV /tn MicrosoftEdgeUpdateTask
+  - cmd.exe /c schtasks /query /v /fo CSV /tn MicrosoftVLCTaskMachine
+  - wscript . exe / B % Public % \\ Libraries \\ MicrosoftEdgeUpdate . vbs
+  - cmd . exe / c schtasks / query / v / fo CSV / tn MicrosoftEdgeUpdateTask
+  - cmd . exe / c schtasks / query / v / fo LIST / tn MicrosoftAdobeUpdateTaskMachine
+  - WShell.ExpandEnvizormentStrings ("STEMPSTM)
+  - FSO.CreateFolder (TEMP_PATH & APECACHE_PATH)
+  powershell:
+  - powershell.exe -ep bypass -w 0 %APPDATA%\\Adobe\\AdobeMon.ps1
+  - powershell w BT -Fxec Bypass -encZgB1AERATB OAEKATUBUACAADOBhAHQAIABLAG 0AKARKAHQAYGBPAGYAKQB7ARKAJAB
+    JAGOACAGADBATAAXADsACQAKAGSAHgBOADQATAAYACART gB1AHCAL QBPAGTAAgB1AGHAGAAGACBAQUBYAG
+    BATWB1AGOAZOB JAHOATA[BNAKHAEABTAGWAHgAUAF HAZQBYAHYAZBYAF gATABHAEGAUABUAF AAL
+    gAZACHAHAR ARKAJABUADAIAA DAC[AbuBuAGUADGAOACTARUBFAFQATGASACARJAB BAG I AAQBSACUAT
+    ARKAGYAYQBSARHAZQAPADSACAKAGBANGBOADIACABYACARPOAGAE CAZUBOAC RSB BAGADUBOAH T
+    ADYBYAGUAC B OAHKA ARTAF]laaYOBBACARIAAIAESASWEDAFUADGBCAEwAlUBUAEYAdABIACEACORTAFWAXABNACKAYWRUAGRACWBUACYAdABI
+  - New-Object-ComObject Msxml2.ServerXULETTE.5.0;$02h4.open ("GET", $tbil, $false);
+  - Start-Sleep(-join 333..355 | Get-Random)
+  - Get-ChildItem -Path dr -Recurse -Include *.psl
+  scripting_engine:
+  - VBS
+  - JScript
+  registry_keys:
+  - HKCU\\Console\\%SystemRoot%_System32_WindowsPowerShell_v1.0_powershell.exe
+  - HKCU\\UConsole\\taskeng.exe
+  - HKCU\\Console\\taskeng.exe
+  - Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings
+  - Console\\sSystenRoots_Systen3dz_WindowsPowerSnell.exev
+  - Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\ProxyServer
+  - Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\\ProxyEnable
+  image_load:
+  - libvnc_plugin.dll
+  - chambranle
+  - pytest.dll
+  - libvlc_plugin.dll
+  - libvlccore.dll
+  - libvlc.dll
+  - libvac_plugin.dll
+  - libviccore.dll
+  network_connections:
+  - wscript.exe, hrtps://rzhd. oro/, 80
+  - wscript.exe, hrrps://uehdev. vendex.za/, 80
+  - wscript.exe, hrrps://miz.nl.teb.digical/, 80
+  - wscript.exe, hrrps://uebdav.opendrive . cons_linkS/, 80
+  - wscript.exe, hrrps://uehdav.mydrive.ch/, 80
+  - https://leo.it.teb.dimital/remnte.php/dev/files/ msemmmmmmt 10 by icosk . con/
+  - webdav.opendrive.com
+  file_activity:
+  - '%Public%\\Libraries\\MicrosoftEdgeUpdate.vbs'
+  - '%Public%\\Libraries\\v.log'
+  - '%LOCALAPPDATA%\\vlc\\vlc.exe'
+  - '%LOCALAPPDATA%\\vlc\\chambranle'
+  - '%LOCALAPPDATA%\\vlc\\plugins\\access\\libvlc_plugin.dll'
+  - '%LOCALAPPDATA%\\vlc\\libvlccore.dll'
+  - '%LOCALAPPDATA%\\vlc\\libvlc.dll'
+  - '%APPDATA%\\Adobe\\p.txt'
+  - upgrade.mds
+  - cookies.txt
+  - passwords.txt
+  - y3.txt
+  - '%Publics%\\Libraries\\MicrosoftEdgeUpdate. vhs'
+  - '%APPDATA%\\Adobe\\AdobeMon.ps1'
+  - '%LOCALAPPDATAS%\\vic.exe'
+  - '%LOCALAPPDATAS%\\vic\\libvic.dll'
+  - '%LOCALAPPDATAS%\\vic\\a.xnl'
+  - '%LOCALAPPDATAS%\\vic\\b.xnl'
+  - '%LOCALAPPDATAS%\\vic\\d.xul'
+  - '%LOCALAPPDATAS%\\vic\\e.xnl'
+  - '%LOCALAPPDATAS%\\vic\\plugins\\access\\c.xmi'
+  - '%LOCALAPPDATAS%\\vic\\plugins\\access\\libvac_plugin.dll'
+  - TEMP_PATH & APECACHE_PATH
+  - TEMP_BATH & APPCACHE_PATH & "buff"
+  - TEMP_BATH & APPCACHE PATH & "kiipdes.zip"
+  persistence:
+  - MicrosoftEdgeUpdateTask
+  - MicrosoftVLCTaskMachine
+  - MicrosoftAdobeUpdateTaskMachine
+  - Task Scheduler for MicrosoftEdgeUpdateTaskMachine
+  - Task Scheduler for MicrosoftAdobeUpdateTaskMachine
+  process_relations:
+  - wscript.exe->MicrosoftEdgeUpdate. vhs
+  - powershell.exe->AdobeMon.ps1
+CVEs:
+- CVE-2018-0802
+- CVE-2025-55182
+IOCs:
+  hashes:
+  - 0D309C25A835BAF3B0C392AC87504D9E
+  - D34AAEB811787B52EC45122EC10AEB08
+  - 4F7C5088BCDF388C49F9CAAD2CCCDCC5
+  - 24BFDFFA096D3938AB6E626E418572B1
+  - 5C93AF19EF930352A251B5E1B2AC2519
+  - 0E13FA3F06607B1392A3C3CAA8092C98
+  - BC80C582D21AC9E98CBCA2F0637D8993
+  - EBD6DA3B4D452BD146500EBC6FC49AAE
+  - 12F1F060DF0C1916E6D5D154AF925426
+  - E8C21CA9A5B721F5B0AB7C87294A2D72
+  - 2D03F1646971FB7921E31B647586D3FB
+  - 7A85873661B50EA914E12F0523527CFA
+  - F31CE101CBE25ACDE328A8C326B9444A
+  - E2F3E5BF7EFBA58A9C371E2064DFD0BB
+  - 67156D9D0784245AF0CAE297FC458AAC
+  - 116E5132E30273DA7108F23A622646FE
+  - C7387D957C5381E11D1E6EDC0F3F353
+  - E9F60941A7CED1A91643AF9D8B92A36D
+  - 718B9E688AF49C2E1984CF6472B23805
+  - A913EF515F5DC8224FCFFA33027EB0DD
+  - F56DAD18A308B64247D0C3360DDB1727
+  - 62170C67523C8F5009E3658F5858E8BF
+  - BAA59BB050A12DBDF981193D88079232
+  - 097D18D92C2167D2F4E94F04C5A12D33
+  - B0100C43BD9B024C6367B38ABDF5C0D2
+  - 7727AAE4A0840C7DC037634BED6A6D74
+  ip_addresses:
+  - 192.16.204.1:8081
+  domains:
+  - billet-ru.net
+  - mskreg.net
+  - flashsupport.org
+  - solid-logit.com
+  - cityru-travel.org
+  - transferpolicy.org
+  - information-model.net
+  - securemodem.com
+  - roskomnadz.com
+  - processmanagerpro.net
+  - luxoftinfo.com
+  - marketru.net
+  - rzhd.org
+  - gimnazija.org
+  - technoguides.org
+  - multipackage.net
+  - rostvgroup.com
+  - russiatimes.info
+  - updatechecker.org
+  - rosatomgroup.com
+  - telehraf.com
+  - statusupport.org
+  - perfectfinder.net
+  - webdav.opendrive.com
+  urls:
+  - https://securemodem[.]com?tzak.html_anacid
+  - https://webdav.yandex.ru
+  - hrtps://rzhd. oro/
+  - hrrps://uehdev. vendex.za/
+  - hrrps://miz.nl.teb.digical/
+  - hrrps://uebdav.opendrive . cons_linkS/
+  - hrrps://uehdav.mydrive.ch/
+  - https://leo.it.teb.dimital/remnte.php/dev/files/ msemmmmmmt 10 by icosk . con/
+  - https://gimneziia.ora/deve.ntel/bopyrasdd;Starc-Sleep 0.7
+  - webdav.opendrive.com
+  - https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2025/12/11071506/SL-cve-2025-55182-exploitation-featured-800x450.jpg
+  - https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2025/12/03143655/SL-Shai-Hulud-2-featured-800x450.jpg
+  - https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2025/11/24105035/SL-black-friday-scams-2025-featured-800x450.jpg
+  - https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2025/08/03151420/notes-of-cyber-inspector-featured-image-800x450.png
+  - https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2025/07/07093411/batavia-featured-image-800x450.jpg
+  - https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2025/10/24151956/SL-ForumTroll-Dante-featured-800x450.jpg
+  - https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2024/12/28082809/SL-EagerBee-backdoor-featured-800x450.jpg
+  - https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2024/12/19145053/SL-Bella-featured-1-800x450.jpg
+  - https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2024/10/11172712/SL-SideWinder-StealerBot-featured-800x450.jpg
+  - https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2024/08/16173535/SL-BlindEagle-featured-800x450.jpg
+  - https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2025/11/01102245/NEXT-Optimum_banner_310%D1%85420.png
+  - https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2025/12/05154057/dcom-lateral-movement-featured-image-800x450.jpg
+  - https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2025/12/17093749/forumtroll-part-3-featured-image-800x450.jpg
+  - https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2025/12/15191059/SL-vehicle-modem-hack-featured-800x450.jpg
+  - https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2025/12/12211937/SL-Frogblight-featured-800x450.jpg
+  - https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2025/08/13165959/KMS-SDK-webinar-800x450.jpg
+  - https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2025/05/25110852/unmasking-email-dangers-webinar-featured-800x450.jpg
+  - https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2025/05/27112734/Cloud-workload-protection-webinar-featured-800x450.png
+  - https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2020/12/07162656/xTraining-LLM-banner_370x500.jpg
+  - https://media.kasperskycontenthub.com/wp-content/uploads/sites/43/2020/12/07162648/xTraining-LLM-banner_1080x1080-740x740.png
+reference: https://securelist.com/cloud-atlas-h1-2025-campaign/118517
+date_of_publication: December 19, 2025
+file_creation_date: December 23, 2025

