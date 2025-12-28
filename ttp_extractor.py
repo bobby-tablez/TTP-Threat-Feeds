@@ -58,8 +58,8 @@ TASK: Extract TTPs and IOCs from the report below and output ONLY raw YAML.
 
 CRITICAL RULES:
 1. Return ONLY YAML - no markdown fences (```), no explanations, no commentary
-2. Extract EXACT data only - preserve full command-lines, complete file paths, exact registry keys
-3. DO NOT infer, guess, or generate placeholder values
+2. Extract EXACT threat data only - preserve full command-lines, complete file paths, exact registry keys, C2 and hash data.
+3. DO NOT infer, explain, guess, or generate placeholder values
 4. If scripts are obfuscated (base64/hex), include them verbatim
 5. Extract code from <pre>, <code>, and <table> blocks with full context
 6. Use single quotes for strings, compact YAML formatting
@@ -86,7 +86,7 @@ IOCs:
   ip_addresses: [<IPv4/IPv6>]
   domains: [<domain names>]
   urls: [<full URLs>]
-authors: [<report authors/researchers>]
+authors: [<report authors/researchers names>]
 
 If no technical details exist, return only description, attribution, malware_families, and authors with empty TTPs/IOCs.
 

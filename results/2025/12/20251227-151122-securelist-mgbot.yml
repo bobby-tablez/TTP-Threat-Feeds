@@ -1,0 +1,70 @@
+description: Evasive Panda APT group used sophisticated techniques including DNS poisoning,
+  loader injection, and hybrid encryption to deliver MgBot malware.
+attribution: Evasive Panda
+malware_families:
+- MgBot
+TTPs:
+  processes:
+  - evteng.exe
+  - svchost.exe
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - libpython2.4.dll
+  network_connections:
+  - dictionary.com
+  - 60.28.124.21
+  - 123.139.57.103
+  - 140.205.220.98
+  - 112.80.248.27
+  - 116.213.178.11
+  - 60.29.226.181
+  - 58.68.255.45
+  - 61.135.185.29
+  - 103.27.110.232
+  - 117.121.133.33
+  - 139.84.170.230
+  - 103.96.130.107
+  - 158.247.214.28
+  - 106.126.3.78
+  - 106.126.3.56
+  file_activity:
+  - C:\\ProgramData\\Microsoft\\MF
+  - C:\\ProgramData\\Microsoft\\eHome\\status.dat
+  - C:\\ProgramData\\Microsoft\\eHome\\perf.dat
+  - sohuva_update_10.2.29.1-lup-s-tp.exe
+  - libpython2.4.dll
+  persistence: []
+  process_relations:
+  - evteng.exe->svchost.exe
+IOCs:
+  hashes:
+  - c340195696d13642ecf20fbe75461bed
+  - 7973e0694ab6545a044a49ff101d412a
+  - 9e72410d61eaa4f24e0719b34d7cad19
+  ip_addresses:
+  - 60.28.124.21
+  - 123.139.57.103
+  - 140.205.220.98
+  - 112.80.248.27
+  - 116.213.178.11
+  - 60.29.226.181
+  - 58.68.255.45
+  - 61.135.185.29
+  - 103.27.110.232
+  - 117.121.133.33
+  - 139.84.170.230
+  - 103.96.130.107
+  - 158.247.214.28
+  - 106.126.3.78
+  - 106.126.3.56
+  domains:
+  - dictionary.com
+  - p2p.hd.sohu.com.cn
+authors:
+- Fatih Şensoy
+reference: https://securelist.com/evasive-panda-apt/118576/
+date_of_publication: December 24, 2025
+file_creation_date: December 27, 2025

