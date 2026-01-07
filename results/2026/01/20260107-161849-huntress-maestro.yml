@@ -1,0 +1,65 @@
+description: VMware ESXi exploit toolkit used by threat actor targeting ESXi hypervisors
+  via SonicWall VPN compromise.
+malware_families:
+- MAESTRO
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - devcon.exe
+  - kdu.exe
+  - exploit.exe
+  - WinRAR.exe
+  - InfDefaultInstall.exe
+  commandline:
+  - netsh advfirewall firewall add rule "name=Allow Local Network-2" dir=out action=allow
+    remoteip=10.x.x.x/8 profile=any
+  - netsh advfirewall firewall add rule "name=Block External Outbound" dir=out action=block
+    remoteip=0.0.0.0-255.255.255.255 profile=any
+  - netsh advfirewall firewall add rule "name=Allow Local Network-3" dir=out action=allow
+    remoteip=172.x.x.x/12 profile=any
+  - C:\\Program Files\\WinRAR\\WinRAR.exe a -ep1 -scul -r0 -iext -imon1 -- . Mapped
+    Network Share
+  - devcon.exe disable PCI\\VEN_15AD&DEV_0740
+  - devcon.exe disable ROOT\\VMWVMCIHOSTDEV
+  - kdu.exe -prv 1 -map MyDriver.sys
+  - client.exe 2:10000
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\vmci
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\vsock
+  image_load:
+  - MyDriver.sys
+  - drv64.dll
+  network_connections:
+  - exploit.exe -> 127.0.0.1:21
+  - client.exe -> 2:10000
+  file_activity:
+  - C:\\Users\\<username>\\Downloads\\Advanced_Port_Scanner_2.5.3869.exe
+  - C:\\Program Files\\SoftPerfect Network Scanner\\netscan.exe
+  - C:\\ProgramData\\shares.txt
+  - /var/run/a
+  - /var/run/inetd.conf
+  - /tmp/input
+  persistence:
+  - Modifying inetd configuration to allow backdoor access on port 21
+  - Installing modified VMware drivers (vmci.inf, vsock.inf)
+  process_relations:
+  - exploit.exe -> MyDriver.sys
+  - client.exe -> VSOCKpuppet
+CVEs:
+- CVE-2025-22226
+- CVE-2025-22224
+- CVE-2025-22225
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- Anna Pham
+- Matt Anderson
+reference: https://www.huntress.com/blog/esxi-vm-escape-exploit
+date_of_publication: January 07, 2026
+file_creation_date: January 07, 2026

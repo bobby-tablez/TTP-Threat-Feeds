@@ -1,0 +1,57 @@
+description: VVS stealer is a Python-based malware targeting Discord users for data
+  exfiltration, including tokens and browser data.
+malware_families:
+- VVS stealer
+- Chromium Key Stealer
+- Discord Data Exfiltrator
+TTPs:
+  processes:
+  - Update.exe
+  - python311.exe
+  commandline:
+  - Update.exe --processStart
+  powershell: []
+  scripting_engine:
+  - Python
+  registry_keys: []
+  image_load:
+  - pyarmor_runtime.pyd
+  - python311.dll
+  network_connections: []
+  file_activity:
+  - '%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup'
+  - '%USERNAME%_vault.zip'
+  - C:\\Users\\<username>\\AppData\\Local\\discord\\app\\package.json
+  - C:\\Users\\<username>\\AppData\\Local\\discord\\app\\index.js
+  - C:\\Users\\<username>\\AppData\\Roaming\\betterdiscord\\data\\betterdiscord.asar
+  persistence:
+  - Copies itself to startup folder for persistence
+  process_relations:
+  - Update.exe -> Discord application
+IOCs:
+  hashes:
+  - 307d9cefa7a3147eb78c69eded273e47c08df44c2004f839548963268d19dd87
+  - 7a1554383345f31f3482ba3729c1126af7c1d9376abb07ad3ee189660c166a2b
+  - c7e6591e5e021daa30f949a6f6e0699ef2935d2d7c06ea006e3b201c52666e07
+  ip_addresses: []
+  domains:
+  - ptb.discord.com
+  - remote-auth-gateway.discord.gg
+  - discord.com
+  - braintreegateway.com
+  - discord.confapi
+  urls:
+  - hxxps://ptb.discord.com/api/webhooks/1360401843963826236/TkFvXfHFXrBIKT3EaqekJefvdvt39XTAxeOIWECeSrBbNLKDR5yPcn75uIqKEzdfs9o2
+  - hxxps://ptb.discord.com/api/webhooks/1360259628440621087/YCo9eVnIBOYSMn8Xr6zX5C7AJF22z26WljaJk4zr6IiThnUrVyfWCZYs6JjSC12IC8c0
+  - https://SNEBHOOK%\"
+  - wss://remote-auth-gateway.discord.gg/
+  - https://discord.com/api/v9/users/gme
+  - https://fapi.braintreegateway.con/
+authors:
+- DeepCode
+authors:
+- Pranay Kumar Chhaparwal
+- Lee Wei Yeong
+reference: https://unit42.paloaltonetworks.com/vvs-stealer/
+date_of_publication: December 11, 2025
+file_creation_date: January 07, 2026
