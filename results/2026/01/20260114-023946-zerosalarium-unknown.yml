@@ -1,0 +1,36 @@
+description: Attacker uses Bindlink to redirect a critical DLL used by Windows Defender
+  to prevent it from starting during system initialization.
+TTPs:
+  processes:
+  - EDRStartupHinder.exe
+  - MsMpEng.exe
+  commandline:
+  - DRstartupHinder.exe C:\\THPARSvep_uin.d11 C:\\Windows\\System32\\nsvep_uin.dll
+    HsHpEng.exe DusaSve-1 TO
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\KnownDLLs
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\ServiceGroupOrder
+  image_load: []
+  network_connections: []
+  file_activity:
+  - C:\\THPARSvep_uin.d11
+  - C:\\Windows\\System32\\nsvep_uin.dll
+  persistence:
+  - Creating a new Windows service named DusmSVC-01 to run before Windows Defender
+  process_relations:
+  - EDRStartupHinder.exe -> MsMpEng.exe
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - https://github.com/TwoSevenOneT/EDRStartupHinder
+  - https://www.zerosalarium.com/2025/10/DR-Redir-Break-EDR-Via-BindLink-Cloud-Filter.html
+  - https://www.zerosalarium.com/2025/11/EDR-Redir-V2-Blind-EDR-With-Fake-Program-Files.html
+authors:
+- Zero Salarium
+reference: https://www.zerosalarium.com/2026/01/edrstartuphinder-edr-startup-process-blocker.html
+date_of_publication: January 11, 2026
+file_creation_date: January 14, 2026

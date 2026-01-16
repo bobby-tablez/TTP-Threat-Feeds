@@ -1,0 +1,69 @@
+description: Threat actors used geopolitical events to deliver backdoor malware via
+  spear-phishing emails containing a zip archive with a legitimate executable and
+  a malicious DLL.
+malware_families:
+- Backdoor
+- Ransomware
+TTPs:
+  processes:
+  - Maduro to be taken to New York.exe
+  - DataTechnology.exe
+  - powershell.exe
+  - cmd.exe
+  commandline:
+  - Maduro to be taken to New York.exe --DATA
+  - powershell.exe -NoProfile -WindowStyle Hidden -File a.msi (1b9869a2e862f1e6a59f5d88398463d3962abe51e19a59)
+  registry_keys:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Lite360
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  file_activity:
+  - C:\\ProgramData\\Technology360NB\\DataTechnology.exe
+  - C:\\ProgramData\\Technology360NB\\kugou.dll
+  - '!!!READ_ME_MEDUSA!!!.txt'
+  - '*.MEDUSA'
+  - gaze.exe
+  persistence:
+  - Registry key for running DataTechnology.exe on logon
+  - Registry key modification to run DataTechnology.exe on startup
+  network_connections:
+  - 172.81.60[.]97:443
+  - powershell.exe, 45.9.149[.]112:15330
+  - cmd.exe, erp.ranasons[.]com, 7070
+  powershell:
+  - 'SHSetValueA(HKEY_CURRENT_USER,"Software\\Microsoft\\Windows\\CurrentVersion\\Run","Lite360",1lu,"C:\\ProgramData\\Technology36@NB\\DataTechnology.exe
+    DATA",9x39u):'
+  image_load:
+  - kugou.d11
+  - DataImporterMain
+IOCs:
+  hashes:
+  - 8f81ce8ca6cdbc7d7eb10f4da5f470c6
+  - 722bcd4b14aac3395f8a073050b9a578
+  - aea6f6edbbbb0ab0f22568dcb503d731
+  - 1b9869a2e862f1e6a59f5d88398463d3962abe51e19a59
+  ip_addresses:
+  - 172.81.60[.]97
+  - 185.108.129[.]62
+  - 185.126.238[.]119
+  - 213.183.63[.]41
+  - 213.183.63[.]42
+  - 31.220.45[.]120
+  - 91.92.246[.]110
+  - 45.9.149[.]112:15330
+  - 89.36.161[.]12
+  - 193.37.69[.]154:7070
+  domains:
+  - erp.ranasons[.]com
+  - pruebas.pintacuario[.]mx
+  - 144.217.181[.]205
+  - lirdel[.]com
+  urls:
+  - wizarr.manate[.]ch/108.215.180[.]161:8585/$/1dIL5
+authors:
+- Tara Gould
+- Signe Zaharka
+- Emma Foulger
+attribution: Medusa
+reference: https://www.darktrace.com/blog/runtime-is-where-cloud-security-really-counts-the-importance-of-detection-forensics-and-real-time-architecture-awareness
+date_of_publication: January 14, 2026
+file_creation_date: January 14, 2026

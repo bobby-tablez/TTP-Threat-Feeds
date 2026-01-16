@@ -1,0 +1,78 @@
+description: Medusa Ransomware is a RaaS group that targets organizations across all
+  sectors, using various vulnerabilities and legitimate RMM tools for initial access,
+  lateral movement, data exfiltration, and ransomware deployment.
+malware_families:
+- Medusa
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - robocopy . \"c:\\windows\\\\\" /COPY:DT /E /XX /R:0 /W:0 /NP /XF RunFileCopy.cmd
+    /IS /IT
+  - powershell.exe -NoProfile -WindowStyle Hidden -File C:\\ProgramData\\Technology360NB\\DataTechnology.exe
+    DATA
+  powershell:
+  - sub_100069E0(v15);SHSetValueA(HKEY_CURRENT_USER,"Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run","Lite360",1lu,"C:\\\\ProgramData\\\\Technology360NB\\\\DataTechnology.exe
+    DATA",9x39u)
+  scripting_engine: []
+  registry_keys:
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load:
+  - kugou.dll
+  network_connections:
+  - 31.220.45[.]120
+  - 213.183.63[.]41
+  - erp.ranasons[.]com:443
+  - pruebas.pintacuario[.]mx:443
+  file_activity:
+  - c:\\windows\\system32\\gaze.exe
+  - '!!!READ_ME_MEDUSA!!!.txt'
+  - '*.MEDUSA'
+  - C:\\ProgramData\\Technology360NB\\DataTechnology.exe
+  - C:\\ProgramData\\Technology360NB\\kugou.dll
+  persistence:
+  - Registry modification to run DataTechnology.exe on startup
+  process_relations: []
+CVEs:
+- CVE-2025-10035
+- CVE-2024-57726
+- CVE-2024-57727
+- CVE-2024-57728
+- CVE-2024-1709
+- CVE-2021-34473
+- CVE-2023-48788
+IOCs:
+  hashes:
+  - 1b9869a2e862f1e6a59f5d88398463d3962abe51e19a59
+  - a.msi (1b9869a2e862f1e6a59f5d88398463d3962abe51e19a59)
+  ip_addresses:
+  - 185.108.129[.]62
+  - 185.126.238[.]119
+  - 213.183.63[.]41
+  - 213.183.63[.]42
+  - 31.220.45[.]120
+  - 91.92.246[.]110
+  - 45.9.149[.]112:15330
+  - 89.36.161[.]12
+  - 193.37.69[.]154:7070
+  - 143.110.243[.]154
+  - 144.217.181[.]205
+  - 44.235.83[.]125
+  - 143.110.243.154
+  - 213.183.63.410
+  domains:
+  - erp.ranasons[.]com
+  - pruebas.pintacuario[.]mx
+  - lirdel[.]com
+  - wizarr.manate[.]ch
+  - a.msi (1b9869a2e862f1e6a59f5d88398463d3962abe51e19a59)
+  urls:
+  - https://wizarr.manate[.]ch/108.215.180[.]161:8585/$/1dIL5
+  - https://lirdel[.]com/44.235.83[.]125/a.msi
+authors:
+- Signe Zaharka
+- Emma Foulger
+reference: https://www.darktrace.com/blog/under-medusas-gaze-how-darktrace-uncovers-rmm-abuse-in-ransomware-campaigns
+date_of_publication: January 14, 2026
+file_creation_date: January 14, 2026

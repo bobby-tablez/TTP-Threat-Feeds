@@ -1,0 +1,61 @@
+description: AI-generated scripts and malicious Chrome extension used for credential
+  theft and remote access.
+malware_families:
+- Remote Access Trojan
+TTPs:
+  processes:
+  - powershell.exe
+  - rundll32
+  - comsvcs.dll
+  - wininit.exe
+  - services.exe
+  - ScreenConnect.ClientService.exe
+  - cmd.exe
+  commandline:
+  - powershell.exe -ExecutionPolicy Bypass -NoProfile -WindowStyle Hidden -File "C:\\Windows\\SystemTemp\\ScreenConnect\\\\25.3.4.9288\\\\secure.chase.ps1"
+  powershell:
+  - SCREENSHOT
+  - EXPORT_COOKIES
+  - GET_TABS
+  - GET_HISTORY
+  - GET_DOWNLOADS
+  - GET_SYSTEM_INFO
+  - ARCHIVER_*
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - comsvcs.dll
+  network_connections:
+  - 172.86.105.237:5000
+  file_activity:
+  - C:\\temp\\v.ps1
+  - qb_check.ps1
+  - coinbase_check.ps1
+  - secure.chase.ps1
+  - background.js
+  - popup.html
+  persistence: []
+  process_relations:
+  - wininit.exe->services.exe->ScreenConnect.ClientService.exe->cmd.exe->powershell.exe
+IOCs:
+  hashes:
+  - 19d19ac8199298f7b623693f4e38cb79aba8294c258746a3c9d9a183b2bb2578
+  - 4574ffef886ca461a89db7b9aaaede2e20ac802a82db94e3b6e4d0e86370e7a4
+  - 57f2a2bb77f5400b46ebc42118f46ffaa497d5c03c24d1cb3868dde2381a0f07
+  - cf289b3ab970a3d04213b7312220f769f493f2f2c666ed7a8fe512075a84e995
+  - d272c90fc264fa3e4a71fbeff324273c99dd0a48fd2f0234aa6fdd3e80add936
+  - f75219e2aea50b8fa618f55389ab9a58351fb6acd4ea7c7de3e656183d5a52f0
+  ip_addresses:
+  - 172.86.105.237
+  domains: []
+  urls:
+  - http://127.0.0.1:5000/
+  - http://kbsqoivihgdmwczmxkbovk7ss2dcynitwhhfuSyw725dboqoskthfaad.onion
+  - http://ijzn3sicrcy7guixkzjkibdukbiilwe3xhnmbydmcbecnsd7j2rekvqd.onion
+authors:
+- Dray Agha
+- Anton Ovrutsky
+- Anna Pham
+reference: https://www.huntress.com/blog/ai-2025-faster-attacks-same-tradecraft
+date_of_publication: January 14, 2026
+file_creation_date: January 14, 2026

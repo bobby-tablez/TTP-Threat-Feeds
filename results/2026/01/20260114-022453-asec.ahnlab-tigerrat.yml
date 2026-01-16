@@ -1,0 +1,63 @@
+description: Threat actors used TigerRAT, ProcDump, PetitPotato, and PrintSpoofer
+  to gain control and escalate privileges on IIS web servers.
+attribution: Andariel
+malware_families:
+- TigerRAT
+- ProcDump
+- PetitPotato
+- PrintSpoofer
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - w3wp.exe
+  - svchost.exe
+  - pd.exe
+  commandline:
+  - query
+  - whoami
+  - qwinsta
+  - netstat -naop tcp
+  - tasklist
+  - systeminfo
+  - ipconfig /all
+  - query user
+  - appcmd list apppool
+  - wevtutil qe Microsoft-Windows-TerminalServices-LocalSessionManager/Operational
+    /c:10 /q:*[System [(EventID=25)]] /rd:true /f:text
+  - wevtutil.exe cl Application
+  - for /f tokens=* %G in (wevtutil.exe el) do (wevtutil.exe cl %G)
+  - w3wp.exe
+  powershell:
+  - Downloads executable file http://92.246.89.150/pd.gif
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - w3wp.exe, 72.154.15.222:80
+  - powershell.exe, http://92.246.89.150/pd.gif
+  file_activity:
+  - '%SystemRoot%\\system32\\cmd.exe'
+  - '%ALLUSERSPROFILE%\\pd.exe'
+  - '%SystemRoot%\\system32\\inetsrv\\w3wp.exe'
+  - '%SystemRoot%\\system32\\svchost.exe'
+  - wevtutil.exe
+  persistence: []
+  process_relations:
+  - w3wp.exe->cmd.exe
+  - w3wp.exe->powershell.exe
+  - w3wp.exe->pd.exe
+  - svchost.exe->w3wp.exe
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 72.154.15.222
+  - 92.246.89.150
+  domains: []
+  urls:
+  - http://92.246.89.150/pd.gif
+authors:
+- AhnLab SEcurity intelligence Center (ASEC)
+reference: https://asec.ahnlab.com/en/92002/
+date_of_publication: January 07, 2026
+file_creation_date: January 14, 2026

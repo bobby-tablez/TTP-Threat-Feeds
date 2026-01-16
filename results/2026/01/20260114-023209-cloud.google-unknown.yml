@@ -1,0 +1,44 @@
+description: Mandiant released AuraInspector to audit Salesforce Aura for data exposure,
+  detailing misconfigurations and a GraphQL technique to bypass record retrieval limits.
+TTPs:
+  processes:
+  - python3
+  commandline:
+  - python3 aura.cli.py -u URL -C COOKIES -o OUTPUT_DIR -O OBJECT_LIST -v -p PROXY
+    -k --app APP --aura AURA --context CONTEXT --token TOKEN --no-gal --no-banner
+    --aura-request-file AURA_REQUEST_FILE
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - POST /customerportal/s/stsites/aura HTTP/2
+  - POST /customervortal/s/sfsites/aura HTTP/2
+  - POST /customerportal/s/stsices/aura HIT?/2
+  file_activity: []
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - '*.vf.force.com'
+  - '*.my.salesforce-sites.com'
+  - '*.my.salesforce.com'
+  - my.site.com
+  - develop.my.sice.com
+  urls:
+  - https://storage.googleapis.com/gweb-cloudblog-publish/images/aurainspector-fig5.max-900x900.png
+  - https://storage.googleapis.com/gweb-cloudblog-publish/images/aurainspector-fig6.max-800x800.png
+  - https://storage.googleapis.com/gweb-cloudblog-publish/images/aurainspector-fig7.max-900x900.png
+  - https://storage.googleapis.com/gweb-cloudblog-publish/images/aurainspector-fig8.max-1000x1000.png
+  - https://storage.googleapis.com/gweb-cloudblog-publish/images/aurainspector-fig9.max-900x900.png
+  - https://storage.googleapis.com/gweb-cloudblog-publish/images/aurainspector-fig10.max-1200x1200.png
+  - https://storage.googleapis.com/gweb-cloudblog-publish/images/aurainspector-fig11.max-900x900.png
+  - https://storage.googleapis.com/gweb-cloudblog-publish/images/03_ThreatIntelligenceWebsiteBannerIdeas_BANN.max-700x700.png
+authors:
+- Amine Ismail
+- Anirudha Kanodia
+reference: https://cloud.google.com/blog/topics/threat-intelligence/auditing-salesforce-aura-data-exposure
+date_of_publication: January 14, 2026
+file_creation_date: January 14, 2026
