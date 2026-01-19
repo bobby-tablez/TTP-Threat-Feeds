@@ -1,0 +1,46 @@
+description: Sicarii ransomware uses Israeli and Jewish symbolism, performs anti-VM
+  checks, collects data for double extortion, disables security features, encrypts
+  files with AES-GCM, and deploys a destructive script.
+attribution: 'null'
+malware_families: '[''Sicarii'']'
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - schtasks /create /tn "SystemDestruct" /tr "%TEMP%\\destruct.bat" /sc onstart /ru
+    SYSTEM /f >nul 2>&1
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - '%TEMP%\\destruct.bat'
+  - C:\\bootmgr.efi
+  - C:\\bootmgrw.efi
+  - C:\\SecureBootRecovery.efi
+  - C:\\bootmgr_EX.efi
+  - C:\\bootmgrw_EX.efi
+  persistence:
+  - schtasks /create /tn "SystemDestruct" /tr "%TEMP%\\destruct.bat" /sc onstart /ru
+    SYSTEM /f >nul 2>&1
+  process_relations: []
+CVEs: '[''CVE-2025-64446'']'
+IOCs: 'hashes: [''4104542714022cb6ef34e9ee5affca07b9a38dbee49748f8630c5f50a26db8b2'',
+  ''cce3821939b7cb77b9da3d59bbcb5978818d4937dd330d820102b012ffcebe4d'', ''a9cadb2c85a4d951f1c41d3dba6be6af876d364c5bba267a42f7839f40b45c0a'',
+  ''b9691587dff4b09987354d50c5d7f9f99f57183bdb6115d1ed410ea0a2e86973'', ''0f0509d1751185fc3d0fce5a578d29aa9d1fe219f29dacef2cf4200851ed541c'',
+  ''59bb8cbd471bd6598c8bf830fa9f90574e8b1bae59d90d379dfd91b1390f7a33'', ''203fd36eed61f7c0f9225cf5a824d39a3a891f63c908586801e350f785f0ddca'',
+  ''6d4cecda3cd5e031d2d23991fe4040568a221ee6ee7e99aaecda52431e67e18d'', ''fbf4ba84c6bb558d6663e34ce7fb459c2cb4e7577241116abaa09ff1eb0d2108'',
+  ''8a4f1e01c78dbeb5258ef97420a948cc530ff3c4d6fa5153b5da5872c728bfe3'', ''bacc9fe505d243ad5192bad081f2fb7cb5bf0d4d26b0b0e51f5a74f64a2db2a5'',
+  ''70ac2b0f9b40eb8682db4452bbda70363b3680eef8ee30cd311e0d2e4c125bcb'', ''a7ec88cc08ffa80915f32ac7274218ded88e61c6cda95bedbb8fe9d729ba7495'',
+  ''debbc85b17c753c3428588cd865b9bcc4b60c18566724d6fc841133ddb3ba5d3'', ''97c2cda26d8e53eb74489a066834e7afae1a89a71f57b91e64384f88358d0c4e'',
+  ''07ef103cbe476dbaee5fb3a8068a9246c0a18f7b89846ba11e90b3622fdfef91'', ''b23176a06dc2e32978a13853ce7730007242a2f9d1e1d33e9601de6b4eaadc3e'',
+  ''5a2f8aea67e3f89029383b46dfe2f5671902d0b2815b9cf5ab6e74fe6d406fb0'', ''befb0f49fc3bfad9166300600be6da73efb6c9b19e09f9515bce9d60cc9a0455'',
+  ''feda2efbc44d4ef1694d3d2a4c2794013d8a071194adf3c14e5376e1a369ee61'', ''942b5945a927ad2c78c1ce1afc9e86b2f6f4134c6fb36ca1fafef5b21ba1d8a2'',
+  ''b0718c24b687e7'
+authors:
+- Checkpoint Research
+reference: https://research.checkpoint.com/2026/sicarii-ransomware-truth-vs-myth/
+date_of_publication: January 14, 2026
+file_creation_date: January 19, 2026

@@ -1,0 +1,59 @@
+description: TamperedChef malvertising campaign distributing an infostealer targeting
+  Windows devices via trojanized PDF editing application.
+attribution: EvilAI
+malware_families:
+- TamperedChef
+TTPs:
+  processes:
+  - cmd.exe
+  - mshta.exe
+  commandline:
+  - C:\\WINDOWS\\system32\\cmd.exe /d /s /c "reg query \"HKLM\\Software\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{4073CD02-7996-48D7-AFDF-297676C27CA6}\"
+    /v \"UninstallString\""
+  - C:\\WINDOWS\\system32\\cmd.exe /d /s /c "reg query \"HKLM\\Software\\Classes\\G
+    DATA ANTIVIRUS\""
+  - C:\\WINDOWS\\system32\\cmd.exe /d /s /c "reg query \"HKCU\\Software\\CheckPoint\\ZANG\""
+  - C:\\WINDOWS\\system32\\cmd.exe /d /s /c "reg query \"HKCU\\Software\\KasperskyLabSetup\""
+  - C:\\WINDOWS\\system32\\cmd.exe /d /s /c "reg query \"HKLM\\Software\\Fortinet\""
+  - C:\\WINDOWS\\system32\\cmd.exe /d /s /c "reg query \"HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\Bitdefender\"
+    /v \"UninstallString\""
+  - C:\\WINDOWS\\system32\\cmd.exe /d /s /c "reg query \"HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\Bitdefender\"
+    /v \"UninstallString\""
+  - C:\\WINDOWS\\system32\\cmd.exe /d /s /c "reg query \"HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{96A251BD-7532-4CF9-B87D-158FC685DBC4}\"
+    /v \"UninstallString\""
+  - C:\\WINDOWS\\system32\\cmd.exe /d /s /c "reg query \"HKLM\\Software\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\REC\"
+    /v \"UninstallString\""
+  - C:\\WINDOWS\\system32\\cmd.exe /d /s /c "reg query \"HKLM\\Software\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\G
+    DATA ANTIVIRUS\" /v \"UninstallString\""
+  scripting_engine:
+  - VBS
+  - JavaScript
+  registry_keys:
+  - HKCU\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\PDFEditorUpdater
+  file_activity:
+  - C:\\Users\\<user>\\AppData\\Local\\ManualFinder\\ManualFinderApp.exe
+  - C:\\Users\\[username]\\AppData\\Local\\TEMP\\bb1b47cb-962f-fb06-4b84-87ad12b4f37f8de0or.js
+  persistence:
+  - Scheduled tasks (PDFEditorScheduledTask, PDFEditorUScheduledTask)
+  - Autorun entries in the registry
+  network_connections:
+  - mshta.exe -> mka3e8[.]com
+  - ManualFinder-v2.0.196.msi -> portal[.]manualfinder[.]app/sapi/iidsuccesssrc\\main.rs
+  - portal[.]manualfinder[.]app/sapi/regCode
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - fullpdf[.]com
+  - pdftraining[.]com
+  - vault.appsuites[.]ai
+  - mka3e8[.]com
+  - portal[.]manualfinder[.]app
+  urls:
+  - https[:]//portal[.]manualfinder[.]app/sapi/iidsuccesssrc\\main.rs
+  - https[:]//portal[.]manualfinder[.]app/sapi/regCode
+authors:
+- Sushmita Shetty
+reference: https://www.sophos.com/en-us/blog/tamperedchef-serves-bad-ads-with-infostealers-as-the-main-course
+date_of_publication: January 16, 2026
+file_creation_date: January 19, 2026

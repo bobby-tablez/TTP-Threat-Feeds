@@ -1,0 +1,51 @@
+description: Landlock LSM (Linux Security Module) has denied access requests, logged
+  for a sandboxed program if audit is enabled.
+TTPs:
+  processes:
+  - touch
+  - curl
+  - xz
+  - ./server
+  commandline:
+  - /usr/bin/touch /home/user/sandbox_c
+  - /usr/bin/curl https://google.com
+  - curl "http://localhost:B086/7file=index.html"
+  - curl "http://localhost:8086/2file=/. /. /. /etc/passwd"
+  - ./server
+  - LD_PRELOAD=/home/user/test_sample/vuln.so xz -c < /home/user/test_sample/input.txt >/dev/null
+  - LD_PRELOAD=/home/user/test_sample/vuln.so ./src/xz/xz -c < /home/user/test_sample/input.txt >/dev/null
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - vuln.so
+  network_connections:
+  - curl, 142.250.179.110, 80
+  - localhost:B086
+  - localhost:8086
+  file_activity:
+  - /home/user/sandbox_c
+  - /tmp
+  - /etc/passwd
+  - /var/lib/htdocs/index.html
+  - /home/user/test_sample/input.txt
+  persistence: []
+  process_relations: []
+CVEs:
+- CVE-2024-3094
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 142.250.179.110
+  domains:
+  - google.com
+  urls:
+  - https://google.com
+  - http://localhost:B086/7file=index.html
+  - http://localhost:8086/2file=/. /. /. /etc/passwd
+authors:
+- Erwan Chevalier
+- Guillaume C.
+reference: https://blog.sekoia.io/leveraging-landlock-telemetry-for-linux-detection-engineering/
+date_of_publication: January 14, 2026
+file_creation_date: January 19, 2026

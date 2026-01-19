@@ -1,0 +1,62 @@
+description: MonetaStealer is a PyInstaller-compiled Python malware targeting macOS,
+  designed to steal various sensitive data including browser credentials, cryptocurrency
+  wallets, and WiFi passwords.
+malware_families:
+- MonetaStealer
+TTPs:
+  processes:
+  - python
+  - security
+  - networksetup
+  commandline:
+  - security find-generic-password -w -a "Chrome"
+  - networksetup -listpreferredwirelessnetworks en0
+  - security find-generic-password -wa \"{ssid}\" 2>/dev/null
+  - security find-generic-password -l \"{ssid}\" -g 2>&1 | grep \"password:\"
+  - security dump-keychain 2>/dev/null | grep -i {keyword} | head -20
+  powershell: []
+  scripting_engine:
+  - Python
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - api.telegram.org
+  - POST /bot8384579537:AAFdrbUN1YWOi-UEpe@PeF8-MFYcQhwbyPQ/sendMessage HTTP/1.1
+  file_activity:
+  - /Users/Desktop/STOLEN{sessionID}.zip
+  - ~/Library/Application Support
+  - ~/.config
+  - ~/Documents
+  - ~/Desktop
+  - ~/Downloads
+  - /Users/Desktop/STOLEN_DATA_03c77af01a88.zip
+  persistence: []
+  process_relations:
+  - python->PortfolioGUI
+IOCs:
+  hashes:
+  - 4885adc9de7e91b74a3ac01187775459acf3e4e026ee2fa776b3419cf8dbaf00
+  - 1a5027adf99076470444c5ffdd83a4313ab1d21827700699d0ee6ab1337beb70
+  - 6f746388853178a3b4c2c91a6bd98438fb59e760caa273a8d6a4c03936498c39
+  - A01e57611537699d85e9767023638dbd88a224075a866c17509dc17d7e5ddbde
+  ip_addresses: []
+  domains:
+  - api.telegram.org
+  urls:
+  - https://the-sequence.com/hs-fs/hubfs/2-3.png
+  - https://the-sequence.com/hs-fs/hubfs/3-3.png
+  - https://the-sequence.com/hs-fs/hubfs/4-2.png
+  - https://the-sequence.com/hs-fs/hubfs/5-1.png
+  - https://the-sequence.com/hs-fs/hubfs/6-1.png
+  - https://the-sequence.com/hs-fs/hubfs/7-2.png
+  - https://the-sequence.com/hs-fs/hubfs/8-1.png
+  - https://the-sequence.com/hs-fs/hubfs/9-1.png
+  - https://the-sequence.com/hs-fs/hubfs/10-1.png
+  - https://the-sequence.com/hs-fs/hubfs/11-1.png
+  - https://the-sequence.com/hs-fs/hubfs/unnamed-2.png
+  - https://the-sequence.com/hs-fs/hubfs/12..png
+authors:
+- Calvin So
+reference: https://the-sequence.com/monetastealer-threat
+date_of_publication: January 14, 2026
+file_creation_date: January 19, 2026

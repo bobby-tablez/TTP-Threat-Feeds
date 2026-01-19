@@ -1,0 +1,55 @@
+description: Remcos RAT campaign using CVE-2017-11882 to deliver a fileless payload
+  via malicious Word document.
+malware_families:
+- Remcos
+TTPs:
+  processes:
+  - EQNEDT32.EXE
+  - powershell.exe
+  - wscript.exe
+  - colorcpl.exe
+  commandline:
+  - powershell -NoProfile -WindowStyle Hidden -Command {Base64-decoded PowerShell code}
+  - wscript.exe C:\\Users\\Public\\Downloads\\eOTJ0Dniy5.vbs
+  powershell:
+  - '[Reflection.Assembly]::Load([Convert]::FromBase64String (snapery))'
+  - '[System.Text.Encoding]::ASCII.GetString (feorybantiosm)'
+  scripting_engine:
+  - VBS
+  registry_keys: []
+  image_load:
+  - Microsoft.Win32.TaskScheduler.dll
+  network_connections:
+  - EQNEDT32.EXE, hxxp://66.179.94.117/157/fsf090g90dfg090asdfxcv0sdf09sdf90200002f0sf0df09f0s9f0sdf0sf00ds.vbe,80
+  - powershell.exe, hxxps://idliya.com/arquivo_20251130221101.txt, 443
+  file_activity:
+  - '%AppData%\\90g90dfg090asdfxcv0sdf09sdf90200002f0sf0df09f0s9f0sdf0sf00d.vbs'
+  - C:\\Users\\Public\\Downloads\\eOTJ0Dniy5.vbs
+  persistence:
+  - Scheduled task named "5V3EBWmhxc" to run wscript.exe every minute
+  process_relations:
+  - EQNEDT32.EXE->powershell.exe
+  - powershell.exe->colorcpl.exe
+CVEs:
+- CVE-2017-11882
+IOCs:
+  hashes:
+  - A35DD25CD31E4A7CCA528DBFFF37B5CDBB4076AAC
+  - E915CE8F7271902FA7D270717A5C08E57014528F19C92266F7B192793D40972F
+  - 94CA3BEEB0DFD3F02FE14DE2E6FB0D26E29BEB426AEE911422B08465AFBD2FAA
+  ip_addresses:
+  - 66.179.94.117
+  - 216.9.224.26
+  domains:
+  - go-shorty.killcod3.com
+  - idliya.com
+  urls:
+  - hxxps://go-shorty.killcod3.com/OkkxCrq
+  - hxxp://66.179.94.117/157/w/w.doc
+  - hxxp://66.179.94.117/157/fsf090g90dfg090asdfxcv0sdf09sdf90200002f0sf0df09f0s9f0sdf0sf00ds.vbe
+  - hxxps://idliya.com/arquivo_20251130221101.txt
+authors:
+- Xiaopeng Zhang
+reference: https://www.fortinet.com/blog/threat-research/new-remcos-campaign-distributed-through-fake-shipping-document
+date_of_publication: January 14, 2026
+file_creation_date: January 19, 2026

