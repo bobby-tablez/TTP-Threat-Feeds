@@ -6,3 +6,7 @@ Pillow
 trafilatura
 pyyaml
 curl_cffi
+# Optional: Install these only if using the respective providers
+# anthropic>=0.18.0  # For Claude API
+# openai>=1.0.0      # For OpenAI API
+# google-generativeai>=0.3.0  # For Gemini API (alternative SDK)

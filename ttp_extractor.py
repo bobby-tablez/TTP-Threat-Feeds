@@ -17,6 +17,8 @@ import unicodedata
 import string
 from dateutil.parser import parse as date_parse
 import logging
+import argparse
+from llm_providers import create_provider, LLMProvider
 
 # Try to use curl_cffi for better browser impersonation, fallback to requests
 try:
@@ -26,13 +28,13 @@ except ImportError:
     USE_CURL_CFFI = False
 
 # CONFIG
-LLM_ENDPOINT = "http://127.0.0.1:1234/v1/chat/completions"
-HEADERS = {"Content-Type": "application/json"}
-MODEL_NAME = "qwen2.5-coder-32b-instruct"
 URLS_FILE = "urls.txt"
 CACHE_FILE = "processed_urls.txt"
 VERBOSE = os.getenv("VERBOSE", "1") == "1"  # Set VERBOSE=0 to disable detailed logging
 REQUEST_DELAY = float(os.getenv("REQUEST_DELAY", "2.0"))  # Seconds between requests to same domain
+
+# Global LLM provider (initialized in main)
+llm_provider: LLMProvider = None
 
 # Setup logging - dual output to console and file
 logger = logging.getLogger(__name__)
@@ -768,34 +770,27 @@ def _normalize_yaml_doc(doc):
 
 
 def ask_llm(text):
-    import json
     from math import ceil
+
+    global llm_provider
 
     estimated_tokens = ceil(len(text) / 3.5)
     if estimated_tokens > 12000:
         print(f"    ⚠️ Skipped (input too long: ~{estimated_tokens} tokens)")
         return ""
 
-    payload = {
-        "model": MODEL_NAME,
-        "messages": [
-            {"role": "system", "content": "You are an expert cybersecurity analyst."},
-            {"role": "user", "content": PROMPT_TEMPLATE.format(text=json.dumps(text)[1:-1])}
-        ],
-        "temperature": 0.2,
-        "max_tokens": 5000
-    }
+    system_prompt = "You are an expert cybersecurity analyst."
+    # Simply format the text into the template - no JSON encoding tricks
+    user_prompt = PROMPT_TEMPLATE.format(text=text)
 
     try:
-        resp = requests.post(LLM_ENDPOINT, headers=HEADERS, json=payload)
-        resp.raise_for_status()
-        data = resp.json()
+        raw_response = llm_provider.generate(
+            system_prompt=system_prompt,
+            user_prompt=user_prompt,
+            temperature=0.2,
+            max_tokens=5000
+        )
 
-        if "choices" not in data:
-            print(f"    ❌ Unexpected LLM response: {data}")
-            return ""
-
-        raw_response = data["choices"][0]["message"]["content"]
         yaml_candidate = extract_yaml_from_response(raw_response)
         if yaml_candidate:
             return yaml_candidate
@@ -949,7 +944,126 @@ def is_feed_url(url):
     return any(ind in u for ind in ("/rss", "/feed", ".xml"))
 
 
+def parse_args():
+    """Parse command-line arguments for LLM provider selection"""
+    parser = argparse.ArgumentParser(
+        description="TTP-Threat-Feeds: Extract TTPs and IOCs from threat intelligence reports",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+LLM Provider Examples:
+  --lmstudio                        Use LM Studio (default)
+  --lmstudio --endpoint http://...  Use LM Studio with custom endpoint
+  --ollama --model llama3.1:70b     Use Ollama with specific model
+  --openai --model gpt-4o           Use OpenAI GPT-4o
+  --claude --model claude-opus-4    Use Anthropic Claude
+  --gemini --model gemini-2.0-flash Use Google Gemini
+
+API Keys (for cloud providers):
+  Set environment variables: OPENAI_API_KEY, ANTHROPIC_API_KEY, GOOGLE_API_KEY
+  Or use --api-key flag
+        """
+    )
+
+    # Provider selection (mutually exclusive)
+    provider_group = parser.add_mutually_exclusive_group()
+    provider_group.add_argument('--lmstudio', action='store_true', default=True,
+                                help='Use LM Studio (default)')
+    provider_group.add_argument('--ollama', action='store_true',
+                                help='Use Ollama')
+    provider_group.add_argument('--openai', action='store_true',
+                                help='Use OpenAI API')
+    provider_group.add_argument('--claude', action='store_true',
+                                help='Use Anthropic Claude API')
+    provider_group.add_argument('--gemini', action='store_true',
+                                help='Use Google Gemini API')
+
+    # Common options
+    parser.add_argument('--model', type=str, help='Model name to use')
+    parser.add_argument('--endpoint', type=str, help='API endpoint (for local providers)')
+    parser.add_argument('--api-key', type=str, help='API key (for cloud providers)')
+
+    args = parser.parse_args()
+
+    # Determine which provider was selected
+    if args.ollama:
+        args.provider = 'ollama'
+    elif args.openai:
+        args.provider = 'openai'
+    elif args.claude:
+        args.provider = 'claude'
+    elif args.gemini:
+        args.provider = 'gemini'
+    else:
+        args.provider = 'lmstudio'
+
+    return args
+
+
+def initialize_llm_provider(args):
+    """Initialize the LLM provider based on command-line arguments"""
+    global llm_provider
+
+    provider_config = {}
+
+    # Provider-specific defaults
+    defaults = {
+        'lmstudio': {
+            'model_name': 'qwen2.5-coder-32b-instruct',
+            'endpoint': 'http://127.0.0.1:1234/v1/chat/completions'
+        },
+        'ollama': {
+            'model_name': 'qwen2.5-coder:32b',
+            'endpoint': 'http://127.0.0.1:11434/api/chat'
+        },
+        'openai': {
+            'model_name': 'gpt-4o'
+        },
+        'claude': {
+            'model_name': 'claude-3-5-sonnet-20241022'
+        },
+        'gemini': {
+            'model_name': 'gemini-2.0-flash-exp'
+        }
+    }
+
+    # Get defaults for selected provider
+    provider_defaults = defaults.get(args.provider, {})
+
+    # Override with user-specified values
+    if args.model:
+        provider_config['model_name'] = args.model
+    else:
+        provider_config['model_name'] = provider_defaults.get('model_name')
+
+    if args.endpoint:
+        provider_config['endpoint'] = args.endpoint
+    elif 'endpoint' in provider_defaults:
+        provider_config['endpoint'] = provider_defaults['endpoint']
+
+    if args.api_key:
+        provider_config['api_key'] = args.api_key
+
+    # Create the provider
+    try:
+        llm_provider = create_provider(args.provider, **provider_config)
+        logger.info(f"🤖 Initialized LLM Provider: {llm_provider.get_provider_name()}")
+        logger.info(f"   Model: {llm_provider.model_name}")
+        if hasattr(llm_provider, 'endpoint'):
+            logger.info(f"   Endpoint: {llm_provider.endpoint}")
+    except Exception as e:
+        logger.error(f"❌ Failed to initialize LLM provider: {e}")
+        raise
+
+
 def main():
+    global llm_provider
+
+    # Parse command-line arguments
+    args = parse_args()
+
+    # Initialize LLM provider
+    initialize_llm_provider(args)
+
     MAX_ARTICLES_PER_SOURCE = 7
     start_urls = read_start_urls()
     cached = read_cached_urls()

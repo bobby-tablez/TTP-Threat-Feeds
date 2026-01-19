@@ -29,18 +29,94 @@ The purpose of this project is to automate the discovery and parsing of threat a
 
 ## LLM Setup
 
-This project assumes a locally hosted LLM compatible with the OpenAI chat completion format.
+This project supports multiple LLM providers, both local and cloud-based.
 
-**Recommended model:**
+> 📖 **For detailed provider information, setup guides, and troubleshooting, see [PROVIDERS.md](PROVIDERS.md)**
 
+### Supported Providers
+
+| Provider | Type | Default Model | Notes |
+|----------|------|---------------|-------|
+| **LM Studio** | Local | `qwen2.5-coder-32b-instruct` | Default, OpenAI-compatible endpoint |
+| **Ollama** | Local | `qwen2.5-coder:32b` | Easy local deployment |
+| **OpenAI** | Cloud | `gpt-4o` | Requires API key |
+| **Claude** | Cloud | `claude-3-5-sonnet-20241022` | Requires API key |
+| **Gemini** | Cloud | `gemini-2.0-flash-exp` | Requires API key |
+
+### Usage Examples
+
+**Default (LM Studio):**
+```bash
+python ttp_extractor.py
+# or explicitly
+python ttp_extractor.py --lmstudio
+```
+
+**Ollama:**
+```bash
+python ttp_extractor.py --ollama
+# With custom model
+python ttp_extractor.py --ollama --model llama3.1:70b
+```
+
+**OpenAI:**
+```bash
+export OPENAI_API_KEY="your-api-key"
+python ttp_extractor.py --openai
+# With specific model
+python ttp_extractor.py --openai --model gpt-4o-mini
+```
+
+**Claude:**
+```bash
+export ANTHROPIC_API_KEY="your-api-key"
+python ttp_extractor.py --claude
+# With specific model
+python ttp_extractor.py --claude --model claude-3-5-sonnet-20241022
+```
+
+**Gemini:**
+```bash
+export GOOGLE_API_KEY="your-api-key"
+python ttp_extractor.py --gemini
+# With specific model
+python ttp_extractor.py --gemini --model gemini-2.0-flash-exp
+```
+
+**Custom endpoint (for local providers):**
+```bash
+python ttp_extractor.py --lmstudio --endpoint http://192.168.1.100:1234/v1/chat/completions
+python ttp_extractor.py --ollama --endpoint http://192.168.1.100:11434/api/chat
+```
+
+### Recommended Local Models
+
+For local deployment via LM Studio or Ollama:
+- [`qwen2.5-coder-32b-instruct`](https://huggingface.co/Qwen/Qwen2.5-Coder-32B-Instruct) **RECOMMENDED**
 - [`gemma-3-12b-it@q8_0`](https://huggingface.co/Triangle104/gemma-3-12b-it-Q8_0-GGUF)
-- [`qwen2.5-coder-32b-instruct`](https://huggingface.co/Qwen/Qwen2.5-Coder-32B-Instruct) **CURRENT**
-- [`phi-4`](https://huggingface.co/microsoft/phi-4) 
+- [`phi-4`](https://huggingface.co/microsoft/phi-4)
 - [`devstral-small-2505`](https://huggingface.co/mistralai/Devstral-Small-2505)
-- [`openai/gpt-oss-20b`](https://huggingface.co/openai/gpt-oss-20b)
-- Served locally via [LM Studio](https://lmstudio.ai)
+- [`llama-3.1-70b-instruct`](https://huggingface.co/meta-llama/Llama-3.1-70B-Instruct)
 
-To change the endpoint or model, edit the `LLM_ENDPOINT` and `MODEL_NAME` variables in `ttp_extractor.py`.
+### API Key Setup
+
+For cloud providers, set environment variables:
+
+```bash
+# OpenAI
+export OPENAI_API_KEY="sk-..."
+
+# Anthropic Claude
+export ANTHROPIC_API_KEY="sk-ant-..."
+
+# Google Gemini
+export GOOGLE_API_KEY="..."
+```
+
+Or pass directly via command line:
+```bash
+python ttp_extractor.py --openai --api-key "sk-..."
+```
 
 ---
 
@@ -50,10 +126,63 @@ Some vendors embed command-line samples or TTPs in screenshots. This tool includ
 
 ---
 
+##  Quick Start
+
+1. **Clone and setup:**
+```bash
+git clone <repository-url>
+cd TTP-Threat-Feeds
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+2. **Choose your LLM provider:**
+
+**Option A: Local (LM Studio) - Default**
+- Install [LM Studio](https://lmstudio.ai/)
+- Download a model (e.g., `qwen2.5-coder-32b-instruct`)
+- Start local server
+- Run: `python ttp_extractor.py`
+
+**Option B: Local (Ollama)**
+- Install [Ollama](https://ollama.ai/)
+- Run: `ollama pull qwen2.5-coder:32b`
+- Run: `python ttp_extractor.py --ollama`
+
+**Option C: Cloud (OpenAI/Claude/Gemini)**
+- Get API key from your provider
+- Run: `export OPENAI_API_KEY="your-key"`
+- Run: `python ttp_extractor.py --openai`
+
+3. **Configure URLs:**
+Add threat intelligence blog URLs to `urls.txt` (one per line)
+
+4. **Run the extractor:**
+```bash
+python ttp_extractor.py
+```
+
+Results will be saved to `results/YYYY/MM/` as YAML files.
+
+---
+
 ##  Requirements
 
 ```bash
 pip install -r requirements.txt
+```
+
+**Note:** Cloud provider SDKs are optional. Only install if using that provider:
+```bash
+# For OpenAI
+pip install openai>=1.0.0
+
+# For Claude
+pip install anthropic>=0.18.0
+
+# For Gemini (optional, can use REST API)
+pip install google-generativeai>=0.3.0
 ```
 
 ##  Contributing
