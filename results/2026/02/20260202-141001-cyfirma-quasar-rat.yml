@@ -1,0 +1,52 @@
+description: '''Quasar RAT uses fileless techniques to inject shellcode into trusted
+  processes, employs watchdog timers for persistence, and communicates over standard
+  application-layer protocols.'''
+malware_families:
+- Quasar RAT
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - explorer.exe
+  - svchost.exe
+  commandline:
+  - 'powershell -NoProfile -ExecutionPolicy Bypass ::9eCO31IH8TKn3TLI::'
+  - powershell -NoProfile -ExecutionPolicy Bypass $batch_ps_exec
+  powershell:
+  - Remove-Item -Path "%APPDATA%\OneDrive.bat:Zone.Identifier"
+  - Get-Process -Name explorer
+  - OpenProcess, VirtualAllocEx, WriteProcessMemory, CreateRemoteThread
+  scripting_engine:
+  - Batch
+  registry_keys:
+  - HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+  image_load: []
+  network_connections:
+  - explorer.exe, 91.92.243.10, 4783
+  file_activity:
+  - '%APPDATA%\microsoft\d1hvyujfbr7g\njzyslsx38rhxc5o.bat'
+  - '%APPDATA%\OneDrive.bat'
+  persistence:
+  - Registry Run key for cmd.exe /c %APPDATA%\microsoft\d1hvyujfbr7g\njzyslsx38rhxc5o.bat
+  - Watchdog-based reinjection logic
+  process_relations:
+  - cmd.exe->powershell.exe
+  - powershell.exe->explorer.exe/svchost.exe
+CVEs:
+- CVE-2025-8088
+IOCs:
+  hashes:
+  - 198f2767f04680098a037ac03c089e3d400dc63e7d276b36eebbebed4e85e067
+  - bf12a13ed0fac0de3dba45f65f14e67b0b62a30cde88ae18785328c8b34b5995
+  - 4b82f29b17b977a42f08d4f47a505740a31be273ecd76f9655643ed5ce44bb86
+  - d722f6b162a8cc49867856f94961ed7827ba4975a20632f6cdc6eba1096e3263
+  ip_addresses:
+  - 91.92.243.10
+  domains: []
+  urls: []
+authors:
+- CYFIRMA Research
+attribution: 'null'
+reference: https://www.cyfirma.com/research/weaponized-winrar-exploitation-and-stealth-deployment-of-fileless-net-rat
+date_of_publication: January 23, 2026
+file_creation_date: February 02, 2026

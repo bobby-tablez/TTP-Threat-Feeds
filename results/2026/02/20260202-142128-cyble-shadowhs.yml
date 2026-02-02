@@ -1,0 +1,54 @@
+description: Linux intrusion chain leveraging a highly obfuscated, fileless loader
+  deploying a weaponized variant of hackshell.
+malware_families:
+- ShadowHS
+TTPs:
+  processes:
+  - bash
+  - perl
+  - gzip
+  - openssl
+  commandline:
+  - echo S1A76XhLvaqIQ+7WsT+Euw== | openssl enc -d -aes-256-cbc -md sha256 -nosalt -k C-92KemmzRUsREnkdk-SMxUoJy8yHhmItvA -a -A
+  powershell: []
+  scripting_engine:
+  - POSIX shell
+  - Perl
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - bash->62.171.153[.]47
+  - bash->91.92.242[.]200
+  file_activity:
+  - /proc/<pid>/fd/<f>
+  - /proc/*/exe
+  - /tmp/
+  - /home/
+  persistence: []
+  process_relations:
+  - bash->perl
+  - bash->gzip
+  - bash->openssl
+IOCs:
+  hashes:
+  - 20c1819c2fb886375d9504b0e7e5debb87ec9d1a53073b1f3f36dd6a6ac3f427
+  - 9f2cfc65b480695aa2fd847db901e6b1135b5ed982d9942c61b629243d6830dd
+  - 148f199591b9a696197ec72f8edb0cf4f90c5dcad0805cfab4a660f65bf27ef3
+  - 574a17028b28fdf860e23754d16ede622e4e27bac11d33dbf5c39db501dfccdc
+  - 3f014aa3e339d33760934f180915045daf922ca8ae07531c8e716608e683d92d
+  - 847846a0f0c76cf5699342a066378774f1101d2fb74850e3731dc9b74e12a69d
+  - 5a6b08d42cc8296b32034b132bab18d201a48c1628df3200e869722506dd4ec6
+  - e11bcba19ac628ae1d0b56e43646ae1b5da2ccc1da5162e6719d4b7d68d37096
+  - 0bb7d4d8a9c8f6b3622d07ae9892aa34dc2d0171209e2829d7d39d5024fd79ef
+  - 9fdaf64180b7d02b399d2a92f1cdd062af2e6584852ea597c50194b62cca3c0b
+  - b3ee445675fce1fccf365a7b681b316124b1a5f0a7e87042136e91776b187f39
+  ip_addresses:
+  - 91.92.242[.]200
+  - 62.171.153[.]47
+  domains: []
+  urls: []
+authors:
+- Cyble Research & Intelligence Labs (CRIL)
+reference: https://cyble.com/blog/shadowhs-fileless-linux-post-exploitation-framework/
+date_of_publication: January 30, 2026
+file_creation_date: February 02, 2026
