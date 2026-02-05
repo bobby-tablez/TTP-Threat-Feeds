@@ -1,0 +1,47 @@
+description: SnappyBee (Deed RAT) is a modular backdoor used for long-term persistence
+  and deploying further malware.
+attribution: Salt Typhoon, Earth Estries
+malware_families:
+- SnappyBee
+- Deed RAT
+- Snappybee
+TTPs:
+  processes:
+  - dllhost.exe
+  - powershell.exe
+  - cmd.exe
+  commandline:
+  - powershell -NoP -NonI -W Hidden -Exec Bypass -Command & {Add-Type -TypeDefinition
+    $code; [MyClass]::Main()}
+  powershell:
+  - Add-Type -TypeDefinition $code; [MyClass]::Main()
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - kernel32.dll
+  - advapi32.dll
+  - snappybee.bin
+  network_connections: []
+  file_activity:
+  - dbindex.dat
+  - C:\\Windows\\Temp\\snappybee.bin
+  persistence:
+  - DLL sideloading to execute code without suspicion
+  process_relations: []
+IOCs:
+  hashes:
+  - 25b9fdef3061c7dfea744830774ca0e289dba7c14be85f0d4695d382763b409b
+  - b2b617e62353a672626c13cc7ad81b27f23f91282aad7a3a0db471d84852a9ac
+  - 1a38303fb392ccc5a88d236b4f97ed404a89c1617f34b96ed826e7bb7257e296
+  - MD5
+  - SHA1
+  - SHA256
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- Nathaniel Bill
+- Ryan Traill
+reference: https://www.darktrace.com/blog/darktrace-malware-analysis-unpacking-snappybee
+date_of_publication: February 05, 2026
+file_creation_date: February 05, 2026

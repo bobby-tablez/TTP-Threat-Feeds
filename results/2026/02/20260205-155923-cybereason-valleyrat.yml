@@ -1,0 +1,51 @@
+description: Malware samples impersonate installers for software commonly used in
+  Chinese-speaking regions and use a process-injection technique called PoolParty
+  Variant 7.
+attribution: Silver Fox APT
+malware_families:
+- ValleyRat
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - rundll32.exe
+  - chrmstp.exe
+  commandline:
+  - power""shell.exe -Executio""nPolicy Byp""ass -Command Add-MpPre""ference -Exclus""ionPath
+    C:\\, D:\\, E:\\, F:\\
+  - regsvr32.exe C:\\Users\\adm\\AppData\\Roaming\\TrustAsia\\i""n""t""e""l.dll
+  - C:\\Users\\adm\\AppData\\Local\\insttect.exe
+  powershell:
+  - powershell-Exec\"\"utionP\"\"olicy Byp\"\"ass -File C:\\Users\\adm\\AppData\\Local\\updated.ps1
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\Microsoft\\Windows\AppID\\.NET Framework NGEN v4.0.8745
+  - HKEY_LOCAL_MACHINE\\Microsoft\\Windows\AppID\\ .NET Framework Single v4.0
+  image_load:
+  - intel.dll
+  - sangee.ini
+  network_connections:
+  - chrmstp.exe, destination IP address and port (not specified)
+  file_activity:
+  - '%AppData%\TrustAsia\intell.dll'
+  - '%AppData%\config.ini'
+  - '%AppData%\config2.ini'
+  - '%LOCALAPPDATA%\chrmstp.exe'
+  - '%LOCALAPPDATA%\Sangee.ini'
+  - '%LOCALAPPDATA%\Yuteab.db'
+  persistence:
+  - Scheduled Task registration via RPC
+  - Task Scheduler operations
+  process_relations:
+  - Fake Installer->PowerShell
+  - Fake Installer->rundll32.exe->intel.dll
+  - Fake Installer->chrmstp.exe
+IOCs: 'hashes: [''b02a99344f2fa81636ad913f805b52051debe529'', ''b4feadbada51e68852a8a732f0e79ae725a755a4'',
+  ''51330636e299128c026c77cbc77dc24f3db49336'', ''9120e22231ea9f597d8bb62d46e4775bd3fe5ccb'',
+  ''fab0802c3978f096223ff3b29188c3617e3cfa62'', ''da64ac77059050fdf30143da3671d41fff872689'',
+  ''8e7e3a910f06310ca9fe1d07fd1a4208eeb53a25'', ''2fd374f17e059cb16e530c3b73b883d5c57ce0f0'']'
+authors:
+- Cybereason GSOC
+reference: https://www.cybereason.com/blog/fake-installer-valleyrat
+date_of_publication: February 05, 2026
+file_creation_date: February 05, 2026

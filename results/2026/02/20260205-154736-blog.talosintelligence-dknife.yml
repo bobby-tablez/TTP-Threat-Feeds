@@ -1,0 +1,162 @@
+description: DKnife is a fully featured gateway-monitoring and adversary-in-the-middle
+  (AitM) framework targeting Chinese-speaking users with capabilities including deep-packet
+  inspection, traffic manipulation, and delivery of ShadowPad and DarkNimbus backdoors.
+attribution: China-nexus threat actors
+malware_families:
+- DKnife
+- ShadowPad
+- DarkNimbus
+- CiscoShadowpad
+TTPs:
+  processes:
+  - dknife.bin
+  - postapi.bin
+  - sslmm.bin
+  - mmdown.bin
+  - yitiji.bin
+  - remote.bin
+  - dkupdate.bin
+  - powershell.exe
+  - cmd.exe
+  commandline:
+  - nohup /dksoft/bin/dknife.bin 2>/dev/null 1>/dev/null &
+  - nohup /dksoft/bin/postapi.bin 2>/dev/null 1>/dev/null &
+  - nohup /dksoft/bin/sslmm.bin 2>/dev/null 1>/dev/null &
+  - nohup /dksoft/bin/mmdown.bin 2>/dev/null 1>/dev/null &
+  - nohup /dksoft/bin/yitiji.bin 2>/dev/null 1>/dev/null &
+  - nohup /dksoft/bin/remote.bin 2>/dev/null 1>/dev/null &
+  - nohup /dksoft/bin/dkupdate.bin 2>/dev/null 1>/dev/null &
+  - http://43.132.205.118:81/app/minibrowser11_rpl.zip
+  - http://47.93.54[.]134:8005
+  - http://47.93.54[.]134:8003/protocol/tcp-data
+  - http://47.93.54[.]134:8003/protocol/channel-trigger-log
+  - http://47.93.54[.]134:8003/protocol/virtual-id
+  - http://47.93.54[.]134:8003/protocol/user-account
+  - http://47.93.54[.]134:8003/protocol/application
+  - http://47.93.54[.]134:8003/protocol/target-info
+  - http://47.93.54[.]134:8003/public/bind-ip
+  - http://47.93.54[.]134:8003/protocol/internet-action
+  - http://47.93.54[.]134:8003/protocol/attack-result
+  - http://117.175.185[.]81:8003/
+  - http://192.168.92.92:8080/login
+  - http://192.168.92.92:8080/fe-device-info
+  - http://192.168.92.92:8080/user
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - /etc/rc.local
+  image_load:
+  - libcrypto.so.10
+  - TosBtKbd.dll
+  - TosBtKbdLayer.dll
+  network_connections:
+  - dknife.bin, 47.93.54[.]134:8005
+  - postapi.bin, 47.93.54[.]134:8003
+  - sslmm.bin, 47.93.54[.]134:8003
+  - mmdown.bin, 47.93.54[.]134:8005
+  - yitiji.bin, 10.3.3.3
+  - remote.bin, 192.168.92.92:8080
+  - dkupdate.bin, 47.93.54[.]134:8005
+  - dknife.bin, https://47.93.54[.]134:8003, 8003
+  - postapi.bin, https://47.93.54[.]134:8003, 8003
+  - sslmm.bin, 0.0.0.0:10800, 10800
+  - yitiji.bin, http://10.3.3.3:81/app/base.apk, 81
+  - remote.bin, udp, 5644
+  - mmdown.bin, http://47.93.54[.]134:8005, 8005
+  - dkupdate.bin, http://117.175.185[.]81:8003/, 8003
+  - 10.3.3.3:51
+  - 192.168.92.92:8080
+  - 10.3.3.3:81
+  file_activity:
+  - /dksoft/conf/server.conf
+  - /etc/diankeuuid
+  - /dksoft/conf/<UUID>.ini
+  - /dksoft/update/
+  - /dksoft/bin/
+  - /dksoft/conf/rules.aes
+  - /dksoft/html/dkay-scripts/
+  - /dksoft/conf/url.cfg
+  - /dksoft/conf/wxha.conf
+  - /dksoft/conf/<UUID>.mm
+  - /dksoft/html/app/
+  - /dksoft/update_bin.tar.gz
+  - /dksoft/bin/nohup [filepath] 2>/dev/null 1>/dev/null &
+  - app/base.apk
+  - /dkay-scripts/11184.json
+  - /dkay-scripts/110@1.json
+  - /dkay-scripts/11017.json
+  - /dkay-scripts/11027.json
+  - /dkay-scripts/11034.json
+  - /dkay-scripts/1106@.json
+  - /dkay-scripts/11@65.json
+  persistence:
+  - Modifying /etc/rc.local to ensure the binary runs automatically each time the
+    system starts
+  process_relations:
+  - dknife.bin -> yitiji.bin
+  - dknife.bin -> postapi.bin
+  - dknife.bin -> sslmm.bin
+  - dknife.bin -> remote.bin
+  - dknife.bin -> mmdown.bin
+  - dknife.bin -> dkupdate.bin
+IOCs:
+  hashes:
+  - 2550aa4c4bc0a020ec4b16973df271b81118a7abea77f77fec2f575a32dc3444
+  - 17a2dd45f9f57161b4cc40924296c4deab65beea447efb46d3178a9e76815d06
+  - cd09f8f7ea3b57d5eb6f3f16af445454
+  - 1.1.1.143891d3898a54a132d198be47a44a8d4856201fa7a87f3f850432ba9e038893ac59509018bbbe5482452a205513a2eb5d86004369309818ece7eba7a462ef854dlied
+  - c62d929e7b7e7b6165923a5dfc60cb56
+  ip_addresses:
+  - 47.93.54[.]134
+  - 192.168.92.92
+  - 10.3.3.3
+  - 43.132.205[.]118
+  - 117.175.185[.]81
+  - 43.132.205.118
+  domains:
+  - iface2.
+  - .can
+  - com
+  - d1d:i N we ixin/android/wxweb/updateCantig.xml
+  - api.
+  - mobads.
+  - pns.
+  - ta-cn.abardeen.com
+  - m5.zhemai.com
+  - www.icoursel63.org
+  urls:
+  - http://47.93.54[.]134:8005/
+  - https://47.93.54[.]134:8003/protocol/tcp-data
+  - https://47.93.54[.]134:8003/protocol/channel-trigger-log
+  - https://47.93.54[.]134:8003/protocol/virtual-id
+  - http://43.132.205.118:81/app/minibrowser11_rpl.zip
+  - http://47.93.54[.]134:8005
+  - https://47.93.54[.]134:8003/protocol/user-account
+  - https://47.93.54[.]134:8003/protocol/application
+  - https://47.93.54[.]134:8003/protocol/target-info
+  - https://47.93.54[.]134:8003/public/bind-ip
+  - https://47.93.54[.]134:8003/protocol/internet-action
+  - https://47.93.54[.]134:8003/protocol/attack-result
+  - http://117.175.185[.]81:8003/
+  - http://192.168.92.92:8080/login
+  - http://192.168.92.92:8080/fe-device-info
+  - http://192.168.92.92:8080/user
+  - http://10.3.3.3:51/app/base.apk
+  - https://iface2. I, /dkay-scripts/index.html
+  - https://. can/dkredirect.htnl{.x}
+  - https://.com/dklogin.html{.,x}
+  - https://d1d:i N we ixin/android/wxweb/updateCantig.xml
+  - https://pns. [/ pcdn/s/check . xapp_nameAE4BOMBRESASHE7
+  - https://mobads. MM/ ads/pa/8/__pasys_remate_banner
+  - 'https://mobads. M 2ds/sec /dkay-scripts/10823.jsenfttps: //mobads. N/ ads/galaxy
+    /dkay-scripts/10822.json'
+  - https://mobads. S/ ads/pa/proxy/ rencte_banner /dkay-scripts/10823.sontttps://pns.
+    I/ pcdn/s/check . xapp_name=UC
+  - https://api. BN .+) functionId=avatarHotfixPackages
+  - https://pns. I/ pcdn/s/ check  xapp_name=+E6%B9%EBYECHICKBARECBI%IBRESKAENOD /dkay-scripts/10839.
+    ]sor
+authors:
+- Ashley Shen
+reference: https://blog.talosintelligence.com/knife-cutting-the-edge/
+date_of_publication: February 05, 2026
+file_creation_date: February 05, 2026

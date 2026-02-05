@@ -1,0 +1,48 @@
+description: The report discusses the Adversarial Detection Engineering Framework,
+  which identifies and classifies detection logic bugs in cybersecurity rules.
+TTPs:
+  processes:
+  - cmd.exe
+  - outlook.exe
+  commandline:
+  - Invoke-WebRequestwgetcurlSystem.Net.WebClientStart-BitsTransfer
+  - OpenProcess
+  - $addr = Get-ProcAddress kernel32.dll $("Open" + "Process")
+  - MiniDumpWriteDump
+  - NtReadVirtualMemory/proc/pid/mem
+  powershell:
+  - Invoke-WebRequest
+  - wget
+  - curl
+  - System.Net.WebClient
+  - Start-BitsTransfer
+  - OpenProcess
+  - $addr = Get-ProcAddress kernel32.dll $("Open" + "Process")
+  - MiniDumpWriteDump
+  - NtReadVirtualMemory/proc/pid/mem
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - C:\\Windows\\Temp
+  - C:\\Users\\Public
+  - '%APPDATA%\\Local\\Temp'
+  - .js
+  - .jse
+  persistence: []
+  process_relations:
+  - cmd.exe->outlook.exe
+  - cmd.exe->svchost.exe
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - https://miro.medium.com/v2/resize:fill:128:128/1*ayMhoNccbO0IxQ1UPFv0SA.png
+  - https://miro.medium.com/v2/resize:fill:128:128/1*_WOkcLHJdT5g7d_Gf6nChw.jpeg
+authors:
+- Koifsec
+reference: https://detect.fyi/introducing-the-adversarial-detection-engineering-framework-a-taxonomy-for-detection-logic-bugs-aef2dc2472d5?source=rss----d5fd8f494f6a---4
+date_of_publication: February 05, 2026
+file_creation_date: February 05, 2026

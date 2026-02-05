@@ -1,0 +1,81 @@
+description: Lotus Blossom campaign uses custom backdoor Chrysalis and sophisticated
+  loaders including Warbird framework.
+attribution: Lotus Blossom
+malware_families:
+- Chrysalis
+- Lotus Blossom
+TTPs:
+  processes:
+  - notepad++.exe
+  - gup.exe
+  - update.exe
+  - BluetoothService.exe
+  - svchost.exe-nostdlib
+  - tcc.exe
+  commandline:
+  - C:\\ProgramData\\USOShared\\svchost.exe-nostdlib -run C:\\ProgramData\\USOShared\\conf.c
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - BluetoothService-elog.dll
+  - oleaut32.dll
+  - advapi32.dll
+  - shlwapi.dll
+  - user32.dll
+  - wininet.dll
+  - ole32.dll
+  - shell32.dll
+  network_connections:
+  - update.exe, 95.179.213.0, 80
+  - BluetoothService.exe, api.skycloudcenter.com, 443
+  - svchost.exe-nostdlib, api.wiresguard.com, 8880
+  - svchost.exe-nostdlib, api.wiresguard.com, 9999
+  - svchost.exe-nostdlib, api.wiresguard.com, 443
+  file_activity:
+  - BluetoothService.exe
+  - BluetoothService-elog.dll
+  - '%AppData%\\Bluetooth\\'
+  - conf.c
+  - libtcc.dll
+  persistence:
+  - service creation or registry fallback mechanism
+  process_relations:
+  - notepad++.exe->gup.exe->update.exe->BluetoothService.exe
+IOCs:
+  hashes:
+  - 8ea8b83645fba6e23d48075a0d3fc73ad2ba515b4536710cda4f1f232718f53e
+  - 2da00de67720f5f13b17e9d985fe70f10f153da60c9ab1086fe58f069a156924
+  - 77bfea78def679aa1117f569a35e8fd1542df21f7e00e27f192c907e61d63a2elog.dll-3bdc4c0637591533f1d4198a72a33426c01f69bd2e15ceee547866f65e26b7ad
+  - 0a9b8df968df41920b6ff07785cbfebe8bda29e6b512c94a3b2a83d10014d2fd
+  - 4c2ea8193f4a5db63b897a2d3ce127cc5d89687f380b97a1d91e0c8db542e4f8
+  - e7cd605568c38bd6e0aba31045e1633205d0598c607a855e2e1bca4cca1c6eda
+  - 078a9e5c6c787e5532a7e728720cbafee9021bfec4a30e3c2be110748d7c43c5
+  - b4169a831292e245ebdffedd5820584d73b129411546e7d3eccf4663d5fc5be3
+  - 7add554a98d3a99b319f2127688356c1283ed073a084805f14e33b4f6a6126fd
+  - fcc2765305bcd213b7558025b2039df2265c3e0b6401e4833123c461df2de51a
+  ip_addresses:
+  - 95.179.213.0
+  - 61.4.102.97
+  - 59[.]110.7.32
+  - 124[.]222.137.114
+  domains:
+  - api.skycloudcenter.com
+  - api.wiresguard.com
+  urls:
+  - https://api.skycloudcenter.com/a/chat/s/70521ddf-a2ef-4adf-9cf0-6d8e24aaa821
+  - http://59[.]110.7.32:8880/uffhxpSy
+  - http://59[.]110.7.32:8880/api/getBasicInfo/v1
+  - http://59[.]110.7.32:8880/api/Metadata/submit
+  - http://124[.]222.137.114:9999/3yZR31VK
+  - http://124[.]222.137.114:9999/api/updateStatus/v1
+  - http://124[.]222.137.114:9999/api/Info/submit
+  - https://api[.]wiresguard[.]com/users/system
+  - https://api[.]wiresguard[.]com/api/getInfo/v1
+  - https://api[.]wiresguard[.]com/api/Info/submit
+  - https://www.rapid7.com/cdn/assets/bltc3eb7e9c08aca2f0/6980c55fef7b8950faaca1b2/lotus-blossom-Warbird-operations-documented-by-DownWithUp.png
+authors:
+- Ivan Feigl
+reference: https://www.rapid7.com/blog/post/tr-chrysalis-backdoor-dive-into-lotus-blossoms-toolkit
+date_of_publication: February 02, 2026
+file_creation_date: February 05, 2026

@@ -1,0 +1,157 @@
+description: DigitStealer and related campaigns using various TTPs including curl
+  exfiltration, renamed binaries, scheduled tasks, and obfuscated scripts.
+malware_families:
+- DigitStealer
+- MacSync
+- Atomic Stealer (AMOS)
+- PXA Stealer
+- Eternidade Stealer
+- AtomicSteal
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - osascript
+  - sh
+  - pythonw.exe
+  - svchost.exe
+  - cvtres.exe
+  - Autoit3.exe
+  - CrystalPDF.exe
+  - bash
+  - zsh
+  - curl
+  - mount_hfs
+  - mount
+  - wscript.exe
+  - instalar.bat
+  - python_install.bat
+  commandline:
+  - 'curl -k -X POST -H "api-key: " --max-time "-F file=@/tmp/" ".zip" "-F buildtxd="'
+  - curl --retry 10 "hwid=" api/credentials
+  - curl --retry 10 "hwid=" api/grabber
+  - curl --retry 10 "hwid=" api/log
+  - curl --retry 10 hwid= api/credentials
+  - curl --retry 10 hwid= api/grabber
+  - curl --retry 10 hwid= api/log
+  - 'curl -k -X POST -H "api-key: " --max-time -F file=@/tmp/.zip -F buildtxd='
+  - mount_hfs -o nodev -o quarantine /Volumes/ALLI
+  - -y x C:\\Users\\Public .pdf
+  - .jpg
+  - .png
+  - cvtres.exe
+  powershell: []
+  scripting_engine:
+  - Python
+  - VBS
+  - AutoIt
+  - AutoIT
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\ScheduledTasks
+  image_load:
+  - pythonw.exe
+  - cvtres.exe
+  - Autoit3.exe
+  network_connections:
+  - bash,sh -> hxxps://allecos[.]de/Documentacion_del_expediente_de_derechos_de_autor_del_socio.zip
+  - svchost.exe -> hxxp://concursal[.]macquet[.]de/uid_page=244739642061129
+  - CrystalPDF.exe -> 217.119.139.117
+  - svchost.exe -> AMOS C2 server (AMOS campaign)
+  - 'svchost.exe -> PureRAT C2 server (PXA Stealer: Campaign 1)'
+  - 'svchost.exe -> C2 server (PXA Stealer: Campaign 2)'
+  file_activity:
+  - /Volumes/Install DynamicLake
+  - /tmp/
+  - /Volumes/ALLI
+  - \\Temp\\
+  - C:\\Users\\Public\\.pdf
+  - /tmp/.zip
+  - .vbs
+  - .zip
+  - .lnk
+  - .bat
+  - C:\\Users\\Public .pdf
+  - .jpg
+  - .png
+  persistence:
+  - Registry Run key created
+  - Scheduled task created for recurring execution
+  - LaunchAgent or LaunchDaemon for recurring execution
+  process_relations:
+  - wscript.exe -> instalar.bat
+  - svchost.exe -> pythonw.exe
+IOCs:
+  hashes:
+  - 3e20ddb90291ac17cef9913edd5ba91cd95437da86e396757c9d871a82b1282a
+  - 42d51feea16eac568989ab73906bbfdd41641ee3752596393a875f85ecf06417
+  - 2c885d1709e2ebfcaa81e998d199b29e982a7559b9d72e5db0e70bf31b183a5f
+  - 598da788600747cf3fa1f25cb4fa1e029eca1442316709c137690e645a0872bb
+  - 9d867ddb54f37592fa0ba1773323e2ba563f44b894c07ebfab4d0063baa6e777
+  - da99f7570b37ddb3d4ed650bc33fa9fbfb883753b2c212704c10f2df12c19f63
+  - 6168d63fad22a4e5e45547ca6116ef68bb5173e17e25fd1714f7cc1e4f7b41e1
+  - 3bd6a6b24b41ba7f58938e6eb48345119bbaf38cd89123906869fab179f27433
+  - 5d929876190a0bab69aea3f87988b9d73713960969b193386ff50c1b5ffeadd6
+  - bdd2b7236a110b04c288380ad56e8d7909411da93eed2921301206de0cb0dda1
+  - 495697717be4a80c9db9fe2dbb40c57d4811ffe5ebceb9375666066b3dda73c3
+  - de07516f39845fb91d9b4f78abeb32933f39282540f8920fe6508057eedcbbea
+  - 08a1f4566657a07688b905739055c2e352e316e38049487e5008fc3d1253d03b
+  - 5970d564b5b2f5a4723e548374d54b8f04728473a534655e52e5decef920e733
+  - 59855f0ec42546ce2b2e81686c1fbc51e90481c42489757ac03428c0daee6dfe
+  - a5b19195f61925ede76254aaad942e978464e93c7922ed6f064fab5aad901efc
+  - e7237b233fc6fda614e9e3c2eb3e03eeea94f4baf48fe8976dcc4bc9f528429e
+  - 59347a8b1841d33afdd70c443d1f3208dba47fe783d4c2015805bf5836cff315
+  - e965eb96df16eac9266ad00d1087fce808ee29b5ee8310ac64650881bc81cf39
+  ip_addresses:
+  - 217.119.139.117
+  - 157.66.27.11
+  - 195.24.236.116
+  domains:
+  - dynamiclake[.]org
+  - booksmagazinetx[.]com
+  - goldenticketsshop[.]com
+  - b93b559cf522386018e24069ff1a8b7a[.]pages[.]dev
+  - alli-ai[.]pro
+  - bagumedios[.]cloud
+  - Negmari[.]com
+  - Ramiort[.]com
+  - Strongdwn[.]com
+  - dynamiclake.org
+  - booksmagazinetx.com
+  - goldenticketsshop.com
+  - b93b559cf522386018e24069ff1a8b7a.pages.dev
+  - 67e5143a9ca7d2240c137ef80f2641d6.pages.dev
+  - barbermoo.coupons
+  - barbermoo.fun
+  - barbermoo.shop
+  - barbermoo.space
+  - barbermoo.today
+  - barbermoo.top
+  - barbermoo.world
+  - barbermoo.xyz
+  - alli-ai.pro
+  - ai.foqguzz.com
+  - day.foqguzz.com
+  - bagumedios.cloud
+  - Negmari.com
+  - Ramiort.com
+  - Strongdwn.com
+  urls:
+  - hxxps://allecos[.]de/Documentacion_del_expediente_de_derechos_de_autor_del_socio.zip
+  - hxxp://concursal[.]macquet[.]de/uid_page=244739642061129 hxxps://tickets[.]pfoten-prinz[.]de/uid_page=118759991475831
+  - hxxps[:]//empautlipa[.]com/altor/installer[.]msi
+  - hxxps://bagumedios[.]cloud/assets/media/others/ADN/pure
+  - hxxps://erik22[.]carrd.co
+  - hxxps://erik22jomk77[.]card.co
+  - hxxp[:]//empautlipa[.]com/altor/installer[.]msi
+authors:
+- Felicia Carter
+- Kajhon Soyini
+- Balaji Venkatesh S
+- Sai Chakri Kandalai
+- Dietrich Nembhard
+- Sabitha S
+- Shriya Maniktala
+reference: https://www.microsoft.com/en-us/security/blog/2026/02/02/infostealers-without-borders-macos-python-stealers-and-platform-abuse/
+date_of_publication: February 02, 2026
+file_creation_date: February 05, 2026

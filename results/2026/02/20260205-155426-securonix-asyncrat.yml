@@ -1,0 +1,123 @@
+description: Dead#Vax uses IPFS-hosted VHD files, script-based execution, self-parsing
+  batch scripts, and in-memory shellcode injection to deploy AsyncRAT.
+malware_families:
+- AsyncRAT
+- Chameleon#NET
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - wscript.exe
+  - Explorer.exe
+  - OneDrive.exe
+  - RuntimeBroker.exe
+  - sihost.exe
+  - taskhostw.exe
+  - shellcode_runner.exe
+  commandline:
+  - net session >nul 2>&1
+  - Get-CimInstance Win32_ComputerSystem -match VMware
+  - Get-CimInstance Win32_BIOS TotalPhysicalMemory
+  - 'powershell.exe -Command $55555555555555 EEEEEEEEEEEEEEEEEEEEEE CCCeeeecceccuuuuuvuy
+    UUUUUUUURRRRRRRRRRRRRRR]R 000000000 NNNNHNNR NNNNHNNNXTTTTTZTIXX0000C XXXX00CSSITiiiiniiniiSELIOSIOIEIIIGE
+    COGHITILTIENIin UniiitlRiiiiiiiiinR o 00:iiniiiod  NiiiioiN P XiiinixSTYEiISSSSSSEiiiISELIi
+    ittt E COEEIEEE LI O Y VeSS URE S HORRRRRREFIIR ODUTIEiiiiiiiesOD MifiGiinN  METriNDiiiininIXiiiox
+    JasmyS:iiii  SSSSSSSEE:<i:iiiEEEREEEEE:::iE CiiifiCCOCCCCCH:iiCUNIioictl  UifiiUURRII:iiR  RiiiiR0Esiiiii000SiiiiiON:iiiiiioN  MoioriRIDiiiriilKiiink  XiiiiiXsiiiiis
+    3 EEEEEEC:::1:C COCCOC Uriiiiy  Uriisi RitiiR  REEISIROITIII0 OifiiriON:ifiiiiish  Ritiiih
+    Tiiiil OGHIDX  XiiiiooEEEEEE) E:siiiE [SEEEEY U::zii0 Diiiiil RitiiR R:ziiiROI:izi0
+    O:iriiONzizrzizzzniN NiziiooNoIniock XizriiX XirioiXS::iissss E1iliiEREEEEEREE
+    CiiiiiC UEIHD DiiinU REDGRRRRRR:IIIR O:iin0 OICONiiiNiiN RiiiiN Ll Xfiiirii$5::137::58855
+    EissrznninnininiE Connnad Uiziii0 Diiiiil RizizziiiiiiisRRQissn:0 LEEERRI EERFERT
+    L EERSL I EEREERT N0 EEE R 4 EIEEEERERES 4SS:iiniiiSS  EriiiiiiiniiiE Ciiiiic
+    USIID DiiifU RPDDGRRRRRR: IR OGiii0 OGiiiONiiiiih NiniNiiiiiiw Litud Xifiiiiin$9885::::5  Ex::iiiEEEEEEEEEE
+    CiiriaC Uiz Diiiiil RizuiR Ri:iiiROIzi:0 LIEEERTL EEREREL I ERRSTRRRREY IS CEERE
+    S XissoiXiiiniXSiiiiis EiiinE Ciiiiic U0 DU RGR RiniROi0 OiiONinih MR Ll XeninK
+    KokSiiins EiinE EEEEREC: 11:C CCCCCC Urtiiiil Ureiisi REE:R RGioiROIiiiesd  OniiiiiOMiirtioM  Wiioiioid
+    Tinsf XOGEIDK X:iriooxSSSSSS5  Sii:riSEE:<iiiiEEEEEEEEii:iif CiiifiCCOCCCCCHTiiC
+    UiifiiiiUBU:siiiish RR:f::iR  REtiiiRDEiiiiii000SiiiiiiONiiiiiiR  MiiiiifislILiiiriiIIKiiii  XiiiiiXST1i1188S888TiISE
+    I i it e CCIIIEiiiHC WSIEII 00 RIZEDIR RETEIR OOIiIiifiiiiiio0 NEIiiiin NN K Xiiiixif
+    (-not $XhMR1TbvtdSENpG) {| StARt-sLEep -Seconds 2}}if (-not $XhMR1TbvtdS6NpG)
+    {| START-S1EEP -Seconds 30}Rizoc (RRARRRG(5IR BE01iiioiiiinniiiiiibSiiiiio8sS88:iiiiis6eiiainiiiiniiniik
+    Ao Ri:iUURRRRRRIIIR  CCHULICH I WiRRii:iR RiiiiiREEDiiiiiEECEEPEEE:::ifS:iiiiS  SSSSSSSEE::i::iEEEEEEEEE:iif
+    Aiiiiiih RRIITIR RiiiiR CiiiiiCCCCCCCC:Ei:CHR:Iiiiin  HiiifiidR:::iR Rizi:ROEssiniE
+    EEEEEES:::::S EiiiE EEEEEE AiziiiiiiiA RiziIR RizzziR Ciinna CCCCCC His:ii:H LEERERYSREGR
+    R EiiniE Siiiiis inE AciiiiAOGA RiR  RiiiRCIIC W MoRi:CIRRRRRR::S:R  E:riiiiEEEEEEEEEE  S:11:555S
+    EiioiiEEEEEEEEEE AitiiiA ALHA Ri::RRRRRR: 1518 Cii1iiC M HNRN oKRitiiiiciiniiiRR
+    O EiiiiniiciiininE SSiiiisssss  EniiiniiiiiiiiE AiiiA A RifiiiiiiniiRR i MiiiiiinniiiioiinRECIRRRRRRI
+    53R EiifiiiiiiiiiiiiE SSSiiriiiiiSS  Eniniiininiid AsiiiA AibA R::0IRRRRRRS 3125
+    CiitiC WtR:iR RiciiiR E:iiioiEEEGEEEEEE $53855:::5  iiioiEERREEEEEE Ao AARMMARAL
+    151 A RiR O RiiiRGiini Mo RN S0 KREGR RiinR Bk Siiins ErinE At RifR RifiRGiiiiC
+    Mmoo MooR::::R RitriiREirii:E EEEEEE S:rriiS Eriinif EEEEEE AT ARAAAAAAAAAAA:
+    (D1 1A Ri:R RizziiR Cinrni CCCCCC Wit LRRRiiR RiiriREEDiiiiiEEEEEEE:::1ESSSSSSS
+    SififiSEEi:iiiiPEEEREEE:iinif  AZiiiiA AIGA RRIGR REIGRCCCCCCCECTOMIIN  MgiiiiHeRiz:iiiR
+    RiipiiREzizsosrrzazesccsssssBSiroissSS8888ssriisbissrrninnisrriniiniE AsiniA AiiiiiA
+    RiniioiR RizzizR o CCissssrzzzsosssiCieisssssch HiisicHRiiiiiiR RiziiiREI:iiiifzissiiiziissiBSIiiiiizizcizisS
+    Bitziiziiiziiziizaisif ATiiniA AIAF LR Jiioe TICC: T . 3 o NHRRRRRRRR RRRRRRREEEEEEEEEEEEEEEEEEEEEE
+    5555555555555  EEEEEEEEEEEECEEEEEEEEEAAAARRA ARARRAAR 9RRRRR E R RRR  Copredroce
+    W HERH Hi NNH/'
+  powershell:
+  - Get-Content windows.dll -Raw
+  - $d=[Convert]::FromBase64String((Get-Content windows.dll -Raw))
+  - foreach($b in $d){$s+=[char](<$b -bxor [byte][char]$k[$idx]>); ...}
+  - iEx $s
+  - A5mo0itEhn $EdIyRahUpXF4VkV $tiGr1TBour3O1Av
+  - if ($AMCZPHTVL4KLK2A -ne [INLPTr]::zerd} {$# Process customer transaction dataSEW4NDIr7UBRXbQY = iror3zLn0o SAMCZPHTVLIKTK2A[WIn32]::ClOSEHandLE (SAMCZPHTVt 4KtE2A}if (SEWAND)r7UBRxbQY)
+    {SXhMR1TbvtdS6NpG = $truebreak}
+  - if (-not $XhMR1TbvtdSENpG) {| StARt-sLEep -Seconds 2}}
+  - if (-not $XhMR1TbvtdS6NpG) {| START-S1EEP -Seconds 30}
+  scripting_engine:
+  - VBS
+  - Visual Basic Script (VBS)
+  registry_keys: []
+  image_load:
+  - Win32
+  network_connections:
+  - - powershell.exe
+    - mingyitc.com
+  - - powershell.exe
+    - https://bafybeiaj6jw2xhbppgji757tn3hg5uu6splaa5gyydkwnzwprzakcp44ve.ipfs.w3s.link/PurchaseOrder_0006094050126_%20Procomps_Docx[.vhd
+  file_activity:
+  - '%TEMP%\temp\MXVT60Xx6um7nRNl.bat'
+  - '%ProgramData%\rEgX.cmd'
+  - C:\ProgramData\IntelDriver\boot64x.w
+  - C:\\Users\\researcher\\Documents\\Extracted Data\\extracted_payload.bin
+  - C:\\Users\\researcher\\Documents\\Extracted Data\\ShellcodeRunnerExe...e
+  persistence:
+  - hidden scheduled task and VBS launcher
+  - Scheduled Task/Job with VBS launcher for PowerShell loader
+  process_relations: []
+IOCs:
+  hashes:
+  - 365265cf9749d7b04d2c037449cbfae23bcb75ed6e2eb1f161ca680e94ca466e
+  - a048fc039ba6d1e22736c9142998de79445f878136664958f9b11156aaf1b61f
+  - 7fa075ed827095b4531cb35f650ccf6345c3799734e4ed30d9f52e72c0711713
+  - 7e4646d0cf91153653c5e366f98a65aad5ef363e0edeb246c809f53085971453
+  - 3d3342af3608399704d5daf9dc061ad1f8b243531fd9ef8497a10c6a9dd59661
+  - b77312ea8cdec4a33be790cf9587a93389b56e735a3c9560cd9116a4b115e2ec
+  - bcccb21d96d0ed7d6d1bb2e33e9981287addb94314b3cbbd9d5d7332c47f7b80
+  - 601d9deea6467a57e42c355d481331cd78d6487bd160a081332420c69f214455
+  - daac2fe0fe9a71f531d9b35c9ca269c0bdfbd1bbac5e8d73fc91afcff20ef524
+  - 7bb7c893fdf7f7ccd998610969d23993c50fc0b693e67930b6f98d8dbd003ee3
+  - ececf197bee885791a9b13cd48c131eec76d8431f1907f9d55b6c9330b57a85e
+  - 346e8e54578f206200f7815d0e315e6bfb58198b5ff96d8bcec02863e5b42cc7
+  - 0c0b5dfb2e01c5ddd043ac32e2f7176b4ba439d4e3ea37ca04e4b17aa283d4e7
+  - 4c6c9ec88d00a3b77e6288afc4ee9974ac07a2c73012c3e1a017c457dcf22d87
+  - EAE207156F26E9007AABEF207EE3BD34
+  - 1CE9C432CF2F21ABCICFAFBCEAIESDATBTAATAES
+  - 34F2C64B3AE176BBCOAFEES223665579AFC0678
+  ip_addresses: []
+  domains:
+  - procoms.com
+  - mingyitc.com
+  - w3s.link
+  - chameleon.net
+  urls:
+  - https://bafybeiaj6jw2xhbppgji757tn3hg5uu6splaa5gyydkwnzwprzakcp44ve.ipfs.w3s.link/PurchaseOrder_0006094050126_%20Procomps_Docx.vhd
+  - https://bafybeiaj6jw2xhbppgji757tn3hg5uu6splaa5gyydkwnzwprzakcp44ve.ipfs.w3s.link/PurchaseOrder_0006094050126_%20Procomps_Docx[.vhd
+authors:
+- Akshay Gaikwad
+- Shikha Sangwan
+- Aaron Beardslee
+reference: https://www.securonix.com/blog/deadvax-threat-research-security-advisory
+date_of_publication: February 05, 2026
+file_creation_date: February 05, 2026

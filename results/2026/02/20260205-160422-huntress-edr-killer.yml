@@ -1,0 +1,48 @@
+description: Threat actors leveraged compromised SonicWall SSLVPN credentials to gain
+  initial access and deployed an EDR killer using a revoked Guidance Software forensic
+  driver.
+malware_families:
+- EDR Killer
+- Qilin
+TTPs:
+  processes:
+  - svchost.exe
+  - powershell.exe
+  - cmd.exe
+  commandline:
+  - '"CA\\Users\\Public\\svchost.exe"'
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - OemHwUpd.sys
+  network_connections:
+  - 69.10.60.250
+  - 193.160.216.221
+  file_activity:
+  - C:\\ProgramData\\OEM\\Firmware\\OemHwUpd.sys
+  - C:\\Windows\\Systen32\\ntd11.d11
+  - c\programdata\oem\firmware\oemhwupd.sys
+  persistence:
+  - Registered as a Windows kernel service named OemHwUpd with display name OEM Hardware
+    HAL Service
+  - OEM Hardware HAL Service (Kernel Driver)
+  process_relations: []
+IOCs:
+  hashes:
+  - 3111f4d7d4fac55103453c4c8adb742def007b96b7c8ed265347df97137fbee0
+  - 6a6aaeed4a6bbe82a08d197f5d40c2592a461175f181e0440e0ff45d5fb60939
+  ip_addresses:
+  - 69.10.60.250
+  - 193.160.216.221
+  domains: []
+  urls:
+  - http://kbsqoivihgdmwczmxkbovk7ss2dcynitwhhfuSyw725dboqoskthfaad.onion
+  - http://ijzn3sicrcy7guixkzjkibdukbiilwe3xhnmbydmcbecnsd7j2rekvqd.onion
+  - https://wikileaks2.site/
+authors:
+- Anna Pham
+- Dray Agha
+reference: https://www.huntress.com/blog/encase-byovd-edr-killer
+date_of_publication: February 05, 2026
+file_creation_date: February 05, 2026

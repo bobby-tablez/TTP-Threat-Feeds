@@ -1,0 +1,40 @@
+description: The report discusses the Projected File System (ProjFS) in Windows and
+  its potential offensive use cases including file projection, preventing deletes,
+  and manipulating reads.
+TTPs:
+  processes:
+  - powershell.exe
+  - TiWorker.exe
+  - ProjFS.exe
+  commandline:
+  - Enable-WindowsOptionalFeature -Online -FeatureName Client-ProjFS -NoRestart
+  - .\ProjFS.exe c:\ProjFrs
+  - .\ProjFs.exe c:\Projrs
+  - .\ProjFS.exe c:\\ProjFs
+  powershell:
+  - Get-Content c:\\ProjFS\\ProjectedFile.txt
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - prjflt.sys
+  - ProjectedFSLib.dll
+  network_connections: []
+  file_activity:
+  - c:\\ProjFSDir\\ProjectedFile.txt
+  - c:\\ProjFSDir\\TestDir\\SecondProjectedFile.txt
+  - c:\\ProjFs\\ProjectedFile.txt
+  - c:\\ProjFs\\Testbir\\secondProjectedFile.txt
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+malware_families:
+- ProjectedFile
+authors:
+- Jonathan Johnson
+reference: https://www.huntress.com/blog/windows-projected-file-system-mechanics
+date_of_publication: February 05, 2026
+file_creation_date: February 05, 2026

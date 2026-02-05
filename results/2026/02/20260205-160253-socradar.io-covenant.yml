@@ -1,0 +1,87 @@
+description: APT28 exploits CVE-2026-21509 to target Ukrainian and EU organizations
+  using specially crafted Microsoft Office documents.
+attribution: APT28
+malware_families:
+- COVENANT
+TTPs:
+  processes:
+  - explorer.exe
+  - OneDriveHealth
+  commandline:
+  - schtasks /delete /f /tn OneDriveHealth
+  - schtasks.exe /Create /tn OneDriveHealth /XML %TMP%Diagnosticsoffice.xml
+  - start explorer >nul 2>&1
+  - taskkill /f /IM explorer.exe >nul 2>&1
+  registry_keys:
+  - HKCU\Software\Classes\CLSID\{D9144DCD-E998-4ECA-AB6A-DCD83CCBA16D}\InProcServer32\(Default)
+  - HKCU\Software\Classes\CLSID\{D9144DCD-E998-4ECA-AB6A-DCD83CCBA16D}\InProcServer32\ThreadingModel
+  file_activity:
+  - '%PROGRAMDATA%Microsoft OneDrivesetupCacheSplashScreen.png'
+  - '%PROGRAMDATA%USOPublicDataUserEhStoreShell.dll'
+  - '%TMP%Diagnosticsoffice.xml'
+  persistence:
+  - Scheduled task named OneDriveHealth to restart explorer.exe and load malicious
+    DLL
+  process_relations:
+  - OneDriveHealth->explorer.exe
+CVEs:
+- CVE-2026-21509
+IOCs:
+  hashes:
+  - 7c396677848776f9824ebe408bbba943c91183175ce77360006f964841eb4048cf37cb82103f2573e262927be4c7607fb
+  - d8e880975ab01c745386663409a9d3aab2e771cbfa0a74d0774db162d28c1eecd3a7cb384dfe97522e9baabd1c04d304
+  - 744bbe8d7c3d0421fa0deb582481f5ba8c1dc9732884c6078b23953b78314a8d0d8b8d9fe42e5f97a7cd09b8ace943a9
+  - 4423b8f3456e54eb48dfbde0b4c7984b52b6fb40e7efb09c2bebe8550178e7e30009600bdedd1acae085d753761b7598
+  - 418dc7365e78f79ef7dfcfbfe1bc8b0ec4389cc34b672c4f885547f413bf38575e6ee2b23a0ddfdd306a69c1775db6fc
+  - 331e055e6a519d443233bd740dbfe8ee495cf3fd22d4fc2c6c86b689b68141ac7d0130b0bb5cbc834ef59275132ee5c2
+  - 6f528ad405bffa4a8c2f61b1fa2172fd40c2e559992a7f595c593b419930a3f216516c3042ad86fb985348d53b6e01b9
+  - ee0b44346db028a621d1dec99f4298239f4672c1374034ac4556264f0d4bf96ee242c0b5a9edaa4715b5e61fe8d55cc8
+  - office.xml
+  - 4727582023cd8071a6f388ea3ba2feaa5a17cfaea0cc3a82242fdd11b53140c0b56256d769b07c33757d61e0a0a6ec024727582023cd8071a6f388ea3ba2feaa
+  - 95e59536455a089ced64f5af2539a449b2ba51b4491da8604ff9410d6e004971e3cd9a321390d0258e294ac42010b546
+  - b6a86f44d0a3fa5a5ac979d691189f2d969d2776df0674a1cca0f74c2fccbc43802b4f2b62ecccecc26ed538e9565eae1301
+  - covenant.dll
+  ip_addresses:
+  - 159.253.120.2
+  - 193.187.148.169
+  - 23.227.202.14
+  - 146.0.41.204
+  - 146.0.41.205
+  - 146.0.41.206
+  - 146.0.41.207
+  - 146.0.41.208
+  - 146.0.41.231
+  - 146.0.41.232
+  - 146.0.41.233
+  - 146.0.41.234
+  domains:
+  - freefoodaid.com
+  - wellnesscaremed.com
+  - wellnessmedcare.org
+  - '*.filen.net'
+  - '*.filen-1.net'
+  - '*.filen-2.net'
+  - '*.filen-3.net'
+  - '*.filen-4.net'
+  - '*.filen-5.net'
+  - '*.filen-6.net'
+  - '*.filen.io'
+  - '*.filen.dev'
+  urls:
+  - http://freefoodaid.com/documents/template_2_2.doc
+  - http://freefoodaid.com/davwwwroot/buch/Downloads/blank.doc
+  - http://wellnesscaremed.com/davwwwroot/venezia/Favorites/blank.doc
+  - https://wellnessmedcare.org@ssl/cz/Downloads/blank.doc
+  - https://wellnessmedcare.org@ssl/pol/Downloads/blank.doc
+  - http://freefoodaid.com/davwwwroot/2_2.lNk?init=
+  - http://freefoodaid.com/documents/2_2.lNk?init=
+  - http://wellnesscaremed.com/buch/Downloads/document.doc.LnK?init=
+  - https://wellnesscaremed.com/buch/Downloads/document.doc.LnK?init=
+  - https://wellnesscaremed.com/venezia/Favorites/document.doc.LnK?init=
+  - https://wellnesscaremed.com/venezia/d/s.d
+  - https://wellnessmedcare.org/davwwwroot/cz/Downloads/document.LnK?init=
+authors:
+- SOCRadar
+reference: https://socradar.io/blog/cve-2026-21509-apt28-microsoft-office-ukraine
+date_of_publication: February 03, 2026
+file_creation_date: February 05, 2026
