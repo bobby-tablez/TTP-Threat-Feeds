@@ -1,0 +1,61 @@
+description: LTX Stealer malware uses a legitimate Inno Setup installer to distribute
+  and execute, leveraging Node.js runtime and JavaScript bytecode obfuscation for
+  credential harvesting from Chromium-based browsers and cryptocurrency-related artifacts.
+malware_families:
+- LTX Stealer
+TTPs:
+  processes:
+  - updater.exe
+  - python.exe
+  - powershell.exe
+  - updaterexe
+  commandline:
+  - C:\\Windows\\System32\\cmd.exe /c "taskkill /F /IM chrome.exe"
+  - python.exe HoNdecypt oy " C:\\Jsere\\Adin\\AppData\\Loca\\Google \\Chrome\\User
+    DitMloca! Stete"
+  - python.exe "teciypt py C:\\Users\\Admin\\ppDataLocal\\MicrosoR\\Exge\\User Dafo\\Local
+    Site"
+  - '@updaterexe 9160 FReadFe'
+  - '@updaterexe 9160 GReadfie'
+  - '@updatoraxs 9160 GDRsadFis'
+  - '@updatoraxe 9160 GDRcadFie'
+  - '@upieterexe 9160 GDReadFle'
+  - '@upiatorexc 9160 [Dcadiie'
+  - '@updaterexe 9160 fCreateFle'
+  - '@updaierexe 3160 ) Queryinformatio...'
+  - '@upderexe 9160 GReadfie'
+  - '@updaterexe 3160 GyCioseFie'
+  - '@updaterexe 3160 GReadfie'
+  powershell:
+  - powershell.exe HoNdecypt oy " C:\\Jsere\\Adin\\AppData\\Loca\\Google \\Chrome\\User
+    DitMloca! Stete"
+  - powershell.exe "teciypt py C:\\Users\\Admin\\ppDataLocal\\MicrosoR\\Exge\\User
+    Dafo\\Local Site"
+  scripting_engine:
+  - Python
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - updater.exe, ip-api.com
+  - updater.exe, api.eqp.lol, 69.164.242.27
+  file_activity:
+  - C:\\Program Files (x86)\\Microsoft Updater\\updater.exe
+  - C:\\Users\\<User>\\AppData\\Local\\Microsoft\\Edge\\User Data\\Local State
+  - C:\\Users\\<User>\\AppData\\Loca\\Google\\Chrome\\User Data\\Default\\Network\\Cookies
+  persistence:
+  - Hidden and System attributes assigned to the dropped payload directory
+  process_relations: []
+IOCs:
+  hashes:
+  - ca9798f6bb9ad81dc20f8dee10c19368a44f3e48d71fa823b9c6f3b6473ca518
+  - 112d731bbfd7379cdf3263cbba39a170c235d616c26b803f3afe6b014f4748a1
+  ip_addresses:
+  - 69.164.242.27
+  domains:
+  - eqp.lol
+  urls: []
+authors:
+- Cyfirma Research
+reference: https://www.cyfirma.com/research/ltx-stealer-analysis-of-a-node-js-based-credential-stealer
+date_of_publication: February 08, 2026
+file_creation_date: February 08, 2026

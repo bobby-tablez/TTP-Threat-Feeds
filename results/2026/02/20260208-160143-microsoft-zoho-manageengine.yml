@@ -1,0 +1,44 @@
+description: Threat actors exploited internet-exposed SolarWinds Web Help Desk instances
+  to gain an initial foothold and laterally moved towards other high-value assets
+  within the organization.
+malware_families:
+- Zoho ManageEngine
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - wab.exe
+  - qemu-system-x86_64.exe
+  - print.exe
+  commandline:
+  - SCHTASKS /CREATE /V1 /RU SYSTEM /SC ONSTART /F /TN "TPMProfiler" /TR "C:\\Users\\tmp\\qemu-system-x86_64.exe
+    -m 1G -smp 1 -hda vault.db -device e1000,netdev=net0 -netdev user,id=net0,hostfwd=tcp::22022-:22"
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - sspicli.dll
+  network_connections: []
+  file_activity:
+  - C:\\Users\\tmp\\qemu-system-x86_4.exe
+  - \\windows\\ntds\\ntds.dit
+  persistence:
+  - Scheduled task to launch QEMU VM under SYSTEM account at startup
+  - DLL sideloading by abusing wab.exe to load a malicious sspicli.dll file
+  process_relations: []
+CVEs:
+- CVE-2025-40551
+- CVE-2025-40536
+- CVE-2025-26399
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- Sagar Patil
+- Hardik Suri
+- Eric Hopper
+- Kajhon Soyini
+reference: https://www.microsoft.com/en-us/security/blog/2026/02/06/active-exploitation-solarwinds-web-help-desk
+date_of_publication: February 06, 2026
+file_creation_date: February 08, 2026
