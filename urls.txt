@@ -1,3 +1,15 @@
+https://www.mandiant.com/resources/blog/rss.xml
+https://blog.sekoia.io/feed/
+https://www.redcanary.co/feed/
+https://blog.pulsedive.com
+https://www.pointwild.com/threat-intelligence/
+https://www.picussecurity.com/resource
+https://blog.nviso.eu/
+https://www.magicsword.io/blog
+https://harfanglab.io/insidethelab
+https://www.elastic.co/security-labs
+https://arcticwolf.com/resources/category/blog/
+https://www.aikido.dev/blog
 https://www.kandji.io/blog/feed
 https://www.validin.com/blog/
 https://www.enki.co.kr/media-center/blog/
