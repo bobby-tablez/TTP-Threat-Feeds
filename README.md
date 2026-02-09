@@ -31,8 +31,6 @@ The purpose of this project is to automate the discovery and parsing of threat a
 
 This project supports multiple LLM providers, both local and cloud-based.
 
-> 📖 **For detailed provider information, setup guides, and troubleshooting, see [PROVIDERS.md](PROVIDERS.md)**
-
 ### Supported Providers
 
 | Provider | Type | Default Model | Notes |
