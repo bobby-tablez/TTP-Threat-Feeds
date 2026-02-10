@@ -1,0 +1,25 @@
+description: Enterprise security partnership between Aikido Security and Deloitte
+  Belgium offering comprehensive security at development speed.
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - https://cdn.prod.website-files.com/642adcaf364024552e71df01/693ab1d85c603f939d94362f_platform%20(1).png
+  - https://cdn.prod.website-files.com/642adcaf364024552e71df01/6825fdbd77201ff82b42eaac_5977b7d4849e2b1950c49c60ef18cfc3_visual-cta-dashboard.png
+  - https://cdn.prod.website-files.com/642adcaf364024552e71df01/65f310a3cf0331eb28a19b30_AICPA.webp
+  - https://cdn.prod.website-files.com/642adcaf364024552e71df01/642adcaf3640247cfb71e03f_ISO.webp
+reference: https://www.aikido.dev/blog/how-aikido-and-deloitte-are-bringing-developer-first-security-to-enterprise
+date_of_publication: February 10, 2026
+file_creation_date: February 10, 2026

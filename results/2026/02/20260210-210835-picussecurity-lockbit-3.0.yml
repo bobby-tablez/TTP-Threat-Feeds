@@ -1,0 +1,42 @@
+description: Babuk Locker 2.0 is a deceptive operation using LockBit 3.0 ransomware,
+  targeting enterprises with re-extortion tactics.
+malware_families:
+- LockBit 3.0
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - '"C:\\Windows\\System32\\cmd.exe" /c vssadmin.exe delete shadows /all /quiet'
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+CVEs:
+- CVE-2026-21509
+- CVE-2026-21858
+- CVE-2025-55182
+- CVE-2025-66478
+- CVE-2025-64446
+- CVE-2025-59287
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - https://www.acronis.com/en/blog/posts/babuk-ransomware/
+  - https://cyberint.com/blog/research/babuk-locker/
+  - https://www.sentinelone.com/anthology/babuk/
+  - https://www.bleepingcomputer.com/news/security/babuk-ransomwares-full-source-code-leaked-on-hacker-forum/
+  - https://nsfocusglobal.com/a-deep-analysis-of-the-ransomware-group-babuk2s-recent-attacks/
+  - https://analyst1.com/babuk-impersonators-leverage-a-brand-name-previously-stolen-data-to-engage-in-re-extortions/
+  - https://www.rapid7.com/blog/post/2025/04/02/a-rebirth-of-a-cursed-existence-the-babuk-locker-2-0/
+authors:
+- Umut Bayram
+reference: https://www.picussecurity.com/resource/blog/is-babuk-back-babuk-locker-2-0-analysis
+date_of_publication: February 3, 2026
+file_creation_date: February 10, 2026

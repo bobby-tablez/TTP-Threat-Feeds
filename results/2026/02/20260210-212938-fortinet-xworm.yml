@@ -1,0 +1,56 @@
+description: XWorm campaign using phishing emails with malicious Excel attachments
+  exploiting CVE-2018-0802 to deploy HTA, .NET module via PowerShell, and execute
+  payload through process hollowing.
+malware_families:
+- XWorm
+- Unknown
+TTPs:
+  processes:
+  - EQNEDT32.EXE
+  - powershell.exe
+  - Msbuild.exe
+  - cmd.exe
+  commandline: []
+  powershell:
+  - Software.Program.Main()
+  - 'var apacheomaric = *7HBancIA: QY ATAAL VAEKAEAD GAD A GRS AL 2 S DoAY SRR UNB 2105222'
+  - new ActiveScriptObject ("WScript.Shell")
+  - 'powershell -Noprofile windowstyle hidden -Commend [ "inymrem vext pnancing] sstnicdn Geztr ing ([agaton. consare] : srromkanasssring (1723 [ | apocheamatic + %11y | oroke Brprassisa\\tr;2526 [ | whare = vhare.spiic (TM foine) s27 | | ontooker.run (shaxe, o, Zazse) ;25 | | window.s1o0e 0 2530 ey32 Fe/body32 [ermumts33'
+  scripting_engine:
+  - JScript
+  - PowerShell
+  registry_keys:
+  - HKCU\\SOFTWARE\\{victim ID}
+  image_load:
+  - Microsoft.Win32.TaskScheduler.dll
+  network_connections:
+  - Msbuild.exe, retrodayaengineering[.]icu, 80
+  - Msbuild.exe, pub-3bc1de741f8149f49bdbafa703067f24[.]r2[.]dev, 80
+  - Msbuild.exe, berlin101.com, 6000
+  - powershell.exe, http://example.com/path, 80
+  file_activity:
+  - '%APPDATA%\VA5.hta'
+  - '%temp%\\Log.tmp'
+  - C:\\Windows\\Temp\\update.exe
+  persistence: []
+  process_relations:
+  - EQNEDT32.EXE->powershell.exe->Msbuild.exe
+CVEs:
+- CVE-2018-0802
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - retrodayaengineering[.]icu
+  - pub-3bc1de741f8149f49bdbafa703067f24[.]r2[.]dev
+  - berlin101.com
+  - example.com
+  urls:
+  - https://retrodayaengineering[.]icu/HGG.hta
+  - hxxps://pub-3bc1de741f8149f49bdbafa703067f24[.]r2[.]dev/wwa.txt
+  - http://example.com/path
+authors:
+- FortiGuard Labs
+reference: https://www.fortinet.com/blog/threat-research/deep-dive-into-new-xworm-campaign-utilizing-multiple-themed-phishing-emails
+date_of_publication: February 10, 2026
+file_creation_date: February 10, 2026

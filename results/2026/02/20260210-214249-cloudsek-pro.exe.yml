@@ -1,0 +1,37 @@
+description: Clipboard hijacking malware targeting cryptocurrency users distributed
+  through Discord.
+attribution: RedLineCyber
+malware_families:
+- Pro.exe
+TTPs:
+  processes:
+  - python.exe
+  - cmd.exe
+  commandline: []
+  powershell: []
+  scripting_engine:
+  - Python
+  registry_keys:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run "CryptoClipboardGuard"
+  - 'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run\CryptoClipboardGuard- '
+  image_load: []
+  network_connections: []
+  file_activity:
+  - '%APPDATA%\\CryptoClipboardGuard\\activity.log'
+  - '%APPDATA%\\CryptoClipboardGuard\\'
+  persistence:
+  - Registry Run Keys - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run "CryptoClipboardGuard"
+  process_relations: []
+IOCs:
+  hashes:
+  - 0d6e83e240e41013a5ab6dfd847c689447755e8b162215866d7390c793694dc6
+  - d011068781cfba0955258505dbe7e5c7d3d0b955e7f7640d2f1019d425278087
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- Koushik Sivaraman
+- CloudSEK STRIKE
+reference: https://www.cloudsek.com/blog/humint-operations-uncover-cryptojacking-campaign-discord-based-distribution-of-clipboard-hijacking-malware-targeting-cryptocurrency-communities
+date_of_publication: January 15, 2026
+file_creation_date: February 10, 2026
