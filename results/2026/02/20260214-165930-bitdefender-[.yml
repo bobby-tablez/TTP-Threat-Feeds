@@ -1,0 +1,32 @@
+description: Lumma threat actors use CastleLoader to deploy malware and perform various
+  malicious activities including tasklist manipulation and file copying.
+attribution: GrayBravo (CastleLoader developer)
+malware_families: '[''LummaStealer'', ''CastleLoader'']'
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - cmd.exe /c copy Pros Pros.cmd & ePros.cmd tasklist findstr <antimalware solutions>
+  - cmd Jcmd 187743
+  - exirac32 /Y /E .cab file
+  scripting_engine:
+  - JScript
+  file_activity:
+  - TANMovieDownloads Title.mp4.rar
+  - 'MOVI: Writes- partitioned in.mp4.exe small indepentfiles'
+  - Autoltexecutable
+  - one scriptf Autolt Interpreter witha CastleLoader script
+CVEs: '[]'
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors: 
+- Bogdan Ionut Lazar
+- Manuel Dragomir
+- Janos Gergo SZELES
+reference: https://www.bitdefender.com/en-us/blog/labs/lummastealer-second-life-castleloader
+date_of_publication: February 14, 2026
+file_creation_date: February 14, 2026

@@ -1,0 +1,66 @@
+description: Operation MacroMaze campaign by APT28 using macro-enabled documents to
+  establish foothold and exfiltrate data.
+attribution: APT28, Fancy Bear, Forest Blizzard, FROZENLAKE
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - msedge.exe
+  commandline:
+  - start msedge headless=new ...
+  - taskkill /fi WindowTitle eq cf25f91c-...* /t
+  - taskkill /im msedge.exe
+  - msedge --window-size=1,1 window-position=10000,10000 -ignore-certificate-errors
+  powershell: []
+  scripting_engine:
+  - VBS
+  - BAT
+  - CMD
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - http://webhook[.]site/c29905ab-e5fa-446c-8958-4eab15d8fb80/docopened.jpg
+  - https://webhook[.]site/a3f4e990-0b2a-4f6a-a02e-c573005de3ee
+  file_activity:
+  - C:\\Windows\\4zjwj81sp.exe
+  - C:\\Users\\user\\Desktop\\Informatii.doc (copy)
+  - C:\\Users\\user\\Desktop\\attachment.docm (copy)
+  - C:\\Windows\\6p8wwn4ja.exe
+  - Program.doc
+  - localfile~
+  - INDICE NEGRO.docm
+  - C:\\Users\\user\\Downloads\\*.75a
+  - C:\\Users\\user\\Downloads\\*.tmp
+  - C:\\Users\\user\\Downloads\\*.crdownload
+  - C:\\Users\\user\\Downloads\\*.html
+  - C:\\Users\\user\\Downloads\\*.htm
+  - C:\\Users\\user\\Downloads\\*.xhtml
+  persistence:
+  - Windows Scheduled Task using schtasks to run VBScript every 30/20/61 minutes
+  process_relations: []
+IOCs:
+  hashes:
+  - b0f9f0a34ccab1337fbcca24b4f894de8d6d3a6f5db2e0463e2320215e4262e4
+  - c3b617e0c6b8f01cf628a2b3db40e8d06ef20a3c71365ccc1799787119246010
+  - df60fa6008b1a0b79c394b42d3ada6bab18b798f3c2ca1530a3e0cb4fbbbe9f6
+  - 58cfb8b9fee1caa94813c259901dc1baa96bae7d30d79b79a7d441d0ee4e577e
+  - 9097d9cf5e6659e869bf2edf766741b687e3d8570036d853c0ca59ae72f9e9fc
+  - 5486107244ecaa3a0824895fa432827cc12df69620ca94aaa4ad75f39ac79588
+  - ed8f20bbab18b39a67e4db9a03090e5af8dc8ec24fe1ddf3521b3f340a8318c1
+  ip_addresses: []
+  domains:
+  - webhook[.]site
+  urls:
+  - http://webhook[.]site/c29905ab-e5fa-446c-8958-4eab15d8fb80/docopened.jpg
+  - https://webhook[.]site/a3f4e990-0b2a-4f6a-a02e-c573005de3ee
+  - http://webhook[.]site/d63049e3-1cbe-474b-9005-237517af53a7/docopened.jpg
+  - https://webhook[.]site/5dbed3be-f1c9-41e5-b5d5-e961d08b5fba
+  - http://webhook[.]site/68d68fc7-aa94-4f2d-a727-d18fb40b0d69/docopened.jpg
+  - https://webhook[.]site/a72d8905-b15f-4e95-9a8f-5e4bb7dc9b3d
+  - http://webhook[.]site/c2e1be16-401b-4f60-8a0f-276b30417fda/docopened.jpg
+  - https://webhook[.]site/4e6cf717-e4d6-4f40-9f2d-134196fa5e7d
+  - http://webhook[.]site/62114596-33f5-47fb-9012-0223529e5a13/docopened.jpg
+  - https://webhook[.]site/5744c020-a8d9-4755-abfb-cde6ccd450af
+reference: https://lab52.io/blog/operation-macromaze-new-apt28-campaign-using-basic-tooling-and-legit-infrastructure/
+date_of_publication: February 13, 2026
+file_creation_date: February 14, 2026

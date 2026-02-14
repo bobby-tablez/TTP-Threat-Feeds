@@ -1,0 +1,91 @@
+description: OysterLoader, also known as Broomstick and CleanUp, is a multi-stage
+  malware loader developed in C++ used by the Rhysida ransomware group to distribute
+  other malware.
+attribution: Rhysida ransomware group
+malware_families:
+- OysterLoader
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - rundll32.exe
+  - schtasks.exe
+  - svchost.exe
+  - sysmon.exe
+  - unsecapp.exe
+  - vt-windows-event-stream.exe
+  - conhost.exe
+  commandline:
+  - C:\\Windows\\System32\\schtasks.exe /Create /SC MINUTE /MO 13 /TN "COPYING3" /TR
+    "C:\\Windows\\System32\\rundll32.exe C:\\Users\\<redacted>\\AppData\\Roaming\\<15
+    random alphanum>\\COPYING3.dll DllRegisterServer"
+  - DllRegisterServer
+  powershell: []
+  scripting_engine:
+  - Python
+  registry_keys: []
+  image_load:
+  - kernel32.dll
+  - ntdll.dll
+  network_connections:
+  - C:\\Windows\\System32\\rundll32.exe, grandideapay[.]com, 80
+  - C:\\Windows\\System32\\rundll32.exe, nucleusgate[.]com, 80
+  - C:\\Windows\\System32\\rundll32.exe, cardlowestgroup[.]com, 80
+  - C:\\Windows\\System32\\rundll32.exe, socialcloudguru[.]com, 80
+  - C:\\Windows\\System32\\rundll32.exe, coretether[.]com, 80
+  - C:\\Windows\\System32\\rundll32.exe, registrywave[.]com, 80
+  - grandideapay[.]com/api/v2/facade
+  - nucleusgate[.]com/api/v2/facade
+  - cardlowestgroup[.]com/api/v2/facade
+  - socialcloudguru[.]com/api/v2/facade
+  - coretether[.]com/api/v2/facade
+  - registrywave[.]com/api/v2/facade
+  file_activity:
+  - COPYING3.dll
+  - C:\\Windows\\System32\\schtasks.exe
+  - C:\\Users\\<redacted>\\AppData\\Roaming\\<15 random alphanum>\\COPYING3.dll
+  - payload.bin
+  persistence:
+  - Task scheduler with task name "COPYING3" running every 13 minutes
+  - Scheduled task named "COPYING3"
+  process_relations: []
+IOCs:
+  hashes:
+  - '0x9866A947'
+  - '0x895E0804'
+  - '0xEA1023BE'
+  - '0x8F1E88B1'
+  - '0x5CD5A5AA'
+  ip_addresses:
+  - 85.239.53[.]66
+  - 51.222.96[.]108
+  - 135.125.241[.]45
+  - 85.239.53.66
+  - 51.222.96.108
+  - 135.125.241.45
+  domains:
+  - grandideapay[.]com
+  - nucleusgate[.]com
+  - cardlowestgroup[.]com
+  - socialcloudguru[.]com
+  - coretether[.]com
+  - registrywave[.]com
+  urls:
+  - hxxps://grandideapay[.]com/api/v2/facade
+  - hxxp://nucleusgate[.]com/api/v2/facade
+  - hxxps://cardlowestgroup[.]com/api/v2/facade
+  - hxxps://socialcloudguru[.]com/api/v2/facade
+  - hxxps://coretether[.]com/api/v2/facade
+  - hxxps://registrywave[.]com/api/v2/facade
+  - /api/connect
+  - /api/session
+  - /api/kcehc
+  - /api/jgfnsfnuefcnegfnehjbfncejfh
+  - /api/v2/init
+  - /api/v2/facade
+  - /api/v2/YgePIY5zPSoGUjzRx7C50MTx6EzABXIPd
+authors:
+- Pierre Le Bourhis
+reference: https://blog.sekoia.io/oysterloader-unmasked-the-multi-stage-evasion-loader/
+date_of_publication: February 12, 2026
+file_creation_date: February 14, 2026

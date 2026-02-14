@@ -1,0 +1,46 @@
+description: ConsentFix (a.k.a. AuthCodeFix) is a phishing attack that tricks victims
+  into generating an OAuth authorization code for Azure CLI or other vulnerable applications,
+  which the adversary then uses to obtain access tokens and gain unauthorized access
+  to Microsoft accounts.
+TTPs:
+  processes:
+  - curl.exe
+  - powershell.exe
+  commandline:
+  - 'curl.exe -X POST https://login.microsoftonline.com/<common|tenant_id>/oauth2/v2.0/token
+    -H "Content-Type: application/x-www-form-urlencoded" -d "client_id=04b07795-8ddb-461a-bbee-02f9e1bf7b46"
+    -d "scope=https://graph.microsoft.com/.default" -d "code=<authorization_code>"
+    -d "redirect_uri=http://localhost:1605/" -d "grant_type=authorization_code"'
+  - 'curl.exe https://graph.microsoft.com/v1.0/me -H "Authorization: Bearer <access_token>"'
+  - 'curl .exe X POST https://login.microsoftonline.com/common/oauth2/v2.0/token H
+    "Content-Type: application/x-www-form-urlencoded" d "client_id=04b07795-8ddb-461a-bbee-02f9e1bf7b46"
+    d "scopes=https://graph.microsoft.com/.default" d "code=1AXHAUD!" d "redirect_uri=http://localhost:1605/"
+    d "grant_type=authorization_code"'
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - curl.exe, login.microsoftonline.com, 443
+  - curl.exe, graph.microsoft.com, 443
+  - curl.exe, https://login.microsoftonline.com/common/oauth2/v2.0/token, 443
+  file_activity: []
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - aadrm.com
+  - login.microsoftonline.com
+  - graph.microsoft.com
+  urls:
+  - https://aadrm.com/adminpowershell
+  - https://login.microsoftonline.com/organizations/oauth2/authorize?client_id=04b07795-8ddb-461a-bbee-02f9e1bf7b46&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A1605%2F&prompt=select_account&login_hint=victim@corp.com
+  - https://login.microsoftonline.com/common/oauth2/v2.0/token
+  - http://localhost:1605/
+authors:
+- Stamatis Chatzimangou
+reference: https://blog.nviso.eu/2026/01/29/consentfix-a-k-a-authcodefix-detecting-oauth2-authorization-code-phishing
+date_of_publication: January 29, 2026
+file_creation_date: February 14, 2026

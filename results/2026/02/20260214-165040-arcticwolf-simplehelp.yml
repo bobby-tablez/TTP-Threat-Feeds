@@ -1,0 +1,44 @@
+description: Arctic Wolf observed malicious activities exploiting CVE-2026-1731 in
+  self-hosted BeyondTrust Remote Support and Privileged Remote Access deployments,
+  deploying SimpleHelp RMM tool for persistence and performing discovery and lateral
+  movement.
+malware_families:
+- SimpleHelp
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - net user REDACTED_USERNAME REDACTED_PASSWORD /add /domain
+  - net group \\enterprise admins\\ REDACTED_USERNAME /add /domain
+  - net group \\domain admins\\ REDACTED_USERNAME /add /domain
+  - net share
+  - cmd.exe /c ipconfig /all
+  - Systeminfo
+  - cmd.exe /c ver
+  powershell:
+  - 'echo AD_Computers: ([adsiSearcher]\\(ObjectClass=computer)\\).FindAll().count'
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - ProgramData root directory/remote access.exe
+  - ProgramData root directory/others
+  persistence:
+  - Renamed SimpleHelp binaries created through Bomgar processes using the SYSTEM
+    account in ProgramData root directory
+  process_relations: []
+CVEs:
+- CVE-2026-1731
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+
+authors:
+- Andres Ramos
+reference: https://arcticwolf.com/resources/blog/update-arctic-wolf-observes-threat-campaign-targeting-beyondtrust-remote-support-following-cve-2026-1731-poc-availability/
+date_of_publication: February 13, 2026
+file_creation_date: February 14, 2026

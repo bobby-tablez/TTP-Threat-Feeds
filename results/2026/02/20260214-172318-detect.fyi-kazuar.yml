@@ -1,0 +1,51 @@
+description: Threat involves the use of md.exe, certutil.exe, and installutil.exe
+  to drop and load a malicious DLL named LOC.dll.
+attribution: Turla
+malware_families:
+- Kazuar
+TTPs:
+  processes:
+  - wscript.exe
+  - hpbprndi.exe
+  - md.exe
+  - certutil.exe
+  - installutil.exe
+  commandline:
+  - CreateObject("WScript.Shell").Run(WSHShell.ExpandEnvironmentStrings("%LOCALAPPDATA%")
+    + "\Programs\HP\Printer\Driver\hpbprndi.exe")
+  scripting_engine:
+  - VBS
+  registry_keys:
+  - HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\Hewlett
+    Packard Drivers
+  file_activity:
+  - '%LOCALAPPDATA%\\Programs\\HP\\Printer\\Driver\\hpbprndi.exe'
+  - '%LOCALAPPDATA%\\Programs\\HP\\Printer\\Driver\\hpbprndiLOC.dll'
+  - '%LOCALAPPDATA%\\Programs\\HP\\Printer\\Driver\\jayb.dadk'
+  - '%LOCALAPPDATA%\\Programs\\HP\\Printer\\Driver\\kgjlj.sil'
+  - '%LOCALAPPDATA%\\Programs\\HP\\Printer\\Driver\\pkrfsu.ldy'
+  - FileName endswith "LOC.dll"
+  - FolderPath has_any (SuspiciousDirs)
+  persistence:
+  - HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\Hewlett
+    Packard Drivers
+  image_load:
+  - LOC.dll
+  process_relations:
+  - ParentProcessName -> LoaderProcess
+IOCs:
+  ip_addresses:
+  - 185.126.255.132
+  domains: []
+  urls:
+  - https://185.126.255.132/hpbprndi.exe
+  - https://185.126.255.132/hpbprndiLOC.dll
+  - https://185.126.255.132/jayb.dadk
+  - https://185.126.255.132/kgjlj.sil
+  - https://185.126.255.132/pkrfsu.ldy
+  - https://185.126.255.132/requestor.php
+authors:
+- IM-IN
+reference: https://detect.fyi/detection-satelital-dll-sideloading-via-mfc-turla-s-kazuar-v3-3de2fbd2d6af?source=rss----d5fd8f494f6a---4
+date_of_publication: February 13, 2026
+file_creation_date: February 14, 2026
