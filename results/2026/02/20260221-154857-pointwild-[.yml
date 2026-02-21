@@ -1,0 +1,47 @@
+description: Remcos RAT is a powerful surveillance and control tool that provides
+  capabilities such as credential theft, keylogging, screen capture, webcam/microphone
+  control, and persistent command and control (C2) access.
+malware_families: '[''RemcosRAT'']'
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - cmd /c \\\
+  - CreateObject(WScript.Shell).Run cmd /c \\
+  - CreateObject(Scripting.FileSystemObject).DeleteFile(Wscript.ScriptFullName)
+  powershell: []
+  scripting_engine:
+  - VBS
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load:
+  - WININET.dll
+  - Dynamic Link Library (DLL)
+  network_connections:
+  - Remcos Agent initialized BT Bl (o7 o socTeasesocr i3y 69a0acs dz 900727 bin. 6701Feset
+    gt3 now SEresnB soarens RS hu7a0sseazssncrrossrasavscs 2900227  bin. 8764543 apszene
+    ettt At bt e3 Staens R R R AL S R RS h gtyke oy SehrexgBce oy ec;
+  - 172.245.246.77:8080
+  file_activity:
+  - C:\\ProgramData\\colors\\logs.dat
+  - \\Device\\HarddiskVolumed\\Users\\Adnin\\Apphasa\\Local Wicrasafo\\Edge\\User
+    Dava\\Defauli\\Eocal Storage\\leveldn000015. 10g Prapervics
+  persistence:
+  - Remcos creates a named mutex to prevent multiple instances from running
+  - Remcos can add itself to the Registry key for persistence
+  process_relations: []
+IOCs:
+  hashes:
+  - c748c6a74389e4c48f9a34acba1ff093
+  ip_addresses:
+  - 172.245.246.77
+  domains: []
+  urls: []
+attribution: 'null'
+CVEs: '[]'
+authors:
+- Amol Swami
+reference: https://www.pointwild.com/threat-intelligence/remcos-revisited-inside-the-rats-evolving-command-and-control-techniques
+date_of_publication: February 18, 2026
+file_creation_date: February 21, 2026

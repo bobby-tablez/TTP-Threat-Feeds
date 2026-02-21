@@ -1,0 +1,59 @@
+description: UNC6201 exploited CVE-2026-22769 to deploy BRICKSTORM, SLAYSTYLE, and
+  GRIMBOLT malware on Dell RecoverPoint for Virtual Machines.
+attribution: UNC6201
+malware_families:
+- SLAYSTYLE
+- BRICKSTORM
+- GRIMBOLT
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - PUT /manager/text/deploy?path=/<MAL_PATH>&update=true
+  - iptables -I INPUT -i eth0 -p tcp --dport 443 -m string --hex-string <HEX_STRING>
+  - iptables -A port_filter -i eth0 -p tcp --dport 10443 --syn -m recent --rcheck
+    --name ipt -j ACCEPT
+  - iptables -t nat -N IPT
+  - iptables -t nat -A IPT -p tcp -j REDIRECT --to-ports 10443
+  - iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 443 --syn -m recent --rcheck
+    --name ipt --seconds 300 -j IPT
+  powershell: []
+  scripting_engine:
+  - VBS
+  - JScript
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - convert_hosts.sh->149.248.11.71
+  - 149.248.11.71:443
+  file_activity:
+  - /home/kos/tomcat9/tomcat-users.xml
+  - /manager/text/deploy
+  - /var/lib/tomcat9/
+  - /var/cache/tomcat9/Catalina/
+  - /var/log/tomcat9/
+  - /home/kos/kbox/src/installation/distribution/convert_hosts.sh
+  persistence:
+  - modify convert_hosts.sh to include backdoor path
+  process_relations: []
+CVEs:
+- CVE-2026-22769
+IOCs:
+  hashes:
+  - 24a11a26a2586f4fba7bfe89df2e21a0809ad85069e442da98c37c4add369a0cdfb37247d12351ef9708cb6631ce2d7017897503657c6b882a711c0da8a9a59192fb4ad6dee9362d0596fda7bbcfe1ba353f812ea801d1870e37bfc6376e624aaa688682d44f0c6b0ed7f30b981a609100107f2d414a3a6e5808671b112d18782388ed7aee0b6b392778e8f9e98871c06499f476c9e7eae6ca0916f827fe65df320a0b5d4900697e125cebb5ff03dee7368f8f087db1c1570b0b62f5a986d75990b760ed1d0dcb3ef0f2b6d6195c9d852bcb65eca293578982a8c4b64f51b03545313a6745803a7f57ff35f5397fdf117eaec008a76417e6e2ac8a6280f7d830
+  ip_addresses:
+  - 149.248.11.71
+  domains: []
+  urls:
+  - wss://149.248.11.71/rest/apisession
+authors:
+- Peter Ukhanov
+- Daniel Sislo
+- Nick Harbour
+- John Scarbrough
+- Fernando Tomlinson, Jr.
+- Rich Reece
+reference: https://cloud.google.com/blog/topics/threat-intelligence/unc6201-exploiting-dell-recoverpoint-zero-day/
+date_of_publication: February 17, 2026
+file_creation_date: February 21, 2026

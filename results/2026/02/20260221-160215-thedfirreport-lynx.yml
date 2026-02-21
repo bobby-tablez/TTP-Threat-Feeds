@@ -1,0 +1,154 @@
+description: The intrusion involved RDP access using compromised credentials, lateral
+  movement to domain controllers, enumeration of network infrastructure, data exfiltration,
+  deletion of backup jobs, and deployment of Lynx ransomware.
+malware_families:
+- Lynx
+- Lynx Ransomware
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - mstsc.exe
+  - netscan.exe
+  - nxc.exe
+  - taskmgr.exe
+  - mmc.exe
+  - dsa.msc
+  - lusrmgr.msc
+  - SecEdit.exe
+  - virtmgmt.msc
+  - regedit.exe
+  - ping.exe
+  - nslookup.exe
+  - nbtstat.exe
+  - explorer.exe
+  - w.exe
+  - ServerManager.exe
+  - anydesk-5-4-2.exe
+  - AnyDesk.exe
+  - 7zG.exe
+  - node.exe
+  - end.exe
+  - rundll32.exe
+  - AnyDesk
+  - NetExec
+  - Microsoft Management Console
+  - Task Manager
+  - OpManager
+  - Nslookup
+  - Ping
+  - RegRoute
+  - SecEdit
+  - Systeminfo
+  - RDP Server
+  commandline:
+  - '"C:\\Windows\\System32\\cmd.exe"'
+  - ipconfig
+  - route print
+  - systeminfo
+  - ping \\REDACTED
+  - ping REDACTED
+  - '"C:\\Users\\REDACTED\\Documents\\000\\netscan.exe"'
+  - nxc.exe smb REDACTED/24 -u REDACTED -p REDACTED
+  - '"C:\\Windows\\System32\\mmc.exe" "C:\\Windows\\system32\\dsa.msc"'
+  - '"C:\\Windows\\system32\\ServerManager.exe"'
+  - reg query HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Virtual Machine\\Guest\\Parameters
+  - '"C:\\Windows\\system32\\taskmgr.exe" /4'
+  - '"C:\\Users\\REDACTED\\Documents\\000\\netscan.exe"'
+  - ROUTE PRINT
+  - nxc.exe smb REDACTED/24 -u REDACTED -p REDACTED
+  - ipconfig
+  - '"C:\\Windows\\system32\\mmc.exe" "C:\\Windows\\system32\\lusrmgr.msc"'
+  - SecEdit.exe /export /cfg C:\\secpol.cfg
+  - notepad.exe C:\\secpol.cfg
+  - '"C:\\Windows\\system32\\ServerManager.exe"'
+  - virtmgmt.msc
+  - ping REDACTED -4
+  - reg query HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Virtual Machine\\Guest\\Parameters
+  - mstsc.exe /v:<IP address>
+  - netscan.exe
+  - w.exe --dir E:\\ --mode fast --verbose --noprint
+  - C:\\Windows\\System32\\mstsc.exe
+  - C:\\Users\\ \\Documents\\@@B\\netscan.exehttp://18. /1
+  - '"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe" --single-argument
+    C:\\Users\\ \\Documents\\@@B\\netscan.exehttp://18. /1'
+  - node fast --verbose no-print
+  - end. exe | el w.exe dir E:\\ node fast --verbose no-print
+  - rundll32 upfilles.dll
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Virtual Machine\\Guest\\Parameters
+  image_load: []
+  network_connections:
+  - mstsc.exe /v:<IP address>
+  - nxc.exe smb REDACTED/24 -u REDACTED -p REDACTED
+  - ping \\REDACTED
+  - ping REDACTED
+  - ping REDACTED -4
+  - netscan.exe, C:\\Users\\ \\Downloads\\B@@\\netscan.exe, 10.88
+  - netscan.exe, C:\\Users\\ \\Downloads\\B@@\\netscan.exe, 10.3,389
+  - netscan.exe, C:\\Users\\ \\Downloads\\B@@\\netscan.exe, 10.445
+  - nxc.exe 445
+  - mstsc.exe 3,389 Hypervisor B
+  - mstsc.exe 3,389 Hypervisor A
+  - temp.sh 51.91.79.17
+  file_activity:
+  - C:\\Windows\\System32\\cmd.exe
+  - C:\\Users\\REDACTED\\Documents\\000\\netscan.exe
+  - ss.xml
+  - .nxc directory
+  - smb.db
+  - secpol.cfg
+  - C:\\Users\\ \\Desktop\\@geFileCreate Explorer EXE C:\\Users\\ \\Desktop\\B8B\\netscan.
+    exe
+  - C:\\Users\\ \\Downloads\\@@B\\netscan.exe
+  - C:\\Users\\ \\Desktop\\ss.xml
+  - C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe
+  - C:\\Users\\ \\Downloads\\nxc.exe_zip
+  - C:\\Users\\ \\AppData\\Local\\Temp\\2\\_MEI28122\\pypykatz\\utils\\crypto\\winhash.py
+  - C:\\Users\\ \\Documents\\nxe..exe
+  persistence:
+  - AnyDesk installed as a service on the domain controller
+  - AnyDesk Installation and service creation on the domain controller
+  - Creation of domain users with non-expiring passwords
+  - Users added to Domain Admins and Group Policy Creator Owner groups
+  - Windows Service - T1543.003
+  process_relations:
+  - explorer.exe -> netscan.exe
+  - explorer.exe -> mstsc.exe
+  - mstsc.exe -> nxc.exe
+IOCs:
+  hashes:
+  - 3073af95dfc18361caebccd69d0021a2efe8b9ff7ff93780c9162959a4c1e5ecf6e840a4517288e12c05a92e483e6d80b9136c19bc58c46851720680bb6d1b7016034c37
+  - 7532ff90145b8c59dc9440bf43dc87a52b4b11d3ecffd82ed44db652cdd65733224f8e346285d32a9491a0084da85a384a11e15e203badf67b1deed54155f02b7338b108
+  - e2179046b86deca297ebf7398b95e4383e01df0155a539fe6d802ee9e9226d8c77fd96c907b36c1660deb223749a8ac151676d8924bc13aa59e6712a3c14a2df5237264a
+  ip_addresses:
+  - 195.211.190.189
+  - 77.90.153.30
+  - 77.96.153.30
+  - 77.96.153.38
+  - 77.98.153.30
+  - 51.91.79.17
+  - 77.90.155.30
+  domains:
+  - temp.sh
+  - nfsk=...
+  - anlicvancom-
+  - Tarkzairbo.com
+  - itynbecom=
+  - TR e | e scupolastastore boriza00.com
+  - ridiculous-breakpoint-gw.aws-usel.cloud-araykio
+  - uncertain-Kitten-gwaws-eucl.cloud-aratykiov
+  urls:
+  - http://temp.sh/upload
+  - http://lynxchatly4zludmhmi75]ruhycnogukxbaprohxmyzfaeufsgjxroad.onion/login
+  - http://lynxblog.net/
+  - https://www.opmanager.pro
+  - http://www.opmanager.proDownload OpManager ManageEngine - Official Website
+authors:
+- Friff
+- Daniel Casenove
+reference: https://thedfirreport.com/2025/12/17/cats-got-your-files-lynx-ransomware
+date_of_publication: December 17, 2025
+file_creation_date: February 21, 2026

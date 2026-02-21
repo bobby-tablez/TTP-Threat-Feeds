@@ -1,0 +1,42 @@
+description: DarkComet RAT masquerades as a Bitcoin wallet to trick users, performing
+  keylogging and establishing C2 communication.
+malware_families:
+- DarkComet
+TTPs:
+  processes:
+  - cmd.exe
+  - conhost.exe
+  - notepad.exe
+  commandline:
+  - upx.exe -d 94k BTC wallet.exe -o Unpacked94kBTCwallet.exe
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\explorer -> C:\\Users\\admin\\AppData\\Roaming\\MSDCSC\\explorer.exe
+  image_load: []
+  network_connections:
+  - 94k BTC wallet.exe, kvejo991.ddns.net, 1604
+  file_activity:
+  - C:\\Users\\<User>\\AppData\\Roaming\\MSDCSC\\explorer.exe
+  - 2025-10-29-4.dc
+  persistence:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\explorer -> C:\\Users\\admin\\AppData\\Roaming\\MSDCSC\\explorer.exe
+  process_relations:
+  - 94k BTC wallet.exe->cmd.exe
+  - 94k BTC wallet.exe->conhost.exe
+  - 94k BTC wallet.exe->notepad.exe
+IOCs:
+  hashes:
+  - 11bf1088d66bc3a63d16cc9334a25a214a25a47f39713400279e0823c97eb377
+  - 5b5c276ea74e1086e4835221da50865f872fe20cfc5ea9aa6a909a0b0b9a0554
+  - 58c284e7bbeacb5e1f91596660d33d0407d138ae0be545f59027f8787da75eda
+  ip_addresses: []
+  domains:
+  - kvejo991.ddns.net
+  urls: []
+authors:
+- Kedar S Pandit
+- Jay Prakash
+reference: https://www.pointwild.com/threat-intelligence/darkcomet-rat-malware-hidden-inside-fake-bitcoin-tool
+date_of_publication: November 11, 2025
+file_creation_date: February 21, 2026

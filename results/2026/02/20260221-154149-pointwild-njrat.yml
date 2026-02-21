@@ -1,0 +1,57 @@
+description: Malware campaign masquerading as Eaglercraft 1.12 Offline, bundling NjRat
+  RAT for remote access and data exfiltration.
+malware_families:
+- NjRat
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - WindowsServices.exe
+  - conhost.exe
+  commandline:
+  - netsh firewall delete allowedprogram <malware_path>
+  - cmd.exe /c ping 0 -n 2 & del <malware_path>
+  powershell: []
+  scripting_engine:
+  - VBS
+  registry_keys:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\9bf8c938863c256b03cb64cc0d3cad79
+  - HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\9bf8c938863c256b03cb64cc0d3cad79
+  - HKU\S-1-5-21-2437395626-461985582-3422877865-1001\Software\\9bf8c938863c256b03cb64cc0d3cad79\[kl]
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load:
+  - avicap32.dll
+  network_connections:
+  - WindowsServices.exe, 13.202.226.61, 12829
+  - WindowsServices.exe, ec2-3-6-231-193.ap-south-1.compute.amazonaws.com, 12829
+  - 13.202.226.61
+  - ec2-3-6-231-193.ap-south-1.compute.amazonaws.com
+  - 0.tcp.in.ngrok.io
+  - '12829'
+  file_activity:
+  - CLIENT.exe
+  - WindowsServices.exe
+  - 9bf8c938863c256b03cb64cc0d3cad79.exe
+  - Tools.exe
+  - EAGLERCRAFT_1.12_OFFLINE_EN_US.html
+  persistence:
+  - Mutex 9bf8c938863c256b03cb64cc0d3cad79
+  - Registry Run Keys
+  - Auto-start on boot using registry entries
+  process_relations:
+  - WindowsServices.exe->cmd.exe
+  - WindowsServices.exe->conhost.exe
+IOCs:
+  hashes:
+  - df116774536956eba650466db8c135b5
+  ip_addresses:
+  - 13.202.226.61
+  domains:
+  - ec2-3-6-231-193.ap-south-1.compute.amazonaws.com
+  - 0.tcp.in.ngrok.io
+  urls: []
+authors:
+- Nihanshu Katkar
+reference: https://www.pointwild.com/threat-intelligence/fake-minecraft-game-spreads-njrat-malware-what-you-need-to-know
+date_of_publication: August 11, 2025
+file_creation_date: February 21, 2026

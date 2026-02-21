@@ -1,0 +1,109 @@
+description: Keenadu backdoor utilizes machine learning and WebRTC to interact with
+  advertising elements, distributing clickers and spyware via compromised system apps
+  and Google Play.
+malware_families:
+- Keenadu
+- BADBOX
+TTPs:
+  processes:
+  - system_server
+  - zygote
+  commandline:
+  - adb shell pm disable --user 0 %PACKAGE%
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - libandroid_runtime.so
+  - libVndxUtils.a
+  - libhshelper.so
+  - liblog.so
+  network_connections:
+  - process: system_server
+    destination: keepgo123.com
+    port: null
+  - process: system_server
+    destination: gsonx.com
+    port: null
+  - system_server->C2 server
+  - com.arcsoft.closeli.service.KucopdInitService->C2 server
+  - system_server
+  - api.echoyesterday.com
+  - us-akeepgo123.com
+  - us-agsonxcom
+  - http://zalo.zenewy.con/new/api/up
+  - http://api..tuoksy.com/neu/api/up
+  file_activity:
+  - /data/dalvik-cache/arm/system@framework@vndx_10x.jar@classes.jar
+  - /system/lib[64]/libandroid_runtime.so
+  - /storage/emulated/0/Android/data/%PACKAGE%/files/.dx/
+  - /data/dalvik-cache/arm[64]/system@framework@vndx_10x.jar@classes.jar
+  - com.arcsoft.closeli.service.KucopdInitService->hxxps://trends.search-hub.cn/vuGs8
+  persistence:
+  - Embedded in libandroid_runtime.so, launches with system_server process
+  - Registers an event handler for session-based app installations
+  - Embedded within system apps and Google Play apps
+  process_relations: []
+IOCs:
+  hashes:
+  - MD5: ca98ae7ab25ce144927a46b7fee6bd21
+  - MD5: 4c4ca7a2a25dbe15a4a39c11cfef2fb2
+  - MD5: ad60f46e724d88af6bcacb8c269ac3c1
+  - MD5: 912bc4f756f18049b241934f62bfb06c
+  - MD5: f0184f6955479d631ea4b1ea0f38a35d
+  - MD5: 3dae1f297098fa9d9d4ee0d35f0aeed3
+  - 3dae1f297098fa9d9d4ee0335f0aeed3
+  - 529632abf8246dfe555153de6ae2a9df
+  - d840a70f2610b78493c41b1a344b6893
+  - 382764921919868d810a5cf0391ea193
+  - d07eb2db2621c425bda0f046b736e372
+  - f53c6ee141df2083e0200a514ba19e32
+  - 3d185f30b00270e7e30fc4e29a68237f
+  - bccd56a6b6c9496ff1acd40628edd25ec4c0e65a5c56038034555ec4a09d3a37cb9f86c02f756fb9afdb2fe1ad0184eef59ad0c8e47228b603efc0ff790d4a0cf9b740dd08df6c66009b27c618f1e08602c4c7209b82bbed19b962fb61ad2de3185220652fbbc266d4fdf3e668c26e5936db58957342024f9bc1cdecf2f163d64964743c742bb899527017b8d06d4eaa58f282540ab1bd5ccfb632ef0d27365459aee75ece46962c4eb09de78edaa3fa8d493346cb84fbbfdb5187ae046ab8d39d16a10031cddd222d26fcb5aa88a009a191b683a9307276f0fc68a2a9253da165f290dd99f9113592fba90ea10cb9b368990fbc668b3d2cfbefed874bb247116d93fb8897bf94b62a56aca31961756a
+  - 2922df6713f865c9cba3de1fe56849d73dae1f297098fa9d9d4ee0335f0aeed3462a23bc22d06e5662d379b9011d89ff4c4ca7a2a25dbe15a4a39c11cfef2fb25048406d8d0affa80c18f8b1d6d76e21529632abf8246dfe555153de6ae2a9df7ceccea499cfd3f9f9981104fc05bcbd912bc4f756f18049b241934f62bfb06c98ff5a3b5f2cdf2e8f58f96d70db2875aa5bf06f0cc5a8a3400e90570fb081b0ad60f46e724d88af6bcacb8c269ac3c1dc3d454a7edb683bec75a6a1e28a4877f0184f6955479d631ea4b1ea0f38a35d
+  - 07546413bdcb0e28eadead4e2b0db59d0c1f61eeebc4176d533b4fc0a36b9d6110d8e8765adb1cbe485cb7d7f4df21e411eaf02f41b9c93e9b3189aa3905941919df24591b3d76ad3d0a6f548e608a431bfb3edb394d7c018e06ed31c7eea9371c52e14095f23132719145cf24a2f9dc21846f602bcabccb00de35d994f153c92419583128d7c75e9f0627614c2aa73f28e6936302f2d290c2fec63ca647f8a6382764921919868d810a5cf0391ea19345bf58973111e00e378ee9b7b43b7d2d56036c2490e63a3e55df4558f7ecf89364947d3a929e1bb860bf748a15dba57c69225f41dcae6ddb78a6aa6a3caa82e16df8284a4acee337078a6a62a8b652106f6e14b4449c0518258beb5a40ad72037882796fdae0043153aa75576e5d0b357c3e70937da7721dd1243638b467cff19ddd621daab4c4bc811b7c1990d7e9eaa0f775dd99108cb3b76953e25f5cdae4b841debc5307afc8a4592ea60d64de14c57de69b401eb58c0aad786531c02c28ca59e49878bcf2c72b99d15c98323bcdd07eb2db2621c425bda0f046b736e372d4be9b2b73e565b1181118cb7f44a102d9aecc9d4bf1d4b39aa551f3a1bcc6b7e9bed47953986f90e814ed5ed25b010c
+  - 0bc94bc4bc4d69705e4f08aaf0e976b31276480838340dcbc699d1f32f30a5e915fb99660dbd52d66f074eaa4cf1366d2dca15e9e83bca37817f46b24b00d197350313656502388947c7cbcd08dc5a953e36ffda0a946009cb9059b69c6a6f0d5b0726d66422f76d8ba4fbb9765c68f668b64bf1dea3eb314ce273923b8df5109195454da9e2cb22a3d58dbbf7982be8a4a6ff86413b3b2a893627c4cff34399b163fa76bde53cd80d727d88b7b1d94fba0a349f177ffb3e398f8c780d911580bba23f4b66a0e07f837f2832a8cd3bd4d6ebc5526e957866c02c938fc01349eeec7ab99beb846eec4ecee232ac0b3246ef119626a3b07f46386e65de312cf151fcaeadbee39fddc907a3ae0315d86178
+  ip_addresses:
+  - 67.198.232.4
+  - 67.198.232.187
+  - 110.34.191.81
+  - 110.34.191.82
+  - 67.198.232.46
+  - 7.198.232.187
+  domains:
+  - keepgo123.com
+  - gsonx.com
+  - ubkt1x.oss-us-west-1.aliyuncs.com
+  - m-file-us.oss-us-west-1.aliyuncs.com
+  - pkg-czu.istaticfiles.com
+  - pkgu.istaticfiles.com
+  - app-download.cn-wlcb.ufileos.com
+  - fbsimg.com
+  - tmgstatic.com
+  - gbugreport.com
+  - aifacecloud.com
+  - goaimb.com
+  - proczone.com
+  - gvvt1.com
+  - dllpgd.click
+  - fbgraph.com
+  - newsroomlabss.com
+  - sliidee.com
+  - afcc8a4592ea60d64de14c57de69b401eb58c0aad786531c02c28ca59e49878bcf2c72b99d15c98323bcdd07eb2db2621c425bda0f046b736e372d4be9b2b73e565b1181118cb7f44a102d9aecc9d4bf1d4b39aa551f3a1bcc6b7e9bed47953986f90e814ed5ed25b010c
+  - zcnewy.com
+  - api.echoyesterday.com
+  - us-akeepgo123.com
+  - us-agsonxcom
+  - zalo.zenewy.con
+  - api.tuoksy.com
+  urls:
+  - hxxps://trends.search-hub[.]cn/vuGs8
+  - https://pkgu.istaticfiles.com/js_ob_he2/js_ob_he2_2e25313
+  - http://zalo.zenewy.con/new/api/up
+  - http://api.tuoksy.com/neu/api/up
+  - http://api..tuoksy.com/neu/api/up
+authors:
+- Dmitry Kalinin
+reference: https://securelist.com/keenadu-android-backdoor/118913
+date_of_publication: February 17, 2026
+file_creation_date: February 21, 2026

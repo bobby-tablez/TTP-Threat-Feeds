@@ -1,0 +1,48 @@
+description: DragonForce ransomware encrypts files and demands ransom payments in
+  cryptocurrency. It uses phishing, exploits vulnerabilities, and employs advanced
+  evasion techniques.
+attribution: DragonForce
+malware_families:
+- DragonForce
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - C:\\Windows\\System32\\wbem\\WMIC.exe shadowcopy where ID=%s delete
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKEY_CLASSES_ROOT\\.dragonforce_encrypted
+  image_load:
+  - kernel32.dll
+  - ws2_32.dll
+  - advapi32.dll
+  - RstrtMgr.dll
+  - ole32.dll
+  - netapi32.dll
+  - IPHLPAPI.dll
+  - shlwapi.dll
+  - shell32.dll
+  - ntdll.dll
+  network_connections: []
+  file_activity:
+  - C:\\Users\\Public\\log.log
+  - C:\\Users\\Public\\wallpaper_white.png
+  - C:\\Users\\Public\\icon.ico
+  - readme.txt
+  persistence:
+  - Registry key HKCR\\.dragonforce_encrypted
+  process_relations: []
+IOCs:
+  hashes:
+  - c844d02c91d5e6dc293de80085ad2f69b5c44bc46ec9fdaa4e3efbda062c871cb
+  - c844d02c91d5e6dc293de80085ad2f69b5c44bc46ec9fdaa4e3efbda062c871cb9bba02d18bacc4bc8d9e4f70657d381568075590cc9d0e7590327d854224b32
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- Amol Swami
+reference: https://www.pointwild.com/threat-intelligence/dragonforce-ransomware
+date_of_publication: September 03, 2025
+file_creation_date: February 21, 2026

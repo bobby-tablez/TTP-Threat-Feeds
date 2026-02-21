@@ -1,0 +1,75 @@
+description: CharlieKirk Grabber is a Python-based Windows infostealer designed for
+  rapid credential harvesting and data exfiltration.
+malware_families:
+- CharlieKirk
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - taskkill.exe
+  - netsh.exe
+  commandline:
+  - taskkill /F /IM msedge.exe
+  - taskkill /F /IM chromium.exe
+  - taskkill /F /IM iron.exe
+  - taskkill /F /IM wavebrowser.exe
+  - taskkill /F /IM iridium_exe
+  - taskkill /F /IM vivaldi.exe
+  - taskkill /F /IM zen.exe
+  - taskkill /F /IM chrome.exe
+  - taskkill /F /IM mullvadbrowser.exe
+  - taskkill /F /IM amigo.exe
+  - taskkill /F /IM eplc.exe
+  - taskkill /F /IM comet.exe
+  - taskkill /F /IM escosiabrowser.exe
+  - taskkill /F /IM duckduckgo.exe
+  - taskkill /F /IM dragon.exe
+  - taskkill /F /IM brave.exe
+  - taskkill /F /IM opera.exe
+  - taskkill /F /IM firefox.exe
+  - taskkill /F /IM hola.exe
+  - taskkill /F /IM AVGBrowser.exe
+  - taskkill /F /IM hola-browser.exe
+  - taskkill /F /IM waterfox.exe
+  - taskkill /F /IM seamonkey.exe
+  - taskkill /F /IM AvastBrowser.exe
+  - taskkill /F /IM browser.exe
+  - netsh wlan show profile name="name" key=clear
+  powershell:
+  - Add-MpPreference -ExclusionPath "{path}"
+  - powershell (Get-CimInstanceWin32_ComputerSystemProduct).UUID
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - schtasks /create /sc onlogon /tn kirkyboiiii /tr (}" /rlhighest"
+  - https://ipinfo.io/
+  - discord.com
+  - login.live.com
+  - store.gofile.io
+  file_activity:
+  - KIRK_administrator\\System\\System.txt
+  - KIRK_administrator\\System\\IP Info.txt
+  - KIRK_administrator\\System\\Screenshot-png
+  - KIRK_administrator\\Local Storage\\leveldb\\*
+  - KIRK_administrator\\Cookies\\Login Data
+  - KIRK_administrator\\Cookies\\Cookies
+  - KIRK_administrator\\Cookies\\Web Data
+  - KIRK_administrator\\Cookies\\History
+  persistence:
+  - 'Scheduled Task/Job: Scheduled Task'
+  process_relations: []
+IOCs:
+  hashes:
+  - 598adf7491ff46f6b88d83841609b5cc
+  - f56afcdfd07386ecc127aa237c1a045332e4cc5822a9bcc77994d8882f074dd1
+  ip_addresses: []
+  domains:
+  - ipinfo.io
+  - discord.com
+  - login.live.com
+  - store.gofile.io
+  urls: []
+reference: https://www.cyfirma.com/research/charliekirk-grabber-a-python-based-infostealer
+date_of_publication: February 20, 2026
+file_creation_date: February 21, 2026

