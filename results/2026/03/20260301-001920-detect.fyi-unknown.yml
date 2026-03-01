@@ -1,0 +1,25 @@
+description: AppsIndex.db is a SQLite database file used by Windows 11 to maintain
+  an index of installed applications for system functions like Start Menu searches.
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - '%LOCALAPPDATA%\Packages\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\LocalState\Search\AppsIndex.db'
+  - '%LOCALAPPDATA%\Packages\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\LocalState\Search\AppsIndex.db-wal'
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - https://miro.medium.com/v2/resize:fill:128:128/1*ayMhoNccbO0IxQ1UPFv0SA.png
+  - https://miro.medium.com/v2/resize:fill:128:128/1*wWoM1TJZ5srxk3nSqCDyeg.jpeg
+reference: https://detect.fyi/introducing-appsindex-db-new-windows-11-artifact-for-tracking-start-menu-application-execution-b294c8e764fa?source=rss----d5fd8f494f6a---4
+date_of_publication: February 25, 2026
+file_creation_date: March 01, 2026

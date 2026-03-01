@@ -1,0 +1,42 @@
+description: Agent Tesla multi-stage infection chain utilizing phishing, obfuscated
+  scripts, and advanced in-memory execution techniques.
+malware_families:
+- Agent Tesla
+TTPs:
+  processes:
+  - powershell.exe
+  - Aspnet_compiler.exe
+  commandline:
+  - Invoke-ManagedAssenbly -RawAssemblyBytes $decodedAssenblyBytes *~TargetTypeNane "MAFFIA.ProcessHollowing" *~TargetiethodName "Execute" ~-MethodArgunents $invocationParaneters
+  powershell:
+  - Test-ProcessAbsent Processiame $onitorProcessiane
+  - Invoke-ManagedAssenbly -RawAssemblyBytes $decodedAssenblyBytes *~TargetTypeNane "MAFFIA.ProcessHollowing" *~TargetiethodName "Execute" ~-MethodArgunents $invocationParaneters
+  scripting_engine:
+  - JScript
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - Aspnet_compiler.exe, hxxps://files[.]catbox[.]moe/2x0j75[.]ps1, 80
+  - mail[.]taikei-rmc-co[.]biz
+  file_activity:
+  - C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\Aspnet_compiler.exe
+  persistence: []
+  process_relations:
+  - powershell.exe->Aspnet_compiler.exe
+IOCs:
+  hashes:
+  - Cc2b26bbcbaa2d0593e15a45734fe3fd940451fc7290d49bc841c496b906a9c1
+  - 83F9C6A3978D926F2C0155E22008C1BCE6510B321031598509A2937ADD2D5A54
+  - 30713C4BFC813848B3EC28EB227D2E439BE0E07C77237498553FD5DFA745F278
+  - B133D75DE5010C3A5005606A8E682A08C413364A3921DFBDFBFDDE811A866E88
+  ip_addresses: []
+  domains:
+  - catbox[.]moe
+  - mail[.]taikei-rmc-co[.]biz
+  urls:
+  - hxxps://files[.]catbox[.]moe/2x0j75[.]ps1
+authors:
+- Ariel Davidpur
+reference: https://www.fortinet.com/blog/threat-research/unmasking-agent-tesla-deep-dive-into-multi-stage-campaign
+date_of_publication: February 25, 2026
+file_creation_date: February 28, 2026

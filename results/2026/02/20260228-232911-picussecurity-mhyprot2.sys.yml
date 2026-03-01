@@ -1,0 +1,54 @@
+description: BYOVD attacks exploit vulnerable, digitally signed drivers to gain kernel-mode
+  access and disable security tools.
+malware_families:
+- mhyprot2.sys
+- kill_svc.exe
+TTPs:
+  processes:
+  - cmd.exe
+  - sc.exe
+  - powershell.exe
+  commandline:
+  - sc.exe create vuln_driver type= kernel binPath= C:\\Windows\\Temp\\vulnerable_driver.sys
+  - sc.exe start vuln_driver
+  - reg add "HKLM\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d 1 /f
+  - reg add "HKLM\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard" /v "RequirePlatformSecurityFeatures" /t REG_DWORD /d 1 /f
+  - reg add "HKLM\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard" /v "Locked" /t REG_DWORD /d 0 /f
+  - reg add "HKLM\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard\\Scenarios\\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d 1 /f
+  - reg add "HKLM\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard\\Scenarios\\HypervisorEnforcedCodeIntegrity" /v "Locked" /t REG_DWORD /d 0 /f
+  powershell:
+  - Get-CimInstance -ClassName Win32_DeviceGuard - Namespace root\\Microsoft\\Windows\\DeviceGuard | Select-Object VirtualizationBasedSecurityStatus, SecurityServicesRunning
+  scripting_engine: []
+  registry_keys:
+  - HKLM\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard
+  - HKLM\\SYSTEM\\CurrentControlSet\\Control\\DeviceGuard\\Scenarios\\HypervisorEnforcedCodeIntegrity
+  image_load: []
+  network_connections: []
+  file_activity:
+  - C:\\Windows\\Temp\\vulnerable_driver.sys
+  - mhyprot2.sys
+  - kill_svc.exe
+  persistence:
+  - Creating a new service named "zam64.sys" using sc.exe
+  process_relations: []
+IOCs:
+  hashes:
+  - 93b9b7bc71c22d078987b2640190b655
+  - 77daf77d9d2a08cc22981c004689b87074544b5d
+  - 982dfc0a0984317460ca6d27d72ad6b3274b58cb7cf984e1c3e6f001eledfs
+  ip_addresses: []
+  domains: []
+  urls:
+  - https://www.trendmicro.com/en_us/research/22/h/ransomware-actor-abuses-genshin-impact-anti-cheat-driver-to-kill-antivirus.html
+  - https://www.picussecurity.com/hs-fs/hubfs/undefined-Feb-27-2026-01-11-53-8199-PM.png?width=1600&height=855&name=undefined-Feb-27-2026-01-11-53-8199-PM.png
+  - https://www.picussecurity.com/hs-fs/hubfs/undefined-Feb-27-2026-01-11-48-4872-PM.png?width=1600&height=866&name=undefined-Feb-27-2026-01-11-48-4872-PM.png
+  - https://www.picussecurity.com/hs-fs/hubfs/undefined-Feb-27-2026-01-11-48-1359-PM.png?width=634&height=827&name=undefined-Feb-27-2026-01-11-48-1359-PM.png
+  - https://www.picussecurity.com/hs-fs/hubfs/RedReport2026/RR26%20Subtechnique%20Blog%20Previews/RR26-Blog-Previews-4.3.png?width=353&height=200&name=RR26-Blog-Previews-4.3.png
+  - https://www.picussecurity.com/hs-fs/hubfs/RedReport2026/RR26%20Subtechnique%20Blog%20Previews/RR26-Blog-Previews-4.2.png?width=353&height=200&name=RR26-Blog-Previews-4.2.png
+  - https://www.picussecurity.com/hs-fs/hubfs/RedReport2026/RR26%20Subtechnique%20Blog%20Previews/RR26-Blog-Previews-4.1.png?width=353&height=200&name=RR26-Blog-Previews-4.1.png
+  - https://www.picussecurity.com/hs-fs/hubfs/RedReport2026/RR26%20Previews/Picus-RedReport2026-T1497-4-Preview.png?width=353&height=200&name=Picus-RedReport2026-T1497-4-Preview.png
+authors:
+- Umut Bayram
+reference: https://www.picussecurity.com/resource/blog/what-are-bring-your-own-vulnerable-driver-byovd-attacks
+date_of_publication: February 28, 2026
+file_creation_date: February 28, 2026

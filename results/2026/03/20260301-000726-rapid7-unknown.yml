@@ -1,0 +1,31 @@
+description: Rapid7 Labs identified more than 30 UK-based systems responding to DICOM
+  requests over Port 104, reachable from the public internet.
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - dicom-server->public IP space, port 104
+  - dicom-server->public IP space, ports 80/443
+  file_activity: []
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - https://www.rapid7.com/_next/image/?url=https%3A%2F%2Fwww.rapid7.com%2Fcdn%2Fassets%2Fblted8cb9466d79dc4d%2F6852c596a274324cfbb23d9d%2FPSN-gov-showcase-hero-image.png&w=3840&q=75
+  - https://www.rapid7.com/cdn/assets/blt1933ad177a53b96f/699f23443b580eba7a24a94e/clarify-pacs-login-screen.png
+  - https://www.rapid7.com/cdn/assets/blt74d5b3f6408e68f6/699f237fb009386b1a8334c4/DICOM-medical-devices-exposed-UK-map.png
+  - https://www.rapid7.com/cdn/assets/blt80dd00001c6429e8/699f250da2156840331096fb/NHS-product-trends-over-time-graph.png
+  - https://www.rapid7.com/cdn/assets/blt11a93509d5eadc6f/699f261e56ca115149bb5704/UK-DICOM-top-ransomware-groups-graph.png
+  - https://www.rapid7.com/cdn/assets/blt138272a2aa980cdf/699f261e883c6379c54d848f/UK-DICOM-monthly-ransomware-activity-graph.png
+authors:
+- Rapid7 Labs
+reference: https://www.rapid7.com/blog/post/tr-mri-hidden-risks-exposed-dicom-servers-uk-healthcare
+date_of_publication: February 25, 2026
+file_creation_date: March 01, 2026

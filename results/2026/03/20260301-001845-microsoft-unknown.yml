@@ -1,0 +1,137 @@
+description: Microsoft Defender Experts identified a coordinated developer-targeting
+  campaign using malicious repositories disguised as legitimate Next.js projects and
+  technical assessment materials.
+TTPs:
+  processes:
+  - node.exe
+  - Code.exe
+  commandline:
+  - node /Users/XXXXXX/.vscode/env-setup.js https://price-oracle-v2.vercel.app
+  - node server/server.js https://price-oracle-v2.vercel.app
+  - Server start / module import decode AUTH_API (base64) POST process.env to attacker
+    endpoint receive JavaScript source execute via new Function(...)(require)
+  - next dev
+  - next build
+  - eval
+  - new Function
+  - readFile
+  - '-'
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - node.exe, https://price-oracle-v2.vercel.app, 80
+  - node.exe, https://api-web3-auth.vercel.app/api/auth, 443
+  - node.exe, https://oracle-v1-beta.vercel.app/api/getMoralisData, 443
+  - node.exe, https://coredeal2.vercel.app/api/auth, 443
+  - node.exe, https://ip-check-notification-03.vercel.app/api, 443
+  - node.exe, https://ip-check-wh.vercel.app/api, 443
+  - node.exe, https://ip-check-notification-rkb.vercel.app/api, 443
+  - node.exe, https://ip-check-notification-firebase.vercel.app/api, 443
+  - node.exe, https://ip-checking-notification-firebase111.vercel.app/api, 443
+  - node.exe, https://ip-check-notification-firebase03.vercel.app/api, 443
+  - node.exe, https://vscodesettingtask.vercel.app/api/settings/XXXXX, 80
+  - node.exe, https://price-oracle-v2.vercel.app, 80
+  - node.exe, http://87.236.177.9:3000/api/errorMessage, 300
+  - node.exe, http://87.236.177.9:3000/api/handleErrors, 300
+  - node.exe, http://87.236.177.9:3000/api/reportErrors, 300
+  - node.exe, http://147.124.202.208:3000/api/reportErrors, 300
+  - node.exe, http://87.236.177.9:3000/api/hsocketNext, 300
+  - node.exe, http://87.236.177.9:3000/api/hsocketResult, 300
+  - node.exe, http://87.236.177.9:3000/upload, 300
+  - node.exe, http://87.236.177.9:3000/uploadsecond, 300
+  - node.exe, http://87.236.177.9:3000/uploadend, 300
+  - - node.exe
+    - 87.236.177.9:3000/api/errorMessage
+    - '3000'
+  - - node.exe
+    - 87.236.177.9:3000/api/handleErrors
+    - '3000'
+  - - node.exe
+    - 87.236.177.9:3000/api/reportErrors
+    - '3000'
+  - - node.exe
+    - 147.124.202.208:3000/api/handleErrors
+    - '3000'
+  - - node.exe
+    - 147.124.202.208:3000/api/reportErrors
+    - '3000'
+  file_activity:
+  - .vscode/tasks.json
+  - scripts/jquery.min.js
+  - public/assets/js/jquery.min.js
+  - frontend/next.config.js
+  - server/routes/api/auth.js
+  - server/controllers/collection.js
+  - .env
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 87.236.177.9
+  - 147.124.202.208
+  - 163.245.194.216
+  - 66.235.168.136
+  domains:
+  - api-web3-auth.vercel.app
+  - oracle-v1-beta.vercel.app
+  - monobyte-code.vercel.app
+  - ip-checking-notification-kgm.vercel.app
+  - vscodesettingtask.vercel.app
+  - price-oracle-v2.vercel.app
+  - coredeal2.vercel.app
+  - ip-check-notification-03.vercel.app
+  - ip-check-wh.vercel.app
+  - ip-check-notification-rkb.vercel.app
+  - ip-check-notification-firebase.vercel.app
+  - ip-checking-notification-firebase111.vercel.app
+  - ip-check-notification-firebase03.vercel.app
+  urls:
+  - https://price-oracle-v2.vercel.app
+  - https://api-web3-auth.vercel.app/api/auth
+  - https://oracle-v1-beta.vercel.app/api/getMoralisData
+  - https://coredeal2.vercel.app/api/auth
+  - https://ip-check-notification-03.vercel.app/api
+  - https://ip-check-wh.vercel.app/api
+  - https://ip-check-notification-rkb.vercel.app/api
+  - https://ip-check-notification-firebase.vercel.app/api
+  - https://ip-checking-notification-firebase111.vercel.app/api
+  - https://ip-check-notification-firebase03.vercel.app/api
+  - https://vscodesettingtask.vercel.app/api/settings/XXXXX
+  - http://87.236.177.9:3000/api/errorMessage
+  - http://87.236.177.9:3000/api/handleErrors
+  - http://87.236.177.9:3000/api/reportErrors
+  - http://147.124.202.208:3000/api/reportErrors
+  - http://87.236.177.9:3000/api/hsocketNext
+  - http://87.236.177.9:3000/api/hsocketResult
+  - http://87.236.177.9:3000/upload
+  - http://87.236.177.9:3000/uploadsecond
+  - http://87.236.177.9:3000/uploadend
+  - hxxp://api-web3-auth.vercel.app/api/auth
+  - hxxps://oracle-v1-beta.vercel.app/api/getMoralisData
+  - hxxps://coredeal2.vercel.app/api/auth
+  - hxxps://ip-check-notification-03.vercel.app/api
+  - hxxps://ip-check-wh.vercel.app/api
+  - hxxps://ip-check-notification-rkb.vercel.app/api
+  - hxxps://ip-check-notification-firebase.vercel.app/api
+  - hxxps://ip-checking-notification-firebase111.vercel.app/api
+  - hxxps://ip-check-notification-firebase03.vercel.app/api
+  - hxxps://vscodesettingtask.vercel.app/api/settings/XXXXX
+  - hxxps://price-oracle-v2.vercel.app
+  - hxxp://87.236.177.9:3000/api/errorMessage
+  - hxxp://87.236.177.9:3000/api/handleErrors
+  - hxxp://87.236.177.9:3000/api/reportErrors
+  - hxxp://147.124.202.208:3000/api/reportErrors
+  - hxxp://87.236.177.9:3000/api/hsocketNext
+  - hxxp://87.236.177.9:3000/api/hsocketResult
+  - hxxp://87.236.177.9:3000/upload
+  - hxxp://87.236.177.9:3000/uploadsecond
+  - hxxp://87.236.177.9:3000/uploadend
+  - hxxps://api.ipify.org/?format=json
+authors:
+- Colin Milligan
+reference: https://www.microsoft.com/en-us/security/blog/2026/02/24/c2-developer-targeting-campaign/
+date_of_publication: February 24, 2026
+file_creation_date: March 01, 2026

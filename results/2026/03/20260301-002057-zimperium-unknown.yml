@@ -1,0 +1,24 @@
+description: Threat actors are targeting core telecom and mobile network components,
+  including subscriber identity and signaling.
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - https://no-cache.hubspot.com/cta/default/46745145/interactive-198009386165.png
+  - https://zimperium.com/hs-fs/hubfs/Images/Screenshot-2024-10-09-at-2.42.53.jpg?width=220&height=322&name=Screenshot-2024-10-09-at-2.42.53.jpg
+  - https://zimperium.com/hubfs/Mobile%20Threat%20Watch%20Blog%20Series-1.png
+reference: https://zimperium.com/blog/mobile-threat-watch/reducing-telecom-attack-surface-with-privacy-first-mobile-technology
+date_of_publication: March 01, 2026
+file_creation_date: March 01, 2026

@@ -1,0 +1,38 @@
+description: Forensic insights into Microsoft Store application installations, updates,
+  and uninstallations.
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - winget search <App_Name> -s msstore
+  - winget install <App_ID> -s msstore
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\WindowsStore
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\InstallService\\State
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModel\\StateRepository\\Cache\\User\\Index\\UserSid
+  image_load: []
+  network_connections: []
+  file_activity:
+  - C:\\Program Files\\WindowsApps\\<Application_Package_Name>
+  - '%LOCALAPPDATA%\\Packages\\Microsoft.WindowsStore_8wekyb3d8bbwe\\Settings'
+  - '%LOCALAPPDATA%\\Packages\\Microsoft.WindowsStore_8wekyb3d8bbwe\\LocalState\\JumpListIcons'
+  - '%LOCALAPPDATA%\\Packages\\Microsoft.WindowsStore_8wekyb3d8bbwe\\LocalCache\\perUserCache_{Global}'
+  - C:\\ProgramData\\Microsoft\\Windows\\AppRepository\\StateRepository-Machine.srd
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - https://apps.microsoft.com/detail/<ProductID>
+authors:
+- Riyadh Alsulami
+- Justin Boncaldo
+- Yogesh Khatri
+reference: https://detect.fyi/apps-leave-traces-forensic-insights-from-the-microsoft-store-b771c054c14c?source=rss----d5fd8f494f6a---4
+date_of_publication: February 24, 2026
+file_creation_date: March 01, 2026

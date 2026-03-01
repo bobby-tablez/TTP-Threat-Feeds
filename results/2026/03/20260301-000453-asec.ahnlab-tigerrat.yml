@@ -1,0 +1,69 @@
+description: Andariel and Kimsuky conducted attacks targeting European public/legal
+  sector institutions, Korean ERP software vendors, North Korean activists, using
+  various RATs, supply chain attacks, and spear phishing.
+malware_families:
+- TigerRAT
+- JelusRAT
+- StarshellRAT
+- GopherRAT
+- ASPXSHELL/TigerShell
+- PetitPotato
+- BYOVD
+- Procdump/PassView/Plink/Socks5Server
+- LNK(Shortcut)
+- PowerShell
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - ms.exe
+  - default_an.exe
+  - AnyDesk
+  commandline:
+  - ms.exe
+  - curl
+  - ps.exe
+  - default_an.vbs
+  - default_an.ps1
+  - 1.bat
+  - pc366.ps1
+  powershell:
+  - Exfiltrates system information and uploads to Dropbox
+  - Execute(Console Hide)
+  - Remove, default_an.exe
+  - AnyDesk executable file (described as version 5.5.3.0)
+  scripting_engine:
+  - VBS
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - Dropbox C2 channel
+  file_activity:
+  - ms.exe
+  - ms.exe.manifest
+  - 1.vbs
+  - pc366.ps1
+  - tmp.ini
+  - park_yyy_MM-dd__HH_mm_info.ini
+  - 1.bat
+  - default_an.vbs
+  - default_an.ps1
+  - default_an.exe
+  - service.conf/system.conf
+  - default5(XML)
+  persistence:
+  - Scheduled Task registration for periodic execution (ms.exe executed every 18 minutes,
+    default_an.vbs executed every 5 minutes)
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - https://labs.withsecure.com/publications/andariel-2025
+  - https://plainbit.co.kr/kr/insight/tech_hub?bgu=view&idx=62
+authors:
+- AhnLab
+reference: https://asec.ahnlab.com/en/92627
+date_of_publication: February 12, 2026
+file_creation_date: March 01, 2026

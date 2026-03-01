@@ -1,0 +1,80 @@
+description: Targeted malware campaign attributed to Transparent Tribe (APT36), using
+  social engineering, macro-enabled PowerPoint add-in, and batch scripts for initial
+  access.
+attribution: Transparent Tribe (APT36)
+malware_families:
+- RAT
+- Approved Documents 2026.pdf.lnk
+- Brief.ppam
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - wscript.exe
+  - SearchApp.exe
+  commandline:
+  - '%comspec% /c start /MIN ~\myscsd.bat'
+  - start /MAX Approved_Documents_2026.pdf
+  - xcopy ~\\pdsfile C:\\ProgramData\\ /Y /C /Q
+  - PowerShell Unblock-File -Path C:\\ProgramData\\pdsfile
+  - mklink /h %APPDATA%\\hsuzoiaisaacrhy.exe C:\\ProgramData\\pdsfile
+  - start  %APPDATA%\\hsuzoiaisaacrhy.exe
+  - xcopy ~\\pdafile C:\\ProgramData\\ /Y /C /Q
+  - start C:\\ProgramData\\Approved Documents 2026.pdf /MAX
+  - powershell uUnblock-File - Path C:\\ProgramData\\pdsfile
+  - niclink /h "%APPDATA%\\hsuzoiaisaacrhy.exe C:\\ProgramData\\pdsfile"
+  - start "" "$APPDATA$\\hsuzoiaisaacrhy.eze" && EXIT
+  powershell:
+  - Unblock-File -Path C:\\ProgramData\\pdsfile
+  - Unblock-File - Path C:\\ProgramData\\pdsfile
+  scripting_engine:
+  - VBA
+  - VBS
+  - JScript
+  registry_keys:
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Office\\ClickToRun\\Configuration
+  image_load: []
+  network_connections:
+  - hsuzoiaisaacrhy.exe, 93.127.130.89, 445
+  - hsuzoiaisaacrhy.exe, sharemxme126.net, 445
+  - SearchApp.exe, 192.168.88.165, 93.127.130.89
+  - hsuzoiaisaacrhy.exe, 192.168.88.165, 231215147
+  file_activity:
+  - Approved Documents 2026.pdf.lnk
+  - Brief.ppam
+  - myscsd.bat
+  - ~\\pdsfile
+  - ~\\pdsfilem
+  - ~\\pdffile
+  - C:\\ProgramData\\Approved_Documents_2026.pdf
+  - C:\\ProgramData\\pdsfile
+  - '%APPDATA%\\hsuzoiaisaacrhy.exe'
+  - C:\\ProgramData\\Approved Documents 2026.pdf
+  persistence:
+  - Adding to Windows startup registry key
+  - Registry Run Keys
+  - Event Triggered Execution
+  process_relations:
+  - cmd.exe->powershell.exe
+  - powershell.exe->SearchApp.exe
+IOCs:
+  hashes:
+  - ff1a302651019277d90c814c2e0940ec
+  - 81d97473b2b87310b2caf3376341fba6
+  - f3b4e186aa1e27455e9d870218e423a5
+  - 34412e765822cf3fb32a5a5c9866fb29a9b98d627b4d9a3275fd3e754cf8e360
+  - 7b4e1670930ec33a673d9b32454f67f28af73a89958fcaba4b24ac2c799b1af1
+  - 9d88e2b6dda140befb2dc0e91a13ca8356b079671e24a486be966ce447d87438
+  - 7725f32d6b9906ca653f43e9950fc9f6c914b7f2cd29a29b712c9e94dac55031
+  ip_addresses:
+  - 93.127.130.89
+  domains:
+  - sharemxme126.net
+  urls:
+  - http://93.127.130.89/sharemaxmel26.net
+authors:
+- Cyfirma
+reference: https://www.cyfirma.com/research/apt36-multi-vector-execution-malware-campaign-targeting-indian-government-entities
+date_of_publication: February 27, 2026
+file_creation_date: February 28, 2026

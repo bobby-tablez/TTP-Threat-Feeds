@@ -1,0 +1,22 @@
+description: Threat monitoring is crucial for effective SOC operations, integrating
+  detection, triage, hunting, response, intelligence, and reporting.
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\CurrentVersion\\Schedule
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+reference: https://any.run/cybersecurity-blog/threat-monitoring-ti-feeds/
+date_of_publication: March 01, 2026
+file_creation_date: March 01, 2026

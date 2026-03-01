@@ -1,0 +1,27 @@
+description: Todays security leaders are operating in an environment of truncated
+  cyberattack timelines with aging defenses built for slower, linear cyberthreats
+  that can no longer keep pace with advanced cyberthreats.
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - https://www.microsoft.com/en-us/security/blog/wp-content/themes/security-blog-2025/dist/images/single-bg-dark.jpg
+  - https://www.microsoft.com/en-us/security/blog/wp-content/uploads/2026/02/FY26_SecurityServices_JasperSleet_Human_Blog_1920x1080.png
+  - https://www.microsoft.com/en-us/security/blog/wp-content/uploads/2026/02/MS_Actional-Insights_Detection-hunting-809x455.webp
+  - https://www.microsoft.com/en-us/security/blog/wp-content/uploads/2026/02/Highlights_Day-1_19582-1-809x455.jpg
+  - https://www.microsoft.com/en-us/security/blog/wp-content/themes/security-blog-2025/dist/images/bg-footer.png
+reference: https://www.microsoft.com/en-us/security/blog/2026/02/24/scaling-security-operations-with-microsoft-defender-autonomous-defense-and-expert-led-services/
+date_of_publication: February 24, 2026
+file_creation_date: March 01, 2026

@@ -1,0 +1,56 @@
+description: Threat actor exploited CVE-2023-46604 on an internet-facing Apache ActiveMQ
+  server to deploy LockBit ransomware via RDP.
+malware_families:
+- LockBit
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - uFSyLszKsuR.exe
+  - SystemSettingsAdminFlows.exe
+  - Advanced IP Scanner.exe
+  - AnyDesk.exe
+  commandline:
+  - cmd.exe /c echo kesknq > \\.\pipe\\kesknq
+  - '%USERPROFILE%\\Downloads'
+  - netstat -t
+  - net user <account> /add /domain
+  - net group "Domain Admins" <account> /add
+  - SystemSettingsAdminFlows.exe
+  powershell:
+  - cmd.exe /c echo kesknq > \\.\pipe\\kesknq
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - 166.62.100[.]52
+  - 166.62.100[.]52:6761
+  file_activity:
+  - C:\\Users\\<USERNAME>\\AppData\\Local\\Temp\\uFSyLszKsuR.exe
+  - '%USERPROFILE%\\Downloads\\lb3_pass.exe'
+  - '%USERPROFILE%\\Downloads\\lb3.exe'
+  - netscan.exe
+  - advanced_ip_scanner.exe
+  - rdp.bat
+  persistence:
+  - AnyDesk service configured to AutoStart
+  process_relations: []
+CVEs:
+- CVE-2023-46604
+IOCs:
+  hashes:
+  - C8646CFB574FF2C6F183C3C3951BF6B2C6CF16FF8A5E949A118BE27F15962FAE
+  - 8CEEE89550C521BA43F59D24BA53A22A3B69EAD0FCE118508D0A87A383D6A7B6
+  ip_addresses:
+  - 166.62.100[.]52
+  - 166.62.100[.]52
+  domains: []
+  urls: []
+authors:
+- '@malforsec'
+- '@lapadrino'
+- '@PeteO'
+attribution: 'null'
+reference: https://thedfirreport.com/2026/02/23/apache-activemq-exploit-leads-to-lockbit-ransomware/
+date_of_publication: February 23, 2026
+file_creation_date: February 28, 2026

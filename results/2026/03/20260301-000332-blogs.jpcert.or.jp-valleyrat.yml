@@ -1,0 +1,43 @@
+description: Analysis of phishing campaigns, DDoS attacks, and ransomware incidents
+  targeting Japanese organizations.
+malware_families:
+- ValleyRAT
+- VShell
+- Qilin
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+CVEs:
+- CVE-2025-59287
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - FishingMaster
+  - NX
+  - FA
+  urls: []
+authors:
+- Minoru Kobayashi
+- Shadow Liu
+- Lime Chen
+- Albert Song
+- Masaomi Masumoto
+- Yuji Ino
+- Paul Ziegler
+- Hideyuki Furukawa
+- Shohei Iwata
+- Teruki Yoshikawa
+- Satoshi Kamekawa
+- Takahiro Takeda
+reference: https://blogs.jpcert.or.jp/en/2026/02/jsac2026day2.html
+date_of_publication: February 27, 2026
+file_creation_date: March 01, 2026

@@ -1,0 +1,45 @@
+description: APT attacks in South Korea using Spear Phishing with LNK files and HTA
+  downloaders.
+malware_families:
+- AutoIt
+- Infostealer
+TTPs:
+  processes:
+  - curl.exe
+  - powershell.exe
+  commandline:
+  - curl.exe -o WpqNoXz.exe <external URL>
+  - <malicious HTA file>
+  powershell: []
+  scripting_engine:
+  - AutoIt
+  registry_keys:
+  - task scheduler registration key for continuous execution
+  image_load:
+  - sys.dll
+  network_connections:
+  - curl.exe -> <external URL>, port unspecified
+  - <malicious HTA file> -> Github/Google Drive, port unspecified
+  file_activity:
+  - 2025Year China Political Situation Review and Prospects.docx.lnk
+  - 01_Documentary (Immanuel)Production Proposal.pdf.lnk
+  - Finished.pdf.lnk
+  - 1. I want to go to that village_Synopsis.hwp.lnk
+  - YouTube Campaign Paid Partnership Proposal.docx.lnk
+  - Overseas Visit Performance Cooperation Proposal.pdf.lnk
+  - shcard_202512.html.lnk
+  - National Tax Notice.pdf.lnk
+  - Password.txt.lnk
+  persistence:
+  - task scheduler registration for continuous execution
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - <external URL>
+  - Github/Google Drive
+reference: https://asec.ahnlab.com/en/92685
+date_of_publication: February 19, 2026
+file_creation_date: March 01, 2026

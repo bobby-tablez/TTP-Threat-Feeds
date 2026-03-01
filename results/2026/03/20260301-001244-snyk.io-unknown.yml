@@ -1,0 +1,26 @@
+description: Snyk and uv partnership for Python package management with security features.
+TTPs:
+  processes: []
+  commandline:
+  - uv export --format cyclonedx
+  - snyk sbom test file=sbom.json
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1770888915%2Ffeb-launch-nav-on-demand-image_qlkipc.png&w=2560&q=75
+  - https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1770131197%2F2026-ai-report_f65o1i.png&w=2560&q=75
+  - https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Fv1767886660%2F1200x630_gn93sl.png&w=2560&q=75
+  - https://snyk.io/_next/image/?url=https%3A%2F%2Fres.cloudinary.com%2Fsnyk%2Fimage%2Fupload%2Ff_auto,w_2560,q_auto/v1771960032/blog/hbwsdrooibelty3mwrzq.png
+reference: https://snyk.io/blog/snyk-uv-partnership/
+date_of_publication: February 24, 2026
+file_creation_date: March 01, 2026

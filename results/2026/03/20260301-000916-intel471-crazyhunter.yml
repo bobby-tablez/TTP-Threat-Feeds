@@ -1,0 +1,24 @@
+description: CrazyHunter Ransomware is a ransomware campaign targeting healthcare
+  that weakens endpoint defenses and escalates privileges before encrypting systems
+  at scale.
+malware_families:
+- CrazyHunter
+TTPs:
+  processes: []
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+reference: https://www.intel471.com/blog/the-uk-cyber-security-resilience-bill
+date_of_publication: January 27, 2026
+file_creation_date: March 01, 2026

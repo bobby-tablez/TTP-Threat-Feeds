@@ -1,0 +1,109 @@
+description: Moonrise is a Go-based remote access trojan that supports credential
+  theft, remote command execution, persistence, and user monitoring.
+malware_families:
+- Moonrise
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - svchost.exe
+  commandline:
+  - cmd /c ver
+  - cmd /c start cmd.exe
+  - cmd /c tasklist
+  - cmd /c dir
+  - cmd /c net user
+  - cmd /c ipconfig
+  - cmd /c systeminfo
+  - cmd /c whoami
+  - cmd /c hostname
+  - cmd /c echo %COMPUTERNAME%
+  - cmd /c echo %USERNAME%
+  - cmd /c echo %USERDOMAIN%
+  - cmd /c echo %USERPROFILE%
+  - cmd /c echo %SYSTEMROOT%
+  - cmd /c echo %PATH%
+  - cmd /c echo %TEMP%
+  - cmd /c echo %TMP%
+  - cmd /c echo %WINDIR%
+  - cmd /c echo %PROGRAMFILES%
+  - cmd /c echo %PROGRAMFILES(x86)%
+  - cmd /c echo %SYSTEMDRIVE%
+  - cmd /c echo %HOMEDRIVE%
+  - cmd /c echo %HOMEPATH%
+  - cmd /c echo %APPDATA%
+  - cmd /c echo %LOCALAPPDATA%
+  - cmd /c echo %PROGRAMDATA%
+  - cmd /c echo %USERPROFILE%\AppData\Local\Temp
+  - cmd /c echo %USERPROFILE%\AppData\Roaming
+  - cmd /c echo %WINDIR%\System32
+  - cmd /c echo %WINDIR%\SysWOW64
+  - cmd /c echo %WINDIR%\System32\config
+  - cmd /c echo %WINDIR%\System32\drivers
+  - cmd /c echo %WINDIR%\System32\spool
+  - cmd /c echo %WINDIR%\System32\tasks
+  - cmd /c echo %WINDIR%\System32\wscript.exe
+  - cmd /c echo %WINDIR%\System32\cscript.exe
+  - cmd /c echo %WINDIR%\System32\netsh.exe
+  - cmd /c echo %WINDIR%\System32\wbem\wmic.exe
+  - cmd /c echo %WINDIR%\System32\inetsrv\appcmd.exe
+  - cmd /c echo %WINDIR%\System32\bitsadmin.exe
+  - cmd /c echo %WINDIR%\System32\certutil.exe
+  - cmd /c echo %WINDIR%\System32\findstr.exe
+  - cmd /c echo %WINDIR%\System32\forfiles.exe
+  - cmd /c echo %WINDIR%\System32\fsutil.exe
+  - cmd /c echo %WINDIR%\System32\net.exe
+  - cmd /c echo %WINDIR%\System32\ping.exe
+  - cmd /c echo %WINDIR%\System32\taskkill.exe
+  - cmd /c echo %WINDIR%\System32\tasklist.exe
+  - cmd /c echo %WINDIR%\System32\timeout.exe
+  - cmd /c echo %WINDIR%\System32\tracert.exe
+  - cmd /c echo %WINDIR%\System32\wscript.exe
+  - cmd /c echo %WINDIR%\System32\cscript.exe
+  - cmd /c echo %WINDIR%\System32\netsh.exe
+  - cmd /c echo %WINDIR%\System32\wbem\wmic.exe
+  - cmd /c echo %WINDIR%\System32\inetsrv\appcmd.exe
+  - cmd /c echo %WINDIR%\System32\bitsadmin.exe
+  - cmd /c echo %WINDIR%\System32\certutil.exe
+  - cmd /c echo %WINDIR%\System32\findstr.exe
+  - cmd /c echo %WINDIR%\System32\forfiles.exe
+  - cmd /c echo %WINDIR%\System32\fsutil.exe
+  - cmd /c echo %WINDIR%\System32\net.exe
+  - cmd /c echo %WINDIR%\System32\ping.exe
+  - cmd /c echo %WINDIR%\System32\taskkill.exe
+  - cmd /c echo %WINDIR%\System32\tasklist.exe
+  - cmd /c echo %WINDIR%\System32\timeout.exe
+  - cmd /c echo %WINDIR%\System32\tracert.exe
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load: []
+  network_connections:
+  - moonrise-client.exe, 193.23.199.88, 443
+  file_activity:
+  - C:\\Users\\admin\\AppData\\Local\\Temp\\moonrise-client.exe
+  - C:\\Windows\\System32\\cmd.exe
+  - C:\\Windows\\System32\\svchost.exe
+  - C:\\Users\\admin\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\moonrise.lnk
+  persistence:
+  - Registry Run Keys / Startup Folder
+  process_relations:
+  - svchost.exe->cmd.exe
+IOCs:
+  hashes:
+  - c7fd265b23b2255729eed688a211f8c3bd2192834c00e4959d1f17a0b697cd5e
+  - 8a422b8c4c6f9a183848f8d3d95ace69abb870549b593c080946eaed9e5457ad
+  - 7609c7ab10f9ecc08824db6e3c3fa5cbdd0dff2555276e216abe9eebfb80f59b
+  - Ed5471d42bef6b32253e9c1aba49b01b8282fd096ad0957abcf1a1e27e8f7551
+  - 082fdd964976afa6f9c5d8239f74990b24df3dfa0c95329c6e9f75d33681b9f4
+  - 8d7c1bbdb6a8bf074db7fc1185ffd59af0faffb08e0eb46a373c948147787268
+  ip_addresses:
+  - 193.23.199.88
+  domains: []
+  urls: []
+authors:
+- ANY.RUN
+reference: https://any.run/cybersecurity-blog/moonrise-rat-detected/
+date_of_publication: March 01, 2026
+file_creation_date: March 01, 2026
