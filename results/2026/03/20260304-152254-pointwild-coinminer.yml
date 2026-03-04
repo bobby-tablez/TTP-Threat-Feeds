@@ -1,0 +1,47 @@
+description: CoinMiner is a high-risk malware categorized as a cryptojacker that hijacks
+  system resources to mine cryptocurrency without consent.
+malware_families:
+- CoinMiner
+TTPs:
+  processes:
+  - explorer.exe
+  - xmrig.exe
+  commandline:
+  - C:\Windows\System32\explorer.exe -B --coin=monero --asm=auto --cpu-memory-pool=-1
+    --randomx-mode=auto --randomx-no-rdmsr --cuda-bfactor-hint=12 --cuda-bsleep-hint=100
+    --url=xmr-us-west1.nanopool.org:10343 --user=49i2Q8eNao81D3anxK67D2eDhz7oMg3yE5EMXXKh26KRUyD5fG9MsHWRZ8qEs7m4mAUXF5ZCYaKgiQk3kuWC1uDWHpDh7YB/a
+    --pass=a --cpu-max-threads-hint=50 --donate-level=5 --unam-idle-wait=15 --unam-idle-cpu=90
+    --tls
+  registry_keys: []
+  image_load:
+  - WinRing0.sys
+  - project1.dll
+  network_connections:
+  - explorer.exe, xmr-us-west1.nanopool.org, 10343
+  file_activity:
+  - C:\Users\Admin\AppData\Local\Temp\PRE2F25.tmp
+  - C:\Users\Admin\AppData\Roaming\WinCFG\Libs\WR64.sys
+  - xmrig.exe
+  persistence: []
+  process_relations:
+  - PRE2F25.exe -> explorer.exe (injected/miner payload)
+IOCs:
+  hashes:
+  - 23906ed2d63f82cbfc38c785f926386a
+  - b4bb29c94acc0c9f9a432aac4a70dd85
+  - 17faa30e17b0f360e9ee6d601b56b7483253e71fa9ec8e6c83056928bcc837b8
+  - ba8d5c07e519acee63c8954264acaaf1
+  ip_addresses:
+  - 207.246.100.198
+  - 66.42.106.226
+  - 66.42.105.246
+  - 45.76.208.207
+  - 45.76.65.223
+  domains:
+  - xmr-us-west1.nanopool.org
+  urls: []
+authors:
+- Jay Prakash Gupta
+reference: https://www.pointwild.com/threat-intelligence/coinminer
+date_of_publication: July 28, 2025
+file_creation_date: March 04, 2026

@@ -1,0 +1,120 @@
+description: SloppyLemming cyber espionage campaign targeting government entities
+  and critical infrastructure in Pakistan and Bangladesh using PDF lures, ClickOnce
+  manifests, and macro-enabled Excel documents.
+attribution: SloppyLemming (Outrider Tiger, Fishing Elephant)
+malware_families:
+- BurrowShell
+- Rust-based keylogger
+- Havoc
+- Custom Rust-based Keylogger
+- Sloppylemming
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - OneDrive.exe
+  - NGenTask.exe
+  - audiodg.exe
+  - phoneactivate.exe
+  commandline:
+  - hxxps://webmail-pnra[.]gov-pk[.]workers[.]dev/ftp[.]pnra.org.application
+  - hxxps://ftp[.]desco-gov-bd[.]workers[.]dev/favicon.ico
+  - hxxps://fancy-voice-b182[.]goldibrowhoami[.]workers[.]dev/audiodg.pdf
+  - ExecuteCmdAsync strCmd
+  powershell: []
+  scripting_engine:
+  - VBS
+  registry_keys:
+  - Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\OneDrive
+  image_load:
+  - mscorsvc.dll
+  - system32.dll
+  - sppc.dll
+  - KERNEL32.dll
+  - WINHTTP.dll
+  - ADVAPI32.dll
+  - USER32.dll
+  - GDI32.dll
+  - WS2_32.dll
+  - gdi32.dll
+  - ntdll.dll
+  - winhttp.dll
+  - user32.dll
+  - ws2_32.dll
+  - bcrypt.dll
+  - kernel32.dll
+  - dbghelp.dll
+  - cryptbase.dll
+  - test.dll
+  - vault.dll
+  - mscorsve.dll
+  network_connections:
+  - OneDrive.exe->www[.]gov-pk[.]workers[.]dev:443
+  - audiodg.exe->api[.]desco-gov-bd[.]workers[.]dev:443
+  - OneDrive.exe, info[.]bangladesh-islamic-baank[.]workers[.]dev, 443
+  - audiodg.exe, https://ftp.desco-gov-bd.workers.dev/favicon.ico, 80
+  - audiodg.exe, https://fancy-voice-bl82.goldibrowhoami.workers.dev/audiodg.pdf,
+    443
+  file_activity:
+  - C:\\Users\\<Username>\\AppData\\Local\\Apps\\2.0\\<12randomchars>\\<12randomchars>\\ftp...app_ca9923741b74f6d5_0001.0002_<16random-hex>
+  - C:\\ProgramData\\sppc.dll
+  - C:\\ProgramData\\audiodg.exe
+  - C:\\Users\\<Username>\\AppData\\Local\\Apps\\2.0\\<12randomchars>\\<12randomchars>\\ftp...app_*
+  - C:\ProgramData\sppc.dll
+  - C:\ProgramData\audiodg.exe
+  persistence:
+  - Registry key Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\OneDrive
+  process_relations:
+  - OneDrive.exe->mscorsvc.dll
+  - audiodg.exe->sppc.dll
+IOCs:
+  hashes:
+  - 8faeea306a331d86ce1acb92c8028b4322efbd11a971379ba81a6b769ff5ac4b
+  - 1946315d645d9a8c5114759b350ec4f85dba5f9ee4a63d74437d7a068bff7752
+  - 8cc46f6ef1b659fa463b7eb343b4ca033de89c313af2e68e2cc7ce08eaff88de
+  - 4f1628821c13cc27fd4134301cc93a1ad32b2a3f7066c3d90f7ba89e02180754
+  - 9fd133b11abcbbed33ccea71bd4743e8f35e42cd637fb763f5ab2a8fbb9b6261
+  - 81d1a62c00724c1dfbc05a79ac4ae921c459350a2a4a93366c0842fadc40b011
+  - 3dbf64da37616acbe16bc6bd06a320fed416c4c8ec37a04f811a32389af3d46c
+  - c57baa17321257ea1915ba0336a89f63975e6ed612a89c9888be7067222bef38
+  - 67c341e187ddfcd5a4a7df8743ae82e72db1e5c3747d5c4e185d99f54182f093
+  - 6ea8fd10725676c886692d3acda9782e044c9f3988276360c87559dcaf1a3123
+  - 87822f0b579c6c123c72971ee524a2d977ba4f02027f32d57a533d8f123183c3
+  - 7e16fc7603e450b28f06e55748ef65204f8685b0f75e963da997192fdec5f96e
+  - bb83cd7ebe75cf62f06859ab2166a35a16cac924f874109b78dd5c4b653d6d44
+  - 3269829b50da5b3c4120a103ef72b09a8bbbf258ab3086ca24b2aa24dc00039b
+  - c4cea4147719c3abe7eb6c7c7e3420480361773b602d4270af0a607d29f8771f
+  - c603e7a1018f7b3a168404bcf2f709950c4e29e0596c78823647baaadaf317c7
+  - 1f79f88e97e60bc431ab641ccbbfb09e9d2633d258d3d4bc8b0cb5b9adbc9a4a
+  - 7a34070f98bd129764f053d8003b402975f73e85da87eebdfcc718ac7c8bb0bb
+  - d071ea65ea30df38623afe959ccc142f14dc4659dce21c2d7195e31245ee2df1
+  - 9dca24630c06463a01ca6d38b73987589bbe68650b0ff893770eab9ff6ec581a
+  - f46dd8154f963a8d49c4503bcfb93caf6551f4c845377c95fdde52ce9ca9798b
+  ip_addresses: []
+  domains:
+  - webmail-pnra[.]gov-pk[.]workers[.]dev
+  - ftp[.]desco-gov-bd[.]workers[.]dev
+  - api[.]desco-gov-bd[.]workers[.]dev
+  - support[.]paknavy-gov-pk-fd9[.]workers[.]dev
+  - xen[.]pgcb-gov-bd[.]workers[.]dev
+  - vrms[.]bangladeshbaank-gov-bd[.]workers[.]dev
+  - cms[.]ndu-edu-gov[.]workers[.]dev
+  - ntsoc[.]pta-gov-pk[.]workers[.]dev
+  - uploads[.]ptcl-gov-pk[.]workers[.]dev
+  - www[.]gov-pk[.]workers[.]dev
+  - info[.]bangladesh-islamic-baank[.]workers[.]dev
+  - ftp.desco-gov-bd.workers.dev
+  - fancy-voice-bl82.goldibrowhoami.workers.dev
+  urls:
+  - hxxps://webmail-pnra[.]gov-pk[.]workers[.]dev/ftp[.]pnra.org.application
+  - hxxps://ftp[.]desco-gov-bd[.]workers[.]dev/favicon.ico
+  - hxxps://fancy-voice-b182[.]goldibrowhoami[.]workers[.]dev/audiodg.pdf
+  - https://ftp.desco-gov-bd.workers.dev/favicon.ico
+  - https://fancy-voice-bl82.goldibrowhoami.workers.dev/audiodg.pdf
+authors:
+- Arctic Wolf Labs
+reference: https://arcticwolf.com/resources/blog/sloppylemming-deploys-burrowshell-and-rust-based-rat-to-target-pakistan-and-bangladesh/
+date_of_publication: March 02, 2026
+file_creation_date: March 04, 2026

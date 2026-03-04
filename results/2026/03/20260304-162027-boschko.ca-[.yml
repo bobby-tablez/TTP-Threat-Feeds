@@ -1,0 +1,52 @@
+description: '''Unauthenticated DDS-Based Remote Code Execution (CVE-2026-27509) and
+  Mobile Database Tampering Leading to Remote Code Execution (CVE-2026-27510)'''
+attribution: 'null'
+malware_families: '[]'
+TTPs:
+  processes:
+  - python3
+  commandline:
+  - python3 modify_db_v1.1.11_rce.py --db unitree_go2.db --programme olivier --pycode
+    new_payload.py
+  - python3 revshell.py
+  - adb shell monkey -p com.unitree.doggo2 -c android.intent.category.LAUNCHER 1
+  - nc -l 1337
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - revshell.py, 192.168.1.179, 1337
+  - revshell.py, 192.168.1.2, 4444
+  - python3, 192.168.1.2, 1337
+  file_activity:
+  - /unitree/etc/programming/hotkey_list.txt
+  - /unitree/module/programming_actuator/actuator_manager.py
+  - /data/data/com.unitree.doggo2/databases/unitree_go2.db
+  - /sdcard/unitree_go2.db
+  - /unitree/module/programming_actuator/
+  - /home/unitree/programming_actuator/
+  - /tmp/sqglite3 unitree_go2_latest.db
+  - /tmp/sqlite3 unitree_go2.db
+  - hotkey_list.txt
+  - info.txt
+  - 1761882659881716dc19f-0dee-4749-b5bd-35f6c4a8816f.py
+  persistence: []
+  process_relations:
+  - python3->bash
+CVEs: '[''CVE-2026-27509'', ''CVE-2026-27510'']'
+IOCs:
+  hashes:
+  - 17618826598817f6dc19f-0dee-4749-b5bd-35f6c4b8816f
+  ip_addresses:
+  - 192.168.1.179
+  - 192.168.1.2
+  domains: []
+  urls:
+  - https://global-robot-api.unitree.com/app/creativeProgramming/myself?page=1
+  - https://global-robot-api.unitree.com/app/creativeProgramming/download?id=403
+authors:
+- Olivier Laflamme
+reference: https://boschko.ca/unitree-go2-rce/
+date_of_publication: February 26, 2026
+file_creation_date: March 04, 2026

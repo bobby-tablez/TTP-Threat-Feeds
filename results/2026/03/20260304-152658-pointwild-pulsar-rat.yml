@@ -1,0 +1,58 @@
+description: Pulsar RAT Powers Live Chat Driven Remote Control and Advanced Infostealer
+  Delivery via Donut Loader
+malware_families:
+- Pulsar RAT
+- Stealerv37
+- Pulsar.Common
+- Stealer
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - svchost.exe
+  - explorer.exe
+  commandline:
+  - cmd.exe /c <path-to-hidden-bat>
+  - Process.Start(new ProcessStartInfo(schtasks))
+  powershell:
+  - powershell -ExecutionPolicy Bypass -File %TEMP%\\!TEMPPS!
+  - <obfuscated PowerShell script>
+  scripting_engine: []
+  registry_keys:
+  - HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\bada287ebf
+  - Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load: []
+  network_connections:
+  - explorer.exe, <remote server IP>, <port>
+  - SendToTelegran->https://api.telegram.org/bot/sendDocuments
+  file_activity:
+  - '%APPDATA%\\Microsoft\\9bd8233d8354\\0a1a98b5f9fc7c62.bat'
+  - '%TEMP%\\!TEMPPS!'
+  - pulsar-net-win64.zip
+  persistence:
+  - Scheduled Task Persistence
+  - Registry Run Key Persistence
+  - Task Manager and UAC manipulation via Registry keys
+  - Scheduled task creation for persistence
+  process_relations:
+  - cmd.exe->powershell.exe
+  - powershell.exe->svchost.exe/explorer.exe
+IOCs:
+  hashes:
+  - 'MD5 : 666493877FB7328C3E8C313FBCFDFD1E'
+  - 'SHA -1 : DD5E51D3EA1D861D966D7E939D20BEFDDD4620D3'
+  ip_addresses:
+  - <remote server IP>
+  domains:
+  - telegram.org
+  - pointwild.com
+  urls:
+  - https://api.telegram.org/bot<TOKEN>/sendDocument
+  - https://api.telegram.org/bot/sendDocuments
+  - https://www.pointwild.com/wp-content/uploads/2026/01/img35.png
+authors:
+- Kedar Shashikant Pandit
+- Prathamesh Shingare
+reference: https://www.pointwild.com/threat-intelligence/when-malware-talks-back
+date_of_publication: January 29, 2026
+file_creation_date: March 04, 2026

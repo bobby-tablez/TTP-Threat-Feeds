@@ -1,0 +1,99 @@
+description: Darkside ransomware uses RDP over Tor, Cobalt Strike, and PowerShell
+  tools for attacks.
+attribution: Darkside
+malware_families:
+- Darkside
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - rundll32.exe
+  - net.exe
+  - schtasks.exe
+  commandline:
+  - net stop <service_name>
+  - net user
+  - net group
+  - net localgroup
+  - net start
+  - net use
+  - net view
+  - net config workstation
+  - net config server
+  - net config share
+  - net config workstation /domain
+  - net config server /domain
+  - net config share /domain
+  - net config workstation /workstationname:<new_name>
+  - net config server /server:<new_name>
+  - net config share /path:<path>
+  powershell:
+  - Get-ChildItem -Path <path> -Recurse -File | Select-Object FullName, Length
+  - Get-WmiObject Win32_UserAccount | Select-Object Name, Disabled, Lockout, PasswordRequired,
+    PasswordChangeable, Domain, Status
+  - Get-WmiObject Win32_Group | Select-Object Name, Description, Domain, Status
+  - Get-WmiObject Win32_GroupUser | Select-Object GroupComponent, PartComponent
+  - Get-WmiObject Win32_Service | Select-Object Name, State, StartMode, PathName
+  - Get-WmiObject Win32_Share | Select-Object Name, Path, Description, Status
+  - Get-WmiObject Win32_ComputerSystem | Select-Object Name, Domain
+  - Get-WmiObject Win32_ServerConnection | Select-Object ShareName, UserName, ComputerName
+  - Get-WmiObject Win32_LogonSession | Select-Object LogonId, StartTime, EndTime,
+    Status
+  - Get-WmiObject Win32_LoggedOnUser | Select-Object Dependent, Antecedent
+  - Get-WmiObject Win32_NetworkAdapterConfiguration | Select-Object IPAddress, IPSubnet,
+    DefaultIPGateway, DNSDomain, DNSServerSearchOrder
+  - Get-WmiObject Win32_Process | Select-Object ProcessId, Name, ExecutablePath, CommandLine
+  - Get-WmiObject Win32_Product | Select-Object Name, Version, Vendor
+  - Get-WmiObject Win32_QuickFixEngineering | Select-Object HotFixID, Description,
+    InstalledOn
+  - Get-WmiObject Win32_OperatingSystem | Select-Object Caption, Version, BuildNumber,
+    OSArchitecture
+  - Get-WmiObject Win32_LogicalDisk | Select-Object DeviceID, FileSystem, FreeSpace,
+    Size
+  - Get-WmiObject Win32_DiskPartition | Select-Object DiskIndex, PartitionNumber,
+    Type, Bootable, Recognized, Purpose
+  - Get-WmiObject Win32_DiskDrive | Select-Object Index, Model, InterfaceType, MediaType,
+    Size, Partitions
+  - Get-WmiObject Win32_BIOS | Select-Object Manufacturer, Version, ReleaseDate, SerialNumber
+  - Get-WmiObject Win32_BaseBoard | Select-Object Manufacturer, Product, Version,
+    SerialNumber
+  - Get-WmiObject Win32_Processor | Select-Object Name, NumberOfCores, NumberOfLogicalProcessors,
+    MaxClockSpeed
+  - Get-WmiObject Win32_PhysicalMemory | Select-Object Tag, Capacity, Speed, FormFactor
+  - Get-WmiObject Win32_Environment | Select-Object VariableName, VariableValue
+  - Get-WmiObject Win32_StartupCommand | Select-Object Name, Command, User
+  - Get-WmiObject Win32_Printer | Select-Object Name, PortName, Shared, Published
+  - Get-WmiObject Win32_PrintJob | Select-Object JobId, Owner, Document
+  - Get-WmiObject Win32_LogicalDiskToPartition | Select-Object Antecedent, Dependent
+  - Get-WmiObject Win32_DiskDriveToDiskPartition | Select-Object Antecedent, Dependent
+  - Get-WmiObject Win32_Registry | Select-Object CurrentLocation
+  - Get-WmiObject Win32_RegistryAction | Select-Object ActionName, ActionPath
+  - Get-WmiObject Win32_RegistryValue | Select-Object Property, Value
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\EventLog
+  image_load: []
+  network_connections:
+  - powershell.exe, <destination>, <port>
+  - rundll32.exe, <destination>, <port>
+  file_activity:
+  - <path_to_malware>.exe
+  - <path_to_malware>.zip
+  - <path_to_encrypted_data>
+  - <path_to_exfiltrated_data>
+  persistence:
+  - Create and Start a Service
+  - Scheduled task creation over SMB
+  - Event Triggered Execution using PowerShell Profile
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+reference: https://www.safebreach.com/blog/safebreach-hackers-playbook-updated-for-darkside-ransomware-attacks
+date_of_publication: March 04, 2026
+file_creation_date: March 04, 2026

