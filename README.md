@@ -87,6 +87,12 @@ python ttp_extractor.py --lmstudio --endpoint http://192.168.1.100:1234/v1/chat/
 python ttp_extractor.py --ollama --endpoint http://192.168.1.100:11434/api/chat
 ```
 
+**Single URL mode (process one article directly):**
+```bash
+python ttp_extractor.py --claude --url https://securelist.com/apt-report/
+python ttp_extractor.py --ollama --url https://unit42.paloaltonetworks.com/new-malware/
+```
+
 ### Recommended Local Models
 
 For local deployment via LM Studio or Ollama:

@@ -958,6 +958,10 @@ LLM Provider Examples:
   --claude --model claude-opus-4    Use Anthropic Claude
   --gemini --model gemini-2.0-flash Use Google Gemini
 
+Single URL Mode:
+  --url https://example.com/report  Process a single article directly
+  --claude --url https://...        Combine with any provider
+
 API Keys (for cloud providers):
   Set environment variables: OPENAI_API_KEY, ANTHROPIC_API_KEY, GOOGLE_API_KEY
   Or use --api-key flag
@@ -981,6 +985,7 @@ API Keys (for cloud providers):
     parser.add_argument('--model', type=str, help='Model name to use')
     parser.add_argument('--endpoint', type=str, help='API endpoint (for local providers)')
     parser.add_argument('--api-key', type=str, help='API key (for cloud providers)')
+    parser.add_argument('--url', type=str, help='Process a single article URL directly (skips urls.txt)')
 
     args = parser.parse_args()
 
@@ -1075,6 +1080,13 @@ def main():
         logger.info("🌐 Using curl_cffi with automatic Chrome impersonation (TLS + HTTP/2 fingerprinting)")
     else:
         logger.info("🌐 Using requests library with manual headers (curl_cffi not installed)")
+
+    # Single URL mode: process one article directly and exit
+    if args.url:
+        logger.info(f"🔗 Single URL mode: {args.url}")
+        handle_article(args.url, cached, set())
+        logger.info("Done.")
+        return
 
     logger.info(f"Starting scan with {len(base_urls)} sources, {len(cached)} cached URLs")
 
