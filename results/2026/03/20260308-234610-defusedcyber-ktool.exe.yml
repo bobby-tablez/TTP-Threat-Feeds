@@ -1,0 +1,41 @@
+description: Attackers exploit CVE-2015-2291 in Intel Ethernet diagnostics driver
+  to gain kernel-level access and deploy malicious code.
+attribution: Scattered Spider, DOGE Big Balls Ransomware
+malware_families:
+- ktool.exe
+- Havoc Demon
+TTPs:
+  processes:
+  - powershell.exe
+  commandline:
+  - powershell.exe -Command "Set-Service -Name iQVW64 -StartupType Manual; Stop-Service
+    -Name iQVW64; Rename-Item -Path C:\\Windows\\System32\\drivers\\iQVW64.sys -NewName
+    iQVW64.old; Copy-Item -Path C:\\path_to_malicious_iqvw64.sys -Destination C:\\Windows\\System32\\drivers\\iQVW64.sys;
+    Start-Service -Name iQVW64"
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\iQVW64
+  image_load:
+  - iQVW64.sys
+  network_connections: []
+  file_activity:
+  - C:\\Windows\\System32\\drivers\\iQVW64.sys
+  - C:\\path_to_malicious_iqvw64.sys
+  persistence:
+  - Replaces legitimate driver with malicious version to maintain access
+  process_relations:
+  - powershell.exe->Set-Service
+  - powershell.exe->Stop-Service
+  - powershell.exe->Rename-Item
+  - powershell.exe->Copy-Item
+  - powershell.exe->Start-Service
+CVEs:
+- CVE-2015-2291
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+reference: https://defusedcyber.com/when-patching-doesnt-help-cve-2015-2291-bring-your-own-vulnerable-driver
+date_of_publication: May 13, 2025
+file_creation_date: March 08, 2026

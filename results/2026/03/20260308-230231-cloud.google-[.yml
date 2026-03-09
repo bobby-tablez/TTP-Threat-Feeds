@@ -1,0 +1,66 @@
+description: The report contains various security configurations, recommendations,
+  and threat detection techniques but does not provide specific technical indicators
+  such as TTPs or IOCs.
+TTPs:
+  processes:
+  - mstsc.exe
+  commandline:
+  - 'wbadmin start systemstatebackup -backuptarget:<targetDrive>:'
+  - robocopy c:\\windows\\sysvol c:\\sysvol-backup /copyall /mir /b /r:0 /xd
+  - mstsc.exe /RestrictedAdmin
+  - mstsc.exe /remoteguard
+  - reg add HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa /v DisableRestrictedAdmin
+    /d 0 /t REG_DWORD
+  powershell:
+  - New-Object System.Diagnostics.Eventing.Reader.EventLogConfiguration Microsoft-Windows-Authentication/ProtectedUserSuccesses-DomainController;$log1.IsEnabled=$true;$log1.SaveChanges();$log2
+    = New-Object System.Diagnostics.Eventing.Reader.EventLogConfiguration Microsoft-Windows-Authentication/ProtectedUserFailures-DomainController;$log2.IsEnabled=$true;$log2.SaveChanges()
+  scripting_engine: []
+  registry_keys:
+  - HKLM\\SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\WDigest\\UseLogonCredential
+  - HKLM\\SYSTEM\\CurrentControlSet\\Control\\Lsa\\TokenLeakDetectDelaySecs
+  - HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Lsa\\Credssp\\PolicyDefaults
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\CredentialsDelegation
+  - HKLM\\System\\CurrentControlSet\\Control\\Lsa\\Security Packages
+  - HKLM\\Software\\Policies\\Microsoft\\Windows\\CredentialsDelegation\\RestrictedRemoteAdministration
+  - HKLM\\System\\CurrentControlSet\\Control\\Lsa\\DisableRestrictedAdmin
+  - HKLM\\System\\CurrentControlSet\\Control\\Lsa\\DisableRestrictedAdminOutboundCreds
+  - HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\LocalAccountTokenFilterPolicy
+  - HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\FilterAdministratorToken
+  - HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\EnableLUA
+  image_load: []
+  network_connections: []
+  file_activity:
+  - c:\\windows\\sysvol
+  - c:\\sysvol-backup
+  - C:\\Windows\\SYSVOL\\sysvol\\<domain>\\Policies
+  - '%systemroot%\\system32\\LogFiles\\Firewall\\pfirewall.log'
+  - c:\\temp\\gpo-listing-all.csv
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - https://www.microsoft.com/en-us/download/details.aspx?id=55319
+authors:
+- Matthew McWhirt
+- Bhavesh Dhake
+- Emilio Oropeza
+- Gautam Krishnan
+- Stuart Carrera
+- Greg Blaum
+- Michael Rudden
+attribution: 'null'
+malware_families: '[]'
+authors:
+- Matthew McWhirt
+- Bhavesh Dhake
+- Emilio Oropeza
+- Gautam Krishnan
+- Stuart Carrera
+- Greg Blaum
+- Michael Rudden
+reference: https://cloud.google.com/blog/topics/threat-intelligence/preparation-hardening-destructive-attacks/
+date_of_publication: March 08, 2026
+file_creation_date: March 08, 2026
