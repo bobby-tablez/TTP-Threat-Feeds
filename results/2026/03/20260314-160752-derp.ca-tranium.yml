@@ -1,0 +1,118 @@
+description: Tranium is a Go binary that encrypts files, overwrites the MBR, and corrupts
+  system files including registry hives and boot chain.
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - wmic
+  - vssadmin
+  - bcdedit
+  - sc
+  - utilman.exe
+  - narrator.exe
+  - magnify.exe
+  - osk.exe
+  - sethc.exe
+  commandline:
+  - cmd.exe /c wmic shadowcopy delete
+  - cmd.exe /c vssadmin delete shadows /all /quiet
+  - cmd.exe /c bcdedit /set {default} bootstatuspolicy ignoreallfailures
+  - cmd.exe /c bcdedit /set {default} recoveryenabled no
+  - autocheck autochk * Tranium.exe
+  - wmic + vssadmin
+  - bcdedit bootstatuspolicy + recoveryenabled
+  - bcdedit recoveryenabled no
+  - 'vssadmin delete shadows /for=C: /oldest /quiet'
+  - 'vssadmin delete shadows /for=D: /oldest /quiet'
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKLM\\...\\Run\\{D4E5F6A1-...}
+  - HKCU\\...\\Run\\{D4E5F6A1-...}
+  - HKLM\\...\\RunOnce\\{D4E5F6A1-...}
+  - HKCU\\...\\RunOnce\\{D4E5F6A1-...}
+  - HKLM\\...\\IFEO\\sethc.exe\\Debugger
+  - HKLM\\...\\IFEO\\osk.exe\\Debugger
+  - HKLM\\...\\IFEO\\magnify.exe\\Debugger
+  - HKLM\\...\\IFEO\\narrator.exe\\Debugger
+  - HKLM\\...\\IFEO\\utilman.exe\\Debugger
+  - ..\\Session Manager\\BootExecute
+  - ..\\Windows Defender\\DisableAntiSpyware
+  - ..\\Policies\\System\\EnableLUA
+  image_load: []
+  network_connections:
+  - autism[.]lat
+  - thegumonmyshoe[.]me
+  - file.marafile[.]cc
+  - biteblob[.]com
+  - 91.193.56.10
+  - 91.193.56.11
+  - 91.193.56.12
+  - 91.193.56.14
+  - 71.179.14.4
+  file_activity:
+  - \\\\.\\PhysicalDrive0
+  - \\\\.\\PhysicalDrive1
+  - \\\\.\\PhysicalDrive2
+  - '\\\\.\\C:'
+  - '\\\\.\\D:'
+  - '%TEMP%\\1773106600_716fdd44_0.bmp'
+  - bat.wav
+  - C:/Users/Admin/Downloads/wiper.go
+  - Wallpaper%TEMP%\1773106600_716fdd44_0.bmp
+  - Audiobat.wav
+  persistence:
+  - Run key (HKLM)
+  - Run key (HKCU)
+  - RunOnce key (HKLM)
+  - RunOnce key (HKCU)
+  - Startup folder
+  - Scheduled task x3
+  - Windows service
+  - IFEO debugger hijack
+  - BootExecute
+  - UAC bypass
+  - HKLM\\...\\Run\\{D4E5F6A1-...}
+  - HKCU\\...\\Run\\{D4E5F6A1-...}
+  - HKLM\\...\\RunOnce\\{D4E5F6A1-...}
+  - HKCU\\...\\RunOnce\\{D4E5F6A1-...}
+  - HKLM\\...\\IFEO\\sethc.exe\\Debugger
+  - HKLM\\...\\IFEO\\osk.exe\\Debugger
+  - HKLM\\...\\IFEO\\magnify.exe\\Debugger
+  - HKLM\\...\\IFEO\\narrator.exe\\Debugger
+  - HKLM\\...\\IFEO\\utilman.exe\\Debugger
+  - ..\\Session Manager\\BootExecute
+  - ..\\Windows Defender\\DisableAntiSpyware
+  - ..\\Policies\\System\\EnableLUA
+  process_relations: []
+IOCs:
+  hashes:
+  - 06430cf9e0ec9fb5b783db7c01fd59bd651d8877143fc45d2bcd7e4dedaf94a6
+  - 5dc62f4c65df422f1e7a0e691b1a075b
+  - 621551552d8ebcf1c5b8e23246726cc589eda56d
+  - 0fd1cd57e37b3c312ed66c2dda1e9548dfccdf1d8fcf57416b67118e072b38a4
+  - 3bfeaa70b0df65969d5ac7fb2ae6e110fbd3cd2901658ff4ac0cbf8569a2ff38
+  - 4e2bd2c481372f7ab13b83b63b424e97
+  ip_addresses:
+  - 91.193.56.10
+  - 91.193.56.11
+  - 91.193.56.12
+  - 91.193.56.14
+  - 71.179.14.4
+  domains:
+  - autism[.]lat
+  - thegumonmyshoe[.]me
+  - file.marafile[.]cc
+  - biteblob[.]com
+  urls:
+  - https://autism[.]lat/v73d2.bmp
+  - https://autism[.]lat/UPiQj.wav
+  - https://file.marafile[.]cc/3months/1773106600_716fdd44_0.bmp
+  - https://file.marafile[.]cc/3months/1773106676_5f65a166_0.wav
+  - https://biteblob[.]com/Download/gsaqlrX1mH0a5V/#bat.wav
+  - https://thegumonmyshoe[.]me/b77/gYKRXBNDVcuBUeNlQGhu.bmp?md5=...&expires=...
+malware_families:
+- Tranium
+reference: https://www.derp.ca/research/tranium-wiper-analysis/
+date_of_publication: March 10, 2026
+file_creation_date: March 14, 2026

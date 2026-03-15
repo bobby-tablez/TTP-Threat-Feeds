@@ -55,43 +55,54 @@ logger.addHandler(file_handler)
 
 PROMPT_TEMPLATE = """
 You are a cybersecurity analyst extracting technical indicators from threat intelligence reports for detection engineering.
-
 TASK: Extract TTPs and IOCs from the report below and output ONLY raw YAML.
-
 CRITICAL RULES:
 1. Return ONLY YAML - no markdown fences (```), no explanations, no commentary
 2. Extract EXACT threat data only - preserve full command-lines, complete file paths, exact registry keys, C2 and hash data.
 3. DO NOT infer, explain, guess, or generate placeholder values
 4. If scripts are obfuscated (base64/hex), include them verbatim
 5. Extract code from <pre>, <code>, and <table> blocks with full context
-6. Use single quotes for strings, compact YAML formatting
+6. Format ALL list fields as YAML block sequences using "  - " prefix (one item per line).
+   NEVER use flow style (inline brackets) or wrap lists in quoted strings.
+   EXAMPLE:
+     file_activity:
+       - %LOCALAPPDATA%/Microsoft/Windows/INetCache
+       - CacheManager.bat
 7. As all data is important, do not truncate long command, registry, or path strings (e.g., "...")
+8. Do NOT quote individual list items unless the value contains a colon followed by a space (": ").
+   Percent signs (%%), backslashes, arrows (->), and brackets do not require quoting.
 
 OUTPUT SCHEMA:
 description: <1-2 sentence threat summary>
 attribution: <threat actor/APT group/nation-state or null>
-malware_families: [<malware family names>]
+malware_families:
+  - <malware family name>
 TTPs:
-  processes: [<process names: cmd.exe, powershell.exe, etc.>]
-  commandline: [<full command-lines with ALL arguments - no truncation>]
-  powershell: [<PowerShell scripts or one-liners>]
-  scripting_engine: [<VBS, JScript, Python, Bash scripts>]
-  registry_keys: [<full registry paths: HKEY_LOCAL_MACHINE\\...>]
-  image_load: [<DLLs/libraries loaded by processes>]
-  network_connections: [<process, destination, port>]
-  file_activity: [<full file paths created/dropped/accessed/deleted>]
-  persistence: [<persistence mechanism descriptions>]
-  process_relations: [<parent->child process trees>]
-CVEs: [<List of any CVEs identified related to the threat report>]
+  processes:          # one process name per line
+  commandline:        # full command-lines, no truncation, one per line
+  powershell:         # PowerShell scripts or one-liners, one per line
+  scripting_engine:   # VBS/JScript/Python/Bash scripts, one per line
+  registry_keys:      # full registry paths, one per line
+  image_load:         # DLLs/libraries loaded by processes, one per line
+  network_connections: # one entry per line: process, destination, port
+  file_activity:      # full file paths created/dropped/accessed/deleted, one per line
+  persistence:        # persistence mechanism descriptions, one per line
+  process_relations:  # parent->child process trees, one per line
+CVEs:
+  - <CVE-YYYY-NNNNN>
 IOCs:
-  hashes: [<MD5, SHA1, SHA256>]
-  ip_addresses: [<IPv4/IPv6>]
-  domains: [<domain names>]
-  urls: [<full URLs>]
-authors: [<report authors/researchers names>]
+  hashes:
+    - <MD5/SHA1/SHA256>
+  ip_addresses:
+    - <IPv4/IPv6>
+  domains:
+    - <domain name>
+  urls:
+    - <full URL>
+authors:
+  - <author name or list of people who contributed to the report>
 
 If no technical details exist, return only description, attribution, malware_families, and authors with empty TTPs/IOCs.
-
 REPORT:
 {text}
 """

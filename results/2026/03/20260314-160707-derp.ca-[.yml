@@ -1,0 +1,96 @@
+description: '''HellsUchecker is a 28 KB native backdoor delivered through a 10-stage
+  chain, using a LOLBin for initial delivery, a blockchain smart contract for C2 rotation,
+  and direct syscalls for injection.'''
+attribution: 'null'
+malware_families:
+  - Trojan.BAT.Agent
+  - TrojanDropper/BAT.Agent
+TTPs:
+  processes:
+  - explorer.exe
+  - pythonw.exe
+  - msiexec.exe
+  - powershell.exe
+  commandline:
+  - taskkill /f /im explorer.exe
+  - curl -s -L -o "...pdf" python.org/.../python-3.14.3-embed-win32.zip
+  - mkdir
+  - tar -xf "...pdf"
+  - start "" <random>.exe -c "exec(...base64...)"
+  - start explorer.exe
+  powershell: []
+  scripting_engine:
+  - VBS
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load:
+  - ole32.dll
+  - oleaut32.dll
+  - wininet.dll
+  - mscoree.dll
+  - shell32.dll
+  network_connections:
+  - https://rec.allthe.site/chk
+  - http://more-arpc.icu
+  - http://rpcsecnoweb.pro
+  - http://allthe.site
+  file_activity:
+  - '%LocalAppData%\\Microsoft\\Windows\\INetCache\\poygon-notifications-click.msi'
+  - '%APPDATA%\\Microsoft\\Protect\\CacheManager.bat'
+  - '%APPDATA%\\Microsoft\\Protect\\CacheManager.lnk'
+  persistence:
+  - Startup folder .lnk + RegisterApplicationRestart
+  - File timestamps backdated 43 months
+  process_relations:
+  - msiexec.exe->powershell.exe
+  - powershell.exe->pythonw.exe
+CVEs: '[]'
+IOCs:
+  hashes:
+  - 6373eec0482f5b98f127967135937fca60e5a497befb51cb1267fa402063095d
+  - dcf5e6b4c75c50010d79ba3c451de49f433b7f7b7138013c60b1fa168441399c
+  ip_addresses:
+  - 178.16.52.168
+  - 144.124.246.155
+  - 185.93.89.62
+  - 46.173.25.138
+  domains:
+  - rec.allthe.site
+  - more-arpc.icu
+  - rpcsecnoweb.pro
+  - allthe.site
+  urls:
+  - https://rec.allthe.site/chk
+  - http://more-arpc.icu
+  - http://rpcsecnoweb.pro
+  - http://allthe.site
+powershell: '[]'
+registry_keys:
+  - HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run
+image_load: 
+  - ole32.dll
+  - oleaut32.dll
+  - wininet.dll
+  - mscoree.dll
+  - shell32.dll
+network_connections: 
+  - https://rec.allthe.site/chk
+  - https://more-arpc.icu
+  - https://rpcsecnoweb.pro
+file_activity: 
+  - %LOCALAPPDATA%/Microsoft/Windows/INetCache
+  - %LOCALAPPDATA%/Microsoft/Windows/WebCache
+  - %APPDATA%/Microsoft/Protect
+  - %APPDATA%/Microsoft/Windows/Libraries
+  - %APPDATA%/Microsoft/Windows/Themes
+  - CacheManager.bat
+  - CacheManager.lnk
+persistence:
+  - Startup folder .lnk + RegisterApplicationRestart
+  - File timestamps backdated 43 months
+process_relations: 
+  - wscript_ce49.bat->CacheManager.bat
+  - explorer.exe->wscript_ce49.bat
+reference: https://www.derp.ca/research/hellsuchecker-clickfix-etherhiding/
+date_of_publication: March 11, 2026
+file_creation_date: March 14, 2026

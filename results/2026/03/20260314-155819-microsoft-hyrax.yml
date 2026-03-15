@@ -1,0 +1,71 @@
+description: Credential theft campaign using fake VPN clients distributed through
+  SEO poisoning
+attribution: Storm-2561
+malware_families:
+- Hyrax
+TTPs:
+  processes:
+  - Pulse.exe
+  - dwmapi.dll
+  - inspector.dll
+  commandline: []
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Run
+  image_load:
+  - dwmapi.dll
+  - inspector.dll
+  network_connections:
+  - Pulse.exe, 194.76.226[.]93, 8080
+  file_activity:
+  - '%CommonFiles%\\Pulse Secure\\Pulse.exe'
+  - '%CommonFiles%\\Pulse Secure\\dwmapi.dll'
+  - '%CommonFiles%\\Pulse Secure\\inspector.dll'
+  - C:\\ProgramData\\Pulse Secure\\ConnectionStore\\connectionstore.dat
+  persistence:
+  - Run key modification to add Pulse.exe
+  process_relations: []
+IOCs:
+  hashes:
+  - 57a50a1c04254df3db638e75a64d5dd3b0d6a460829192277e252dc0c157a62f
+  - 862f004679d3b142d9d2c729e78df716aeeda0c7a87a11324742a5a8eda9b557
+  - 6c9ab17a4aff2cdf408815ec120718f19f1a31c13fc5889167065d448a40dfe6
+  - 6129d717e4e3a6fb4681463e421a5603b640bc6173fb7ba45a41a881c79415ca
+  - 44906752f500b61d436411a121cab8d88edf614e1140a2d01474bd587a8d7ba832397697c209953ef0252b95b904893cb07fa975
+  - 85c4837e3337165d24c6690ca63a3274dfaaa03b2ddaca7f1d18b3b169c6aac1
+  - 98f21b8fa426fc79aa82e28669faac9a9c7fce9b49d75bbec7b60167e21963c9
+  - cfa4781ebfa5a8d68b233efb723dbde434ca70b2f76ff28127ecf13753bfe011
+  - 26db3fd959f12a61d19d102c1a0fb5ee7ae3661fa2b301135cdb686298989179
+  - 44906752f500b61d436411a121cab8d88edf614e1140a2d01474bd587a8d7ba8
+  - eb8b81277c80eeb3c094d0a168533b07366e759a8671af8bfbe12d8bc87650c9
+  - 8ebe082a4b52ad737f7ed33ccc61024c9f020fd085c7985e9c90dc2008a15adc
+  ip_addresses:
+  - 194.76.226[.]93
+  domains:
+  - checkpoint-vpn[.]com
+  - cisco-secure-client[.]es
+  - forticlient-for-mac[.]com
+  - forticlient-vpn[.]de
+  - forticlient-vpn[.]fr
+  - forticlient-vpn[.]it
+  - forticlient[.]ca
+  - forticlient.co[.]uk
+  - forticlient[.]no
+  - fortinet-vpn[.]com
+  - ivanti-vpn[.]org
+  - ivanti-secure-access[.]de
+  - ivanti-pulsesecure[.]com
+  - sonicwall-netextender[.]nl
+  - sophos-connect[.]org
+  - vpn-fortinet[.]com
+  - watchguard-vpn[.]com
+  - vpn-connection[.]pro
+  - myconnection[.]pro
+  urls:
+  - hxxps://github[.]com/latestver/vpn/releases/download/vpn-client2/VPN-CLIENT.zip
+authors:
+- Microsoft Defender Experts
+reference: https://www.microsoft.com/en-us/security/blog/2026/03/12/storm-2561-uses-seo-poisoning-to-distribute-fake-vpn-clients-for-credential-theft
+date_of_publication: March 12, 2026
+file_creation_date: March 14, 2026
