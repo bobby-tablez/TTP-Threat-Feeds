@@ -1,0 +1,139 @@
+description: Threat actors used various methods including LSASS memory dumping, NTDS.dit
+  file copying, and credential harvesting via DPAPI to gain elevated privileges and
+  execute ransomware.
+attribution: 'null'
+malware_families:
+- REDBIKE
+- AGENDA
+- INC
+- TridentLocker
+- WHITERABBIT
+- NINTHBEE
+- FOULFOG.LINUX
+- RIFTTEAR
+- CONTI
+- RANSOMHUB
+- AGENDA.ESXI
+- AGENDA.RUST
+- BABUK
+- BABUK.MARIO
+- CLOP
+- CRYPTO
+- DOLLARLOCKER
+- INTERLOCK
+- LOCKBIT.UNIX
+- LOCKBIT.WARLOCK
+- MEDUSALOCKER.V2
+- NINTHBEEN
+- ITROGENO
+- DDSIDEPLAY
+- PLAYCRYPT
+- TRANSOM
+- HUBREDBIKER
+- HYSIDA
+- RIFT
+- TEARSAFEPAY
+- SILVERPINE
+TTPs:
+  processes:
+  - Get-ADComputer
+  - Get-ADUser
+  - netsh
+  - New-NetFirewallRule
+  - net.exe
+  - PsExec
+  - WinRM
+  - WMIC
+  - IMPACKET.SMBEXEC
+  - NetExec
+  - Invoke-ShareFinder
+  - rundll32.exe
+  - powershell.exe
+  - cmd.exe
+  - reg
+  - sshd
+  commandline:
+  - cmd.exe /C netsh advfirewall firewall set rule group="remote desktop" new enable=No
+  - powershell.exe -Command New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server
+    (sshd)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort
+    22
+  - cmd.exe /C netsh advfirewall firewall set rule group="remote desktop" new enable=No
+  - esxcli system settings advanced set -o /User/execInstalledOnly -i 0
+  - /Create /SC MINUTE /MO 720 /TN Reg /TR "C:\Windows\System32\rundll32.exe C:\windows\system32\config\red.dll
+    Test" /ru system
+  - cmd.exe /c reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Real-Time
+    Protection" /v "DisableRealtimeMonitoring" /t REG_DWORD /d "1" /f
+  - cmd.exe /c reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Real-Time
+    Protection" /v "DisableScanOnRealtimeEnable" /t REG_DWORD /d "1" /f
+  - cmd.exe /c reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Real-Time
+    Protection" /v "DisableOnAccessProtection" /t REG_DWORD /d "1" /f
+  - cmd.exe /c reg add "HKLM\Software\Policies\Microsoft\Windows Defender\Real-Time
+    Protection" /v "DisableIOAVProtection" /t REG_DWORD /d "1" /f
+  powershell:
+  - Import-Module ActiveDirectory; Get-ADUser -filter * -properties Enabled,DisplayName,Mail,SAMAccountName,homephone,ipphone,TelephoneNumber,comment,description,title | select Enabled,DisplayName,Mail,SAMAccountName,homephone,ipphone,TelephoneNumber,comment,description,title | export-csv C:\Users\Public\Music\users.csv
+  - Import-Module ActiveDirectory; Get-ADComputer -Filter {enabled -eq $true} -properties *|select comment, description, Name, DNSHostName, OperatingSystem, LastLogonDate, ipv4address | Export-CSV C:\users\public\music\AllWindows.csv -NoTypeInformation -Encoding UTF8
+  - Enter-PSSession
+  - Get-VM
+  - Invoke-ShareFinder
+  - net.exe user /add root1 password
+  - net.exe user root1 /active:yes
+  - netsh advfirewall firewall set rule group="remote desktop" new enable=No
+  - New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server (sshd)' -Enabled True
+    -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
+  - esxcli system settings advanced set -o /User/execInstalledOnly -i 0
+  - Set-MpPreference
+  scripting_engine:
+  - Veeam-Get-Creds.ps1
+  registry_keys:
+  - LegalNoticeCaption
+  - LegalNoticeText
+  - Run
+  - HKLM\Software\Policies\Microsoft\Windows Defender\Real-Time Protection
+  image_load: null
+  network_connections:
+  - net.exe->RDP
+  - IMPACKET.SMBEXEC->SMB
+  - PuTTY->SSH
+  - KiTTY->SSH
+  - WinRM->remote execution
+  - WMIC->remote execution
+  file_activity:
+  - C:\Users\Public\Music\users.csv
+  - C:\users\public\music\AllWindows.csv
+  - Rclone configuration files
+  - NetExec batch files
+  - Scheduled task files
+  - Registry Run keys
+  - BitLocker configuration files
+  - C:\windows\system32\config\red.dll
+  persistence:
+  - Scheduled tasks
+  - Windows services
+  - Registry Run keys
+  - Create /SC MINUTE /MO 720 /TN Reg /TR "C:\Windows\System32\rundll32.exe C:\windows\system32\config\red.dll
+    Test" /ru system
+  process_relations: null
+CVEs:
+- CVE-2024-37085
+- CVE-2021-40539
+- CVE-2024-55591
+- CVE-2019-6693
+- CVE-2024-40766
+- CVE-2023-4966
+- CVE-2025-53771
+- CVE-2025-53770
+- CVE-2025-31324
+- CVE-2024-3400
+- CVE-2025-31161
+IOCs:
+  hashes: null
+  ip_addresses: null
+  domains: null
+  urls: null
+authors:
+- Dima Lenz
+- Chastine Altares
+- Ana Foreman
+reference: https://cloud.google.com/blog/topics/threat-intelligence/ransomware-ttps-shifting-threat-landscape/
+date_of_publication: December 21, 2022
+file_creation_date: March 19, 2026

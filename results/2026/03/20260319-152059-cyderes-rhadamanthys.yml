@@ -1,0 +1,83 @@
+description: Newly discovered multistage malware chain using .NET Native Ahead-of-Time
+  (AOT) compilation, deploying KeyAuth.exe and subsequent payloads including Rhadamanthys
+  infostealer and XMRig cryptocurrency miner.
+attribution: Howler Cell
+malware_families:
+- Rhadamanthys
+- XMRig
+TTPs:
+  processes:
+  - KeyAuth.exe
+  - bound_build.exe
+  - Crypted_build.exe
+  - Miner.exe
+  - MicrosoftEdgeUpdater
+  - DataSyncHost.exe
+  - msedge_updater.exe
+  - xmrig_encrypted.exe
+  - XMRig.exe
+  commandline:
+  - URLDownloadToFileA hxxps[://]files[.]catbox[.]moe/tv0ww9[.]zip tv0ww9.zip
+  - URLDownloadToFileA hxxp[://]176[.]46[.]152[.]62:5858/801b0b4d118a4c0a8c4523e7805f5227_crypted_build[.]exe
+    Crypted_build.exe
+  - URLDownloadToFileA hxxp[://]176[.]46[.]152[.]62:5858/fc2e7a9930c9496c9df103b2bff5e372_miner[.]exe
+    Miner.exe
+  - URLDownloadToCacheFileW hxxp[://]176[.]46[.]152[.]80/Donut_shellcode Donut_shellcode
+  - CreateProcessA Crypted_build.exe
+  - CreateProcessA Miner.exe
+  - CreateThread Donut_shellcode
+  - GlobalMemoryStatusEx
+  - GetTickCount64
+  - CopyFileExW DataSyncHost.exe
+  - SetPriorityClass msedge_updater.exe ABOVE_NORMAL_PRIORITY_CLASS(0x8000)
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\HARDWARE\DESCRIPTION\System\BIOS- SystemProductName
+  - HKEY_LOCAL_MACHINE\HARDWARE\DESCRIPTION\System\CentralProcessor\0- ProcessorNameString
+  - HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+  image_load: []
+  network_connections:
+  - KeyAuth.exe -> hxxps[://]files[.]catbox[.]moe/tv0ww9[.]zip 80
+  - Crypted_build.exe -> hxxp[://]176[.]46[.]152[.]62:5858/801b0b4d118a4c0a8c4523e7805f5227_crypted_build[.]exe
+  - Miner.exe -> hxxp[://]176[.]46[.]152[.]62:5858/fc2e7a9930c9496c9df103b2bff5e372_miner[.]exe
+  - Donut_shellcode -> hxxp[://]176[.]46[.]152[.]80/Donut_shellcode 80
+  - msedge_updater.exe -> pool[.]supportxmr[.]com:443 443
+  file_activity:
+  - tv0ww9.zip
+  - KeyAuth.exe
+  - bound_build.exe
+  - Crypted_build.exe
+  - Miner.exe
+  - DataSyncHost.exe
+  - msedge_updater.exe
+  - xmrig_encrypted.exe
+  - XMRig.exe
+  persistence:
+  - Run registry entry named SystemDataSync_<Random_GUID_8bytes>
+  process_relations: []
+IOCs:
+  hashes:
+  - 6762c5807021fb7871f051135248cfd8f2cb387495b4544817433
+  - 63e3d55e61542fb15706ad2f87551fecbb0c2b94e85e597a1f31
+  - 1133f41e2b463ce5024423dcad44bcc0ff9543c2d38eae5bddc
+  - 0cb27847077eae63a1641cf3efc9ba807612cdde1cdd4ebcb732
+  - 5ff26d13c49966d579f5cf97c8a20fb6e2aa327acadfa8662f3
+  - 6bbb5d3086050c49741fb934dabecad210ece7991eef718c2
+  - edf1b62620e3a90eca34eb6660182f492a02912e652b19fec
+  - 556d8ed53e1015b4d40383198e5a787e022fa26dc132820fc
+  - f29d673b032f7ff763dec032aefd6c5759a1583b211625f7f77
+  - 11bd2c9f9e2397c9a16e0990e4ed2cf0679498fe0fd418a3d
+  ip_addresses:
+  - 176.46.152.62
+  - 176.46.152.80
+  domains:
+  - files[.]catbox[.]moe
+  - pool[.]supportxmr[.]com
+  urls:
+  - hxxps[://]files[.]catbox[.]moe/tv0ww9[.]zip
+authors:
+- Rahul Ramesh
+reference: https://www.cyderes.com/howler-cell/reverse-engineering-net-aot-malware
+date_of_publication: March 19, 2026
+file_creation_date: March 19, 2026

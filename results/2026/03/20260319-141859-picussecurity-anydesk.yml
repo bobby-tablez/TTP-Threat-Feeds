@@ -1,0 +1,31 @@
+description: Adversaries use remote desktop software to establish persistent and interactive
+  control over compromised systems.
+malware_families:
+- AnyDesk
+TTPs:
+  processes:
+  - AnyDesk.exe
+  commandline:
+  - C:\AnyDesk.exe --install C:\Program Files (x86)\AnyDesk --start-with-win --silent
+    --update-disabled
+  - C:\Program Files (x86)\AnyDesk\AnyDesk.exe --start-service
+  - C:\Program Files (x86)\AnyDesk\AnyDesk.exe --set-password
+  - C:\Program Files (x86)\AnyDesk\AnyDesk.exe --control
+  file_activity:
+  - C:\Program Files (x86)\AnyDesk\
+persistence:
+- Install AnyDesk silently, register it for automatic startup, enable unattended access
+  via a predefined password, and disable update functionality.
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - https://blog.talosintelligence.com/new-chaos-ransomware/
+  - https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-109a
+  - https://blog.talosintelligence.com/byovd-loader-deadlock-ransomware/
+authors:
+- Sıla Özeren Hacıoğlu
+reference: https://www.picussecurity.com/resource/blog/t1219-002-remote-desktop-software
+date_of_publication: March 19, 2026
+file_creation_date: March 19, 2026
