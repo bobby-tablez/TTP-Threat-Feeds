@@ -1,0 +1,71 @@
+description: The report describes a sophisticated attack involving the use of osk.exe
+  as part of an exploit chain, leveraging trusted Windows binaries and accessibility
+  settings to gain elevated privileges.
+malware_families:
+- RegPwn
+- null
+TTPs:
+  processes:
+  - atbroker.exe
+  - winlogon.exe
+  - osk.exe
+  - regpwn.exe
+  - msiserver.exe
+  commandline:
+  - cmd.exe || Parent=explorer.exe
+  - powershell.exe || Parent=atbroker.exe
+  - reg.exe || Parent=osk.exe
+  - /start osk
+  - osk.exe
+  scripting_engine: []
+  registry_keys:
+  - HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Accessibility\ATConfig\osk
+  - HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Accessibility\Session\d+\ATConfig\osk
+  - HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\
+  - HKCU\Software\Microsoft\Windows NT\CurrentVersion\Accessibility\ATConfig\osk
+  - HKLM\SYSTEM\ControlSet001\Services\msiserver
+  - SOFTWARE\Microsoft\Windows NT\CurrentVersion\Accessibility\Session<id>\ATConfig\osk
+  - HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Accessibility\ATConfig\osk
+  - HKCU Accessibility ATConfig\osk staging
+  - HKLM Session<id> ATConfig\osk link or SymbolicLinkValue activity
+  image_load: []
+  network_connections: []
+  file_activity:
+  - \??\C:\Program Files\Common Files\microsoft shared\ink\fsdefinitions\oskmenu.xml
+  persistence:
+  - Run Key / Autorun
+  - Winlogon
+  - IFEO
+  - Policies
+  - System Control
+  - Non-standard process launched osk.exe
+  - SYSTEM brokered osk.exe via atbroker.exe/winlogon.exe
+  - HKLM Session<id> ATConfig\osk link or SymbolicLinkValue activity
+  - Non-Accessibility target registry writes
+  process_relations:
+  - atbroker.exe->osk.exe (SYSTEM)
+  - winlogon.exe->atbroker.exe->osk.exe
+CVEs:
+- CVE-2026-24291
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- Omar Tarek Zayed
+- null
+- <author name or list of people who contributed to the report>
+file_activity:
+- HKCU\Software\Microsoft\Windows NT\CurrentVersion\Accessibility\ATConfig\osk
+- HKLM\SYSTEM\ControlSet001\Services\msiserver
+persistence:
+- Registry key manipulation for privilege escalation
+process_relations:
+- regpwn.exe->atbroker.exe->osk.exe
+- winlogon.exe->atbroker.exe->osk.exe
+authors:
+- Omar Tarek Zayed
+reference: https://detect.fyi/detecting-regpwn-by-behavior-not-binary-1614ff829fc0?source=rss----d5fd8f494f6a---4
+date_of_publication: March 23, 2026
+file_creation_date: March 27, 2026

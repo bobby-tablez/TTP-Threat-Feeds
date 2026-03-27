@@ -1,0 +1,60 @@
+description: Pay2Key ransomware attack chain involving compromised admin credentials,
+  TeamViewer access, Mimikatz/LaZagne for credential harvesting, and a self-extracting
+  7z archive deploying the encryptor.
+malware_families:
+- Pay2Key
+TTPs:
+  processes:
+  - sqlservr
+  - sqlagent
+  - msaccess
+  - mysqld
+  - oracle
+  - python
+  - node
+  - java
+  - Raccine
+  - Sysmon
+  - xServer
+  - QBDBMgr
+  - Creative Cloud
+  commandline:
+  - 7za.exe x -y -p2295124761281648206 Everything64.dll
+  powershell: []
+  scripting_engine: []
+  registry_keys:
+  - HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\AllowMultipleTSSessions
+  - HKLM\\system\\CurrentControlSet\\Control\\Terminal Server\\fSingleSessionPerUser
+  image_load:
+  - Everything32.dll
+  - Everything64.dll
+  network_connections: []
+  file_activity:
+  - C:\\temp\\Decrypt_files.txt
+  - C:\\temp\\session.tmp
+  - Everything.ini
+  - Everything2.ini
+  - ENC_*.exe
+  - DC.exe
+  - xdel.exe
+  persistence:
+  - Terminal Server persistence via registry keys
+  process_relations: []
+IOCs:
+  hashes:
+  - 2ae80e5bff8fc9055ce7dc60e59447cba6e6c3a215eea1b6de7d9cb5ae26f9e8
+  - 10333c96ae8c877398bb16841b627c94
+  - c576f7f55c4c0304b290b15e70a638b037df15c69577cd6263329c73416e490e
+  - e8eaa39e2adfd49ab69d7bb8504ccb82a902c8b48fbc256472f36f41775e594c
+  - 2fefb69e4b2310be5e09d329e8cf1bebd1f9e18884c8c2a38af8d7ea46bd5e01
+  - 89ad2164717bd5f5f93fbb4cebf0efeb473097408fddfc7fc7b924d790514dc5
+  - 5e1ba287113770184fb51f0faed1a851d5066fa263a67a463da17601de82cb5a
+  - c45b87fff769379ebb9f4708438e208ee134692a2392a987205bfe900cceacb1
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- Kirk
+reference: https://www.derp.ca/research/pay2key-ransomware-crypto-briefing/
+date_of_publication: March 26, 2026
+file_creation_date: March 27, 2026

@@ -1,0 +1,36 @@
+description: Adversaries use Winlogon Helper DLLs to establish persistence by modifying
+  registry keys and injecting malicious code during user logon.
+malware_families:
+- KamiKakaBot
+- Mandela.exe
+TTPs:
+  processes:
+  - Winlogon.exe
+  - explorer.exe
+  commandline:
+  - net user whiteninja <password> /add
+  - reg add HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon /v LegalNoticeText
+    /t REG_SZ /d /f
+  - reg add HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon /v DefaultUserName
+    /t REG_SZ /d whiteninja /f
+  - reg add HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon /v AutoLogonCount
+    /t REG_DWORD /d 1
+  powershell:
+  - Start-Process -N -F $env:Msbd -A $env:Temprd
+  registry_keys:
+  - HKLM\Software[\Wow6432Node\]\Microsoft\Windows NT\CurrentVersion\Winlogon\
+  - HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Shell
+    = explorer.exe, explorer.exe /e,/root,%Pyps% -nop -w h "Start-Process -N -F $env:Msbd
+    -A $env:Temprd"
+persistence:
+- Modifying the Shell value in the Windows Registry under HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows
+  NT\CurrentVersion\Winlogon to include malicious parameters.
+IOCs:
+  hashes:
+  - 580506d869ce6652dcf0f77354959f8258c0f7fbdc95bd686a1377fa758a4e2b
+  - c6818da28a36a7ed628e5a86ede3a642b609b34b2f61ae4dba9a4814d6822d2f
+authors:
+- Sıla Özeren Hacıoğlu
+reference: https://www.picussecurity.com/resource/blog/t1547-004-winlogon-helper
+date_of_publication: March 27, 2026
+file_creation_date: March 27, 2026

