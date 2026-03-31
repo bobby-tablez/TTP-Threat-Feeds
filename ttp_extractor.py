@@ -73,14 +73,15 @@ CRITICAL RULES:
    Percent signs (%%), backslashes, arrows (->), and brackets do not require quoting.
 
 OUTPUT SCHEMA:
+title: <Exact title of the publication>
 description: <1-2 sentence threat summary>
 attribution: <threat actor/APT group/nation-state or null>
 malware_families:
   - <malware family name>
 TTPs:
   processes:          # one process name per line
-  commandline:        # full command-lines, no truncation, one per line
-  powershell:         # PowerShell scripts or one-liners, one per line
+  commandline:        # full process-level command-lines, no truncation, one per line
+  powershell:         # PowerShell scripts (scriptblocktext) or one-liners, one per line
   scripting_engine:   # VBS/JScript/Python/Bash scripts, one per line
   registry_keys:      # full registry paths, one per line
   image_load:         # DLLs/libraries loaded by processes, one per line
