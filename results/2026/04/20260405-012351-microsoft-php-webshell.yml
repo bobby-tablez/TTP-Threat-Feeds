@@ -1,0 +1,53 @@
+title: Suspicious Script and Shell Command Execution via Cron Jobs
+description: Attackers gain access through exposed web applications or hosting environments,
+  deploy PHP webshells for remote command execution, and establish persistence using
+  cron jobs.
+attribution: Microsoft Defender Security Research
+malware_families:
+- PHP webshell
+- WebShell
+TTPs:
+  processes:
+  - php-fpm
+  - httpd
+  - apache2
+  - nginx
+  - cron
+  - crond
+  - bash
+  - sh
+  - dash
+  - jailshell
+  - cpanel
+  commandline:
+  - /usr/local/cpanel/bin/jailshellecho | base64 -d > file.php
+  - /bin/sh -c *p="/home/<redacted>/public_html/vendor/index.php"# Create only if the file is missing or empty (reduces repeated writes)if (! -s "Sfp" 1; thenecho "<BASE64_PHP_PAYLOAD_REDACTED>" | base6d -decode > "$p"i# Make the dropped file read-only (slows casual removal/modification)chmod 444 $p
+  powershell: []
+  scripting_engine:
+  - PHP
+  registry_keys: []
+  image_load: []
+  network_connections: []
+  file_activity:
+  - file.php
+  - /home/<redacted>/public_html/vendor/index.php
+  persistence:
+  - Establishing cron jobs to recreate obfuscated PHP loaders
+  - Using cookie-gated execution to control activation of malicious functionality
+  - A new cron job is created by a hosting control panel process (such as cPanel),
+    to establish persistence by scheduling recurring execution of attacker-controlled
+    commands or scripts without further user interaction.
+  - PHP webshell file (for example, index.php) is written to disk and identified as
+    active malware, indicating confirmation of server-side backdoor deployment intended
+    for remote command execution via HTTP requests.
+  process_relations: []
+IOCs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- Microsoft Defender Security Research Team
+reference: https://www.microsoft.com/en-us/security/blog/2026/04/02/cookie-controlled-php-webshells-tradecraft-linux-hosting-environments/
+date_of_publication: April 02, 2026
+file_creation_date: April 05, 2026

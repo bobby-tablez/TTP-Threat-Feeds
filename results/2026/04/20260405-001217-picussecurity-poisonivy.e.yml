@@ -1,0 +1,31 @@
+title: T1547.014 Active Setup in MITRE ATT&CK Explained| April 01,2026
+description: Adversaries use the Active Setup feature to establish persistence by
+  executing malicious code during user login.
+malware_families:
+- Poisonivy.E
+TTPs:
+  processes:
+  - chrmstp.exe
+  - svvchost.exe
+  commandline:
+  - cmd.exe /c powershell.exe -WindowStyle Hidden -Command <encoded_payload>
+  - reg add "HKLM\Software\Microsoft\Active Setup\Installed Components\<CLSID>" /v "StubPath" /d "c:\windows:svvchost.exe" /f
+  scripting_engine:
+  - cmd.exe /c powershell.exe -WindowStyle Hidden -Command <encoded_payload>
+  registry_keys:
+  - HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components\<CLSID>
+  - HKCU\SOFTWARE\Microsoft\Active Setup\Installed Components\
+  file_activity:
+  - C:\path\to\malware.exe
+  - C:\Program Files\Chromnius\Application\118.0.5951.0\Installer\chrmstp.exe
+persistence:
+- Active Setup with StubPath pointing to malicious executables or scripts
+IOCs:
+  hashes:
+  - SHA-256; 845d1e3825790109ec90c6c2ee6c2e95b971780448d2e18bd855c421de8de4fe
+  - SHA-256*: 94587b41a0eb5e2c592976fa283b0bfc0ef2e2c5cec24bba298cda0eb67270de
+authors:
+- Sıla Özeren Hacıoğlu
+reference: https://www.picussecurity.com/resource/blog/t1547-014-active-setup
+date_of_publication: April 05, 2026
+file_creation_date: April 05, 2026
