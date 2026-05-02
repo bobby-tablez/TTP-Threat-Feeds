@@ -17,6 +17,7 @@ env/
 # Project-specific
 processed_urls.txt
 output.log
+failed_responses/
 
 # IDE
 .vscode/
