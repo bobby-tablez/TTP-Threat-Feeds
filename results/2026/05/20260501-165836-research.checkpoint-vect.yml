@@ -1,0 +1,123 @@
+title: VECT Ransomware Analysis
+description: The VECT ransomware targets VMware ESXi hypervisors and other common
+  hypervisors, employing anti-analysis techniques and SSH-based lateral movement.
+attribution: ''
+malware_families:
+- VECT
+- BF+VECT
+cves: []
+ttps:
+  processes:
+  - sql.exe
+  - oracle.exe
+  - mysqld.exe
+  - excel.exe
+  - winword.exe
+  - outlook.exe
+  - firefox.exe
+  - thunderbird.exe
+  - esxcli
+  - vmrun
+  - VBoxManage
+  - virsh
+  - xm
+  - xl
+  - systemctl
+  - pkill
+  - ssh
+  - scp
+  - timedatectl
+  - vssadmin
+  - vect2.0.exe
+  command_lines:
+  - Set-MpPreference via PowerShell disables realtime, behavior, IOAV, and script
+    scanning
+  - vssadmin delete shadows /all /quiet
+  - wevtutil cl Application, Security, System, Windows PowerShell
+  - PSReadLine\\ConsoleHost_history.txt
+  - '%APPDATA%\\Microsoft\\Windows\\Recent\\*'
+  - cmd /c with ping stall followed by forced deletion
+  - PSReadLine\ConsoleHost_history.txt
+  - '%APPDATA%\Microsoft\Windows\Recent\*'
+  - cmd /c
+  - /vmfs/volumes
+  - --path <dir>
+  - --spread
+  - --fast
+  - --medium
+  - --secure
+  - --no-kill-vms
+  - --verbose
+  - --help
+  - systemctl stop
+  - service stop
+  - pkill -9
+  - systemctl disable --now
+  - vmware-cmd / vmrun
+  - VBoxManage
+  - virsh
+  - esxcli
+  - xm / xl
+  - /var/log/vmkernel.log
+  - /var/log/vmkwarning.log
+  - /var/log/vmksummary.log
+  - /var/log/hostd.log
+  - /var/log/vpxa.log
+  - /var/log/fdm.log
+  - /var/log/shell.log
+  - /var/log/syslog
+  - /var/log/vobd.log
+  - /var/log/vmware/*
+  - vect2.0.exe -v --no-gpo --no-mount --no-stealth
+  - esxcli network firewall set --enabled false 2>/dev/null
+  - esxcli network firewall ruleset set --enabled false --ruleset-id sshserver 2>/dev/null
+  powershell: []
+  scripts: []
+  registry_keys:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run\
+  - HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\
+  image_loads:
+  - advapi32.dll
+  - bcryptprimitives.dll
+  network_connections:
+  - ssh -> hxxps://vectordntlcrlmfkcm4alni734tbcrnd5lk44v6sp4lqal6noqrgnbyd.onion/chat/REDACTED
+  - vect2.0.exe -> hxxps://vectordntlcrlmfkcm4alni734tbcrnd5lk44v6sp4lqal6noqrgnbyd.onion/chat/REDACTED
+  file_activity:
+  - '!!!READ_ME!!!.txt'
+  - dvm3_wall.bmp
+  - /vmfs/volumes/
+  - /home
+  - /root
+  - /tmp
+  - /etc/motd
+  - /etc/issue
+  - /etc/issue.net
+  - /etc/profile.d/vector_notice.sh
+  - ./*.vmfs/volumes/*
+  persistence:
+  - Safe mode boot configuration entry with value "Service"
+  - Task Manager disabled via the registry
+  process_relations: []
+iocs:
+  hashes:
+  - a7eadcf81dd6fda0dd6affefaffcb33b1d8f64ddec6e5a1772d028ef2a7da0f2
+  - 58e17dd61d4d55fa77c7f2dd28dd51875b0ce900c1e43b368b349e65f27d6fdd
+  - e1fc59c7ece6e9a7fb262fc8529e3c4905503a1ca44630f9724b2ccc518d0c06
+  - 8ee4ec425bc0d8db050d13bbff98f483fff020050d49f40c5055ca2b9f6b1c4d
+  - 9c745f95a09b37bc0486bf0f92aad4a3d5548a939c086b93d6235d34648e683f
+  - e512d22d2bd989f35ebaccb63615434870dc0642b0f60e6d4bda0bb89adee27a
+  ip_addresses: []
+  domains:
+  - vectordntlcrlmfkcm4alni734tbcrnd5lk44v6sp4lqal6noqrgnbyd.onion
+  urls:
+  - hxxps://vectordntlcrlmfkcm4alni734tbcrnd5lk44v6sp4lqal6noqrgnbyd.onion/chat/REDACTED
+  - hxxps://research.checkpoint.com/wp-content/uploads/2026/04/image-10.png
+  - hxxps://research.checkpoint.com/wp-content/uploads/2026/04/image-6-8.png
+  - hxxps://research.checkpoint.com/wp-content/uploads/2026/04/image-7-3.png
+  - hxxps://research.checkpoint.com/wp-content/uploads/2026/04/image-6-9.png
+  - hxxps://research.checkpoint.com/wp-content/uploads/2026/04/image-7-4.png
+authors:
+- Check Point Research
+reference: https://research.checkpoint.com/2026/vect-ransomware-by-design-wiper-by-accident/
+date_of_publication: April 28, 2026
+file_creation_date: May 01, 2026

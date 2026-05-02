@@ -1,0 +1,105 @@
+title: Phishing Campaign Targeting Brazilian Users with agenteV2 Malware
+description: A new phishing campaign targeting Brazilian users leverages social engineering
+  and multi-stage malware to compromise victims and actively assist attackers in financial
+  fraud.
+attribution: ''
+malware_families:
+- agenteV2
+- Core Banker Stealer
+- Banker Stealer AgenteV2
+cves: []
+ttps:
+  processes:
+  - WScript.exe
+  - cmd.exe
+  - schtasks
+  - wifi_driver.exe
+  - reiniciar.exe
+  - agenteV2_historico_detect.dll
+  - schtasks.exe
+  - IWshShell3.Run
+  - msedge03/04.exe
+  - python.exe
+  command_lines:
+  - cmd.exe /c schtasks /create /f /tn "RunAsAdmin_Executar" ...reiniciar.exe... /sc
+    onlogon /rl highest
+  - cmd.exe /c schtasks /create /f /tn "RunAsAdmin_AutoUpdate" ...wifi_driver.exe...
+    /sc onlogon /rl highest
+  - 'CMD:SHELL:'
+  - RunAsAdmin_AutoUpdate+ RunAsAdmin_Executar /sc onlogon /rl highest
+  powershell: []
+  scripts:
+  - C:\Users\admin\Downloads\0124_INTMACAO_.vbs
+  - C:\Users\admin\AppData\Local\Temp\0124_INTMACAO_.vbs
+  registry_keys:
+  - HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+  image_loads:
+  - agenteV2_historico_detect.dll
+  - python313.dll
+  - python3.dll
+  - vcruntime140.dll
+  - libcrypto-3.dll
+  - libssl-3.dll
+  - sqlite3.dll
+  - _sqlite3.pyd
+  - PIL/_imaging.pyd
+  - PIL/_imagingcms.pyd
+  - psutil/_psutil_windows.pyd
+  - _wmi.pyd
+  - _ssl.pyd
+  - certifi/cacert.pem
+  - charset_normalizer/*.pyd
+  - 81d243bd__mypyc.pyd
+  network_connections:
+  - WScript.exe -> odaracani.online/index.php?id=3df947b3:80
+  - WScript.exe -> nuevaprodeciencia.club/br77b/arquivos/download/reiniciar.exe:80
+  - WScript.exe -> nuevaprodeciencia.club/br77b/arquivos/download/msedge04.exe:80
+  - wifi_driver.exe -> pastebin.com/raw/0RmxqY57:80
+  - agenteV2_historico_detect.dll -> 38.242.246.176:8443
+  - wifi_driver.exe -> pastebin.com:443
+  - IWshShell3.Run -> nuevaprodeciencia[.]club/br77b/iayjaskyeiagds.php:8443
+  - agenteV2_historico_detect.dll -> pastebin[.]com/raw/0RmxqY57:8443
+  file_activity:
+  - C:\Program Files (x86)\Wi-fi\reiniciar.exe
+  - C:\Program Files (x86)\Wi-fi\wifi_driver.exe
+  - C:\Users\admin\Downloads\0124_INTMACAO_.vbs
+  - C:\Users\admin\AppData\Local\Temp\0124_INTMACAO_.vbs
+  persistence:
+  - Two Scheduled Tasks created via cmd.exe: RunAsAdmin_AutoUpdate and RunAsAdmin_Executar
+      both /sc onlogon /rl highest.
+  - Registry Run key (HKCU) pointing to C:\Program Files (x86)\Wi-fi\wifi_driver.exe
+  - Registry Run key (HKCU) pointing to C:\Users\admin\AppData\Local\Temp\ONEFIL~1\agenteV2_historico_detect.py
+  - Scheduled Task (RunAsAdmin_AutoUpdate)
+  - Scheduled Task (RunAsAdmin_Executar)
+  process_relations:
+  - WScript.exe -> cmd.exe
+  - cmd.exe -> schtasks
+  - WScript.exe -> wifi_driver.exe
+iocs:
+  hashes:
+  - 285fea57345d838916153c4d8f43ab6c
+  - 8a87d63110eeb782bb621b5f3154ca80bdcf5de7
+  - 5fd682cdfdf2de867be2a4bd378a2c206370c18a598975a11c99dba121e36b1b
+  - 826d6350724f203b911aa6c8c4626391
+  ip_addresses:
+  - 38.242.246.176
+  - 69.49.241.120
+  domains:
+  - odaracani.online
+  - nuevaprodeciencia.club
+  - pastebin.com
+  - odaracani[.]online
+  - nuevaprodeciencia[.]club
+  - pastebin[.]com
+  urls:
+  - hxxps://odaracani[.]online/index.php?id=3df947b3
+  - hxxps://nuevaprodeciencia[.]club/br77b/arquivos/download/reiniciar.exe
+  - hxxps://nuevaprodeciencia[.]club/br77b/arquivos/download/msedge04.exe
+  - hxxps://pastebin[.]com/raw/0RmxqY57
+  - hxxps://pastebin.com/raw/0RmxqY57
+authors:
+- Moises Cerqueira
+- 0xOlympus
+reference: https://any.run/cybersecurity-blog/brazilian-banking-phishing-campaign/
+date_of_publication: May 01, 2026
+file_creation_date: May 01, 2026

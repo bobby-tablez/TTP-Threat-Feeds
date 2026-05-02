@@ -1,0 +1,71 @@
+title: Void Dokkaebi Uses Fake Job Interview Lure to Spread Malware via Code Repositories
+description: Void Dokkaebi exploits developer trust in tools, commits, and open-source
+  projects to propagate malware through compromised repositories.
+attribution: ''
+malware_families:
+- DEV#POPPER RAT variant
+cves: []
+ttps:
+  processes:
+  - cmd.exe
+  - git.exe
+  command_lines:
+  - cmd.exe /c git log -1 --date=format-local:Y=%m-%d ~format=_escd
+  - cmd.exe /c git log -1 --date=format-local:H:%iM:%ss format=_escd
+  - cmd.exe /c git log -1 --format=_ss
+  - cmd.exe /c git log -1 --format=aan
+  - cmd.exe /c git log -1 --format=wae
+  - git rev-parse -abbrev-ref HEAD
+  - git config local user.name %USER_NAME%
+  - git add .
+  - git commit -amend -m "SLAST_COMMIT TEXT%" no-verify
+  - date %CURRENT_DATE%
+  - time %CURRENT_TIME%
+  - git push -uf origin %CURRENT_BRANCH% --no-verify
+  - RENT_TIME%s and complete anend last comnit24 git push -uf origin SCURRENT_BRANCHs
+    --no-verify25
+  powershell: []
+  scripts:
+  - temp_auto_push.bat
+  - '@echo on'
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - DEV#POPPER RAT -> api.trongrid.io
+  - DEV#POPPER RAT -> fullnode.mainnet.aptoslabs.com
+  - DEV#POPPER RAT -> Binance Smart Chain RPC endpoints
+  - cmd.exe -> api.trongrid.io:443
+  - cmd.exe -> fullnode.mainnet.aptoslabs.com:443
+  - cmd.exe -> Binance Smart Chain RPC endpoints:27017
+  - cmd.exe -> /u/f
+  - cmd.exe -> /verify-human/[VERSION]
+  file_activity:
+  - .vscode/tasks.json
+  - temp_auto_push.bat
+  persistence:
+  - Injects versioned code into developer applications and creates a hidden .node_modules
+    folder for Node.js module search order hijacking.
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+  - 136.0.9.8
+  - 198.105.127.210
+  - 23.27.202.27
+  - 154.91.0.196
+  - 23.27.20.143
+  - 85.239.62.36
+  - 83.168.68.219
+  - 166.88.4.2
+  - 23.27.120.142
+  domains:
+  - api.trongrid.io
+  - fullnode.mainnet.aptoslabs.com
+  - Binance Smart Chain RPC endpoints
+  urls:
+  - hxxps://www.trendmicro.com/content/dam/trendmicro/global/en/research/26/d/void-dokkaebi/figure4_scale_contamination.png
+authors:
+- TrendAITM Research
+reference: https://www.trendmicro.com/en_us/research/26/d/void-dokkaebi-uses-fake-job-interview-lure-to-spread-malware-via-code-repositories.html
+date_of_publication: April 21, 2026
+file_creation_date: May 01, 2026

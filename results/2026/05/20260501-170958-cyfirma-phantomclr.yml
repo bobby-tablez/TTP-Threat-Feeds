@@ -1,0 +1,56 @@
+title: At CYFIRMA, we continuously monitor evolving cyber threats targeting enterprises
+  and critical sectors.
+description: A highly sophisticated, multi-stage post-exploitation framework observed
+  targeting organizations in the Middle East and EMEA financial sectors.
+attribution: ''
+malware_families:
+- PhantomCLR
+cves: []
+ttps:
+  processes:
+  - IAStorHelp.exe
+  command_lines: []
+  powershell: []
+  scripts: []
+  registry_keys:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\RuntimeBroker\AppDomainManagerAssembly
+  image_loads:
+  - IAStorHelpMosquitoproof.dll
+  - stylohyoideus
+  - Bartifert
+  - Beartibly
+  - Haenacean
+  - Simminatest
+  - Gasmium
+  network_connections:
+  - IAStorHelp.exe -> hxxps://[.]com/path
+  - IAStorHelp.exe -> dp8519iqiftub[.]cloudfront[.]net:443
+  - IAStorHelp.exe -> dunamis-ethos508-prod-va6-856defacfb833db1[.]elb[.]us-east-1[.]amazonaws[.]com:443
+  file_activity:
+  - C:\path\to\IAStorHelp.exe
+  - C:\path\to\IAStorHelp.exe.config
+  - C:\path\to\IAStorHelpMosquitoproof.dll
+  - C:\path\to\setting.yml
+  - C:\path\to\Work From Home Policy Update.pdf.lnk
+  - C:\Users\dives\Downloads\WorkFrom Home Policy Update.pdf.lnk
+  - C:\Users\dives\Downloads\AStorHelp.exe.config
+  - C:\Users\dives\Downloads\AStorHelpMosquitoproof.dll
+  persistence: []
+  process_relations:
+  - IAStorHelp.exe -> stylohyoideus::InitializeNewDomain
+iocs:
+  hashes:
+  - f2266b45d60f5443c5c9304b5f0246348ad82ca4f63c7554c46642311e3f8b83
+  - 4f353b9634509a5e1456e54ccb4ce64c1e6d95094df96048ef79b30cc2fda6cb
+  - 5d784d3ca02ab0015b028f34aa54bc8c50db39f9671dc787bc2a84f0987043b2
+  - 8ba1b0392a8fbfb455c43c4e1408352d0e5fc281148810143a5b64938fb0982f
+  ip_addresses: []
+  domains:
+  - dp8519iqiftub[.]cloudfront[.]net
+  - dunamis-ethos508-prod-va6-856defacfb833db1[.]elb[.]us-east-1[.]amazonaws[.]com
+  urls: []
+authors:
+- CYFIRMA Research
+reference: https://www.cyfirma.com/research/operation-phantomclr-stealth-execution-via-appdomain-hijacking-and-in-memory-net-abuse
+date_of_publication: April 17, 2026
+file_creation_date: May 01, 2026

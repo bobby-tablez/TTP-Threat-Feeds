@@ -1,0 +1,93 @@
+title: 'Deep#Door Stealer: Stealthy Python Backdoor and Credential Stealer Leveraging
+  Tunneling, Multi-Layer Persistence, and In-Memory Surveillance Capabilities'
+description: A stealthy Python-based backdoor framework dubbed Deep#Door uses an obfuscated
+  batch loader to deploy a persistent surveillance and credential-stealing implant
+  on Windows systems.
+attribution: ''
+malware_families:
+- Deep#Door
+cves: []
+ttps:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - wscript.exe
+  - svc.py
+  - install_obf.bat
+  - launcher.vbs
+  - SystemServices.vbs
+  command_lines:
+  - cmd.exe /c C:\User\researcher\Desktop\install_obf.bat
+  - powershell -NoP -Command $f=[IO.File]::ReadAllText(%~f0);$m=[regex]::Match($f,'(?s)#PYTHON_START\r?\n(.+?)\r?\n#PYTHON_END);if($m.Success){[IO.File]::WriteAllText(%LOCALAPPDATA%\SystemServices\svc.py,$m.Groups[1].Value)}
+  - Set-MpPreference -DisableRealtimeMonitoring $true
+  - Set-MpPreference -DisableBehaviorMonitoring $true
+  - Set-MpPreference -DisableBlockAtFirstSeen $true
+  - Set-MpPreference -DisableIOAVProtection $true
+  - netsh advfirewall set allprofiles logging droppedconnections disable
+  - netsh advfirewall set allprofiles logging allowedconnections disable
+  - '{[Text.Encoding]::UTF8.GetString(...)}'
+  - Set-MpPreference
+  - DisableRealtimeMonitoring
+  - DisableBehaviorMonitoring
+  - Add-MpPreference
+  - netsh advfirewall set allprofiles logging
+  powershell:
+  - $f=[IO.File]::ReadAllText(%~f0);$m=[regex]::Match($f,'(?s)#PYTHON_START\r?\n(.+?)\r?\n#PYTHON_END);if($m.Success){[IO.File]::WriteAllText(%LOCALAPPDATA%\SystemServices\svc.py,$m.Groups[1].Value)}
+  - Set-MpPreference -DisableRealtimeMonitoring $true
+  - Set-MpPreference -DisableBehaviorMonitoring $true
+  - Set-MpPreference -DisableBlockAtFirstSeen $true
+  - Set-MpPreference -DisableIOAVProtection $true
+  - take_screenshot()
+  - record_audio()
+  - clipmon_start()
+  scripts:
+  - '{[Text.Encoding]::UTF8.GetString(...)}'
+  registry_keys:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run\SystemServices
+  - HKLM\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging
+  - HKLM\SOFTWARE\Policies\Microsoft\Windows\PowerShell\Transcription
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run\
+  - Software\Microsoft\Windows\CurrentVersion\Run
+  image_loads:
+  - ntdll.dll
+  network_connections:
+  - svc.py -> bore[.]pub:41234-41243
+  - svc.py -> bore.pub:41234
+  - svc.py -> bore.pub:41243
+  - -> bore[.]pub:41234
+  - -> bore[.]pub:41243
+  file_activity:
+  - '%LOCALAPPDATA%\SystemServices\svc.py'
+  - '%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\SystemServices.vbs'
+  - '%LOCALAPPDATA%\SystemServices\'
+  - '%LOCALAPPDATA%\SystemServices\launcher.vbs'
+  - '%LOCALAPPDATA%\SystemServices\SystemServices.vbs'
+  persistence:
+  - Startup folder scripts pointing to SystemServices.vbs
+  - Registry Run key (HKCU) pointing to wscript launcher.vbs
+  - Watchdog self-healing threads
+  - Optional WMI event subscriptions
+  - Startup folder modifications
+  - Registry Run keys (HKCU\Software\Microsoft\Windows\CurrentVersion\Run)
+  - WMI event subscriptions
+  - Registry Run keys (HKCU)
+  - Scheduled Task/Job
+  - WMI Event Subscription
+  process_relations: []
+iocs:
+  hashes:
+  - 2c2386ef6416ce821e377223d2a3b79f2b7ea9e8dc9ed2549f4676fe060b7ddd
+  - 84515368e2f8ff4467e38bf48dabb267b5b895f54df5be5ceb5428a414ae15e9
+  - 4e3ae82eed8980bbc396020c197c767ba22483a124a00ee04c264dd394378485
+  - c6f00569913cd6bd1017b26bd33bbb28f1d92b9c9e0f830adcc24af59e181d3e
+  ip_addresses: []
+  domains:
+  - bore[.]pub
+  urls: []
+authors:
+- Akshay Gaikwad
+- Shikha Sangwan
+- Aaron Beardsleetldr
+reference: https://www.securonix.com/blog/deepdoor-python-backdoor-and-credential-stealer
+date_of_publication: May 01, 2026
+file_creation_date: May 01, 2026

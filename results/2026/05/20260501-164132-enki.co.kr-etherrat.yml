@@ -1,0 +1,67 @@
+title: EtherRAT msi EtherRAT
+description: EtherRAT is a malware that uses an MSI installer to deploy and establish
+  persistence via registry keys.
+attribution: ''
+malware_families:
+- EtherRAT
+cves:
+- CVE-2025-55182
+ttps:
+  processes:
+  - nodejs
+  command_lines:
+  - nodejs %LOCALAPPDATA%\6gahPD\Dt2fWrOyPtRxL28.js
+  - nodejs %LOCALAPPDATA%\6gahPD\IEgrjQr6OI6C3pf
+  powershell: []
+  scripts:
+  - '{[Text.Encoding]::UTF8.GetString(...)}'
+  registry_keys:
+  - '%APPDATA%\svchost.log'
+  image_loads: []
+  network_connections:
+  - syBKJQiN.cmd -> hxxp://91.215.85[.]42:3000
+  - EtherRAT -> https://eth.llamarpc.com
+  - EtherRAT -> https://mainnet.gateway.tenderly.co
+  - EtherRAT -> https://rpc.flashbots.net/fast
+  - EtherRAT -> https://rpc.mevblocker.io
+  - EtherRAT -> https://eth-mainnet.public.blastapi.io
+  - EtherRAT -> https://ethereum-rpc.publicnode.com
+  - EtherRAT -> https://rpc.payload.de
+  - EtherRAT -> https://eth.drpc.org
+  - EtherRAT -> https://eth.merkle.io
+  file_activity:
+  - '%LOCALAPPDATA%\msitemp\99 Nights Script Installer.msi'
+  - '%LOCALAPPDATA%\6gahPD\Dt2fWrOyPtRxL28.js'
+  - '%LOCALAPPDATA%\6gahPD\IEgrjQr6OI6C3pf'
+  - svchost.log
+  persistence:
+  - Registry Run key pointing to svchost.log
+  process_relations: []
+iocs:
+  hashes:
+  - 4508a26a0a42966606cd59c558284e28e9e06b4db89fe0f8b50fd9599f4f73f1
+  - 9383c992abecdab53cc798940d296c0f8a5c0efe5ee8161d7c71a2dd23e374e2
+  - b8d9ef87b3a7a2cf2509317296baf127100a14838d03e1c158b0d5f17ec5b41b
+  - e38362aca79b16d588174e64a33cc688504c845d882624243fde90abd578bd7d
+  - 81c3d0efb9da0dd0cd7b06e1692053fdf5561b916cb2502ccc4c31f997c352f8
+  - 606dd4d7b4f7755136f53ed442a1eebd1c36a671eaf91c494a1627788b64e819
+  - 98da27f6667782ac7e4b629cd8bc09b193635a109f8e521ea8e2fb7ce15c2ea1
+  - 926ee406adc542dc21a971d4112d958f91413222fd97d2ee0422ac0568a80aa9
+  - 1f715a97657a547e9eb55878bb0b946c3a2d43b6d467ca60e816853d4d727828
+  - 2de16fea5af78d5f1fdb8039efd7fb319d8e233cea8b4c20ea1f13ad380aea1d
+  ip_addresses:
+  - 91.215.85[.]42
+  - 173.249.8[.]102
+  domains: []
+  urls:
+  - hxxp://api-gateway-prod[.]com
+  - hxxps://gateway001kir[.]com
+  - hxxp://91.221.190[.]12
+  - hxxp://localhost:3000
+  - hxxp://jariosos[.]com
+  - hxxps://api-gateway-softupdate[.]io
+  - hxxp://grabify.link/SEFKGU
+authors: []
+reference: https://www.enki.co.kr/media-center/blog/etherrat-targeting-windows-disguised-as-a-game-mod-installer
+date_of_publication: January 20, 2026
+file_creation_date: May 01, 2026

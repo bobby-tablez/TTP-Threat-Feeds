@@ -1,0 +1,97 @@
+title: Microsoft Threat Intelligence uncovered a macOS-focused cyber campaign by the
+  North Korean threat actor Sapphire Sleet
+description: The report details various indicators associated with the Sapphire Sleet
+  campaign, including malicious file hashes, network connections, and specific behaviors.
+attribution: North Korean threat actor Sapphire Sleet
+malware_families:
+- Trojan:MacOS/NukeSped.D
+- Trojan:MacOS/PassStealer.D
+- Trojan:MacOS/SuspMalScript.C
+- Trojan:MacOS/SuspInfostealExec.C
+cves: []
+ttps:
+  processes:
+  - curl
+  - dscl
+  - Script Editor
+  - osascript
+  - sh
+  - bash
+  - zsh
+  - caffeinate
+  command_lines:
+  - dscl -authonly
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - com.apple.cli -> 83.136.208[.]246:6783
+  - icloudz -> check02id[.]com:5202
+  - curl -> uw04webzoom.us:443
+  - curl -> uw05webzoom.us:443
+  - curl -> uw03webzoom.us:443
+  - curl -> ur01webzoom.us:443
+  - curl -> uv01webzoom.us:443
+  - curl -> uv03webzoom.us:443
+  - curl -> uv04webzoom.us:443
+  - curl -> ux06webzoom.us:443
+  - curl -> check02id.com:443
+  - curl -> check02id.com:5202
+  - curl -> 188.227.196.252:443
+  - curl -> 83.136.208.246:6783
+  - curl -> 83.136.209.22:8444
+  - curl -> 83.136.208.48:443
+  - curl -> 104.145.210.107:6783
+  - dscl -authonly -> api.telegram.org/bot
+  file_activity:
+  - ~/Library/Application Support/iCloud/icloudz
+  - ~/Library/Google/com.google.chromes.updaters
+  - .zoom.log
+  - auth.db
+  - /tmp/lg4err
+  - /Users/<user>/Downloads/Zoom SDK Update.scpt
+  - /Users/<user>/com.apple.cli
+  - /Library/Services/services services / icloudz
+  - /private/tmp/SystemUpdate/systemupdate.app/Contents/MacOS/Mac Password Popup
+  - /private/tmp/SoftwareUpdate/softwareupdate.app/Contents/MacOS/Mac Password Popup
+  persistence:
+  - Launch daemon configuration file named com.google.webkit.service.plist
+  - TCC database manipulation to grant AppleEvents permissions
+  - LaunchDaemon plist files created in /Library/LaunchDaemons/
+  - TCC database manipulation
+  process_relations: []
+iocs:
+  hashes:
+  - 2075fd1a1362d188290910a8c55cf30c11ed5955c04af410c481410f538da419
+  - 05e1761b535537287e7b72d103a29c4453742725600f59a34a4831eafc0b8e53
+  - 5fbbca2d72840feb86b6ef8a1abb4fe2f225d84228a714391673be2719c73ac7
+  - 5e581f22f56883ee13358f73fabab00fcf9313a053210eb12ac18e66098346e5
+  - 95e893e7cdde19d7d16ff5a5074d0b369abd31c1a30962656133caa8153e8d63
+  - 8fd5b8db10458ace7e4ed335eb0c66527e1928ad87a3c688595804f72b205e8c
+  - a05400000843fbad6b28d2b76fc201c3d415a72d88d8dc548fafd8bae073c640
+  ip_addresses:
+  - 83.136.208[.]246
+  - 188.227.196.252
+  - 83.136.208.246
+  - 83.136.209.22
+  - 83.136.208.48
+  - 83.136.210.180
+  - 104.145.210.107
+  domains:
+  - check02id[.]com
+  - uw04webzoom.us
+  - uw05webzoom.us
+  - uw03webzoom.us
+  - ur01webzoom.us
+  - uv01webzoom.us
+  - uv03webzoom.us
+  - uv04webzoom.us
+  - ux06webzoom.us
+  - check02id.com
+  urls: []
+authors:
+- Microsoft Threat Intelligence
+reference: https://www.microsoft.com/en-us/security/blog/2026/04/16/dissecting-sapphire-sleets-macos-intrusion-from-lure-to-compromise
+date_of_publication: April 16, 2026
+file_creation_date: May 01, 2026

@@ -1,0 +1,51 @@
+title: Version 2026.4.0 of the @bitwarden/clinpm package identified as malicious
+description: 'A sophisticated multi-stage credential theft worm named Shai-Hulud:
+  The Third Coming targets developer credentials including SSH keys, cloud secrets,
+  and MCP configuration files.'
+attribution: ''
+malware_families:
+- Shai-Hulud
+cves: []
+ttps:
+  processes: []
+  command_lines: []
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - bw1.js -> audit.checkmarx[.]cx:443/v1/telemetry
+  - bw1.js -> api.github[.]com/search/commits?q=beautifulcastle%20
+  file_activity:
+  - ~/.ssh/id*
+  - ~/.ssh/id_
+  - ~/.ssh/known_hosts
+  - ~/.ssh/keys
+  - ~/.aws/credentials
+  - ~/.config/gcloud/credentials.db
+  - ~/.npmrc
+  - .npmrc
+  - ~/.claude.json
+  - .claude/mcp.json
+  - ~/.kiro/settings/mcp.json
+  - .git/config
+  - .git-credentials
+  - .env
+  - ~/.bash_history
+  - ~/.zsh_history
+  persistence: []
+  process_relations: []
+iocs:
+  hashes:
+  - 37f34aa3b86db6898065f3ca886031978580a15251f2576f6d24c3b778907336
+  - 18f784b3bc9a0bcdcb1a8d7f51bc5f54323fc40cbd874119354ab609bef6e4cb
+  ip_addresses: []
+  domains:
+  - audit.checkmarx[.]cx
+  - api.github[.]com
+  urls:
+  - hxxps://audit.checkmarx[.]cx/v1/telemetry
+authors: []
+reference: https://www.aikido.dev/blog/shai-hulud-npm-bitwarden-cli-compromise
+date_of_publication: May 01, 2026
+file_creation_date: May 01, 2026

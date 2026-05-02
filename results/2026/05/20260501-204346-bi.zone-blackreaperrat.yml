@@ -1,0 +1,86 @@
+title: Forbidden Hyena adopts BlackReaperRAT in AI-powered campaigns
+description: Forbidden Hyena cluster adopted a new remote access trojan named BlackReaperRAT
+  and updated their ransomware to Milkyway.
+attribution: ''
+malware_families:
+- BlackReaperRAT
+- Milkyway
+cves: []
+ttps:
+  processes:
+  - wscript.exe
+  - cscript.exe
+  - cmd.exe
+  command_lines:
+  - cmd.exe /c ping 127.0.0.1 -n 2 > nul & del /F /Q [1.vbs path]
+  - cmd.exe /k "schtasks /create /tn \"Windows Update\" /tr \"%APPDATA%\[0-9a-zA-Z]{14}.vbs\"
+    /sc onstart /ru SYSTEM /rl HIGHEST /f"&&exit
+  - cmd.exe /c schtasks /create /tn "WindowsSystemMaintenance" /tr "[path to WindowsSystemHelper.exe]"
+    /sc onstart /ru SYSTEM /rl HIGHEST /f
+  - cmd.exe /k [COMMAND] > sh.txt & exit
+  powershell:
+  - nt usr $username $password /add /expires:never /comment:\"Local admin user for
+    SSH keys\" | Out-Null
+  - nt lclgrup Administrators $username /add | Out-Null
+  - scdit /export /cfg "$env:TEMP\secpol.inf" /quiet | Out-Null
+  - scdit /configure /db "$env:TEMP\secpol.cfg" /cfg "$env:TEMP\secpol.inf" /quiet | Out-Null
+  scripts:
+  - full.sh
+  - systemd-svchelper
+  - svchost.exe
+  - conhost.exe
+  - viper_linux
+  - go.sh
+  - ssh.ps1
+  - PsMapExec.ps1
+  - PowerView.ps1
+  - any.ps1
+  - systemd-cron
+  - ntds.ps1
+  registry_keys:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run] WindowsSystemHelper = "[path
+    to WindowsSystemHelper.exe]"
+  - HKLM\Software\Microsoft\Windows\CurrentVersion\Run] WindowsSystemHelper = "[path
+    to WindowsSystemHelper.exe]"
+  - HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce] SystemHelper = "[path
+    to WindowsSystemHelper.exe]"
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run] WinSystemHelper = [path to
+    winhelper.exe]
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run] ViperWindow = [path to (winhelper.exe|WindowsSystemHelper.exe)]
+  image_loads: []
+  network_connections:
+  - wscript.exe -> hxxps://t[.]me/+QFbPfHfSq3E0N2M6?nocache=[0-9]{14,88}
+  - cmd.exe /k [COMMAND] > sh.txt & exit -> hxxp://193.233.48[.]98:4458
+  file_activity:
+  - document.pdf
+  - /lib/systemd/systemd-svchelper
+  - /lib/systemd/systemd-cron
+  - C:\Windows\Temp\README.txt
+  - C:\Users\Public\README.txt
+  - C:\README.txt
+  - C:\Users\Public\Desktop\README.txt
+  - '%USERPROFILE%\Desktop\WindowsSystemHelper.exe'
+  - C:\Windows\Temp\task.xml
+  - WindowsHelper.lnk
+  - SystemHelper.lnk
+  - '%WINDIR%\system32\winhelper.exe'
+  persistence:
+  - Registry Run key (HKLM|HKCU) pointing to (%APPDATA%|%TEMP%)\[0-9a-zA-Z]{14}.vbs
+  - Scheduled task named WindowsSystemMaintenance
+  - LNK file in Startup folder
+  - Service named WinSystemHelper
+  - Registry entry for ViperWindow
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+  - 193.233.48[.]98
+  - 2.59.163[.]169
+  domains: []
+  urls:
+  - hxxps://t[.]me/+QFbPfHfSq3E0N2M6?nocache=[0-9]{14,88}
+authors:
+- BI.ZONE Threat Intelligence
+reference: https://bi.zone/eng/expertise/blog/forbidden-hyena-atakuet-s-novym-troyanom-udalennogo-dostupa-blackreaperrat
+date_of_publication: December 01, 2025
+file_creation_date: May 01, 2026

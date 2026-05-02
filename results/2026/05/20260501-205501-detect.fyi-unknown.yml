@@ -1,0 +1,48 @@
+title: Analyzing GLOBAL GROUP (BlackLock) ArtifactsForecast Trends 2026 for ESXi Attacks
+  in the Ransomware Ecosystem
+description: A technical analysis of a publicly shared domain by MalwareHunterTeam
+  and the leak of the whole ecosystem of RAMP, revealing strong attribution to the
+  BlackLock ransomware-as-a-service operation.
+attribution: GLOBAL GROUP (BlackLock/Eldorado)
+malware_families: []
+cves:
+- CVE-202437085
+ttps:
+  processes:
+  - schtasks.exe
+  - esxcli
+  - vim-cmd
+  - vssadmin
+  command_lines:
+  - esxcli vm process kill
+  - vim-cmd vmsvc/power.off
+  - vssadmin delete shadows /all
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - paksecurity[.]org
+  - techoption[.]org
+  - paksecurity[.]org -> 86 and23[.]62[.]168[.]204
+  file_activity:
+  - C:\Users\Public\
+  persistence:
+  - Scheduled Task/Job
+  - schtasks.exe creation of persistence tasks
+  process_relations: []
+iocs:
+  hashes:
+  - 9b2637b8fefeedf8dca8a0ace491de05b6d937ea7463b48562cd1a0f25abb9f5
+  - 9d7e12eae6b593e582d8b2c3af3154a989977309dcffc7a85aedf0e047d4ca0b
+  ip_addresses:
+  - 104[.]21[.]25[.]86
+  - 23[.]62[.]168[.]204
+  domains:
+  - paksecurity[.]org
+  - techoption[.]org
+  urls: []
+authors: []
+reference: https://detect.fyi/analyzing-global-group-blacklock-artifacts-72dabc14c500?source=rss----d5fd8f494f6a---4
+date_of_publication: April 24, 2026
+file_creation_date: May 01, 2026

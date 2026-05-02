@@ -1,0 +1,40 @@
+# Failed YAML extraction
+# Timestamp: 2026-05-01T20:32:00.114514
+# Response length: 1095 chars
+# Input chunk preview: '=== ARTICLE BODY ==="A Mini Shai-Hulud Has Appeared": Bun-Based Stealer Hits SAP @cap-js and mbt npm PackagesApril 29, 20260 mins readOn April 29, 2026, attackers published malicious versions of four '
+# ============================================================
+
+title: "A Mini Shai-Hulud Has Appeared": Bun-Based Stealer Hits SAP @cap-js and mbt npm Packages
+description: Attackers published malicious versions of four npm packages in the SAP development ecosystem, using a preinstall hook to download and execute an obfuscated credential stealer.
+attribution: ""
+malware_families: []
+cves: []
+ttps:
+  processes: []
+  command_lines: []
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections: []
+  file_activity:
+    - setup.mjs
+    - execution.js
+    - .claude/settings.json
+    - .vscode/tasks.json
+    - github/workflows/format-check.yml
+    - README.md
+    - results/results-<unix-ms>-<counter>.json
+  persistence:
+    - Developer-tool config injection into GitHub repositories
+    - GitHub Actions workflow injection
+    - Daemonization on developer machines
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+    - hxxps://github.com/search?q=%22A+Mini+Shai-Hulud+has+Appeared%22&type=repositories
+    - hxxps://github.com/search?q=OhNoWhatsGoingOnWithGitHub&type=commits
+authors: []

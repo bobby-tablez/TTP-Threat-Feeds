@@ -1,0 +1,27 @@
+title: eSentire Managed Detection and Response Services
+description: eSentire provides 24/7 SOC-as-a-Service with unlimited threat hunting
+  and incident handling.
+attribution: ''
+malware_families: []
+cves:
+- CVE-2026-33032
+ttps:
+  processes: []
+  command_lines: []
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors: []
+reference: https://www.esentire.com/security-operations-center-pricing-calculator
+date_of_publication: May 01, 2026
+file_creation_date: May 01, 2026

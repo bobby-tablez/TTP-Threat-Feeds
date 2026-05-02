@@ -1,0 +1,54 @@
+title: Acronis TRU Report on Malware Delivery via AI Platforms
+description: Attackers leverage trusted AI ecosystems to distribute malicious implants
+  disguised as legitimate models, datasets, and agent extensions.
+attribution: 'null'
+malware_families:
+- Windows Security
+TTPs:
+  processes:
+  - Explorer.exe
+  - msedge.exe
+  - chrome.exe
+  - firefox.exe
+  - powershell.exe
+  commandline:
+  - powershell.exe -WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand JABSAGEA...
+  scripting_engine:
+  - msedge.exe --headless --disable-gpu
+  - chrome.exe --headless --incognito
+  - firefox.exe --headless --disable-gpu
+  registry_keys: []
+  image_load: []
+  network_connections:
+  - process: powershell.exe
+    destination: vpn-proton-setup.com
+    port: 80
+  - process: powershell.exe
+    destination: jt.me/dusty_vintage
+    port: 80
+  - process: powershell.exe
+    destination: fuelvet-pamot.com
+    port: 80
+  file_activity:
+  - Windows Security
+  persistence:
+  - Watchdog loop that reinjects payload if Explorer restarts
+  process_relations:
+  - Explorer.exe->powershell.exe
+CVEs: 'null'
+IOCs:
+  hashes: []
+  ip_addresses:
+  - 104.21.68.36
+  domains:
+  - vpn-proton-setup.com
+  - jt.me/dusty_vintage
+  - fuelvet-pamot.com
+  urls:
+  - http://vpn-proton-setup.com/downloads/ProtarVPN.zip
+  - http://jt.me/dusty_vintage
+  - http://fuelvet-pamot.com/
+authors: '- Darrel Virtusio'
+reference: https://www.acronis.com/en/tru/posts/poisoning-the-well-ai-supply-chain-attacks-on-hugging-face-and-openclaw/
+date_of_publication: May 01, 2026
+file_creation_date: May 01, 2026

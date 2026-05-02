@@ -1,0 +1,63 @@
+title: We Know What You Did (in Azure) Last Summer
+description: Techniques for enumerating cloud resources have had extensive coverage
+  over the years. Most of the existing techniques focus on subdomain enumeration,
+  or identification of hosts in IP spaces associated with cloud providers.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes: []
+  command_lines:
+  - try { Invoke-RestMethod -Uri "https://0752a779955f4cbda44468.blob.core.windows.net/?comp=blobs"
+    -Method Get -Headers @{"x-ms-version"="2019-12-12"} }catch { $_.Exception.Response.Headers}
+  powershell:
+  - try { Invoke-RestMethod -Uri "https://0752a779955f4cbda44468.blob.core.windows.net/?comp=blobs"
+    -Method Get -Headers @{"x-ms-version"="2019-12-12"} }catch { $_.Exception.Response.Headers}
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - https://login.microsoftonline.com/977e0660-d4d3-4752-a79d-3ac9c4dbcf19/oauth2/authorize
+  - darksideops.vault.azure.net -> blob.core.windows.net
+  - darksideopslogic vault azure net -> blob.core.windows.net
+  - darksideops.sharepoint.com -> blob.core.windows.net
+  - cloudshelldso.blob.core windows net -> blob.core.windows.net
+  - darksideops3 biob. core windows net -> blob.core.windows.net
+  - darksideopsazure biob.core windows.net -> blob.core.windows.net
+  - ds03 bilob.core windows.net -> blob.core.windows.net
+  - dsoazure blob_core windows.net -> blob.core.windows.net
+  - dsocertificates blob.core windows.net -> blob.core.windows.net
+  - dsosecretfiles blob.core. windows.net -> blob.core.windows.net
+  - darksideops.scm.azurewebsites.net -> scm.azurewebsites.net
+  file_activity: []
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - vault.azure.net
+  - blob.core.windows.net
+  - sharepoint.com
+  - azurewebsites.net
+  - scm.azurewebsites.net
+  - azuredatabricks.net
+  - instances.azureml.ms
+  - dev.azure.com
+  - management.azure.com
+  - darksideops.vault.azure.net
+  - darksideopslogic vault azure net
+  - darksideops.sharepoint.com
+  - darksideops3 biob. core windows net
+  - darksideopsazure biob.core windows.net
+  - ds03 bilob.core windows.net
+  - dsoazure blob_core windows.net
+  - dsocertificates blob.core windows.net
+  - dsosecretfiles blob.core. windows.net
+  - darksideops.scm.azurewebsites.net
+  urls: []
+authors:
+- NetSPI
+reference: https://www.netspi.com/blog/technical-blog/cloud-pentesting/azure-resource-attribution-via-tenant-id-enumeration
+date_of_publication: August 13, 2025
+file_creation_date: May 01, 2026

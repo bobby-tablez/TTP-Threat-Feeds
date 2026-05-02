@@ -1,0 +1,70 @@
+title: Axios NPM Package Compromise Incident
+description: Two malicious Axios versions were briefly published to npm via a compromised
+  maintainer account, injecting a trojanized dependency that deployed a crossplatform
+  RAT.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes:
+  - node.exe
+  - wt.exe
+  - powershell.exe
+  - cscript.exe
+  - wscript.exe
+  - cmd.exe
+  - curl.exe
+  command_lines: []
+  powershell: []
+  scripts:
+  - 6202033.vbs
+  - 6202033.ps1
+  registry_keys:
+  - HKEY_CURRENT_USER\USER_SID\Software\Microsoft\Windows\CurrentVersion\Run
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run\Updater
+  image_loads: []
+  network_connections:
+  - wt.exe -> sfrclak[.]com:8000/6202033
+  - cmdexe -> hxxp://sfrclak[.]com:3000/
+  file_activity:
+  - C:\ProgramData\wt.exe
+  - C:\ProgramData\system.bat
+  - /Library/Caches/com.apple.act.mond/plain-crypto-js@4.2.1.tgz
+  - /tmp/ld.py
+  - plain-crypto-js@4.2.1/package.json
+  - setup.js
+  - 6202033.vbs
+  - 6202033.ps1
+  - C:\Users\Public\update.exe
+  persistence:
+  - Registry key (HKEY_CURRENT_USER) pointing to C:\ProgramData\system.bat
+  - Registry Run key (HKCU) pointing to C:\Users\Public\update.exe
+  process_relations: []
+iocs:
+  hashes:
+  - 92ff08773995ebc8d55ec4b8e1a225d0d1e51efa4ef88b8849d0071230c9645a
+  - 617b67a8e1210e4fc87c92d1d1da45a2f311c08d26e89b12307cf583c900d101
+  - ed8560c1ac7ceb6983ba995124d5917dc1a00288912387a6389296637d5f815c
+  - fcb81618bb15edfdedfb638b4c08a2af9cac9ecfa551af135a8402bf980375cf
+  - e10b1fa84f1d6481625f741b69892780140d4e0e7769e7491e5f4d894c2e0e09
+  - f7d335205b8d7b20208fb3ef93ee6dc817905dc3ae0c10a0b164f4e7d07121cd
+  - e49c2732fb9861548208a78e72996b9c3c470b6b562576924bcc3a9fb75bf9ff
+  - 58401c195fe0a6204b42f5f90995ece5fab74ce7c69c67a24c61a057325af668
+  - 59336a964f110c25c112bcc5adca7090296b54ab33fa95c0744b94f8a0d80c0f
+  - 5bb67e88846096f1f8d42a0f0350c9c46260591567612ff9af46f98d1b7571cd
+  ip_addresses:
+  - 142[.]11[.]206[.]73
+  - 23[.]254[.]167[.]216
+  domains:
+  - sfrclak[.]com
+  - callnrwise[.]com
+  - calltan[.]com
+  urls:
+  - hxxp[://]sfrclak[.]com:8000/6202033
+  - hxxp://sfrclak[.]com:3000/
+authors:
+- Thomas Papaloukas
+- Panagiotis Panagopoulos
+reference: https://blog.nviso.eu/2026/04/03/the-axios-npm-supply-chain-incident-fake-dependency-real-backdoor
+date_of_publication: April 03, 2026
+file_creation_date: May 01, 2026

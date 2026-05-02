@@ -1,0 +1,30 @@
+title: ''
+description: Aikido AI Pentesting identified a remote code execution vulnerability
+  through command injection in the backup feature.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes: []
+  command_lines:
+  - curl -i -s -k -c cookies.txt -X GET https://portal.attack-me.com/register
+  - curl -i -s -k -b cookies.txt -cookies.txt -X POST https://portal.attack-me.com/register \-H 'Content-Type: application/x-www-form-urlencoded'
+      --data 'username=pentest_rce_demo&email=pentest_rce_demo@auto-pentest.com&password=****d42'
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - portal.attack-me.com
+  urls: []
+authors: []
+reference: https://www.aikido.dev/blog/ai-pentesting-demo
+date_of_publication: May 01, 2026
+file_creation_date: May 01, 2026
