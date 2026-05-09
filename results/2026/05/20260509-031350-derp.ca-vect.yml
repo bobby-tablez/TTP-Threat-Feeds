@@ -1,0 +1,73 @@
+title: Vect Ransomware Analysis
+description: Vect ransomware encrypts files using ChaCha20, with small files recoverable
+  and large files losing necessary nonce data.
+attribution: ''
+malware_families:
+- VECT
+cves: []
+ttps:
+  processes:
+  - vect.exe
+  - powershell.exe
+  - vssadmin.exe
+  - wevtutil.exe
+  - cmd.exe
+  command_lines:
+  - powershell -Command "Set-MpPreference -DisableRealtimeMonitoring $true -DisableBehaviorMonitoring
+    $true -DisableIOAVProtection $true -DisableScriptScanning $true"
+  - vssadmin delete shadows /all /quiet
+  - wevtutil cl "Application"
+  - wevtutil cl "Security"
+  - wevtutil cl "System"
+  - wevtutil cl "Windows PowerShell"
+  - cmd /c ping 127.0.0.1 -n 3 >nul & del /f /q "C:\Users\michael\AppData\Local\Temp\vect.exe"
+  powershell:
+  - Invoke-CimMethod -CimSession $sess -ClassName Win32_Process -MethodName Create
+  - sc.exe \\$pc create $svc binPath= "C:\ProgramData\$name"
+  - Set-MpPreference -DisableRealtimeMonitoring $true -DisableBehaviorMonitoring $true
+    -DisableIOAVProtection $true -DisableScriptScanning $true
+  scripts: []
+  registry_keys:
+  - SafeBoot entries, Run key path, and DisableTaskMgr policy value
+  image_loads: []
+  network_connections:
+  - vect.exe -> vectordntlcrlmfkcm4alni734tbcrnd5lk44v6sp4lqal6noqrgnbyd[.]onion:443
+  file_activity:
+  - C:\ProgramData\.vect
+  - c:\users\michael\desktop\quarterly-planning.docx.vect
+  - \\$pc\C$\ProgramData\$name
+  - quarterly-planning.docx
+  - large-archive.zip.vect
+  - large-archive.zip
+  - mail-store.pst.vect
+  - mail-store.pst
+  - server-backup.tibx.vect
+  - server-backup.tibx
+  - vm-snapshot.pvhd.vect
+  - vm-snapshot.pvhd
+  - customer-list.csv
+  - dvm3_wall.bmp
+  - '!!!_READ_ME_!!!.txt'
+  persistence:
+  - SafeBoot entries, Run key path, and DisableTaskMgr policy value
+  - Registry Run key (HKCU) pointing to C:\ProgramData\.vect
+  - DisableTaskMgr policy value set in registry
+  process_relations: []
+iocs:
+  hashes:
+  - 8ee4ec425bc0d8db050d13bbff98f483fff020050d49f40c5055ca2b9f6b1c4d
+  - f4b904fb6ba8474cb87f26302b74c4b82c106003
+  - 207b1a60f803d348c795d382f5aed9c3
+  - b9f4c4bad3a8262ade99cfb6785df34afe8aff9a2652026d2350238e265ed458
+  - dd2105e5d97add32151d3340022e7bcb2ddefb2c635725a5fea2327c38a2d4bd
+  ip_addresses: []
+  domains:
+  - vectordntlcrlmfkcm4alni734tbcrnd5lk44v6sp4lqal6noqrgnbyd[.]onion
+  urls:
+  - vectordntlcrlmfkcm4alni734tbcrnd5lk44v6sp4lqal6noqrgnbyd[.]onion/chat/5cb9f0f9-e171-403f-bed9-a3cd6ce36d1f
+authors:
+- Check Point Research
+- DarkWebInformer
+reference: https://www.derp.ca/research/vect-ransomware-nonce-loss/
+date_of_publication: May 02, 2026
+file_creation_date: May 09, 2026

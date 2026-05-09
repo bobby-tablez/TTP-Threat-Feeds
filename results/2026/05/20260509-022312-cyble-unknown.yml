@@ -1,0 +1,49 @@
+title: Targeted Cyberespionage Campaign Leveraging Social Engineering and Trusted
+  Infrastructure
+description: A targeted cyberespionage campaign uses social engineering and trusted
+  infrastructure to establish persistent, covert access to victim systems.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes:
+  - pythonw.exe
+  command_lines: []
+  powershell: []
+  scripts:
+  - run.vbs
+  - launch_module.vbs
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - pythonw.exe -> hxxp://159.198.41[.]140/static/builder/lnk_uploads/invo[.]pdf
+  - pythonw.exe -> hxxp://159.198.41[.]140/test/index.php?r=survey/index&sid=936926&newtest=Y&lang=ru%22
+  - pythonw.exe -> hxxps://github.com/leravalera2/dtfls/releases/download/dtfls/data.zip
+  - pythonw.exe -> hxxp://159.198.41[.]140/upload
+  - hxxp://159.198.41.140/static/builder/lnk_uploads/invo[.]pdf
+  - hxxp://159.198.41.140/test/index.php?r=survey/index&sid=936926&newtest=Y&lang=ru%22
+  - hxxps://github.com/leravalera2/dtfls/releases/download/dtfls/data.zip
+  file_activity:
+  - '%TEMP%\open_doc'
+  - module.pyw
+  persistence:
+  - Windows Scheduled Task named WindowsHelper
+  process_relations: []
+iocs:
+  hashes:
+  - 8a100cbdf79231e70cee2364ebd9a4433fda6b4de4929d705f26f7b68d6aeb79
+  - 9be61c95056fd6b63565cf51a196f2615f5360c0a42e616b2a618473e9d60a21
+  - a5b782901829861a6f458db404e8ec1a99c65a48393525e681742bb2a5db454d
+  ip_addresses:
+  - 159.198.41.140
+  domains: []
+  urls:
+  - hxxp://159.198.41[.]140/static/builder/lnk_uploads/invo[.]pdf
+  - hxxp://159.198.41[.]140/test/index.php?r=survey/index&sid=936926&newtest=Y&lang=ru%22
+  - hxxps://github.com/leravalera2/dtfls/releases/download/dtfls/data.zip
+  - hxxp://159.198.41.140/static/builder/lnk_uploads/invo[.]pdf
+  - hxxp://159.198.41.140/test/index.php?r=survey/index&sid=936926&newtest=Y&lang=ru%22
+authors: []
+reference: https://cyble.com/blog/operation-humanitarianbait-infostealer-campaign/
+date_of_publication: May 07, 2026
+file_creation_date: May 09, 2026

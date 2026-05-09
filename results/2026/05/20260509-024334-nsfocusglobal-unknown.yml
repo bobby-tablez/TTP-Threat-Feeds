@@ -1,0 +1,35 @@
+title: NSFOCUS CERT Detection of Linux Kernel Privilege Escalation Vulnerability (Dirty Frag)
+description: Attackers use logical defects in splice system calls with xfrm-ESP or
+  RxRPC protocol stacks to tamper with the page cache and obtain root privileges.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes: []
+  command_lines:
+  - cat /proc/version
+  - lsmod | grep -E ^(esp4|esp6|rxrpc)
+  - sh -c printf install esp4 /bin/false\ninstall esp6 /bin/false\ninstall rxrpc /bin/false\n > /etc/modprobe.d/dirtyfrag.conf; rmmod esp4 esp6 rxrpc 2>/dev/null; true
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections: []
+  file_activity:
+  - /etc/passwd
+  - /etc/sudoers
+  - /etc/shadow
+  - /usr/bin/su
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - hxxps://www.openwall.com/lists/oss-security/2026/05/07/8
+authors:
+- NSFOCUS
+reference: https://nsfocusglobal.com/linux-kernel-privilege-escalation-vulnerability-dirty-frag-alert/
+date_of_publication: May 08, 2026
+file_creation_date: May 09, 2026

@@ -1,0 +1,99 @@
+title: PCPJack Credential Theft Framework Analysis
+description: The PCPJack toolset focuses on scanning and exploiting cloud services
+  for credential harvesting, with a particular emphasis on targeting Docker, Kubernetes,
+  MongoDB, RayML, Redis, Anthropic, Digital Ocean, Discord, Google API, Grafana Cloud,
+  HashiCorp Vault, OnePassword, and OpenAI keys.
+attribution: ''
+malware_families:
+- PCPJack
+cves:
+- CVE-2025-29927
+- CVE-2025-55182
+- CVE-2026-1357
+- CVE-2025-9501
+- CVE-2025-48703
+ttps:
+  processes: []
+  command_lines:
+  - rm -f "$0"
+  powershell: []
+  scripts:
+  - bootstrap.sh
+  - check.sh
+  - extractor.py
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - monitor.py -> hxxps://spm-cdn-assets-dist-2026[.]s3[.]us-east-2[.]amazonaws[.]com:443
+  - update.bin -> hxxps://cdn[.]cloudfront-js[.]com:8443/u
+  - update-386.bin -> hxxps://cdn[.]cloudfront-js[.]com:8443/u
+  - update-arm.bin -> hxxps://cdn[.]cloudfront-js[.]com:8443/u
+  file_activity:
+  - /var/lib/.spm/working
+  - /etc
+  - /home
+  - /opt
+  - /root
+  - /srv
+  - /var/lib
+  - /var/www
+  - .env
+  - config files
+  - SSH private keys
+  - AWS IMDS credentials
+  - Kubernetes service account tokens
+  - Docker secrets
+  - wallet.dat
+  - Ethereum keystores
+  - Solana keys
+  - /var/lib/.spm/_cr/ranges.json
+  - /etc/systemd/system/spm-worker.service
+  - harvest.jsonl
+  - /tmp/.origin
+  - /var/lib/.spm
+  - /var/tmp/apt-daily-upgrade
+  - /proc/*/environ
+  persistence:
+  - If run as root: createsys-monitor.service, which runs monitor.py, akaworm.py
+  - If not root, create two crontabs to check and start monitor.py
+  - If run as root: create- Launchmonitor.py
+  - _rwcperforms a Redis cron rewrite, resulting in a cron job that fires bootstrap.sh
+    every 5 minutes as root
+  process_relations: []
+iocs:
+  hashes:
+  - 005587975a483876c1fa26b64b418931019be38f
+  - 01cebc48016395e284ac76afc1816f143ee3e7b6
+  - 0b86434ca5145636d745222f7e49c903ce6ef538
+  - 2cd2c5268e41cdece1b0506bcda3b9eba2998119
+  - 2fab324eb0d927846c8744dc0e217beea65138e0
+  - 339cbf61c80f757085c5afb7304d69f323bdf87a
+  - 6060da100b5cd587131a1c11a20d6e0108604744
+  - 848ef1f638807826586802428a7ebafdc710915c
+  - 9c7ab48c9fdbbeecdad8433529bdab38584f0e25
+  - a20a9924d92c2b06d82b79c0fe87451c650cabec
+  - c2dd8051d89c4efa71bd67d2df7d9b4bc3e67810
+  - fed52a4bbac7b5b6ae4f76cab3eadd67e79227e3
+  ip_addresses:
+  - 38.242.204[.]245
+  - 38.242.237[.]196
+  - 38.242.245[.]147
+  - 83.171.249[.]231
+  - 161.97.129[.]25
+  - 161.97.
+  - 161.97.135[.]154
+  - 161.97.163[.]87
+  - 161.97.186[.]175
+  - 161.97.187[.]42
+  - 193.187.129[.]143
+  - 213.136.80[.]73
+  domains:
+  - spm-cdn-assets-dist-2026[.]s3[.]us-east-2[.]amazonaws[.]com
+  - lastpass-login-help[.]com
+  - cdn[.]cloudfront-js[.]com
+  urls: []
+authors:
+- SentinelLABS
+reference: https://www.sentinelone.com/labs/cloud-worm-evicts-teampcp-and-steals-credentials-at-scale/
+date_of_publication: May 07, 2026
+file_creation_date: May 09, 2026

