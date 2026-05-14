@@ -1,0 +1,30 @@
+title: 'Mini Shai-Hulud: The npm Supply Chain Worm Explained'
+description: Mini Shai-Hulud is a worm designed to live inside modern build systems,
+  harvest tokens from CI/CD pipelines and developer workstations, and then weaponize
+  that access to publish malicious versions of additional packages.
+attribution: ''
+malware_families:
+- Mini Shai-Hulud
+cves: []
+ttps:
+  processes:
+  - node
+  command_lines:
+  - node setup.mjs
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors: []
+reference: https://www.picussecurity.com/resource/blog/mini-shai-hulud-the-npm-supply-chain-worm-explained
+date_of_publication: May 14, 2026
+file_creation_date: May 14, 2026

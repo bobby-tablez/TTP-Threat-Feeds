@@ -1,0 +1,98 @@
+title: Exposed Open Directory Leaks a Full BYOB Deployment Across Windows, Linux,
+  and macOS
+description: Exposed open directory on an active BYOB command-and-control server uncovered
+  during proactive threat hunting. Complete BYOB deployment recovered, including droppers,
+  stagers, payloads, and post-exploitation modules.
+attribution: ''
+malware_families:
+- BYOB
+cves: []
+ttps:
+  processes:
+  - byob_*.py
+  - kxe.py
+  - tasklist.exe
+  - ps
+  - taskkill.exe
+  - python.exe
+  command_lines:
+  - hxxp://38[.]255[.]43[.]60:8081////clients/stagers/kxe.py
+  - hxxp://38[.]255[.]43[.]60:8081////clients/payloads/kxe.py
+  - tasklist
+  - ps
+  - taskkill /pid [PID] /f
+  - kill -9 [PID]
+  - taskkill /im [name] /f
+  powershell: []
+  scripts:
+  - util.emails()
+  registry_keys:
+  - HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\Java-Update-Manager
+  image_loads: []
+  network_connections:
+  - byob_*.py -> 38[.]255[.]43[.]60:8081
+  - kxe.py -> 38[.]255[.]43[.]60:8081
+  - hxxp://api[.]ipify[.]org
+  - hxxp://ipinfo[.]io
+  - python.exe -> 38[.]255[.]43[.]60:8081
+  - python.exe -> 38[.]255[.]43[.]60:8080
+  - python.exe -> 38[.]255[.]43[.]60:8082
+  - python.exe -> 38[.]255[.]43[.]60:8083
+  - python.exe -> api[.]ipify[.]org:80
+  - python.exe -> ipinfo[.]io:80
+  - 38.255.43[.]60 -> 8081
+  - 38.255.43[.]60 -> 8080
+  - 38.255.43[.]60 -> 8082
+  - 38.255.43[.]60 -> 8083
+  file_activity:
+  - '%AppData%...\Startup\Java-Update-Manager.eu.url'
+  - /etc/crontab malicious entry
+  - ~/Library/LaunchAgents/com.apple.update.manager.plist
+  - /var/tmp/.com.apple.update.manager.sh
+  - http://38.255.43.60:8081/clients/droppers/byob_kxe.py
+  - http://38.255.43.60:8081/clients/droppers/byob_tLD.py
+  - http://38.255.43.60:8081/clients/droppers/byob_tva.py
+  - http://190.123.44.228:1407/clients/droppers/byob_d7c.py
+  - http://190.123.44.228:1407/clients/droppers/byob._lik.py
+  - http://190.123.44.228:1407/clients/droppers/byob_jpG.py
+  - http://190.123.44.228:1407/clients/droppers/byob_iiK.py
+  - http://190.123.44.228:1407/clients/droppers/byob_y4N.py
+  - http://190.123.44.228:1401/clients/droppers/byob_y1Q.py
+  - http://172.93.105.254:8081/clients/droppers/byob_bDF.py
+  persistence:
+  - Startup Folder Persistence: Java-Update-Manager.eu.url
+  - Registry Run Key Persistence: HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\Java-Update-Manager
+  - Registry Run key (HKCU) pointing to Java-Update-Manager
+  - .eu.url file in Startup folder
+  - Hourly scheduled task 'Java-Update-Manager'
+  - WMI EventFilter: Java-Update-Manager
+  - CommandLineEventConsumer: Java-Update-Manager
+  - macOS LaunchAgent plist
+  - Registry Run key (HKCU) pointing to malware executable
+  - Startup folder persistence via .eu.url file
+  process_relations: []
+iocs:
+  hashes:
+  - 76e8ff3524822f9b697af1b7f9a96712
+  - 3c5a52efd0c08f92bc31be4b31afb2e5
+  - 5c61a8720aa0b9a28973be3f0eedf042
+  - 72caa7b8bb22c80a2bc77c17d1a35046
+  - 3544b6c28d2812d09677b07ead503597
+  - cd06fc1d25a5636a7e953c672e1fa3ba
+  ip_addresses:
+  - 38[.]255[.]43[.]60
+  - 38.255.43.60
+  - 190.123.44.228
+  - 172.93.105.254
+  domains:
+  - api[.]ipify[.]org
+  - ipinfo[.]io
+  urls:
+  - hxxp://38[.]255[.]43[.]60:8081////clients/stagers/kxe.py
+  - hxxp://38[.]255[.]43[.]60:8081////clients/payloads/kxe.py
+  - hxxp://api[.]ipify[.]org
+authors:
+- Hunt.io Team
+reference: https://hunt.io/blog/exposed-byob-c2-infrastructure-multi-stage-malware-deployment
+date_of_publication: January 28, 2026
+file_creation_date: May 14, 2026

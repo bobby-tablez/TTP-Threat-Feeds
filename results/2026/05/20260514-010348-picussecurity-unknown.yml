@@ -1,0 +1,28 @@
+title: How Does an Automated Penetration Testing Tool Work?| May 13,2026
+description: An automated penetration testing tool simulates a real attacker from
+  an assumed breach point, exploiting vulnerabilities and chaining techniques to find
+  the shortest path to domain admin.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes: []
+  command_lines: []
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - stager -> orchestrating agent:443
+  file_activity: []
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors: []
+reference: https://www.picussecurity.com/resource/blog/how-does-an-automated-penetration-testing-tool-work
+date_of_publication: May 14, 2026
+file_creation_date: May 14, 2026

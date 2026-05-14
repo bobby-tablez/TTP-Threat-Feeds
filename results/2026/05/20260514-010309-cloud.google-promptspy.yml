@@ -1,0 +1,32 @@
+title: 'GTIG AI Threat Tracker: Adversaries Leverage AI for Vulnerability Exploitation,
+  Augmented Operations, and Initial Access'
+description: A backdoor malware designed to intercept and consume touch events on
+  Android devices, allowing threat actors to maintain intrusion without alerting the
+  victim.
+attribution: ''
+malware_families:
+- PROMPTSPY
+cves: []
+ttps:
+  processes: []
+  command_lines: []
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections: []
+  file_activity: []
+  persistence:
+  - AppProtectionDetector module to identify and intercept uninstall attempts
+  - Firebase Cloud Messaging (FCM) to relaunch the backdoor
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- Google Threat Intelligence Group
+reference: https://cloud.google.com/blog/topics/threat-intelligence/ai-vulnerability-exploitation-initial-access/
+date_of_publication: May 14, 2026
+file_creation_date: May 14, 2026

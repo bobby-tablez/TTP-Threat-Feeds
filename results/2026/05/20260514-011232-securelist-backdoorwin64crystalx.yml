@@ -1,0 +1,44 @@
+title: 'CrystalX RAT: CrystalX combines spyware, stealer, and prankware features'
+description: A highly functional MaaS platform that includes spyware, keylogging,
+  remote control, stealer, and prankware features.
+attribution: ''
+malware_families:
+- Backdoor.Win64.CrystalX.*
+- Trojan.Win64.Agent.*
+- Trojan.Win32.Agentb.gen
+cves: []
+ttps:
+  processes:
+  - cmd.exe
+  command_lines:
+  - cmd.execmd.exe
+  powershell: []
+  scripts: []
+  registry_keys:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings
+  image_loads:
+  - AmsiScanBuffer
+  - EtwEventWrite
+  - MiniDumpWriteDump
+  network_connections:
+  - cmd.exe -> webcrystal[.]lol:443
+  - cmd.exe -> webcrystal[.]sbs:443
+  - cmd.exe -> crystalxrat[.]top:443
+  file_activity:
+  - '%TEMP%\svc[rndInt].exe'
+  - '%TEMP%\co[rndInt]'
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - webcrystal[.]lol
+  - webcrystal[.]sbs
+  - crystalxrat[.]top
+  urls: []
+authors:
+- Kaspersky
+reference: https://securelist.com/crystalx-rat-with-prankware-features/119283
+date_of_publication: April 01, 2026
+file_creation_date: May 14, 2026

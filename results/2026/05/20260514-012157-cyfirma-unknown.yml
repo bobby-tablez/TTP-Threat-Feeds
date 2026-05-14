@@ -1,0 +1,62 @@
+title: CYFIRMA Multi-Stage Intrusion Campaign Report
+description: The malware uses a modified ScreenConnect framework to provide remote
+  command execution, deploy additional malware, create privileged accounts, disable
+  security controls, and facilitate lateral movement.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes:
+  - ComputerDefaults.exe
+  - csc.exe
+  - uds.exe
+  - ScreenConnect.ClientService.exe
+  - powershell.exe
+  - DISM.exe
+  - cvtres.exe
+  - sc.exe
+  - OneDriveServers.exe
+  - ScreenConnect.WindowsClient.exe
+  command_lines:
+  - ComputerDefaults.exe
+  - sysupdate.ps1 -ExecutionPolicy unrestricted
+  - sc.exe create OneDriveServers binPath= "C:\ProgramData\OneDriveServer\OneDriveServer\OneDriveServer\OneDriveServers.exe"
+  - powershell.exe -ExecutionPolicy Bypass -File ksxypuSlg.ps1
+  powershell:
+  - using System;using System.Diagnostics;using System.Reflection;using System.Runtime.CompilerServices;
+  - internal class Program{private static void Main(){ProcessStartInfo processStartInfo
+    = new ProcessStartInfo();processStartInfo.Filenane = "powershell.exe";processStartInfo.Arguments
+    = "-ExecutionPolicy Bypass -File ksxypuSlg.ps1";processStartInfo.UseShellExecute
+    = false;processStartInfo.CreateNoWindow = true;try{Process.Start(processstartinfo);}catch
+    (Exception ex){Console.writeline("Errors * + ex.Message);}}
+  scripts:
+  - <Random-Text>run.cmd
+  registry_keys:
+  - HKCU:\software\classes\ms-settings\shell\open\command
+  image_loads:
+  - ScreenConnect.Core.dll
+  network_connections:
+  - ComputerDefaults.exe -> legitserver.theworkpc[.]com:5443
+  - ScreenConnect.ClientService.exe -> legitserver.theworkpc[.]com:8041
+  - powershell.exe -> legitserver.theworkpc.com:45.138.16.64
+  file_activity:
+  - C:\Systems\
+  - C:\Systems\uds.exe
+  - OneDriveServer.zip
+  - ksxypuSlg.ps1
+  persistence:
+  - Registry Run key (HKCU) pointing to uds.exe via ms-settings protocol handler
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+  - 45.138.16[.]64
+  - 45.138.16.64
+  domains:
+  - legitserver.theworkpc[.]com
+  - legitserver.theworkpc.com
+  urls: []
+authors: []
+reference: https://www.cyfirma.com/research/operation-silentcanvas-jpeg-based-multistage-powershell-intrusion
+date_of_publication: May 09, 2026
+file_creation_date: May 14, 2026

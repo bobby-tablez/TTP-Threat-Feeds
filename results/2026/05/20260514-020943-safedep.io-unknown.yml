@@ -1,0 +1,43 @@
+title: 'noon-contracts npm Package: DeFi Supply Chain RAT'
+description: A malicious npm package published on May 10, 2026 by a throwaway account.
+  It impersonates a Noon Protocol smart contract SDK and exfiltrates various credentials.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes: []
+  command_lines:
+  - node setup.mjs
+  powershell: []
+  scripts:
+  - ~/.local/share/neon-cache/neon-runtime.sh
+  - ~/.cache/node-addon-api/node-addon-api.sh
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - setup.mjs -> 82.221.101.203:8443
+  - setup.mjs -> hxxp://82[.]221[.]101[.]203:8443/q?h=<hostname>
+  - setup.mjs -> hxxp://82[.]221[.]101[.]203:8443/r?h=<hostname>
+  file_activity:
+  - kubectl get secrets -A -o json
+  - ~/.local/share/neon-cache/neon-runtime.sh
+  - ~/.config/systemd/user/node-addon-api.service
+  persistence:
+  - 'Crontab entry: */10 * * * * pgrep -f node-addon-api ... (or neon-runtime on macOS)'
+  - 'macOS LaunchAgent: ~/Library/LaunchAgents/com.apple.neon-runtime.plist'
+  - 'Linux systemd: ~/.config/systemd/user/node-addon-api.service'
+  - 'Shell RC marker: # node addon cache (appended to .bashrc, .zshrc, .bash_profile,
+    .profile)'
+  process_relations: []
+iocs:
+  hashes:
+  - 263df2348f54f1f4980542a41f69d77b085fb28091a95979ba7f0e9f3d0da861
+  ip_addresses:
+  - 82.221.101.203
+  domains: []
+  urls: []
+authors:
+- SafeDep Teamsafedep.io
+reference: https://safedep.io/malicious-noon-contracts-npm-defi-rat
+date_of_publication: May 14, 2026
+file_creation_date: May 14, 2026

