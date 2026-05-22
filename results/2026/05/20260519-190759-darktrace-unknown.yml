@@ -1,0 +1,31 @@
+title: Darktraces annual State of AI Cybersecurity Report 2026
+description: Rapid AI adoption is expanding the attack surface and empowering attackers
+  to operate at unprecedented speed and scale, while also enabling defenders to spot
+  novel threats before humans can.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes: []
+  command_lines: []
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - 7912722147 -> 1000
+  - 43130.073 -> 80
+  file_activity: []
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+  - '7912722147'
+  - '43130.073'
+  domains: []
+  urls: []
+authors: []
+reference: https://www.darktrace.com/blog/state-of-ai-cybersecurity-2026-77-of-security-stacks-include-ai-but-trust-is-lagging
+date_of_publication: May 19, 2026
+file_creation_date: May 19, 2026

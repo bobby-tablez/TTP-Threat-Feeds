@@ -1,0 +1,110 @@
+title: CrystalX Go RAT Loader Analysis
+description: CrystalXRAT is a Go-based remote access trojan distributed via a loader
+  (NursultanCracked.exe) that establishes persistence through scheduled tasks, startup
+  shortcuts, and WMI subscriptions, communicating with its C2 over WebSocket. The
+  malware supports remote desktop, webcam streaming, keylogging, file management,
+  clipboard theft, and extensive anti-analysis checks.
+attribution: ''
+malware_families:
+- CrystalX
+- WebCrystal RAT
+- CrystalXRAT
+cves: []
+ttps:
+  processes:
+  - NursultanCracked.exe
+  - SecurityHealthSystray.exe
+  - VBoxService.exe
+  - VBoxTray.exe
+  - vmtoolsd.exe
+  - VMwareTray.exe
+  - VMwareUser.exe
+  - prl_tools.exe
+  - qemu-ga.exe
+  - xenservice.exe
+  - vboxservice.exe
+  - wireshark.exe
+  - procmon.exe
+  - processhacker.exe
+  - x64dbg.exe
+  - ollydbg.exe
+  - ida.exe
+  - windbg.exe
+  - dnSpy.exe
+  - fiddler.exe
+  - burp.exe
+  - svchost.exe
+  - wevtutil
+  command_lines:
+  - wevtutil el | ForEach-Object { wevtutil cl $_ }
+  - SecurityHealthSystray.exe worker
+  - Stop-Service WinDefend
+  - wevtutil cl
+  powershell:
+  - Stop-Service WinDefend
+  - wevtutil el | ForEach-Object { wevtutil cl $_ }
+  scripts: []
+  registry_keys:
+  - VMware Tools
+  - VirtualBox Guest Additions
+  - VBoxGuest
+  - VBoxService
+  - vmci
+  - vmhgfs
+  - VMTools
+  - VMMEMCTL
+  - Xen
+  image_loads: []
+  network_connections:
+  - NursultanCracked.exe -> crystalxrat[.]net:443
+  - SecurityHealthSystray.exe -> crystalxrat[.]net:443
+  - NursultanCracked.exe -> wss://crystalxrat[.]net/api/ws
+  file_activity:
+  - '%LOCALAPPDATA%\Microsoft\DeviceMetadataStore\SecurityHealthSystray.exe'
+  - '%ProgramData%\GoogleUpdate\YBFZUW1U32T.lock'
+  - bg_image.jpg
+  - bg:/remote/
+  persistence:
+  - Scheduled task NvContainerTask_YBFZUW1U32 runs SecurityHealthSystray.exe worker
+    on logon at highest privileges
+  - Startup folder shortcut Windows Security Health Service.lnk
+  - WMI filter Windows Security Health Service_Filter monitors __InstanceModificationEvent
+    on Win32_PerfFormattedData_PerfOS_System every 300 seconds
+  - WMI consumer Windows Security Health Service_Consumer (CommandLineEventConsumer)
+  - Mutex Global\WinSecMutex_YBFZUW1U32
+  - Defender exclusion added for C:\Windows\System32\svchost.exe
+  - Defender exclusion added for System32 directory
+  - TaskScheduler Operational and Services Diagnostic event logs disabled via wevtutil
+  - Inbound firewall notification disabled
+  - Inbound and outbound firewall rules named System Network Service created
+  - Firewall rules named System Network Service and System Network Service Out
+  process_relations:
+  - NursultanCracked.exe -> SecurityHealthSystray.exe
+  - SecurityHealthSystray.exe -> C:\Windows\System32\svchost.exe
+iocs:
+  hashes:
+  - 34b84db8f10d34f711bb242b21bdf662ee489dcd0e9c23b9cc95240d324bb094
+  - a9340c46243f5d2b00e30ea649bd14fc146ebbb42e43dbe45f5ee0cc9fc9227a
+  - 8a6f8ef99384152df63a39b6ba9f08f0a1e9cc33b14319e8a1b184beb4a06cf7
+  - 2497e0aa88af681872194966bfc2bd67013ea75c96f4b5717abe4a4f43e69394
+  - 087d077990ecbc7ac2b09e261df80ffc49475a61
+  - 5a3a660ff209398a8a81bd8dc6ca8b9880c0456879456a4f930531eba0557a9d
+  ip_addresses: []
+  domains:
+  - crystalxrat[.]net
+  - crystalxrat[.]top
+  - webcrystal[.]lol
+  - webcrystal[.]sbs
+  - braden.ns.cloudflare[.]com
+  - teresa.ns.cloudflare[.]com
+  - braden.ns.cloudflare.com
+  - teresa.ns.cloudflare.com
+  urls:
+  - wss://crystalxrat[.]net/api/ws
+  - hxxp://crystalxrat[.]net
+  - hxxps://crystalxrat[.]net
+  - hxxps://crystalxrat[.]net/login/
+authors: []
+reference: https://www.derp.ca/research/crystalx-go-rat/
+date_of_publication: May 18, 2026
+file_creation_date: May 22, 2026

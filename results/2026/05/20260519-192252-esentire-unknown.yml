@@ -1,0 +1,30 @@
+title: Connects to any signal across any vendor stack and powers adaptive AI Operatives
+  that expose, detect, and neutralize cyberattacks
+description: Atlas Operations Center sees investigations and protects businesses with
+  technology integrations and threat response.
+attribution: ''
+malware_families: []
+cves:
+- CVE-2026-0300
+- CVE-2026-41940
+ttps:
+  processes: []
+  command_lines: []
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- Justin Bailey
+reference: https://www.esentire.com/blog/offensive-and-defensive-security-one-continuous-flywheel
+date_of_publication: May 19, 2026
+file_creation_date: May 19, 2026

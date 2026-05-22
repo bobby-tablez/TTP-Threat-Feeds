@@ -1,0 +1,107 @@
+title: Agent Tesla Campaign Targeting LATAM Enterprises via Procurement-Themed Phishing
+description: An active Agent Tesla credential-stealing campaign targets Chilean and
+  broader LATAM enterprises using procurement-themed phishing lures delivered as RAR
+  archives. The multi-stage chain uses JScript encoded droppers, PowerShell stagers,
+  .NET Reactor-protected loaders, process hollowing into aspnet_compiler.exe, and
+  FTP-based credential exfiltration to compromised Romanian infrastructure.
+attribution: ''
+malware_families:
+- Agent Tesla
+- ALTERNATE.dll
+- AgentTesla
+cves: []
+ttps:
+  processes:
+  - wscript.exe
+  - aspnet_compiler.exe
+  - powershell.exe
+  - WinRAR.exe
+  command_lines:
+  - wscript.exe
+  powershell:
+  - AYRMWWFH.ps1
+  - Z2KBLYG5.ps1
+  - ELHYLTLT.ps1
+  - -ExecutionPolicy Bypass
+  scripts:
+  - Orden de compra_pdf.jse
+  - Orden de compra.xlam
+  - OC 20240814.xlam
+  - OC 20240813.xlam
+  - Nomina_Sept2025_Confidencial.xlam
+  - Orden - N652120.008.xlam
+  - givingbestthingsalwaysfor.hta
+  registry_keys:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run[StartupRegName]
+  image_loads:
+  - ALTERNATE.dll
+  - SbieDll.dll
+  - cmdvrt32.dll
+  - SxIn.dll
+  - Sf2.dll
+  - snxhk.dll
+  network_connections:
+  - aspnet_compiler.exe -> ftp.horeca-bucuresti[.]ro:21
+  - aspnet_compiler.exe -> ip-api[.]com:80
+  - Agent Tesla -> ftp.horeca-bucuresti[.]ro:21
+  - Agent Tesla -> ip-api[.]com:80
+  - aspnet_compiler.exe -> 89.39.83[.]184:21
+  - aspnet_compiler.exe -> ip-api[.]com
+  file_activity:
+  - ALTERNATE.dll
+  - alternate_Slayed.dll
+  - 7bcd610d-7af6-4dc2-875b-dc4fec91463c.exe
+  - '%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\'
+  - ALTERNATE.pdb
+  - C:\Temp\[A-Z]{8}.ps1
+  - Nomina de sueldos.pdf_008.exe
+  - Comprobante de pago.pdf.exe
+  persistence:
+  - Registry key modification performed by JScript encoded dropper (Orden de compra_pdf.jse)
+  - Registry Run key HKCU\Software\Microsoft\Windows\CurrentVersion\Run pointing to
+    GUID-named copy 7bcd610d-7af6-4dc2-875b-dc4fec91463c.exe
+  - Startup folder copy to %APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\
+  - Task Scheduler scheduled task for persistence without registry artifacts
+  - GUID-named executable copy 7bcd610d-7af6-4dc2-875b-dc4fec91463c.exe dropped to
+    blend with system files
+  - GUID-named executable copy used for autorun (7bcd610d-7af6-4dc2-875b-dc4fec91463c.exe)
+  process_relations:
+  - wscript.exe -> powershell.exe
+  - powershell.exe -> aspnet_compiler.exe
+  - WinRAR.exe -> wscript.exe
+  - wscript.exe -> aspnet_compiler.exe
+iocs:
+  hashes:
+  - a7eeead9c868d9944ed1c1f113328f32
+  - b50b3800b17ad7ad5c4483c0b6b24d1d151a9d10
+  - 948c8c69fe02eda9231aebfa5c626335307058ac74a5c3c40b346179a1bfc982
+  - 96ad1146eb96877eab5942ae0736b82d8b5e2039a80d3d6932665c1a4c87dcf7
+  - 43d09743a69c9afa7156bf4e2bf7423b3d5f5ad7d54c4c3fb8a698d526778057
+  - 78ba57f4a164bedc26204296ea09bb8f
+  - 7929355856a2a85d48f95d230cd74fbb5ad554bed49e73b1800136c4bcccd1a8
+  - cd83f5ceb2d014badfa991106a9d37a6aeab9043d60d796ad0f16d36cdfa5703
+  - d5b7247c497788cf0031ceb06e3df77a45fef59f1e49633dc7159816d64759b5
+  - c61b1941cf756eb7551f7c661743802362728b785adc22e860d269713dfb01a6
+  - c356aff1a01c2b0da472e584c8e3c8f875b9a24280435d42836a77b19f5a8c18
+  - f1c3ebe78bd8c38559bf3cfcc9a9fa37d221e31780774a3787e26160a61f5348
+  ip_addresses:
+  - 89[.]39[.]83[.]184
+  - 89.39.83[.]184
+  - 208.95.112[.]1
+  domains:
+  - ftp.horeca-bucuresti[.]ro
+  - horeca-bucuresti[.]ro
+  - ip-api[.]com
+  - email.v.todotramitesperu.com.elgartizocon[.]ro
+  - email.elrif[.]com
+  urls:
+  - ftp://ftp.horeca-bucuresti[.]ro
+  - hxxp://ip-api[.]com/line/?fields=hosting
+authors:
+- Moises Cerqueira
+- 0xOlympus
+- Moises Cerqueira (0xOlympus)
+reference: https://any.run/cybersecurity-blog/agent-tesla-latam-enterprise
+date_of_publication: May 22, 2026
+file_creation_date: May 22, 2026

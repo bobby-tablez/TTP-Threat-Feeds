@@ -1,0 +1,31 @@
+title: Welcome to this weeks edition of the Threat Source newsletter
+description: Many solutions have been proposed to reduce software bugs, but skilled
+  vulnerability researchers are a scarce resource and can only review so much software.
+  AI is likely to uncover more faults in software, leading to a surge in patches.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes: []
+  command_lines: []
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+iocs:
+  hashes:
+  - 9f1f11a708d393e0a4109ae189bc64f1f3e312653dcf317a2bd406f18ffcc507
+  - 96fa6a7714670823c83099ea01d24d6d3ae8fef027f01a4ddac14f123b1c9974
+  - e60ab99da105ee27ee09ea64ed8eb46d8edc92ee37f039dbc3e2bb9f587a33ba
+  - 90b1456cdbe6bc2779ea0b4736ed9a998a71ae37390331b6ba87e389a49d3d59
+  ip_addresses: []
+  domains: []
+  urls: []
+authors: []
+reference: https://blog.talosintelligence.com/the-time-of-much-patching-is-coming/
+date_of_publication: May 14, 2026
+file_creation_date: May 19, 2026

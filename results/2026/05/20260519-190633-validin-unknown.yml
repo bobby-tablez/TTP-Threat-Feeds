@@ -1,0 +1,187 @@
+title: Revisiting another YouTube DMCA-themed phishing campaign with old and new pivots
+description: A revisitation of a YouTube DMCA-themed phishing campaign using historical
+  DNS, header hashes, title tags, and redirect patterns to identify related infrastructure.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes: []
+  command_lines: []
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - dmca-notification[.]info -> blacklivesmattergood4[.]com/youtube/main/
+  - blacklivesmattergood4.com:443
+  file_activity: []
+  persistence: []
+  process_relations: []
+iocs:
+  hashes:
+  - a927b832d5f0baf0fea5a427588da6c5
+  - 1e69c76842689565c2c46580042f2e54
+  - 863a129608d053b67081c8243c72e9e1
+  - 5dab1fa5f7d42e5eca2385ce3dad1f03
+  ip_addresses:
+  - 101.99.92[.]246
+  - 101.99.89[.]94
+  - 156.87[.]345
+  - 188.190[.]160
+  - 193.23.199[.]125
+  - 176.46.152[.]11
+  - 101.99.92.246
+  - 101.99.89.94
+  - 172.67.151.115
+  - 188.114.97.3
+  - 104.21.62.225
+  - 188.114.96.3
+  - 188.114.97.0
+  - 45.156.87.34
+  - 5.188.190.160
+  - 103.23.199.125
+  - 176.46.152.11
+  - 5.101.81.119
+  - 94.74.191.123
+  - 144.172.110.194
+  - 23.26.237.117
+  - 83.217.208.54
+  - 65.100.108.42
+  domains:
+  - dmca-notification[.]info
+  - blacklivesmattergood4[.]com
+  - domain-monitoring.cc
+  - fileless-storage-s3[.]cc
+  - hardware-office[.]cc
+  - memory-protection-layer2[.]cc
+  - memory-protection-layer1[.]cc
+  - alphazero1-endscape[.]cc
+  - health-smooth-eu3[.]com
+  - holiday-updateservice[.]com
+  - handle-me-sv1[.]com
+  - vvork-space[.]com
+  - my-smart-house1[.]com
+  - dmca-compliance[.]media
+  - video-compliance[.]media
+  - audio-compliance[.]media
+  - content-compliance[.]media
+  - compliance-video[.]media
+  - dmcainfo[.]media
+  - panoramas[.]media
+  - dmca-content[.]media
+  - sweeply[.]media
+  - dmca[.]casa
+  - dmca-strike[.]casa
+  - compliance-video[.]casa
+  - dmca-notify[.]casa
+  - eco-gear[.]club
+  - sweeply[.]cc
+  - media-dmca[.]cf
+  - youtube-dmca[.]cfd
+  - dmcamedia[.]cfd
+  - find[.]cfd
+  - dmcatube[.]cfd
+  - dmca-youtube[.]cfd
+  - dmcacheck[.]cfd
+  - dmca-video[.]cfd
+  - dmca-info[.]cfd
+  - dmca-find[.]cfd
+  - complaints-report[.]cfd
+  - blacklivesmattergood[.]life
+  - mediasync[.]one
+  - mediasync[.]blog
+  - sweeply[.]blog
+  - noticetakedown[.]org
+  - takedownalerts[.]org
+  - mediasync[.]sh
+  - support-dmca[.]click
+  - mediasync[.]click
+  - dmca-report[.]click
+  - dmca-support[.]click
+  - dmca-notify[.]click
+  - mediasync[.]ink
+  - dmca-notify[.]ink
+  - collabixagency[.]network
+  - sweeply[.]digital
+  - sweep[.]gl
+  - dmca-strike[.]team
+  - id240941[.]com
+  - dmca-media[.]com
+  - abuse-hub[.]com
+  - dmcastrike[.]com
+  - dmcadef[.]com
+  - dmca-check[.]com
+  - strike-check[.]com
+  - dmca-desk[.]com
+  - abuse-desk[.]com
+  - dmca-scan[.]com
+  - dmca-video[.]com
+  - dmcainfo[.]com
+  - dmca-audio[.]com
+  - mobiledownloadapp[.]com
+  - dmcatracker[.]com
+  - strike-monitor[.]com
+  - sync-creators[.]com
+  - takedowncontents[.]com
+  - dmcalerts[.]com
+  - takedownrequest[.]com
+  - dmca-verify[.]com
+  - strike-verify[.]com
+  - report-verify[.]com
+  - dmcaverify[.]com
+  - strikeverify[.]com
+  - dmca[.]forumsweeply[.]run
+  - mediasync[.]video
+  - sweep[.]video
+  - 079890-kuryr-ord[.]info
+  - dmca-notice[.]info
+  - takedown-notification[.]info
+  - alert-notification[.]info
+  - mediasync-cooperation[.]info
+  - sweep-cooperation[.]info
+  - dmca-takedown[.]info
+  - dmca-alerts[.]info
+  - dmca-alert[.]info
+  - takedown-alert[.]info
+  - complaints-report[.]info
+  - remove-strike[.]proytstrike[.]prostrikeremove[.]procopyrightviolation[.]propltba09083[.]shopcz10948903id[.]shopmediasync[.]topdmca-notify[.]topid0144871[.]sbsid9910875[.]sbsmediasync-cooperation[.]sbscompliance-video[.]sbscomplaints-report[.]sbsdmca-gov[.]sbsdmca-strike[.]workssweeply[.]atnotifyhub[.]latdmca-notice[.]net
+  - youtube-notice[.]net
+  - dmca-hub[.]report
+  - dmca-strike[.]report
+  - restid240941[.]icuid0976443[.]icuid0024997[.]icuid7771029[.]icucompliance-video[.]icudmcaguard[.]cyoudmcatracker[.]cyoudmca-notify[.]cyoumediasync[.]cv
+  - sweeply[.]agency
+  - mediasync[.]mydmca-notify[.]mysweeply[.]mydmca-notify[.]xyzsweepauth[.]acv2auth-f43fui3[.]ccverify-fu34fuhasfifii99[.]ccv2oauth-verf33wd[.]ccverify-fg34fg778ydsvcg[.]cctoku[.]financeyt-check-verifi[.]meauth-identity[.]mesystem-identity[.]mecheck-verify-id[.]onlinecheck-yt-inform[.]onlineauth-secure-connect[.]onlineitu-ramusgrandst[.]onlineuniswap-labs[.]orguniswap-awards[.]orgssl-host[.]orgdns-verify-check[.]clickyour-exmaple-domain[.]clickex-test-domain[.]clickopenid-info[.]clickblacklivesmattergood4[.]comdomenadfga[.]commatreshkabalalaika[.]competrushkaskypka[.]comprocessingtoyourcab[.]comins-guinee[.]comins-collecte[.]comtechnicallydiff[.]comtechnicallystuffoff[.]comtechnicallystuff[.]comprocesschanneling[.]comwordsmithcopywriting[.]comtechnicalesytexg[.]comcollabix-auth[.]comswepauth[.]comssl-connecti[.]comsjsisjidkdj[.]commavibardak[.]comdocuteamwork[.]comreasonforcom[.]comins-denom[.]comjoinbuddyxom[.]combasiclogin[.]combeast-info[.]comidentifime-studio[.]comverify-studio[.]comidentify-studio[.]comlodocushgor[.]comcopycompylas[.]comtechsdifferents[.]comprocessingtoyourcabinet[.]comflexibleilifullst[.]comtechdifferentst[.]comdomenayx[.]comcopsforapsslay[.]comjoinnnvusdy[.]combrandleymedia-verify[.]combrandleystudio-verify[.]comsystem-identify[.]comstudio-identify[.]comrgph[.]gov[.]gnopenid-confirm[.]infoverify-dns-id[.]toappverifybrandleylogin2[.]topasdjifhvliosudhfgv3453[.]topverify-35iugh777[.]topsddvwsed-ver88[.]topreaunt-sevic
+  - webmixer.top
+  - dmca-abuse.com
+  - dmca-hub.com
+  - dmca-quard.con
+  - dmca-guardian.com
+  - dnca-shield.com
+  - www.dnca-abuse.com
+  - www.dnca-quardian.com
+  - demo.dnmca.media
+  - exchange.dmca.media
+  - mail.dnca.media
+  - mysql.dnca.media
+  - webdisk.dnca.media
+  - takedownglobal.media
+  - takedownsecurity.com
+  - dmca-global.com
+  - dmca-security.com
+  - blacklivesmattergood4.com
+  - youtube/main/
+  - beast-info.com
+  - blacklivesmattergoods.com
+  - ex-test-domain.click
+  - flexibleilifullst.com
+  - itu-ramusgrandst.online
+  - joinbuddyxom.com
+  - joinnnvusdy.com
+  - openid-confirm.info
+  - processchanneling.com
+  - reaunt-sevice-id.top
+  urls: []
+authors: []
+reference: https://www.validin.com/blog/dmca_phishing_revisited
+date_of_publication: May 14, 2026
+file_creation_date: May 19, 2026

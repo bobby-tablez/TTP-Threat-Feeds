@@ -1,0 +1,45 @@
+title: 'Gamaredon GamaLoad Update: BITS-Based Payload Delivery Fallback'
+description: Gamaredon's GamaLoad scripts have been updated with increased obfuscation
+  and a new fallback mechanism using bitsadmin.exe to download payloads when traditional
+  LOLBin-based delivery fails. The malware is delivered via RAR archive containing
+  an HTA file dropped into the Startup folder.
+attribution: Gamaredon
+malware_families:
+- GamaLoad
+- Pterodo
+cves: []
+ttps:
+  processes:
+  - mshta.exe
+  - bitsadmin.exe
+  - svchost.exe
+  command_lines: []
+  powershell: []
+  scripts:
+  - harshR2i = "msxml2.xmlhttp"
+  - Set processionkP) = CreateObject(lookgCl).CreateTextFile(encyclopediakxq, true,
+    false)
+  - CreateObject(refusednyQ) .Run squadronjuiZ, false
+  - larkxGg = improbableWs?.serialnumber
+  - commanderGek = fogMe3(Int((UBound(fogie3)+1) Rnd()))
+  registry_keys:
+  - HKCU_FALLBACK
+  image_loads: []
+  network_connections:
+  - bitsadmin.exe -> FALLBACK_DOMAIN:443
+  file_activity: []
+  persistence:
+  - HTA file dropped into the Startup folder via RAR archive extraction, executed
+    on next reboot
+  process_relations: []
+iocs:
+  hashes:
+  - 3538618e0ae0f7e73d96843d90323178b1d434262a074fc24be8e36283e7dd92
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- Robin Dost
+reference: https://blog.synapticsystems.de/gamaredon-now-downloading-via-windows-updates-best-friend/#comment-313
+date_of_publication: January 13, 2026
+file_creation_date: May 22, 2026

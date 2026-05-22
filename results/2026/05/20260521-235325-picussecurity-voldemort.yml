@@ -1,0 +1,56 @@
+title: 'Revisiting Voldemort, HealthKick, and GOVERSHELL: A Technical Retrospective'
+description: Three Chinese state-sponsored malware families (Voldemort, HealthKick,
+  GOVERSHELL) targeted Taiwanese semiconductor companies and international think tanks
+  via spear-phishing and DLL sideloading, with Voldemort using Google Sheets as C2
+  and GOVERSHELL rapidly evolving its C2 stack five times in five months.
+attribution: Chinese state-sponsored threat actor
+malware_families:
+- Voldemort
+- HealthKick
+- GOVERSHELL
+cves: []
+ttps:
+  processes:
+  - powershell.exe
+  - Python.exe
+  - CiscoCollabHost.exe
+  - schtasks.exe
+  - adobe_licensing_wf_helper.exe
+  command_lines:
+  - schtasks.exe /Create /TN "SystemHealthMonitor" /TR "\"malware_binary.exe" -run"
+    /SC MINUTE /MO 5 /F
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads:
+  - CiscoSparkLauncher.dll
+  - libcef.dll
+  - lib\te64.dll
+  network_connections:
+  - Voldemort -> sheets.googleapis.com:443
+  - HealthKick -> C2:465
+  file_activity:
+  - C:\ProgramData\
+  persistence:
+  - Scheduled task named "SystemHealthMonitor" created via schtasks.exe running every
+    5 minutes with command malware_binary.exe -run
+  - Scheduled task named "MyGoTask" (or "UPnPHostUpdater" in later variants) created
+    via Windows COM interface running every 15 minutes with argument cuVn
+  - HealthKick copies itself to a randomly named directory under C:\ProgramData\ before
+    scheduling its task
+  process_relations:
+  - powershell.exe -> Python.exe
+  - CiscoCollabHost.exe -> CiscoSparkLauncher.dll
+  - adobe_licensing_wf_helper.exe -> libcef.dll
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - hxxps://www[.]proofpoint[.]com/us/blog/threat-insight/malware-must-not-be-named-suspected-espionage-campaign-delivers-voldemort
+  - hxxps://www[.]proofpoint[.]com/us/blog/threat-insight/phish-china-aligned-espionage-actors-ramp-up-taiwan-semiconductor-targeting
+  - hxxps://www[.]volexity[.]com/blog/2025/10/08/apt-meets-gpt-targeted-operations-with-untamed-llms/
+authors: []
+reference: https://www.picussecurity.com/resource/blog/revisiting-voldemort-healthkick-and-govershell-a-technical-retrospective
+date_of_publication: May 21, 2026
+file_creation_date: May 21, 2026

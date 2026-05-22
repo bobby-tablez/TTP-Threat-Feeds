@@ -1,0 +1,29 @@
+title: 'Penetration Testing vs. Red Teaming: What''s the Difference?'
+description: Penetration testing and red teaming are both ways to stress test your
+  security, but they're not the same thing. This post breaks down how each works,
+  when to use one over the other, and where AI pentesting is changing the equation.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes: []
+  command_lines: []
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - hxxps://cdn.prod.website-files.com/642adcaf364024654c71df23/6a0726c8ab6216455c742c82_completed-test.png
+authors:
+- Nicholas Thomson
+reference: https://www.aikido.dev/blog/penetration-testing-vs-red-teaming-whats-the-difference
+date_of_publication: May 19, 2026
+file_creation_date: May 19, 2026

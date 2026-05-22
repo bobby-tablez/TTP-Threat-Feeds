@@ -1,0 +1,36 @@
+title: Cisco Catalyst SD-WAN Controller and SD-WAN Manager Vulnerabilities
+description: Cisco disclosed vulnerabilities in Cisco Catalyst SD-WAN Controller and
+  SD-WAN Manager that allow remote, unauthenticated attackers to bypass authentication
+  and gain administrative privileges.
+attribution: ''
+malware_families: []
+cves:
+- CVE-2026-20182
+- CVE-2026-20133
+- CVE-2026-20128
+- CVE-2026-20122
+ttps:
+  processes: []
+  command_lines: []
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - hxxps://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-sdwan-rpa2-v69WY2SW
+  - hxxps://nvd.nist.gov/vuln/detail/CVE-2026-20182
+  - hxxps://blog.talosintelligence.com/sd-wan-ongoing-exploitation/
+  - hxxps://www.cisco.com/c/en/us/support/docs/routers/sd-wan/225842-remediate-catalyst-sd-wan-security.html
+  - hxxps://blog.talosintelligence.com/uat-8616-sd-wan/
+authors: []
+reference: https://www.esentire.com/security-advisories/cisco-catalyst-sd-wan-zero-day-vulnerability-cve-2026-20182
+date_of_publication: May 19, 2026
+file_creation_date: May 19, 2026

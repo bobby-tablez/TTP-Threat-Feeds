@@ -1,0 +1,30 @@
+title: WEEKLY INTELLIGENCE REPORT
+description: Check Point Research's analysis of recent cyber threats, including ransomware
+  operations and vulnerabilities.
+attribution: ''
+malware_families: []
+cves:
+- CVE-2026-44112
+- CVE-2026-42945
+- CVE-2026-20182
+- CVE-2026-28819
+ttps:
+  processes: []
+  command_lines: []
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors: []
+reference: https://research.checkpoint.com/2026/18th-may-threat-intelligence-report/
+date_of_publication: May 18, 2026
+file_creation_date: May 19, 2026

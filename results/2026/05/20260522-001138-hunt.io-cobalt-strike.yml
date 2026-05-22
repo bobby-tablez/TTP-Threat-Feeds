@@ -1,0 +1,149 @@
+title: 'The Complete Guide to Hunting Cobalt Strike - Part 1: Detecting Cobalt Strike
+  in Open Directories'
+description: Attackers deployed Cobalt Strike beacons via malicious .lnk files executing
+  encoded PowerShell payloads that perform in-memory shellcode injection using VirtualAlloc,
+  connecting to C2 infrastructure on non-standard ports. The campaign was identified
+  through reused TLS certificates labeled "Major Cobalt Strike" and exposed open directories
+  containing lure files.
+attribution: ''
+malware_families:
+- Cobalt Strike
+- ERMAC
+- Viper
+- ARL
+- Gophish
+cves: []
+ttps:
+  processes:
+  - powershell.exe
+  - rundll32.exe
+  - rundll32
+  command_lines:
+  - powershell -nop -w hidden -encodedcommand
+  - powershell -nop -w hidden -encodedCommand
+  powershell:
+  - Invoke-WebRequest
+  - powershell -nop -w hidden -encodedcommand
+  - '$s=New-Object IO.MemoryStream(,[Convert]::FromBase64String( HASIAAAAAAAAAKIXDY+iyhL+PPAKPky1RsdFYX2Zk6BHFQUUPBNDOZNNBK+86Ap7d/34a10mzZ2
+    v3eReE TXpraqueurpskKF+EHFAJKX5BqQe] JBIESUQZUKNFu+K2LqC/WIKNNF jo626HzwakL 86ghu/OMIABhSP1VUIUBANRUGFAEG
+    DS TLVGSIROERNTAB 14561 puQ70CrAZAGWVChAr1 rhGS j8jPneX3XBshs+fy5FuUBPD1UTAEMAtDAGSWEMGPTH2]1nSYWTepdoAGpY61719rQ8VVEHUVS3tAS0A0MFT1
+    iauDr TTagpnIVia/VInsF28UH+pEXAENL BUVNIOQ7 tmiiFaxTHaVZx sulg+HihL SAzded712Rg7TqC127+Xceenie7F8]czoAInj10FnVi86pSTZ2gg23AXDYpV6ZVZ7
+    Finhvr5500Q0R jasiQ6GELUPMDEhHYYIATIGBRHAT2r FKKTPHY.+14kQACRO41MEXondy j7B070SWVSV2n3
+    /X7ktIhVENINOVKrIXT1IZHISPVE78DhXS ZpuL ORLOTO6/T16ZFHATMLNWYFABVQ100RNg + TOJVU+4Hi
+    7e86HKMR Tk hy Vids UHSVkog TALtBGVZEUSW/PIPFi7b3]TD618N1HOAVS1L ei5+FKGeVy4yXgp35CKVPAnBqxYhy
+    4BBLY7re9CHO+TAFUOAGHk3upC+yhnCHTDHO3YTkamFped1ARrOKZr FONDNNOVAG+ E33e7F0UANeQ:
+    JVAQSSR +dueSWVBQdCAOE Vs zoen9hzeJ0+HQ3tNV2NHGS Z4EurFKz 13X 2vUqpEFJQFKCEGLPEhdhNX8W/3FXi
+    1yMdBDim7mXBgeQXr fuuQasHzFOskt ghkge1BGuM1Sq1TAM2E1VZNS CKHOTSQOYF 1y XNKISTTHZF
+    000NHYFT/ZYOy TYVYtD8L 2kQ6reIDC51KS 1 XPVEA3YEK 4B/ CVp2Ty6HTS LqBIHSPQEDVCNGVHGEAKTPHIrPSEVP/NVROLZASUOEIATHOPPAP3RRNXYNX1LPL5CSb11yASa0DQLX7OINIK1L
+    201 TtO0FDGVDVNTIHORPASEX+AX5NS IXBQF8ZDISVKAYeFlo0hPosUSCt/ tsFEA1t0jSzTAmCHd/y0/E@OR9qkc21ZCBBSSTubD1C2F
+    FPPUS0eG7g6a301 C7F/25Fte1 JThoachBK62CQSYVIK Fum091XDL+335670]0tZue@4ONFVKTtxMoT
+    JBbQIMIB2VK1pdHE5SebL 1PV11] TN NBAAQ2BIL2+HBrrHyenli1 1j80pMabadEapqnZT/Y HHIUG6TTSHCZ++OEANOKBZBICE
+    HVOKONTOE3g1 ]y INUEIKHXKATrUIWKFSG2FaNIDaNAXSOuE /FDNhsmjpsTzyIyUT38G0zagYg7XkTBLXUDE60BNWHHYAFPFPVZXUTLY
+    tYAEFEStOTSITL SDJAC6]ZDhEXFY7SEUKHALMQHFk.WILOEqXSCU60giR2B1yFk83JaN1YaXoYMAttOGRHeK
+    JUGLUOKTYQ5qYeYqePaPARIUSBETark+2135HeVIXD2NXNRY tbHyMofyT/SAtTNpPpCCAy27118d0n0ozI
+    crPQt1 31Uk tvtqBFaNDSCy 76313/XMurtY2xFdoZDTo7@0Md 21 5v21dk3SDAUO1 kuORKbSbTKOTTxxiKeQye7mNHNI9saGehRPDSUANNHY
+    L5 LHy hANZ5OHEVEFoWAIt1LPSIGETStBM5N1ZT1q9L uexvV0doX39/@u047SUPEE3VCpXX1Uej65YCxvFVgLpYNETgeVNhayriN1Zz0sRa@paDXNTksOgqmu3ashi281dh1
+    pHriHnEnSrtIucI6PAX0.+mLP1UDSY1R3YPAKMFDCS7JROBOF S +p2JuV/SWEGH] JK7TTrnvi+F5h3RNUULTX6PUNMYOW]
+    7tA2XYHS6/6adBeVGNHrkzkB1MF4tFPNA13eNNCtvaHOHaFeOE JSAtPOODSFONKT62vn4Gn jyBunzUnnnIpIVpUNSCPoGoSN61qeiGFCzz0B1A3pYPCATWFEQBLD2CZBITXCFNCU+yHaSF1xVTOuIpgEHRz
+    tZ3 1 t+bI3asHVbht SVKOZJBZ53F62pFcbil+TOIBRBISINEGrY2yarRzASI FINmd/QdF/h8STL3VG1I1SAHL
+    5 1uVenbyv6083y cvtz7t7F1BS4g15GrXFKChy L 9q FiQQhHt kUpGGPJbO TNWEBGIDZNSKNHOLT7unT8uCKBFuknSAI6KNNAZrpa1Tr/oYEgbd2muXs
+    1tCRDPVHhGEYICZIUGRKTFU12eXNx ] FDNYIREP3/ ekvCq7OCCQMFE+ypFIuxNGOk/S5CLVWOLZ/XSpuSatZcvFPk/USHVIPSindQOTb8Pybght3/070ZeH1
+    /9gZd7tDHe UL xa+Fgrij352H6EZePqBP tXPURY T+ OHgaURVIbO7S/ egTInghroH1HFqgY THhUYDVKSEZpRAXNT10e
+    sbFQNOUTXGKVCHpHL+GLkaVSkk/VRmOjeSCZO5vwHNriJWzweAAA==") ) ; TEX (New-Object I0.StreamReader
+    (New-Object IO.Compression.GzipStrean($s, [I0.Compression. Compressiontode]: :Decompress)))
+    . ReadToEnd();'
+  - for ($x = 05 $x -1t Svar_code.Count; $xt) {$var_code[$x] = $var_code[$x] -bxor
+    35}
+  scripts: []
+  registry_keys: []
+  image_loads:
+  - winvnc.x86.dll
+  network_connections:
+  - powershell.exe -> 141.98.197[.]31:81
+  - shellcode -> 141.98.197[.]31:7785
+  - powershell.exe -> 141.98.197[.]31:81/setup_office.exe
+  - Cobalt Strike Beacon -> C2:8080
+  - Cobalt Strike Beacon -> C2:8088
+  - Cobalt Strike Beacon -> C2:443
+  - Cobalt Strike Beacon -> C2:7785
+  - Cobalt Strike Beacon -> C2:14323
+  - unknown -> 141.98.197[.]31:7785
+  file_activity:
+  - C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+  - C:\Windows\setup_office.exe
+  - hxxp://141.98.197[.]31:81/setup_office.exe
+  - setup_office.exe
+  - Master.lnk
+  - SetupOffice.lnk
+  - payload.txt
+  - 111.out
+  - Setup_office.exe
+  - Master.exe
+  - setupoffice.lnk
+  - \\.\pipe\MSSE-<random>-server
+  persistence:
+  - Malware enters an infinite loop sleeping for ten seconds then checking for new
+    commands through a named pipe, remaining dormant but responsive indefinitely
+  - Cobalt Strike Beacon uses infinite loop for continuous operation via named pipe
+    \\.\pipe\MSSE-<random>-server
+  - Malware enters an infinite loop sleeping for ten seconds then checking for new
+    commands through a named pipe, allowing indefinite dormant operation
+  - Cobalt Strike Beacons maintain persistence using registry entries or startup scripts;
+    analyzed samples use an infinite loop for continuous operation
+  - Named pipe creation for local C2 communication via \\.\pipe\MSSE-<random>-server
+  - Named pipe creation via CreateNamedPipeA for local C2 communication using pattern
+    \\.\pipe\MSSE-<random>-server
+  process_relations:
+  - Master.lnk -> powershell.exe
+  - SetupOffice.lnk -> powershell.exe
+  - powershell.exe -> powershell.exe (32-bit compatibility mode spawned on 64-bit
+    systems)
+iocs:
+  hashes:
+  - 87f2085c32b6a2cc709b365f55873e207a9caa10bffecf2fd16d3cf9d94d390c
+  - 56a06a233bd30f693de25ef12cc19e8b2c92d3eb97dd969a2578df084c376478
+  ip_addresses:
+  - 47.103.218[.]35
+  - 141.98.197[.]31
+  - 43.199.214[.]90
+  - 107.148.35[.]2
+  - 58.87.103[.]59
+  - 103.149.93[.]146
+  - 106.52.24[.]141
+  - 45.118.144[.]151
+  - 116.62.42[.]4
+  - 47.101.187[.]187
+  - 118.25.10[.]65
+  - 62.234.150[.]115
+  - 1.92.137[.]130
+  - 150.158.21[.]250
+  - 39.104.200[.]45
+  - 124.221.32[.]87
+  - 47.129.171[.]26
+  - 38.12.24[.]188
+  - 101.133.157[.]22
+  - 35.220.161[.]31
+  - 86.106.85[.]185
+  - 49.232.34[.]39
+  - 113.44.68[.]52
+  - 154.64.246[.]191
+  - 92.246.87[.]44
+  - 119.29.244[.]248
+  - 38.55.199[.]104
+  - 45.38.20[.]254
+  - 149.104.11[.]50
+  - 47.238.140[.]204
+  domains: []
+  urls:
+  - hxxp://141.98.197[.]31:81/setup_office.exe
+  - hxxps://hunt[.]io/contact-us
+  - hxxp://38.12.24[.]188:80/Server/.cobaltstrike.beacon_keys
+  - hxxp://38.12.24[.]188:80/Server/cobaltstrike.auth
+  - hxxp://38.12.24[.]188:80/Server/cobaltstrike.store
+  - hxxp://141.98[.]197.31:81
+  - hxxps://public-hunt-static-blog-assets[.]s3[.]us-east-1[.]amazonaws[.]com/11-2025/The+Complete+Guide+to+Hunting+Cobalt+Strike+-+Part+1+++Detecting+Cobalt+Strike+in+Open+Directories+-+figure+16[.]png
+  - hxxps://public-hunt-static-blog-assets[.]s3[.]us-east-1[.]amazonaws[.]com/11-2024/Screenshot+2025-11-13+at+9.54.18%E2%80%AFAM[.]png
+authors: []
+reference: https://hunt.io/blog/guide-hunting-cobalt-strike-part-1-open-directories
+date_of_publication: November 13, 2025
+file_creation_date: May 22, 2026

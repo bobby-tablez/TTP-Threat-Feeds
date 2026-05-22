@@ -1,0 +1,33 @@
+title: Amatera Stealer Attack Chain Analysis
+description: Amatera's developers have made significant changes to thwart traffic
+  inspection, including replacing AES-256-CBC with ECDH key exchange using NIST P-256,
+  followed by ChaCha20-Poly1305 encryption.
+attribution: SheldIO
+malware_families:
+- Amatera Stealer
+- NetSupport RAT
+cves: []
+ttps:
+  processes:
+  - powershell.exe
+  command_lines: []
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads:
+  - ntdll.dll
+  - User32.dll
+  network_connections:
+  - powershell.exe -> c2[.]domain:80
+  file_activity: []
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors: []
+reference: https://www.esentire.com/blog/amatera-stealer-4-0-2-beta-whats-new-in-this-variant
+date_of_publication: May 19, 2026
+file_creation_date: May 19, 2026

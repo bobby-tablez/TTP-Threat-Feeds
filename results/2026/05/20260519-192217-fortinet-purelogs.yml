@@ -1,0 +1,46 @@
+title: PureLogs Delivery via PawsRunner Steganography
+description: A phishing campaign uses steganography to deliver a .NET infostealer,
+  PureLogs, via a TXZ archive containing obfuscated JavaScript and a .NET assembly
+  loader.
+attribution: ''
+malware_families:
+- PureLogs
+cves: []
+ttps:
+  processes:
+  - conhost.exe
+  - powershell.exe
+  command_lines:
+  - headless powershell.exe -w h -NoP -nOni -S Oni G e N TCAIRAT IRretlovnasuisitaosemasasnsacingeseiios
+    )5 BYPASS -Command e Senv:edpsIndBgy S i e
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads:
+  - '[DLLs or modules loaded]'
+  network_connections:
+  - '[process -> decrypted EXE loader:port]'
+  - '[decrypted EXE loader -> C2 server endpoints]'
+  - powershell.exe -> 5.101.84.202[.]8996
+  - hitps://5.10184202899 -> /ping
+  - hittps://5.10184.202899 -> Juserinfo
+  - hitps7/5.101842028996 -> /browser
+  - hitps7/5.101842028996 -> /discord
+  - https//5.101.842028996 -> /illesearchireq
+  - hitps//5.101842028996 -> ffinish
+  file_activity: []
+  persistence: []
+  process_relations:
+  - conhost.exe -> powershell.exe
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - https//5[.]101[.]842028996
+authors:
+- FortiGuard Labs
+- Mohammed Cosulich
+reference: https://www.fortinet.com/blog/threat-research/purelogs-delivery-via-pawsrunner-steganography
+date_of_publication: May 15, 2026
+file_creation_date: May 19, 2026

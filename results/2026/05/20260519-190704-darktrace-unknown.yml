@@ -1,0 +1,40 @@
+title: How generative AI changes insider behavior
+description: A discussion on how AI systems can influence and enable insider threats
+  through cognitive amplification, operational enablerment, and semi-autonomous actions.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes: []
+  command_lines: []
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - Compromise -> 7912722147:1000
+  - Compromise -> 43130.073:80
+  - ' -> 43130.73.mon:80'
+  - ' -> 47.84.56.5:445'
+  - ' -> 47.84.56.5:47.84.56.5'
+  - ' -> 47.84.56.5:1000'
+  - ' -> 79127.221.470:1000'
+  - ' -> 79427.221.470:1000'
+  file_activity: []
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+  - '7912722147'
+  - 43130[.]073
+  - 47.84.56.5
+  - 79127.221.470
+  - 79427.221.470
+  domains: []
+  urls: []
+authors:
+- Darktrace
+reference: https://www.darktrace.com/blog/ai-insider-threats-how-generative-ai-is-changing-insider-risk
+date_of_publication: May 19, 2026
+file_creation_date: May 19, 2026

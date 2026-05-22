@@ -1,0 +1,73 @@
+title: 'The Complete Guide to Hunting Cobalt Strike - Part 2: 10+ HuntSQL Recipes
+  to Find Cobalt Strike'
+description: A practical guide presenting 10+ HuntSQL query recipes to detect, cluster,
+  and track Cobalt Strike C2 infrastructure using enriched malware dataset fields
+  including watermarks, public keys, spawn targets, and URI patterns. The report covers
+  behavioral fingerprinting, campaign clustering, and infrastructure attribution for
+  Cobalt Strike beacons.
+attribution: Lazarus Group
+malware_families:
+- Cobalt Strike
+- AsyncRAT
+- QuasarRAT
+- Metasploit
+- Pyramid C2
+- reNgine
+- Tactical RMM
+- Keitaro
+cves: []
+ttps:
+  processes:
+  - dllhost.exe
+  - imeklmg.exe
+  command_lines: []
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - Cobalt Strike beacon -> 124.223.25[.]186:4444
+  - dllhost.exe -> 185.196.11[.]20:443
+  - dllhost.exe -> 147.185.221[.]25:443
+  - dllhost.exe -> 93.113.25[.]195:443
+  - Cobalt Strike beacon -> 124.223.25[.]186:50050
+  - Cobalt Strike beacon -> 185.196.11[.]20
+  - Cobalt Strike beacon -> 147.185.221[.]25
+  - imeklmg.exe -> 93.113.25[.]195:443
+  - Cobalt Strike beacon -> 101.43[.]136.183:8443
+  - Cobalt Strike beacon -> 171.244.143[.]184:80
+  - Cobalt Strike beacon -> 118.25.91[.]151:8084
+  file_activity:
+  - /view.jsp
+  - psmon.dat
+  - avgnt.dat
+  persistence: []
+  process_relations:
+  - unknown parent -> dllhost.exe
+  - unusual parent -> dllhost.exe
+iocs:
+  hashes:
+  - 60182a31714e152628714a75b05e8a6502ae481b0fc003d0746dffa833e5762f
+  ip_addresses:
+  - 124.223.25[.]186
+  - 185.196.11[.]20
+  - 147.185.221[.]25
+  - 93.113.25[.]195
+  - 62.60[.]229.89
+  - 185.147[.]39.227
+  - 150.187[.]25.242
+  - 185.196[.]11.20
+  - 147.185[.]221.25
+  - 93.113[.]25.195
+  domains:
+  - kerneltaskmanager[.]com
+  - misctoolsupdate[.]com
+  - web.sparkfunding56[.]site
+  - 3se9ewodke339f0e82.connectivitytests[.]com
+  - www.j-query[.]site
+  - juyulyifanyi[.]app
+  urls: []
+authors: []
+reference: https://hunt.io/blog/guide-hunting-cobalt-strike-part-2-huntsql-recipes
+date_of_publication: November 19, 2025
+file_creation_date: May 22, 2026

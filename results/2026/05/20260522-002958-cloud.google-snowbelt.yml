@@ -1,0 +1,122 @@
+title: 'Snow Flurries: How UNC6692 Employed Social Engineering to Deploy a Custom
+  Malware Suite'
+description: UNC6692 uses social engineering and malicious Microsoft Edge extensions
+  (SNOWBELT), a Python HTTP backdoor (SNOWBASIN), and a Python WebSocket tunneler
+  (SNOWGLAZE) to establish C2, exfiltrate data, and proxy traffic through compromised
+  systems. The campaign abuses legitimate cloud services including Amazon S3 and Heroku
+  for payload delivery and C2 infrastructure.
+attribution: UNC6692
+malware_families:
+- SNOWBELT
+- SNOWGLAZE
+- SNOWBASIN
+cves: []
+ttps:
+  processes:
+  - msedge.exe
+  - cmd.exe
+  - lsass.exe
+  - powershell.exe
+  - tasklist.exe
+  - taskkill.exe
+  - python.exe
+  - RegSrvc.exe
+  command_lines:
+  - cmd /c start "" "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+    --user-data-dir="%LOCALAPPDATA%\Microsoft\Edge\System Data" --headless=new --load-extension="%LOCALAPPDATA%\Microsoft\Edge\Extension
+    Data\SysEvents" --no-first-run
+  - '"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --user-data-dir="C:\Users\<redacted>\AppData\Local\Microsoft\Edge\System
+    Data" --no-first-run --load-extension="C:\Users\<redacted>\AppData\Local\Microsoft\Edge\Extension
+    Data\SysEvents" --headless=new --disable-sync'
+  - /c "for /f "tokens=2" %p in ('tasklist /M SHELL32.dll ^| findstr "msedge.exe"')
+    do @(tasklist /M CoreUIComponents.dll | findstr "%p" >nul || taskkill /F /PID
+    %p)"
+  powershell: []
+  scripts:
+  - if !CheckHeadlessEdge(){try{taskService:=ComObject("Schedule.Service")taskService.Connect()rootFolder:=taskService.GetFolder("\")if
+    FindAndRunTask(rootFolder){Sleep 10000if CheckHeadlessEdge(){ExitApp}}}Run 'cmd
+    /c start "" "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --user-data-dir="%LOCALAPPDATA%\Microsoft\Edge\System
+    Data" --headless=new --load-extension="%LOCALAPPDATA%\Microsoft\Edge\Extension
+    Data\SysEvents" --no-first-run',,"Hide"}ExitApp
+  - Protected.ahk
+  - background.js
+  - dream.js
+  registry_keys: []
+  image_loads:
+  - CoreUIComponents.dll
+  - SHELL32.dll
+  network_connections:
+  - SNOWGLAZE -> wss://sad4w7h913-b4a57f9c36eb[.]herokuapp[.]com:443/ws
+  - SNOWBASIN -> localhost:8000
+  - SNOWBASIN -> localhost:8001
+  - SNOWBASIN -> localhost:8002
+  - SNOWGLAZE -> wss://sad4w7h913-b4a57f9c36eb.herokuapp[.]com/ws
+  - SNOWGLAZE -> http://localhost[:]8000/flush
+  - SNOWBELT -> cloudfront-021.s3.us-west-2.amazonaws[.]com
+  file_activity:
+  - C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe
+  - C:\Users\<redacted>\AppData\Local\Microsoft\Edge\System Data
+  - C:\Users\<redacted>\AppData\Local\Microsoft\Edge\Extension Data\SysEvents
+  - NTDS.dit
+  - C:\ProgramData\log
+  - C:\Users\<user>\AppData\Local\Microsoft\Edge\Extension Data\SysEvents\background.js
+  - C:\Users\<user>\AppData\Local\Microsoft\Edge\Extension Data\SysEvents\dream.j
+  - C:\Users\<user>\AppData\Local\Microsoft\Edge\Extension Data\SysEvents
+  - profileB5.txt
+  - RegSrvc.exe
+  - C:\Users\<user>\AppData\Local\Microsoft\Edge\Extension Data\SysEvents\dream.js
+  - C:\Users\<user>\AppData\Local\Microsoft\Edge\Extension Data\SysEvents\dream.html
+  - C:\Users\<user>\AppData\Local\Microsoft\Edge\Extension Data\SysEvents\helper.html
+  persistence:
+  - Shortcut to AutoHotKey script added to Windows Startup folder to verify SNOWBELT
+    was running and that a Scheduled Task was present
+  - Scheduled Task to start a windowless Microsoft Edge process loading the SNOWBELT
+    extension
+  - Scheduled Task to identify and terminate Microsoft Edge processes that do not
+    have CoreUIComponents.dll loaded
+  - SNOWBELT persists via the browser's extension registration system using Service
+    Worker Alarms (agent-heartbeat) and Keep-Alive Tab Injection (helper.html)
+  - Scheduled task executing msedge.exe in headless mode with a malicious extension
+    loaded from %LOCALAPPDATA%\Microsoft\Edge\Extension Data\SysEvents
+  - AutoHotKey script (Protected.ahk) suspected to install SNOWBELT via Windows Task
+    Scheduler COM object
+  - Browser extension registered under Microsoft Edge (SysEvents extension directory)
+  - Registry Run Keys / Startup Folder (T1547.001)
+  - Scheduled Task (T1053.005)
+  - Windows Service creation or modification (T1543.003)
+  - Shortcut Modification (T1547.009)
+  process_relations:
+  - AutoHotKey -> cmd.exe
+  - SNOWBELT -> SNOWBASIN (HTTP POST to localhost:8000)
+  - cmd.exe -> msedge.exe
+iocs:
+  hashes:
+  - 691f7258f212fa8908a8bf06bcf9e027d2177276e13e10ff56bd434ff3755cc4
+  - 2fa987b9ed6ec6d09c7451abd994249dfaba1c5a7da1c22b8407c461e62f7e49
+  - c8940de8cb917abe158a826a1d08f1083af517351d01642e6c7f324d0bba1eb8
+  - 7f1d71e1e079f3244a69205588d504ed830d4c473747bb1b5c520634cc5a2477
+  - ca390b86793922555c84abc3b34406da2899382c617f9dcf83a74ac09dd18190
+  - 6e6dab993f99505646051d2772701e3c4740096ff9be63c92713bcb7fcddf9f7
+  - de200b79ad2bd9db37baeba5e4d183498d450494c71c8929433681e848c3807f
+  ip_addresses: []
+  domains:
+  - service-page-25144-30466-outlook.s3.us-west-2.amazonaws[.]com
+  - service-page-18968-2419-outlook.s3.us-west-2.amazonaws[.]com
+  - sad4w7h913-b4a57f9c36eb[.]herokuapp[.]com
+  - cloudfront-021.s3.us-west-2.amazonaws[.]com
+  - service-page-11369-28315-outlook[.]s3[.]us-west-2[.]amazonaws[.]com
+  - sad4w7h913-b4a57f9c36eb.herokuapp[.]com
+  urls:
+  - hxxps://service-page-25144-30466-outlook.s3.us-west-2.amazonaws[.]com/update.html?email=<redacted>.com
+  - wss://sad4w7h913-b4a57f9c36eb[.]herokuapp[.]com/ws
+  - wss://sad4w7h913-b4a57f9c36eb.herokuapp[.]com/ws
+  - http://localhost[:]8000/flush
+authors:
+- JP Glab
+- Tufail Ahmed
+- Josh Kelley
+- Muhammad Umair
+- Google Threat Intelligence Group (GTIG)
+reference: https://cloud.google.com/blog/topics/threat-intelligence/unc6692-social-engineering-custom-malware
+date_of_publication: May 22, 2026
+file_creation_date: May 22, 2026

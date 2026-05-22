@@ -1,0 +1,73 @@
+title: Backdoored node-ipc npm Package Credential Exfiltration via DNS
+description: Malicious versions of the node-ipc npm package (9.1.6, 9.2.3, 12.0.1)
+  contain a backdoor that forks a detached child process to harvest cloud credentials,
+  SSH keys, Kubernetes secrets, and other sensitive files, then exfiltrates them via
+  DNS TXT queries to a threat-actor-controlled endpoint.
+attribution: ''
+malware_families:
+- node-ipc backdoor
+- node-ipc
+cves: []
+ttps:
+  processes:
+  - node
+  - node-ipc.cjs
+  command_lines:
+  - grep -R 'node-ipc@\|"node-ipc"' package.json package-lock.json yarn.lock pnpm-lock.yaml
+    npm-shrinkwrap.json 2>/dev/null
+  - shasum -a 256 node_modules/node-ipc/node-ipc.cjs
+  - uname -a
+  powershell: []
+  scripts:
+  - grep -F -e '__ntRun' \-e '3786M216G75727563747164796360727P66796465627M2M65647G34343339'
+    \-e '2647M2M6P64656M2G637H' \node_modules/node-ipc/node-ipc.cjs
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - node -> sh.azurestaticprovider[.]net:443
+  - node -> 8[.]8[.]8[.]8:53
+  - node -> 1[.]1[.]1[.]1:53
+  - node -> 37[.]16[.]75[.]69:443
+  - node-ipc.cjs -> sh.azurestaticprovider[.]net:443
+  file_activity:
+  - node_modules/node-ipc/node-ipc.cjs
+  - /etc/hosts
+  - ~/.aws/credentials
+  - ~/.azure/accessTokens.json
+  - ~/.config/gcloud/application_default_credentials.json
+  - ~/.oci/config
+  - .npmrc
+  - ~/.npmrc
+  - ~/.git-credentials
+  - ~/.config/gh/hosts.yml
+  - .git/config
+  - ~/.ssh/id_rsa
+  - ~/.ssh/id_ed25519
+  - ~/.kube/config
+  - /var/run/secrets/kubernetes.io/serviceaccount/token
+  - .env
+  - .env.production
+  - config/database.yml
+  - terraform.tfvars
+  - wp-config.php
+  persistence: []
+  process_relations:
+  - node (parent) -> node detached child with __ntw=1
+  - node-ipc.cjs -> detached child process
+iocs:
+  hashes:
+  - 449e4265979b5fdb2d3446c021af437e815debd66de7da2fe54f1ad93cbcc75e
+  - c2f4dc64aec4631540a568e88932b61daebbfb7e8281b812fa01b7215f9be9ea
+  - 78a82d93b4f580835f5823b85a3d9ee1f03a15ee6f0e01b4eac86252a7002981
+  - 96097e0612d9575cb133021017fb1a5c68a03b60f9f3d24ebdc0e628d9034144
+  ip_addresses:
+  - 37[.]16[.]75[.]69
+  - 37.16.75[.]69
+  domains:
+  - sh.azurestaticprovider[.]net
+  - bt.node[.]js
+  urls: []
+authors: []
+reference: https://securitylabs.datadoghq.com/articles/node-ipc-npm-malware-analysis
+date_of_publication: May 14, 2026
+file_creation_date: May 22, 2026

@@ -2384,8 +2384,8 @@ def initialize_llm_provider(args):
             'endpoint': 'http://127.0.0.1:11434/api/chat'
         },
         'openai': {'model_name': 'gpt-4o'},
-        'claude': {'model_name': 'claude-3-5-sonnet-20241022'},
-        'gemini': {'model_name': 'gemini-2.0-flash-exp'}
+        'claude': {'model_name': 'claude-sonnet-4-6'},
+        'gemini': {'model_name': 'gemini-2.0-flash'}
     }
 
     provider_defaults = defaults.get(args.provider, {})

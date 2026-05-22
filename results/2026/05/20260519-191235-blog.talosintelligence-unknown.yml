@@ -1,0 +1,38 @@
+title: Cisco Talos Vulnerability Discovery & Research team disclosed vulnerabilities
+  in TP-Link, Adobe Photoshop, OpenVPN, and Gen Digital's Norton VPN
+description: Cisco Talos disclosed eight vulnerabilities in TP-Link devices, one each
+  in Adobe Photoshop, OpenVPN, and Gen Digital's Norton VPN.
+attribution: ''
+malware_families: []
+cves:
+- CVE-2026-30814
+- CVE-2026-30815
+- CVE-2026-30816
+- CVE-2026-30817
+- CVE-2026-30818
+- CVE-2026-34632
+- CVE-2026-35058
+- CVE-2025-58074
+ttps:
+  processes: []
+  command_lines: []
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- Lilith >_>
+- KPC
+- Emma Reuter
+reference: https://blog.talosintelligence.com/tp-link-photoshop-openvpn-norton-vpn-vulnerabilities/
+date_of_publication: May 19, 2026
+file_creation_date: May 19, 2026

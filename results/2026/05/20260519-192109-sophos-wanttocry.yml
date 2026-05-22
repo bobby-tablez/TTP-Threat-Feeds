@@ -1,0 +1,40 @@
+title: SophosLabs analysts investigated WantToCry ransomware attacks
+description: SophosLabs analysts investigated WantToCry ransomware attacks that involved
+  the threat actors abusing the Server Message Block (SMB) service for initial access
+  and then exfiltrating files to attacker-controlled infrastructure for remote encryption.
+attribution: ''
+malware_families:
+- WantToCry
+cves: []
+ttps:
+  processes: []
+  command_lines: []
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - WIN-J9D866ESIJ2 -> 109.69.58.213
+  - WIN-LIVFRVQFMKO -> 185.189.13.56
+  - WIN-LIVFRVQFMKO -> 185.200.191.37
+  - WIN-J9D866ESIJ2 -> 194.36.179.18
+  - WIN-LIVFRVQFMKO -> 194.36.179.30
+  file_activity: []
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+  - 87.225.105.217
+  - 109.69.58.213
+  - 185.189.13.56
+  - 185.200.191.37
+  - 194.36.179.18
+  - 194.36.179.30
+  domains: []
+  urls:
+  - hxxps://t[.]me/want_to_cry_team
+authors: []
+reference: https://www.sophos.com/en-us/blog/wanttocry-ransomware-remotely-encrypts-files
+date_of_publication: May 19, 2026
+file_creation_date: May 19, 2026

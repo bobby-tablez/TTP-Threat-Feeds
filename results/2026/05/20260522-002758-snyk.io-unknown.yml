@@ -1,0 +1,43 @@
+title: Malicious node-ipc versions published to npm in suspected maintainer account
+  compromise
+description: Multiple malicious versions of the npm package node-ipc (9.1.6, 9.2.3,
+  12.0.1) were published on May 14, 2026, containing an obfuscated credential-stealing
+  payload injected into node-ipc.cjs that harvests cloud credentials, SSH keys, Kubernetes
+  tokens, and other secrets and exfiltrates them to attacker-controlled infrastructure.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes: []
+  command_lines:
+  - npm ls node-ipc
+  - npm ls node-ipc --all 2>/dev/null | grep -E '9\.1\.6|9\.2\.3|12\.0\.1'
+  - grep -E '"node-ipc".*"(9\.1\.6|9\.2\.3|12\.0\.1)"' package-lock.json
+  - grep -E 'node-ipc@(9\.1\.6|9\.2\.3|12\.0\.1)' yarn.lock
+  - grep -E 'node-ipc.*9\.1\.6|9\.2\.3|12\.0\.1' pnpm-lock.yaml
+  - find . -path '*/node_modules/node-ipc/node-ipc.cjs' -exec ls -lh {} \;
+  - snyk test
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - node-ipc -> sh.azurestaticprovider[.]net
+  - node-ipc -> 37.16.75[.]69
+  file_activity:
+  - node-ipc.cjs
+  - '*/node_modules/node-ipc/node-ipc.cjs'
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+  - 37.16.75[.]69
+  domains:
+  - azurestaticprovider[.]net
+  - sh.azurestaticprovider[.]net
+  urls: []
+authors: []
+reference: https://snyk.io/blog/malicious-node-ipc-versions-published-npm/
+date_of_publication: May 15, 2026
+file_creation_date: May 22, 2026

@@ -1,0 +1,50 @@
+title: Cisco Talos BadIIS Variant Analysis
+description: The latest version of the BadIIS malware includes a two-stage installation
+  toolset that authenticates with a C2 server, copies payloads to specific directories,
+  and establishes persistence through IIS configuration.
+attribution: ''
+malware_families:
+- BadIIS
+cves: []
+ttps:
+  processes:
+  - svchost.exe
+  - appcmd.exe
+  command_lines:
+  - appcmd.exe install module /name:{name32} /image:{path32} /preCondition=bitness32
+  - appcmd.exe install module /name:{name64} /image:{path64} /preCondition=bitness64
+  - appcmd.exe install module /name:filter /image:C:\Windows\System32\filter.dll /preCondition:bitness32
+  - appcmd.exe install module /name:filter_64 /image:C:\Windows\System32\filter_64.dll
+    /preCondition:bitness64
+  - iisreset /stop
+  - iisreset /start
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads:
+  - iis32.dll
+  - iis64.dll
+  - filter.dll
+  - filter_64.dll
+  network_connections:
+  - svchost.exe -> http://154.194.17[.]133/authorize.txt:80
+  - svchost.exe -> http://45.194.17[.]133/authorize.txt:80
+  file_activity:
+  - C:\Windows\Logs\
+  persistence:
+  - Registry Run key pointing to svchost.exe
+  - Setupfilter.dll
+  - Setupfilter_64.dll
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+  - 45.194.17[.]133
+  domains: []
+  urls: []
+authors:
+- Cisco Talos
+- lwxat
+reference: https://blog.talosintelligence.com/from-pdb-strings-to-maas-tracking-a-commodity-badiis-ecosystem/
+date_of_publication: May 19, 2026
+file_creation_date: May 19, 2026

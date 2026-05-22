@@ -1,0 +1,38 @@
+title: 'BlackFile: Inside a Vishing Extortion Operation'
+description: A threat actor claiming to be BlackFile has breached [COMPANY NAME]'s
+  network, extracted data from SharePoint and M365 instances, and threatened to publish
+  it if not contacted within 72 hours.
+attribution: BlackFile
+malware_families: []
+cves: []
+ttps:
+  processes: []
+  command_lines: []
+  powershell: []
+  scripts:
+  - python-requests/2.28.1
+  - WindowsPowerShell/5.1
+  registry_keys: []
+  image_loads: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+  - 179.43.185.226
+  domains:
+  - <organization>.enrollms[.]com
+  - <organization>.passkeyms[.]com
+  - <organization>.setupsso[.]com
+  urls: []
+authors:
+- Austin Larsen
+- Tyler McLellan
+- Genevieve Stark
+- Dan Ebreo
+- '[pseudorandom_alphanumeric_string]@gmail.com'
+reference: https://cloud.google.com/blog/topics/threat-intelligence/blackfile-vishing-extortion-operation/
+date_of_publication: May 19, 2026
+file_creation_date: May 19, 2026

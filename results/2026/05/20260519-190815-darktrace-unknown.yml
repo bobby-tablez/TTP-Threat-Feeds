@@ -1,0 +1,54 @@
+title: Malicious 7-Zip Installer Campaign
+description: A malicious distribution campaign leveraging a trojanized installer masquerading
+  itself as a legitimate 7Zip utility.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes:
+  - Uphero.exe
+  - hero.exe
+  command_lines: []
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads:
+  - hero.dll
+  network_connections:
+  - 79.127.221[.]47 -> 1000
+  - update[.]7zip[.]com -> 443
+  - zest.hero-sms[.]ai -> 443
+  - flux.smshero[.]cc -> 443
+  - glide.smshero[.]cc -> 443
+  - 79.127.221.470 -> :1000
+  file_activity:
+  - Uphero.exe
+  - hero.exe
+  - hero.dll
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+  - 79.127.221[.]47
+  - 172.96.115[.]226
+  - 84.17.37[.]1
+  - 79.127.221.47
+  domains:
+  - 7zip[.]com
+  - flux[.]smshero[.]co
+  - neo[.]herosms[.]co
+  - nova[.]smshero[.]ai
+  - zest[.]hero-sms[.]ai
+  - soc[.]hero-sms[.]co
+  - pulse[.]herosms[.]cc
+  - glide[.]smshero[.]cc
+  - prime[.]herosms[.]vip
+  urls: []
+authors:
+- Justin Torres, Senior Cyber Analyst
+- David Moreira da Silva, Cyber Analyst
+- Emma Foulger, Global Threat Research Operations Lead
+reference: https://www.darktrace.com/blog/when-open-source-is-weaponized-analysis-of-a-trojanized-7-zip-installer
+date_of_publication: May 19, 2026
+file_creation_date: May 19, 2026

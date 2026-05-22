@@ -1,0 +1,139 @@
+title: 'Tinker Tailor Soldier: Paper Werewolf''s latest toolkit'
+description: Paper Werewolf (a named threat cluster) delivers malicious WSF files
+  containing VBScript that drops MSBuild tasks and VBS persistence scripts, ultimately
+  loading a .NET assembly into memory via reflective loading. The group also uses
+  EchoGather RAT, PaperGrabber, Mythic implant, and various loaders targeting Russian
+  organizations.
+attribution: Paper Werewolf
+malware_families:
+- PaperGrabber
+- EchoGather
+- Mythic
+cves: []
+ttps:
+  processes:
+  - cmd.exe
+  - yandex.exe
+  - MSBuild.exe
+  - wscript.exe
+  - ConsoleApplication.exe
+  command_lines:
+  - reg add "HKCU\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Windows" /v LOAD
+    /t REG_SZ /d "\"%APPDATA%vni.wsf\\"" /f
+  - '%SYSTEMROOT%\Microsoft.NET\(Framework|Framework64)\v4.0.30319\MSBuild.exe /nologo
+    "%LOCALAPPDATA%\msb_cache.xml" /t:___RunHelloWorld___'
+  - wscript.exe %LOCALAPPDATA%\msb_run.vbs
+  - '"${exePath}" "${scriptPath}"'
+  powershell: []
+  scripts:
+  - vain
+  - vain1
+  - vni.wsf
+  - msb_run.vbs
+  - msb_cache.xml
+  - var shell = new ActiveXObject("WScript.Shell"); var appData = shell.ExpandEnvironmentStrings("%APPDATA%");
+    var exe = appData + "\\yandex\\yandex.exe"; var script = appData + "\\yandex\\vain1";
+    shell.Run("\"" + exe + "\" " + script, 0, false);
+  - const { exec } = require('child_process'); const path = require('path'); const
+    fs = require('fs'); const appData = process.env.APPDATA || path.join(process.env.USERPROFILE,
+    'AppData', 'Roaming'); const nodeJsDir = path.join(appData, 'yandex');
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - EchoGather -> ntpsum[.]online:443
+  - DocDownloader.exe -> ntptop[.]online
+  - vain1 -> hxxps://zeccecard[.]com/116739/person_image/1167273647/48980/cis8petition/0201787911
+  - Mythic implant -> zeccecard[.]com/grain/duke
+  - C++ downloader -> hxxps://arrotech[.]org/pathclass/33205/freehash/katy
+  - .NET assembly downloader -> hxxps://woburneast[.]com/t2376/dom/fwcookiemanager/bs_afp/872794
+  - MSBuild.exe -> woburneast[.]com:443
+  file_activity:
+  - '%APPDATA%\Adobe\adbp.exe'
+  - '%APPDATA%\yandex\yandex.exe'
+  - '%APPDATA%\yandex\vain1'
+  - '%LOCALAPPDATA%\msb_cache.xml'
+  - '%LOCALAPPDATA%\msb_run.vbs'
+  - search.bin
+  - Adobe_Acrobat_Reader_Plugin_ru.exe
+  - Adobe_Reader_RU.zip
+  - Adobe_Reader.zip
+  - Requirement.pdf
+  - KnownFiles.txt
+  - 111.rar
+  - 123.py
+  persistence:
+  - Registry value HKCU\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows\LOAD
+    pointing to %APPDATA%\vni.wsf
+  - Registry value HKCU\Environment\UserInitMprLogonScript set to wscript.exe %LOCALAPPDATA%\msb_run.vbs
+  - Registry key HKCU\Environment\UserInitMprLogonScript set to wscript.exe %LOCALAPPDATA%\msb_run.vbs
+  - Registry key HKCU\SOFTWARE\Microsoft\Windows NT\CurrentVersion\WindowsTM with
+    LOAD value pointing to WSF path
+  - Registry entry added via addToRegistry() function in Node.js dropper
+  process_relations:
+  - vni.wsf -> yandex.exe (node.exe) executing vain1
+  - MSBuild.exe loading embedded C# assembly from msb_cache.xml
+  - wscript.exe -> MSBuild.exe
+  - wscript.exe -> yandex.exe
+iocs:
+  hashes:
+  - a4eacfe2fabb1eb5d888dfb5275506c1
+  - eeab4aec6ad3b271c303d927db55de273bbca008ebf00e06898336c6f3010296
+  - a4eacfe2fabb1eb5d888dfb5275506c12137cd54
+  - f603bc069d7e1767aa5f82f94b8f437cd41c53a698c430a975fc7074e374712a
+  - ca4c52fa49a8ab395b184f884394ff157a86a44e5694ba40c93a982ac17c2f70
+  - c727b00efee63528f64b95de7b80c3055432a07680932778e2709e392b6b9dea
+  - 21157badea76a14a4fc1f93af3b5fa2d1cca8b4f232e08fb4bb64241f0caac93
+  - fc366deda7c23b6b6d7b4905f52d67e5b3e48208073dddd1c22728085a36744f
+  - dc91a0ca767cae6db9cdea74f4a81dc69b87062e61bede3bf9f78b4d5f8df6af
+  - d856cacd6f1748370886d00264cda4837fc50bd651078d9a3925d6c8993a3b54
+  - ff57f89a3e315b6bb035956183a31a1615a18a6a9a86be41d342e4b5b10b0266
+  - ac6970ae46dc7e9d194307d77e1510002a5b04beadf7e5b7e8a96242849187a0
+  - 53906429e9c6a8d1facc0d1a208308930bf17df50e52cc0dcd14555e853c6da4
+  - 13836b60bf906f73ac94d9c58f911d183b09ef9d587d1e59a5d17f9273581cee
+  - 9891f4642e349b4f9f678b14100708d2b461def58653a46344ec73aaabf2fafe
+  - 4a2ebf27855b7b53dc301848b80626c8a42fe35c5d1fd2e1372fb57cfcf8b9eb
+  - 969b1580350461389d227cca6e0fc5de3e7ab1c6d0041f43a460bc3f3a02383c
+  - 683223e684239ff658791405454f4811de9b1bf3b0e47cf8bad8e8e915b7379a
+  - 25065c4877e8db93e2c4fad8c30add66c0043299fac827f1ffa174c786bcff84
+  - 6184cd2c135024c1d340b71ad29aeabbbd78b7414541e48064a0bfb9d96b47d7
+  - a3a48f53729817fe54ab56a997b7799f0ccb241219995ea275ffbf99d22a3777
+  - b442e7bb7ab907aef3641def336fa0f8dfcc60f85a7a862e07730d0e99052515
+  - d1b5f7bbdd435de595aeec5645cbd4295278a23c243e79a3f519b9a6ca8b59f7
+  - a4afa92c77e6ed737f080e5edd8e5efb1ffc1804ac51f88f7401d91f9b0fd8cd
+  - 3da1ba0a5fab4015234463a4d84886713695f3b3812a0a3733f9ce74b4614c88
+  - 1f9774995c01c61d09cf38ae62e8a521a79e1ddfa4e360d5abce992bb671644c
+  - a7473c02dcfa120e575d13c3ea0512687ff086c605cb6d331d0d588c39f362ee
+  - 32712a3f7ec72fac4535b47017135a72b4994ee69440eff95221fed673d41fdc
+  ip_addresses: []
+  domains:
+  - ntpluck[.]online
+  - ntpsum[.]online
+  - ntptop[.]online
+  - zeccecard[.]com
+  - arrotech[.]org
+  - woburneast[.]com
+  - ssltop[.]online
+  - certcalc[.]online
+  - bi[.]zone
+  urls:
+  - hxxps://ntpluck[.]online/29mNqbkQB96clqjJMRsdVKa94ILLxbFclUe3wf4KSx0rRPtI9M/download/eeab4aec6ad3b271c303d927db55de273bbca008ebf00e06898336c6f3010296
+  - hxxps://zeccecard[.]com/116739/person_image/1167273647/48980/cis8petition/0201787911?asdzq=[hostname]&asdzf31=[username]
+  - hxxps://arrotech[.]org/pathclass/33205/freehash/katy?user=[username]&hostNetBIOS=[computername]
+  - hxxps://woburneast[.]com/171751/20020722/1306wicadigi023.pdf
+  - hxxps://woburneast[.]com/t2376/dom/fwcookiemanager/bs_afp/872794
+  - hxxps://ntpsum[.]online/sum/M8suINj3ZFi22GMAUdCJH639vDrI2G4zdTWm2rpE5plxsr17Eg
+  - hxxps://ssltop[.]online/l402XY5rTBxLPOJDTnqlRCePwy2puTnieDSFVaHEKOyb0Eqh3y/download/32712a3f7ec72fac4535b47017135a72b4994ee69440eff95221fed673d41fdc
+  - hxxps://certcalc[.]online/certificate/calculate/G8OftO2lyUuRHa8wBuqR7wcOfAcirSnrp0PCsA3ST17RjjL7JQ
+  - hxxps://ntptop[.]online/VaukY9uSiPjpylxpDeTXQgmh0QLy2Q9I8kYY6OFyt0wFqz3yZF/upload
+  - hxxps://zeccecard[.]com/116739/person_image/1167273647/48980/cis8petition/0201787911?asdzq
+  - hxxps://zeccecard[.]com/grain/duke
+  - hxxps://arrotech[.]org/pathclass/33205/freehash/katy
+  - hxxps://bi[.]zone/upload/pic/kamen-nozhnitsy-bumaga-novyy-instrumentariy-v-atakakh-klastera-paper-werewolf-06-eng.PNG
+  - hxxps://bi[.]zone/upload/pic/kamen-nozhnitsy-bumaga-novyy-instrumentariy-v-atakakh-klastera-paper-werewolf-07-eng.png
+  - hxxps://bi[.]zone/upload/pic/kamen-nozhnitsy-bumaga-novyy-instrumentariy-v-atakakh-klastera-paper-werewolf-08-eng.png
+  - hxxps://bi[.]zone/upload/pic/kamen-nozhnitsy-bumaga-novyy-instrumentariy-v-atakakh-klastera-paper-werewolf-09-eng.png
+authors:
+- BI.ZONE Threat Intelligence
+reference: https://bi.zone/eng/expertise/blog/kamen-nozhnitsy-bumaga-novyy-instrumentariy-v-atakakh-klastera-paper-werewolf
+date_of_publication: May 18, 2026
+file_creation_date: May 22, 2026

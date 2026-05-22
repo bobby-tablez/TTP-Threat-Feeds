@@ -1,0 +1,26 @@
+title: Aurora Mobile Threat Defense
+description: Aurora Mobile Threat Defense provides security for iOS and Android devices.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes: []
+  command_lines: []
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - hxxps://arcticwolf.com/ja/jp-aurora-endpoint-security/
+authors: []
+reference: https://arcticwolf.com/resources/blog-ja/aurora-mobile-threat-defense-now-available/
+date_of_publication: May 19, 2026
+file_creation_date: May 19, 2026

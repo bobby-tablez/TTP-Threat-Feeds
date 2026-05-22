@@ -149,9 +149,9 @@ class OpenAIProvider(LLMProvider):
                 try:
                     error_data = resp.json()
                     error_msg = error_data.get('error', {}).get('message', resp.text)
-                    raise ValueError(f"OpenAI API error ({resp.status_code}): {error_msg}")
-                except (ValueError, KeyError):
-                    resp.raise_for_status()
+                except Exception:
+                    error_msg = resp.text
+                raise RuntimeError(f"OpenAI API error ({resp.status_code}): {error_msg}")
 
             data = resp.json()
 
@@ -172,7 +172,7 @@ class ClaudeProvider(LLMProvider):
     """Anthropic Claude API provider"""
 
     def __init__(self, api_key: Optional[str] = None,
-                 model_name: str = "claude-3-5-sonnet-20241022", **kwargs):
+                 model_name: str = "claude-sonnet-4-6", **kwargs):
         super().__init__(model_name, **kwargs)
         self.api_key = api_key or os.getenv("ANTHROPIC_API_KEY")
         if not self.api_key:
@@ -210,9 +210,9 @@ class ClaudeProvider(LLMProvider):
                 try:
                     error_data = resp.json()
                     error_msg = error_data.get('error', {}).get('message', resp.text)
-                    raise ValueError(f"Claude API error ({resp.status_code}): {error_msg}")
-                except (ValueError, KeyError):
-                    resp.raise_for_status()
+                except Exception:
+                    error_msg = resp.text
+                raise RuntimeError(f"Claude API error ({resp.status_code}): {error_msg}")
 
             data = resp.json()
 

@@ -1,0 +1,59 @@
+title: Darktrace Chinese-nexus Operations Report
+description: Darktrace identified activity consistent with Chinese-nexus operations
+  targeting customer environments in the APJ region, involving CDN impersonation and
+  modular .NET-based RAT deployment.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes:
+  - dfsvc.exe
+  - vshost.exe
+  command_lines: []
+  powershell: []
+  scripts: []
+  registry_keys:
+  - HKCU\Software\Microsoft\IME\{id}
+  - HKCU\Software\Classes\TypeLib\ {9E175B61-F52A-11D8-B9A5-505054503030} \1.0\1\Win64
+  image_loads:
+  - browser_host.dll
+  - client.core.dll
+  - client.dmtpframe.dll
+  - Microsoft.VisualStudio.HostingProcess.Utilities.Sync.dll
+  network_connections:
+  - dfsvc.exe -> yahoo-cdn.it[.]com:80
+  - vshost.exe -> yahoo-cdn.it[.]com:80
+  - biz_render.exe -> yahoo-cdn.it[.]com:80
+  - dfsvc.exe -> icloud-cdn[.]net:80
+  file_activity:
+  - C:\ProgramData\USOShared\Logs\checksum.etl
+  persistence:
+  - Scheduled task for %APPDATA%\Local\Microsoft\WindowsApps\dfsvc.exe
+  - Registry key HKCU\Software\Classes\TypeLib\ {9E175B61-F52A-11D8-B9A5-505054503030}
+    \1.0\1\Win64
+  process_relations: []
+iocs:
+  hashes:
+  - fc3959ebd35286a82c662dc81ca658cb
+  - b2c8f1402d336963478f4c5bc36c961a
+  - c17f39d25def01d5c87615388925f45a
+  - 482cc72e01dfa54f30efe4fefde5422d
+  - 162f69fe29eb7de12b684e979a446131
+  - 067fbad4d6905d6e13fdc19964c1ea52
+  - 2cd781ab63a00ce5302ed844cfbecc27
+  - df3437c88866c060b00468055e6fa146
+  - c650a624455c5222906b60aac7e57d48
+  ip_addresses:
+  - 154.223.58[.]142
+  domains:
+  - yahoo-cdn.it[.]com
+  - icloud-cdn[.]net
+  urls: []
+authors:
+- Tara Gould (Malware Research Lead)
+- Adam Potter (Senior Cyber Analyst)
+- Emma Foulger (Global Threat Research Operations Lead)
+- Nathaniel Jones (VP, Security & AI Strategy)
+reference: https://www.darktrace.com/blog/chinese-apt-campaign-targets-entities-with-updated-fdmtp-backdoor
+date_of_publication: May 19, 2026
+file_creation_date: May 19, 2026

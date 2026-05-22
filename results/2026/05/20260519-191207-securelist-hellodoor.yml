@@ -1,0 +1,89 @@
+title: Kimsuky Malware Clusters Analysis
+description: Kimsuky has continuously introduced new malware variants based on the
+  PebbleDash platform and uses legitimate VSCode tunneling mechanisms for persistence.
+attribution: Kimsuky
+malware_families:
+- HelloDoor
+- httpMalice
+- MemLoad
+- httpTroy
+- AppleSeed
+- HappyDoor
+- VSCode
+- DWAgent
+cves: []
+ttps:
+  processes:
+  - regsvr32.exe
+  - rundll32.exe
+  - cmd.exe
+  - code.exe
+  - dwagsvc.exe
+  command_lines:
+  - regsvr32.exe /s [current file path]
+  - rundll32.exe [file path] [export function]
+  - powershell.exe -windowstyle hidden certutil -decode [src path] [dst path]
+  - cmd.exe /c chcp 949 [command] > [temporary filename]
+  - cmd.exe /c rundll32.exe [current DLL path], load
+  - schtasks /create /tn ChromeCheck /tr "regsvr32 /s <current file path>" /sc minute
+    /mo 1 /rl highest /f
+  - schtasks /create /tn EdgeCheck /tr "regsvr32 /s <current file path>" /sc minute
+    /mo 1 /f
+  - code.exe tunnel
+  - C:\programdata\dwagent\native\dwagsvc.exe installService
+  - C:\programdata\dwagent\native\dwagsvc.exe startService
+  powershell: []
+  scripts: []
+  registry_keys:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+  image_loads:
+  - MemLoader.dll
+  network_connections:
+  - hxxp://female-disorder-beta-metropolitan.trycloudflare[.]com/index.php
+  - httpTroy -> hxxps://file.bigcloud.n-e[.]kr/index.php
+  - VSCode -> hxxps://vscode[.]dev/tunnel
+  - VSCode -> hxxps://www.yespp.co[.]kr/common/include/code/out[.]php
+  - DWAgent -> node896147.dwservice[.]net:443
+  - DWAgent -> node828765.dwservice[.]net:443
+  - DWAgent -> node484265.dwservice[.]net:443
+  file_activity:
+  - '%temp%'
+  - C:\ProgramData
+  - C:\programdata\unrar.exe
+  - C:\programdata\dwagent\native\dwagsvc.exe
+  persistence:
+  - Registry Run key (HKCU) pointing to regsvr32.exe /s [current file path]
+  - Creating a service named CacheDB that executes cmd.exe /c rundll32.exe [current
+    DLL path], load
+  - Registering the same command under the registry key HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+    with the value name Everything 1.9a-[filesize]
+  - Scheduled task named ChromeCheck or EdgeCheck pointing to regsvr32 /s <current
+    file path>
+  - VSCode tunnel creation via GitHub account
+  - DWAgent installed as a service on the target host
+  process_relations: []
+iocs:
+  hashes:
+  - 995a0a49ae4b244928b3f67e2bfd7a6e
+  - 52f1ff082e981cbdfd1f045c6021c63f
+  - 65fc9f06de5603e2c1af9b4f288bb22c
+  - 8e15c4d4f71bdd9dbc48cd2cabc87806
+  - 8983ffa6da23e0b99ccc58c17b9788c7
+  ip_addresses: []
+  domains:
+  - female-disorder-beta-metropolitan.trycloudflare[.]com
+  - file.bigcloud.n-e[.]kr
+  - www.yespp.co[.]kr
+  - node896147.dwservice[.]net
+  - node828765.dwservice[.]net
+  - node484265.dwservice[.]net
+  urls:
+  - hxxps://file.bigcloud.n-e[.]kr/index.php
+  - hxxps://vscode[.]dev/tunnel
+  - hxxps://www.yespp.co[.]kr/common/include/code/out[.]php
+authors: []
+reference: https://securelist.com/kimsuky-appleseed-pebbledash-campaigns/119785/
+date_of_publication: May 14, 2026
+file_creation_date: May 19, 2026
