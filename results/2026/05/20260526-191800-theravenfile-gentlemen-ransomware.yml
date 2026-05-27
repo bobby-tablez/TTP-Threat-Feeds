@@ -1,0 +1,83 @@
+title: Gentlemen Ransomware Leaked Artifacts Analysis (May 2026)
+description: A ransomware group dubbed "The Gentlemen" gained initial access via FortiGate
+  SSL-VPN brute force, performed internal scanning and lateral movement using NetExec
+  and PsExec, deployed a custom locker via GPO, and exfiltrated data to MEGA using
+  MEGAsync, MEGACmd, and rclone over a period from October 2025 to April 2026.
+attribution: Gentlemen Ransomware
+malware_families:
+- Gentlemen Ransomware
+cves: []
+ttps:
+  processes:
+  - locker.exe
+  - psexec.exe
+  - nxc.exe
+  - gogo.exe
+  - openconnect
+  - rclone
+  command_lines:
+  - nxc smb 10.0.1.0/24
+  - nxc smb 192.168.10.0/24
+  - nxc winrm 10.0.1.0/24
+  - proxychains nxc smb 10.0.1.0/24
+  - psexec \\* -u DOMAIN\Admin -p Password -c -f locker.exe
+  - psexec \\* -u DOMAIN\Admin -p Password -s -c killer.exe
+  - ./gogo.exe -p 22,53,80,443,445,3389,5985,8443,9443 -i 192.168.1.0/24 --ping
+  - net share C$=C:\ /grant:everyone,FULL
+  - net share D$=D:\ /grant:everyone,FULL
+  - 'for /f tokens=1 delims=: %d in (wmic logicaldisk get caption) do net share %d$=%d:\
+    /grant:everyone,FULL'
+  - wevtutil cl
+  - Gpupdate /force
+  - vzdump 101 102 --prune-backups 'keep-daily=3,keep-monthly=1,keep-weekly=1' --quiet
+    1 --mode snapshot --compress zstd --fleecing 0 --notification-mode notification-system
+  powershell: []
+  scripts: []
+  registry_keys:
+  - C:\Windows\NTDS\
+  - C:\Windows\System32\Tasks\
+  - C:\Windows\system32\wbem\repository\
+  - C:\Windows\Registration\
+  image_loads: []
+  network_connections:
+  - MEGAsync -> 178.130.46.120:6157
+  - MEGAcmd -> 178.130.46.120:47004
+  - MEGAcmd -> 178.130.46.120:41290
+  - MEGAsync -> 178.130.46.120:41231
+  - MEGAsync -> 178.130.46.120:64175
+  - rclone -> 193.228.128.2:49756
+  - MEGAsync -> 194.87.31.69
+  - Firefox -> 192.42.116.104
+  - rclone -> MEGA
+  file_activity:
+  - /etc/shadow
+  - /volume1/DATA/
+  - E:\
+  - C:\Windows
+  persistence:
+  - FortiGate SSL-VPN tunnel configured for persistent internal access
+  - GPO deployment used to push locker and killer executables to domain-joined machines
+  - GPO-based deployment of custom ransomware locker
+  - WMI repository abuse for persistence (C:\Windows\system32\wbem\repository\)
+  - Task Scheduler abuse for persistence (C:\Windows\System32\Tasks\)
+  - COM+ hijacking persistence via C:\Windows\Registration\
+  process_relations:
+  - psexec.exe -> locker.exe
+  - psexec.exe -> killer.exe
+  - proxychains -> nxc.exe
+iocs:
+  hashes: []
+  ip_addresses:
+  - 178.130.46.120
+  - 193.228.128.2
+  - 194.87.31.69
+  - 192.42.116.104
+  - 89.185.80.134
+  - 92.39.211.142
+  - 178.130.46[.]120
+  domains: []
+  urls: []
+authors: []
+reference: https://theravenfile.com/2026/05/23/gentlemen-ransomware-leaks
+date_of_publication: May 23, 2026
+file_creation_date: May 26, 2026
