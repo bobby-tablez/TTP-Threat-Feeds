@@ -1,0 +1,42 @@
+title: 'The Return of a Ghost: Unpacking the MiniPlasma Zero-Day Exploit'
+description: MiniPlasma is a zero-day privilege escalation exploit based on CVE-2020-17103
+  that abuses a race condition in the Windows Cloud Files Mini Filter Driver (cldflt.sys)
+  via thread token impersonation to write registry keys to the SYSTEM account hive
+  and spawn a SYSTEM shell on fully patched Windows 11 and Server 2022/2025 systems.
+attribution: ''
+malware_families:
+- MiniPlasma
+cves:
+- CVE-2020-17103
+ttps:
+  processes:
+  - cldflt.sys
+  - conhost.exe
+  command_lines:
+  - whoami /groups
+  - whoami
+  powershell: []
+  scripts: []
+  registry_keys:
+  - \Registry\User\Software\Policies\Microsoft\CloudFiles\BlockedApp
+  - \Registry\User\.DEFAULT\Volatile Environment
+  - \REGISTRY\USER\.DEFAULT
+  image_loads:
+  - cldflt.sys
+  network_connections: []
+  file_activity: []
+  persistence: []
+  process_relations:
+  - PoC_Ab -> C:\Windows\System32\conhost.exe
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - hxxps://www[.]bleepingcomputer[.]com/news/microsoft/new-windows-miniplasma-zero-day-exploit-gives-system-access-poc-released/
+  - hxxps://www[.]threatlocker[.]com/blog/miniplasma-windows-privilege-escalation-zero-day-affects-fully-patched-systems
+authors:
+- Picus Security
+reference: https://www.picussecurity.com/resource/blog/the-return-of-a-ghost-unpacking-the-miniplasma-zero-day-exploit
+date_of_publication: June 01, 2026
+file_creation_date: June 01, 2026

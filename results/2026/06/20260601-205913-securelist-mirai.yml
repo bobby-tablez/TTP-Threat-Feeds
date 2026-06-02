@@ -1,0 +1,74 @@
+title: Security Analysis of Docker Hub Community Images - Vulnerabilities and Misconfigurations
+description: Research into Docker container images found that 64 out of 100 images
+  for popular applications contain critically vulnerable software, with insecure configurations
+  including plaintext passwords in Dockerfiles, excessive privileges, world-writable
+  directories, and software downloaded without integrity verification.
+attribution: ''
+malware_families:
+- Mirai
+- Gafgyt
+- Dero miner
+- Kinsing
+- perfctl
+cves:
+- CVE-2025-55182
+- CVE-2025-49844
+- CVE-2026-24061
+- CVE-2025-32463
+- CVE-2023-4911
+- CVE-2021-4034
+- CVE-2021-35942
+- CVE-2021-3520
+- CVE-2021-20232
+- CVE-2022-22823
+- CVE-2022-33171
+- CVE-2022-23852
+- CVE-2019-5482
+- CVE-2022-30123
+- CVE-2022-48565
+ttps:
+  processes:
+  - wget
+  - bash
+  - perl
+  command_lines:
+  - echo "solr ALL=(ALL) NOPASSWD: ALL" >/etc/sudoers.d/solr
+  - echo 'postgres ALL=(ALL:ALL) NOPASSWD:ALL' >> /etc/sudoers
+  - perl -i -pe 's/\bALL$/NOPASSWD:ALL/g' /etc/sudoers
+  - chmod 0777 /usr/share/cargo /usr/share/cargo/bin
+  - wget -qO- "http://acestream[.]org/downloads/linux/acestream_3.1.49_debian_9.9_x86_64.tar.gz" | tar --extract --gzip -C /opt/acestream
+  - mysql --protocol TCP -u"root" -p"$MYSQL_ROOT_PASSWORD" -e "SELECT 1;"
+  - wget --no-check-certificate https://github[.]com/phpvirtualbox/phpvirtualbox/archive/refs/heads/7.2-dev.zip
+    -O phpvirtualbox.zip
+  - chmod -R 777 / /
+  - apt-get update && apt-get -y install sudo; echo "solr ALL=(ALL) NOPASSWD: ALL" >/etc/sudoers.d/solr
+  - bash /resources/setup.sh
+  powershell: []
+  scripts:
+  - /resources/setup.sh
+  - sectools/nikto-master/program/nikto.pl
+  registry_keys: []
+  image_loads: []
+  network_connections: []
+  file_activity:
+  - /etc/sudoers.d/solr
+  - /etc/sudoers
+  - /usr/share/cargo
+  - /usr/share/cargo/bin
+  - /opt/acestream
+  - phpvirtualbox.zip
+  - sectools/nikto-master/program/nikto.pl
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - acestream[.]org
+  urls:
+  - hxxp://acestream[.]org/downloads/linux/acestream_3.1.49_debian_9.9_x86_64.tar.gz
+  - hxxps://github[.]com/phpvirtualbox/phpvirtualbox/archive/refs/heads/7.2-dev.zip
+authors: []
+reference: https://securelist.com/container-security-typical-issues/119974/
+date_of_publication: May 29, 2026
+file_creation_date: June 01, 2026

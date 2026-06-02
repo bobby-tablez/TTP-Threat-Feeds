@@ -1,0 +1,211 @@
+title: Kimsuky HttpSpy RAT Campaign Using Webex Lure and JSONPing C2 (2026)
+description: A threat campaign dubbed Contagious Interview delivers spyware components
+  including spyLoader.dll, spyInster.dll, and httpSpy.dll via phishing lures such
+  as fake Webex meetings and malicious archives, targeting victims with capabilities
+  including screen capture, C2 communication, and sandbox evasion.
+attribution: Kimsuky
+malware_families:
+- HttpSpy
+- HttpTroy
+- HelloDoor
+- loadDll
+- spyInster
+- spyLoader
+- MemLoader
+- JSONPing
+- httpSpy
+cves: []
+ttps:
+  processes:
+  - rundll32.exe
+  - regsvr32.exe
+  - powershell.exe
+  - cmd.exe
+  - calc.exe
+  - vr32.exe
+  - ollydbg
+  - ProcessHacker
+  - tcpview
+  - autoruns
+  - filemon
+  - procmon
+  - regmon
+  - procexp
+  - idaq
+  - ImmunityDebugger
+  - Wireshark
+  - dumpcap
+  - HookExplorer
+  - ImportREC
+  - PETools
+  - LordPE
+  - SysInspector
+  - proc_analyzer
+  - sysAnalyzer
+  - sniff_hit
+  - windbg
+  - joeboxcontrol
+  - joeboxserver
+  - x32dbg
+  - x64dbg
+  - Fiddler
+  - httpdebugger
+  - cheatengine
+  - frida-helper
+  - systemexplorer
+  - dbgview
+  - vmtoolsd
+  - vm3dservice
+  - debugview
+  - ida
+  command_lines:
+  - powershell.exe -windowstyle hidden regsvr32.exe /s C:\ProgramData\mTSTCv8.mdxm
+  - regsvr32.exe /s C:\ProgramData\mTSTCv8.mdxm
+  - C:\Windows\System32\regsvr32.exe /s C:\Users\Public\cacheMon.dat
+  - cmd.exe /c %TEMP%\NK[0-9a-fA-F]+\.tmp
+  - certutil
+  powershell:
+  - powershell.exe -windowstyle hidden regsvr32.exe /s C:\ProgramData\mTSTCv8.mdxm
+  scripts:
+  - fix-camera.jse
+  - 420109__2_.hwp.jse
+  - 2026-0146--  .pdf.jse
+  - '%Temp%\msbuild.bat'
+  - 420109__2_.jse
+  - 2026-0146--.pdf.jse
+  registry_keys:
+  - HKEY_LOCAL_MACHINE\HARDWARE\DESCRIPTION\System\BIOS\SystemManufacturer
+  - HKEY_LOCAL_MACHINE\HARDWARE\DESCRIPTION\System\BIOS\SystemProductName
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run\MSEdgeUpdateInstaller
+  image_loads:
+  - MemLoader.dll
+  - loadDll.dll
+  - spyInster.dll
+  - spyLoader.dll
+  - httpSpy.dll
+  network_connections:
+  - calc.exe -> localhost:62001
+  - JSONPing -> localhost:16106
+  file_activity:
+  - C:\Programdata\[a-z]{8}.dat
+  - C:\ProgramData\mTSTCv8.mdxm
+  - C:\ProgramData\meeting.html
+  - C:\ProgramData\mTXDZew.sz8f
+  - C:\programdata\calc.exe
+  - C:\Users\Public\cacheMon.dat
+  - '%Temp%\msbuild.bat'
+  - '%TEMP%\NK[0-9a-fA-F]+\.tmp'
+  - '%TEMP%JG[0-9a-fA-F]{4}\.tmp'
+  - engine.dat
+  - cache.db
+  - nos-setup.exe
+  - nos_setup.exe
+  - astx-setup.exe
+  - astx_setup.exe
+  - MemLoader.dll
+  - calc.exe
+  - install.html
+  - fix-camera.zip
+  - fix-camera.jse
+  - meeting.html
+  - mTSTCv8.mdxm
+  - cacheMon.dat
+  - httpSpy.dll
+  - recaptcha.html
+  - Screenshot2026-02-24085012.scr
+  - Screenshot2026-02-24085012.png
+  - 420109__2_.egg
+  - 420109__2_.jse
+  - d5HaQHe.bt6L
+  - 420109__2_.hwp
+  - 2026-0146--.egg
+  - 2026-0146--.pdf.jse
+  - h3ZYBzb.dbei
+  - 2026-0146--.pdf
+  persistence:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run\MSEdgeUpdateInstaller = C:\Windows\System32\regsvr32.exe
+    /s C:\Users\Public\cacheMon.dat
+  - regsvr32.exe loading cacheMon.dat (spyLoader.dll) on startup
+  - Registry Run Keys / Startup Folder (T1547.001)
+  - Scheduled Task (T1053.005)
+  process_relations:
+  - loadDll.dll -> engine.dat (spyInster.dll)
+  - spyInster.dll -> cacheMon.dat (spyLoader.dll)
+  - nos-setup.exe -> MemLoader.dll
+  - astx-setup.exe -> MemLoader.dll
+  - fix-camera.jse -> regsvr32.exe
+iocs:
+  hashes:
+  - bea602695d58cbf25fff058834e36c1d
+  - be978477fe7c179cb9607a6e08a05dff
+  - 8833a270ddef0f464d5916958b6778e6
+  - d09c0744273355b6da719fdb62923bed
+  - f57a9e973e1cecd6b361467041e464f4
+  - 1efaf988fded55cd3b974c66f4ca8f7e
+  - bd8e948a6e61436532cd2ed2b62db3f3
+  - 02897faac6e41781152f480565e5d572
+  - a2547836564b0732c6d02a78702da7e6
+  - 4a476abcf741323b367eda0ec49f8c38
+  - 00f957b7dafd8d210e717041add02eab
+  - cc837d2b2af4bd9c1c3faf61cefeb848
+  - 97b4c2e67e5e18b70949690a69820c2a
+  - ea5f32e1273ec93d43ee09a337fb60e1
+  - 0d07fb6d1a3736ea543ab8364115e435
+  - 6d2dfd7ca77530afec000a197d6b8677
+  - b4dd4c76d7deef4cf532e240b7f84c9d
+  - be31a38bab026f229afd5e3174c363f7
+  - c61a6efe1a169c6c1d8595af3ff0dd74
+  - c6de1be41dcfbad9cae76c58eae7f5a3
+  - 50f619aaba1d28882022ced135b13a07
+  - a581fdea0970f8a5b6cfec4853c802d7
+  - 9df5ca76ac085b89c1ddcb3963e9fe97
+  - fcaf03060e34a73fe499b906492d9f13
+  - dd47c97b44408e0a5ecd8f482fcd0dbc
+  - 3369b911cf3706a2660d2af9b3c35f9a
+  - 39e091e981d9daab56e680927508bd1f
+  - 00fd7272f9a3044b5f62680d9e576e55
+  - 3315229011b2fa2b05bd4c7b4fbb58e3
+  - a87cd5fd8fe223816005e81e0da70b21
+  - c05f074c70a6cacb0e6f05578aab3c9d
+  - 50e89a4e50392e4235822e9e92df4c32
+  - 7b9484d719f39faa71abd90f57525cc8
+  - 91d1a7153606dedef92502553962cf67
+  - 9de541b039cfdb96c7810df49efd958b28cc2df73e314f67c1a91469a2b19796
+  ip_addresses:
+  - 163.245.221[.]218
+  - 163.245.215[.]46
+  - 27.102.113[.]106
+  - 157.250.202[.]123
+  domains:
+  - www.ibizplus.n-e[.]kr
+  - load.serverpit[.]com
+  - load[.]erasecloud[.]n-e[.]kr
+  - conference.birdriver[.]org
+  - download.birdriver[.]org
+  - hdrgdrfes[.]chickenkiller[.]com
+  - pipeline[.]embeddedonline[.]org
+  - appview[.]imagetemplate[.]com
+  - meet1754245389211-9925[.]webex[.]com
+  - bigfile[.]crabdance[.]com
+  - ibizplus[.]co[.]kr
+  - ibizplus[.]n-e[.]kr
+  - conference[.]birdriver[.]org
+  urls:
+  - hxxps://www.ibizplus.n-e[.]kr/install.html
+  - hxxps://load.serverpit[.]com/fwrite.php
+  - hxxps://load[.]erasecloud[.]n-e[.]kr/login.php
+  - hxxps://conference.birdriver[.]org/
+  - hxxps://download.birdriver[.]org/download.php?id=425623
+  - hxxps://download[.]birdriver[.]org/download.php?id=393156
+  - hxxp://hdrgdrfes[.]chickenkiller[.]com/index.php
+  - hxxps://pipeline[.]embeddedonline[.]org/check.php?x-csrf-token=gateless
+  - hxxps://appview[.]imagetemplate[.]com/gateless_icon<>.png
+  - hxxps://pipeline[.]embeddedonline[.]org/download3.php?sessid=54126&user-token=babymetalsave
+  - hxxps://pipeline[.]embeddedonline[.]org/check.php?x-csrf-token=babymetalsave
+  - hxxps://appview[.]imagetemplate[.]com/babymetalsave_icon<>.png
+  - hxxps://meet1754245389211-9925[.]webex[.]com/meet1754245389211-9925/j.php?MTID=mb755b0b9133ae8f9e3608b0b519d6a35
+  - hxxps://bigfile[.]crabdance[.]com/recaptcha.html
+authors: []
+reference: https://www.enki.co.kr/media-center/blog/kimsuky-s-advanced-attack-techniques-jsonping-webex-spoofing-and-a-new-httpspy-variant
+date_of_publication: May 27, 2026
+file_creation_date: June 01, 2026

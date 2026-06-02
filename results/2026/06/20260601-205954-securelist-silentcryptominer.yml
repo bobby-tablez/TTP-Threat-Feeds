@@ -1,0 +1,76 @@
+title: 'Pirates in the crosshairs: how one cybercrime gang has been infecting book,
+  movie, and TV show fans for years'
+description: A long-running campaign distributes a cryptominer via fake video player
+  plugin updates on pirated streaming and digital library sites. The malware uses
+  DLL side-loading, DNS tunneling, reflective loading, and a modified SilentCryptoMiner
+  fork to deploy CPU/GPU miners and a RAT agent.
+attribution: ''
+malware_families:
+- SilentCryptoMiner
+- XMRig
+cves: []
+ttps:
+  processes:
+  - HLS Installer.874.exe
+  - conhost.exe
+  - explorer.exe
+  - mrt.exe
+  command_lines:
+  - powercfg /x -hibernate-timeout-ac 0
+  - powercfg /x -hibernate-timeout-dc 0
+  - powercfg /x -standby-timeout-ac 0
+  - powercfg /x -standby-timeout-dc 0
+  powershell: []
+  scripts: []
+  registry_keys:
+  - HKLM\Software\Policies\Microsoft\MRT
+  - HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+  image_loads:
+  - dentel.dll
+  network_connections:
+  - main module -> 107[.]172[.]212[.]235
+  - RAT agent -> 5d14vnfb[.]space
+  - RAT agent -> r7mvjl67[.]space
+  - RAT agent -> zgj1tam9[.]space
+  - RAT agent -> jeaw520i[.]space
+  - RAT agent -> qdmagva5[.]space
+  - RAT -> zgjLtand[.]space:80
+  file_activity:
+  - C:\ProgramData\Google\Chrome
+  - '%USERPROFILE%\AppData\Roaming\Sandboxie'
+  - HLS Installer.874.zip
+  persistence:
+  - Windows service GoogleUpdateTaskMachineQC registered and configured to launch
+    automatically at system startup, with ImagePath pointing to C:\ProgramData\Google\Chrome
+  - Registry Run key (HKCU) entry added at HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
+    pointing to copy in %USERPROFILE%\AppData\Roaming\Sandboxie
+  - DontOfferThroughWUAU value set to 1 under HKLM\Software\Policies\Microsoft\MRT
+    to prevent MSRT reinstallation
+  process_relations:
+  - HLS Installer.874.exe -> malicious DLL side-load
+  - main module -> conhost.exe (RAT agent injected)
+  - main module -> explorer.exe (Watchdog injected)
+  - main module -> explorer.exe (CPU miner injected)
+  - main module -> explorer.exe (GPU miner injected)
+  - HLS Installer 74.exe -> explorer.exe
+iocs:
+  hashes:
+  - 6a0fe6065d76715feebc1526d456db737f624407ae489324e96a708a09c17e6f
+  - 02a43b3423367b9dddc24cc7dfc070df
+  ip_addresses:
+  - 107[.]172[.]212[.]235
+  domains:
+  - urush1bar4[.]online
+  - 5d14vnfb[.]space
+  - r7mvjl67[.]space
+  - zgj1tam9[.]space
+  - jeaw520i[.]space
+  - qdmagva5[.]space
+  - m4yuri[.]online
+  - kristina[.]quest
+  - zgjLtand[.]space
+  urls: []
+authors: []
+reference: https://securelist.com/video-books-pirates-miners-rat/119943/
+date_of_publication: May 28, 2026
+file_creation_date: June 01, 2026

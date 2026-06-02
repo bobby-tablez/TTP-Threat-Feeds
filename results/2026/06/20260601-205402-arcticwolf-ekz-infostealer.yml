@@ -1,0 +1,60 @@
+title: EKZ Infostealer Delivered via CVE-2026-35616 FortiClient EMS Exploitation
+description: Threat actors exploited CVE-2026-35616 in FortiClient EMS to bypass API
+  authentication and push malicious PowerShell scripts to managed endpoints, delivering
+  the EKZ Infostealer disguised as a Fortinet endpoint update to harvest browser credentials.
+attribution: ''
+malware_families:
+- EKZ Infostealer
+cves:
+- CVE-2026-35616
+ttps:
+  processes:
+  - fortitray.exe
+  - ipsec.exe
+  - cmd.exe
+  - powershell.exe
+  - FortiEndpoint_Patch.exe
+  command_lines: []
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads:
+  - nss3.dll
+  network_connections:
+  - powershell.exe -> 83[.]138.53[.]110:80
+  - FortiEndpoint_Patch.exe -> 83[.]138.53[.]110:80
+  file_activity:
+  - C:\Program Files\Fortinet\FortiClient\logs\Trace\scripts\{36_DIGIT_GUID_HERE}.cmd
+  - C:\ProgramData\log.txt
+  - key4.db
+  - logins.json
+  - cookies.sqlite
+  persistence: []
+  process_relations:
+  - fortitray.exe -> cmd.exe
+  - ipsec.exe -> cmd.exe
+  - cmd.exe -> powershell.exe
+  - powershell.exe -> FortiEndpoint_Patch.exe
+iocs:
+  hashes:
+  - 0da123adf9251957a4b850a3f6bd6a753dd4892be176a84a18450e899534cc5e
+  - 17e771c78430cc67e71d4547f8996a1a488e9d3f
+  - 338662fd0c4d750a0ba203a32b59f081
+  - 8c5b72906e8183037532afc3f4639931
+  - d91c00fad521e76efa89715cca89db487d5676f2c767c883482f9c8f82bd383a
+  - fd65051c61a904a304919c04a8c8633c001183ac73ac461cd4d9057946f02bf5
+  - 2927bc31b4f8254c6b332fc03110a6373cad00ffa2ff9de427c26bb222017bb2
+  - 2f25ea1b622abf3212141af932c2ec4cbd6b2b5903c2a531121f691227d98cff
+  ip_addresses:
+  - 185[.]220.101[.]15
+  - 192[.]42.116[.]14
+  - 83[.]138.53[.]110
+  domains: []
+  urls:
+  - hxxp[:]//83[.]138[.]53[.]110/dl/p.exe
+  - hxxp[:]//83[.]138[.]53[.]110/service/save.php
+authors:
+- Arctic Wolf Labs
+reference: https://arcticwolf.com/resources/blog/forticlient-ems-exploited-via-cve-2026-35616-to-deliver-ekz-infostealer-disguised-as-a-fortinet-patch/
+date_of_publication: May 27, 2026
+file_creation_date: June 01, 2026

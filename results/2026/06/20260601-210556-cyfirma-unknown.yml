@@ -1,0 +1,41 @@
+title: 'CVE-2026-34197: Apache ActiveMQ Classic Remote Code Execution via Jolokia
+  Management Interface'
+description: CVE-2026-34197 is a high-severity RCE vulnerability in Apache ActiveMQ
+  Classic arising from unsafe exposure of privileged broker management functionality
+  through the Jolokia HTTP/JMX interface, allowing attackers to invoke broker methods
+  such as addNetworkConnector() with externally controlled configuration content.
+  Controlled validation confirmed exploit path feasibility in insecure deployment
+  scenarios.
+attribution: ''
+malware_families: []
+cves:
+- CVE-2026-34197
+ttps:
+  processes:
+  - activemq
+  - curl
+  command_lines:
+  - sudo ss -tulpn | grep java
+  - 'curl -u admin:admin \ -H ''Origin: http://192.168.230.134:8161'' \ http://192.168.230.134:8161/api/jolokia/list
+    | grep addNetworkConnector'
+  - 'curl -u admin:admin \ -H ''Origin: http://192.168.230.134:8161'' \ -H ''Content-Type:
+    application/json'' \ -d exploit.json \ http://192.168.230.134:8161/api/jolokia'
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - curl -> 192.168.230.134:8161
+  file_activity: []
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- CYFIRMA Research
+reference: https://www.cyfirma.com/research/cve-2026-34197-jolokia-exposure-enables-rce-in-apache-activemq
+date_of_publication: June 01, 2026
+file_creation_date: June 01, 2026

@@ -1,0 +1,52 @@
+title: Supply Chain Attack via codexui-android npm Package Exfiltrating OpenAI Codex
+  Auth Tokens
+description: The npm package codexui-android contained hidden credential-exfiltration
+  code that read ~/.codex/auth.json on every startup and POSTed XOR-encrypted OAuth
+  tokens to an attacker-controlled server at sentry.anyclaw[.]store. The same malicious
+  package was bundled into Android apps on Google Play, including "OpenClaw Codex
+  Claude AI Agent" and "Codex" by BrutalStrike.
+attribution: friuns2 (BrutalStrike)
+malware_families:
+- codexui-android
+cves: []
+ttps:
+  processes:
+  - node
+  - pnpm
+  command_lines:
+  - pnpm add codexui-android@latest --prefer-offline --config.node-linker=hoisted
+  - exec node /usr/local/lib/node_modules/codexui-android/dist-cli/index.js --port
+    <port>
+  powershell: []
+  scripts:
+  - '#!/usr/bin/env node
+
+    import "./chunk-PUR7OUAG.js";'
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - node -> sentry.anyclaw[.]store:443
+  file_activity:
+  - ~/.codex/auth.json
+  - $CODEX_HOME/auth.json
+  - /usr/local/lib/node_modules/codexui-android/dist-cli/index.js
+  - dist-cli/index.js
+  - chunk-PUR7OUAG.js
+  - classes3.dex
+  - rootfs.tar.zst.bin
+  persistence:
+  - Android app bootstraps malicious npm package on every launch via pnpm add codexui-android@latest
+    and executes it with Node.js inside a PRoot sandbox
+  process_relations:
+  - Android app (gptos.intelligence.assistant) -> pnpm add codexui-android@latest
+  - pnpm -> node /usr/local/lib/node_modules/codexui-android/dist-cli/index.js
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - sentry.anyclaw[.]store
+  urls: []
+authors: []
+reference: https://www.aikido.dev/blog/codex-remote-ui-steals-ai-tokens
+date_of_publication: June 01, 2026
+file_creation_date: June 01, 2026

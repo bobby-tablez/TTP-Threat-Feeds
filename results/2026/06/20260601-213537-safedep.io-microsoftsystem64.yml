@@ -1,0 +1,84 @@
+title: 'Inside MicrosoftSystem64: A Supply Chain RAT Exfiltrating to HuggingFace'
+description: A malicious npm package (js-logger-pack) drops a cross-platform Node.js
+  SEA binary called MicrosoftSystem64 that functions as a full-featured info-stealer
+  and RAT, exfiltrating credentials, crypto wallet data, SSH keys, screenshots, and
+  keylogger output to attacker-controlled HuggingFace datasets while maintaining a
+  WebSocket C2 connection.
+attribution: FAMOUS CHOLLIMA
+malware_families:
+- MicrosoftSystem64
+cves: []
+ttps:
+  processes:
+  - powershell.exe
+  command_lines:
+  - powershell.exe -NoProfile -NonInteractive -Command
+  - schtasks /create
+  - screencapture -x -C -t png
+  - gnome-screenshot
+  - scrot
+  - xinput test-xi2 --root
+  - loginctl enable-linger
+  - systemctl --user enable
+  - launchctl bootstrap
+  powershell:
+  - powershell.exe -NoProfile -NonInteractive -Command
+  scripts:
+  - /bin/sh -c
+  registry_keys:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+  image_loads:
+  - libdl
+  - libstdc++
+  - libm
+  - libgcc_s
+  - libpthread
+  - libc
+  network_connections:
+  - MicrosoftSystem64 -> 195[.]201[.]194[.]107:8010
+  - agent -> hxxps://huggingface[.]co/api/repos/create
+  - agent -> hxxp://195[.]201[.]194[.]107:8010/api/validate/hf-upload-complete
+  file_activity:
+  - ~/.local/share/MicrosoftSystem64
+  - ~/Library/Application Support/MicrosoftSystem64
+  - ~/.config/systemd/user/MicrosoftSystem64.service
+  - ~/.config/autostart/MicrosoftSystem64.desktop
+  - ~/Library/LaunchAgents/com.launchkeeper.MicrosoftSystem64.plist
+  - id_rsa
+  - id_rsa.pub
+  - known_hosts
+  - known_hosts.old
+  persistence:
+  - Windows scheduled task named \MicrosoftSystem64 created via schtasks /create
+  - Windows Run registry key under HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+  - macOS LaunchAgent plist at ~/Library/LaunchAgents/com.launchkeeper.MicrosoftSystem64.plist
+    loaded via launchctl bootstrap
+  - Linux systemd user service at ~/.config/systemd/user/MicrosoftSystem64.service
+    enabled via systemctl --user enable
+  - Linux loginctl enable-linger for user-level persistence without login
+  - Linux XDG autostart desktop entry at ~/.config/autostart/MicrosoftSystem64.desktop
+  - Self-update loop via HuggingFace binary staging (Lordplay/system-releases, jpeek998/Jlob
+    repositories)
+  process_relations:
+  - MicrosoftSystem64 -> powershell.exe
+  - MicrosoftSystem64 -> /bin/sh
+iocs:
+  hashes:
+  - b2954c945b51dbd6fa88ac72338b7fbf76dec7d9909ceada9d36b21330842c97
+  ip_addresses:
+  - 195[.]201[.]194[.]107
+  domains:
+  - huggingface[.]co
+  - sha256-validate-rpc.vercel[.]app
+  - changelog[.]rest
+  - copilot-ai.whisdev[.]org
+  urls:
+  - hxxps://huggingface[.]co/jpeek998/system-releases/resolve/main
+  - hxxps://huggingface[.]co/api/repos/create
+  - hxxp://195[.]201[.]194[.]107:8010/api/validate/hf-upload-complete
+authors:
+- SafeDeps
+- SafeDep Team
+reference: https://safedep.io/microsoftsystem64-binary-payload-analysis
+date_of_publication: June 01, 2026
+file_creation_date: June 01, 2026
