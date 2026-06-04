@@ -1,0 +1,95 @@
+title: Inside SStar Agent, a Cross-Platform RAT with an Unfinished macOS Toolkit
+description: A malicious npm package named tw-style-utils delivers a cross-platform
+  infostealer agent (SSTAR) targeting macOS and Windows with capabilities including
+  keylogging, clipboard monitoring, filesystem recon, Chrome extension exfiltration,
+  and shell command execution. The agent persists via LaunchAgent on macOS and the
+  Startup folder on Windows, communicating with a C2 at api.otter-stack[.]com.
+attribution: ''
+malware_families:
+- SStar Agent
+- OtterCookie
+- SSTAR
+cves: []
+ttps:
+  processes:
+  - WpnUserSvc.exe
+  - GoogleUpdateService.exe
+  - cmd.exe
+  - powershell
+  - MprUserSve
+  command_lines:
+  - cmd.exe /c <tempfile>
+  - powershell -NoProfile -NonInteractive -WindowStyle Hidden -Command "Add-Type -AssemblyName
+    System.Windows.Forms;$b=[Convert]::FromBase64String('<b64>');$t=[Text.Encoding]::UTF8.GetString($b);[System.Windows.Forms.SendKeys]::SendWait($t)"
+  - launchctl unload <plist>
+  - launchctl load <plist>
+  - launchctl bootstrap gui/<uid> <plist>
+  - launchctl enable gui/<uid>/com.wpnuersvc.agent
+  - launchctl kickstart gui/<uid>/com.wpnuersvc.agent
+  - powershell -NoProfile -NonInteractive -WindowStyle Hidden -Command "Add-Type -AssemblyName
+    System.Windows.Forms;   $b=[Convert]::FromBase64String('<b64>');   $t=[Text.Encoding]::UTF8.GetString($b);   [System.Windows.Forms.SendKeys]::SendWait($t)"
+  - /bin/sh -c <cmd>
+  - /Users/g/.local/share/wpnuersv-agent/MprUserSve
+  powershell:
+  - Add-Type -AssemblyName System.Windows.Forms;$b=[Convert]::FromBase64String('<b64>');$t=[Text.Encoding]::UTF8.GetString($b);[System.Windows.Forms.SendKeys]::SendWait($t)
+  - powershell -NoProfile -NonInteractive -WindowStyle Hidden -Command "Add-Type -AssemblyName
+    System.Windows.Forms;   $b=[Convert]::FromBase64String('<b64>');   $t=[Text.Encoding]::UTF8.GetString($b);   [System.Windows.Forms.SendKeys]::SendWait($t)"
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - agent -> api.otter-stack[.]com:443
+  - agent -> api.ipify[.]org:443
+  - agent -> api.otter-stack[.]com/d/IobO0YELAu4CJ2oG4iC4W38OxsOtTk8a/agent
+  - agent -> api.otter-stack[.]com/api/telemetry/poll-command
+  - agent -> api.otter-stack[.]com/api/telemetry/keylog
+  - agent -> api.otter-stack[.]com/api/telemetry/clipboard
+  - agent -> api.otter-stack[.]com/api/telemetry/report
+  - agent -> api.otter-stack[.]com/api/telemetry/upload-download
+  - agent -> api.ipify[.]org
+  file_activity:
+  - ~/.local/share/wpnuersvc-agent/WpnUserSvc
+  - ~/Library/LaunchAgents/com.wpnuersvc.agent.plist
+  - ~/Library/LaunchAgents/com.googleupdate.sstaragent.plist
+  - '%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\GoogleUpdateService.exe'
+  - sstar-agent-error.txt
+  - ~/Library/Application Support/Google/Chrome/<profile>/Extensions/
+  - _locales/en_US/messages.json
+  - _locales/en_GB/messages.json
+  - '%TEMP%\sstar-*.cmd'
+  - <exe_dir>\sstar-agent-error.txt
+  - <exe_dir>\agent.env
+  persistence:
+  - macOS LaunchAgent plist at ~/Library/LaunchAgents/com.wpnuersvc.agent.plist with
+    RunAtLoad=true and KeepAlive=true registered via launchctl bootstrap
+  - macOS LaunchAgent plist at ~/Library/LaunchAgents/com.googleupdate.sstaragent.plist
+    with RunAtLoad=true and KeepAlive=true
+  - Windows Startup folder persistence via %APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\GoogleUpdateService.exe
+  - macOS LaunchAgent via ~/Library/LaunchAgents/com.wpnuersvc.agent.plist (arm64)
+  - macOS LaunchAgent via ~/Library/LaunchAgents/com.googleupdate.sstaragent.plist
+    (x86_64)
+  - LaunchAgent plist with Label com.wpnuersve.agent, ProgramArguments /Users/g/.local/share/wpnuersv-agent/MprUserSve,
+    RunAtLoad true, KeepAlive true
+  process_relations:
+  - node.js (npm plugin) -> WpnUserSvc.exe
+  - node.js (npm plugin) -> com.slack.autoLaunch.agent.plist
+  - cmd.exe -> sstar-*.cmd
+  - agent -> powershell
+  - tw-style-utils npm package -> GoogleUpdateService.exe
+  - agent -> cmd.exe /c <tempfile>
+iocs:
+  hashes:
+  - e6d8b7696d2fdd15a1c8cdec30ed0bbdb1c7f7a68436809aecc931150a3b1ccf
+  - 026368b5dd2bae0ae68fd116c3fadb2019428f0ce451014250cb08746a045365
+  - 6b815b91cc240fea85411ff563098931c050a04d72568a14086bce44a38de5fe
+  - 000d65ea79fc6d2f73cc69efed970ad1824b83cdeae9e78ea3ffff59479c3fd3
+  ip_addresses: []
+  domains:
+  - api.otter-stack[.]com
+  - api.ipify[.]org
+  urls:
+  - hxxps://api.otter-stack[.]com/d/IobO0YELAu4CJ2oG4iC4W38OxsOtTk8a/agent?os=<os>&arch=<arch>
+authors: []
+reference: https://www.iru.com/blog/sstar-agent
+date_of_publication: June 04, 2026
+file_creation_date: June 04, 2026

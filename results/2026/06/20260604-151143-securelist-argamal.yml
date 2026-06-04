@@ -1,0 +1,90 @@
+title: 'Argamal: Malware hidden in hentai games'
+description: A remote access trojan distributed via fake game torrents (Sleeping Twins)
+  uses a custom alphabet substitution cipher, executes encoded PowerShell commands,
+  and communicates with C2 servers over UDP port 63559 to receive commands including
+  DLL execution, file operations, and payload updates.
+attribution: ''
+malware_families:
+- Argamal
+- Termixia
+- Argamal RAT
+cves: []
+ttps:
+  processes:
+  - bitsadmin.exe
+  - tasklist
+  - powershell.exe
+  command_lines:
+  - bitsadmin.exe
+  - C:\\Windows\\System32\\WindowsPowerShell\\vi.@\\powershell.exe -EncodedCommand
+  powershell:
+  - Stage1
+  - Stage2
+  - '$palabra1 = (New-RandomString 6) + $d2 $palabra2 = (New-RandomString 6) + $d2$appDatalocal
+    =[Environment]: :GetFolderPath([Environment+SpecialFolder]::LocalApplicationData)$subcarpetas
+    = Get-ChildItem $appDatalLocal -Directory | Select-Object -ExpandProperty FullName'
+  scripts: []
+  registry_keys:
+  - HKCU\SOFTWARE\Classes\CLSID\{722D0F89-B69C-4700-AE8C-4A44350E4876}
+  image_loads:
+  - ffmpeg.dll
+  - natives2_blob.bin
+  - libpython64.dat
+  network_connections:
+  - payload -> asper1[.]freeddns[.]org:57441/udp
+  - payload -> Winst0[.]kozow[.]com:57441/udp
+  - payload -> country1[.]ignorelist[.]com:57441/udp
+  - payload -> 186[.]158[.]223[.]35:57441/udp
+  - payload -> asper1[.]freeddns[.]org:3747/tcp
+  - payload -> Winst0[.]kozow[.]com:3747/tcp
+  - payload -> 186[.]158[.]223[.]35:63559/udp
+  - RAT -> C2:63559/UDP
+  file_activity:
+  - ~wra1269.tmp
+  - Game.exe
+  persistence:
+  - COM hijacking via HKCU\SOFTWARE\Classes\CLSID\{B210D694-C8DF-490D-9576-9E20CDBC20BD}\InprocServer32
+    pointing to malicious DLL in %USER%\AppData\Local subdirectory, triggered by \Microsoft\Windows\WindowsColorSystem\CalibrationLoader
+    scheduled task at every user login
+  - Scheduled task created by Stage1 to execute Stage2 three days after initial infection
+  - Update COM path in the registry with new DLL payload received via C2 port 63559/UDP
+  process_relations: []
+iocs:
+  hashes:
+  - 42add9475e67a1ccc6a6af94b5475d3defc01b85
+  - edce72f59e4c1d136cd1946af70d334c19df858d
+  - 76253fb55aed707440e808ea78e7101318436b1c
+  - 1405a3c5e0aeb08012484134e16cdec4ab29b4a4
+  - 535f4337f261b6da20a3c614eb13270bed2d533a
+  - d2cb0d7a9ad2b5d4ea7c2da8aec62beb37cf36d6
+  - e05f1767c2a337910ed75e90288838d6d0541164
+  - dad26f61da7b8bccc78364411812be74c025b475
+  - 29f1d346a6e71774c7dad25b90f446b2974393df
+  - e815a9b418d09c2d4bcd074c2c0bc21406eeb22f
+  - 17f8f8f34dfa737f36182fed7ff9e9814a114058
+  - 954722b0c9c678b1313d1f8b204e102842dc5889
+  - 69331cfdac792dc79240e6a6bb6e803eabd70beb
+  - 901cfa97b1baaf908fd4a02bb52d970f576c4193
+  - 5f1f3689bcf23de1b280b5f35712946da0f7978f
+  - c2d9d48b3b10bd58cdf5df9463e3ffcd60533ff3
+  - 2423a5bf0fa7cb9ec09211630a5488629499691b
+  - ae4601a19d28332a3ec6ac31b385cdf53be53450
+  - 9803604ec45f31f9ef75bcca1e1310d8ac1fc3a6
+  - 02819d200d1424882af81cb504b3e8614b32397a
+  ip_addresses:
+  - 186[.]158.223.35
+  - 181[.]116.218.56
+  domains:
+  - asper1[.]freeddns[.]org
+  - Winst0[.]kozow[.]com
+  - country1[.]ignorelist[.]com
+  - Winst0.kozow[.]com
+  urls:
+  - hxxps://github[.]com/gmz159/u
+  - hxxps://github[.]com/DnyP/files
+  - hxxps://github[.]com/mgzv/p
+authors:
+- Kaspersky
+reference: https://securelist.com/argamal-rat-distributed-with-hentai-games/119999/
+date_of_publication: June 03, 2026
+file_creation_date: June 04, 2026

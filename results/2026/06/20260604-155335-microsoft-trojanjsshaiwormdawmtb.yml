@@ -1,0 +1,102 @@
+title: 'npm Supply Chain Attack via @redhat-cloud-services Packages: Miasma Campaign'
+description: A large-scale npm supply chain attack compromised 32 packages under the
+  @redhat-cloud-services scope by poisoning the RedHatInsights/javascript-clients
+  CI/CD pipeline, embedding a heavily obfuscated dropper that harvests credentials
+  from cloud providers, CI/CD environments, and developer systems, and propagates
+  by republishing trojanized packages with forged SLSA provenance.
+attribution: ''
+malware_families:
+- Trojan:JS/ShaiWorm.DAW!MTB
+- Trojan:JS/ObfusNpmJs
+cves: []
+ttps:
+  processes:
+  - node
+  - bun
+  - sh
+  - bun.exe
+  - node.exe
+  - npm
+  - npm.cmd
+  - curl
+  - wget
+  - grep
+  command_lines:
+  - node index.js
+  - bun run .claude/
+  - tr -d '\0' | grep -aoE '"[^"]+":{"value":"[^"]*","isSecret":true}' | sort -u
+  - echo runner ALL=(ALL) NOPASSWD:ALL > /mnt/runner
+  - echo 'runner ALL=(ALL) NOPASSWD:ALL' >&& chmod 0440 /mnt/runner
+  - sudo sh -c "echo '127.0.0.1 ' >> /etc/hosts"
+  - sudo -n true
+  - rm -rf ~/
+  powershell: []
+  scripts:
+  - .github/setup.js
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - bun -> api.anthropic[.]com:443
+  - payload -> 127.0.0.1:8200
+  - payload -> metadata.google.internal
+  - payload -> management.azure.com
+  - payload -> graph.microsoft.com
+  - node -> 169.254.169.254
+  - node.exe -> 169.254.169.254
+  - bun -> 169.254.169.254
+  - bun.exe -> 169.254.169.254
+  - node -> 169.254.170.2
+  - node.exe -> 169.254.170.2
+  - bun -> 169.254.170.2
+  - bun.exe -> 169.254.170.2
+  - node -> registry.npmjs[.]org/-/npm/v1/tokens
+  - node -> registry.npmjs[.]org/-/whoami
+  file_activity:
+  - index.js
+  - package.json
+  - /proc/
+  - /etc/hosts
+  - /etc/sudoers.d
+  - /mnt/runner
+  - ~/.claude.json
+  - results/<timestamp>-<counter>.json
+  - .github/setup.js
+  - '*.wallet'
+  - wallet.dat
+  - /tmp/
+  - Index.js
+  persistence:
+  - Installs passwordless sudo rule via bind mount at /mnt/runner (echo 'runner ALL=(ALL)
+    NOPASSWD:ALL')
+  - Deploys token monitor for ongoing credential capture using bun run .claude/
+  - Injects payload source as .github/setup.js into non-protected branches across
+    victim-owned repos via Git Data API
+  - Republishes poisoned npm packages with forged SLSA provenance attestations via
+    Sigstore (Fulcio or Rekor)
+  process_relations:
+  - node -> sh -> bun
+  - node -> sh -> bun -> payload
+  - npm -> node
+  - node -> bun
+iocs:
+  hashes:
+  - 396cac9e457ec54ff6d3f6311cb5cc1da8054d019ce3ffa1de5741506c7a4ea4
+  - d8d170af3de17bb9b217c52aaaffdf9395f35ef015a57ef676e406c121e5e223
+  - f0641e053e81f0d01fa46db35a83e0a34494886503086866d956d14e81fd3e1c
+  - d5a97614d5319ce9c8e01fa0b4eb06fb5b9e54fa13b23d718174a1546444123b
+  - f88258e21592084a2f93a572ade8f9b91c0cd0e242f5cf6121ed7bad0f7bdd1f
+  - 25e121e3b7d300c0d0075b33e5eca39a3e6a659fb9cfee52b70ef71686628f1b
+  ip_addresses: []
+  domains:
+  - api.anthropic[.]com
+  - metadata.google.internal
+  - management.azure.com
+  - graph.microsoft.com
+  - registry.npmjs[.]org
+  urls:
+  - hxxps://security.microsoft[.]com/threatanalytics3
+authors:
+- Microsoft Threat Intelligence
+reference: https://www.microsoft.com/en-us/security/blog/2026/06/02/preinstall-persistence-inside-red-hat-npm-miasma-credential-stealing-campaign
+date_of_publication: June 02, 2026
+file_creation_date: June 04, 2026

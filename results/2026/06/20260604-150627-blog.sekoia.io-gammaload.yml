@@ -1,0 +1,84 @@
+title: 'FSB''s matryoshka #2/3 — GammaLoad'
+description: Technical analysis of GammaLoad, Gamaredon's multi-stage VBScript loader
+  chain that uses Dead Drop Resolvers, registry-cached C2 configuration, Alternate
+  Data Streams, and in-memory PowerShell execution to stage and deploy GammaSteel
+  against Ukrainian targets.
+attribution: Gamaredon (UAC-0010, Armageddon) — FSB Russia
+malware_families:
+- GammaLoad
+- GammaSteel
+- GammaWorm
+- GammaPhish
+cves: []
+ttps:
+  processes:
+  - wscript.exe
+  - powershell.exe
+  command_lines:
+  - wscript.exe "%TEMP%\:divedz0f" [RANDOM ARGS] //b //e:vbscript
+  - powershell.exe -nol -nop -encodedcommand [Base64 payload]
+  powershell:
+  - '[System.Net.ServicePointManager]::ServerCertificateValidationCallback={$true};'
+  - $webClient.DownloadString($url)
+  - Invoke-Expression
+  scripts:
+  - VBScript first stage loader (MD5 bf94f4056627907d86ce1cae8b44c67a) executed in-memory
+    via ExecuteGlobal()
+  - VBScript second stage dropper (MD5 a2c6e01001c62f6198e31a9d603977c6) using Base64
+    with && markers every 54 characters
+  - VBScript third stage loader (MD5 d2a6009587b3cb73355c2d1e53d5cdfa) using ROT13
+    obfuscation
+  registry_keys:
+  - HKCU\Console\HistoryURL
+  - HKCU\Console\WindowsResponby
+  image_loads: []
+  network_connections:
+  - wscript.exe -> hxxps://www.az.com@sweet.csxvl00328.workers[.]dev/vehis
+  - wscript.exe -> hxxps://vids-road-christina-guards.trycloudflare[.]com
+  - powershell.exe -> hxxps://insight-sweet-drainage-appreciated.trycloudflare[.]com/log/
+  - wscript.exe -> hxxps://te.legra[.]ph/fxpppscdlw-12-27
+  - wscript.exe -> hxxps://telegram[.]me/s/akatachi
+  - wscript.exe -> hxxps://check-host[.]net/ip-info?host=snterval.selltosell.ru
+  - wscript.exe -> hxxps://telegram[.]me/s/oberfarir
+  - wscript.exe -> 172.86.76[.]132
+  - wscript.exe -> hxxp://172.86.72[.]243
+  - wscript.exe -> dayobtvoyu[.]ru
+  file_activity:
+  - '%TEMP%\:divedz0f'
+  persistence:
+  - Scheduled task named \Windows\ApplicationData\DsSvcCleanup executing %TEMP%\:divedz0f
+    via wscript.exe every 11 minutes
+  - Payload written to Alternate Data Stream at %TEMP%\:divedz0f
+  process_relations:
+  - wscript.exe -> powershell.exe
+iocs:
+  hashes:
+  - bf94f4056627907d86ce1cae8b44c67a
+  - a2c6e01001c62f6198e31a9d603977c6
+  - d2a6009587b3cb73355c2d1e53d5cdfa
+  ip_addresses:
+  - 172.86.76[.]132
+  - 172.86.72[.]243
+  domains:
+  - sweet.csxvl00328.workers[.]dev
+  - vids-road-christina-guards.trycloudflare[.]com
+  - insight-sweet-drainage-appreciated.trycloudflare[.]com
+  - te.legra[.]ph
+  - telegram[.]me
+  - check-host[.]net
+  - dayobtvoyu[.]ru
+  urls:
+  - hxxps://www.az.com@sweet.csxvl00328.workers[.]dev/vehis
+  - hxxps://vids-road-christina-guards.trycloudflare[.]com
+  - hxxps://insight-sweet-drainage-appreciated.trycloudflare[.]com/log/
+  - hxxps://te.legra[.]ph/fxpppscdlw-12-27
+  - hxxps://telegram[.]me/s/akatachi
+  - hxxps://check-host[.]net/ip-info?host=snterval.selltosell.ru
+  - hxxps://telegram[.]me/s/oberfarir
+  - hxxps://www.huaweicloud.com@e097.yggjf81487.workers[.]dev/libertarian
+  - hxxp://172.86.72[.]243
+authors:
+- Sekoia.io TDR team
+reference: https://blog.sekoia.io/fsbs-matryoshka-2-3-gamaredons-gifts-that-keeps-unpacking-gammaload/
+date_of_publication: June 03, 2026
+file_creation_date: June 04, 2026

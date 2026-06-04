@@ -1,0 +1,112 @@
+title: 'FSB''s matryoshka #3/3 — GammaSteel'
+description: Gamaredon (FSB-linked) conducts a fileless, VBScript-driven campaign
+  targeting Ukrainian government entities using GammaPhish, GammaWorm, GammaLoad,
+  and GammaSteel malware with DPAPI-encrypted registry-staged PowerShell functions,
+  NTFS ADS abuse, and tiered S3/fallback C2 exfiltration infrastructure with Dead
+  Drop Resolvers.
+attribution: Gamaredon (UAC-0010, Armagedon)
+malware_families:
+- GammaSteel
+- GammaLoad
+- GammaWorm
+- GammaPhish
+- GammaStealer
+- GammaWipe
+cves: []
+ttps:
+  processes:
+  - powershell.exe
+  - wscript.exe
+  command_lines:
+  - Start-Process -FilePath "powershell" -ArgumentList "-noexit", 'powershell.exe
+    -nol -nop -enc [PAYLOAD EXECUTING ORCHESTRATOR]' -WindowStyle Hidden;
+  - powershell.exe -w hidden -command "$a='HKCU:\Printers'; $b=Get-ItemProperty -Path
+    $a -Name 'YxwHku2chu0bznt3kkyAB'; $c=$b.YxwHku2chu0bznt3kkyAB; $d=[scriptblock]::Create($c);
+    &$d"
+  - powershell.exe -w hidden -command "$HIBdqts3rtuonnvozqAjU = (Get-ItemProperty
+    -Path 'HKCU:\Printers' -Name 'YxwHku2chu0bznt3kkyAB').YxwHku2chu0bznt3kkyAB; $zCZZm1uyck0njfsnFPli
+    = [scriptblock]::Create($HIBdqts3rtuonnvozqAjU); Invoke-Command -ScriptBlock $zCZZm1uyck0njfsnFPli"
+  - wscript.exe [TEMP_FILE_PATH] //e:vbscript //b
+  powershell:
+  - $UAIPh3lmau2x0g34RcX = New-Object System.Timers.timer;$UAIPh3lmau2x0g34RcX.Interval
+    = 3600000;$UAIPh3lmau2x0g34RcX.AutoReset = $true;Register-ObjectEvent -InputObject
+    $UAIPh3lmau2x0g34RcX -EventName "Elapsed" -Action {Start-Process -FilePath "powershell"
+    -ArgumentList '[PAYLOAD IN HKCU:\rinters\plLmfuh4uctxjtrQSXC' -WindowStyle Hidden;}$UAIPh3lmau2x0g34RcX.Start();
+  - Register-WmiEvent -Query "select * from __InstanceCreationEvent within 5 where
+    TargetInstance ISA 'Win32_LogicalDisk' and TargetInstance.DriveType = 2" -Action
+    $cjObc0rpxzoo55zghAOT -SourceIdentifier USBFlashDrive;
+  - $heSTrjgbmmwf31pvTqeN = New-Object IO.FileSystemWatcher;$heSTrjgbmmwf31pvTqeN.NotifyFilter
+    = [IO.NotifyFilters]"FileName, DirectoryName, Attributes, Size, LastWrite, Security";$heSTrjgbmmwf31pvTqeN.EnableRaisingEvents
+    = $true;$heSTrjgbmmwf31pvTqeN.IncludeSubdirectories = $true;$VKynhi5axdxmalgZmv
+    = Register-ObjectEvent $heSTrjgbmmwf31pvTqeN -EventName "Changed" -Action {[EXFILTRATION]}
+  - Get-WmiObject Win32_LogicalDisk | Where-Object { $_.DriveType -ne 2 };
+  - gwmi win32_userprofile
+  - Get-PSDrive -PSProvider FileSystem | Sort-Object Name -Descending
+  - Get-CimInstance Win32_LogicalDisk -Filter "DeviceID='[Drive Letter]:'"
+  - Get-FileHash -Algorithm MD5
+  - ConvertTo-SecureString
+  scripts:
+  - VBScript remote code execution payload delivered via HTTP response
+  registry_keys:
+  - HKCU\Printers
+  - HKCU\Printers\YxwHku2chu0bznt3kkyAB
+  - HKCU\Printers\plLmfuh4uctxjtrQSXC
+  - HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+  - HKLM\SOFTWARE\Microsoft\Cryptography
+  - HKCU\Printers\
+  image_loads: []
+  network_connections:
+  - powershell.exe -> s3.tebi[.]io:443
+  - powershell.exe -> de-fra.i3storage[.]com:443
+  - powershell.exe -> s3.[VALUE].wasabisys[.]com:443
+  - GammaSteel -> s3.tebi[.]io:443
+  - GammaSteel -> de-fra.i3storage[.]com:443
+  - GammaSteel -> hxxps://s3.[VALUE].wasabisys[.]com
+  - GammaSteel -> hxxps://justsstop[.]ru/
+  - GammaSteel -> hxxps://165.22.170[.]129/
+  file_activity:
+  - C:\Users\Admin\d1a84c20-5
+  - C:\Users\[USER]\AppData\Local\Temp\tmp[XXXX].tmp
+  persistence:
+  - GammaSteel PowerShell functions (71 distinct) stored DPAPI-encrypted in HKCU\Printers\
+    registry key
+  - VBScript functions injected into NTFS Alternate Data Streams (ADS) attached to
+    standard user profiles or temporary directories
+  - Registry used to cache DDR outputs and staging/C2 servers for GammaLoad
+  - NTFS Alternate Data Streams (ADS) used to stage payloads
+  - Windows Registry used to stage DPAPI-encrypted PowerShell stealer payloads
+  - Hourly drive exploration for at-rest data collection
+  - USB drive monitoring for in-transit data collection
+  - Real-time file surveillance for in-use data collection
+  process_relations:
+  - wscript.exe -> wscript.exe [TEMP_FILE_PATH] //e:vbscript //b
+iocs:
+  hashes: []
+  ip_addresses:
+  - 165.22.170[.]129
+  domains:
+  - s3.tebi[.]io
+  - de-fra.i3storage[.]com
+  - wasabisys[.]com
+  - justsstop[.]ru
+  - norosta[.]ru
+  - selltosell[.]ru
+  - serveirc[.]com
+  - webhop[.]me
+  - serveftp[.]com
+  - myvnc[.]com
+  - rentry[.]co
+  - workers[.]dev
+  urls:
+  - hxxps://justsstop[.]ru/
+  - hxxps://165.22.170[.]129/
+  - hxxps://rentry[.]co/hwzrmfkxr
+  - hxxps://api.telegra[.]ph/getPage/Hello-01-23-161
+  - hxxps://write[.]as/api/posts/1nei1af6dnw8q
+  - hxxps://rentry[.]co/hwzrmfkx
+  - hxxps://mastodon[.]social/api/v1/statuses/115942411657067215
+authors:
+- Sekoia TDR team
+reference: https://blog.sekoia.io/fsbs-matryoshka-3-3-gamaredons-gifts-that-keeps-unpacking-gammasteel/
+date_of_publication: June 04, 2026
+file_creation_date: June 04, 2026
