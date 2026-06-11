@@ -1,0 +1,168 @@
+title: 'Exposing a Global Smishing Operation Across 19 Countries: Governments, Postal
+  Services, and Telecoms Targeted'
+description: A large-scale smishing operation impersonates government payment portals,
+  parcel delivery services, and telecoms across 19 countries using a shared 128-character
+  HTML metadata fingerprint across 1,628 phishing URLs hosted on Tencent Cloud, Alibaba
+  Cloud, Cloudflare CDN, and ALEXHOST Moldova infrastructure. The campaign harvests
+  payment card data through four-stage phishing flows built on Vue.js and Bootstrap
+  templates.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes: []
+  command_lines: []
+  powershell: []
+  scripts:
+  - SELECT * FROM crawler WHERE url LIKE '%ghiseul%' AND NOT hostname = 'ghiseul.ro'
+    AND timestamp gt '2026-05-01'
+  - SELECT * FROM crawler WHERE body LIKE '%/assets/B0cMf6vN.js%' AND timestamp gt
+    '2026-05-01' ORDER BY timestamp DESC
+  - SELECT * FROM crawler WHERE final_url RLIKE '/[a-z]{2}/#/index' AND timestamp
+    > '2026-05-01' ORDER BY timestamp DESC
+  - SELECT * FROM crawler WHERE body LIKE '%39dabeddef7c2f0806110b305bd8ca7307c13ac987e7c64fc1d46752868a258958eba99f16413f522a4961dfb0956598336fc258794664ccc9f71f25e8f688c5%'
+  - B0cMf6vN.js
+  - DNINFtUF.js
+  - Vx8ldEBt.css
+  - ./assets/BOcMf6VN.js
+  registry_keys: []
+  image_loads: []
+  network_connections: []
+  file_activity:
+  - /assets/B0cMf6vN.js
+  - /assets/DNINFtUF.js
+  - /assets/Vx8ldEBt.css
+  persistence: []
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses:
+  - 43.160.242[.]3
+  - 43.160.221[.]174
+  - 43.160.250[.]19
+  - 43.157.17[.]77
+  - 43.157.122[.]50
+  - 43.157.64[.]211
+  - 43.165.4[.]234
+  - 43.157.25[.]170
+  - 43.165.3[.]200
+  - 43.165.4[.]68
+  - 43.165.1[.]208
+  - 43.165.62[.]39
+  - 43.157.91[.]129
+  - 43.153.72[.]244
+  - 43.173.74[.]207
+  - 47.245.142[.]76
+  - 47.91.88[.]57
+  - 47.254.147[.]205
+  - 80.96.58[.]119
+  - 80.96.58[.]68
+  - 104.21.80[.]54
+  - 172.67.199[.]16
+  - 172.67.206[.]239
+  - 104.21.23[.]164
+  - 104.21.16[.]182
+  - 104.21.61[.]204
+  - 172.67.196[.]175
+  - 104.21.83[.]233
+  - 104.21.34[.]64
+  - 104.21.75[.]129
+  - 172.67.137[.]96
+  - 172.67.136[.]71
+  - 104.21.8[.]35
+  - 172.67.156[.]124
+  domains:
+  - ghiseul-ro[.]shop
+  - ghiseul-ro[.]sbs
+  - ghiseul[.]cfd
+  - ghiseulro[.]cyou
+  - ghiseul-ro[.]cfd
+  - ghiseul.eu[.]cc
+  - ghiseul-ro[.]bond
+  - ghiseul.govro[.]one
+  - ghiseul-ro[.]cyou
+  - ghiseul[.]cyou
+  - ghiseul[.]autos
+  - ghisaul[.]lat
+  - ghiseal[.]lat
+  - ghizeul[.]lat
+  - ghisiul[.]lat
+  - hoiatustrahv.politsei[.]gov-ee[.]bond
+  - sumin[.]lrv-lt[.]shop
+  - roadpolice-am[.]icu
+  - roadpolice-am[.]shop
+  - roadspolice[.]lat
+  - govl[.]lat
+  - gove[.]lat
+  - govk[.]lat
+  - govsi[.]bar
+  - gov-si[.]xin
+  - govh[.]lat
+  - govo[.]lat
+  - govj[.]lat
+  - gov-si[.]sbs
+  - gov-si[.]qpon
+  - gov-si[.]cam
+  - e-uprava[.]gov-si[.]shop
+  - mvrcc[.]lat
+  - mvr[.]lat
+  - mvri[.]lat
+  - mvrbg[.]ink
+  - mvrbg[.]sbs
+  - mvrx[.]lat
+  - mvrbg[.]life
+  - e-csddlv[.]top
+  - e.csdd[.]govlv[.]cam
+  - dpde[.]lat
+  - dpdlv[.]bond
+  - dpd-lv[.]top
+  - seur-rmvxq[.]club
+  - seur-hxrz[.]org
+  - seur-fghij[.]org
+  - seur-bcdef[.]cc
+  - seur-cztwp[.]club
+  - seur-fqlap[.]cyou
+  - seur-zkryw[.]cloud
+  - seur-rxkmd[.]cyou
+  - seur-hijkl[.]cc
+  - seur-yzabc[.]com
+  - seur-jwqec[.]link
+  - fanveris[.]cyou
+  - mvr-gov-mk[.]cyou
+  - mvr.govmk[.]one
+  - mvr.govmk[.]cam
+  - dsvag[.]sbs
+  - dsvav[.]cfd
+  - dsvxk[.]cyou
+  - dsvcv[.]cfd
+  - dpd.ie-com[.]vip
+  - vodafaone[.]shop
+  - tesco-redeem-check[.]bond
+  - worldmartonline[.]com
+  - gobal-store-hub[.]shop
+  - holatustrahv.politsel.gov-ee[.]bond
+  - sumin.irv-it[.]shop
+  - dpd.xquirm[.]cfd
+  - dpd.faplzwr[.]cid
+  urls:
+  - hxxp://ghiseul-ro[.]shop/
+  - hxxp://ghiseul-ro[.]sbs/
+  - hxxp://ghiseul[.]cfd/pay
+  - hxxps://www.ghiseulro[.]cyou/ro/
+  - hxxps://www.ghiseul-ro[.]cfd/ghiseul/public/
+  - hxxp://ghiseul.eu[.]cc/pay
+  - hxxps://www.ghiseul-ro[.]bond/ghiseul/public/
+  - hxxps://www.ghiseul.govro[.]one/ghiseul/public/
+  - hxxp://ghiseul-ro[.]cyou/
+  - hxxps://ghiseul[.]cyou/pay
+  - hxxps://ghiseul[.]autos/ro/
+  - hxxp://ghisaul[.]lat/ro
+  - hxxps://ghiseal[.]lat/ro/
+  - hxxps://ghizeul[.]lat/ro/
+  - hxxps://ghisiul[.]lat/ro/
+  - hxxps://ghiseal[.]lat/ro/#/index
+  - hxxps://holatustrahv.politsel.gov-ee[.]bond/ee/#/index
+authors: []
+reference: https://hunt.io/blog/massive-smishing-campaign-governments-postal-telecoms
+date_of_publication: May 27, 2026
+file_creation_date: June 11, 2026

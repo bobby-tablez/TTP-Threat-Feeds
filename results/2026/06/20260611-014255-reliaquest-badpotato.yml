@@ -1,0 +1,70 @@
+title: 'OP-512: New China-Linked Espionage Cluster Targeting IIS Servers with Custom
+  Web Shell Framework'
+description: A China-linked threat cluster designated OP-512 deployed a purpose-built
+  web shell framework against IIS servers running legacy .NET Framework, using RSA+RC4
+  authenticated .ashx command handlers and a self-reporting DNS C2 channel that transmits
+  the web shell's location via hex-encoded subdomains. The framework includes timestomping,
+  reflective .NET loading, and Meterpreter for post-exploitation.
+attribution: OP-512 (China-linked)
+malware_families:
+- BadPotato
+- SweetPotato
+- EfsPotato
+- GhostKit
+- Meterpreter
+cves: []
+ttps:
+  processes:
+  - w3wp.exe
+  - cmd.exe
+  command_lines:
+  - whoami
+  powershell: []
+  scripts: []
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - w3wp.exe -> ashx.lhlsjcb[.]com
+  - w3wp.exe -> hcgos[.]com:53
+  - w3wp.exe -> ashx.lhlsjcb[.]com:53
+  - w3wp.exe -> 43.160.202[.]246:8053
+  - w3wp.exe -> 140.206.161[.]227:443
+  file_activity:
+  - .aspx
+  - .ashx
+  - .asmx
+  - web.config
+  persistence:
+  - Three web shells deployed to IIS application upload directory (.aspx file manager
+    and two .ashx cryptographic command handlers)
+  - Compiled DLL artifacts persisting in ASP.NET temporary compilation directories
+    after web shell deletion
+  - IIS worker process (w3wp.exe) automatic restart reloading attacker tooling after
+    EDR termination
+  - Web shell (.aspx) deployed on IIS server that auto-restarts via w3wp.exe process
+    recycling
+  - Cryptographic command handlers (.ashx) with RSA signature verification and RC4
+    encryption deployed as IIS handlers
+  process_relations:
+  - w3wp.exe -> whoami
+  - w3wp.exe -> whoami /priv
+  - w3wp.exe -> cmd.exe
+iocs:
+  hashes: []
+  ip_addresses:
+  - 43.160.202[.]246
+  - 140.206.161[.]227
+  - 124.156.129[.]151
+  domains:
+  - ashx.lhlsjcb[.]com
+  - hcgos[.]com
+  urls:
+  - hxxps://www.imda.gov[.]sg/assets/a5395ab6-7388-4c1e-97db-18bdf654e163.pdf
+  - hxxps://thehackernews[.]com/2025/09/ghostredirector-hacks-65-windows.html
+  - hxxps://thehackernews[.]com/2025/02/dragonrank-exploits-iis-servers-with.html
+authors:
+- Alexa Feminella
+- ReliaQuest
+reference: https://reliaquest.com/blog/threat-spotlight-reliaquests-agentic-ai-uncovers-new-china-linked-cluster-op-512/
+date_of_publication: June 05, 2026
+file_creation_date: June 11, 2026

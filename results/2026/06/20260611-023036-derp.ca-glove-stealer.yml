@@ -1,0 +1,102 @@
+title: Trojanized Roblox Executor Distributing Glove Stealer Python Port with Discord
+  RAT
+description: A trojanized Roblox executor lure (.NET 4.8 WPF application) silently
+  stages and executes a PyInstaller-compiled Python 3.12 payload that is a port of
+  the Glove Stealer family, featuring Chrome App-Bound Encryption bypasses, AMSI/ETW
+  memory patching, Discord bot C2, and a 6-layer persistence matrix.
+attribution: ''
+malware_families:
+- Glove Stealer
+cves: []
+ttps:
+  processes:
+  - winupdate.exe
+  - SLaunch.exe
+  - fodhelper.exe
+  - computerdefaults.exe
+  - powershell.exe
+  - idaq.exe
+  - x64dbg.exe
+  - procmon.exe
+  - wireshark.exe
+  - lsass.exe
+  command_lines:
+  - Add-MpPreference -ExclusionPath "<current_directory_path>"
+  - Set-MpPreference -DisableRealtimeMonitoring $true
+  powershell:
+  - (Get-MpPreference).ExclusionPath -contains '<current_directory_path>'
+  - Add-MpPreference -ExclusionPath "<current_directory_path>"
+  - Set-MpPreference -DisableRealtimeMonitoring $true
+  scripts:
+  - '%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\WindowsDefenderAgent.vbs'
+  - '%USERPROFILE%\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1'
+  registry_keys:
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+  - HKCU\Software\Classes\ms-settings\Shell\Open\command
+  image_loads:
+  - amsi.dll
+  - ntdll.dll
+  - chrome.dll
+  - YutaCore.dll
+  network_connections:
+  - winupdate.exe -> pastebin[.]com:443
+  - winupdate.exe -> discord.com:443
+  - winupdate.exe -> economy.roblox[.]com:443
+  - winupdate.exe -> trades.roblox[.]com:443
+  - winupdate.exe -> gmail.googleapis[.]com:443
+  - SLaunch.exe -> localhost:9912
+  file_activity:
+  - '%LOCALAPPDATA%\YutaAIKey.txt'
+  - '%LOCALAPPDATA%\Microsoft\CLR_v4.0\cache_cfg.dat'
+  - '%APPDATA%\.cache\winupdate.exe'
+  - '%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\WindowsDefenderAgent.vbs'
+  - '%USERPROFILE%\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1'
+  - LocalStorage\RobloxCookies.dat
+  - tdata.ovpn
+  - .conf
+  - sitemanager.xml
+  - sqlite3.db
+  - loginusers.vdf
+  - .kdbx
+  - .env
+  persistence:
+  - Scheduled Task named WindowsDefenderAgent configured to run at user logon with
+    highest privileges
+  - Registry Run key inserted under HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+    pointing to payload path
+  - Startup VBS written to %APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\WindowsDefenderAgent.vbs
+  - COM CLSID hijack to load malicious payload on targeted Windows shell operations
+  - PowerShell profile append to %USERPROFILE%\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
+  - WMI ActiveScriptEventConsumer tied to Win32_LogonSession event filter registered
+    for boot execution
+  - Registry Run key at HKCU\Software\Microsoft\Windows\CurrentVersion\Run
+  - Startup script dropped to %APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\WindowsDefenderAgent.vbs
+  - PowerShell profile modification at %USERPROFILE%\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
+  - WMI ActiveScriptEventConsumer registration for persistent execution
+  - Scheduled Task installation
+  - UAC bypass via HKCU\Software\Classes\ms-settings\Shell\Open\command registry hijack
+    paired with fodhelper.exe
+  process_relations:
+  - Stage1 WPF loader -> winupdate.exe
+  - fodhelper.exe -> elevated payload process
+  - computerdefaults.exe -> elevated payload process
+  - fodhelper.exe -> high integrity elevated process
+iocs:
+  hashes:
+  - 7ec70af57c96c75da3553bbdf333a8486be1c6ab9e07f6242443ec8db0318a5e
+  - a5538a6dd83446eafbe356dc98016cc2aa62092f524f4db47546fb1552aa53b1
+  ip_addresses: []
+  domains:
+  - pastebin[.]com
+  - economy.roblox[.]com
+  - trades.roblox[.]com
+  - economy[.]roblox[.]com
+  - trades[.]roblox[.]com
+  urls:
+  - hxxps://pastebin[.]com/raw/ptXPHhQS
+  - hxxps://pastebin[.]com/raw/a18wq6rG
+  - hxxps://pastebin[.]com/raw/4ubCKBwD
+authors: []
+reference: https://www.derp.ca/research/yuta-solara-roblox-python-rat/
+date_of_publication: June 04, 2026
+file_creation_date: June 11, 2026

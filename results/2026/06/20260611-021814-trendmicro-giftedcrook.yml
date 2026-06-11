@@ -1,0 +1,104 @@
+title: Old WinRAR Flaw Fuels Attacks on Ukraine - CVE-2025-8088 Exploitation by SHADOW-EARTH-066
+  and Earth Dahu
+description: Two Russia-aligned threat actor groups, SHADOW-EARTH-066 (UAC-0226) and
+  Earth Dahu (Gamaredon), exploit CVE-2025-8088 in WinRAR as an initial access vector
+  against Ukrainian government and military organizations. SHADOW-EARTH-066 deploys
+  an evolved GIFTEDCROOK information stealer (result.dll) via a CVE-2025-8088 to LNK
+  to PowerShell chain, while Earth Dahu delivers espionage modules via an HTA-to-VBScript
+  chain using Cloudflare Workers as a C2 proxy.
+attribution: SHADOW-EARTH-066 (UAC-0226), Earth Dahu (Gamaredon)
+malware_families:
+- GIFTEDCROOK
+- result.dll
+- GammaSteel
+cves:
+- CVE-2025-8088
+- CVE-2025-6218
+ttps:
+  processes:
+  - cmd.exe
+  - powershell.exe
+  - mshta.exe
+  command_lines:
+  - cmd.exe /c start /min "" powershell -NoPr -Win Hidd -Ex Bypass-Com "powershell
+    -NoPr -Ex Bypass -Com ""iex (gc 'C:\ProgramData\KKN' -raw)"""
+  - cmd.exe /c "timeout /t 5 & del "
+  - cmd.exe /c timeout & del
+  - cmd.exe -ExecutionPolicy Bypass -WindowStyle Hidden
+  powershell:
+  - iex (gc 'C:\ProgramData\KKN' -raw)
+  - PowerShell with -ExecutionPolicy Bypass and -WindowStyle Hidden reading from C:\ProgramData\
+  scripts:
+  - VBScript loaded by mshta.exe from external resources via Dynamic DNS and Cloudflare
+    Workers
+  - VBScript loaded by mshta.exe via Dynamic DNS and Cloudflare Workers
+  registry_keys: []
+  image_loads:
+  - result.dll
+  network_connections:
+  - result.dll -> 1[.]1[.]1[.]1
+  - result.dll -> 166[.]0[.]132[.]237:7044
+  - result.dll -> 136[.]0[.]141[.]41:9580
+  - result.dll -> 136[.]0[.]141[.]138:8406
+  - result.dll -> 38[.]225[.]209[.]229:9623
+  - result.dll -> 136[.]0[.]141[.]112:9200
+  - result.dll -> 38[.]225[.]209[.]122:8009
+  - result.dll -> 23[.]26[.]237[.]80:8941
+  file_activity:
+  - C:\ProgramData\KKN
+  - '%LOCALAPPDATA%\Google\Chrome\User Data'
+  - '%LOCALAPPDATA%\Microsoft\Edge\User Data'
+  - '%APPDATA%\Opera Software\Opera Stable'
+  - '%APPDATA%\Mozilla\Firefox\Profiles'
+  - C:\ProgramData\QB5k
+  - C:\ProgramData\cmd.exe
+  - C:\ProgramData\
+  persistence:
+  - LNK shortcut dropped to %APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\
+    via CVE-2025-8088 NTFS ADS path traversal, executed on next user login
+  - LNK file written to %APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\ via
+    CVE-2025-8088 ADS path traversal
+  - HTA or VBS/VBE file written to Startup folder via CVE-2025-8088 ADS path traversal
+    (Earth Dahu)
+  - mshta.exe executes HTA from Startup folder at next login (Earth Dahu)
+  - Startup folder LNK placed via CVE-2025-8088 RAR5 path traversal; mshta.exe auto-executes
+    HTA on system reboot
+  - Self-delete via cmd.exe /c timeout & del and DeleteFileW removing all staging
+    artifacts and Startup LNK
+  process_relations:
+  - cmd.exe -> powershell.exe
+  - powershell.exe -> powershell.exe
+  - mshta.exe -> VBScript execution from Startup folder
+  - cmd.exe -> powershell.exe (from Startup context)
+  - mshta.exe -> VBScript
+iocs:
+  hashes:
+  - 3d371ef71e40c34a75c168d4647db096c2f386499d99a88d4e16b63cd4acda25
+  ip_addresses:
+  - 166[.]0[.]132[.]237
+  - 136[.]0[.]141[.]41
+  - 136[.]0[.]141[.]138
+  - 38[.]225[.]209[.]229
+  - 136[.]0[.]141[.]112
+  - 38[.]225[.]209[.]122
+  - 23[.]26[.]237[.]80
+  - 194[.]58[.]66[.]82
+  - 5[.]9[.]241[.]27
+  domains:
+  - trycloudflare[.]com
+  - astrocaf[.]com
+  - joymobile[.]com[.]ua
+  - mail[.]c1[.]com[.]ua
+  - workers[.]dev
+  urls:
+  - hxxp://1[.]1[.]1[.]1
+  - hxxps://ssu[.]gov[.]ua@malicious[.]workers[.]dev/path
+  - hxxps://www.trendmicro.com/content/dam/trendmicro/global/en/research/26/f/winrar-ukraine/fig1.png
+  - hxxps://www.trendmicro.com/content/dam/trendmicro/global/en/research/26/f/winrar-ukraine/fig3.png
+  - hxxps://www.trendmicro.com/content/dam/trendmicro/global/en/research/26/f/winrar-ukraine/fig4.png
+  - hxxps://www.trendmicro.com/content/dam/trendmicro/global/en/research/26/f/winrar-ukraine/fig5.png
+  - hxxps://www.trendmicro.com/content/dam/trendmicro/global/en/research/26/f/winrar-ukraine/fig6.png
+authors: []
+reference: https://www.trendmicro.com/en_us/research/26/f/old-winrar-flaw-fuels-attacks-on-ukraine.html
+date_of_publication: June 08, 2026
+file_creation_date: June 11, 2026

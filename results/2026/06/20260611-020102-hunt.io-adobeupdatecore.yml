@@ -1,0 +1,231 @@
+title: 'Operation SouthNet: SideWinder Expands Phishing and Malware Operations in
+  South Asia'
+description: APT SideWinder conducted a large-scale credential-harvesting and malware
+  staging campaign targeting government, military, maritime, and critical infrastructure
+  entities across South Asia, leveraging free hosting platforms and weaponized lure
+  documents. The operation, labeled Operation SouthNet, deployed fake Outlook/Zimbra
+  portals and open directories containing malware samples linked to Pakistan and Sri
+  Lanka's marine sectors.
+attribution: APT SideWinder
+malware_families:
+- AdobeUpdateCore
+- EdgUpdate
+- gwadardxgi
+- lsdxgi
+- itrpay
+- dxgi
+- pdocumentsdxgi
+- agent2.malz
+cves: []
+ttps:
+  processes:
+  - AdobeUpdateCore.exe
+  - manarupdate.exe
+  - payload_1.exe
+  - e0fd3.exe
+  - EdgUpdate.exe
+  command_lines: []
+  powershell: []
+  scripts:
+  - ThisDocument.txt
+  - function getQueryParameter(paran) {const queryString = window.location. search;const
+    urlParans = new URLSearchParams(querystring);return urlParans.get(paran);}window.onload
+    = function () {const inboxvalue = getQueryParameter("redirect");if (!inboxvalue)
+    {window.location.href = "error.html"; return;}const base64Tnbox = btoa(inboxvalue);setTimeout(()
+    => {document.getElementById("errorOverlay").classList.add("show");document.getElementById("reloadstn").addEventListener("click",
+    () => {window.location.href = '1.html?redirect=' + encodeURIComponent(base64Tnbox);});},
+    3600);document.getElementById("detailsBtn").addEventListener("click", () => {const
+    details = document.getElementById("details");details.hidden = !details.hidden;});}
+  registry_keys: []
+  image_loads:
+  - gwadardxgi.dll
+  - lsdxgi.dll
+  - itrpay.dll
+  - dxgi.dll
+  - pdocumentsdxgi.dll
+  network_connections:
+  - phishing_page -> drive-nepal-gov[.]com/document/docu.php
+  - phishing_page -> myanmar-org-mail[.]com/cbm/action.php
+  - phishing_page -> technologysupport[.]help/1pac.php
+  - e0fd3.exe -> 5.255.113.9/translateapp/Dell_YGN/processtext.php
+  - AdobeUpdateCore.exe -> govmm[.]org
+  - e0fd3.exe -> 5.255.113[.]9
+  - agent2.malz -> 89.46.65[.]19
+  - localfile~ -> 89.46.65[.]19
+  - gwadardxgi.dll -> blue-term-c168[.]gov-pkgov[.]workers[.]dev
+  - manarupdate.exe -> govmm[.]org
+  - payload_1.exe -> govmm[.]org
+  - EdgUpdate.exe -> 5.255.113[.]9
+  file_activity:
+  - AdobeUpdateCore.exe
+  - manarupdate.exe
+  - payload_1.exe
+  - payload_1.zip
+  - ThisDocument.txt
+  - e0fd3.exe
+  - EdgUpdate.exe
+  - Training_Program_July_2024.pdf.url
+  - Navy_Operational_Highlights_2025.zip
+  - Incident_Report_Gwadar_Port_Complex.pdf.exe
+  - gwadardxgi.dll
+  - agent2.malz
+  - localfile~
+  - lsdxgi.dll
+  - itrpay.dll
+  - dxgi.dll
+  - pdocumentsdxgi.dll
+  - 3-itrpay.dll
+  - Medical-Report
+  - SLPA_Container_Evidence
+  persistence: []
+  process_relations: []
+iocs:
+  hashes:
+  - 7a6723cea87ba7c098f022ad92abf865
+  - 799b9aa10e223b13577f9685c7808280
+  - b6fb42a8ff8ea93addf1c3a99abfe10a
+  - 5b4eebe67765339f2a4ef7f0cc1d4f44
+  - 04acac204ff3fbd18115982478adb7e5
+  - 487da072770a77a568cb43b7a5f9cdcd
+  - bc5543b39d89cda6832706948945f567
+  - 80b8048876db5af4578a6ad9690e2bfa
+  - e57860d18607667ca76a5046b97976c3
+  - f3081479986fee38211b28247b185d65
+  - 00c1ecc716c9206964b50529661fee7c
+  - 13e321fed4903d136f19ad54b885650b
+  - 00603c207062e8f8576225067a7c5269
+  - c1a5863ad6f31ecc1a9079927c69cbf2
+  ip_addresses:
+  - 193.57.138.22
+  - 5.255.113.9
+  - 46.183.184.245
+  - 98.84.224.111
+  - 18.160.41[.]38
+  - 159.100.6[.]5
+  - 47.236.177[.]123
+  - 31.14.142[.]50
+  - 89.46.65[.]19
+  - 98.84.224[.]111
+  - 193.57.138[.]22
+  - 5.255.113[.]9
+  - 46.183.184[.]245
+  - 172.66.47[.]203
+  domains:
+  - drive-nepal-gov[.]com
+  - myanmar-org-mail[.]com
+  - technologysupport[.]help
+  - govmm[.]org
+  - govnp[.]org
+  - andc[.]govaf[.]org
+  - mailcbmgovmm[.]pages[.]dev
+  - drive-dgdp-gov-bd-files[.]netlify[.]app
+  - dgdp-product-details-2025-turkey[.]netlify[.]app
+  - drive-dgdp-gov-bd-confidential-files[.]netlify[.]app
+  - mall-ministryoffinance-np[.]netlify[.]app
+  - maill-nepalgv-gov-np[.]netlify[.]app
+  - mail-moha-gov-np-download[.]netlify[.]app
+  - www-foreignaffairs-nepal-com[.]netlify[.]app
+  - www-nepalgovernment-genz-agendapdf[.]netlify[.]app
+  - www-customs-download-pdf[.]netlify[.]app
+  - mail-minfinance-gov-np[.]netlify[.]app
+  - www-mofa-nepal-teledirectory-download[.]netlify[.]app
+  - maill-govttnepal-gov-np[.]netlify[.]app
+  - maill-govtnepal-gov-np[.]netlify[.]app
+  - mail-mod-gov-np-download-pdf[.]netlify[.]app
+  - www-moha-gov-np-download[.]netlify[.]app
+  - helpful-national-poilcy-nepla-gov-np[.]netlify[.]app
+  - doc-ye9wbezc[.]b4a[.]run
+  - mofagovnp-bm46fjwo[.]b4a[.]run
+  - viewpdfonline-1wgtaeus[.]b4a[.]run
+  - drive-nepal-gov-np-files[.]netlify[.]app
+  - owa-suparco-gov-pk-owa-autho[.]pages[.]dev
+  - mail-paa-gov-pk.pages[.]dev
+  - mail-suparco-gov-pk-owa-auth-logon-aspx[.]pages[.]dev
+  - owa-suparco-gov-pk-logon-aspx[.]pages[.]dev
+  - autodiscover-paa-gov-pk-auth-logon-aspx[.]pages[.]dev
+  - mail-776f305796709f2d567e6868feaba274-gov-pk-investment[.]pages[.]dev
+  - uparco-gov-pk-logon-aspx[.]pages[.]dev
+  - na-gov-pk-meeting-pac[.]pages[.]dev
+  - webmail-776f305796709f2d567e6868feaba274-pages-download[.]pages[.]dev
+  - 2642476f.na-gov-pk-meeting-pac[.]pages[.]dev
+  - webmail-hubpower-com-error[.]pages[.]dev
+  - ntc-06gd0upz[.]b4a[.]run
+  - posta-nhq43i6x[.]b4a[.]run
+  - webservermail-g2689far[.]b4a[.]run
+  - secure-ntc[.]net
+  - mail-aviation-gov-pk-pdf[.]pages[.]dev
+  - gooogle.files-cyber-net-pk[.]workers[.]dev
+  - blue-term-c168.gov-pkgov[.]workers[.]dev
+  - pythonscanner.gov-pkgov[.]workers[.]dev
+  - mail-modp.gov-pkgov[.]workers[.]dev
+  - mail-ntc-net-pk.gov-pkgov[.]workers[.]dev
+  - maif-piac-aero.gov-pkgov[.]workers[.]dev
+  - worker-dark-paper-2231.gov-pkgov[.]workers[.]dev
+  - webmail.cybar-net-pk[.]workers[.]dev
+  - worker-patient-wave-96d1.pakistan-gov-pk[.]workers[.]dev
+  - mail.pof-gov-pk[.]workers[.]dev
+  - uploads.ptcl-gov-pk[.]workers[.]dev
+  - workermdxxx.naychilin-pk[.]workers[.]dev
+  - verify.mod-defence-lk[.]workers[.]dev
+  - mail-depo-gov-pk.govtpak[.]workers[.]dev
+  - mail-modp-gov-pk.pak-gov-pk[.]workers[.]dev
+  - mail-mod-gov-pk.pakistan-gov-pk[.]workers[.]dev
+  - mail-paa-gov-pk[.]pages[.]dev
+  - themegaprovider[.]ddns[.]net
+  - gwadarport[.]ddns[.]net
+  - colombo-port.ddns[.]net
+  - morning-forest-4fef.ethanhunthero125[.]workers[.]dev
+  - momgovsg[.]net
+  - mom.gov-sg[.]online
+  - momgovsg[.]info
+  - colombo-port[.]ddns[.]net
+  - blue-term-c168[.]gov-pkgov[.]workers[.]dev
+  - b4a[.]run
+  - mail-776f305796709f2d567e6868feaba274-gov-pk-investment.pages[.]dev
+  - webmail-776f305796709f2d567e6868feaba274-pages-download.pages[.]dev
+  - posta-nhq43i6x.b4a[.]run
+  - mofagovnp-bm46fjwo.b4a[.]run
+  - ntc-06gdoupz.b4a[.]run
+  - webservermail-g2688far.b4a[.]run
+  - mail-aviation-gov-pk-pdf.pages[.]dev
+  - gooogle.files-cyber-net-pk.workers[.]dev
+  - blue-term-c168.gov-pkgov.workers[.]dev
+  - morning-forest-4fef.ethanhuntherol25.workers[.]dev
+  urls:
+  - hxxps://drive-dgdp-gov-bd-files[.]netlify[.]app/
+  - hxxps://dgdp-product-details-2025-turkey[.]netlify[.]app/
+  - hxxps://drive-dgdp-gov-bd-confidential-files[.]netlify[.]app/
+  - hxxps://mall-ministryoffinance-np[.]netlify[.]app/
+  - hxxp://www-nepalgovernment-genz-agendapdf[.]netlify[.]app/
+  - hxxp://www-customs-download-pdf[.]netlify[.]app/
+  - hxxp://mofagovnp-bm46fjwo[.]b4a[.]run/
+  - hxxps://technologysupport[.]help/renderer.php
+  - hxxps://mail-aviation-gov-pk-pdf[.]pages[.]dev/
+  - hxxp://worker-dark-paper-2231.gov-pkgov[.]workers[.]dev/
+  - hxxp://webmail.cybar-net-pk[.]workers[.]dev/
+  - hxxp://worker-patient-wave-96d1.pakistan-gov-pk[.]workers[.]dev/
+  - hxxp://mail.pof-gov-pk[.]workers[.]dev/
+  - hxxp://workermdxxx.naychilin-pk[.]workers[.]dev/
+  - hxxp://mail-mod-gov-pk.pakistan-gov-pk[.]workers[.]dev/
+  - drive-nepal-gov[.]com/document/docu.php
+  - myanmar-org-mail[.]com/cbm/action.php
+  - hxxps://mail-suparco-gov-pk-owa-auth-logon-aspx[.]pages[.]dev
+  - hxxps://gooogle.files-cyber-net-pk[.]workers[.]dev/
+  - hxxp://blue-term-c168.gov-pkgov[.]workers[.]dev/
+  - hxxp://pythonscanner.gov-pkgov[.]workers[.]dev/
+  - hxxp://mail-modp.gov-pkgov[.]workers[.]dev/
+  - hxxp://mail-ntc-net-pk.gov-pkgov[.]workers[.]dev/
+  - hxxp://maif-piac-aero.gov-pkgov[.]workers[.]dev/
+  - hxxp://mod[.]govmm[.]org/
+  - hxxps://technologysupport[.]help/ipac.php
+  - hxxp://mofagovnp-bm46fjwo.b4a[.]run/
+  - hxxps://mail-aviation-gov-pk-pdf.pages[.]dev/
+  - hxxp://blue-term-c168.gov-pkgov.workers[.]dev/
+  - hxxps://gooogle.files-cyber-net-pk.workers[.]dev/
+authors:
+- Hunt.io
+- Demon
+- wa1Ile
+reference: https://hunt.io/blog/operation-southnet-sidewinder-south-asia-maritime-phishing
+date_of_publication: October 01, 2025
+file_creation_date: June 11, 2026
