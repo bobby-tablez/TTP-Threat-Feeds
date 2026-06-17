@@ -1,0 +1,112 @@
+title: ShinyHunters Targets Education Sector with Oracle PeopleSoft Exploit
+description: UNC6240 (ShinyHunters) exploited CVE-2026-35273, a zero-day RCE in Oracle
+  PeopleSoft's Environment Management component, to compromise over 100 organizations—primarily
+  higher education institutions—deploying customized MeshCentral agents for lateral
+  movement and exfiltrating data published on their Data Leak Site.
+attribution: UNC6240 (ShinyHunters)
+malware_families:
+- MeshCentral agent
+- MeshAgent
+cves:
+- CVE-2026-35273
+ttps:
+  processes:
+  - meshagent32-azure-ops.exe
+  - meshagent64-azure-ops.exe
+  - meshagent64-v2.exe
+  - meshagent
+  - sshpass
+  - zstd
+  - pv
+  - node
+  - ssh
+  command_lines:
+  - npm list global authenticode
+  - grep -hE '\'^[[:space:]]*Address=|^[[:space:]]*HostName=\'\' /u01/app/psoft/ps_config_homes/csprd/appserv/prcs/psappsrv.cfg
+    2>/dev/null | head -80
+  - mount | grep -E "psoft|ps_config|nfs"
+  - cat /etc/hosts | grep -E "[redacted_victim_string]"
+  - node meshctrl.js RunCommand --loginuser admin --loginpass '[password]' --id '[agent_id]'
+    --run 'bash /tmp/[victim_abbreviation]_fanout.sh'
+  - pv -s "$(du -sb exfil | awk '{print $1}')" | zstd -3 -T0 -o exfil.tar.zst
+  - hostname; id
+  - sshpass -p "$p" ssh -o StrictHostKeyChecking=no -o ConnectTimeout=6 -o BatchMode=no
+    $u@$h "hostname" >/dev/null 2>&1
+  - sshpass -p "$p" ssh -o StrictHostKeyChecking=no $u@$h "test -d $dest && mkdir
+    -p $dest && cat > $dest/$NAME" < "$SRC" 2>/dev/null
+  - ssh -o StrictHostKeyChecking=no -o ConnectTimeout=6 -o BatchMode=yes $USER@$h
+    "hostname" >/dev/null 2>&1
+  - find $BASE -name "$NAME" -type f 2>/dev/null
+  - grep -E '[redacted_victim_host_pattern]|csprd[0-9]' /etc/hosts | awk '{print $2}'
+    | grep -v '^#' | sort -u
+  powershell: []
+  scripts:
+  - '[victim_abbreviation]_fanout.sh'
+  - 'SRC="/u01/app/psoft/ps_config_homes/csprd/webserv/CSPRD02/README-IF-YOU-SEE-THIS-YOUVE-BEEN-HACKED.TXT"
+
+    NAME="README-IF-YOU-SEE-THIS-YOUVE-BEEN-HACKED.TXT"
+
+    BASE="/u01/app/psoft/ps_config_homes/csprd"
+
+    export PATH=/usr/bin:/bin'
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - meshagent32-azure-ops.exe -> azurenetfiles[.]net:443
+  - meshagent64-azure-ops.exe -> azurenetfiles[.]net:443
+  - meshagent64-v2.exe -> azurenetfiles[.]net:443
+  - staging_host -> 176.120.22[.]24:22
+  - sshpass -> internal PeopleSoft nodes:22
+  - ssh -> internal PeopleSoft nodes:22
+  - meshagent64-azure-ops.exe -> azurenetfiles[.]net
+  - meshagent64-v2.exe -> azurenetfiles[.]net
+  - meshagent32-azure-ops.exe -> azurenetfiles[.]net
+  file_activity:
+  - /u01/app/psoft/ps_config_homes/csprd/appserv/prcs/psappsrv.cfg
+  - /u01/app/psoft/ps_config_homes/csprd/webserv/CSPRD02/README-IF-YOU-SEE-THIS-YOUVE-BEEN-HACKED.TXT
+  - /tmp/[victim_abbreviation]_fanout.sh
+  - /etc/hosts
+  - exfil.tar.zst
+  - .bash_history
+  - config.xml
+  - meshagent64-azure-ops.exe
+  - meshagent64-v2.exe
+  - meshagent32-azure-ops.exe
+  - meshagent
+  - README-IF-YOU-SEE-THIS-YOUVE-BEEN-HACKED.TXT
+  - <PS_CFG_HOME>/webserv/<domain>/applications/peoplesoft/PSEMHUB.war/*.jsp
+  - <docroot>/envmetadata/data/environment/.xml
+  persistence:
+  - MeshCentral agent installed and hardcoded to communicate with wss://azurenetfiles[.]net:443/agent.ashx
+    for persistent remote access
+  - XMLDecoder persistence via recently created or modified .xml files under <docroot>/envmetadata/data/environment/
+    executed on application restart
+  - MeshAgent deployed as pre-configured Windows agent (meshagent64-azure-ops.exe,
+    meshagent64-v2.exe, meshagent32-azure-ops.exe) connecting to azurenetfiles[.]net
+  - MeshAgent deployed as unconfigured Linux agent (meshagent)
+  process_relations:
+  - meshctrl.js -> node
+iocs:
+  hashes:
+  - 2ab684d93c1553fad87041b4dea97188a97e78589deee2a7bacff905564f3a35
+  - f02a924c9ff92a8780ce812511341182c6b509d45bc59f3f7b522e37225d24fc
+  - d83fdb9e53c5ff03c4cb0451ea1bebd79b53f29eadc1e2fa394c7af13a86ce2f
+  - c7e9332731b06644fc73e0046a2a89eaa59b09f54250e9bd622467187351711f
+  - 68257a6f9ff196179ec03624e849927f26599eb180a7c82e14ef5bc4e93bc309
+  ip_addresses:
+  - 142.11.200[.]186
+  - 142.11.200[.]187
+  - 142.11.200[.]188
+  - 142.11.200[.]189
+  - 142.11.200[.]190
+  - 176.120.22[.]24
+  domains:
+  - azurenetfiles[.]net
+  urls:
+  - wss://azurenetfiles[.]net:443/agent.ashx
+authors:
+- Mandiant
+- Google Threat Intelligence Group
+reference: https://cloud.google.com/blog/topics/threat-intelligence/shinyhunters-targets-education-sector-oracle-exploit
+date_of_publication: June 17, 2026
+file_creation_date: June 17, 2026

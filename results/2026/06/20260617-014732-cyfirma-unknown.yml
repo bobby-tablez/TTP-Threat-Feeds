@@ -1,0 +1,114 @@
+title: 'New NPM Supply Chain Campaign Identified : A Multi-Stage Cryptocurrency Malware
+  with More Than 2.7 million Downloads'
+description: A multi-stage NPM supply chain campaign distributes malicious packages
+  that steal cryptocurrency wallet credentials, SSH keys, and environment variables
+  by hooking ethers.js wallet functions and exfiltrating data to a C2 server. The
+  malware uses Ethereum smart contracts for dynamic C2 infrastructure discovery and
+  includes obfuscated postinstall scripts.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes:
+  - node
+  - curl
+  - python
+  - powershell.exe
+  - cmd.exe
+  - node.exe
+  command_lines:
+  - node index.js
+  - cmd.exe
+  - node 6rzs4@tm.cjs
+  - node aboo2jmh.cjs
+  powershell:
+  - Invoke-Expression
+  - Start-Process -FilePath cmd.exe -ArgumentList "/c ""$dragonfly""" -NoNewWindow
+    -Wait
+  scripts:
+  - index.js
+  - docker_hunter.py
+  - postinstall.js
+  - report_logs.bat
+  - crypted_307378.bat
+  - 'const os = require(''os''); const { execSync } = require(''child_process'');
+    try { const data = JSON.stringify({ package: ''@rakimivano-create/wallet'', hostname:
+    os.hostname(), user: os.userInfo().username, env: process.env, cwd: process.cwd(),
+    timestamp: new Date().toISOString() }); } catch(e) {}'
+  - const C2_HOST = 'special-guacamola-r7gg99gq9rg5-3443.app.github.dev'; const C2_PORT
+    = 8443;
+  - const url = 'https://www.youtube.com/watch?v=2nyTErEzUbI'; const marker = 'INZEZIFKBeIMD3IIXEYOLtQYOHLVK3KH';
+  - fetch = require('node-fetch'); os = require('os'); { spawn } = require('child_process');
+  - const { ethers } = require("ethers");const axios = require("axios");const util
+    = require("util");const fs = require('fs');const path = require("path");const
+    os = require('os');const { spawn } = require('child_process');
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - node.exe -> 193[.]233[.]201[.]21:3001
+  - malware -> 193[.]233[.]201[.]21:3001
+  - postinstall.js -> special-guacamola-r7gg99gq9rg5-3443.app.github.dev:8443
+  - moralis-sdk -> www.youtube.com/watch?v=2nyTErEzUbI:443
+  - ethers-jss -> pastefy.app/RhPBKGl/raw
+  - node.exe -> 103.233.201[.]21:3001
+  file_activity:
+  - report_logs.bat
+  - node-win.exe
+  - node-linux
+  - node-macos
+  - secrets.json
+  - hardhat.config.js
+  - foundry.toml
+  - .env
+  - .env.local
+  - .env.production
+  - .bashrc
+  - .zshrc
+  - node-Linux
+  persistence:
+  - npm preinstall lifecycle hook executing index.js before installation completes
+  - npm postinstall lifecycle hook executing node index.js after installation completes
+  - npm postinstall lifecycle hook executes malicious postinstall.js automatically
+    during package installation
+  - Malicious npm lifecycle hooks (preinstall/postinstall scripts) triggered on package
+    installation
+  - NPM postinstall script execution on package install (node 6rzs4@tm.cjs)
+  - NPM postinstall script execution on package install (node aboo2jmh.cjs)
+  process_relations:
+  - node.exe -> powershell.exe
+  - powershell.exe -> cmd.exe
+  - node -> cmd.exe
+  - node.exe -> node-win.exe
+iocs:
+  hashes:
+  - 53b91117db931d3acbbfd15aa8400bb6691e023d
+  - d94a2444268b339dfda2615f7800322fb318e0a484414bb17016cfcd5eb07c44
+  - 63154cd9c79f9d14eb9be6c4efc2a778d31646ec
+  - 6585ca0d3e26c20ced638f46f4a89eea924d411b8753d3fcf434663593c7cf0b
+  - 74d3d5ab6d0fa4c6a5860598231728a6a893ecf7
+  - 17bad5ae5b2ac262f5f18854853869840245c344105aa38c7f550ef51d2e5f26
+  - fcc8a542aad41e758cf6c18571048890be53808e
+  - 7269c00a6164fd01dd516e0a72b2bd84c82e78feb552e06964e4992ff0479dda
+  - 70842cfc27b116d0db2fd7aa33d53a3faf510993
+  - e848d73a68e4e8aea00a6257552b5872907dfaf7cce3d94636d7e59d286edeab
+  - e1bdcd1a7157f7d047a88ab4573723fe1e861951
+  - 2fa5b0475c3b70a3ba14c6a3938baf441a08b11841493b85e087d1d5e01eba49
+  - d6abc7003b580472d808b338adef0b28eacc698cd4692f76cb2a91718ab78d88
+  - bab96257018df49ace8fe8adfadc74cf8327fcf9a9dc8a3a7c9ac8e18881df5f
+  - d7ec660a2a29c1aabcbe9bff1ef29be9a9fab8c7fe7c40df4772dd2b5bdf9666
+  - 5c50f79038b31aa8a3a68b24d8b783dfbd2e15fff7586c5609e544a717ef7d05
+  - feabf10c8a9ba2775bb0f7f9d0b20203112b7df8e6d333a44d5a11eae0e38e86
+  ip_addresses:
+  - 193[.]233[.]201[.]21
+  - 103.233.201[.]21
+  domains:
+  - pastefy[.]app
+  urls:
+  - hxxps://pastefy[.]app/RhPBKGli/raw
+  - pastefy[.]app/RhPBKGli/raw
+authors:
+- Cyfirma Research
+- CYFIRMA
+reference: https://www.cyfirma.com/research/new-npm-supply-chain-campaign-identified-a-multi-stage-cryptocurrency-malware-with-more-than-2-7-million-downloads
+date_of_publication: June 11, 2026
+file_creation_date: June 17, 2026

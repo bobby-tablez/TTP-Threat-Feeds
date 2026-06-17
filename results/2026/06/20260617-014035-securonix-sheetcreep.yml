@@ -1,0 +1,70 @@
+title: 'Analyzing SHEET#CREEP: SHEETCREEP is up again with different config obfuscation'
+description: A spearphishing campaign delivers a dropper via ISO attachment that installs
+  a C# RAT (vaultsvc.exe) using Google Sheets as a bidirectional C2 channel, with
+  persistence via a scheduled task named WindowsVaultSyncService.
+attribution: APT36 (Transparent Tribe)
+malware_families:
+- SHEETCREEP
+cves: []
+ttps:
+  processes:
+  - cmd.exe
+  - Document_11052026-03578240540350-93.exe
+  - vaultsvc.exe
+  - conhost.exe
+  - wireshark.exe
+  - x64dbg.exe
+  - dnspy.exe
+  - netmon.exe
+  - chrome.exe
+  - msedge.exe
+  - firefox.exe
+  - excel.exe
+  command_lines:
+  - C:\Windows\System32\cmd.exe /c start  Document_11052026-03578240540350-93.exe
+  - Restart-Computer -Force
+  powershell:
+  - Restart-Computer -Force
+  scripts: []
+  registry_keys: []
+  image_loads:
+  - System.Management.Automation
+  network_connections:
+  - vaultsvc.exe -> 142.251.223.42:443
+  - vaultsvc.exe -> sheets.googleapis.com:443
+  - vaultsvc.exe -> sheets.googleapis[.]com:443
+  - vaultsvc.exe -> oauth2.googleapis[.]com:443
+  - vaultsvc.exe -> 142.251.223[.]42:443
+  file_activity:
+  - '%LOCALAPPDATA%\Microsoft\Vault\vaultsvc.exe'
+  - '%TEMP%\<GUID>.pdf'
+  - UAE-India_Strategic_Partnership_Week.iso
+  - UAE-India_Strategic_Partnership-Week.lnk
+  - Document_11052026-03578240540350-93.exe
+  - \Microsoft\Vault\vaultsvc.exe
+  persistence:
+  - Scheduled task named WindowsVaultSyncService with description "Windows Edge Core
+    Update Task Machine Discord Update" created via COM API (Schedule.Service), set
+    to run on every logon with no execution time limit, pointing to %LOCALAPPDATA%\Microsoft\Vault\vaultsvc.exe
+  - Scheduled Task named WindowsVaultSyncService pointing to \Microsoft\Vault\vaultsvc.exe
+  process_relations:
+  - cmd.exe -> Document_11052026-03578240540350-93.exe
+  - Document_11052026-03578240540350-93.exe -> cmd.exe
+iocs:
+  hashes:
+  - 1ba67bb1cfad42446880cca53cbd05fe66d7514b2bb139b48e5c63adff14be7b
+  - 2cc7c2d8653c98e5bac32fcaf5e45b861efb4bb87df3b3f96285edb475e75bba
+  - 62d62950ff7a0e43550a5d0ba55d32d5083b9de5538e0f012e406b6d951e16aa
+  ip_addresses:
+  - 142.251.223[.]42
+  domains:
+  - sheets.googleapis[.]com
+  - oauth2.googleapis[.]com
+  urls: []
+authors:
+- Shikha Sangwan
+- Akshay Gaikwad
+- Aaron Beardslee
+reference: https://www.securonix.com/blog/sheetcreep-evolved-google-sheets-rat
+date_of_publication: June 17, 2026
+file_creation_date: June 17, 2026

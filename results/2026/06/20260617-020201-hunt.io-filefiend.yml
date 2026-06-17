@@ -1,0 +1,136 @@
+title: 'Ababil of Minab Exposed: LA Metro SCADA Backups and Israeli Victim Data Left
+  Open on an Iranian Staging Server'
+description: Pro-Iranian threat actor Ababil of Minab conducted destructive intrusions
+  and data exfiltration against targets in the US, Israel, Saudi Arabia, and Turkey,
+  leaving approximately 5 GB of stolen data on an openly accessible staging server
+  at 5.255.127[.]55:8020. The exposed server contained a custom Flask-based chunked
+  upload receiver, operator bash history, and exfiltrated data from LA Metro and multiple
+  other victims.
+attribution: Ababil of Minab (assessed by Gambit Security as Black Shadow, operating
+  on behalf of Iranian MOIS)
+malware_families:
+- FileFiend
+cves: []
+ttps:
+  processes:
+  - axel
+  - python
+  - Exchangedb.exe
+  - scp
+  - openssl
+  - proxychains
+  command_lines:
+  - proxychains axel -n 8
+  - scp root@31.172.87.20:/root/downloader/uploads/s.7z .
+  - scp root@31.172.87.20:/root/downloader/uploads/a.7z .
+  - scp root@31.172.87.20:/root/downloader/uploads/k.7z .
+  - openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes
+    -subj "/C=US/ST=California/L=San Francisco/O=Acme Cloud Solutions Inc/OU=IT/CN=localhost/emailAddress=admin@acmecloud.example"
+  - grep -ir "connectionstring"
+  - ipconfig
+  - scp root@31.172.87[.]20:/root/downloader/uploads/s.7z .
+  - scp root@31.172.87[.]20:/root/downloader/uploads/a.7z .
+  - scp root@31.172.87[.]20:/root/downloader/uploads/k.7z .
+  - openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes
+    -subj"/C=US/ST=California/L=San Francisco/O=Acme Cloud Solutions Inc/OU=IT/CN=localhost/emailAddress=admin@acmecloud.example"
+  powershell: []
+  scripts:
+  - http.flask.py
+  - connect_ifat_capsule.cmd
+  - f.cmd
+  registry_keys: []
+  image_loads: []
+  network_connections:
+  - scp -> 31.172.87[.]20:22
+  - staging server -> 5.255.127[.]55:8020
+  - staging server -> 5.255.127[.]55:8087
+  - staging server -> 5.255.127[.]55:22
+  - Axel -> 5.255.127[.]55:8020
+  - Flask receiver -> 5.255.127[.]55:443
+  - http.flask.py -> 5.255.127[.]55:8020
+  - Flask receiver -> port 443
+  - Apache -> port 8087
+  - Apache HTTPD -> 5.255.127[.]55:8087
+  - axel -> 5.255.127[.]55:8020
+  file_activity:
+  - Exchangedb.exe
+  - http.flask.py
+  - cert.pem
+  - key.pem
+  - .bash_history
+  - /root/downloader/uploads/s.7z
+  - /root/downloader/uploads/a.7z
+  - /root/downloader/uploads/k.7z
+  - ruppin/temp/
+  - connect_ifat_capsule.cmd
+  - f.cmd
+  - Chrome Passwords.csv
+  - Police2.zip
+  - MICHLOL.7z
+  - DBBackup_taam_tehara_titan.rar
+  - data transfer.rar
+  - accz.7z
+  - accz.zip
+  - Metadata.json
+  - metadata.json
+  - metro/7443_3869236902/MTAdb/
+  - var/www/html/uuuuuua/
+  - PST/accz.7z
+  - agentinstaller-x86_64.msi
+  - ProtonVPN_win_v1.24.0.exe
+  - Police.docx
+  - Police2.docx
+  persistence: []
+  process_relations:
+  - f.cmd -> VBScript (UAC bypass to relaunch with administrator rights)
+iocs:
+  hashes:
+  - 33a6b4900c2fbfb3c2d816947871eade800d0c0e2a2680871700fd6e640e5f20
+  - c8cc4225d1e21324ef419adbb1c10dd0578fb034b5f5d7b8000f0aae1871c061
+  - 81a25357d027d0f04a43139377d5d58384b8e9b0770e699cdcc37e600641cf90
+  ip_addresses:
+  - 5.255.127[.]55
+  - 31.172.87[.]20
+  - 172.20.20[.]0/24
+  - 172.67.212[.]58
+  - 82.166.151[.]59
+  domains:
+  - nefeshhope[.]com
+  - ababilofminab[.]io
+  - media.ifat[.]com
+  - sslvpn.ifat.com
+  - sslvpn.ifat[.]com
+  - acmecloud[.]example
+  - adabroker[.]com.tr
+  - courier[.]co.il
+  - bac[.]org.il
+  - orbital[.]co.il
+  - media[.]ifat.com
+  - michlolltd[.]co.il
+  - deswins[.]com
+  - adabroker[.]com[.]tr
+  - 2eat[.]co[.]il
+  - courier[.]co[.]il
+  - cmenu[.]co[.]il
+  - ozbital[.]co[.]il
+  - rupping[.]co[.]il
+  - rewards.americanexpress.co[.]il
+  - emp.ayalon-ins.co[.]il
+  - balcar.co[.]il
+  - biz.bankhapoalim.co[.]il
+  - biz2.bankhapoalim.co[.]il
+  urls:
+  - hxxps://ababilofminab[.]io/metro-net-is-hacked
+  - hxxps://ababilofminab[.]io
+  - t[.]me/ababilofminab/7
+  - hxxps://www.michlolltd.co[.]il
+  - hxxp://adabroker.com[.]tr
+  - hxxp://adabroker[.]com.tr
+  - hxxps://www[.]michlolltd.co.il
+  - hxxps://balcar.co[.]il/login
+  - hxxps://biz.bankhapoalim.co[.]il/mg
+authors:
+- Hunt.io
+reference: https://hunt.io/blog/ababil-of-minab-iranian-hackers-exposed-la-metro-breach-open-directory
+date_of_publication: June 15, 2026
+file_creation_date: June 17, 2026

